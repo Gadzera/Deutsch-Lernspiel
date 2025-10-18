@@ -274,14 +274,14 @@
             font-weight: 600;
         }
         
-        /* Стили для 25-го кадра */
+        /* УЛУЧШЕННЫЕ СТИЛИ ДЛЯ 25-ГО КАДРА */
         .subliminal-frame {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.98);
             color: white;
             display: flex;
             flex-direction: column;
@@ -292,29 +292,50 @@
             font-weight: bold;
             text-align: center;
             opacity: 0;
-            transition: opacity 0.1s ease;
+            transition: opacity 0.05s ease;
             pointer-events: none;
+            padding: 20px;
         }
 
         .subliminal-frame.visible {
             opacity: 1;
         }
 
-        .subliminal-article {
-            font-size: 3em;
-            color: #4CAF50;
-            margin-bottom: 20px;
+        .subliminal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            width: 100%;
+            max-width: 400px;
         }
 
-        .subliminal-word {
-            font-size: 2em;
-            color: #2196F3;
+        .subliminal-combined {
+            font-size: 2.8em;
+            color: #4CAF50;
+            margin-bottom: 15px;
+            text-align: center;
+            line-height: 1.2;
+            font-weight: 700;
         }
 
         .subliminal-translation {
-            font-size: 1.5em;
+            font-size: 1.8em;
             color: #FF9800;
-            margin-top: 15px;
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* Анимация появления */
+        @keyframes subliminalFlash {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0; transform: scale(0.9); }
+        }
+
+        .subliminal-frame.visible .subliminal-content {
+            animation: subliminalFlash 0.04s ease;
         }
 
         /* Медиа-запросы для разных размеров экранов */
@@ -662,11 +683,12 @@
         </div>
     </div>
 
-    <!-- 25-й кадр -->
+    <!-- УЛУЧШЕННЫЙ 25-Й КАДР -->
     <div id="subliminalFrame" class="subliminal-frame">
-        <div id="subliminalArticle" class="subliminal-article"></div>
-        <div id="subliminalWord" class="subliminal-word"></div>
-        <div id="subliminalTranslation" class="subliminal-translation"></div>
+        <div class="subliminal-content">
+            <div id="subliminalCombined" class="subliminal-combined"></div>
+            <div id="subliminalTranslation" class="subliminal-translation"></div>
+        </div>
     </div>
 
     <script>
@@ -694,7 +716,7 @@ let globalStats = JSON.parse(localStorage.getItem('globalStats') || '{"users": {
 let onlineUsers = globalStats.onlineUsers;
 
 // СЛОВАРЬ (ВСТАВЬТЕ ВАШ СЛОВАРЬ ЗДЕСЬ):
-const wordDictionary = [
+const wordDictionary =[
   {
     "article": "der",
     "word": "Abend",
@@ -7075,18 +7097,16 @@ function ensureLearningButtonsVisible() {
     }
 }
 
-// Функция показа 25-го кадра
+// УЛУЧШЕННАЯ ФУНКЦИЯ ПОКАЗА 25-ГО КАДРА
 function showSubliminalFrame(word) {
     if (!subliminalEnabled) return;
     
     const frame = document.getElementById('subliminalFrame');
-    const articleEl = document.getElementById('subliminalArticle');
-    const wordEl = document.getElementById('subliminalWord');
+    const combinedEl = document.getElementById('subliminalCombined');
     const translationEl = document.getElementById('subliminalTranslation');
     
-    // Заполняем информацией
-    articleEl.textContent = word.article;
-    wordEl.textContent = word.word;
+    // Объединяем артикль и слово в одну строку
+    combinedEl.textContent = `${word.article} ${word.word}`;
     translationEl.textContent = pickTranslation(word);
     
     // Показываем на очень короткое время
