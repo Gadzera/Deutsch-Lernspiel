@@ -20,65 +20,66 @@
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             line-height: 1.4;
+            -webkit-text-size-adjust: 100%;
         }
         
         .container { 
             max-width: 100%; 
             margin: 0 auto; 
             background: white; 
-            padding: 15px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            position: relative;
+            padding: 12px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         
         h1 { 
             text-align: center; 
             color: #333; 
-            margin-bottom: 15px;
-            font-size: 1.4em;
-            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+            font-weight: 700;
         }
         
         h2 {
-            font-size: 1.2em;
-            margin-bottom: 12px;
+            font-size: 1.1em;
+            margin-bottom: 10px;
             color: #444;
+            font-weight: 600;
         }
         
         h3 {
-            font-size: 1.1em;
-            margin: 12px 0 8px;
+            font-size: 1em;
+            margin: 10px 0 6px;
             color: #555;
+            font-weight: 600;
         }
         
         .section { 
-            margin: 15px 0; 
-            padding: 15px; 
+            margin: 12px 0; 
+            padding: 12px; 
             border: 1px solid #e0e0e0; 
-            border-radius: 8px; 
+            border-radius: 12px; 
             background: #f9f9f9;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         
         button { 
-            padding: 12px 16px; 
-            margin: 6px; 
+            padding: 14px 12px; 
+            margin: 4px; 
             cursor: pointer; 
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             background: #4CAF50;
             color: white;
             font-weight: 600;
             font-size: 14px;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             min-height: 44px;
+            flex: 1;
+            min-width: 0;
         }
         
-        button:hover {
-            background: #45a049;
-            transform: translateY(-1px);
+        button:active {
+            transform: scale(0.96);
         }
         
         button.active { 
@@ -87,8 +88,8 @@
         
         .filter-btn { 
             background: #666; 
-            font-size: 13px;
-            padding: 10px 14px;
+            font-size: 12px;
+            padding: 12px 8px;
         }
         
         .filter-btn.active {
@@ -96,10 +97,10 @@
         }
         
         input, select { 
-            padding: 12px; 
-            margin: 8px 0; 
+            padding: 14px; 
+            margin: 6px 0; 
             border: 1px solid #ddd;
-            border-radius: 6px;
+            border-radius: 8px;
             width: 100%;
             font-size: 16px;
             min-height: 44px;
@@ -113,53 +114,79 @@
         #answers button { 
             display: block; 
             width: 100%; 
-            margin: 8px 0; 
+            margin: 6px 0; 
             background: #666;
             font-size: 16px;
             padding: 16px;
+        }
+
+        /* Кнопки в ряд */
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 8px 0;
+        }
+
+        .button-row button {
+            flex: 1;
+            min-width: calc(50% - 8px);
+        }
+
+        /* Компактные настройки */
+        .compact-settings {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #e9ecef;
+        }
+
+        .compact-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            padding: 8px;
+        }
+
+        .compact-toggle input {
+            width: 18px;
+            height: 18px;
+            margin: 0;
         }
         
         /* Адаптивные кнопки статуса изучения */
         .learning-status {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin: 20px 0;
-            padding: 15px;
+            gap: 8px;
+            margin: 15px 0;
+            padding: 12px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 10px;
-            z-index: 100;
             border: 1px solid #e0e0e0;
         }
         
         .status-btn {
-            padding: 16px 20px;
+            padding: 14px 16px;
             border: 2px solid #e0e0e0;
-            border-radius: 25px;
+            border-radius: 20px;
             background: white;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 14px;
             width: 100%;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
             color: #333;
-            min-height: 54px;
+            min-height: 50px;
         }
         
         .status-btn:active {
             transform: scale(0.98);
-        }
-        
-        .status-btn.active {
-            transform: scale(1.02);
         }
         
         /* Цвета для статусов */
@@ -182,19 +209,19 @@
         }
         
         .status-icon {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
-            min-width: 24px;
+            min-width: 20px;
             text-align: center;
         }
         
         /* Прогресс бар */
         .progress-bar {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: #e0e0e0;
-            border-radius: 4px;
-            margin: 15px 0;
+            border-radius: 3px;
+            margin: 12px 0;
             overflow: hidden;
         }
         
@@ -210,27 +237,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 8px;
+            margin: 15px 0;
+            padding: 10px;
         }
         
         .article-display {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: bold;
             color: #333;
         }
         
         .word-text {
-            font-size: 1.6em;
+            font-size: 1.4em;
             font-weight: bold;
-            margin: 10px 0;
+            margin: 8px 0;
             color: #333;
             text-align: center;
             word-break: break-word;
         }
         
         .correct-answer {
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: bold;
             color: #22c55e;
         }
@@ -239,8 +267,8 @@
         .navigation-buttons {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 8px;
+            margin-top: 15px;
         }
         
         .back-btn {
@@ -255,22 +283,45 @@
         .info-bar {
             background: #e3f2fd;
             border-radius: 8px;
-            padding: 10px 15px;
-            margin-bottom: 15px;
+            padding: 8px 12px;
+            margin-bottom: 12px;
             text-align: center;
             font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 12px;
         }
         
         .learned-words-info {
             background: #e8f5e8;
             border: 1px solid #4CAF50;
             border-radius: 8px;
-            padding: 12px;
-            margin: 12px 0;
+            padding: 10px;
+            margin: 10px 0;
             text-align: center;
-            font-size: 14px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Таблицы для статистики */
+        .user-stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .user-stats-table th,
+        .user-stats-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .user-stats-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .current-user {
+            background: #e3f2fd !important;
             font-weight: 600;
         }
         
@@ -281,16 +332,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.98);
+            background: rgba(0, 0, 0, 0.95);
             color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 10000;
-            font-size: 2em;
-            font-weight: bold;
-            text-align: center;
             opacity: 0;
             transition: opacity 0.05s ease;
             pointer-events: none;
@@ -305,33 +353,37 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
-            width: 100%;
-            max-width: 400px;
+            gap: 15px;
+            width: 90%;
+            max-width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         .subliminal-combined {
-            font-size: 2.8em;
+            font-size: 2.2em;
             color: #4CAF50;
-            margin-bottom: 15px;
             text-align: center;
             line-height: 1.2;
             font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .subliminal-translation {
-            font-size: 1.8em;
+            font-size: 1.4em;
             color: #FF9800;
-            margin-top: 10px;
             text-align: center;
             font-style: italic;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         /* Анимация появления */
         @keyframes subliminalFlash {
-            0% { opacity: 0; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.05); }
-            100% { opacity: 0; transform: scale(0.9); }
+            0% { opacity: 0; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.02); }
+            100% { opacity: 0; transform: scale(0.95); }
         }
 
         .subliminal-frame.visible .subliminal-content {
@@ -340,44 +392,56 @@
 
         /* Медиа-запросы для разных размеров экранов */
         @media (min-width: 400px) {
+            .container {
+                max-width: 95%;
+            }
+            
             .learning-status {
                 flex-direction: row;
-                flex-wrap: wrap;
             }
             
             .status-btn {
                 flex: 1;
-                min-width: 140px;
+                min-width: 120px;
             }
             
             .navigation-buttons {
                 flex-direction: row;
-                flex-wrap: wrap;
             }
             
             .navigation-buttons button {
                 flex: 1;
-                min-width: 120px;
+            }
+
+            .button-row button {
+                min-width: calc(33.333% - 8px);
             }
         }
         
         @media (min-width: 500px) {
             .container {
-                max-width: 500px;
-                margin: 10px auto;
-                padding: 20px;
+                max-width: 450px;
+                padding: 15px;
             }
             
             h1 {
-                font-size: 1.6em;
+                font-size: 1.5em;
             }
             
             .section {
-                padding: 20px;
+                padding: 15px;
             }
             
             button {
-                font-size: 15px;
+                font-size: 14px;
+            }
+
+            .subliminal-combined {
+                font-size: 2.5em;
+            }
+
+            .subliminal-translation {
+                font-size: 1.6em;
             }
         }
         
@@ -387,19 +451,19 @@
             }
             
             .container {
-                max-width: 600px;
+                max-width: 500px;
             }
             
             h1 {
-                font-size: 1.8em;
+                font-size: 1.6em;
             }
             
             .word-text {
-                font-size: 1.8em;
+                font-size: 1.6em;
             }
             
             .article-display {
-                font-size: 2.2em;
+                font-size: 2em;
             }
         }
         
@@ -408,23 +472,36 @@
             .container {
                 max-width: 95%;
                 margin: 5px auto;
+                padding: 10px;
             }
             
             .section {
-                margin: 10px 0;
-                padding: 12px;
+                margin: 8px 0;
+                padding: 10px;
             }
             
             .learning-status {
                 flex-direction: row;
-                margin: 15px 0;
-                padding: 12px;
+                margin: 10px 0;
+                padding: 10px;
             }
             
             .status-btn {
-                padding: 12px 16px;
+                padding: 10px 12px;
                 min-height: 44px;
-                font-size: 14px;
+                font-size: 13px;
+            }
+
+            .subliminal-content {
+                padding: 20px 15px;
+            }
+
+            .subliminal-combined {
+                font-size: 1.8em;
+            }
+
+            .subliminal-translation {
+                font-size: 1.2em;
             }
         }
         
@@ -435,31 +512,39 @@
             }
             
             .container {
-                padding: 12px;
+                padding: 10px;
             }
             
             .section {
-                padding: 12px;
-                margin: 10px 0;
+                padding: 10px;
+                margin: 8px 0;
             }
             
             button {
-                padding: 10px 14px;
-                margin: 4px;
-                font-size: 13px;
+                padding: 12px 8px;
+                margin: 3px;
+                font-size: 12px;
             }
             
             .status-btn {
-                padding: 14px 16px;
-                font-size: 14px;
+                padding: 12px 14px;
+                font-size: 13px;
             }
             
             h1 {
-                font-size: 1.3em;
+                font-size: 1.2em;
             }
             
             h2 {
-                font-size: 1.1em;
+                font-size: 1em;
+            }
+
+            .subliminal-combined {
+                font-size: 1.8em;
+            }
+
+            .subliminal-translation {
+                font-size: 1.2em;
             }
         }
         
@@ -494,6 +579,11 @@
                 background: #2c3e50;
                 color: #ecf0f1;
             }
+
+            .compact-settings {
+                background: #2c3e50;
+                border-color: #34495e;
+            }
         }
         
         /* Анимации */
@@ -506,25 +596,6 @@
             animation: fadeIn 0.3s ease;
         }
         
-        /* Улучшения для касаний */
-        button:active {
-            transform: scale(0.96);
-        }
-        
-        /* Скрытие полосы прокрутки для лучшего UX */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 2px;
-        }
-        
         /* Улучшения для элементов форм */
         input:focus, select:focus {
             outline: none;
@@ -535,18 +606,18 @@
         /* Developer info */
         .developer-info {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
             color: #666;
-            font-size: 14px;
+            font-size: 12px;
             border-top: 1px solid #ddd;
-            padding-top: 15px;
+            padding-top: 12px;
         }
         
         .powered-by {
             text-align: center;
-            margin-top: 8px;
+            margin-top: 6px;
             color: #888;
-            font-size: 12px;
+            font-size: 11px;
             font-style: italic;
         }
     </style>
@@ -567,29 +638,35 @@
             <h2>Einstellungen</h2>
             
             <div id="learnedWordsInfo" class="learned-words-info" style="display:none">
-                <strong>Gelernte Wörter: <span id="learnedCount">0</span> | Gelernte Artikel: <span id="learnedArticlesCount">0</span></strong>
+                <strong>Gelernte Wörter: <span id="learnedCount">0</span> | Artikel: <span id="learnedArticlesCount">0</span></strong>
             </div>
             
             <div>
-                <h3>Sprache / Language:</h3>
-                <button onclick="setLang('ru')">Русский</button>
-                <button onclick="setLang('tr')">Türkçe</button>
-                <button onclick="setLang('fa')">فارسی</button>
+                <h3>Sprache:</h3>
+                <div class="button-row">
+                    <button onclick="setLang('ru')">Русский</button>
+                    <button onclick="setLang('tr')">Türkçe</button>
+                    <button onclick="setLang('fa')">فارسی</button>
+                </div>
             </div>
             
             <div>
                 <h3>Spielmodus:</h3>
-                <button onclick="setMode('article')">Artikel wählen</button>
-                <button onclick="setMode('de_to_l1')">Deutsch → Übersetzung</button>
-                <button onclick="setMode('l1_to_de')">Übersetzung → Deutsch</button>
+                <div class="button-row">
+                    <button onclick="setMode('article')">Artikel</button>
+                    <button onclick="setMode('de_to_l1')">Deutsch →</button>
+                    <button onclick="setMode('l1_to_de')">→ Deutsch</button>
+                </div>
             </div>
             
             <div>
                 <h3>Wörter Filter:</h3>
-                <button class="filter-btn" onclick="setWordFilter('all')">Alle Wörter</button>
-                <button class="filter-btn" onclick="setWordFilter('unlearned')">Noch nicht gelernt</button>
-                <button class="filter-btn" onclick="setWordFilter('no_article')">Artikel nicht gelernt</button>
-                <button class="filter-btn" onclick="setWordFilter('no_word')">Wörter nicht gelernt</button>
+                <div class="button-row">
+                    <button class="filter-btn" onclick="setWordFilter('all')">Alle</button>
+                    <button class="filter-btn" onclick="setWordFilter('unlearned')">Nicht gelernt</button>
+                    <button class="filter-btn" onclick="setWordFilter('no_article')">Kein Artikel</button>
+                    <button class="filter-btn" onclick="setWordFilter('no_word')">Kein Wort</button>
+                </div>
             </div>
             
             <div id="wordCountInfo"></div>
@@ -599,20 +676,19 @@
                 <input type="number" id="qCount" value="10" min="5" max="100">
             </div>
 
-            <div>
-                <h3>Erweiterte Einstellungen:</h3>
-                <label style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
+            <div class="compact-settings">
+                <div class="compact-toggle">
                     <input type="checkbox" id="subliminalToggle" checked>
-                    <span>25. Frame Technologie (Unterbewusstes Lernen)</span>
-                </label>
+                    <span>25. Frame Technologie aktiv</span>
+                </div>
             </div>
             
             <div id="statsBox"></div>
             
             <div class="navigation-buttons">
-                <button class="stats-btn" onclick="showStats()">📊 Meine Statistik</button>
-                <button class="stats-btn" onclick="showGlobalStats()">🌍 Globale Statistik</button>
-                <button onclick="startQuiz()" style="background: #FF5722; font-size: 16px; padding: 14px;">Quiz starten! 🚀</button>
+                <button class="stats-btn" onclick="showStats()">📊 Statistik</button>
+                <button class="stats-btn" onclick="showGlobalStats()">🌍 Global</button>
+                <button onclick="startQuiz()" style="background: #FF5722;">Quiz starten! 🚀</button>
             </div>
         </div>
         
@@ -624,17 +700,17 @@
                 <div id="word" class="word-text"></div>
                 <div id="correctAnswerDisplay" class="correct-answer"></div>
             </div>
-            <div id="translationBox" style="font-style: italic; margin: 12px 0; font-size: 1.1em;"></div>
+            <div id="translationBox" style="font-style: italic; margin: 10px 0; font-size: 1em;"></div>
             <div id="answers"></div>
             
             <div class="learning-status">
                 <button class="status-btn" id="wordLearnedBtn" onclick="toggleWordLearned()">
                     <span class="status-icon" id="wordLearnedIcon">□</span> 
-                    <span class="status-text">Wort gelernt</span>
+                    <span class="status-text">Wort</span>
                 </button>
                 <button class="status-btn" id="articleLearnedBtn" onclick="toggleArticleLearned()">
                     <span class="status-icon" id="articleLearnedIcon">□</span> 
-                    <span class="status-text">Artikel gelernt</span>
+                    <span class="status-text">Artikel</span>
                 </button>
             </div>
             
@@ -644,24 +720,24 @@
             
             <div class="navigation-buttons">
                 <button class="back-btn" onclick="backToMenu()">← Zurück</button>
-                <div id="progress" style="font-weight: bold; font-size: 1em; padding: 12px;">Frage <span id="currentQuestion">1</span> von <span id="totalQuestions">10</span></div>
+                <div id="progress" style="font-weight: bold; font-size: 0.9em; padding: 10px;">Frage <span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></div>
             </div>
         </div>
         
         <div id="result" class="section">
             <h2>Ergebnis</h2>
-            <div id="score" style="font-size: 1.5em; margin: 20px 0;"></div>
+            <div id="score" style="font-size: 1.3em; margin: 15px 0;"></div>
             
-            <div id="resultStats" style="margin: 20px 0;"></div>
+            <div id="resultStats" style="margin: 15px 0;"></div>
             
             <div class="navigation-buttons">
-                <button class="back-btn" onclick="backToMenu()">← Zurück zum Menü</button>
+                <button class="back-btn" onclick="backToMenu()">← Menü</button>
                 <button onclick="restart()">Neues Spiel</button>
             </div>
         </div>
 
         <div id="stats" class="section" style="display:none">
-            <h2>📊 Meine Statistik</h2>
+            <h2>📊 Statistik</h2>
             <div id="detailedStats"></div>
             <div class="navigation-buttons">
                 <button class="back-btn" onclick="backToMenu()">← Zurück</button>
@@ -669,7 +745,7 @@
         </div>
         
         <div id="globalStats" class="section" style="display:none">
-            <h2>🌍 Globale Statistik</h2>
+            <h2>🌍 Global</h2>
             <div id="onlineUsersInfo" class="learned-words-info"></div>
             <div id="globalStatsContent"></div>
             <div class="navigation-buttons">
@@ -716,7 +792,7 @@ let globalStats = JSON.parse(localStorage.getItem('globalStats') || '{"users": {
 let onlineUsers = globalStats.onlineUsers;
 
 // СЛОВАРЬ (ВСТАВЬТЕ ВАШ СЛОВАРЬ ЗДЕСЬ):
-const wordDictionary =[
+const wordDictionary = [
   {
     "article": "der",
     "word": "Abend",
@@ -6901,7 +6977,7 @@ function updateOnlineUsersDisplay() {
     const onlineCount = Object.keys(onlineUsers).length;
     const onlineUsersInfo = document.getElementById('onlineUsersInfo');
     if (onlineUsersInfo) {
-        onlineUsersInfo.innerHTML = `<strong>👥 Online jetzt: ${onlineCount} Benutzer</strong>`;
+        onlineUsersInfo.innerHTML = `<strong>👥 Online: ${onlineCount} Benutzer</strong>`;
     }
 }
 
@@ -6981,8 +7057,8 @@ function updateWordCountDisplay() {
     const wordCountInfo = document.getElementById('wordCountInfo');
     if (wordCountInfo) {
         wordCountInfo.innerHTML = `
-            Verfügbare Wörter: <b>${availableCount}</b> / ${totalCount}<br>
-            Wörter gelernt: ${learnedWordsCount} | Artikel gelernt: ${learnedArticlesCount}
+            Verfügbar: <b>${availableCount}</b> / ${totalCount}<br>
+            Gelernt: ${learnedWordsCount} Wörter, ${learnedArticlesCount} Artikel
         `;
     }
 }
@@ -7143,13 +7219,13 @@ function showGlobalStats() {
         <table class="user-stats-table">
             <thead>
                 <tr>
-                    <th>Platz</th>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Spiele</th>
-                    <th>Beste Punktzahl</th>
-                    <th>Genauigkeit</th>
-                    <th>Gelernte Wörter</th>
-                    <th>Gelernte Artikel</th>
+                    <th>Beste</th>
+                    <th>%</th>
+                    <th>Wörter</th>
+                    <th>Artikel</th>
                 </tr>
             </thead>
             <tbody>
@@ -7161,7 +7237,7 @@ function showGlobalStats() {
         tableHTML += `
             <tr class="${rowClass}">
                 <td>${index + 1}</td>
-                <td>${user.name} ${isCurrentUser ? '(Sie)' : ''}</td>
+                <td>${user.name} ${isCurrentUser ? '👤' : ''}</td>
                 <td>${user.games}</td>
                 <td>${user.bestScore}</td>
                 <td>${user.accuracy}%</td>
@@ -7184,10 +7260,10 @@ function showGlobalStats() {
 function updateFilterButtons() {
     const buttons = document.querySelectorAll('.filter-btn');
     const filterNames = {
-        'all': 'Alle Wörter',
-        'unlearned': 'Noch nicht gelernt',
-        'no_article': 'Artikel nicht gelernt',
-        'no_word': 'Wörter nicht gelernt'
+        'all': 'Alle',
+        'unlearned': 'Nicht gelernt',
+        'no_article': 'Kein Artikel',
+        'no_word': 'Kein Wort'
     };
     
     buttons.forEach(btn => {
@@ -7232,12 +7308,12 @@ function updateStatsDisplay() {
     const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
     const accuracy = stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0;
     document.getElementById('statsBox').innerHTML = `
-        <b>Statistik für ${playerName}:</b><br>
+        <b>${playerName}:</b><br>
         Spiele: ${stats.games}<br>
-        Bestes Ergebnis: ${stats.bestScore}<br>
-        Durchschnittliche Genauigkeit: ${accuracy}%<br>
-        Gelernte Wörter: ${learnedWords.length}<br>
-        Gelernte Artikel: ${learnedArticles.length}
+        Bestes: ${stats.bestScore}<br>
+        Genauigkeit: ${accuracy}%<br>
+        Wörter: ${learnedWords.length}<br>
+        Artikel: ${learnedArticles.length}
     `;
 }
 
@@ -7389,9 +7465,9 @@ function finishQuiz() {
     // Показываем дополнительную статистику
     const resultStats = document.getElementById('resultStats');
     resultStats.innerHTML = `
-        <div style="margin: 15px 0;">
-            <strong>Gelernte Wörter in diesem Spiel:</strong> ${learnedWords.length}<br>
-            <strong>Gelernte Artikel in diesem Spiel:</strong> ${learnedArticles.length}
+        <div style="margin: 12px 0;">
+            <strong>Gelernte Wörter:</strong> ${learnedWords.length}<br>
+            <strong>Gelernte Artikel:</strong> ${learnedArticles.length}
         </div>
     `;
     
@@ -7403,13 +7479,12 @@ function showStats() {
     const accuracy = stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0;
     
     document.getElementById('detailedStats').innerHTML = `
-        <div style="text-align: left; line-height: 1.6;">
-            <h3>📈 Detaillierte Statistik</h3>
-            <p><strong>Gesamtspiele:</strong> ${stats.games}</p>
+        <div style="text-align: left; line-height: 1.6; font-size: 14px;">
+            <p><strong>Spiele:</strong> ${stats.games}</p>
             <p><strong>Beste Punktzahl:</strong> ${stats.bestScore}</p>
-            <p><strong>Gesamtfragen:</strong> ${stats.totalQuestions}</p>
+            <p><strong>Fragen gesamt:</strong> ${stats.totalQuestions}</p>
             <p><strong>Richtige Antworten:</strong> ${stats.totalCorrect}</p>
-            <p><strong>Durchschnittliche Genauigkeit:</strong> ${accuracy}%</p>
+            <p><strong>Genauigkeit:</strong> ${accuracy}%</p>
             <p><strong>Gelernte Wörter:</strong> ${learnedWords.length}</p>
             <p><strong>Gelernte Artikel:</strong> ${learnedArticles.length}</p>
             <p><strong>Verfügbare Wörter:</strong> ${words.length}</p>
@@ -7445,11 +7520,11 @@ function getLanguageName(lang) {
 
 function getModeName(mode) {
     const names = {
-        'article': 'Artikel wählen',
-        'de_to_l1': 'Deutsch → Übersetzung',
-        'l1_to_de': 'Übersetzung → Deutsch'
+        'article': 'Artikel',
+        'de_to_l1': 'Deutsch →',
+        'l1_to_de': '→ Deutsch'
     };
-    return names[mode] || 'Artikel wählen';
+    return names[mode] || 'Artikel';
 }
 
 function shuffle(a) {
@@ -7465,7 +7540,7 @@ function startSessionTimer() {
         const uptime = Math.floor((Date.now() - startTime) / 1000);
         const minutes = Math.floor(uptime / 60);
         const seconds = uptime % 60;
-        document.getElementById('info').innerHTML = `<span id="status">Sprache: ${getLanguageName(lang)}</span> • <span id="modeStatus">Modus: ${getModeName(mode)}</span> • <span>Uptime: ${minutes}m ${seconds}s</span>`;
+        document.getElementById('info').innerHTML = `<span>Sprache: ${getLanguageName(lang)}</span> • <span>Modus: ${getModeName(mode)}</span>`;
     }, 1000);
 }
 
