@@ -20,76 +20,72 @@
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             line-height: 1.4;
-            -webkit-text-size-adjust: 100%;
         }
         
         .container { 
             max-width: 100%; 
             margin: 0 auto; 
             background: white; 
-            padding: 12px; 
-            border-radius: 16px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 15px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
         h1 { 
             text-align: center; 
             color: #333; 
-            margin-bottom: 12px;
-            font-size: 1.3em;
-            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            font-weight: 600;
         }
         
         h2 {
-            font-size: 1.1em;
-            margin-bottom: 10px;
+            font-size: 1.2em;
+            margin-bottom: 12px;
             color: #444;
-            font-weight: 600;
         }
         
         h3 {
-            font-size: 1em;
-            margin: 10px 0 6px;
+            font-size: 1.1em;
+            margin: 12px 0 8px;
             color: #555;
-            font-weight: 600;
         }
         
         .section { 
-            margin: 12px 0; 
-            padding: 12px; 
+            margin: 15px 0; 
+            padding: 15px; 
             border: 1px solid #e0e0e0; 
-            border-radius: 12px; 
+            border-radius: 8px; 
             background: #f9f9f9;
         }
         
-        button { 
-            padding: 14px 12px; 
-            margin: 4px; 
+        /* НЕЙТРАЛЬНЫЕ КНОПКИ В МЕНЮ */
+        .menu-btn { 
+            padding: 12px 16px; 
+            margin: 6px; 
             cursor: pointer; 
             border: none;
-            border-radius: 10px;
-            background: #4CAF50;
+            border-radius: 8px;
+            background: #6c757d; /* Нейтральный серый */
             color: white;
             font-weight: 600;
             font-size: 14px;
             transition: all 0.2s ease;
             min-height: 44px;
-            flex: 1;
-            min-width: 0;
         }
         
-        button:active {
+        .menu-btn.active { 
+            background: #4CAF50; /* Зеленый при выборе */
+        }
+        
+        .menu-btn:active {
             transform: scale(0.96);
         }
         
-        button.active { 
-            background: #2196F3; 
-        }
-        
         .filter-btn { 
-            background: #666; 
-            font-size: 12px;
-            padding: 12px 8px;
+            background: #6c757d; 
+            font-size: 13px;
+            padding: 10px 14px;
         }
         
         .filter-btn.active {
@@ -97,10 +93,10 @@
         }
         
         input, select { 
-            padding: 14px; 
-            margin: 6px 0; 
+            padding: 12px; 
+            margin: 8px 0; 
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 6px;
             width: 100%;
             font-size: 16px;
             min-height: 44px;
@@ -114,64 +110,42 @@
         #answers button { 
             display: block; 
             width: 100%; 
-            margin: 6px 0; 
+            margin: 8px 0; 
             background: #666;
             font-size: 16px;
             padding: 16px;
+            color: white;
         }
 
         /* Кнопки в ряд */
         .button-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
-            margin: 8px 0;
+            gap: 6px;
+            margin: 10px 0;
         }
 
         .button-row button {
             flex: 1;
-            min-width: calc(50% - 8px);
-        }
-
-        /* Компактные настройки */
-        .compact-settings {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #e9ecef;
-        }
-
-        .compact-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            padding: 8px;
-        }
-
-        .compact-toggle input {
-            width: 18px;
-            height: 18px;
-            margin: 0;
+            min-width: calc(50% - 6px);
         }
         
         /* Адаптивные кнопки статуса изучения */
         .learning-status {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin: 15px 0;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            border: 1px solid #e0e0e0;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
         }
         
         .status-btn {
             padding: 14px 16px;
             border: 2px solid #e0e0e0;
-            border-radius: 20px;
+            border-radius: 8px;
             background: white;
             cursor: pointer;
             display: flex;
@@ -179,7 +153,7 @@
             justify-content: center;
             gap: 10px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 16px;
             width: 100%;
             color: #333;
             min-height: 50px;
@@ -202,12 +176,6 @@
             color: white;
         }
         
-        .both-learned {
-            border-color: #FF9800;
-            background: #FF9800;
-            color: white;
-        }
-        
         .status-icon {
             font-size: 18px;
             font-weight: bold;
@@ -218,10 +186,10 @@
         /* Прогресс бар */
         .progress-bar {
             width: 100%;
-            height: 6px;
+            height: 8px;
             background: #e0e0e0;
-            border-radius: 3px;
-            margin: 12px 0;
+            border-radius: 4px;
+            margin: 15px 0;
             overflow: hidden;
         }
         
@@ -232,33 +200,43 @@
             transition: width 0.5s ease;
         }
         
-        /* Отображение слова */
+        /* ИСПРАВЛЕННОЕ ОТОБРАЖЕНИЕ СЛОВА - АРТИКЛЬ СЛЕВА */
         #wordDisplay {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
-            margin: 15px 0;
-            padding: 10px;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .word-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
         .article-display {
-            font-size: 1.8em;
+            font-size: 2em;
             font-weight: bold;
             color: #333;
         }
         
         .word-text {
-            font-size: 1.4em;
+            font-size: 1.8em;
             font-weight: bold;
-            margin: 8px 0;
             color: #333;
             text-align: center;
             word-break: break-word;
         }
         
         .correct-answer {
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: bold;
             color: #22c55e;
         }
@@ -267,8 +245,8 @@
         .navigation-buttons {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-top: 15px;
+            gap: 10px;
+            margin-top: 20px;
         }
         
         .back-btn {
@@ -283,46 +261,52 @@
         .info-bar {
             background: #e3f2fd;
             border-radius: 8px;
-            padding: 8px 12px;
-            margin-bottom: 12px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
             text-align: center;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 14px;
         }
         
         .learned-words-info {
             background: #e8f5e8;
             border: 1px solid #4CAF50;
             border-radius: 8px;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 12px 0;
             text-align: center;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
         }
 
-        /* Таблицы для статистики */
-        .user-stats-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
+        /* Настройки 25 кадра */
+        .subliminal-settings {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #e9ecef;
         }
 
-        .user-stats-table th,
-        .user-stats-table td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+        .subliminal-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
         }
 
-        .user-stats-table th {
-            background: #f5f5f5;
-            font-weight: 600;
+        .subliminal-toggle input {
+            width: 20px;
+            height: 20px;
+            margin: 0;
         }
 
-        .current-user {
-            background: #e3f2fd !important;
-            font-weight: 600;
+        /* Счетчик посещений */
+        .visit-counter {
+            text-align: center;
+            margin-top: 10px;
+            color: #666;
+            font-size: 11px;
         }
         
         /* УЛУЧШЕННЫЕ СТИЛИ ДЛЯ 25-ГО КАДРА */
@@ -353,30 +337,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             width: 90%;
             max-width: 300px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 30px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         .subliminal-combined {
-            font-size: 2.2em;
+            font-size: 2.5em;
             color: #4CAF50;
             text-align: center;
             line-height: 1.2;
             font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .subliminal-translation {
-            font-size: 1.4em;
+            font-size: 1.6em;
             color: #FF9800;
             text-align: center;
             font-style: italic;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         /* Анимация появления */
@@ -390,72 +368,21 @@
             animation: subliminalFlash 0.04s ease;
         }
 
-        /* Медиа-запросы для разных размеров экранов */
-        @media (min-width: 400px) {
+        /* Медиа-запросы для мобильных */
+        @media (max-width: 480px) {
             .container {
-                max-width: 95%;
-            }
-            
-            .learning-status {
-                flex-direction: row;
-            }
-            
-            .status-btn {
-                flex: 1;
-                min-width: 120px;
-            }
-            
-            .navigation-buttons {
-                flex-direction: row;
-            }
-            
-            .navigation-buttons button {
-                flex: 1;
-            }
-
-            .button-row button {
-                min-width: calc(33.333% - 8px);
-            }
-        }
-        
-        @media (min-width: 500px) {
-            .container {
-                max-width: 450px;
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 1.5em;
+                padding: 10px;
             }
             
             .section {
-                padding: 15px;
+                padding: 12px;
+                margin: 10px 0;
             }
             
-            button {
+            .menu-btn {
+                padding: 14px 12px;
+                margin: 4px;
                 font-size: 14px;
-            }
-
-            .subliminal-combined {
-                font-size: 2.5em;
-            }
-
-            .subliminal-translation {
-                font-size: 1.6em;
-            }
-        }
-        
-        @media (min-width: 768px) {
-            body {
-                padding: 20px;
-            }
-            
-            .container {
-                max-width: 500px;
-            }
-            
-            h1 {
-                font-size: 1.6em;
             }
             
             .word-text {
@@ -463,162 +390,22 @@
             }
             
             .article-display {
+                font-size: 1.6em;
+            }
+            
+            .subliminal-combined {
                 font-size: 2em;
             }
-        }
-        
-        /* Ландшафтная ориентация */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .container {
-                max-width: 95%;
-                margin: 5px auto;
-                padding: 10px;
-            }
             
-            .section {
-                margin: 8px 0;
-                padding: 10px;
-            }
-            
-            .learning-status {
-                flex-direction: row;
-                margin: 10px 0;
-                padding: 10px;
-            }
-            
-            .status-btn {
-                padding: 10px 12px;
-                min-height: 44px;
-                font-size: 13px;
-            }
-
-            .subliminal-content {
-                padding: 20px 15px;
-            }
-
-            .subliminal-combined {
-                font-size: 1.8em;
-            }
-
             .subliminal-translation {
-                font-size: 1.2em;
+                font-size: 1.4em;
             }
         }
-        
-        /* Очень маленькие экраны */
-        @media (max-width: 360px) {
-            body {
-                padding: 5px;
-            }
-            
+
+        @media (min-width: 768px) {
             .container {
-                padding: 10px;
+                max-width: 600px;
             }
-            
-            .section {
-                padding: 10px;
-                margin: 8px 0;
-            }
-            
-            button {
-                padding: 12px 8px;
-                margin: 3px;
-                font-size: 12px;
-            }
-            
-            .status-btn {
-                padding: 12px 14px;
-                font-size: 13px;
-            }
-            
-            h1 {
-                font-size: 1.2em;
-            }
-            
-            h2 {
-                font-size: 1em;
-            }
-
-            .subliminal-combined {
-                font-size: 1.8em;
-            }
-
-            .subliminal-translation {
-                font-size: 1.2em;
-            }
-        }
-        
-        /* Поддержка темной темы */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            }
-            
-            .container {
-                background: #34495e;
-                color: #ecf0f1;
-            }
-            
-            .section {
-                background: #2c3e50;
-                border-color: #34495e;
-                color: #ecf0f1;
-            }
-            
-            h1, h2, h3 {
-                color: #ecf0f1;
-            }
-            
-            input, select {
-                background: #2c3e50;
-                border-color: #34495e;
-                color: #ecf0f1;
-            }
-            
-            .info-bar {
-                background: #2c3e50;
-                color: #ecf0f1;
-            }
-
-            .compact-settings {
-                background: #2c3e50;
-                border-color: #34495e;
-            }
-        }
-        
-        /* Анимации */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .section {
-            animation: fadeIn 0.3s ease;
-        }
-        
-        /* Улучшения для элементов форм */
-        input:focus, select:focus {
-            outline: none;
-            border-color: #4CAF50;
-            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-        }
-        
-        /* Developer info */
-        .developer-info {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-            font-size: 12px;
-            border-top: 1px solid #ddd;
-            padding-top: 12px;
-        }
-        
-        .powered-by {
-            text-align: center;
-            margin-top: 6px;
-            color: #888;
-            font-size: 11px;
-            font-style: italic;
         }
     </style>
 </head>
@@ -631,41 +418,41 @@
         <div id="nameBox" class="section">
             <h2>Spieler Name</h2>
             <input type="text" id="playerName" placeholder="Dein Name">
-            <button onclick="saveName()">Name speichern</button>
+            <button class="menu-btn" onclick="saveName()">Name speichern</button>
         </div>
         
         <div id="menu" class="section" style="display:none">
             <h2>Einstellungen</h2>
             
             <div id="learnedWordsInfo" class="learned-words-info" style="display:none">
-                <strong>Gelernte Wörter: <span id="learnedCount">0</span> | Artikel: <span id="learnedArticlesCount">0</span></strong>
+                <strong>Gelernte Wörter: <span id="learnedCount">0</span> | Gelernte Artikel: <span id="learnedArticlesCount">0</span></strong>
             </div>
             
             <div>
-                <h3>Sprache:</h3>
+                <h3>Sprache / Language:</h3>
                 <div class="button-row">
-                    <button onclick="setLang('ru')">Русский</button>
-                    <button onclick="setLang('tr')">Türkçe</button>
-                    <button onclick="setLang('fa')">فارسی</button>
+                    <button class="menu-btn" id="langRu" onclick="setLang('ru')">Русский</button>
+                    <button class="menu-btn" id="langTr" onclick="setLang('tr')">Türkçe</button>
+                    <button class="menu-btn" id="langFa" onclick="setLang('fa')">فارسی</button>
                 </div>
             </div>
             
             <div>
                 <h3>Spielmodus:</h3>
                 <div class="button-row">
-                    <button onclick="setMode('article')">Artikel</button>
-                    <button onclick="setMode('de_to_l1')">Deutsch →</button>
-                    <button onclick="setMode('l1_to_de')">→ Deutsch</button>
+                    <button class="menu-btn" id="modeArticle" onclick="setMode('article')">Artikel wählen</button>
+                    <button class="menu-btn" id="modeDeToL1" onclick="setMode('de_to_l1')">Deutsch → Übersetzung</button>
+                    <button class="menu-btn" id="modeL1ToDe" onclick="setMode('l1_to_de')">Übersetzung → Deutsch</button>
                 </div>
             </div>
             
             <div>
                 <h3>Wörter Filter:</h3>
                 <div class="button-row">
-                    <button class="filter-btn" onclick="setWordFilter('all')">Alle</button>
-                    <button class="filter-btn" onclick="setWordFilter('unlearned')">Nicht gelernt</button>
-                    <button class="filter-btn" onclick="setWordFilter('no_article')">Kein Artikel</button>
-                    <button class="filter-btn" onclick="setWordFilter('no_word')">Kein Wort</button>
+                    <button class="menu-btn filter-btn" id="filterAll" onclick="setWordFilter('all')">Alle Wörter</button>
+                    <button class="menu-btn filter-btn" id="filterUnlearned" onclick="setWordFilter('unlearned')">Noch nicht gelernt</button>
+                    <button class="menu-btn filter-btn" id="filterNoArticle" onclick="setWordFilter('no_article')">Artikel nicht gelernt</button>
+                    <button class="menu-btn filter-btn" id="filterNoWord" onclick="setWordFilter('no_word')">Wörter nicht gelernt</button>
                 </div>
             </div>
             
@@ -676,19 +463,23 @@
                 <input type="number" id="qCount" value="10" min="5" max="100">
             </div>
 
-            <div class="compact-settings">
-                <div class="compact-toggle">
+            <div class="subliminal-settings">
+                <div class="subliminal-toggle">
                     <input type="checkbox" id="subliminalToggle" checked>
-                    <span>25. Frame Technologie aktiv</span>
+                    <span>25. Frame Technologie (Unterbewusstes Lernen)</span>
                 </div>
             </div>
             
             <div id="statsBox"></div>
             
             <div class="navigation-buttons">
-                <button class="stats-btn" onclick="showStats()">📊 Statistik</button>
-                <button class="stats-btn" onclick="showGlobalStats()">🌍 Global</button>
-                <button onclick="startQuiz()" style="background: #FF5722;">Quiz starten! 🚀</button>
+                <button class="menu-btn stats-btn" onclick="showStats()">📊 Meine Statistik</button>
+                <button class="menu-btn stats-btn" onclick="showGlobalStats()">🌍 Globale Statistik</button>
+                <button class="menu-btn" onclick="startQuiz()" style="background: #FF5722;">Quiz starten! 🚀</button>
+            </div>
+
+            <div class="visit-counter">
+                Besucher heute: <span id="dailyVisits">0</span> | Gesamt: <span id="totalVisits">0</span>
             </div>
         </div>
         
@@ -696,21 +487,24 @@
             <h2>Quiz</h2>
             <div id="question"></div>
             <div id="wordDisplay">
-                <div id="articleDisplay" class="article-display"></div>
-                <div id="word" class="word-text"></div>
+                <!-- ИСПРАВЛЕННОЕ ОТОБРАЖЕНИЕ - АРТИКЛЬ СЛЕВА ОТ СЛОВА -->
+                <div class="word-container">
+                    <div id="articleDisplay" class="article-display"></div>
+                    <div id="word" class="word-text"></div>
+                </div>
                 <div id="correctAnswerDisplay" class="correct-answer"></div>
             </div>
-            <div id="translationBox" style="font-style: italic; margin: 10px 0; font-size: 1em;"></div>
+            <div id="translationBox" style="font-style: italic; margin: 12px 0; font-size: 1.1em;"></div>
             <div id="answers"></div>
             
             <div class="learning-status">
                 <button class="status-btn" id="wordLearnedBtn" onclick="toggleWordLearned()">
                     <span class="status-icon" id="wordLearnedIcon">□</span> 
-                    <span class="status-text">Wort</span>
+                    <span class="status-text">Wort als gelernt markieren</span>
                 </button>
                 <button class="status-btn" id="articleLearnedBtn" onclick="toggleArticleLearned()">
                     <span class="status-icon" id="articleLearnedIcon">□</span> 
-                    <span class="status-text">Artikel</span>
+                    <span class="status-text">Artikel als gelernt markieren</span>
                 </button>
             </div>
             
@@ -719,47 +513,42 @@
             </div>
             
             <div class="navigation-buttons">
-                <button class="back-btn" onclick="backToMenu()">← Zurück</button>
-                <div id="progress" style="font-weight: bold; font-size: 0.9em; padding: 10px;">Frage <span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></div>
+                <button class="menu-btn back-btn" onclick="backToMenu()">← Zurück</button>
+                <div id="progress" style="font-weight: bold; font-size: 1em; padding: 12px;">Frage <span id="currentQuestion">1</span> von <span id="totalQuestions">10</span></div>
             </div>
         </div>
         
         <div id="result" class="section">
             <h2>Ergebnis</h2>
-            <div id="score" style="font-size: 1.3em; margin: 15px 0;"></div>
+            <div id="score" style="font-size: 1.5em; margin: 20px 0;"></div>
             
-            <div id="resultStats" style="margin: 15px 0;"></div>
+            <div id="resultStats" style="margin: 20px 0;"></div>
             
             <div class="navigation-buttons">
-                <button class="back-btn" onclick="backToMenu()">← Menü</button>
-                <button onclick="restart()">Neues Spiel</button>
+                <button class="menu-btn back-btn" onclick="backToMenu()">← Zurück zum Menü</button>
+                <button class="menu-btn" onclick="restart()">Neues Spiel</button>
             </div>
         </div>
 
         <div id="stats" class="section" style="display:none">
-            <h2>📊 Statistik</h2>
+            <h2>📊 Meine Statistik</h2>
             <div id="detailedStats"></div>
             <div class="navigation-buttons">
-                <button class="back-btn" onclick="backToMenu()">← Zurück</button>
+                <button class="menu-btn back-btn" onclick="backToMenu()">← Zurück</button>
             </div>
         </div>
         
         <div id="globalStats" class="section" style="display:none">
-            <h2>🌍 Global</h2>
+            <h2>🌍 Globale Statistik</h2>
             <div id="onlineUsersInfo" class="learned-words-info"></div>
             <div id="globalStatsContent"></div>
             <div class="navigation-buttons">
-                <button class="back-btn" onclick="backToMenu()">← Zurück</button>
+                <button class="menu-btn back-btn" onclick="backToMenu()">← Zurück</button>
             </div>
-        </div>
-        
-        <div class="developer-info">
-            Entwickelt mit ❤️ für Deutschlerner
-            <div class="powered-by">Powered by Aleksandr Gadzera</div>
         </div>
     </div>
 
-    <!-- УЛУЧШЕННЫЙ 25-Й КАДР -->
+    <!-- 25-Й КАДР -->
     <div id="subliminalFrame" class="subliminal-frame">
         <div class="subliminal-content">
             <div id="subliminalCombined" class="subliminal-combined"></div>
@@ -787,11 +576,11 @@ let startTime = Date.now();
 let subliminalEnabled = true;
 let subliminalDuration = 40;
 
-// Глобальная статистика
-let globalStats = JSON.parse(localStorage.getItem('globalStats') || '{"users": {}, "onlineUsers": {}}');
+// Глобальная статистика и посещения
+let globalStats = JSON.parse(localStorage.getItem('globalStats') || '{"users": {}, "onlineUsers": {}, "visits": {"daily": 0, "total": 0, "lastVisit": ""}}');
 let onlineUsers = globalStats.onlineUsers;
 
-// СЛОВАРЬ (ВСТАВЬТЕ ВАШ СЛОВАРЬ ЗДЕСЬ):
+// СЛОВАРЬ (ТОЛЬКО ПРИМЕРЫ - ВСТАВЬТЕ СВОЙ ПОЛНЫЙ СЛОВАРЬ)
 const wordDictionary = [
   {
     "article": "der",
@@ -6918,6 +6707,28 @@ function generateUserId() {
     return 'user_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
 }
 
+// Обновление счетчика посещений
+function updateVisitCounter() {
+    const today = new Date().toDateString();
+    const lastVisit = globalStats.visits.lastVisit;
+    
+    if (lastVisit !== today) {
+        // Новый день
+        globalStats.visits.daily = 1;
+        globalStats.visits.lastVisit = today;
+    } else {
+        // Тот же день
+        globalStats.visits.daily++;
+    }
+    
+    globalStats.visits.total++;
+    saveGlobalStats();
+    
+    // Обновляем отображение
+    document.getElementById('dailyVisits').textContent = globalStats.visits.daily;
+    document.getElementById('totalVisits').textContent = globalStats.visits.total;
+}
+
 // Загрузка данных пользователя
 function loadPlayerData() {
     playerName = localStorage.getItem('playerName') || '';
@@ -6932,6 +6743,8 @@ function loadPlayerData() {
         document.getElementById('nameBox').style.display = 'none';
         document.getElementById('menu').style.display = 'block';
         loadWords();
+        updateVisitCounter();
+        updateMenuButtons(); // Обновляем подсветку кнопок
     }
     
     // Загрузка выученных слов и артиклей
@@ -6941,13 +6754,49 @@ function loadPlayerData() {
     learnedWords = learnedWordsData ? JSON.parse(learnedWordsData) : [];
     learnedArticles = learnedArticlesData ? JSON.parse(learnedArticlesData) : [];
     
-    // Обновление онлайн статуса
     updateOnlineStatus();
+}
+
+// Обновление подсветки кнопок в меню
+function updateMenuButtons() {
+    // Язык
+    document.getElementById('langRu').classList.toggle('active', lang === 'ru');
+    document.getElementById('langTr').classList.toggle('active', lang === 'tr');
+    document.getElementById('langFa').classList.toggle('active', lang === 'fa');
+    
+    // Режим
+    document.getElementById('modeArticle').classList.toggle('active', mode === 'article');
+    document.getElementById('modeDeToL1').classList.toggle('active', mode === 'de_to_l1');
+    document.getElementById('modeL1ToDe').classList.toggle('active', mode === 'l1_to_de');
+    
+    // Фильтры
+    document.getElementById('filterAll').classList.toggle('active', wordFilter === 'all');
+    document.getElementById('filterUnlearned').classList.toggle('active', wordFilter === 'unlearned');
+    document.getElementById('filterNoArticle').classList.toggle('active', wordFilter === 'no_article');
+    document.getElementById('filterNoWord').classList.toggle('active', wordFilter === 'no_word');
+}
+
+// Сохранение имени
+function saveName() {
+    const nameInput = document.getElementById('playerName');
+    playerName = nameInput.value.trim();
+    
+    if (!playerName) {
+        alert('Bitte geben Sie Ihren Namen ein.');
+        return;
+    }
+    
+    localStorage.setItem('playerName', playerName);
+    document.getElementById('nameBox').style.display = 'none';
+    document.getElementById('menu').style.display = 'block';
+    loadWords();
+    updateVisitCounter();
+    updateMenuButtons();
 }
 
 // Обновление онлайн статуса
 function updateOnlineStatus() {
-    if (playerId) {
+    if (playerId && playerName) {
         onlineUsers[playerId] = {
             name: playerName,
             lastSeen: Date.now(),
@@ -6960,7 +6809,6 @@ function updateOnlineStatus() {
 
 // Сохранение глобальной статистики
 function saveGlobalStats() {
-    // Очистка неактивных пользователей (более 5 минут)
     const now = Date.now();
     Object.keys(onlineUsers).forEach(id => {
         if (now - onlineUsers[id].lastSeen > 5 * 60 * 1000) {
@@ -6977,7 +6825,7 @@ function updateOnlineUsersDisplay() {
     const onlineCount = Object.keys(onlineUsers).length;
     const onlineUsersInfo = document.getElementById('onlineUsersInfo');
     if (onlineUsersInfo) {
-        onlineUsersInfo.innerHTML = `<strong>👥 Online: ${onlineCount} Benutzer</strong>`;
+        onlineUsersInfo.innerHTML = `<strong>👥 Online jetzt: ${onlineCount} Benutzer</strong>`;
     }
 }
 
@@ -6994,7 +6842,6 @@ function loadWords() {
             id: generateWordId(w)
         })).filter(x => x.word);
         
-        console.log(`Loaded ${words.length} words`);
         applyWordFilter();
         updateLearnedWordsDisplay();
         
@@ -7008,11 +6855,11 @@ function generateWordId(word) {
     return `${word.article}_${word.word}`.toLowerCase().replace(/\s+/g, '_');
 }
 
-// Новые фильтры
+// Фильтры
 function setWordFilter(filter) {
     wordFilter = filter;
     applyWordFilter();
-    updateFilterButtons();
+    updateMenuButtons(); // Обновляем подсветку
 }
 
 function applyWordFilter() {
@@ -7057,8 +6904,8 @@ function updateWordCountDisplay() {
     const wordCountInfo = document.getElementById('wordCountInfo');
     if (wordCountInfo) {
         wordCountInfo.innerHTML = `
-            Verfügbar: <b>${availableCount}</b> / ${totalCount}<br>
-            Gelernt: ${learnedWordsCount} Wörter, ${learnedArticlesCount} Artikel
+            Verfügbare Wörter: <b>${availableCount}</b> / ${totalCount}<br>
+            Wörter gelernt: ${learnedWordsCount} | Artikel gelernt: ${learnedArticlesCount}
         `;
     }
 }
@@ -7081,6 +6928,35 @@ function updateLearnedWordsDisplay() {
     }
 }
 
+// СБРОС СТАТУСА КНОПОК ДЛЯ НОВОГО СЛОВА
+function resetLearningStatusButtons() {
+    const currentWord = quizWords[index];
+    const wordId = currentWord.id;
+    
+    const wordBtn = document.getElementById('wordLearnedBtn');
+    const wordIcon = document.getElementById('wordLearnedIcon');
+    const articleBtn = document.getElementById('articleLearnedBtn');
+    const articleIcon = document.getElementById('articleLearnedIcon');
+    
+    // Сбрасываем кнопку слова
+    if (learnedWords.includes(wordId)) {
+        wordBtn.classList.add('word-learned');
+        wordIcon.textContent = '✅';
+    } else {
+        wordBtn.classList.remove('word-learned');
+        wordIcon.textContent = '□';
+    }
+    
+    // Сбрасываем кнопку артикля
+    if (learnedArticles.includes(wordId)) {
+        articleBtn.classList.add('article-learned');
+        articleIcon.textContent = '✅';
+    } else {
+        articleBtn.classList.remove('article-learned');
+        articleIcon.textContent = '□';
+    }
+}
+
 // Управление изученными словами и артиклями
 function toggleWordLearned() {
     const currentWord = quizWords[index];
@@ -7090,15 +6966,14 @@ function toggleWordLearned() {
     
     if (learnedWords.includes(wordId)) {
         learnedWords = learnedWords.filter(id => id !== wordId);
-        btn.classList.remove('word-learned', 'active');
+        btn.classList.remove('word-learned');
         icon.textContent = '□';
     } else {
         learnedWords.push(wordId);
-        btn.classList.add('word-learned', 'active');
+        btn.classList.add('word-learned');
         icon.textContent = '✅';
     }
     
-    updateLearningStatus(currentWord);
     saveLearnedData();
 }
 
@@ -7110,51 +6985,15 @@ function toggleArticleLearned() {
     
     if (learnedArticles.includes(wordId)) {
         learnedArticles = learnedArticles.filter(id => id !== wordId);
-        btn.classList.remove('article-learned', 'active');
+        btn.classList.remove('article-learned');
         icon.textContent = '□';
     } else {
         learnedArticles.push(wordId);
-        btn.classList.add('article-learned', 'active');
-        icon.textContent = '⭐';
+        btn.classList.add('article-learned');
+        icon.textContent = '✅';
     }
     
-    updateLearningStatus(currentWord);
     saveLearnedData();
-}
-
-function updateLearningStatus(word) {
-    const wordId = word.id;
-    const wordLearned = learnedWords.includes(wordId);
-    const articleLearned = learnedArticles.includes(wordId);
-    
-    const wordBtn = document.getElementById('wordLearnedBtn');
-    const articleBtn = document.getElementById('articleLearnedBtn');
-    const wordIcon = document.getElementById('wordLearnedIcon');
-    const articleIcon = document.getElementById('articleLearnedIcon');
-    
-    // Сброс стилей
-    wordBtn.className = 'status-btn';
-    articleBtn.className = 'status-btn';
-    
-    if (wordLearned) {
-        wordBtn.classList.add('word-learned', 'active');
-        wordIcon.textContent = '✅';
-    } else {
-        wordIcon.textContent = '□';
-    }
-    
-    if (articleLearned) {
-        articleBtn.classList.add('article-learned', 'active');
-        articleIcon.textContent = '⭐';
-    } else {
-        articleIcon.textContent = '□';
-    }
-    
-    // Если выучено и слово и артикль
-    if (wordLearned && articleLearned) {
-        wordBtn.classList.add('both-learned');
-        articleBtn.classList.add('both-learned');
-    }
 }
 
 function saveLearnedData() {
@@ -7163,17 +7002,7 @@ function saveLearnedData() {
     updateLearnedWordsDisplay();
 }
 
-// Гарантия видимости кнопок изучения
-function ensureLearningButtonsVisible() {
-    const learningStatus = document.querySelector('.learning-status');
-    if (learningStatus) {
-        learningStatus.style.display = 'flex';
-        learningStatus.style.visibility = 'visible';
-        learningStatus.style.opacity = '1';
-    }
-}
-
-// УЛУЧШЕННАЯ ФУНКЦИЯ ПОКАЗА 25-ГО КАДРА
+// Функция показа 25-го кадра
 function showSubliminalFrame(word) {
     if (!subliminalEnabled) return;
     
@@ -7181,11 +7010,9 @@ function showSubliminalFrame(word) {
     const combinedEl = document.getElementById('subliminalCombined');
     const translationEl = document.getElementById('subliminalTranslation');
     
-    // Объединяем артикль и слово в одну строку
     combinedEl.textContent = `${word.article} ${word.word}`;
     translationEl.textContent = pickTranslation(word);
     
-    // Показываем на очень короткое время
     frame.classList.add('visible');
     
     setTimeout(() => {
@@ -7195,11 +7022,12 @@ function showSubliminalFrame(word) {
 
 // Глобальная статистика
 function showGlobalStats() {
+    updateOnlineStatus();
+    
     const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
     const allUsers = globalStats.users || {};
     
-    // Добавляем текущего пользователя в статистику
-    if (playerId) {
+    if (playerId && playerName) {
         allUsers[playerId] = {
             name: playerName,
             games: stats.games || 0,
@@ -7208,24 +7036,27 @@ function showGlobalStats() {
             totalCorrect: stats.totalCorrect || 0,
             accuracy: stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0,
             learnedWords: learnedWords.length,
-            learnedArticles: learnedArticles.length
+            learnedArticles: learnedArticles.length,
+            lastActive: new Date().toLocaleDateString()
         };
+        
+        globalStats.users = allUsers;
+        saveGlobalStats();
     }
     
-    // Сортируем пользователей по точности
-    const sortedUsers = Object.values(allUsers).sort((a, b) => b.accuracy - a.accuracy);
+    const sortedUsers = Object.values(allUsers).sort((a, b) => b.games - a.games);
     
     let tableHTML = `
-        <table class="user-stats-table">
+        <div style="margin: 15px 0; font-size: 14px;">
+            <strong>Besucher heute: ${globalStats.visits.daily} | Gesamt: ${globalStats.visits.total}</strong>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Spiele</th>
-                    <th>Beste</th>
-                    <th>%</th>
-                    <th>Wörter</th>
-                    <th>Artikel</th>
+                    <th style="padding: 8px; border-bottom: 1px solid #ddd; text-align: left;">Name</th>
+                    <th style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">Spiele</th>
+                    <th style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">Beste</th>
+                    <th style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">%</th>
                 </tr>
             </thead>
             <tbody>
@@ -7233,16 +7064,13 @@ function showGlobalStats() {
     
     sortedUsers.forEach((user, index) => {
         const isCurrentUser = user.name === playerName;
-        const rowClass = isCurrentUser ? 'current-user' : '';
+        const rowStyle = isCurrentUser ? 'background: #e3f2fd; font-weight: bold;' : '';
         tableHTML += `
-            <tr class="${rowClass}">
-                <td>${index + 1}</td>
-                <td>${user.name} ${isCurrentUser ? '👤' : ''}</td>
-                <td>${user.games}</td>
-                <td>${user.bestScore}</td>
-                <td>${user.accuracy}%</td>
-                <td>${user.learnedWords}</td>
-                <td>${user.learnedArticles}</td>
+            <tr style="${rowStyle}">
+                <td style="padding: 8px; border-bottom: 1px solid #ddd;">${user.name} ${isCurrentUser ? '(Sie)' : ''}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${user.games}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${user.bestScore}</td>
+                <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${user.accuracy}%</td>
             </tr>
         `;
     });
@@ -7256,24 +7084,6 @@ function showGlobalStats() {
     updateOnlineUsersDisplay();
 }
 
-// Обновление отображения кнопок фильтров
-function updateFilterButtons() {
-    const buttons = document.querySelectorAll('.filter-btn');
-    const filterNames = {
-        'all': 'Alle',
-        'unlearned': 'Nicht gelernt',
-        'no_article': 'Kein Artikel',
-        'no_word': 'Kein Wort'
-    };
-    
-    buttons.forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.textContent.includes(filterNames[wordFilter])) {
-            btn.classList.add('active');
-        }
-    });
-}
-
 // Обновление статистики
 function updateStats() {
     const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
@@ -7285,8 +7095,7 @@ function updateStats() {
     }
     localStorage.setItem(`stats_${playerId}`, JSON.stringify(stats));
     
-    // Сохраняем в глобальную статистику
-    if (playerId) {
+    if (playerId && playerName) {
         if (!globalStats.users) globalStats.users = {};
         globalStats.users[playerId] = {
             name: playerName,
@@ -7296,7 +7105,8 @@ function updateStats() {
             totalCorrect: stats.totalCorrect,
             accuracy: stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0,
             learnedWords: learnedWords.length,
-            learnedArticles: learnedArticles.length
+            learnedArticles: learnedArticles.length,
+            lastActive: new Date().toLocaleDateString()
         };
         saveGlobalStats();
     }
@@ -7308,19 +7118,17 @@ function updateStatsDisplay() {
     const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
     const accuracy = stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0;
     document.getElementById('statsBox').innerHTML = `
-        <b>${playerName}:</b><br>
+        <b>Statistik für ${playerName}:</b><br>
         Spiele: ${stats.games}<br>
-        Bestes: ${stats.bestScore}<br>
+        Bestes Ergebnis: ${stats.bestScore}<br>
         Genauigkeit: ${accuracy}%<br>
-        Wörter: ${learnedWords.length}<br>
-        Artikel: ${learnedArticles.length}
+        Gelernte Wörter: ${learnedWords.length}<br>
+        Gelernte Artikel: ${learnedArticles.length}
     `;
 }
 
-// В функции nextQuestion добавляем обновление статуса изучения
+// Основная логика викторины
 function nextQuestion() {
-    ensureLearningButtonsVisible();
-    
     if (index >= quizWords.length) {
         finishQuiz();
         return;
@@ -7328,16 +7136,14 @@ function nextQuestion() {
     
     const q = quizWords[index];
     
-    // Обновляем прогресс
+    // СБРАСЫВАЕМ СТАТУС КНОПОК ДЛЯ НОВОГО СЛОВА
+    resetLearningStatusButtons();
+    
     document.getElementById('currentQuestion').textContent = index + 1;
     document.getElementById('totalQuestions').textContent = quizWords.length;
     
-    // Обновляем прогресс-бар
     const progressPercent = ((index) / quizWords.length) * 100;
     document.getElementById('progressFill').style.width = `${progressPercent}%`;
-    
-    // Обновляем статус изучения
-    updateLearningStatus(q);
     
     document.getElementById('articleDisplay').textContent = '';
     document.getElementById('correctAnswerDisplay').textContent = '';
@@ -7357,7 +7163,6 @@ function nextQuestion() {
         const g = (q.german || ((q.article || 'das') + ' ' + q.word)).trim();
         qText = `Was bedeutet:`;
         document.getElementById('word').innerText = g;
-        document.getElementById('translationBox').textContent = '';
         const correctT = pickTranslation(q);
         const pool = shuffle(words.map(w => pickTranslation(w)).filter(t => t && t !== correctT));
         opts = pool.slice(0, 3);
@@ -7367,7 +7172,6 @@ function nextQuestion() {
         const trans = pickTranslation(q);
         qText = `Wie heißt auf Deutsch:`;
         document.getElementById('word').innerText = trans;
-        document.getElementById('translationBox').textContent = '';
         const correctG = (q.german || ((q.article || 'das') + ' ' + q.word)).trim();
         const pool = shuffle(words.map(w => (w.german || ((w.article || 'das') + ' ' + w.word)).trim()).filter(g => g !== correctG));
         opts = pool.slice(0, 3);
@@ -7389,59 +7193,51 @@ function nextQuestion() {
 }
 
 function checkAnswer(button, selected, correct, q) {
-    // Блокируем все кнопки
     const allButtons = document.querySelectorAll('#answers button');
     allButtons.forEach(btn => {
         btn.onclick = null;
-        btn.style.cursor = 'default';
     });
 
     if (selected === correct) {
         button.style.background = 'green';
         score++;
         
-        // ПОКАЗЫВАЕМ 25-Й КАДР ПРИ ПРАВИЛЬНОМ ОТВЕТЕ
         if (subliminalEnabled) {
             showSubliminalFrame(q);
         }
         
         if (mode === 'article') {
-            showCorrectArticle(q.article);
+            // ИСПРАВЛЕННОЕ ОТОБРАЖЕНИЕ - АРТИКЛЬ СЛЕВА ОТ СЛОВА
+            document.getElementById('articleDisplay').textContent = q.article;
+            document.getElementById('articleDisplay').style.color = '#22c55e';
         } else {
             showCorrectAnswer(correct);
         }
     } else {
         button.style.background = 'red';
-        // Подсвечиваем правильный ответ зеленым
         allButtons.forEach(btn => {
             if (btn.textContent === correct) {
                 btn.style.background = 'green';
             }
         });
         
-        // ПОКАЗЫВАЕМ 25-Й КАДР ДАЖЕ ПРИ НЕПРАВИЛЬНОМ ОТВЕТЕ (чтобы закрепить правильный)
         if (subliminalEnabled) {
             showSubliminalFrame(q);
         }
         
         if (mode === 'article') {
-            showCorrectArticle(q.article);
+            // ИСПРАВЛЕННОЕ ОТОБРАЖЕНИЕ - АРТИКЛЬ СЛЕВА ОТ СЛОВА
+            document.getElementById('articleDisplay').textContent = q.article;
+            document.getElementById('articleDisplay').style.color = '#22c55e';
         } else {
             showCorrectAnswer(correct);
         }
     }
     
-    // Увеличиваем время до следующего вопроса
     setTimeout(() => {
         index++;
         nextQuestion();
     }, 1500);
-}
-
-function showCorrectArticle(a) {
-    const el = document.getElementById('articleDisplay');
-    el.textContent = a;
-    el.style.color = '#22c55e';
 }
 
 function showCorrectAnswer(answer) {
@@ -7462,12 +7258,11 @@ function finishQuiz() {
     const accuracy = (score / quizWords.length * 100).toFixed(1);
     document.getElementById('score').innerText = `${score} / ${quizWords.length} (${accuracy}%)`;
     
-    // Показываем дополнительную статистику
     const resultStats = document.getElementById('resultStats');
     resultStats.innerHTML = `
-        <div style="margin: 12px 0;">
-            <strong>Gelernte Wörter:</strong> ${learnedWords.length}<br>
-            <strong>Gelernte Artikel:</strong> ${learnedArticles.length}
+        <div style="margin: 15px 0;">
+            <strong>Gelernte Wörter in diesem Spiel:</strong> ${learnedWords.length}<br>
+            <strong>Gelernte Artikel in diesem Spiel:</strong> ${learnedArticles.length}
         </div>
     `;
     
@@ -7479,10 +7274,11 @@ function showStats() {
     const accuracy = stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0;
     
     document.getElementById('detailedStats').innerHTML = `
-        <div style="text-align: left; line-height: 1.6; font-size: 14px;">
-            <p><strong>Spiele:</strong> ${stats.games}</p>
+        <div style="text-align: left; line-height: 1.6;">
+            <h3>📈 Detaillierte Statistik</h3>
+            <p><strong>Gesamtspiele:</strong> ${stats.games}</p>
             <p><strong>Beste Punktzahl:</strong> ${stats.bestScore}</p>
-            <p><strong>Fragen gesamt:</strong> ${stats.totalQuestions}</p>
+            <p><strong>Gesamtfragen:</strong> ${stats.totalQuestions}</p>
             <p><strong>Richtige Antworten:</strong> ${stats.totalCorrect}</p>
             <p><strong>Genauigkeit:</strong> ${accuracy}%</p>
             <p><strong>Gelernte Wörter:</strong> ${learnedWords.length}</p>
@@ -7509,6 +7305,20 @@ function restart() {
     applyWordFilter();
 }
 
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function startSessionTimer() {
+    setInterval(() => {
+        document.getElementById('info').innerHTML = `<span>Sprache: ${getLanguageName(lang)}</span> • <span>Modus: ${getModeName(mode)}</span>`;
+    }, 1000);
+}
+
 function getLanguageName(lang) {
     const names = {
         'ru': 'Русский',
@@ -7520,51 +7330,23 @@ function getLanguageName(lang) {
 
 function getModeName(mode) {
     const names = {
-        'article': 'Artikel',
-        'de_to_l1': 'Deutsch →',
-        'l1_to_de': '→ Deutsch'
+        'article': 'Artikel wählen',
+        'de_to_l1': 'Deutsch → Übersetzung',
+        'l1_to_de': 'Übersetzung → Deutsch'
     };
-    return names[mode] || 'Artikel';
-}
-
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}
-
-function startSessionTimer() {
-    setInterval(() => {
-        const uptime = Math.floor((Date.now() - startTime) / 1000);
-        const minutes = Math.floor(uptime / 60);
-        const seconds = uptime % 60;
-        document.getElementById('info').innerHTML = `<span>Sprache: ${getLanguageName(lang)}</span> • <span>Modus: ${getModeName(mode)}</span>`;
-    }, 1000);
-}
-
-function saveName() {
-    const nameInput = document.getElementById('playerName');
-    playerName = nameInput.value.trim();
-    
-    if (!playerName) {
-        alert('Bitte geben Sie Ihren Namen ein.');
-        return;
-    }
-    
-    localStorage.setItem('playerName', playerName);
-    loadPlayerData();
+    return names[mode] || 'Artikel wählen';
 }
 
 function setLang(language) {
     lang = language;
     updateStatsDisplay();
+    updateMenuButtons(); // Обновляем подсветку
 }
 
 function setMode(gameMode) {
     mode = gameMode;
     updateStatsDisplay();
+    updateMenuButtons(); // Обновляем подсветку
 }
 
 function startQuiz() {
@@ -7585,26 +7367,7 @@ function startQuiz() {
     index = 0;
     score = 0;
     
-    // Гарантируем видимость кнопок изучения
-    setTimeout(ensureLearningButtonsVisible, 100);
-    
     nextQuestion();
-}
-
-// Функция для улучшения мобильного UX
-function ensureMobileUX() {
-    // Предотвращение масштабирования при двойном тапе
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', function (event) {
-        const now = (new Date()).getTime();
-        if (now - lastTouchEnd <= 300) {
-            event.preventDefault();
-        }
-        lastTouchEnd = now;
-    }, false);
-
-    // Улучшение отзывчивости кнопок
-    document.addEventListener('touchstart', function() {}, {passive: true});
 }
 
 // Загружаем настройки 25-го кадра
@@ -7621,17 +7384,13 @@ function init() {
     loadPlayerData();
     updateStatsDisplay();
     startSessionTimer();
-    updateFilterButtons();
-    ensureMobileUX();
     loadSubliminalSettings();
     
-    // Обработчик переключателя 25-го кадра
     document.getElementById('subliminalToggle').addEventListener('change', function(e) {
         subliminalEnabled = e.target.checked;
         localStorage.setItem('subliminalEnabled', subliminalEnabled);
     });
     
-    // Обновляем онлайн статус каждую минуту
     setInterval(updateOnlineStatus, 60000);
 }
 
