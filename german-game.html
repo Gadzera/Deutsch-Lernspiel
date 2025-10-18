@@ -8,44 +8,52 @@
         body { 
             font-family: Arial, sans-serif; 
             margin: 20px; 
-            background: #f0f0f0; 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
         }
         .container { 
-            max-width: 600px; 
+            max-width: 800px; 
             margin: 0 auto; 
             background: white; 
-            padding: 20px; 
-            border-radius: 10px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             position: relative;
         }
         h1 { 
             text-align: center; 
             color: #333; 
+            margin-bottom: 20px;
+            font-size: 2.2em;
         }
         .section { 
-            margin: 15px 0; 
-            padding: 15px; 
-            border: 1px solid #ddd; 
-            border-radius: 5px; 
+            margin: 20px 0; 
+            padding: 20px; 
+            border: 1px solid #e0e0e0; 
+            border-radius: 10px; 
             background: #f9f9f9;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
         button { 
-            padding: 10px 15px; 
-            margin: 5px; 
+            padding: 12px 18px; 
+            margin: 8px; 
             cursor: pointer; 
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             background: #4CAF50;
             color: white;
+            font-weight: bold;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         button:hover {
             background: #45a049;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
         button.active { 
             background: #2196F3; 
+            transform: scale(1.05);
         }
         .filter-btn { 
             background: #666; 
@@ -54,10 +62,11 @@
             background: #2196F3;
         }
         input, select { 
-            padding: 8px; 
-            margin: 5px; 
+            padding: 10px; 
+            margin: 8px; 
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 6px;
+            width: 200px;
         }
         #quiz, #result { 
             display: none; 
@@ -66,62 +75,122 @@
         #answers button { 
             display: block; 
             width: 100%; 
-            margin: 5px 0; 
-            background: #666; /* Нейтральный цвет по умолчанию */
+            margin: 8px 0; 
+            background: #666;
+            font-size: 1.1em;
+            padding: 15px;
         }
+        
+        /* Стили для кнопок статуса изучения - ИСПРАВЛЕНЫ */
         .learning-status {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 25px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 2px solid #e0e0e0;
         }
         
         .status-btn {
-            padding: 10px 15px;
-            border: 2px solid #ddd;
-            border-radius: 20px;
+            padding: 18px 30px;
+            border: 3px solid #e0e0e0;
+            border-radius: 35px;
             background: white;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 15px;
+            font-weight: bold;
+            font-size: 18px;
+            min-width: 220px;
+            justify-content: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            color: #333; /* ЧЁРНЫЙ ТЕКСТ */
+        }
+        
+        .status-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         .status-btn.active {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
         
+        /* Яркое свечение для выученных слов - ИСПРАВЛЕНО */
         .word-learned {
             border-color: #4CAF50;
-            background: #e8f5e8;
+            background: #4CAF50; /* ЗЕЛЁНЫЙ ФОН */
+            color: white; /* БЕЛЫЙ ТЕКСТ НА ЗЕЛЁНОМ */
+            box-shadow: 0 6px 25px rgba(76, 175, 80, 0.5);
         }
         
+        /* Яркое свечение для выученных артиклей - ИСПРАВЛЕНО */
         .article-learned {
             border-color: #2196F3;
-            background: #e3f2fd;
+            background: #2196F3; /* СИНИЙ ФОН */
+            color: white; /* БЕЛЫЙ ТЕКСТ НА СИНЕМ */
+            box-shadow: 0 6px 25px rgba(33, 150, 243, 0.5);
         }
         
+        /* Если выучено и слово и артикль - ИСПРАВЛЕНО */
         .both-learned {
             border-color: #FF9800;
-            background: #fff3e0;
+            background: #FF9800; /* ОРАНЖЕВЫЙ ФОН */
+            color: white; /* БЕЛЫЙ ТЕКСТ НА ОРАНЖЕВОМ */
+            box-shadow: 0 6px 25px rgba(255, 152, 0, 0.5);
+        }
+        
+        .status-icon {
+            font-size: 24px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .status-btn.active .status-icon {
+            transform: scale(1.4);
+        }
+        
+        /* Анимация при активации */
+        @keyframes glow {
+            0% { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); }
+            50% { box-shadow: 0 6px 30px rgba(76, 175, 80, 0.7); }
+            100% { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); }
+        }
+        
+        .word-learned.active {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        .article-learned.active {
+            animation: glow 2s ease-in-out infinite;
         }
         
         .user-stats-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         .user-stats-table th,
         .user-stats-table td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: left;
         }
         
         .user-stats-table th {
             background: #f5f5f5;
+            font-weight: bold;
         }
         
         .user-stats-table tr.current-user {
@@ -132,69 +201,73 @@
         .online-users {
             background: #e8f5e8;
             border: 1px solid #4CAF50;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px 0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
         }
         .star-btn { 
-            font-size: 24px; 
+            font-size: 28px; 
             cursor: pointer; 
             border: none; 
             background: none; 
             transition: all 0.3s ease;
-            padding: 5px;
+            padding: 8px;
         }
         .star-btn:hover {
-            transform: scale(1.2);
+            transform: scale(1.3);
         }
         .starred { 
             color: gold; 
-            text-shadow: 0 0 10px gold;
+            text-shadow: 0 0 15px gold;
         }
         .not-starred { color: #ccc; }
         #question {
-            font-size: 1.2em;
-            margin-bottom: 15px;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
         #word {
-            font-size: 1.5em;
+            font-size: 1.8em;
             font-weight: bold;
-            margin: 10px 0;
+            margin: 15px 0;
+            color: #333;
         }
         .word-with-article {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin: 15px 0;
+            gap: 15px;
+            margin: 20px 0;
         }
         .article-display {
-            font-size: 2em;
+            font-size: 2.5em;
             font-weight: bold;
             color: #333;
         }
         .correct-answer {
-            font-size: 1.2em;
+            font-size: 1.4em;
             font-weight: bold;
             color: #22c55e;
-            margin-left: 15px;
+            margin-left: 20px;
         }
         .answer-feedback {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin: 10px 0;
+            gap: 20px;
+            margin: 15px 0;
         }
         .star-info {
-            font-size: 0.9em;
+            font-size: 1em;
             color: #666;
-            margin-top: 10px;
+            margin-top: 15px;
         }
         .navigation-buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            margin-top: 25px;
         }
         .back-btn {
             background: #6c757d;
@@ -210,19 +283,21 @@
         }
         .developer-info {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 40px;
             color: #666;
-            font-size: 0.9em;
+            font-size: 1em;
             border-top: 1px solid #ddd;
-            padding-top: 15px;
+            padding-top: 20px;
         }
         .learned-words-info {
             background: #e8f5e8;
-            border: 1px solid #4CAF50;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px 0;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
             text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
         }
         .star-animation {
             animation: starPulse 0.5s ease-in-out;
@@ -232,13 +307,47 @@
             50% { transform: scale(1.5); }
             100% { transform: scale(1); }
         }
+        
+        .powered-by {
+            text-align: center;
+            margin-top: 15px;
+            color: #888;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+        
+        .info-bar {
+            background: #e3f2fd;
+            border-radius: 10px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🇩🇪 Deutsch Lernspiel</h1>
         
-        <div id="info" class="section"></div>
+        <div id="info" class="info-bar"></div>
         
         <div id="nameBox" class="section">
             <h2>Spieler Name</h2>
@@ -288,7 +397,7 @@
             <div class="navigation-buttons">
                 <button class="stats-btn" onclick="showStats()">📊 Meine Statistik</button>
                 <button class="stats-btn" onclick="showGlobalStats()">🌍 Globale Statistik</button>
-                <button onclick="startQuiz()" style="font-size: 18px; padding: 15px 30px; background: #FF5722;">Quiz starten! 🚀</button>
+                <button onclick="startQuiz()" style="font-size: 20px; padding: 18px 35px; background: #FF5722;">Quiz starten! 🚀</button>
             </div>
         </div>
         
@@ -300,29 +409,35 @@
                 <div id="word" class="word-text"></div>
                 <div id="correctAnswerDisplay" class="correct-answer"></div>
             </div>
-            <div id="translationBox" style="font-style: italic; margin: 10px 0;"></div>
+            <div id="translationBox" style="font-style: italic; margin: 15px 0; font-size: 1.2em;"></div>
             <div id="answers"></div>
             
             <div class="learning-status">
                 <button class="status-btn" id="wordLearnedBtn" onclick="toggleWordLearned()">
-                    <span id="wordLearnedIcon">□</span> Wort gelernt
+                    <span class="status-icon" id="wordLearnedIcon">□</span> 
+                    <span class="status-text">Wort gelernt</span>
                 </button>
                 <button class="status-btn" id="articleLearnedBtn" onclick="toggleArticleLearned()">
-                    <span id="articleLearnedIcon">□</span> Artikel gelernt
+                    <span class="status-icon" id="articleLearnedIcon">□</span> 
+                    <span class="status-text">Artikel gelernt</span>
                 </button>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
             </div>
             
             <div class="navigation-buttons">
                 <button class="back-btn" onclick="backToMenu()">← Zurück</button>
-                <div id="progress">Frage <span id="currentQuestion">1</span> von <span id="totalQuestions">10</span></div>
+                <div id="progress" style="font-weight: bold; font-size: 1.1em;">Frage <span id="currentQuestion">1</span> von <span id="totalQuestions">10</span></div>
             </div>
         </div>
         
         <div id="result" class="section">
             <h2>Ergebnis</h2>
-            <div id="score" style="font-size: 24px; margin: 20px 0;"></div>
+            <div id="score" style="font-size: 28px; margin: 25px 0;"></div>
             
-            <div id="resultStats" style="margin: 20px 0;"></div>
+            <div id="resultStats" style="margin: 25px 0;"></div>
             
             <div class="navigation-buttons">
                 <button class="back-btn" onclick="backToMenu()">← Zurück zum Menü</button>
@@ -348,7 +463,8 @@
         </div>
         
         <div class="developer-info">
-            Powred by Aleksandr Gadzera
+            Entwickelt mit ❤️ für Deutschlerner
+            <div class="powered-by">Powered by Aleksandr Gadzera</div>
         </div>
     </div>
 
@@ -372,7 +488,7 @@ let startTime = Date.now();
 let globalStats = JSON.parse(localStorage.getItem('globalStats') || '{"users": {}, "onlineUsers": {}}');
 let onlineUsers = globalStats.onlineUsers;
 
-// Словарь:
+// СЛОВАРЬ:
 const wordDictionary = [
   {
     "article": "der",
@@ -6744,6 +6860,16 @@ function saveLearnedData() {
     updateLearnedWordsDisplay();
 }
 
+// Гарантия видимости кнопок изучения
+function ensureLearningButtonsVisible() {
+    const learningStatus = document.querySelector('.learning-status');
+    if (learningStatus) {
+        learningStatus.style.display = 'flex';
+        learningStatus.style.visibility = 'visible';
+        learningStatus.style.opacity = '1';
+    }
+}
+
 // Глобальная статистика
 function showGlobalStats() {
     const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
@@ -6871,6 +6997,8 @@ function updateStatsDisplay() {
 
 // В функции nextQuestion добавляем обновление статуса изучения
 function nextQuestion() {
+    ensureLearningButtonsVisible();
+    
     if (index >= quizWords.length) {
         finishQuiz();
         return;
@@ -6882,10 +7010,13 @@ function nextQuestion() {
     document.getElementById('currentQuestion').textContent = index + 1;
     document.getElementById('totalQuestions').textContent = quizWords.length;
     
+    // Обновляем прогресс-бар
+    const progressPercent = ((index) / quizWords.length) * 100;
+    document.getElementById('progressFill').style.width = `${progressPercent}%`;
+    
     // Обновляем статус изучения
     updateLearningStatus(q);
     
-    // Остальной код функции nextQuestion остается без изменений...
     document.getElementById('articleDisplay').textContent = '';
     document.getElementById('correctAnswerDisplay').textContent = '';
     document.getElementById('translationBox').textContent = '';
@@ -6970,7 +7101,7 @@ function checkAnswer(button, selected, correct, q) {
     setTimeout(() => {
         index++;
         nextQuestion();
-    }, 1000); // 1 секунды вместо 0.65
+    }, 1500);
 }
 
 function showCorrectArticle(a) {
@@ -7000,7 +7131,7 @@ function finishQuiz() {
     // Показываем дополнительную статистику
     const resultStats = document.getElementById('resultStats');
     resultStats.innerHTML = `
-        <div style="margin: 10px 0;">
+        <div style="margin: 15px 0;">
             <strong>Gelernte Wörter in diesem Spiel:</strong> ${learnedWords.length}<br>
             <strong>Gelernte Artikel in diesem Spiel:</strong> ${learnedArticles.length}
         </div>
@@ -7120,6 +7251,9 @@ function startQuiz() {
     
     index = 0;
     score = 0;
+    
+    // Гарантируем видимость кнопок изучения
+    setTimeout(ensureLearningButtonsVisible, 100);
     
     nextQuestion();
 }
