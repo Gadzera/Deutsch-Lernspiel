@@ -474,7 +474,6 @@
             
             <div class="navigation-buttons">
                 <button class="menu-btn stats-btn" onclick="showStats()">📊 Meine Statistik</button>
-                <!-- УБРАНА КНОПКА ГЛОБАЛЬНОЙ СТАТИСТИКИ -->
                 <button class="menu-btn" onclick="startQuiz()" style="background: #FF5722;">Quiz starten! 🚀</button>
             </div>
 
@@ -537,8 +536,6 @@
                 <button class="menu-btn back-btn" onclick="backToMenu()">← Zurück</button>
             </div>
         </div>
-        
-        <!-- УБРАН БЛОК ГЛОБАЛЬНОЙ СТАТИСТИКИ -->
     </div>
 
     <!-- 25-Й КАДР -->
@@ -573,7 +570,20 @@ let subliminalDuration = 40;
 let globalStats = JSON.parse(localStorage.getItem('globalStats') || '{"users": {}, "onlineUsers": {}, "visits": {"daily": 0, "total": 0, "lastVisit": ""}}');
 let onlineUsers = globalStats.onlineUsers;
 
-// СЛОВАРЬ
+// ==============================================
+// ⭐⭐⭐ ВСТАВЬТЕ ВАШ СЛОВАРЬ ЗДЕСЬ ⭐⭐⭐
+// ==============================================
+// УДАЛИТЕ эти 3 примера и вставьте ваш полный словарь
+// Формат каждого слова:
+// {
+//   "article": "der",
+//   "word": "Tisch", 
+//   "translation_ru": "стол",
+//   "translation_tr": "masa",
+//   "translation_fa": "میز"
+// }
+// ==============================================
+
 const wordDictionary = [
   {
     "article": "der",
@@ -1302,18 +1312,15 @@ function updateVisitCounter() {
     const lastVisit = globalStats.visits.lastVisit;
     
     if (lastVisit !== today) {
-        // Новый день
         globalStats.visits.daily = 1;
         globalStats.visits.lastVisit = today;
     } else {
-        // Тот же день
         globalStats.visits.daily++;
     }
     
     globalStats.visits.total++;
     saveGlobalStats();
     
-    // Обновляем отображение
     document.getElementById('dailyVisits').textContent = globalStats.visits.daily;
     document.getElementById('totalVisits').textContent = globalStats.visits.total;
 }
@@ -1333,10 +1340,9 @@ function loadPlayerData() {
         document.getElementById('menu').style.display = 'block';
         loadWords();
         updateVisitCounter();
-        updateMenuButtons(); // Обновляем подсветку кнопок
+        updateMenuButtons();
     }
     
-    // Загрузка выученных слов и артиклей
     const learnedWordsData = localStorage.getItem(`learnedWords_${playerId}`);
     const learnedArticlesData = localStorage.getItem(`learnedArticles_${playerId}`);
     
@@ -1348,17 +1354,14 @@ function loadPlayerData() {
 
 // Обновление подсветки кнопок в меню
 function updateMenuButtons() {
-    // Язык
     document.getElementById('langRu').classList.toggle('active', lang === 'ru');
     document.getElementById('langTr').classList.toggle('active', lang === 'tr');
     document.getElementById('langFa').classList.toggle('active', lang === 'fa');
     
-    // Режим
     document.getElementById('modeArticle').classList.toggle('active', mode === 'article');
     document.getElementById('modeDeToL1').classList.toggle('active', mode === 'de_to_l1');
     document.getElementById('modeL1ToDe').classList.toggle('active', mode === 'l1_to_de');
     
-    // Фильтры
     document.getElementById('filterAll').classList.toggle('active', wordFilter === 'all');
     document.getElementById('filterUnlearned').classList.toggle('active', wordFilter === 'unlearned');
     document.getElementById('filterNoArticle').classList.toggle('active', wordFilter === 'no_article');
@@ -1438,7 +1441,7 @@ function generateWordId(word) {
 function setWordFilter(filter) {
     wordFilter = filter;
     applyWordFilter();
-    updateMenuButtons(); // Обновляем подсветку
+    updateMenuButtons();
 }
 
 function applyWordFilter() {
@@ -1517,7 +1520,6 @@ function resetLearningStatusButtons() {
     const articleBtn = document.getElementById('articleLearnedBtn');
     const articleIcon = document.getElementById('articleLearnedIcon');
     
-    // Сбрасываем кнопку слова
     if (learnedWords.includes(wordId)) {
         wordBtn.classList.add('word-learned');
         wordIcon.textContent = '✅';
@@ -1526,7 +1528,6 @@ function resetLearningStatusButtons() {
         wordIcon.textContent = '□';
     }
     
-    // Сбрасываем кнопку артикля
     if (learnedArticles.includes(wordId)) {
         articleBtn.classList.add('article-learned');
         articleIcon.textContent = '✅';
@@ -1581,7 +1582,7 @@ function saveLearnedData() {
     updateLearnedWordsDisplay();
 }
 
-// Функция показа 25-го кадра
+// Функция показа 25-го кадра - ИСПРАВЛЕНА ПРОВЕРКА
 function showSubliminalFrame(word) {
     if (!subliminalEnabled) return;
     
@@ -1633,7 +1634,6 @@ function updateStatsDisplay() {
     const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
     const accuracy = stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0;
     
-    // ИСПРАВЛЕНО: убрано имя "Gadzera", используется "Ihnen"
     document.getElementById('statsBox').innerHTML = `
         <b>Statistik für Sie:</b><br>
         Spiele: ${stats.games}<br>
@@ -1653,7 +1653,6 @@ function nextQuestion() {
     
     const q = quizWords[index];
     
-    // СБРАСЫВАЕМ СТАТУС КНОПОК ДЛЯ НОВОГО СЛОВА
     resetLearningStatusButtons();
     
     document.getElementById('currentQuestion').textContent = index + 1;
@@ -1724,7 +1723,6 @@ function checkAnswer(button, selected, correct, q) {
         }
         
         if (mode === 'article') {
-            // ИСПРАВЛЕННОЕ ОТОБРАЖЕНИЕ - АРТИКЛЬ СЛЕВА ОТ СЛОВА
             document.getElementById('articleDisplay').textContent = q.article;
             document.getElementById('articleDisplay').style.color = '#22c55e';
         } else {
@@ -1743,7 +1741,6 @@ function checkAnswer(button, selected, correct, q) {
         }
         
         if (mode === 'article') {
-            // ИСПРАВЛЕННОЕ ОТОБРАЖЕНИЕ - АРТИКЛЬ СЛЕВА ОТ СЛОВА
             document.getElementById('articleDisplay').textContent = q.article;
             document.getElementById('articleDisplay').style.color = '#22c55e';
         } else {
@@ -1856,13 +1853,13 @@ function getModeName(mode) {
 function setLang(language) {
     lang = language;
     updateStatsDisplay();
-    updateMenuButtons(); // Обновляем подсветку
+    updateMenuButtons();
 }
 
 function setMode(gameMode) {
     mode = gameMode;
     updateStatsDisplay();
-    updateMenuButtons(); // Обновляем подсветку
+    updateMenuButtons();
 }
 
 function startQuiz() {
@@ -1891,6 +1888,8 @@ function loadSubliminalSettings() {
     const saved = localStorage.getItem('subliminalEnabled');
     if (saved !== null) {
         subliminalEnabled = JSON.parse(saved);
+    } else {
+        subliminalEnabled = true;
     }
     document.getElementById('subliminalToggle').checked = subliminalEnabled;
 }
@@ -1904,7 +1903,7 @@ function init() {
     
     document.getElementById('subliminalToggle').addEventListener('change', function(e) {
         subliminalEnabled = e.target.checked;
-        localStorage.setItem('subliminalEnabled', subliminalEnabled);
+        localStorage.setItem('subliminalEnabled', JSON.stringify(subliminalEnabled));
     });
     
     setInterval(updateOnlineStatus, 60000);
