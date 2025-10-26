@@ -474,7 +474,7 @@
             
             <div class="navigation-buttons">
                 <button class="menu-btn stats-btn" onclick="showStats()">📊 Meine Statistik</button>
-                <button class="menu-btn stats-btn" onclick="showGlobalStats()">🌍 Globale Statistik</button>
+                <!-- УБРАНА КНОПКА ГЛОБАЛЬНОЙ СТАТИСТИКИ -->
                 <button class="menu-btn" onclick="startQuiz()" style="background: #FF5722;">Quiz starten! 🚀</button>
             </div>
 
@@ -538,14 +538,7 @@
             </div>
         </div>
         
-        <div id="globalStats" class="section" style="display:none">
-            <h2>🌍 Globale Statistik</h2>
-            <div id="onlineUsersInfo" class="learned-words-info"></div>
-            <div id="globalStatsContent"></div>
-            <div class="navigation-buttons">
-                <button class="menu-btn back-btn" onclick="backToMenu()">← Zurück</button>
-            </div>
-        </div>
+        <!-- УБРАН БЛОК ГЛОБАЛЬНОЙ СТАТИСТИКИ -->
     </div>
 
     <!-- 25-Й КАДР -->
@@ -580,7 +573,7 @@ let subliminalDuration = 40;
 let globalStats = JSON.parse(localStorage.getItem('globalStats') || '{"users": {}, "onlineUsers": {}, "visits": {"daily": 0, "total": 0, "lastVisit": ""}}');
 let onlineUsers = globalStats.onlineUsers;
 
-// СЛОВАРЬ (ТОЛЬКО ПРИМЕРЫ - ВСТАВЬТЕ СВОЙ ПОЛНЫЙ СЛОВАРЬ)
+// СЛОВАРЬ
 const wordDictionary = [
   {
     "article": "der",
@@ -1399,7 +1392,6 @@ function updateOnlineStatus() {
             sessionStart: startTime
         };
         saveGlobalStats();
-        updateOnlineUsersDisplay();
     }
 }
 
@@ -1414,15 +1406,6 @@ function saveGlobalStats() {
     
     globalStats.onlineUsers = onlineUsers;
     localStorage.setItem('globalStats', JSON.stringify(globalStats));
-}
-
-// Обновление отображения онлайн пользователей
-function updateOnlineUsersDisplay() {
-    const onlineCount = Object.keys(onlineUsers).length;
-    const onlineUsersInfo = document.getElementById('onlineUsersInfo');
-    if (onlineUsersInfo) {
-        onlineUsersInfo.innerHTML = `<strong>👥 Online jetzt: ${onlineCount} Benutzer</strong>`;
-    }
 }
 
 // Загрузка слов
@@ -1616,70 +1599,6 @@ function showSubliminalFrame(word) {
     }, subliminalDuration);
 }
 
-// Глобальная статистика
-function showGlobalStats() {
-    updateOnlineStatus();
-    
-    const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
-    const allUsers = globalStats.users || {};
-    
-    if (playerId && playerName) {
-        allUsers[playerId] = {
-            name: playerName,
-            games: stats.games || 0,
-            bestScore: stats.bestScore || 0,
-            totalQuestions: stats.totalQuestions || 0,
-            totalCorrect: stats.totalCorrect || 0,
-            accuracy: stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0,
-            learnedWords: learnedWords.length,
-            learnedArticles: learnedArticles.length,
-            lastActive: new Date().toLocaleDateString()
-        };
-        
-        globalStats.users = allUsers;
-        saveGlobalStats();
-    }
-    
-    const sortedUsers = Object.values(allUsers).sort((a, b) => b.games - a.games);
-    
-    let tableHTML = `
-        <div style="margin: 15px 0; font-size: 14px;">
-            <strong>Besucher heute: ${globalStats.visits.daily} | Gesamt: ${globalStats.visits.total}</strong>
-        </div>
-        <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
-            <thead>
-                <tr>
-                    <th style="padding: 8px; border-bottom: 1px solid #ddd; text-align: left;">Name</th>
-                    <th style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">Spiele</th>
-                    <th style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">Beste</th>
-                    <th style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">%</th>
-                </tr>
-            </thead>
-            <tbody>
-    `;
-    
-    sortedUsers.forEach((user, index) => {
-        const isCurrentUser = user.name === playerName;
-        const rowStyle = isCurrentUser ? 'background: #e3f2fd; font-weight: bold;' : '';
-        tableHTML += `
-            <tr style="${rowStyle}">
-                <td style="padding: 8px; border-bottom: 1px solid #ddd;">${user.name} ${isCurrentUser ? '(Sie)' : ''}</td>
-                <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${user.games}</td>
-                <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${user.bestScore}</td>
-                <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">${user.accuracy}%</td>
-            </tr>
-        `;
-    });
-    
-    tableHTML += `</tbody></table>`;
-    
-    document.getElementById('globalStatsContent').innerHTML = tableHTML;
-    document.getElementById('menu').style.display = 'none';
-    document.getElementById('globalStats').style.display = 'block';
-    
-    updateOnlineUsersDisplay();
-}
-
 // Обновление статистики
 function updateStats() {
     const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
@@ -1713,8 +1632,10 @@ function updateStats() {
 function updateStatsDisplay() {
     const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
     const accuracy = stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0;
+    
+    // ИСПРАВЛЕНО: убрано имя "Gadzera", используется "Ihnen"
     document.getElementById('statsBox').innerHTML = `
-        <b>Statistik für ${playerName}:</b><br>
+        <b>Statistik für Sie:</b><br>
         Spiele: ${stats.games}<br>
         Bestes Ergebnis: ${stats.bestScore}<br>
         Genauigkeit: ${accuracy}%<br>
@@ -1891,7 +1812,6 @@ function backToMenu() {
     document.getElementById('quiz').style.display = 'none';
     document.getElementById('result').style.display = 'none';
     document.getElementById('stats').style.display = 'none';
-    document.getElementById('globalStats').style.display = 'none';
     document.getElementById('menu').style.display = 'block';
 }
 
@@ -1999,4 +1919,3 @@ window.onload = init;
 
 </body>
 </html>
-
