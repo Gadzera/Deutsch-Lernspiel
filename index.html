@@ -547,6 +547,9 @@
     </div>
 
     <script>
+// Версия приложения для сброса кеша
+const APP_VERSION = '1.3';
+
 // Game state
 let lang = 'ru';
 let mode = 'article';
@@ -571,18 +574,9 @@ let globalStats = JSON.parse(localStorage.getItem('globalStats') || '{"users": {
 let onlineUsers = globalStats.onlineUsers;
 
 // ==============================================
-// ⭐⭐⭐ ВСТАВЬТЕ ВАШ СЛОВАРЬ ЗДЕСЬ ⭐⭐⭐
+// ⭐⭐⭐ Словарь ⭐⭐⭐
 // ==============================================
-// УДАЛИТЕ эти 3 примера и вставьте ваш полный словарь
-// Формат каждого слова:
-// {
-//   "article": "der",
-//   "word": "Tisch", 
-//   "translation_ru": "стол",
-//   "translation_tr": "masa",
-//   "translation_fa": "میز"
-// }
-// ==============================================
+
 
 const wordDictionary = [
   {
@@ -2176,6 +2170,17 @@ const wordDictionary = [
   }
 ];
 
+// Проверка версии и сброс кеша
+function checkVersion() {
+    const savedVersion = localStorage.getItem('app_version');
+    if (savedVersion !== APP_VERSION) {
+        // Сбрасываем настройки 25-го кадра при обновлении версии
+        localStorage.removeItem('subliminalEnabled');
+        localStorage.setItem('app_version', APP_VERSION);
+        console.log('App updated to version', APP_VERSION);
+    }
+}
+
 // Генерация ID пользователя
 function generateUserId() {
     return 'user_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
@@ -2243,7 +2248,7 @@ function updateMenuButtons() {
     document.getElementById('filterNoWord').classList.toggle('active', wordFilter === 'no_word');
 }
 
-// Сохранение имени
+// Сохранение имени - ИСПРАВЛЕННАЯ ФУНКЦИЯ
 function saveName() {
     const nameInput = document.getElementById('playerName');
     playerName = nameInput.value.trim();
@@ -2256,9 +2261,13 @@ function saveName() {
     localStorage.setItem('playerName', playerName);
     document.getElementById('nameBox').style.display = 'none';
     document.getElementById('menu').style.display = 'block';
-    loadWords();
+    
+    // ВАЖНО: перезагружаем данные игрока после сохранения имени
+    loadPlayerData();
     updateVisitCounter();
     updateMenuButtons();
+    
+    console.log('Name saved:', playerName);
 }
 
 // Обновление онлайн статуса
@@ -2457,9 +2466,16 @@ function saveLearnedData() {
     updateLearnedWordsDisplay();
 }
 
-// Функция показа 25-го кадра - ИСПРАВЛЕНА ПРОВЕРКА
+// Функция показа 25-го кадра - УЛУЧШЕННАЯ ПРОВЕРКА
 function showSubliminalFrame(word) {
-    if (!subliminalEnabled) return;
+    // Двойная проверка - переменная и чекбокс
+    const checkbox = document.getElementById('subliminalToggle');
+    const isCurrentlyEnabled = checkbox ? checkbox.checked : subliminalEnabled;
+    
+    if (!subliminalEnabled || !isCurrentlyEnabled) {
+        console.log('25 кадр отключен');
+        return;
+    }
     
     const frame = document.getElementById('subliminalFrame');
     const combinedEl = document.getElementById('subliminalCombined');
@@ -2593,9 +2609,8 @@ function checkAnswer(button, selected, correct, q) {
         button.style.background = 'green';
         score++;
         
-        if (subliminalEnabled) {
-            showSubliminalFrame(q);
-        }
+        // УЛУЧШЕННАЯ ПРОВЕРКА 25-ГО КАДРА
+        showSubliminalFrame(q);
         
         if (mode === 'article') {
             document.getElementById('articleDisplay').textContent = q.article;
@@ -2611,9 +2626,8 @@ function checkAnswer(button, selected, correct, q) {
             }
         });
         
-        if (subliminalEnabled) {
-            showSubliminalFrame(q);
-        }
+        // УЛУЧШЕННАЯ ПРОВЕРКА 25-ГО КАДРА
+        showSubliminalFrame(q);
         
         if (mode === 'article') {
             document.getElementById('articleDisplay').textContent = q.article;
@@ -2758,19 +2772,27 @@ function startQuiz() {
     nextQuestion();
 }
 
-// Загружаем настройки 25-го кадра
+// Загружаем настройки 25-го кадра - УЛУЧШЕННАЯ ФУНКЦИЯ
 function loadSubliminalSettings() {
     const saved = localStorage.getItem('subliminalEnabled');
     if (saved !== null) {
         subliminalEnabled = JSON.parse(saved);
     } else {
         subliminalEnabled = true;
+        localStorage.setItem('subliminalEnabled', 'true');
     }
-    document.getElementById('subliminalToggle').checked = subliminalEnabled;
+    
+    const checkbox = document.getElementById('subliminalToggle');
+    if (checkbox) {
+        checkbox.checked = subliminalEnabled;
+    }
+    
+    console.log('25 кадр загружен:', subliminalEnabled);
 }
 
 // Инициализация
 function init() {
+    checkVersion(); // Проверяем версию
     loadPlayerData();
     updateStatsDisplay();
     startSessionTimer();
@@ -2779,6 +2801,14 @@ function init() {
     document.getElementById('subliminalToggle').addEventListener('change', function(e) {
         subliminalEnabled = e.target.checked;
         localStorage.setItem('subliminalEnabled', JSON.stringify(subliminalEnabled));
+        console.log('25 кадр изменен:', subliminalEnabled);
+    });
+    
+    // Добавляем обработчик Enter для поля ввода имени
+    document.getElementById('playerName').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            saveName();
+        }
     });
     
     setInterval(updateOnlineStatus, 60000);
@@ -2793,4 +2823,3 @@ window.onload = init;
 
 </body>
 </html>
-
