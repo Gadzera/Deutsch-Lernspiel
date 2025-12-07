@@ -115,6 +115,13 @@
             font-size: 16px;
             padding: 16px;
             color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #answers button:active {
+            transform: scale(0.98);
         }
 
         /* Кнопки в ряд */
@@ -454,6 +461,15 @@
                 </div>
             </div>
             
+            <div>
+                <h3>Quiz-Typ:</h3>
+                <div class="button-row">
+                    <button class="menu-btn" id="quizNouns" onclick="setQuizType('nouns')">Nur Substantive</button>
+                    <button class="menu-btn active" id="quizOther" onclick="setQuizType('other')">Nur andere Wörter</button>
+                    <button class="menu-btn" id="quizAll" onclick="setQuizType('all')">Alle Wörter</button>
+                </div>
+            </div>
+            
             <div id="wordCountInfo"></div>
             
             <div>
@@ -472,6 +488,8 @@
             
             <div class="navigation-buttons">
                 <button class="menu-btn stats-btn" onclick="showStats()">📊 Meine Statistik</button>
+                <button class="menu-btn" onclick="repeatLastQuiz()" style="background: #FF9800;">Letztes Quiz wiederholen 🔄</button>
+                <button class="menu-btn" onclick="repeatUnlearned()" style="background: #9C27B0;">Nur Ungeübte wiederholen 📚</button>
                 <button class="menu-btn" onclick="startQuiz()" style="background: #FF5722;">Quiz starten! 🚀</button>
             </div>
 
@@ -523,6 +541,7 @@
             
             <div class="navigation-buttons">
                 <button class="menu-btn back-btn" onclick="backToMenu()">← Zurück zum Menü</button>
+                <button class="menu-btn" onclick="repeatSameWords()" style="background: #FF9800;">Selbe Wörter wiederholen 🔄</button>
                 <button class="menu-btn" onclick="restart()">Neues Spiel</button>
             </div>
         </div>
@@ -546,7 +565,7 @@
 
     <script>
 // Версия приложения для сброса кеша
-const APP_VERSION = '1.3';
+const APP_VERSION = '1.5';
 
 // Game state
 let lang = 'ru';
@@ -559,9 +578,11 @@ let quizWords = [];
 let playerName = '';
 let playerId = '';
 let wordFilter = 'all';
+let quizType = 'other'; // 'nouns', 'other', 'all'
 let learnedWords = [];
 let learnedArticles = [];
 let startTime = Date.now();
+let lastQuizWords = [];
 
 // Настройки 25-го кадра
 let subliminalEnabled = true;
@@ -572,486 +593,861 @@ let globalStats = JSON.parse(localStorage.getItem('globalStats') || '{"users": {
 let onlineUsers = globalStats.onlineUsers;
 
 // ==============================================
-// ⭐⭐⭐ Словарь - ВАШИ СЛОВА ⭐⭐⭐
+// ⭐⭐⭐ СЛОВАРЬ - ВСЕ СЛОВА ИЗ ФАЙЛА ⭐⭐⭐
 // ==============================================
-const wordDictionary = [
-{german: "die Ablehnung", russian: "отклонение", id: "ablehnung", article: "die", word: "Ablehnung"},
-{german: "die Adresse", russian: "адрес", id: "adresse", article: "die", word: "Adresse"},
-{german: "das Album", russian: "альбом", id: "album", article: "das", word: "Album"},
-{german: "der Altenpfleger", russian: "работник по уходу за пожилыми", id: "altenpfleger", article: "der", word: "Altenpfleger"},
-{german: "das Amt", russian: "ведомство", id: "amt", article: "das", word: "Amt"},
-{german: "die Anmeldung", russian: "регистрация", id: "anmeldung", article: "die", word: "Anmeldung"},
-{german: "der Anrufbeantworter", russian: "автоответчик", id: "anrufbeantworter", article: "der", word: "Anrufbeantworter"},
-{german: "der Antrag", russian: "заявление", id: "antrag", article: "der", word: "Antrag"},
-{german: "der Arbeitgeber", russian: "работодатель", id: "arbeitgeber", article: "der", word: "Arbeitgeber"},
-{german: "der Arbeitsplatz", russian: "рабочее место", id: "arbeitsplatz", article: "der", word: "Arbeitsplatz"},
-{german: "die Aufgabe", russian: "задание", id: "aufgabe", article: "die", word: "Aufgabe"},
-{german: "der Aufzug", russian: "лифт", id: "aufzug", article: "der", word: "Aufzug"},
-{german: "die Ausbildung", russian: "обучение", id: "ausbildung", article: "die", word: "Ausbildung"},
-{german: "der Automechaniker", russian: "автомеханик", id: "automechaniker", article: "der", word: "Automechaniker"},
-{german: "der Babysitter", russian: "няня", id: "babysitter", article: "der", word: "Babysitter"},
-{german: "der Beamte", russian: "чиновник", id: "beamter", article: "der", word: "Beamte"},
-{german: "der Beruf", russian: "профессия", id: "beruf", article: "der", word: "Beruf"},
-{german: "die Berufserfahrung", russian: "профессиональный опыт", id: "berufserfahrung", article: "die", word: "Berufserfahrung"},
-{german: "die Bibliothek", russian: "библиотека", id: "bibliothek", article: "die", word: "Bibliothek"},
-{german: "der Bürger", russian: "гражданин", id: "buerger", article: "der", word: "Bürger"},
-{german: "der Busfahrer", russian: "водитель автобуса", id: "busfahrer", article: "der", word: "Busfahrer"},
-{german: "die Cafeteria", russian: "кафетерий", id: "cafeteria", article: "die", word: "Cafeteria"},
-{german: "das Chaos", russian: "хаос", id: "chaos", article: "das", word: "Chaos"},
-{german: "der Chirurg", russian: "хирург", id: "chirurg", article: "der", word: "Chirurg"},
-{german: "die Datei", russian: "файл", id: "datei", article: "die", word: "Datei"},
-{german: "die Daten", russian: "данные", id: "daten", article: "die", word: "Daten"},
-{german: "die Digitalisierung", russian: "цифровизация", id: "digitalisierung", article: "die", word: "Digitalisierung"},
-{german: "das Dokument", russian: "документ", id: "dokument", article: "das", word: "Dokument"},
-{german: "der Dolmetscher", russian: "переводчик", id: "dolmetscher", article: "der", word: "Dolmetscher"},
-{german: "das Doppelzimmer", russian: "двухместный номер", id: "doppelzimmer", article: "das", word: "Doppelzimmer"},
-{german: "die Einführung", russian: "введение", id: "einfuehrung", article: "die", word: "Einführung"},
-{german: "die Einladung", russian: "приглашение", id: "einladung", article: "die", word: "Einladung"},
-{german: "das Einzelzimmer", russian: "одноместный номер", id: "einzelzimmer", article: "das", word: "Einzelzimmer"},
-{german: "die Erfahrung", russian: "опыт", id: "erfahrung", article: "die", word: "Erfahrung"},
-{german: "der Erfolg", russian: "успех", id: "erfolg", article: "der", word: "Erfolg"},
-{german: "die Erinnerung", russian: "воспоминание", id: "erinnerung", article: "die", word: "Erinnerung"},
-{german: "das Event", russian: "мероприятие", id: "event", article: "das", word: "Event"},
-{german: "das Experiment", russian: "эксперимент", id: "experiment", article: "das", word: "Experiment"},
-{german: "der Experte", russian: "эксперт", id: "experte", article: "der", word: "Experte"},
-{german: "der Fahrplan", russian: "расписание", id: "fahrplan", article: "der", word: "Fahrplan"},
-{german: "der Feierabend", russian: "окончание рабочего дня", id: "feierabend", article: "der", word: "Feierabend"},
-{german: "das Fernsehen", russian: "телевидение", id: "fernsehen", article: "das", word: "Fernsehen"},
-{german: "das Feuerwerk", russian: "фейерверк", id: "feuerwerk", article: "das", word: "Feuerwerk"},
-{german: "die Firma", russian: "фирма", id: "firma", article: "die", word: "Firma"},
-{german: "der Flohmarkt", russian: "блошиный рынок", id: "flohmarkt", article: "der", word: "Flohmarkt"},
-{german: "das Formular", russian: "бланк", id: "formular", article: "das", word: "Formular"},
-{german: "der Führerschein", russian: "водительские права", id: "fuehrerschein", article: "der", word: "Führerschein"},
-{german: "die Funktion", russian: "функция", id: "funktion", article: "die", word: "Funktion"},
-{german: "die Garage", russian: "гараж", id: "garage", article: "die", word: "Garage"},
-{german: "der Gedanke", russian: "мысль", id: "gedanke", article: "der", word: "Gedanke"},
-{german: "das Geheimnis", russian: "секрет", id: "geheimnis", article: "das", word: "Geheimnis"},
-{german: "die Geldbörse", russian: "кошелек", id: "geldboerse", article: "die", word: "Geldbörse"},
-{german: "die Generation", russian: "поколение", id: "generation", article: "die", word: "Generation"},
-{german: "das Gerät", russian: "устройство", id: "geraet", article: "das", word: "Gerät"},
-{german: "die Geschichte", russian: "история", id: "geschichte", article: "die", word: "Geschichte"},
-{german: "das Geschirr", russian: "посуда", id: "geschirr", article: "das", word: "Geschirr"},
-{german: "das Getränk", russian: "напиток", id: "getraenk", article: "das", word: "Getränk"},
-{german: "das Gewicht", russian: "вес", id: "gewicht", article: "das", word: "Gewicht"},
-{german: "das Gewitter", russian: "гроза", id: "gewitter", article: "das", word: "Gewitter"},
-{german: "die Gitarre", russian: "гитара", id: "gitarre", article: "die", word: "Gitarre"},
-{german: "die Grenze", russian: "граница", id: "grenze", article: "die", word: "Grenze"},
-{german: "die Grundschule", russian: "начальная школа", id: "grundschule", article: "die", word: "Grundschule"},
-{german: "das Gymnasium", russian: "гимназия", id: "gymnasium", article: "das", word: "Gymnasium"},
-{german: "die Hausaufgabe", russian: "домашнее задание", id: "hausaufgabe", article: "die", word: "Hausaufgabe"},
-{german: "die Herkunft", russian: "происхождение", id: "herkunft", article: "die", word: "Herkunft"},
-{german: "das Hobby", russian: "хобби", id: "hobby", article: "das", word: "Hobby"},
-{german: "die Industrie", russian: "промышленность", id: "industrie", article: "die", word: "Industrie"},
-{german: "die Information", russian: "информация", id: "information", article: "die", word: "Information"},
-{german: "das Instrument", russian: "инструмент", id: "instrument", article: "das", word: "Instrument"},
-{german: "das Interesse", russian: "интерес", id: "interesse", article: "das", word: "Interesse"},
-{german: "das Internet", russian: "интернет", id: "internet", article: "das", word: "Internet"},
-{german: "das Interview", russian: "интервью", id: "interview", article: "das", word: "Interview"},
-{german: "der Job", russian: "работа", id: "job", article: "der", word: "Job"},
-{german: "die Jugend", russian: "молодежь", id: "jugend", article: "die", word: "Jugend"},
-{german: "das Jura", russian: "юриспруденция", id: "jura", article: "das", word: "Jura"},
-{german: "die Kamera", russian: "камера", id: "kamera", article: "die", word: "Kamera"},
-{german: "das Kapitel", russian: "глава", id: "kapitel", article: "das", word: "Kapitel"},
-{german: "der Katalog", russian: "каталог", id: "katalog", article: "der", word: "Katalog"},
-{german: "die Kaution", russian: "залог", id: "kaution", article: "die", word: "Kaution"},
-{german: "die Kleidung", russian: "одежда", id: "kleidung", article: "die", word: "Kleidung"},
-{german: "der Kollege", russian: "коллега", id: "kollege", article: "der", word: "Kollege"},
-{german: "die Kommunikation", russian: "коммуникация", id: "kommunikation", article: "die", word: "Kommunikation"},
-{german: "die Kompetenz", russian: "компетенция", id: "kompetenz", article: "die", word: "Kompetenz"},
-{german: "die Konferenz", russian: "конференция", id: "konferenz", article: "die", word: "Konferenz"},
-{german: "der Kontakt", russian: "контакт", id: "kontakt", article: "der", word: "Kontakt"},
-{german: "der Kopfhörer", russian: "наушники", id: "kopfhoerer", article: "der", word: "Kopfhörer"},
-{german: "das Kraftfahrzeug", russian: "автомобиль", id: "kraftfahrzeug", article: "das", word: "Kraftfahrzeug"},
-{german: "die Krankenschwester", russian: "медсестра", id: "krankenschwester", article: "die", word: "Krankenschwester"},
-{german: "der Krankenpfleger", russian: "медбрат", id: "krankenpfleger", article: "der", word: "Krankenpfleger"},
-{german: "der Kredit", russian: "кредит", id: "kredit", article: "der", word: "Kredit"},
-{german: "die Kreuzung", russian: "перекресток", id: "kreuzung", article: "die", word: "Kreuzung"},
-{german: "der Krieg", russian: "война", id: "krieg", article: "der", word: "Krieg"},
-{german: "der Kurs", russian: "курс", id: "kurs", article: "der", word: "Kurs"},
-{german: "der Laptop", russian: "ноутбук", id: "laptop", article: "der", word: "Laptop"},
-{german: "der Lastwagen", russian: "грузовик", id: "lastwagen", article: "der", word: "Lastwagen"},
-{german: "der Lautsprecher", russian: "громкоговоритель", id: "lautsprecher", article: "der", word: "Lautsprecher"},
-{german: "die Lebensmittel", russian: "продукты питания", id: "lebensmittel", article: "die", word: "Lebensmittel"},
-{german: "der Lernende", russian: "учащийся", id: "lernende", article: "der", word: "Lernende"},
-{german: "der Lkw", russian: "грузовой автомобиль", id: "lkw", article: "der", word: "Lkw"},
-{german: "die Lösung", russian: "решение", id: "loesung", article: "die", word: "Lösung"},
-{german: "die Mailbox", russian: "почтовый ящик", id: "mailbox", article: "die", word: "Mailbox"},
-{german: "die Mathematik", russian: "математика", id: "mathematik", article: "die", word: "Mathematik"},
-{german: "die Meinung", russian: "мнение", id: "meinung", article: "die", word: "Meinung"},
-{german: "die Menge", russian: "количество", id: "menge", article: "die", word: "Menge"},
-{german: "die Messe", russian: "ярмарка", id: "messe", article: "die", word: "Messe"},
-{german: "das Metall", russian: "металл", id: "metall", article: "das", word: "Metall"},
-{german: "die Methode", russian: "метод", id: "methode", article: "die", word: "Methode"},
-{german: "die Miete", russian: "аренда", id: "miete", article: "die", word: "Miete"},
-{german: "der Mitbewohner", russian: "сосед по комнате", id: "mitbewohner", article: "der", word: "Mitbewohner"},
-{german: "die Mitteilung", russian: "сообщение", id: "mitteilung", article: "die", word: "Mitteilung"},
-{german: "das Modell", russian: "модель", id: "modell", article: "das", word: "Modell"},
-{german: "die Monatskarte", russian: "месячный проездной", id: "monatskarte", article: "die", word: "Monatskarte"},
-{german: "der Motor", russian: "двигатель", id: "motor", article: "der", word: "Motor"},
-{german: "die Müllabfuhr", russian: "вывоз мусора", id: "muellabfuhr", article: "die", word: "Müllabfuhr"},
-{german: "das Museum", russian: "музей", id: "museum", article: "das", word: "Museum"},
-{german: "der Nachbar", russian: "сосед", id: "nachbar", article: "der", word: "Nachbar"},
-{german: "die Nachricht", russian: "сообщение", id: "nachricht", article: "die", word: "Nachricht"},
-{german: "das Navi", russian: "навигатор", id: "navi", article: "das", word: "Navi"},
-{german: "die Nebenkosten", russian: "дополнительные расходы", id: "nebenkosten", article: "die", word: "Nebenkosten"},
-{german: "die Note", russian: "оценка", id: "note", article: "die", word: "Note"},
-{german: "der Nutzer", russian: "пользователь", id: "nutzer", article: "der", word: "Nutzer"},
-{german: "die Operation", russian: "операция", id: "operation", article: "die", word: "Operation"},
-{german: "die Organisation", russian: "организация", id: "organisation", article: "die", word: "Organisation"},
-{german: "die Panne", russian: "поломка", id: "panne", article: "die", word: "Panne"},
-{german: "das Parlament", russian: "парламент", id: "parlament", article: "das", word: "Parlament"},
-{german: "das Parkhaus", russian: "паркинг", id: "parkhaus", article: "das", word: "Parkhaus"},
-{german: "der Parkplatz", russian: "парковочное место", id: "parkplatz", article: "der", word: "Parkplatz"},
-{german: "der Partner", russian: "партнер", id: "partner", article: "der", word: "Partner"},
-{german: "die Pause", russian: "перерыв", id: "pause", article: "die", word: "Pause"},
-{german: "die Prüfung", russian: "экзамен", id: "pruefung", article: "die", word: "Prüfung"},
-{german: "der Prüfungstermin", russian: "срок экзамена", id: "pruefungstermin", article: "der", word: "Prüfungstermin"},
-{german: "der Psychologe", russian: "психолог", id: "psychologe", article: "der", word: "Psychologe"},
-{german: "der Pullover", russian: "свитер", id: "pullover", article: "der", word: "Pullover"},
-{german: "der Radfahrer", russian: "велосипедист", id: "radfahrer", article: "der", word: "Radfahrer"},
-{german: "der Radweg", russian: "велосипедная дорожка", id: "radweg", article: "der", word: "Radweg"},
-{german: "der Ratschlag", russian: "совет", id: "ratschlag", article: "der", word: "Ratschlag"},
-{german: "die Rechnung", russian: "счет", id: "rechnung", article: "die", word: "Rechnung"},
-{german: "der Reifen", russian: "шина", id: "reifen", article: "der", word: "Reifen"},
-{german: "die Reinigung", russian: "чистка", id: "reinigung", article: "die", word: "Reinigung"},
-{german: "die Reise", russian: "путешествие", id: "reise", article: "die", word: "Reise"},
-{german: "das Reisebüro", russian: "туристическое агентство", id: "reisebuero", article: "das", word: "Reisebüro"},
-{german: "das Rezept", russian: "рецепт", id: "rezept", article: "das", word: "Rezept"},
-{german: "die Richtung", russian: "направление", id: "richtung", article: "die", word: "Richtung"},
-{german: "der Ring", russian: "кольцо", id: "ring", article: "der", word: "Ring"},
-{german: "das Risiko", russian: "риск", id: "risiko", article: "das", word: "Risiko"},
-{german: "der Rock", russian: "юбка", id: "rock", article: "der", word: "Rock"},
-{german: "der Rollstuhl", russian: "инвалидная коляска", id: "rollstuhl", article: "der", word: "Rollstuhl"},
-{german: "der Roman", russian: "роман", id: "roman", article: "der", word: "Roman"},
-{german: "der Rücken", russian: "спина", id: "ruecken", article: "der", word: "Rücken"},
-{german: "die Ruhe", russian: "покой", id: "ruhe", article: "die", word: "Ruhe"},
-{german: "die Rückfahrt", russian: "обратная поездка", id: "rueckfahrt", article: "die", word: "Rückfahrt"},
-{german: "die Rückgabe", russian: "возврат", id: "rueckgabe", article: "die", word: "Rückgabe"},
-{german: "der Sänger", russian: "певец", id: "saenger", article: "der", word: "Sänger"},
-{german: "der Salat", russian: "салат", id: "salat", article: "der", word: "Salat"},
-{german: "der Schein", russian: "свидетельство", id: "schein", article: "der", word: "Schein"},
-{german: "der Scherz", russian: "шутка", id: "scherz", article: "der", word: "Scherz"},
-{german: "die Schicht", russian: "смена", id: "schicht", article: "die", word: "Schicht"},
-{german: "das Schlafzimmer", russian: "спальня", id: "schlafzimmer", article: "das", word: "Schlafzimmer"},
-{german: "der Schlüssel", russian: "ключ", id: "schluessel", article: "der", word: "Schlüssel"},
-{german: "der Schmerz", russian: "боль", id: "schmerz", article: "der", word: "Schmerz"},
-{german: "der Schnitt", russian: "разрез", id: "schnitt", article: "der", word: "Schnitt"},
-{german: "der Schnupfen", russian: "насморк", id: "schnupfen", article: "der", word: "Schnupfen"},
-{german: "die Schrift", russian: "письмо", id: "schrift", article: "die", word: "Schrift"},
-{german: "die Schwangerschaft", russian: "беременность", id: "schwangerschaft", article: "die", word: "Schwangerschaft"},
-{german: "die Schwester", russian: "сестра", id: "schwester", article: "die", word: "Schwester"},
-{german: "der Schwager", russian: "шурин", id: "schwager", article: "der", word: "Schwager"},
-{german: "die Schweiz", russian: "Швейцария", id: "schweiz", article: "die", word: "Schweiz"},
-{german: "das Sekretariat", russian: "секретариат", id: "sekretariat", article: "das", word: "Sekretariat"},
-{german: "die Selbstständigkeit", russian: "самостоятельность", id: "selbststaendigkeit", article: "die", word: "Selbstständigkeit"},
-{german: "das Semester", russian: "семестр", id: "semester", article: "das", word: "Semester"},
-{german: "die Sendung", russian: "передача", id: "sendung", article: "die", word: "Sendung"},
-{german: "der Service", russian: "обслуживание", id: "service", article: "der", word: "Service"},
-{german: "die Sicherheit", russian: "безопасность", id: "sicherheit", article: "die", word: "Sicherheit"},
-{german: "der Sinn", russian: "смысл", id: "sinn", article: "der", word: "Sinn"},
-{german: "die Sorge", russian: "забота", id: "sorge", article: "die", word: "Sorge"},
-{german: "die Spielkonsole", russian: "игровая консоль", id: "spielkonsole", article: "die", word: "Spielkonsole"},
-{german: "die Sprache", russian: "язык", id: "sprache", article: "die", word: "Sprache"},
-{german: "die Steckdose", russian: "розетка", id: "steckdose", article: "die", word: "Steckdose"},
-{german: "die Stelle", russian: "место", id: "stelle", article: "die", word: "Stelle"},
-{german: "der Stempel", russian: "штамп", id: "stempel", article: "der", word: "Stempel"},
-{german: "der Stift", russian: "ручка", id: "stift", article: "der", word: "Stift"},
-{german: "die Stimme", russian: "голос", id: "stimme", article: "die", word: "Stimme"},
-{german: "das Stipendium", russian: "стипендия", id: "stipendium", article: "das", word: "Stipendium"},
-{german: "der Stoff", russian: "материал", id: "stoff", article: "der", word: "Stoff"},
-{german: "die Straßenbahn", russian: "трамвай", id: "strassenbahn", article: "die", word: "Straßenbahn"},
-{german: "der Stress", russian: "стресс", id: "stress", article: "der", word: "Stress"},
-{german: "der Stuhl", russian: "стул", id: "stuhl", article: "der", word: "Stuhl"},
-{german: "die Studie", russian: "исследование", id: "studie", article: "die", word: "Studie"},
-{german: "der Student", russian: "студент", id: "student", article: "der", word: "Student"},
-{german: "der Sturm", russian: "шторм", id: "sturm", article: "der", word: "Sturm"},
-{german: "das Symbol", russian: "символ", id: "symbol", article: "das", word: "Symbol"},
-{german: "die Tafel", russian: "доска", id: "tafel", article: "die", word: "Tafel"},
-{german: "die Tageszeit", russian: "время суток", id: "tageszeit", article: "die", word: "Tageszeit"},
-{german: "die Tankstelle", russian: "заправочная станция", id: "tankstelle", article: "die", word: "Tankstelle"},
-{german: "die Tante", russian: "тетя", id: "tante", article: "die", word: "Tante"},
-{german: "der Tanz", russian: "танец", id: "tanz", article: "der", word: "Tanz"},
-{german: "die Tasche", russian: "сумка", id: "tasche", article: "die", word: "Tasche"},
-{german: "die Tastatur", russian: "клавиатура", id: "tastatur", article: "die", word: "Tastatur"},
-{german: "der Tee", russian: "чай", id: "tee", article: "der", word: "Tee"},
-{german: "der Termin", russian: "встреча", id: "termin", article: "der", word: "Termin"},
-{german: "die Terrasse", russian: "терраса", id: "terrasse", article: "die", word: "Terrasse"},
-{german: "der Test", russian: "тест", id: "test", article: "der", word: "Test"},
-{german: "das Theater", russian: "театр", id: "theater", article: "das", word: "Theater"},
-{german: "das Tier", russian: "животное", id: "tier", article: "das", word: "Tier"},
-{german: "der Tipp", russian: "совет", id: "tipp", article: "der", word: "Tipp"},
-{german: "der Topf", russian: "горшок", id: "topf", article: "der", word: "Topf"},
-{german: "das Tor", russian: "ворота", id: "tor", article: "das", word: "Tor"},
-{german: "die Tour", russian: "тур", id: "tour", article: "die", word: "Tour"},
-{german: "der Tourist", russian: "турист", id: "tourist", article: "der", word: "Tourist"},
-{german: "die Tradition", russian: "традиция", id: "tradition", article: "die", word: "Tradition"},
-{german: "der Trainer", russian: "тренер", id: "trainer", article: "der", word: "Trainer"},
-{german: "das Training", russian: "тренировка", id: "training", article: "das", word: "Training"},
-{german: "die Tram", russian: "трамвай", id: "tram", article: "die", word: "Tram"},
-{german: "der Transport", russian: "транспорт", id: "transport", article: "der", word: "Transport"},
-{german: "das Treffen", russian: "встреча", id: "treffen", article: "das", word: "Treffen"},
-{german: "die Trennung", russian: "разделение", id: "trennung", article: "die", word: "Trennung"},
-{german: "der Trend", russian: "тенденция", id: "trend", article: "der", word: "Trend"},
-{german: "das Treppenhaus", russian: "лестничная клетка", id: "treppenhaus", article: "das", word: "Treppenhaus"},
-{german: "der Trick", russian: "трюк", id: "trick", article: "der", word: "Trick"},
-{german: "der Truck", russian: "грузовик", id: "truck", article: "der", word: "Truck"},
-{german: "das T-Shirt", russian: "футболка", id: "tshirt", article: "das", word: "T-Shirt"},
-{german: "der TÜV", russian: "техосмотр", id: "tuev", article: "der", word: "TÜV"},
-{german: "die Überprüfung", russian: "проверка", id: "ueberpruefung", article: "die", word: "Überprüfung"},
-{german: "die Überlegung", russian: "размышление", id: "ueberlegung", article: "die", word: "Überlegung"},
-{german: "die Übernachtung", russian: "ночевка", id: "uebernachtung", article: "die", word: "Übernachtung"},
-{german: "die Übersetzung", russian: "перевод", id: "uebersetzung", article: "die", word: "Übersetzung"},
-{german: "die Überweisung", russian: "перевод денег", id: "ueberweisung", article: "die", word: "Überweisung"},
-{german: "die Übung", russian: "упражнение", id: "uebung", article: "die", word: "Übung"},
-{german: "die Uhr", russian: "часы", id: "uhr", article: "die", word: "Uhr"},
-{german: "der Umzug", russian: "переезд", id: "umzug", article: "der", word: "Umzug"},
-{german: "die Umleitung", russian: "объезд", id: "umleitung", article: "die", word: "Umleitung"},
-{german: "die Umwelt", russian: "окружающая среда", id: "umwelt", article: "die", word: "Umwelt"},
-{german: "der Unfall", russian: "несчастный случай", id: "unfall", article: "der", word: "Unfall"},
-{german: "die Universität", russian: "университет", id: "universitaet", article: "die", word: "Universität"},
-{german: "die Unterhaltung", russian: "развлечение", id: "unterhaltung", article: "die", word: "Unterhaltung"},
-{german: "der Unterricht", russian: "урок", id: "unterricht", article: "der", word: "Unterricht"},
-{german: "die Unterstützung", russian: "поддержка", id: "unterstuetzung", article: "die", word: "Unterstützung"},
-{german: "das Unternehmen", russian: "предприятие", id: "unternehmen", article: "das", word: "Unternehmen"},
-{german: "die Untersuchung", russian: "исследование", id: "untersuchung", article: "die", word: "Untersuchung"},
-{german: "der Urlaub", russian: "отпуск", id: "urlaub", article: "der", word: "Urlaub"},
-{german: "die Verabredung", russian: "договоренность", id: "verabredung", article: "die", word: "Verabredung"},
-{german: "die Veränderung", russian: "изменение", id: "veraenderung", article: "die", word: "Veränderung"},
-{german: "der Verein", russian: "клуб", id: "verein", article: "der", word: "Verein"},
-{german: "die Verfolgung", russian: "преследование", id: "verfolgung", article: "die", word: "Verfolgung"},
-{german: "der Vergleich", russian: "сравнение", id: "vergleich", article: "der", word: "Vergleich"},
-{german: "die Vergrößerung", russian: "увеличение", id: "vergroesserung", article: "die", word: "Vergrößerung"},
-{german: "der Verkauf", russian: "продажа", id: "verkauf", article: "der", word: "Verkauf"},
-{german: "der Verkehr", russian: "движение", id: "verkehr", article: "der", word: "Verkehr"},
-{german: "das Verkehrsmittel", russian: "транспортное средство", id: "verkehrsmittel", article: "das", word: "Verkehrsmittel"},
-{german: "das Verkehrsproblem", russian: "транспортная проблема", id: "verkehrsproblem", article: "das", word: "Verkehrsproblem"},
-{german: "die Verletzung", russian: "травма", id: "verletzung", article: "die", word: "Verletzung"},
-{german: "die Verlängerung", russian: "продление", id: "verlaengerung", article: "die", word: "Verlängerung"},
-{german: "die Vermietung", russian: "аренда", id: "vermietung", article: "die", word: "Vermietung"},
-{german: "die Vermutung", russian: "предположение", id: "vermutung", article: "die", word: "Vermutung"},
-{german: "die Verspätung", russian: "опоздание", id: "verspaetung", article: "die", word: "Verspätung"},
-{german: "die Verteilung", russian: "распределение", id: "verteilung", article: "die", word: "Verteilung"},
-{german: "der Vertrag", russian: "договор", id: "vertrag", article: "der", word: "Vertrag"},
-{german: "die Verwaltung", russian: "управление", id: "verwaltung", article: "die", word: "Verwaltung"},
-{german: "das Video", russian: "видео", id: "video", article: "das", word: "Video"},
-{german: "die Vollzeit", russian: "полная занятость", id: "vollzeit", article: "die", word: "Vollzeit"},
-{german: "der Vorhang", russian: "занавес", id: "vorhang", article: "der", word: "Vorhang"},
-{german: "die Vorlesung", russian: "лекция", id: "vorlesung", article: "die", word: "Vorlesung"},
-{german: "die Vorstellung", russian: "представление", id: "vorstellung", article: "die", word: "Vorstellung"},
-{german: "der Vorschlag", russian: "предложение", id: "vorschlag", article: "der", word: "Vorschlag"},
-{german: "der Vortrag", russian: "доклад", id: "vortrag", article: "der", word: "Vortrag"},
-{german: "der Wagen", russian: "автомобиль", id: "wagen", article: "der", word: "Wagen"},
-{german: "die Wahl", russian: "выбор", id: "wahl", article: "die", word: "Wahl"},
-{german: "die Währung", russian: "валюта", id: "waehrung", article: "die", word: "Währung"},
-{german: "die Wanderung", russian: "поход", id: "wanderung", article: "die", word: "Wanderung"},
-{german: "die Wand", russian: "стена", id: "wand", article: "die", word: "Wand"},
-{german: "das Werk", russian: "завод", id: "werk", article: "das", word: "Werk"},
-{german: "das Werkzeug", russian: "инструмент", id: "werkzeug", article: "das", word: "Werkzeug"},
-{german: "die Werbung", russian: "реклама", id: "werbung", article: "die", word: "Werbung"},
-{german: "das Wetter", russian: "погода", id: "wetter", article: "das", word: "Wetter"},
-{german: "die Wiese", russian: "луг", id: "wiese", article: "die", word: "Wiese"},
-{german: "die Wirtschaft", russian: "экономика", id: "wirtschaft", article: "die", word: "Wirtschaft"},
-{german: "der Witz", russian: "шутка", id: "witz", article: "der", word: "Witz"},
-{german: "die Woche", russian: "неделя", id: "woche", article: "die", word: "Woche"},
-{german: "das Wohnen", russian: "проживание", id: "wohnen", article: "das", word: "Wohnen"},
-{german: "die Wohnung", russian: "квартира", id: "wohnung", article: "die", word: "Wohnung"},
-{german: "das Wohnheim", russian: "общежитие", id: "wohnheim", article: "das", word: "Wohnheim"},
-{german: "die Wolke", russian: "облако", id: "wolke", article: "die", word: "Wolke"},
-{german: "das Wort", russian: "слово", id: "wort", article: "das", word: "Wort"},
-{german: "das Wunder", russian: "чудо", id: "wunder", article: "das", word: "Wunder"},
-{german: "der Wunsch", russian: "желание", id: "wunsch", article: "der", word: "Wunsch"},
-{german: "die Wut", russian: "злость", id: "wut", article: "die", word: "Wut"},
-{german: "die Zahlung", russian: "платеж", id: "zahlung", article: "die", word: "Zahlung"},
-{german: "die Zeitung", russian: "газета", id: "zeitung", article: "die", word: "Zeitung"},
-{german: "das Ziel", russian: "цель", id: "ziel", article: "das", word: "Ziel"},
-{german: "das Zimmer", russian: "комната", id: "zimmer", article: "das", word: "Zimmer"},
-{german: "die Zitrone", russian: "лимон", id: "zitrone", article: "die", word: "Zitrone"},
-{german: "der Zug", russian: "поезд", id: "zug", article: "der", word: "Zug"},
-{german: "der Zugang", russian: "доступ", id: "zugang", article: "der", word: "Zugang"},
-{german: "die Zugverbindung", russian: "железнодорожное сообщение", id: "zugverbindung", article: "die", word: "Zugverbindung"},
-{german: "die Zukunft", russian: "будущее", id: "zukunft", article: "die", word: "Zukunft"},
-{german: "die Zusammenarbeit", russian: "сотрудничество", id: "zusammenarbeit", article: "die", word: "Zusammenarbeit"},
-{german: "die Zutat", russian: "ингредиент", id: "zutat", article: "die", word: "Zutat"},
-{german: "die Hochzeit", russian: "свадьба", id: "hochzeit", article: "die", word: "Hochzeit"},
-{german: "der Rentner", russian: "пенсионер", id: "rentner", article: "der", word: "Rentner"},
-{german: "die Rentnerin", russian: "пенсионерка", id: "rentnerin", article: "die", word: "Rentnerin"},
-{german: "die Überstunde", russian: "сверхурочная работа", id: "ueberstunde", article: "die", word: "Überstunde"},
-{german: "der Augenoptiker", russian: "оптик", id: "augenoptiker", article: "der", word: "Augenoptiker"},
-{german: "die Augenoptikerin", russian: "оптик (ж)", id: "augenoptikerin", article: "die", word: "Augenoptikerin"},
-{german: "der Bankkaufmann", russian: "банковский служащий", id: "bankkaufmann", article: "der", word: "Bankkaufmann"},
-{german: "die Bankkauffrau", russian: "банковская служащая", id: "bankkauffrau", article: "die", word: "Bankkauffrau"},
-{german: "der Verein", russian: "клуб, объединение", id: "verein_2", article: "der", word: "Verein"},
-{german: "der Flohmarkt", russian: "блошиный рынок", id: "flohmarkt_2", article: "der", word: "Flohmarkt"},
-{german: "das Pferd", russian: "лошадь", id: "pferd", article: "das", word: "Pferd"},
-{german: "der Aufenthalt", russian: "пребывание", id: "aufenthalt", article: "der", word: "Aufenthalt"},
-{german: "der Eingang", russian: "вход", id: "eingang", article: "der", word: "Eingang"},
-{german: "der Platz", russian: "место, площадь", id: "platz", article: "der", word: "Platz"},
-{german: "die Reservierung", russian: "бронирование", id: "reservierung", article: "die", word: "Reservierung"},
-{german: "das WC", russian: "туалет", id: "wc", article: "das", word: "WC"},
-{german: "die Zigarette", russian: "сигарета", id: "zigarette", article: "die", word: "Zigarette"},
-{german: "der Gegenstand", russian: "предмет", id: "gegenstand", article: "der", word: "Gegenstand"},
-{german: "die Angst", russian: "страх", id: "angst", article: "die", word: "Angst"},
-{german: "die Grippe", russian: "грипп", id: "grippe", article: "die", word: "Grippe"},
-{german: "das Handy", russian: "мобильный телефон", id: "handy", article: "das", word: "Handy"},
-{german: "der Abschluss", russian: "окончание", id: "abschluss", article: "der", word: "Abschluss"},
-{german: "der Schulabschluss", russian: "школьный аттестат", id: "schulabschluss", article: "der", word: "Schulabschluss"},
-{german: "das Abitur", russian: "аттестат зрелости", id: "abitur", article: "das", word: "Abitur"},
-{german: "das Zeugnis", russian: "свидетельство", id: "zeugnis", article: "das", word: "Zeugnis"},
-{german: "die Direktorin", russian: "директор (ж)", id: "direktorin", article: "die", word: "Direktorin"},
-{german: "der Schüler", russian: "ученик", id: "schueler", article: "der", word: "Schüler"},
-{german: "die Schülerin", russian: "ученица", id: "schuelerin", article: "die", word: "Schülerin"},
-{german: "die Klasse", russian: "класс", id: "klasse", article: "die", word: "Klasse"},
-{german: "der Klassenlehrer", russian: "классный руководитель", id: "klassenlehrer", article: "der", word: "Klassenlehrer"},
-{german: "die Klassenlehrerin", russian: "классная руководительница", id: "klassenlehrerin", article: "die", word: "Klassenlehrerin"},
-{german: "der Kiosk", russian: "киоск", id: "kiosk", article: "der", word: "Kiosk"},
-{german: "die Unterrichtszeit", russian: "учебное время", id: "unterrichtszeit", article: "die", word: "Unterrichtszeit"},
-{german: "die Stunde", russian: "час, урок", id: "stunde", article: "die", word: "Stunde"},
-{german: "die Dauer", russian: "продолжительность", id: "dauer", article: "die", word: "Dauer"},
-{german: "die Schuluniform", russian: "школьная форма", id: "schuluniform", article: "die", word: "Schuluniform"},
-{german: "die Vorbereitung", russian: "подготовка", id: "vorbereitung", article: "die", word: "Vorbereitung"},
-{german: "die Ferien", russian: "каникулы", id: "ferien", article: "die", word: "Ferien"},
-{german: "die AG", russian: "рабочая группа", id: "ag", article: "die", word: "AG"},
-{german: "die Hauptschule", russian: "основная школа", id: "hauptschule", article: "die", word: "Hauptschule"},
-{german: "die Realschule", russian: "реальная школа", id: "realschule", article: "die", word: "Realschule"},
-{german: "die Gesamtschule", russian: "общеобразовательная школа", id: "gesamtschule", article: "die", word: "Gesamtschule"},
-{german: "die Berufsschule", russian: "профессиональное училище", id: "berufsschule", article: "die", word: "Berufsschule"},
-{german: "das Schulsystem", russian: "школьная система", id: "schulsystem", article: "das", word: "Schulsystem"},
-{german: "das Bundesland", russian: "федеральная земля", id: "bundesland", article: "das", word: "Bundesland"},
-{german: "die Altenpflegerin", russian: "работница по уходу за пожилыми", id: "altenpflegerin", article: "die", word: "Altenpflegerin"},
-{german: "der Arzt", russian: "врач", id: "arzt", article: "der", word: "Arzt"},
-{german: "die Ärztin", russian: "врач (ж)", id: "aerztin", article: "die", word: "Ärztin"},
-{german: "das Au-pair", russian: "ау-паир", id: "au_pair", article: "das", word: "Au-pair"},
-{german: "die Busfahrerin", russian: "водительница автобуса", id: "busfahrerin", article: "die", word: "Busfahrerin"},
-{german: "der Grafikdesigner", russian: "графический дизайнер", id: "grafikdesigner", article: "der", word: "Grafikdesigner"},
-{german: "der Grafiker", russian: "график", id: "grafiker", article: "der", word: "Grafiker"},
-{german: "der Hotelfachmann", russian: "специалист гостиничного дела", id: "hotelfachmann", article: "der", word: "Hotelfachmann"},
-{german: "die Hotelfachfrau", russian: "специалистка гостиничного дела", id: "hotelfachfrau", article: "die", word: "Hotelfachfrau"},
-{german: "die Arbeitswelt", russian: "мир труда", id: "arbeitswelt", article: "die", word: "Arbeitswelt"},
-{german: "der Auszubildende", russian: "стажер, ученик", id: "auszubildender", article: "der", word: "Auszubildende"},
-{german: "die Lehre", russian: "ученичество", id: "lehre", article: "die", word: "Lehre"},
-{german: "das Handwerk", russian: "ремесло", id: "handwerk", article: "das", word: "Handwerk"},
-{german: "die Arztpraxis", russian: "врачебная практика", id: "arztpraxis", article: "die", word: "Arztpraxis"},
-{german: "die Beziehung", russian: "отношение", id: "beziehung", article: "die", word: "Beziehung"},
-{german: "die Erholung", russian: "отдых", id: "erholung", article: "die", word: "Erholung"},
-{german: "die Weltreise", russian: "кругосветное путешествие", id: "weltreise", article: "die", word: "Weltreise"},
-{german: "die Grafik", russian: "графика", id: "grafik", article: "die", word: "Grafik"},
-{german: "das E-Book", russian: "электронная книга", id: "ebook", article: "das", word: "E-Book"},
-{german: "der E-Book-Reader", russian: "ридер для электронных книг", id: "ebook_reader", article: "der", word: "E-Book-Reader"},
-{german: "das Radio", russian: "радио", id: "radio", article: "das", word: "Radio"},
-{german: "das Tablet", russian: "планшет", id: "tablet", article: "das", word: "Tablet"},
-{german: "der Bildschirm", russian: "экран", id: "bildschirm", article: "der", word: "Bildschirm"},
-{german: "die Maus", russian: "мышь", id: "maus", article: "die", word: "Maus"},
-{german: "die Webseite", russian: "веб-сайт", id: "webseite", article: "die", word: "Webseite"},
-{german: "der Link", russian: "ссылка", id: "link", article: "der", word: "Link"},
-{german: "der Blogbeitrag", russian: "запись в блоге", id: "blogbeitrag", article: "der", word: "Blogbeitrag"},
-{german: "das Start-up", russian: "стартап", id: "startup", article: "das", word: "Start-up"},
-{german: "der Actionfilm", russian: "боевик", id: "actionfilm", article: "der", word: "Actionfilm"},
-{german: "der Fantasyfilm", russian: "фэнтези-фильм", id: "fantasyfilm", article: "der", word: "Fantasyfilm"},
-{german: "die Komödie", russian: "комедия", id: "komoedie", article: "die", word: "Komödie"},
-{german: "der Liebesfilm", russian: "фильм о любви", id: "liebesfilm", article: "der", word: "Liebesfilm"},
-{german: "der Thriller", russian: "триллер", id: "thriller", article: "der", word: "Thriller"},
-{german: "die Filmmusik", russian: "музыка к фильму", id: "filmmusik", article: "die", word: "Filmmusik"},
-{german: "die Handlung", russian: "сюжет", id: "handlung", article: "die", word: "Handlung"},
-{german: "der Trailer", russian: "трейлер", id: "trailer", article: "der", word: "Trailer"},
-{german: "die Hauptperson", russian: "главное лицо", id: "hauptperson", article: "die", word: "Hauptperson"},
-{german: "das Talent", russian: "талант", id: "talent", article: "das", word: "Talent"},
-{german: "der Humor", russian: "юмор", id: "humor", article: "der", word: "Humor"},
-{german: "der Enkel", russian: "внук", id: "enkel", article: "der", word: "Enkel"},
-{german: "die Enkelin", russian: "внучка", id: "enkelin", article: "die", word: "Enkelin"},
-{german: "die Freundschaft", russian: "дружба", id: "freundschaft", article: "die", word: "Freundschaft"},
-{german: "die Kindheit", russian: "детство", id: "kindheit", article: "die", word: "Kindheit"},
-{german: "das Schicksal", russian: "судьба", id: "schicksal", article: "das", word: "Schicksal"},
-{german: "die Geburt", russian: "рождение", id: "geburt", article: "die", word: "Geburt"},
-{german: "das Geschenk", russian: "подарок", id: "geschenk", article: "das", word: "Geschenk"},
-{german: "die Geburtstagsparty", russian: "день рождения (вечеринка)", id: "geburtstagsparty", article: "die", word: "Geburtstagsparty"},
-{german: "der Schultag", russian: "школьный день", id: "schultag", article: "der", word: "Schultag"},
-{german: "der Club", russian: "клуб", id: "club", article: "der", word: "Club"},
-{german: "die Medaille", russian: "медаль", id: "medaille", article: "die", word: "Medaille"},
-{german: "die Laune", russian: "настроение", id: "laune", article: "die", word: "Laune"},
-{german: "die Liebesgeschichte", russian: "любовная история", id: "liebesgeschichte", article: "die", word: "Liebesgeschichte"},
-{german: "die Liebe", russian: "любовь", id: "liebe", article: "die", word: "Liebe"},
-{german: "die Freude", russian: "радость", id: "freude", article: "die", word: "Freude"},
-{german: "das Bedauern", russian: "сожаление", id: "bedauern", article: "das", word: "Bedauern"},
-{german: "die Glückwünsche", russian: "поздравления", id: "glueckwuensche", article: "die", word: "Glückwünsche"},
-{german: "die Karte", russian: "карта, открытка", id: "karte", article: "die", word: "Karte"},
-{german: "die Absage", russian: "отказ", id: "absage", article: "die", word: "Absage"},
-{german: "das Gefühl", russian: "чувство", id: "gefuehl", article: "das", word: "Gefühl"},
-{german: "die Emotion", russian: "эмоция", id: "emotion", article: "die", word: "Emotion"},
-{german: "das Frühjahr", russian: "весна", id: "fruehjahr", article: "das", word: "Frühjahr"},
-{german: "das Gegenteil", russian: "противоположность", id: "gegenteil", article: "das", word: "Gegenteil"},
-{german: "der Fahrer", russian: "водитель", id: "fahrer", article: "der", word: "Fahrer"},
-{german: "die Fahrerin", russian: "водительница", id: "fahrerin", article: "die", word: "Fahrerin"},
-{german: "der Schutz", russian: "защита", id: "schutz", article: "der", word: "Schutz"},
-{german: "die Feuerwehr", russian: "пожарная команда", id: "feuerwehr", article: "die", word: "Feuerwehr"},
-{german: "der Müll", russian: "мусор", id: "muell", article: "der", word: "Müll"},
-{german: "die Aushilfe", russian: "подсобный рабочий", id: "aushilfe", article: "die", word: "Aushilfe"},
-{german: "die Behörde", russian: "ведомство", id: "behoerde", article: "die", word: "Behörde"},
-{german: "die Beamtin", russian: "чиновница", id: "beamtin", article: "die", word: "Beamtin"},
-{german: "der Gefallen", russian: "одолжение", id: "gefallen", article: "der", word: "Gefallen"},
-{german: "das Beste", russian: "лучшее", id: "beste", article: "das", word: "Beste"},
-{german: "der Fan", russian: "фанат", id: "fan", article: "der", word: "Fan"},
-{german: "der Daumen", russian: "большой палец", id: "daumen", article: "der", word: "Daumen"},
-{german: "die Entspannung", russian: "расслабление", id: "entspannung", article: "die", word: "Entspannung"},
-{german: "der Dom", russian: "собор", id: "dom", article: "der", word: "Dom"},
-{german: "die Disco", russian: "дискотека", id: "disco", article: "die", word: "Disco"},
-{german: "die Touristin", russian: "туристка", id: "touristin", article: "die", word: "Touristin"},
-{german: "der Politiker", russian: "политик", id: "politiker", article: "der", word: "Politiker"},
-{german: "die Politikerin", russian: "политик (ж)", id: "politikerin", article: "die", word: "Politikerin"},
-{german: "das Gesetz", russian: "закон", id: "gesetz", article: "das", word: "Gesetz"},
-{german: "das Gebäude", russian: "здание", id: "gebaeude", article: "das", word: "Gebäude"},
-{german: "die Tätigkeit", russian: "деятельность", id: "taetigkeit", article: "die", word: "Tätigkeit"},
-{german: "der Abflug", russian: "вылет", id: "abflug", article: "der", word: "Abflug"},
-{german: "der Bahnsteig", russian: "платформа", id: "bahnsteig", article: "der", word: "Bahnsteig"},
-{german: "die Geschäftsreise", russian: "деловая поездка", id: "geschaeftsreise", article: "die", word: "Geschäftsreise"},
-{german: "der Berufswunsch", russian: "желаемая профессия", id: "berufswunsch", article: "der", word: "Berufswunsch"},
-{german: "der Neuanfang", russian: "новое начало", id: "neuanfang", article: "der", word: "Neuanfang"},
-{german: "die Chance", russian: "шанс", id: "chance", article: "die", word: "Chance"},
-{german: "das Plastik", russian: "пластик", id: "plastik", article: "das", word: "Plastik"},
-{german: "das Gehalt", russian: "зарплата", id: "gehalt", article: "das", word: "Gehalt"},
-{german: "die Chirurgin", russian: "хирург (ж)", id: "chirurgin", article: "die", word: "Chirurgin"},
-{german: "das Herz", russian: "сердце", id: "herz", article: "das", word: "Herz"},
-{german: "die Freiheit", russian: "свобода", id: "freiheit", article: "die", word: "Freiheit"},
-{german: "der Anruf", russian: "звонок", id: "anruf", article: "der", word: "Anruf"},
-{german: "die Band", russian: "группа", id: "band", article: "die", word: "Band"},
-{german: "die Fabrik", russian: "фабрика", id: "fabrik", article: "die", word: "Fabrik"},
-{german: "die Maschine", russian: "машина", id: "maschine", article: "die", word: "Maschine"},
-{german: "der Roboter", russian: "робот", id: "roboter", article: "der", word: "Roboter"},
-{german: "der Arbeitstag", russian: "рабочий день", id: "arbeitstag", article: "der", word: "Arbeitstag"},
-{german: "der Austausch", russian: "обмен", id: "austausch", article: "der", word: "Austausch"},
-{german: "das Wissen", russian: "знание", id: "wissen", article: "das", word: "Wissen"},
-{german: "die Hausarbeit", russian: "домашняя работа", id: "hausarbeit", article: "die", word: "Hausarbeit"},
-{german: "das Blatt", russian: "лист", id: "blatt", article: "das", word: "Blatt"},
-{german: "der Schritt", russian: "шаг", id: "schritt", article: "der", word: "Schritt"},
-{german: "der Feiertag", russian: "праздничный день", id: "feiertag", article: "der", word: "Feiertag"},
-{german: "das Jahrhundert", russian: "век", id: "jahrhundert", article: "das", word: "Jahrhundert"},
-{german: "das E-Bike", russian: "электровелосипед", id: "ebike", article: "das", word: "E-Bike"},
-{german: "die Haltestelle", russian: "остановка", id: "haltestelle", article: "die", word: "Haltestelle"},
-{german: "die Linie", russian: "линия", id: "linie", article: "die", word: "Linie"},
-{german: "die Seilbahn", russian: "канатная дорога", id: "seilbahn", article: "die", word: "Seilbahn"},
-{german: "der Stau", russian: "пробка", id: "stau", article: "der", word: "Stau"},
-{german: "die Kombination", russian: "комбинация", id: "kombination", article: "die", word: "Kombination"},
-{german: "die Konsequenz", russian: "последствие", id: "konsequenz", article: "die", word: "Konsequenz"},
-{german: "das Konzept", russian: "концепция", id: "konzept", article: "das", word: "Konzept"},
-{german: "die Nummer", russian: "номер", id: "nummer", article: "die", word: "Nummer"},
-{german: "das Kfz", russian: "автомобиль", id: "kfz", article: "das", word: "Kfz"},
-{german: "der Pkw", russian: "легковой автомобиль", id: "pkw", article: "der", word: "Pkw"},
-{german: "das Kennzeichen", russian: "номерной знак", id: "kennzeichen", article: "das", word: "Kennzeichen"},
-{german: "der Diesel", russian: "дизель", id: "diesel", article: "der", word: "Diesel"},
-{german: "das Benzin", russian: "бензин", id: "benzin", article: "das", word: "Benzin"},
-{german: "die Versicherung", russian: "страховка", id: "versicherung", article: "die", word: "Versicherung"},
-{german: "das Kinderabteil", russian: "детское отделение", id: "kinderabteil", article: "das", word: "Kinderabteil"},
-{german: "die Platzreservierung", russian: "резервирование места", id: "platzreservierung", article: "die", word: "Platzreservierung"},
-{german: "der Anflug", russian: "подлет", id: "anflug", article: "der", word: "Anflug"},
-{german: "die Landung", russian: "посадка", id: "landung", article: "die", word: "Landung"},
-{german: "die Beschreibung", russian: "описание", id: "beschreibung", article: "die", word: "Beschreibung"},
-{german: "die Ampel", russian: "светофор", id: "ampel", article: "die", word: "Ampel"},
-{german: "der Kundenservice", russian: "обслуживание клиентов", id: "kundenservice", article: "der", word: "Kundenservice"},
-{german: "die PIN", russian: "ПИН-код", id: "pin", article: "die", word: "PIN"},
-{german: "die Expertin", russian: "эксперт (ж)", id: "expertin", article: "die", word: "Expertin"},
-{german: "das Prozent", russian: "процент", id: "prozent", article: "das", word: "Prozent"},
-{german: "der Kinderwagen", russian: "детская коляска", id: "kinderwagen", article: "der", word: "Kinderwagen"},
-{german: "der Artikel", russian: "статья", id: "artikel", article: "der", word: "Artikel"}
+
+// СУЩЕСТВИТЕЛЬНЫЕ С АРТИКЛЯМИ
+const nounsDictionary = [
+    // Семья и люди
+    {german: "der Rentner", russian: "пенсионер", id: "rentner", article: "der", word: "Rentner"},
+    {german: "die Rentnerin", russian: "пенсионерка", id: "rentnerin", article: "die", word: "Rentnerin"},
+    {german: "die Hochzeit", russian: "свадьба", id: "hochzeit", article: "die", word: "Hochzeit"},
+    
+    // Образование и работа
+    {german: "die Ausbildung", russian: "образование", id: "ausbildung", article: "die", word: "Ausbildung"},
+    {german: "der Verein", russian: "клуб", id: "verein", article: "der", word: "Verein"},
+    {german: "die Bankkauffrau", russian: "банковская работница", id: "bankkauffrau", article: "die", word: "Bankkauffrau"},
+    {german: "der Bankkaufmann", russian: "банковский служащий", id: "bankkaufmann", article: "der", word: "Bankkaufmann"},
+    {german: "die Biologie", russian: "биология", id: "biologie", article: "die", word: "Biologie"},
+    {german: "die Mathematik", russian: "математика", id: "mathematik", article: "die", word: "Mathematik"},
+    {german: "die Note", russian: "оценка", id: "note", article: "die", word: "Note"},
+    {german: "der Abschluss", russian: "окончание", id: "abschluss", article: "der", word: "Abschluss"},
+    {german: "der Schulabschluss", russian: "окончание школы", id: "schulabschluss", article: "der", word: "Schulabschluss"},
+    {german: "das Abitur", russian: "аттестат зрелости", id: "abitur", article: "das", word: "Abitur"},
+    {german: "das Zeugnis", russian: "свидетельство", id: "zeugnis", article: "das", word: "Zeugnis"},
+    {german: "die Direktorin", russian: "директор (ж.)", id: "direktorin", article: "die", word: "Direktorin"},
+    {german: "der Schüler", russian: "ученик", id: "schueler", article: "der", word: "Schüler"},
+    {german: "die Schülerin", russian: "ученица", id: "schuelerin", article: "die", word: "Schülerin"},
+    {german: "die Klasse", russian: "класс", id: "klasse", article: "die", word: "Klasse"},
+    {german: "der Klassenlehrer", russian: "классный руководитель", id: "klassenlehrer", article: "der", word: "Klassenlehrer"},
+    {german: "die Klassenlehrerin", russian: "классный руководитель (ж.)", id: "klassenlehrerin", article: "die", word: "Klassenlehrerin"},
+    {german: "der Kiosk", russian: "киоск", id: "kiosk", article: "der", word: "Kiosk"},
+    {german: "die Pause", russian: "перерыв", id: "pause", article: "die", word: "Pause"},
+    {german: "die Cafeteria", russian: "столовая", id: "cafeteria", article: "die", word: "Cafeteria"},
+    {german: "die Unterrichtszeit", russian: "учебное время", id: "unterrichtszeit", article: "die", word: "Unterrichtszeit"},
+    {german: "die Stunde", russian: "урок, час", id: "stunde", article: "die", word: "Stunde"},
+    {german: "die Dauer", russian: "продолжительность", id: "dauer", article: "die", word: "Dauer"},
+    {german: "die Schuluniform", russian: "школьная форма", id: "schuluniform", article: "die", word: "Schuluniform"},
+    {german: "die Vorbereitung", russian: "подготовка", id: "vorbereitung", article: "die", word: "Vorbereitung"},
+    {german: "die Ferien", russian: "каникулы", id: "ferien", article: "die", word: "Ferien"},
+    {german: "die Grundschule", russian: "начальная школа", id: "grundschule", article: "die", word: "Grundschule"},
+    {german: "die Hauptschule", russian: "основная школа", id: "hauptschule", article: "die", word: "Hauptschule"},
+    {german: "die Realschule", russian: "реальная школа", id: "realschule", article: "die", word: "Realschule"},
+    {german: "das Gymnasium", russian: "гимназия", id: "gymnasium", article: "das", word: "Gymnasium"},
+    {german: "die Gesamtschule", russian: "общеобразовательная школа", id: "gesamtschule", article: "die", word: "Gesamtschule"},
+    {german: "die Berufsschule", russian: "профессиональное училище", id: "berufsschule", article: "die", word: "Berufsschule"},
+    {german: "das Schulsystem", russian: "школьная система", id: "schulsystem", article: "das", word: "Schulsystem"},
+    {german: "das Bundesland", russian: "федеральная земля", id: "bundesland", article: "das", word: "Bundesland"},
+    
+    // Ресторан
+    {german: "der Aufenthalt", russian: "пребывание", id: "aufenthalt", article: "der", word: "Aufenthalt"},
+    {german: "der Eingang", russian: "вход", id: "eingang", article: "der", word: "Eingang"},
+    {german: "der Platz", russian: "место", id: "platz", article: "der", word: "Platz"},
+    {german: "die Reservierung", russian: "бронирование", id: "reservierung", article: "die", word: "Reservierung"},
+    {german: "die Zutat", russian: "ингредиент", id: "zutat", article: "die", word: "Zutat"},
+    
+    // Жилье
+    {german: "das Stadtzentrum", russian: "центр города", id: "stadtzentrum", article: "das", word: "Stadtzentrum"},
+    
+    // Свободное время
+    {german: "der Flohmarkt", russian: "блошиный рынок", id: "flohmarkt", article: "der", word: "Flohmarkt"},
+    {german: "das Pferd", russian: "лошадь", id: "pferd", article: "das", word: "Pferd"},
+    
+    // Другие важные слова
+    {german: "das WC", russian: "туалет", id: "wc", article: "das", word: "WC"},
+    {german: "die Geräte", russian: "приборы", id: "geraete", article: "die", word: "Geräte"},
+    {german: "die Zigarette", russian: "сигарета", id: "zigarette", article: "die", word: "Zigarette"},
+    {german: "die Angst", russian: "страх", id: "angst", article: "die", word: "Angst"},
+    {german: "die Grippe", russian: "грипп", id: "grippe", article: "die", word: "Grippe"},
+    {german: "das Handy", russian: "мобильный телефон", id: "handy", article: "das", word: "Handy"},
+    
+    // Школьные предметы
+    {german: "das Fach", russian: "предмет", id: "fach", article: "das", word: "Fach"},
+    {german: "die Chemie", russian: "химия", id: "chemie", article: "die", word: "Chemie"},
+    {german: "die Geografie", russian: "география", id: "geografie", article: "die", word: "Geografie"},
+    {german: "die Geschichte", russian: "история", id: "geschichte", article: "die", word: "Geschichte"},
+    {german: "die Informatik", russian: "информатика", id: "informatik", article: "die", word: "Informatik"},
+    {german: "das Latein", russian: "латынь", id: "latein", article: "das", word: "Latein"},
+    {german: "die Kunst", russian: "искусство", id: "kunst", article: "die", word: "Kunst"},
+    {german: "die Physik", russian: "физика", id: "physik", article: "die", word: "Physik"},
+    {german: "die Sozialkunde", russian: "обществоведение", id: "sozialkunde", article: "die", word: "Sozialkunde"},
+    
+    // Университет
+    {german: "die Vorlesung", russian: "лекция", id: "vorlesung", article: "die", word: "Vorlesung"},
+    {german: "die Meinung", russian: "мнение", id: "meinung", article: "die", word: "Meinung"},
+    
+    // Профессии
+    {german: "der Altenpfleger", russian: "работник по уходу за пожилыми", id: "altenpfleger", article: "der", word: "Altenpfleger"},
+    {german: "die Altenpflegerin", russian: "работница по уходу за пожилыми", id: "altenpflegerin", article: "die", word: "Altenpflegerin"},
+    {german: "der Arzt", russian: "врач", id: "arzt", article: "der", word: "Arzt"},
+    {german: "die Ärztin", russian: "врач (ж.)", id: "aerztin", article: "die", word: "Ärztin"},
+    {german: "das Au-pair", russian: "ау-паир", id: "aupair", article: "das", word: "Au-pair"},
+    {german: "der Busfahrer", russian: "водитель автобуса", id: "busfahrer", article: "der", word: "Busfahrer"},
+    {german: "die Busfahrerin", russian: "водитель автобуса (ж.)", id: "busfahrerin", article: "die", word: "Busfahrerin"},
+    {german: "der Grafikdesigner", russian: "графический дизайнер", id: "grafikdesigner", article: "der", word: "Grafikdesigner"},
+    {german: "der Grafiker", russian: "график", id: "grafiker", article: "der", word: "Grafiker"},
+    {german: "der Hotelfachmann", russian: "гостиничный специалист", id: "hotelfachmann", article: "der", word: "Hotelfachmann"},
+    {german: "die Hotelfachfrau", russian: "гостиничный специалист (ж.)", id: "hotelfachfrau", article: "die", word: "Hotelfachfrau"},
+    {german: "die Krankenschwester", russian: "медсестра", id: "krankenschwester", article: "die", word: "Krankenschwester"},
+    {german: "der Krankenpfleger", russian: "медбрат", id: "krankenpfleger", article: "der", word: "Krankenpfleger"},
+    
+    // Медиа и техника
+    {german: "das E-Book", russian: "электронная книга", id: "ebook", article: "das", word: "E-Book"},
+    {german: "der E-Book-Reader", russian: "читалка для электронных книг", id: "ebook_reader", article: "der", word: "E-Book-Reader"},
+    {german: "der Laptop", russian: "ноутбук", id: "laptop", article: "der", word: "Laptop"},
+    {german: "das Radio", russian: "радио", id: "radio", article: "das", word: "Radio"},
+    {german: "die Spielkonsole", russian: "игровая консоль", id: "spielkonsole", article: "die", word: "Spielkonsole"},
+    {german: "das Tablet", russian: "планшет", id: "tablet", article: "das", word: "Tablet"},
+    {german: "der Bildschirm", russian: "экран", id: "bildschirm", article: "der", word: "Bildschirm"},
+    {german: "die Tastatur", russian: "клавиатура", id: "tastatur", article: "die", word: "Tastatur"},
+    {german: "die Maus", russian: "мышка", id: "maus", article: "die", word: "Maus"},
+    {german: "die Kamera", russian: "камера", id: "kamera", article: "die", word: "Kamera"},
+    {german: "die Kopfhörer", russian: "наушники", id: "kopfhoerer", article: "die", word: "Kopfhörer"},
+    {german: "die Lautsprecher", russian: "динамики", id: "lautsprecher", article: "die", word: "Lautsprecher"},
+    {german: "die Webseite", russian: "веб-сайт", id: "webseite", article: "die", word: "Webseite"},
+    {german: "der Link", russian: "ссылка", id: "link", article: "der", word: "Link"},
+    
+    // Кино и фильмы
+    {german: "der Actionfilm", russian: "боевик", id: "actionfilm", article: "der", word: "Actionfilm"},
+    {german: "der Fantasyfilm", russian: "фэнтези фильм", id: "fantasyfilm", article: "der", word: "Fantasyfilm"},
+    {german: "die Komödie", russian: "комедия", id: "komoedie", article: "die", word: "Komödie"},
+    {german: "der Liebesfilm", russian: "любовный фильм", id: "liebesfilm", article: "der", word: "Liebesfilm"},
+    {german: "der Thriller", russian: "триллер", id: "thriller", article: "der", word: "Thriller"},
+    {german: "die Filmmusik", russian: "музыка к фильму", id: "filmmusik", article: "die", word: "Filmmusik"},
+    {german: "die Handlung", russian: "сюжет", id: "handlung", article: "die", word: "Handlung"},
+    {german: "der Trailer", russian: "трейлер", id: "trailer", article: "der", word: "Trailer"},
+    {german: "die Hauptperson", russian: "главный герой", id: "hauptperson", article: "die", word: "Hauptperson"},
+    {german: "das Talent", russian: "талант", id: "talent", article: "das", word: "Talent"},
+    {german: "der Humor", russian: "юмор", id: "humor", article: "der", word: "Humor"},
+    
+    // Семья и жизнь
+    {german: "der Enkel", russian: "внук", id: "enkel", article: "der", word: "Enkel"},
+    {german: "die Enkelin", russian: "внучка", id: "enkelin", article: "die", word: "Enkelin"},
+    {german: "die Freundschaft", russian: "дружба", id: "freundschaft", article: "die", word: "Freundschaft"},
+    {german: "die Kindheit", russian: "детство", id: "kindheit", article: "die", word: "Kindheit"},
+    {german: "das Schicksal", russian: "судьба", id: "schicksal", article: "das", word: "Schicksal"},
+    {german: "die Sorge", russian: "забота", id: "sorge", article: "die", word: "Sorge"},
+    {german: "das Tier", russian: "животное", id: "tier", article: "das", word: "Tier"},
+    
+    // Особые события
+    {german: "die Geburt", russian: "рождение", id: "geburt", article: "die", word: "Geburt"},
+    {german: "das Geschenk", russian: "подарок", id: "geschenk", article: "das", word: "Geschenk"},
+    {german: "die Geburtstagsparty", russian: "день рождения вечеринка", id: "geburtstagsparty", article: "die", word: "Geburtstagsparty"},
+    {german: "der Schultag", russian: "учебный день", id: "schultag", article: "der", word: "Schultag"},
+    {german: "der Führerschein", russian: "водительские права", id: "fuehrerschein", article: "der", word: "Führerschein"},
+    {german: "die Prüfung", russian: "экзамен", id: "pruefung", article: "die", word: "Prüfung"},
+    {german: "der Club", russian: "клуб", id: "club", article: "der", word: "Club"},
+    {german: "der Ring", russian: "кольцо", id: "ring", article: "der", word: "Ring"},
+    {german: "die Medaille", russian: "медаль", id: "medaille", article: "die", word: "Medaille"},
+    {german: "das Feuerwerk", russian: "фейерверк", id: "feuerwerk", article: "das", word: "Feuerwerk"},
+    
+    // Чувства
+    {german: "die Laune", russian: "настроение", id: "laune", article: "die", word: "Laune"},
+    {german: "die Liebesgeschichte", russian: "любовная история", id: "liebesgeschichte", article: "die", word: "Liebesgeschichte"},
+    {german: "die Liebe", russian: "любовь", id: "liebe", article: "die", word: "Liebe"},
+    {german: "die Freude", russian: "радость", id: "freude", article: "die", word: "Freude"},
+    {german: "das Bedauern", russian: "сожаление", id: "bedauern", article: "das", word: "Bedauern"},
+    {german: "das Gefühl", russian: "чувство", id: "gefuehl", article: "das", word: "Gefühl"},
+    {german: "die Emotion", russian: "эмоция", id: "emotion", article: "die", word: "Emotion"},
+    
+    // Поздравления
+    {german: "die Glückwünsche", russian: "поздравления", id: "glueckwuensche", article: "die", word: "Glückwünsche"},
+    {german: "die Karte", russian: "открытка", id: "karte", article: "die", word: "Karte"},
+    {german: "die Absage", russian: "отказ", id: "absage", article: "die", word: "Absage"},
+    
+    // Город и транспорт
+    {german: "das Verkehrsmittel", russian: "средство транспорта", id: "verkehrsmittel", article: "das", word: "Verkehrsmittel"},
+    {german: "die Feuerwehr", russian: "пожарная служба", id: "feuerwehr", article: "die", word: "Feuerwehr"},
+    {german: "die Sicherheit", russian: "безопасность", id: "sicherheit", article: "die", word: "Sicherheit"},
+    {german: "die Operation", russian: "операция", id: "operation", article: "die", word: "Operation"},
+    {german: "die Organisation", russian: "организация", id: "organisation", article: "die", word: "Organisation"},
+    {german: "der Müll", russian: "мусор", id: "muell", article: "der", word: "Müll"},
+    {german: "die Müllabfuhr", russian: "вывоз мусора", id: "muellabfuhr", article: "die", word: "Müllabfuhr"},
+    {german: "die Aushilfe", russian: "помощник", id: "aushilfe", article: "die", word: "Aushilfe"},
+    
+    // Учреждения
+    {german: "das Amt", russian: "ведомство", id: "amt", article: "das", word: "Amt"},
+    {german: "die Behörde", russian: "государственное учреждение", id: "behoerde", article: "die", word: "Behörde"},
+    {german: "der Beamte", russian: "чиновник", id: "beamte", article: "der", word: "Beamte"},
+    {german: "die Beamtin", russian: "чиновница", id: "beamtin", article: "die", word: "Beamtin"},
+    {german: "der Antrag", russian: "заявление", id: "antrag", article: "der", word: "Antrag"},
+    {german: "das Dokument", russian: "документ", id: "dokument", article: "das", word: "Dokument"},
+    {german: "das Visum", russian: "виза", id: "visum", article: "das", word: "Visum"},
+    {german: "die Grenze", russian: "граница", id: "grenze", article: "die", word: "Grenze"},
+    
+    // Банк
+    {german: "der Angestellte", russian: "служащий", id: "angestellte", article: "der", word: "Angestellte"},
+    {german: "der Betrag", russian: "сумма", id: "betrag", article: "der", word: "Betrag"},
+    {german: "die Bankkarte", russian: "банковская карта", id: "bankkarte", article: "die", word: "Bankkarte"},
+    {german: "der Kredit", russian: "кредит", id: "kredit", article: "der", word: "Kredit"},
+    {german: "die Geldbörse", russian: "кошелек", id: "geldboerse", article: "die", word: "Geldbörse"},
+    {german: "der Diebstahl", russian: "кража", id: "diebstahl", article: "der", word: "Diebstahl"},
+    
+    // Другие важные слова
+    {german: "der Gefallen", russian: "одолжение", id: "gefallen", article: "der", word: "Gefallen"},
+    {german: "der Erfolg", russian: "успех", id: "erfolg", article: "der", word: "Erfolg"},
+    {german: "der Fan", russian: "фанат", id: "fan", article: "der", word: "Fan"},
+    {german: "der Daumen", russian: "большой палец", id: "daumen", article: "der", word: "Daumen"},
+    {german: "der Gedanke", russian: "мысль", id: "gedanke", article: "der", word: "Gedanke"},
+    {german: "die Ruhe", russian: "спокойствие", id: "ruhe", article: "die", word: "Ruhe"},
+    {german: "die Entspannung", russian: "расслабление", id: "entspannung", article: "die", word: "Entspannung"},
+    {german: "das Wunder", russian: "чудо", id: "wonder", article: "das", word: "Wunder"},
+    
+    // Экскурсия по городу
+    {german: "der Dom", russian: "собор", id: "dom", article: "der", word: "Dom"},
+    {german: "die Disco", russian: "дискотека", id: "disco", article: "die", word: "Disco"},
+    {german: "der Stadtplan", russian: "карта города", id: "stadtplan", article: "der", word: "Stadtplan"},
+    {german: "der Tourist", russian: "турист", id: "tourist", article: "der", word: "Tourist"},
+    {german: "die Touristin", russian: "туристка", id: "touristin", article: "die", word: "Touristin"},
+    {german: "der Politiker", russian: "политик", id: "politiker", article: "der", word: "Politiker"},
+    {german: "die Politikerin", russian: "политик (ж.)", id: "politikerin", article: "die", word: "Politikerin"},
+    {german: "das Parlament", russian: "парламент", id: "parlament", article: "das", word: "Parlament"},
+    {german: "das Gesetz", russian: "закон", id: "gesetz", article: "das", word: "Gesetz"},
+    {german: "die Verwaltung", russian: "администрация", id: "verwaltung", article: "die", word: "Verwaltung"},
+    {german: "das Gebäude", russian: "здание", id: "gebaeude", article: "das", word: "Gebäude"},
+    
+    // Работа
+    {german: "die Tätigkeit", russian: "деятельность", id: "taetigkeit", article: "die", word: "Tätigkeit"},
+    {german: "der Abflug", russian: "вылет", id: "abflug", article: "der", word: "Abflug"},
+    {german: "der Bahnsteig", russian: "платформа", id: "bahnsteig", article: "der", word: "Bahnsteig"},
+    {german: "der Fahrplan", russian: "расписание", id: "fahrplan", article: "der", word: "Fahrplan"},
+    {german: "die Zugverbindung", russian: "железнодорожное сообщение", id: "zugverbindung", article: "die", word: "Zugverbindung"},
+    {german: "der Wagen", russian: "вагон", id: "wagen", article: "der", word: "Wagen"},
+    {german: "die Geschäftreise", russian: "командировка", id: "geschaeftsreise", article: "die", word: "Geschäftsreise"},
+    {german: "die Rückfahrt", russian: "обратная дорога", id: "rueckfahrt", article: "die", word: "Rückfahrt"},
+    {german: "der Beruf", russian: "профессия", id: "beruf", article: "der", word: "Beruf"},
+    {german: "der Berufswunsch", russian: "желаемая профессия", id: "berufswunsch", article: "der", word: "Berufswunsch"},
+    {german: "der Neuanfang", russian: "новое начало", id: "neuanfang", article: "der", word: "Neuanfang"},
+    {german: "die Chance", russian: "шанс", id: "chance", article: "die", word: "Chance"},
+    {german: "die Umwelt", russian: "окружающая среда", id: "umwelt", article: "die", word: "Umwelt"},
+    {german: "das Plastik", russian: "пластик", id: "plastik", article: "das", word: "Plastik"},
+    {german: "das Gehalt", russian: "зарплата", id: "gehalt", article: "das", word: "Gehalt"},
+    {german: "das Risiko", russian: "риск", id: "risiko", article: "das", word: "Risiko"},
+    {german: "die Chirurgin", russian: "хирург (ж.)", id: "chirurgin", article: "die", word: "Chirurgin"},
+    {german: "der Chirurg", russian: "хирург", id: "chirurg", article: "der", word: "Chirurg"},
+    {german: "das Herz", russian: "сердце", id: "herz", article: "das", word: "Herz"},
+    {german: "der Lkw", russian: "грузовик", id: "lkw", article: "der", word: "Lkw"},
+    {german: "der Lastwagen", russian: "грузовик", id: "lastwagen", article: "der", word: "Lastwagen"},
+    {german: "die Freiheit", russian: "свобода", id: "freiheit", article: "die", word: "Freiheit"},
+    
+    // Телефон
+    {german: "der Anruf", russian: "звонок", id: "anruf", article: "der", word: "Anruf"},
+    {german: "der Anrufbeantworter", russian: "автоответчик", id: "anrufbeantworter", article: "der", word: "Anrufbeantworter"},
+    
+    // Музыка
+    {german: "der Sänger", russian: "певец", id: "saenger", article: "der", word: "Sänger"},
+    {german: "die Band", russian: "группа", id: "band", article: "die", word: "Band"},
+    {german: "der Musiker", russian: "музыкант", id: "musiker", article: "der", word: "Musiker"},
+    {german: "das Album", russian: "альбом", id: "album", article: "das", word: "Album"},
+    
+    // Современный рабочий мир
+    {german: "der Arbeitstag", russian: "рабочий день", id: "arbeitstag", article: "der", word: "Arbeitstag"},
+    {german: "die Fabrik", russian: "фабрика", id: "fabrik", article: "die", word: "Fabrik"},
+    {german: "die Maschine", russian: "машина", id: "maschine", article: "die", word: "Maschine"},
+    {german: "der Roboter", russian: "робот", id: "roboter", article: "der", word: "Roboter"},
+    {german: "die Digitalisierung", russian: "цифровизация", id: "digitalisierung", article: "die", word: "Digitalisierung"},
+    {german: "der Austausch", russian: "обмен", id: "austausch", article: "der", word: "Austausch"},
+    {german: "die Zusammenarbeit", russian: "сотрудничество", id: "zusammenarbeit", article: "die", word: "Zusammenarbeit"},
+    {german: "das Wissen", russian: "знание", id: "wissen", article: "das", word: "Wissen"},
+    {german: "die Kompetenz", russian: "компетенция", id: "kompetenz", article: "die", word: "Kompetenz"},
+    {german: "die Hausarbeit", russian: "домашняя работа", id: "hausarbeit", article: "die", word: "Hausarbeit"},
+    
+    // Другие
+    {german: "das Blatt", russian: "лист", id: "blatt", article: "das", word: "Blatt"},
+    {german: "der Schwager", russian: "шурин", id: "schwager", article: "der", word: "Schwager"},
+    {german: "der Schritt", russian: "шаг", id: "schritt", article: "der", word: "Schritt"},
+    {german: "der Feiertag", russian: "праздничный день", id: "feiertag", article: "der", word: "Feiertag"},
+    {german: "das Jahrhundert", russian: "век", id: "jahrhundert", article: "das", word: "Jahrhundert"},
+    
+    // Транспорт
+    {german: "der Radfahrer", russian: "велосипедист", id: "radfahrer", article: "der", word: "Radfahrer"},
+    {german: "der Radweg", russian: "велосипедная дорожка", id: "radweg", article: "der", word: "Radweg"},
+    {german: "die Seilbahn", russian: "канатная дорога", id: "seilbahn", article: "die", word: "Seilbahn"},
+    {german: "das Kfz", russian: "автомобиль", id: "kfz", article: "das", word: "Kfz"},
+    {german: "der Pkw", russian: "легковой автомобиль", id: "pkw", article: "der", word: "Pkw"},
+    {german: "das Kennzeichen", russian: "номерной знак", id: "kennzeichen", article: "das", word: "Kennzeichen"},
+    {german: "der Motor", russian: "мотор", id: "motor", article: "der", word: "Motor"},
+    {german: "der Reifen", russian: "шина", id: "reifen", article: "der", word: "Reifen"},
+    {german: "die Panne", russian: "поломка", id: "panne", article: "die", word: "Panne"},
+    {german: "die Garage", russian: "гараж", id: "garage", article: "die", word: "Garage"},
+    {german: "das Navi", russian: "навигатор", id: "navi", article: "das", word: "Navi"},
+    {german: "der Diesel", russian: "дизель", id: "diesel", article: "der", word: "Diesel"},
+    {german: "das Benzin", russian: "бензин", id: "benzin", article: "das", word: "Benzin"},
+    {german: "die Tankstelle", russian: "заправка", id: "tankstelle", article: "die", word: "Tankstelle"},
+    {german: "das Parkhaus", russian: "паркинг", id: "parkhaus", article: "das", word: "Parkhaus"},
+    {german: "der Parkplatz", russian: "парковочное место", id: "parkplatz", article: "der", word: "Parkplatz"},
+    {german: "der TÜV", russian: "техосмотр", id: "tuev", article: "der", word: "TÜV"},
+    {german: "die Versicherung", russian: "страховка", id: "versicherung", article: "die", word: "Versicherung"},
+    {german: "das Fahrrad", russian: "велосипед", id: "fahrrad", article: "das", word: "Fahrrad"},
+    {german: "das Kinderabteil", russian: "детское отделение", id: "kinderabteil", article: "das", word: "Kinderabteil"},
+    {german: "die Monatskarte", russian: "месячный билет", id: "monatskarte", article: "die", word: "Monatskarte"},
+    {german: "die Platzreservierung", russian: "бронирование места", id: "platzreservierung", article: "die", word: "Platzreservierung"},
+    {german: "die Landung", russian: "посадка", id: "landung", article: "die", word: "Landung"},
+    {german: "die Beschreibung", russian: "описание", id: "beschreibung", article: "die", word: "Beschreibung"},
+    {german: "die Richtung", russian: "направление", id: "richtung", article: "die", word: "Richtung"},
+    {german: "die Kreuzung", russian: "перекресток", id: "kreuzung", article: "die", word: "Kreuzung"},
+    {german: "die Ampel", russian: "светофор", id: "ampel", article: "die", word: "Ampel"},
+    {german: "der Kundenservice", russian: "обслуживание клиентов", id: "kundenservice", article: "der", word: "Kundenservice"},
+    {german: "die PIN", russian: "пин-код", id: "pin", article: "die", word: "PIN"},
+    {german: "die Expertin", russian: "эксперт (ж.)", id: "expertin", article: "die", word: "Expertin"},
+    {german: "das Prozent", russian: "процент", id: "prozent", article: "das", word: "Prozent"},
+    {german: "die Untersuchung", russian: "обследование", id: "untersuchung", article: "die", word: "Untersuchung"},
+    
+    // Спорт
+    {german: "der Kinderwagen", russian: "детская коляска", id: "kinderwagen", article: "der", word: "Kinderwagen"},
+    {german: "die Sportart", russian: "вид спорта", id: "sportart", article: "die", word: "Sportart"},
+    {german: "das Kajak", russian: "каяк", id: "kajak", article: "das", word: "Kajak"},
+    {german: "der Ski", russian: "лыжа", id: "ski", article: "der", word: "Ski"},
+    {german: "das Tor", russian: "ворота", id: "tor", article: "das", word: "Tor"},
+    {german: "der Schlitten", russian: "санки", id: "schlitten", article: "der", word: "Schlitten"},
+    {german: "die Strecke", russian: "дистанция", id: "strecke", article: "die", word: "Strecke"},
+    {german: "die Kondition", russian: "физическая форма", id: "kondition", article: "die", word: "Kondition"},
+    {german: "der Schläger", russian: "ракетка", id: "schlaeger", article: "der", word: "Schläger"},
+    {german: "der Skistock", russian: "лыжная палка", id: "skistock", article: "der", word: "Skistock"},
+    {german: "das Paddel", russian: "весло", id: "paddel", article: "das", word: "Paddel"},
+    {german: "die Taucherbrille", russian: "маска для подводного плавания", id: "taucherbrille", article: "die", word: "Taucherbrille"},
+    {german: "der Sportverein", russian: "спортивный клуб", id: "sportverein", article: "der", word: "Sportverein"},
+    {german: "die Mannschaft", russian: "команда", id: "mannschaft", article: "die", word: "Mannschaft"},
+    {german: "der Fanartikel", russian: "фан-товар", id: "fanartikel", article: "der", word: "Fanartikel"},
+    {german: "die Fanszene", russian: "фан-сцена", id: "fanszene", article: "die", word: "Fanszene"},
+    {german: "der Beitrag", russian: "вклад", id: "beitrag", article: "der", word: "Beitrag"},
+    {german: "der Wahnsinn", russian: "безумие", id: "wahnsinn", article: "der", word: "Wahnsinn"},
+    {german: "die Hoffnung", russian: "надежда", id: "hoffnung", article: "die", word: "Hoffnung"},
+    {german: "die Enttäuschung", russian: "разочарование", id: "enttaeuschung", article: "die", word: "Enttäuschung"},
+    {german: "die Katastrophe", russian: "катастрофа", id: "katastrophe", article: "die", word: "Katastrophe"},
+    {german: "der Vorschlag", russian: "предложение", id: "vorschlag", article: "der", word: "Vorschlag"},
+    {german: "die Anreise", russian: "приезд", id: "anreise", article: "die", word: "Anreise"},
+    {german: "der Einwohner", russian: "житель", id: "einwohner", article: "der", word: "Einwohner"},
+    {german: "die Einwohnerin", russian: "жительница", id: "einwohnerin", article: "die", word: "Einwohnerin"},
+    {german: "das Gasthaus", russian: "трактир", id: "gasthaus", article: "das", word: "Gasthaus"},
+    {german: "die Gegend", russian: "местность", id: "gegend", article: "die", word: "Gegend"},
+    {german: "die Umgebung", russian: "окрестности", id: "umgebung", article: "die", word: "Umgebung"},
+    {german: "der Nationalpark", russian: "национальный парк", id: "nationalpark", article: "der", word: "Nationalpark"},
+    {german: "das Tal", russian: "долина", id: "tal", article: "das", word: "Tal"},
+    {german: "die Höhle", russian: "пещера", id: "hoehle", article: "die", word: "Höhle"},
+    {german: "das Wetter", russian: "погода", id: "wetter", article: "das", word: "Wetter"},
+    {german: "der Nebel", russian: "туман", id: "nebel", article: "der", word: "Nebel"},
+    {german: "das Material", russian: "материал", id: "material", article: "das", word: "Material"},
+    {german: "der Staat", russian: "государство", id: "staat", article: "der", word: "Staat"},
+    {german: "die Cousine", russian: "двоюродная сестра", id: "cousine", article: "die", word: "Cousine"},
+    {german: "der Cousin", russian: "двоюродный брат", id: "cousin", article: "der", word: "Cousin"},
+    {german: "die Schulung", russian: "обучение", id: "schulung", article: "die", word: "Schulung"},
+    {german: "der Hinweis", russian: "указание", id: "hinweis", article: "der", word: "Hinweis"},
+    {german: "das Zuhause", russian: "дом", id: "zuhause", article: "das", word: "Zuhause"},
+    {german: "der Bauernhof", russian: "ферма", id: "bauernhof", article: "der", word: "Bauernhof"},
+    {german: "die Ferienwohnung", russian: "отпускная квартира", id: "ferienwohnung", article: "die", word: "Ferienwohnung"},
+    {german: "der Bauer", russian: "фермер", id: "bauer", article: "der", word: "Bauer"},
+    {german: "der Stadtrand", russian: "окраина города", id: "stadtrand", article: "der", word: "Stadtrand"},
+    {german: "der Stadtteil", russian: "район города", id: "stadtteil", article: "der", word: "Stadtteil"},
+    {german: "das Holzhaus", russian: "деревянный дом", id: "holzhaus", article: "das", word: "Holzhaus"},
+    {german: "das Ufer", russian: "берег", id: "ufer", article: "das", word: "Ufer"},
+    {german: "der Wind", russian: "ветер", id: "wind", article: "der", word: "Wind"},
+    {german: "der Blumenkübel", russian: "цветочный горшок", id: "blumenkuebel", article: "der", word: "Blumenkübel"},
+    {german: "der Blumentopf", russian: "цветочный горшок", id: "blumentopf", article: "der", word: "Blumentopf"},
+    {german: "der Briefkasten", russian: "почтовый ящик", id: "briefkasten", article: "der", word: "Briefkasten"},
+    {german: "das Päckchen", russian: "пакет", id: "paeckchen", article: "das", word: "Päckchen"},
+    {german: "der Lärm", russian: "шум", id: "laerm", article: "der", word: "Lärm"},
+    {german: "die Lampe", russian: "лампа", id: "lampe", article: "die", word: "Lampe"},
+    {german: "die Kerze", russian: "свеча", id: "kerze", article: "die", word: "Kerze"},
+    {german: "das Spielzeug", russian: "игрушка", id: "spielzeug", article: "das", word: "Spielzeug"},
+    {german: "der Roller", russian: "самокат", id: "roller", article: "der", word: "Roller"},
+    {german: "der Keller", russian: "подвал", id: "keller", article: "der", word: "Keller"},
+    {german: "der Abbau", russian: "разборка", id: "abbau", article: "der", word: "Abbau"},
+    {german: "die Küche", russian: "кухня", id: "kueche", article: "die", word: "Küche"},
+    {german: "das Kissen", russian: "подушка", id: "kissen", article: "das", word: "Kissen"},
+    {german: "das Gartenhaus", russian: "садовый домик", id: "gartenhaus", article: "das", word: "Gartenhaus"},
+    {german: "das Dach", russian: "крыша", id: "dach", article: "das", word: "Dach"},
+    {german: "der Mieter", russian: "арендатор", id: "mieter", article: "der", word: "Mieter"},
+    {german: "die Mieterin", russian: "арендатор (ж.)", id: "mieterin", article: "die", word: "Mieterin"},
+    {german: "die Nebenkosten", russian: "дополнительные расходы", id: "nebenkosten", article: "die", word: "Nebenkosten"},
+    {german: "das Nachbarhaus", russian: "соседний дом", id: "nachbarhaus", article: "das", word: "Nachbarhaus"},
+    {german: "der Nachbar", russian: "сосед", id: "nachbar", article: "der", word: "Nachbar"},
+    {german: "die Nachbarin", russian: "соседка", id: "nachbarin", article: "die", word: "Nachbarin"},
+    {german: "das Haustier", russian: "домашнее животное", id: "haustier", article: "das", word: "Haustier"},
+    {german: "die Katze", russian: "кошка", id: "katze", article: "die", word: "Katze"},
+    {german: "das Kätzchen", russian: "котенок", id: "kaetzchen", article: "das", word: "Kätzchen"},
+    {german: "der Vogel", russian: "птица", id: "vogel", article: "der", word: "Vogel"},
+    {german: "die Ratte", russian: "крыса", id: "ratte", article: "die", word: "Ratte"},
+    {german: "die Maus", russian: "мышь", id: "maus", article: "die", word: "Maus"},
+    {german: "der Hase", russian: "заяц", id: "hase", article: "der", word: "Hase"},
+    {german: "die Kuh", russian: "корова", id: "kuh", article: "die", word: "Kuh"},
+    {german: "das Schaf", russian: "овца", id: "schaf", article: "das", word: "Schaf"},
+    {german: "das Schwein", russian: "свинья", id: "schwein", article: "das", word: "Schwein"},
+    {german: "der Bär", russian: "медведь", id: "baer", article: "der", word: "Bär"},
+    {german: "die Besitzerin", russian: "владелица", id: "besitzerin", article: "die", word: "Besitzerin"},
+    {german: "der Besitzer", russian: "владелец", id: "besitzer", article: "der", word: "Besitzer"},
+    {german: "das Futter", russian: "корм", id: "futter", article: "das", word: "Futter"},
+    {german: "der Tierarzt", russian: "ветеринар", id: "tierarzt", article: "der", word: "Tierarzt"},
+    {german: "die Vergangenheit", russian: "прошлое", id: "vergangenheit", article: "die", word: "Vergangenheit"},
+    {german: "der Stil", russian: "стиль", id: "stil", article: "der", word: "Stil"},
+    {german: "die Veränderung", russian: "изменение", id: "veraenderung", article: "die", word: "Veränderung"},
+    {german: "die Zeit", russian: "время", id: "zeit", article: "die", word: "Zeit"},
+    {german: "die Ehe", russian: "брак", id: "ehe", article: "die", word: "Ehe"},
+    {german: "der Strom", russian: "электричество", id: "strom", article: "der", word: "Strom"},
+    {german: "die Hektik", russian: "суета", id: "hektik", article: "die", word: "Hektik"},
+    {german: "der Helfer", russian: "помощник", id: "helfer", article: "der", word: "Helfer"},
+    {german: "die Helferin", russian: "помощница", id: "helferin", article: "die", word: "Helferin"},
+    {german: "der Notfall", russian: "чрезвычайная ситуация", id: "notfall", article: "der", word: "Notfall"},
+    {german: "die Unterkunft", russian: "жилье", id: "unterkunft", article: "die", word: "Unterkunft"},
+    {german: "das Einkaufszentrum", russian: "торговый центр", id: "einkaufszentrum", article: "das", word: "Einkaufszentrum"},
+    {german: "der Werkstatt", russian: "мастерская", id: "werkstatt", article: "der", word: "Werkstatt"},
+    {german: "der Export", russian: "экспорт", id: "export", article: "der", word: "Export"},
+    {german: "die Frist", russian: "срок", id: "frist", article: "die", word: "Frist"},
+    {german: "das Gebiet", russian: "область", id: "gebiet", article: "das", word: "Gebiet"},
+    {german: "die Lücke", russian: "пробел", id: "luecke", article: "die", word: "Lücke"},
+    {german: "das Mitleid", russian: "сострадание", id: "mitleid", article: "das", word: "Mitleid"},
+    {german: "der Alkohol", russian: "алкоголь", id: "alkohol", article: "der", word: "Alkohol"},
+    {german: "das Sprichwort", russian: "пословица", id: "sprichwort", article: "das", word: "Sprichwort"},
+    {german: "die Erklärung", russian: "объяснение", id: "erklaerung", article: "die", word: "Erklärung"},
+    {german: "das Gold", russian: "золото", id: "gold", article: "das", word: "Gold"},
+    {german: "der Rat", russian: "совет", id: "rat", article: "der", word: "Rat"},
+    {german: "die Unterhaltung", russian: "развлечение", id: "unterhaltung", article: "die", word: "Unterhaltung"},
+    {german: "die Gesellschaft", russian: "общество", id: "gesellschaft", article: "die", word: "Gesellschaft"},
+    {german: "das Schloss", russian: "замок", id: "schloss", article: "das", word: "Schloss"},
+    {german: "die Königin", russian: "королева", id: "koenigin", article: "die", word: "Königin"},
+    {german: "die Führung", russian: "экскурсия", id: "fuehrung", article: "die", word: "Führung"},
+    {german: "der Roman", russian: "роман", id: "roman", article: "der", word: "Roman"},
+    {german: "der Bestseller", russian: "бестселлер", id: "bestseller", article: "der", word: "Bestseller"},
+    {german: "die Verfilmung", russian: "экранизация", id: "verfilmung", article: "die", word: "Verfilmung"},
+    {german: "der/die Prominente", russian: "знаменитость", id: "prominente", article: "der/die", word: "Prominente"},
+    {german: "der Nachrichtensprecher", russian: "диктор новостей", id: "nachrichtensprecher", article: "der", word: "Nachrichtensprecher"},
+    {german: "die Nachrichtensprecherin", russian: "диктор новостей (ж.)", id: "nachrichtensprecherin", article: "die", word: "Nachrichtensprecherin"},
+    {german: "der Hörer", russian: "слушатель", id: "hoerer", article: "der", word: "Hörer"},
+    {german: "die Hörerin", russian: "слушательница", id: "hoererin", article: "die", word: "Hörerin"},
+    {german: "die Sendung", russian: "передача", id: "sendung", article: "die", word: "Sendung"},
+    {german: "der Einsatz", russian: "использование", id: "einsatz", article: "der", word: "Einsatz"},
+    {german: "die Stimme", russian: "голос", id: "stimme", article: "die", word: "Stimme"},
+    {german: "die Sammlung", russian: "коллекция", id: "sammlung", article: "die", word: "Sammlung"},
+    {german: "das Schnäppchen", russian: "выгодная покупка", id: "schneaeppchen", article: "das", word: "Schnäppchen"},
+    {german: "die Überraschung", russian: "сюрприз", id: "ueberraschung", article: "die", word: "Überraschung"},
+    {german: "die Kunstsprache", russian: "искусственный язык", id: "kunstsprache", article: "die", word: "Kunstsprache"},
+    {german: "das Quiz", russian: "викторина", id: "quiz_word", article: "das", word: "Quiz"},
+    {german: "das Festival", russian: "фестиваль", id: "festival", article: "das", word: "Festival"},
+    {german: "der Hit", russian: "хит", id: "hit", article: "der", word: "Hit"},
+    {german: "die Stimmung", russian: "настроение", id: "stimmung", article: "die", word: "Stimmung"},
+    {german: "das Camping", russian: "кемпинг", id: "camping", article: "das", word: "Camping"},
+    {german: "der Campingplatz", russian: "кемпинг-площадка", id: "campingplatz", article: "der", word: "Campingplatz"},
+    {german: "die Übernachtung", russian: "ночевка", id: "uebernachtung", article: "die", word: "Übernachtung"},
+    {german: "der Rucksack", russian: "рюкзак", id: "rucksack", article: "der", word: "Rucksack"},
+    {german: "der Kauf", russian: "покупка", id: "kauf", article: "der", word: "Kauf"},
+    {german: "der Schalter", russian: "окошко", id: "schalter", article: "der", word: "Schalter"},
+    {german: "der Sitzplatz", russian: "сидячее место", id: "sitzplatz", article: "der", word: "Sitzplatz"},
+    {german: "die Reihe", russian: "ряд", id: "reihe", article: "die", word: "Reihe"},
+    {german: "der Warenkorb", russian: "корзина для покупок", id: "warenkorb", article: "der", word: "Warenkorb"},
+    {german: "die Mehrwertsteuer", russian: "налог на добавленную стоимость", id: "mehrwertsteuer", article: "die", word: "Mehrwertsteuer"},
+    {german: "die Vorkasse", russian: "предоплата", id: "vorkasse", article: "die", word: "Vorkasse"},
+    {german: "der Versand", russian: "отправка", id: "versand", article: "der", word: "Versand"},
+    {german: "die Versandkosten", russian: "стоимость доставки", id: "versandkosten", article: "die", word: "Versandkosten"},
+    {german: "die Zahlung", russian: "оплата", id: "zahlung", article: "die", word: "Zahlung"},
+    {german: "die Überweisung", russian: "перевод", id: "ueberweisung", article: "die", word: "Überweisung"},
+    {german: "die Meldung", russian: "сообщение", id: "meldung", article: "die", word: "Meldung"},
+    {german: "die Kriminalität", russian: "преступность", id: "kriminalitaet", article: "die", word: "Kriminalität"},
+    {german: "die Gewalt", russian: "насилие", id: "gewalt", article: "die", word: "Gewalt"},
+    {german: "die Rückfrage", russian: "уточняющий вопрос", id: "rueckfrage", article: "die", word: "Rückfrage"},
+    {german: "die Malerei", russian: "живопись", id: "malerei", article: "die", word: "Malerei"},
+    {german: "der Titel", russian: "название", id: "titel", article: "der", word: "Titel"},
+    {german: "die Bedeutung", russian: "значение", id: "bedeutung", article: "die", word: "Bedeutung"},
+    {german: "der Ausblick", russian: "вид", id: "ausblick", article: "der", word: "Ausblick"},
+    {german: "die Stelle", russian: "место", id: "stelle", article: "die", word: "Stelle"},
+    {german: "die Hauptrolle", russian: "главная роль", id: "hauptrolle", article: "die", word: "Hauptrolle"},
+    {german: "der Wanderer", russian: "пешеход", id: "wanderer", article: "der", word: "Wanderer"},
+    {german: "die Wanderin", russian: "пешеход (ж.)", id: "wanderin", article: "die", word: "Wanderin"},
+    {german: "die Wanderung", russian: "поход", id: "wanderung", article: "die", word: "Wanderung"},
+    {german: "die Realität", russian: "реальность", id: "realitaet", article: "die", word: "Realität"},
 ];
+
+// ДРУГИЕ СЛОВА (глаголы, прилагательные, наречия)
+const otherWordsDictionary = [
+    // Глаголы
+    {german: "geboren sein", russian: "быть рождённым", id: "geboren_sein", word: "geboren sein"},
+    {german: "heiraten", russian: "жениться/выйти замуж", id: "heiraten", word: "heiraten"},
+    {german: "abschließen", russian: "заканчивать", id: "abschliessen", word: "abschließen"},
+    {german: "anmelden", russian: "регистрироваться", id: "anmelden", word: "anmelden"},
+    {german: "teilnehmen", russian: "участвовать", id: "teilnehmen", word: "teilnehmen"},
+    {german: "organisieren", russian: "организовывать", id: "organisieren", word: "organisieren"},
+    {german: "empfangen", russian: "принимать (гостей)", id: "empfangen", word: "empfangen"},
+    {german: "informieren", russian: "узнавать", id: "informieren", word: "informieren"},
+    {german: "auswählen", russian: "выбирать", id: "auswaehlen", word: "auswählen"},
+    {german: "mieten", russian: "снимать", id: "mieten", word: "mieten"},
+    {german: "renovieren", russian: "ремонтировать", id: "renovieren", word: "renovieren"},
+    {german: "wohnen", russian: "жить", id: "wohnen", word: "wohnen"},
+    {german: "weitersuchen", russian: "продолжать искать", id: "weitersuchen", word: "weitersuchen"},
+    {german: "zusammenleben", russian: "жить вместе", id: "zusammenleben", word: "zusammenleben"},
+    {german: "vorschlagen", russian: "предлагать", id: "vorschlagen", word: "vorschlagen"},
+    {german: "weiterhelfen", russian: "выручать", id: "weiterhelfen", word: "weiterhelfen"},
+    {german: "absagen", russian: "отказываться", id: "absagen", word: "absagen"},
+    {german: "zusagen", russian: "соглашаться", id: "zusagen", word: "zusagen"},
+    {german: "ändern", russian: "изменять", id: "aendern", word: "ändern"},
+    {german: "liegen", russian: "лежать", id: "liegen", word: "liegen"},
+    {german: "reiten", russian: "ездить верхом", id: "reiten", word: "reiten"},
+    {german: "fühlen", russian: "чувствовать", id: "fuehlen", word: "fühlen"},
+    {german: "zuhören", russian: "слушать", id: "zuhören", word: "zuhören"},
+    {german: "begründen", russian: "обосновывать", id: "begruenden", word: "begründen"},
+    {german: "rufen", russian: "звать", id: "rufen", word: "rufen"},
+    {german: "üben", russian: "упражняться", id: "ueben", word: "üben"},
+    {german: "ausschlafen", russian: "высыпаться", id: "ausschlafen", word: "ausschlafen"},
+    {german: "an sein", russian: "быть включенным", id: "an_sein", word: "an sein"},
+    {german: "anklicken", russian: "кликать", id: "anklicken", word: "anklicken"},
+    {german: "tippen", russian: "печатать", id: "tippen", word: "tippen"},
+    {german: "checken", russian: "проверять", id: "checken", word: "checken"},
+    {german: "downloaden", russian: "скачивать", id: "downloaden", word: "downloaden"},
+    {german: "herunterladen", russian: "скачивать", id: "herunterladen", word: "herunterladen"},
+    {german: "hochladen", russian: "загружать", id: "hochladen", word: "hochladen"},
+    {german: "kopieren", russian: "копировать", id: "kopieren", word: "kopieren"},
+    {german: "löschen", russian: "удалять", id: "loeschen", word: "löschen"},
+    {german: "mailen", russian: "отправлять по почте", id: "mailen", word: "mailen"},
+    {german: "senden", russian: "отправлять", id: "senden", word: "senden"},
+    {german: "weiterleiten", russian: "пересылать", id: "weiterleiten", word: "weiterleiten"},
+    {german: "chatten", russian: "чатиться", id: "chatten", word: "chatten"},
+    {german: "posten", russian: "постить", id: "posten", word: "posten"},
+    {german: "teilen", russian: "делиться", id: "teilen", word: "teilen"},
+    {german: "gründen", russian: "основывать", id: "gruenden", word: "gründen"},
+    {german: "studieren", russian: "учиться", id: "studieren", word: "studieren"},
+    {german: "entwickeln", russian: "развивать", id: "entwickeln", word: "entwickeln"},
+    {german: "programmieren", russian: "программировать", id: "programmieren", word: "programmieren"},
+    {german: "sterben", russian: "умирать", id: "sterben", word: "sterben"},
+    {german: "gewinnen", russian: "выигрывать", id: "gewinnen", word: "gewinnen"},
+    {german: "lachen", russian: "смеяться", id: "lachen", word: "lachen"},
+    {german: "weinen", russian: "плакать", id: "weinen", word: "weinen"},
+    {german: "flüstern", russian: "шептать", id: "fluestern", word: "flüstern"},
+    {german: "bestehen", russian: "сдавать (экзамен)", id: "bestehen", word: "bestehen"},
+    {german: "gratulieren", russian: "поздравлять", id: "gratulieren", word: "gratulieren"},
+    {german: "bedanken", russian: "благодарить", id: "bedanken", word: "bedanken"},
+    {german: "erinnern", russian: "вспоминать", id: "erinnern", word: "erinnern"},
+    {german: "gewöhnen", russian: "привыкать", id: "gewoehnen", word: "gewöhnen"},
+    {german: "austauschen", russian: "обмениваться", id: "austauschen", word: "austauschen"},
+    {german: "fallen", russian: "падать", id: "fallen", word: "fallen"},
+    {german: "gefallen", russian: "нравиться", id: "gefallen", word: "gefallen"},
+    {german: "unterhalten", russian: "разговаривать", id: "unterhalten", word: "unterhalten"},
+    {german: "anbieten", russian: "предлагать", id: "anbieten", word: "anbieten"},
+    {german: "ausruhen", russian: "отдыхать", id: "ausruhen", word: "ausruhen"},
+    {german: "aussprechen", russian: "произносить", id: "aussprechen", word: "aussprechen"},
+    {german: "bewundern", russian: "восхищаться", id: "bewundern", word: "bewundern"},
+    {german: "entscheiden", russian: "решать", id: "entscheiden", word: "entscheiden"},
+    {german: "wegfahren", russian: "уезжать", id: "wegfahren", word: "wegfahren"},
+    {german: "bedienen", russian: "обслуживать", id: "bedienen", word: "bedienen"},
+    {german: "servieren", russian: "подавать", id: "servieren", word: "servieren"},
+    {german: "erledigen", russian: "улаживать", id: "erledigen", word: "erledigen"},
+    {german: "ausfüllen", russian: "заполнять", id: "ausfuellen", word: "ausfüllen"},
+    {german: "genehmigen", russian: "одобрять", id: "genehmigen", word: "genehmigen"},
+    {german: "abgeben", russian: "сдавать", id: "abgeben", word: "abgeben"},
+    {german: "prüfen", russian: "проверять", id: "pruefen", word: "prüfen"},
+    {german: "beantragen", russian: "подавать заявление", id: "beantragen", word: "beantragen"},
+    {german: "verlängern", russian: "продлевать", id: "verlaengern", word: "verlängern"},
+    {german: "abheben", russian: "снимать (деньги)", id: "abheben", word: "abheben"},
+    {german: "überweisen", russian: "переводить", id: "ueberweisen", word: "überweisen"},
+    {german: "ausgeben", russian: "тратить", id: "ausgeben", word: "ausgeben"},
+    {german: "eröffnen", russian: "открывать", id: "eroeffnen", word: "eröffnen"},
+    {german: "sperren", russian: "блокировать", id: "sperren", word: "sperren"},
+    {german: "melden", russian: "сообщать", id: "melden", word: "melden"},
+    {german: "bitten", russian: "просить", id: "bitten", word: "bitten"},
+    {german: "drücken", russian: "нажимать", id: "druecken", word: "drücken"},
+    {german: "funktionieren", russian: "работать", id: "funktionieren", word: "funktionieren"},
+    {german: "vorstellen", russian: "представлять", id: "vorstellen", word: "vorstellen"},
+    {german: "beraten", russian: "консультировать", id: "beraten", word: "beraten"},
+    {german: "bewerben", russian: "подавать заявку", id: "bewerben", word: "bewerben"},
+    {german: "klappen", russian: "получаться", id: "klappen", word: "klappen"},
+    {german: "nutzen", russian: "использовать", id: "nutzen", word: "nutzen"},
+    {german: "telefonieren", russian: "звонить", id: "telefonieren", word: "telefonieren"},
+    {german: "konzentrieren", russian: "концентрироваться", id: "konzentrieren", word: "konzentrieren"},
+    {german: "verändern", russian: "изменять", id: "veraendern", word: "verändern"},
+    {german: "zunehmen", russian: "увеличиваться", id: "zunehmen", word: "zunehmen"},
+    {german: "mithelfen", russian: "помогать", id: "mithelfen", word: "mithelfen"},
+    {german: "stören", russian: "мешать", id: "stoeren", word: "stören"},
+    {german: "hinterlassen", russian: "оставлять", id: "hinterlassen", word: "hinterlassen"},
+    {german: "ausrichten", russian: "передавать", id: "ausrichten", word: "ausrichten"},
+    {german: "zurückrufen", russian: "перезванивать", id: "zurueckrufen", word: "zurückrufen"},
+    
+    // Прилагательные и наречия
+    {german: "geschieden", russian: "разведённый", id: "geschieden", word: "geschieden"},
+    {german: "romantisch", russian: "романтичный", id: "romantisch", word: "romantisch"},
+    {german: "abgeschlossen", russian: "завершённый", id: "abgeschlossen", word: "abgeschlossen"},
+    {german: "spätestens", russian: "самое позднее", id: "spaetestens", word: "spätestens"},
+    {german: "bitter", russian: "горький", id: "bitter", word: "bitter"},
+    {german: "sauer", russian: "кислый", id: "sauer", word: "sauer"},
+    {german: "scharf", russian: "острый", id: "scharf", word: "scharf"},
+    {german: "salzig", russian: "солёный", id: "salzig", word: "salzig"},
+    {german: "einverstanden", russian: "согласный", id: "einverstanden", word: "einverstanden"},
+    {german: "gemeinsam", russian: "совместный", id: "gemeinsam", word: "gemeinsam"},
+    {german: "spannend", russian: "захватывающий", id: "spannend", word: "spannend"},
+    {german: "streng", russian: "строгий", id: "streng", word: "streng"},
+    {german: "fast", russian: "почти", id: "fast", word: "fast"},
+    {german: "also", russian: "итак", id: "also", word: "also"},
+    {german: "fließend", russian: "свободно", id: "fliessend", word: "fließend"},
+    {german: "ganz", russian: "совсем", id: "ganz", word: "ganz"},
+    {german: "weil", russian: "потому что", id: "weil", word: "weil"},
+    {german: "nützlich", russian: "полезный", id: "nuetzlich", word: "nützlich"},
+    {german: "witzig", russian: "забавный", id: "witzig", word: "witzig"},
+    {german: "schlecht", russian: "плохой", id: "schlecht", word: "schlecht"},
+    {german: "wütend", russian: "злой", id: "wuetend", word: "wütend"},
+    {german: "interessant", russian: "интересный", id: "interessant", word: "interessant"},
+    {german: "wahrscheinlich", russian: "вероятно", id: "wahrscheinlich", word: "wahrscheinlich"},
+    {german: "wenigstens", russian: "по крайней мере", id: "wenigstens", word: "wenigstens"},
+    {german: "ziemlich", russian: "довольно", id: "ziemlich", word: "ziemlich"},
+    {german: "ehrlich", russian: "честный", id: "ehrlich", word: "ehrлих"},
+    {german: "erwachsen", russian: "взрослый", id: "erwachsen", word: "erwachsen"},
+    {german: "unabhängig", russian: "независимый", id: "unabhaengig", word: "unabhängig"},
+    {german: "sozial", russian: "социальный", id: "sozial", word: "sozial"},
+    {german: "heute", russian: "сегодня", id: "heute", word: "heute"},
+    {german: "erst mal", russian: "сначала", id: "erst_mal", word: "erst mal"},
+    {german: "leicht", russian: "легкий", id: "leicht", word: "leicht"},
+    {german: "schwer", russian: "тяжелый", id: "schwer", word: "schwer"},
+    {german: "genauso", russian: "точно так же", id: "genauso", word: "genauso"},
+    {german: "logisch", russian: "логичный", id: "logisch", word: "logisch"},
+    {german: "real", russian: "реальный", id: "real", word: "real"},
+    {german: "fröhlich", russian: "веселый", id: "froehlich", word: "fröhlich"},
+    {german: "nah", russian: "близкий", id: "nah", word: "nah"},
+    {german: "schwierig", russian: "трудный", id: "schwierig", word: "schwierig"},
+    {german: "still", russian: "тихий", id: "still", word: "still"},
+    {german: "vorsichtig", russian: "осторожный", id: "vorsichtig", word: "vorsichtig"},
+    {german: "manche", russian: "некоторые", id: "manche", word: "manche"},
+    {german: "mehrmals", russian: "несколько раз", id: "mehrmals", word: "mehrmals"},
+    {german: "plötzlich", russian: "вдруг", id: "ploetzlich", word: "plötzlich"},
+    {german: "überhaupt", russian: "вообще", id: "ueberhaupt", word: "überhaupt"},
+    {german: "unbedingt", russian: "обязательно", id: "unbedingt", word: "unbedingt"},
+    {german: "zuletzt", russian: "в последний раз", id: "zuletzt", word: "zuletzt"},
+    {german: "dabei sein", russian: "присутствовать", id: "dabei_sein", word: "dabei sein"},
+    {german: "wohlfühlen", russian: "чувствовать себя хорошо", id: "wohlfuehlen", word: "wohlfühlen"},
+    {german: "froh", russian: "радостный", id: "froh", word: "froh"},
+    {german: "glücklich", russian: "счастливый", id: "gluecklich", word: "glücklich"},
+    {german: "ärgern", russian: "злиться", id: "aergern", word: "ärgern"},
+    {german: "streiten", russian: "ссориться", id: "streiten", word: "streiten"},
+    {german: "langweilen", russian: "скучать", id: "langweilen", word: "langweilen"},
+    {german: "aufregend", russian: "волнующий", id: "aufregend", word: "aufregend"},
+    {german: "aufgeregt", russian: "взволнованный", id: "aufgeregt", word: "aufgeregt"},
+    {german: "genervt", russian: "раздраженный", id: "genervt", word: "genervt"},
+    {german: "gestresst", russian: "напряженный", id: "gestresst", word: "gestresст"},
+    {german: "nervös", russian: "нервный", id: "nervoes", word: "nervös"},
+    {german: "schlimm", russian: "плохой", id: "schlimm", word: "schlimm"},
+    {german: "traurig", russian: "грустный", id: "traurig", word: "traurig"},
+    {german: "stolz", russian: "гордый", id: "stolz", word: "stolz"},
+    {german: "unangenehm", russian: "неприятный", id: "unangenehm", word: "unangenehm"},
+    {german: "unglücklich", russian: "несчастный", id: "ungluecklich", word: "unglücklich"},
+    {german: "außerdem", russian: "кроме того", id: "ausserdem", word: "außerdem"},
+    {german: "inzwischen", russian: "между тем", id: "inzwischen", word: "inzwischen"},
+    {german: "verspätet", russian: "запоздалый", id: "verspaetet", word: "verspätet"},
+    {german: "kostenlos", russian: "бесплатный", id: "kostenlos", word: "kostenlos"},
+    {german: "niemand", russian: "никто", id: "niemand", word: "niemand"},
+    {german: "nirgends", russian: "нигде", id: "nirgends", word: "nirgends"},
+    {german: "hilfsbereit", russian: "готовый помочь", id: "hilfsbereit", word: "hilfsbereit"},
+    {german: "ordentlich", russian: "аккуратный", id: "ordentlich", word: "ordentlich"},
+    {german: "wahr", russian: "правдивый", id: "wahr", word: "wahr"},
+    {german: "weltweit", russian: "всемирный", id: "weltweit", word: "weltweit"},
+    {german: "öffentlich", russian: "общественный", id: "oeffentlich", word: "öffentlich"},
+    {german: "transportieren", russian: "перевозить", id: "transportieren", word: "transportieren"},
+    {german: "gültig", russian: "действительный", id: "gueltig", word: "gültig"},
+    {german: "dringend", russian: "срочно", id: "dringend", word: "dringend"},
+    {german: "bunt", russian: "разноцветный", id: "bunt", word: "bunt"},
+    {german: "modern", russian: "современный", id: "modern", word: "modern"},
+    {german: "neben", russian: "рядом", id: "neben", word: "neben"},
+    {german: "über", russian: "через", id: "ueber", word: "über"},
+    {german: "preiswert", russian: "недорогой", id: "preiswert", word: "preiswert"},
+    {german: "fantastisch", russian: "фантастический", id: "fantastisch", word: "fantastisch"},
+    {german: "virtuell", russian: "виртуальный", id: "virtuell", word: "virtuell"},
+    {german: "erreichbar", russian: "доступный", id: "erreichbar", word: "erreichbar"},
+    {german: "fest", russian: "постоянный", id: "fest", word: "fest"},
+    {german: "befristet", russian: "срочный", id: "befristet", word: "befristet"},
+    {german: "mobil", russian: "мобильный", id: "mobil", word: "mobil"},
+    {german: "problemlos", russian: "беспроблемный", id: "problemlos", word: "problemlос"},
+    {german: "lebenslang", russian: "пожизненный", id: "lebenslang", word: "lebenslang"},
+    {german: "deutlich", russian: "четкий", id: "deutlich", word: "deutlich"},
+    {german: "hektisch", russian: "суетливый", id: "hektisch", word: "hektisch"},
+    {german: "außer Haus", russian: "вне дома", id: "ausser_haus", word: "außer Haus"},
+    {german: "in Ordnung", russian: "в порядке", id: "in_ordnung", word: "in Ordnung"},
+    {german: "also gut", russian: "ладно", id: "also_gut", word: "also gut"},
+    {german: "auf keinen Fall", russian: "ни в коем случае", id: "auf_keinen_fall", word: "auf keinen Fall"},
+    {german: "nun", russian: "теперь", id: "nun", word: "nun"},
+    {german: "möglich", russian: "возможный", id: "moeglich", word: "möglich"},
+    {german: "häufig", russian: "частый", id: "haeufig", word: "häufig"},
+    {german: "komisch", russian: "странный", id: "komisch", word: "komisch"},
+    {german: "unhöflich", russian: "невежливый", id: "unhoeflich", word: "unhöflich"},
+    {german: "unter", russian: "под", id: "unter", word: "unter"},
+    {german: "einige", russian: "несколько", id: "einige", word: "einige"},
+    {german: "flexibel", russian: "гибкий", id: "flexibel", word: "flexibel"},
+    {german: "in Zukunft", russian: "в будущем", id: "in_zukunft", word: "in Zukunft"},
+    {german: "reduzieren", russian: "уменьшать", id: "reduzieren", word: "reduzieren"},
+    {german: "umweltfreundlich", russian: "экологичный", id: "umweltfreundlich", word: "umweltfreundlich"},
+    {german: "tanken", russian: "заправляться", id: "tanken", word: "tanken"},
+    {german: "parken", russian: "парковаться", id: "parken", word: "parken"},
+    {german: "versichern", russian: "страховать", id: "versichern", word: "versichern"},
+    {german: "pendeln", russian: "ездить на работу", id: "pendeln", word: "pendeln"},
+    {german: "buchen", russian: "бронировать", id: "buchen", word: "buchen"},
+    {german: "gegenüber von", russian: "напротив", id: "gegenueber_von", word: "gegenüber von"},
+    {german: "dorthin", russian: "туда", id: "dorthin", word: "dorthin"},
+    {german: "vorwärts", russian: "вперед", id: "vorwaerts", word: "vorwärts"},
+    {german: "rückwärts", russian: "назад", id: "rueckwaerts", word: "rückwärts"},
+    {german: "geradeaus", russian: "прямо", id: "geradeaus", word: "geradeaus"},
+    {german: "vorbeigehen", russian: "проходить мимо", id: "vorbeigehen", word: "vorbeigehen"},
+    {german: "halten", russian: "останавливаться", id: "halten", word: "halten"},
+    {german: "telefonisch", russian: "по телефону", id: "telefonisch", word: "telefonisch"},
+    {german: "erreichen", russian: "достигать", id: "erreichen", word: "erreichen"},
+    {german: "lösen", russian: "решать", id: "loesen", word: "lösen"},
+    {german: "registrieren", russian: "регистрировать", id: "registrieren", word: "registrieren"},
+    {german: "etwa", russian: "примерно", id: "etwa", word: "etwa"},
+    {german: "zeigen", russian: "показывать", id: "zeigen", word: "zeigen"},
+    {german: "gegen", russian: "против", id: "gegen", word: "gegen"},
+    {german: "dafür sein", russian: "быть за", id: "dafuer_sein", word: "dafür sein"},
+    {german: "dagegen sein", russian: "быть против", id: "dagegen_sein", word: "dagegen sein"},
+    {german: "anders", russian: "по-другому", id: "anders", word: "anders"},
+    {german: "d. h.", russian: "то есть", id: "dh", word: "d. h."},
+    {german: "sich bewegen", russian: "двигаться", id: "sich_bewegen", word: "sich bewegen"},
+    {german: "surfen", russian: "заниматься серфингом", id: "surfen", word: "surfen"},
+    {german: "tauchen", russian: "нырять", id: "tauchen", word: "tauchen"},
+    {german: "joggen", russian: "бегать трусцой", id: "joggen", word: "joggen"},
+    {german: "langlaufen", russian: "ходить на лыжах", id: "langlaufen", word: "langlaufen"},
+    {german: "schießen", russian: "стрелять", id: "schiessen", word: "schießen"},
+    {german: "Volleyball spielen", russian: "играть в волейбол", id: "volleyball_spielen", word: "Volleyball spielen"},
+    {german: "werfen", russian: "бросать", id: "werfen", word: "werfen"},
+    {german: "verlieren", russian: "проигрывать", id: "verlieren", word: "verlieren"},
+    {german: "einsam", russian: "одинокий", id: "einsam", word: "einsam"},
+    {german: "treu", russian: "верный", id: "treu", word: "treu"},
+    {german: "sich benehmen", russian: "вести себя", id: "sich_benehmen", word: "sich benehmen"},
+    {german: "faszinierend", russian: "захватывающий", id: "faszinierend", word: "faszinierend"},
+    {german: "sympathisch", russian: "симпатичный", id: "sympathisch", word: "sympathisch"},
+    {german: "großartig", russian: "великолепный", id: "grossartig", word: "großartig"},
+    {german: "genial", russian: "гениальный", id: "genial", word: "genial"},
+    {german: "unglaublich", russian: "невероятный", id: "unglaublich", word: "unglaublich"},
+    {german: "wahnsinnig", russian: "безумный", id: "wahnsinnig", word: "wahnsinnig"},
+    {german: "hoffentlich", russian: "надеюсь", id: "hoffentlich", word: "hoffentlich"},
+    {german: "einverstanden sein", russian: "быть согласным", id: "einverstanden_sein", word: "einverstanden sein"},
+    {german: "passen", russian: "подходить", id: "passen", word: "passen"},
+    {german: "entfernt", russian: "удаленный", id: "entfernt", word: "entfernt"},
+    {german: "kulturell", russian: "культурный", id: "kulturell", word: "kulturell"},
+    {german: "durch", russian: "через", id: "durch", word: "durch"},
+    {german: "mit", russian: "с", id: "mit", word: "mit"},
+    {german: "stark", russian: "сильный", id: "stark", word: "stark"},
+    {german: "trocken", russian: "сухой", id: "trocken", word: "trocken"},
+    {german: "außer", russian: "кроме", id: "ausser", word: "außer"},
+    {german: "ausfallen", russian: "отменяться", id: "ausfallen", word: "ausfallen"},
+    {german: "deshalb", russian: "поэтому", id: "deshalb", word: "deshalb"},
+    {german: "trotzdem", russian: "тем не менее", id: "trotzdem", word: "trotzdem"},
+    {german: "zuerst", russian: "сначала", id: "zuerst", word: "zuerst"},
+    {german: "zurückgeben", russian: "возвращать", id: "zurueckgeben", word: "zurückgeben"},
+    {german: "übermorgen", russian: "послезавтра", id: "uebermorgen", word: "übermorgen"},
+    {german: "neulich", russian: "недавно", id: "neulich", word: "neulich"},
+    {german: "mittendrin", russian: "посередине", id: "mittendrin", word: "mittendrin"},
+    {german: "außerhalb", russian: "вне", id: "ausserhalb", word: "außerhalb"},
+    {german: "schaukeln", russian: "качаться", id: "schaukeln", word: "schaukeln"},
+    {german: "nass", russian: "мокрый", id: "nass", word: "nass"},
+    {german: "nasskalt", russian: "сырой и холодный", id: "nasskalt", word: "nasskalt"},
+    {german: "auspacken", russian: "распаковывать", id: "auspacken", word: "auspacken"},
+    {german: "sich beschweren", russian: "жаловаться", id: "sich_beschweren", word: "sich beschweren"},
+    {german: "stinken", russian: "вонять", id: "stinken", word: "stinken"},
+    {german: "vorbeikommen", russian: "заходить", id: "vorbeikommen", word: "vorbeikommen"},
+    {german: "vollkommen", russian: "совершенно", id: "vollkommen", word: "vollkommen"},
+    {german: "verschwinden", russian: "исчезать", id: "verschwinden", word: "verschwinden"},
+    {german: "legen", russian: "класть", id: "legen", word: "legen"},
+    {german: "hängen", russian: "висеть", id: "haengen", word: "hängen"},
+    {german: "möbliert", russian: "меблированный", id: "moebliert", word: "möbliert"},
+    {german: "einziehen", russian: "въезжать", id: "einziehen", word: "einziehen"},
+    {german: "gespannt", russian: "заинтересованный", id: "gespannt", word: "gespannt"},
+    {german: "nebenan", russian: "по соседству", id: "nebenan", word: "nebenan"},
+    {german: "gern haben", russian: "любить", id: "gern_haben", word: "gern haben"},
+    {german: "begegnen", russian: "встречать", id: "begegnen", word: "begegnen"},
+    {german: "gießen", russian: "поливать", id: "giessen", word: "gießen"},
+    {german: "sich auskennen", russian: "разбираться", id: "sich_auskennen", word: "sich auskennen"},
+    {german: "sich verirren", russian: "заблудиться", id: "sich_verirren", word: "sich verirren"},
+    {german: "kündigen", russian: "увольняться", id: "kuendigen", word: "kündigen"},
+    {german: "bellen", russian: "лаять", id: "bellen", word: "bellen"},
+    {german: "füttern", russian: "кормить", id: "fuettern", word: "füttern"},
+    {german: "dick", russian: "толстый", id: "dick", word: "dick"},
+    {german: "dünn", russian: "тонкий", id: "duenn", word: "dünn"},
+    {german: "modisch", russian: "модный", id: "modisch", word: "modisch"},
+    {german: "besorgt", russian: "обеспокоенный", id: "besorgt", word: "besorgt"},
+    {german: "blitzschnell", russian: "молниеносно", id: "blitzschnell", word: "blitzschnell"},
+    {german: "hergeben", russian: "отдавать", id: "hergeben", word: "hergeben"},
+    {german: "weglaufen", russian: "убегать", id: "weglaufen", word: "weglaufen"},
+    {german: "zurücklaufen", russian: "возвращаться", id: "zuruecklaufen", word: "zurücklaufen"},
+    {german: "intensiv", russian: "интенсивный", id: "intensiv", word: "intensiv"},
+    {german: "schmutzig", russian: "грязный", id: "schmutzig", word: "schmutzig"},
+    {german: "nämlich", russian: "а именно", id: "naemlich", word: "nämlich"},
+    {german: "nie mehr", russian: "больше никогда", id: "nie_mehr", word: "nie mehr"},
+    {german: "zum Teil", russian: "частично", id: "zum_teil", word: "zum Teil"},
+    {german: "als", russian: "когда", id: "als", word: "als"},
+    {german: "verbessern", russian: "улучшать", id: "verbessern", word: "verbessern"},
+    {german: "vergehen", russian: "проходить", id: "vergehen", word: "vergehen"},
+    {german: "ärgern", russian: "злить", id: "aergern2", word: "ärgern"},
+    {german: "backen", russian: "печь", id: "backen", word: "backen"},
+    {german: "bauen", russian: "строить", id: "bauen", word: "bauen"},
+    {german: "einrichten", russian: "обставлять", id: "einrichten", word: "einrichten"},
+    {german: "sparen", russian: "экономить", id: "sparen", word: "sparen"},
+    {german: "sich verletzen", russian: "пораниться", id: "sich_verletzen", word: "sich verletzen"},
+    {german: "verreisen", russian: "уезжать", id: "verreisen", word: "verreisen"},
+    {german: "interessieren", russian: "интересовать", id: "interessieren", word: "interessieren"},
+    {german: "vorbereiten", russian: "подготавливать", id: "vorbereiten", word: "vorbereiten"},
+    {german: "anrufen", russian: "звонить", id: "anrufen", word: "anrufen"},
+    {german: "heizen", russian: "отапливать", id: "heizen", word: "heizen"},
+    {german: "ohne Hektik", russian: "без суеты", id: "ohne_hektik", word: "ohne Hektik"},
+    {german: "im Notfall", russian: "в случае необходимости", id: "im_notfall", word: "im Notfall"},
+    {german: "bieten", russian: "предлагать", id: "bieten", word: "bieten"},
+    {german: "besitzen", russian: "владеть", id: "besitzen", word: "besitzen"},
+    {german: "produzieren", russian: "производить", id: "produzieren", word: "produzieren"},
+    {german: "entlassen", russian: "увольнять", id: "entlassen", word: "entlassen"},
+    {german: "behalten", russian: "сохранять", id: "behalten", word: "behalten"},
+    {german: "Ich würde gern", russian: "Я бы хотел", id: "ich_wuerde_gern", word: "Ich würde gern"},
+    {german: "ausschalten", russian: "выключать", id: "ausschalten", word: "ausschalten"},
+    {german: "klingeln", russian: "звонить", id: "klingeln", word: "klingeln"},
+    {german: "ständig", russian: "постоянно", id: "staendig", word: "ständig"},
+    {german: "verbringen", russian: "проводить", id: "verbringen", word: "verbringen"},
+    {german: "führen", russian: "вести", id: "fuehren", word: "führen"},
+    {german: "meist", russian: "чаще всего", id: "meist", word: "meist"},
+    {german: "bewachen", russian: "охранять", id: "bewachen", word: "bewachen"},
+    {german: "Armer!", russian: "Бедняга!", id: "armer2", word: "Armer!"},
+    {german: "besorgen", russian: "приобретать", id: "besorgen2", word: "besorgen"},
+    {german: "betrunken", russian: "пьяный", id: "betrunken", word: "betrunken"},
+    {german: "bluten", russian: "кровоточить", id: "bluten", word: "bluten"},
+    {german: "effektiv", russian: "эффективный", id: "effektiv", word: "effektiv"},
+    {german: "kühl", russian: "прохладный", id: "kuehl", word: "kühl"},
+    {german: "niedrig", russian: "низкий", id: "niedrig", word: "niedrig"},
+    {german: "reich", russian: "богатый", id: "reich2", word: "reich"},
+    {german: "träumen", russian: "мечтать", id: "traeumen", word: "träumen"},
+    {german: "verzichten", russian: "отказываться", id: "verzichten", word: "verzichten"},
+    {german: "altmodisch", russian: "старомодный", id: "altmodisch", word: "altmodisch"},
+    {german: "damals", russian: "тогда", id: "damals", word: "damals"},
+    {german: "heilen", russian: "лечить", id: "heilen", word: "heilen"},
+    {german: "achten", russian: "обращать внимание", id: "achten", word: "achten"},
+    {german: "ankommen", russian: "прибывать", id: "ankommen", word: "ankommen"},
+    {german: "berechnen", russian: "рассчитывать", id: "berechnen", word: "berechnen"},
+    {german: "brechen", russian: "ломать", id: "brechen", word: "brechen"},
+    {german: "Gute Unterhaltung!", russian: "Приятного просмотра!", id: "gute_unterhaltung", word: "Gute Unterhaltung!"},
+    {german: "mitmachen", russian: "участвовать", id: "mitmachen", word: "mitmachen"},
+    {german: "jährlich", russian: "ежегодно", id: "jaehrlich", word: "jährlich"},
+    {german: "verschlafen", russian: "проспать", id: "verschlafen", word: "verschlafen"},
+    {german: "sammeln", russian: "коллекционировать", id: "sammeln", word: "sammeln"},
+    {german: "wertvoll", russian: "ценный", id: "wertvoll", word: "wertvoll"},
+    {german: "bestätigen", russian: "подтверждать", id: "bestaetigen", word: "bestätigen"},
+    {german: "live", russian: "вживую", id: "live", word: "live"},
+    {german: "ein Ticket online kaufen", russian: "купить билет онлайн", id: "ticket_online_kaufen", word: "ein Ticket online kaufen"},
+    {german: "zusätzlich", russian: "дополнительно", id: "zusaetzlich", word: "zusätzlich"},
+    {german: "inklusive", russian: "включая", id: "inklusive", word: "inklusive"},
+    {german: "Mobil", russian: "мобильный", id: "mobil2", word: "Mobil"},
+    {german: "wild", russian: "дикий", id: "wild", word: "wild"},
+    {german: "schlecht gelaunt", russian: "в плохом настроении", id: "schlecht_gelaunt", word: "schlecht gelaunt"},
+    {german: "-jährig", russian: "-летний", id: "jaehrig", word: "-jährig"},
+    {german: "knapp", russian: "едва", id: "knapp", word: "knapp"},
+    {german: "unscheinbar", russian: "неприметный", id: "unscheinbar", word: "unscheinbar"},
+    {german: "auffallen", russian: "бросаться в глаза", id: "auffallen", word: "auffallen"},
+    {german: "insbesondere", russian: "в частности", id: "insbesondere", word: "insbesondere"},
+    {german: "erhalten", russian: "получать", id: "erhalten", word: "erhalten"},
+    {german: "darstellen", russian: "изображать", id: "darstellen", word: "darstellen"},
+    {german: "unter anderem", russian: "среди прочего", id: "unter_anderem", word: "unter anderem"},
+    {german: "wie immer", russian: "как всегда", id: "wie_immer", word: "wie immer"},
+    {german: "hübsch", russian: "хорошенький", id: "huebsch", word: "hübsch"},
+    {german: "verrückt", russian: "сумасшедший", id: "verrueckt", word: "verrückt"},
+    {german: "unruhig", russian: "беспокойный", id: "unruhig", word: "unruhig"},
+    {german: "uninteressant", russian: "неинтересный", id: "uninteressant", word: "uninteressant"},
+    {german: "hellgrün", russian: "светло-зеленый", id: "hellgruen", word: "hellgrün"},
+    {german: "hell", russian: "светлый", id: "hell", word: "hell"},
+    {german: "dunkelblau", russian: "темно-синий", id: "dunkelblau", word: "dunkelblau"},
+    {german: "abmalen", russian: "срисовывать", id: "abmalen", word: "abmalen"}
+];
+
+// Объединяем все слова
+const allWords = [...nounsDictionary, ...otherWordsDictionary];
+
+// ==============================================
+// ОСНОВНЫЕ ФУНКЦИИ
+// ==============================================
 
 // Проверка версии и сброс кеша
 function checkVersion() {
@@ -1085,6 +1481,22 @@ function updateVisitCounter() {
     
     document.getElementById('dailyVisits').textContent = globalStats.visits.daily;
     document.getElementById('totalVisits').textContent = globalStats.visits.total;
+}
+
+// Сохранение глобальной статистики
+function saveGlobalStats() {
+    localStorage.setItem('globalStats', JSON.stringify(globalStats));
+}
+
+// Обновление статуса онлайн
+function updateOnlineStatus() {
+    if (playerId) {
+        onlineUsers[playerId] = {
+            name: playerName,
+            lastSeen: Date.now()
+        };
+        saveGlobalStats();
+    }
 }
 
 // Загрузка данных пользователя
@@ -1126,65 +1538,100 @@ function updateMenuButtons() {
     document.getElementById('filterUnlearned').classList.toggle('active', wordFilter === 'unlearned');
     document.getElementById('filterNoArticle').classList.toggle('active', wordFilter === 'no_article');
     document.getElementById('filterNoWord').classList.toggle('active', wordFilter === 'no_word');
+    
+    document.getElementById('quizNouns').classList.toggle('active', quizType === 'nouns');
+    document.getElementById('quizOther').classList.toggle('active', quizType === 'other');
+    document.getElementById('quizAll').classList.toggle('active', quizType === 'all');
 }
 
-// Сохранение имени - ИСПРАВЛЕННАЯ ФУНКЦИЯ
+// Сохранение имени
 function saveName() {
-    const nameInput = document.getElementById('playerName');
-    playerName = nameInput.value.trim();
-    
+    playerName = document.getElementById('playerName').value.trim();
     if (!playerName) {
         alert('Bitte geben Sie Ihren Namen ein.');
         return;
     }
     
     localStorage.setItem('playerName', playerName);
+    if (!playerId) {
+        playerId = generateUserId();
+        localStorage.setItem('playerId', playerId);
+    }
+    
     document.getElementById('nameBox').style.display = 'none';
     document.getElementById('menu').style.display = 'block';
     
-    // ВАЖНО: перезагружаем данные игрока после сохранения имени
-    loadPlayerData();
+    loadWords();
     updateVisitCounter();
+    updateOnlineStatus();
+    updateStatsDisplay();
+}
+
+// Установка языка
+function setLang(l) {
+    lang = l;
     updateMenuButtons();
-    
-    console.log('Name saved:', playerName);
 }
 
-// Обновление онлайн статуса
-function updateOnlineStatus() {
-    if (playerId && playerName) {
-        onlineUsers[playerId] = {
-            name: playerName,
-            lastSeen: Date.now(),
-            sessionStart: startTime
-        };
-        saveGlobalStats();
-    }
+// Установка режима
+function setMode(m) {
+    mode = m;
+    updateMenuButtons();
 }
 
-// Сохранение глобальной статистики
-function saveGlobalStats() {
-    const now = Date.now();
-    Object.keys(onlineUsers).forEach(id => {
-        if (now - onlineUsers[id].lastSeen > 5 * 60 * 1000) {
-            delete onlineUsers[id];
-        }
-    });
-    
-    globalStats.onlineUsers = onlineUsers;
-    localStorage.setItem('globalStats', JSON.stringify(globalStats));
+// Установка фильтра слов
+function setWordFilter(filter) {
+    wordFilter = filter;
+    updateMenuButtons();
+    applyWordFilter();
+}
+
+// Генерация ID слова
+function generateWordId(word) {
+    return word.german.toLowerCase().replace(/\s+/g, '_').replace(/[^\wäöüß]/g, '');
 }
 
 // Загрузка слов
 function loadWords() {
     try {
-        words = wordDictionary.map(w => ({
-            article: (w.article || 'das').toLowerCase(),
-            word: w.word || '',
-            german: `${(w.article || 'das').toLowerCase()} ${w.word || ''}`.trim(),
-            translation_ru: w.russian || '',
-            id: w.id || generateWordId(w)
-        })).filter(x => x.word);
+        // Выбираем нужный словарь в зависимости от типа
+        let selectedWords = [];
+        switch(quizType) {
+            case 'nouns':
+                selectedWords = nounsDictionary;
+                break;
+            case 'other':
+                selectedWords = otherWordsDictionary;
+                break;
+            case 'all':
+            default:
+                selectedWords = allWords;
+                break;
+        }
+        
+        words = selectedWords.map(w => {
+            // Для слов с артиклем создаем полную форму
+            if (w.article) {
+                return {
+                    article: w.article.toLowerCase(),
+                    word: w.word || '',
+                    german: `${w.article.toLowerCase()} ${w.word || ''}`.trim(),
+                    translation_ru: w.russian || '',
+                    id: w.id || generateWordId(w),
+                    hasArticle: true
+                };
+            } else {
+                // Для слов без артикля
+                return {
+                    article: null,
+                    word: w.word || '',
+                    german: w.german || w.word || '',
+                    translation_ru: w.russian || '',
+                    id: w.id || generateWordId(w),
+                    hasArticle: false
+                };
+            }
+        }).filter(x => x.word);
         
         applyWordFilter();
         updateLearnedWordsDisplay();
@@ -1195,224 +1642,156 @@ function loadWords() {
     }
 }
 
-function generateWordId(word) {
-    return `${word.article}_${word.word}`.toLowerCase().replace(/\s+/g, '_');
-}
-
-// Фильтры
-function setWordFilter(filter) {
-    wordFilter = filter;
-    applyWordFilter();
-    updateMenuButtons();
-}
-
+// Применение фильтра слов
 function applyWordFilter() {
-    if (!words.length) return;
-    
-    switch(wordFilter) {
-        case 'learned':
-            filteredWords = words.filter(word => 
-                learnedWords.includes(word.id) || learnedArticles.includes(word.id)
-            );
-            break;
-        case 'unlearned':
-            filteredWords = words.filter(word => 
-                !learnedWords.includes(word.id) && !learnedArticles.includes(word.id)
-            );
-            break;
-        case 'no_article':
-            filteredWords = words.filter(word => 
-                !learnedArticles.includes(word.id)
-            );
-            break;
-        case 'no_word':
-            filteredWords = words.filter(word => 
-                !learnedWords.includes(word.id)
-            );
-            break;
-        case 'all':
-        default:
-            filteredWords = [...words];
-            break;
-    }
-    
-    updateWordCountDisplay();
-}
-
-function updateWordCountDisplay() {
-    const availableCount = filteredWords.length;
-    const totalCount = words.length;
-    const learnedWordsCount = learnedWords.length;
-    const learnedArticlesCount = learnedArticles.length;
-    
-    const wordCountInfo = document.getElementById('wordCountInfo');
-    if (wordCountInfo) {
-        wordCountInfo.innerHTML = `
-            Verfügbare Wörter: <b>${availableCount}</b> / ${totalCount}<br>
-            Wörter gelernt: ${learnedWordsCount} | Artikel gelernt: ${learnedArticlesCount}
-        `;
-    }
-}
-
-function updateLearnedWordsDisplay() {
-    const learnedWordsCount = learnedWords.length;
-    const learnedArticlesCount = learnedArticles.length;
-    const learnedInfo = document.getElementById('learnedWordsInfo');
-    const learnedCountSpan = document.getElementById('learnedCount');
-    const learnedArticlesSpan = document.getElementById('learnedArticlesCount');
-    
-    if (learnedInfo && learnedCountSpan && learnedArticlesSpan) {
-        learnedCountSpan.textContent = learnedWordsCount;
-        learnedArticlesSpan.textContent = learnedArticlesCount;
-        if (learnedWordsCount > 0 || learnedArticlesCount > 0) {
-            learnedInfo.style.display = 'block';
-        } else {
-            learnedInfo.style.display = 'none';
+    filteredWords = words.filter(word => {
+        const isWordLearned = learnedWords.includes(word.id);
+        const isArticleLearned = learnedArticles.includes(word.id);
+        
+        switch(wordFilter) {
+            case 'all':
+                return true;
+            case 'unlearned':
+                return !isWordLearned && !isArticleLearned;
+            case 'no_article':
+                return word.hasArticle && !isArticleLearned;
+            case 'no_word':
+                return !isWordLearned;
+            default:
+                return true;
         }
-    }
-}
-
-// СБРОС СТАТУСА КНОПОК ДЛЯ НОВОГО СЛОВА
-function resetLearningStatusButtons() {
-    const currentWord = quizWords[index];
-    const wordId = currentWord.id;
+    });
     
-    const wordBtn = document.getElementById('wordLearnedBtn');
-    const wordIcon = document.getElementById('wordLearnedIcon');
-    const articleBtn = document.getElementById('articleLearnedBtn');
-    const articleIcon = document.getElementById('articleLearnedIcon');
-    
-    if (learnedWords.includes(wordId)) {
-        wordBtn.classList.add('word-learned');
-        wordIcon.textContent = '✅';
-    } else {
-        wordBtn.classList.remove('word-learned');
-        wordIcon.textContent = '□';
-    }
-    
-    if (learnedArticles.includes(wordId)) {
-        articleBtn.classList.add('article-learned');
-        articleIcon.textContent = '✅';
-    } else {
-        articleBtn.classList.remove('article-learned');
-        articleIcon.textContent = '□';
-    }
-}
-
-// Управление изученными словами и артиклями
-function toggleWordLearned() {
-    const currentWord = quizWords[index];
-    const wordId = currentWord.id;
-    const btn = document.getElementById('wordLearnedBtn');
-    const icon = document.getElementById('wordLearnedIcon');
-    
-    if (learnedWords.includes(wordId)) {
-        learnedWords = learnedWords.filter(id => id !== wordId);
-        btn.classList.remove('word-learned');
-        icon.textContent = '□';
-    } else {
-        learnedWords.push(wordId);
-        btn.classList.add('word-learned');
-        icon.textContent = '✅';
-    }
-    
-    saveLearnedData();
-}
-
-function toggleArticleLearned() {
-    const currentWord = quizWords[index];
-    const wordId = currentWord.id;
-    const btn = document.getElementById('articleLearnedBtn');
-    const icon = document.getElementById('articleLearnedIcon');
-    
-    if (learnedArticles.includes(wordId)) {
-        learnedArticles = learnedArticles.filter(id => id !== wordId);
-        btn.classList.remove('article-learned');
-        icon.textContent = '□';
-    } else {
-        learnedArticles.push(wordId);
-        btn.classList.add('article-learned');
-        icon.textContent = '✅';
-    }
-    
-    saveLearnedData();
-}
-
-function saveLearnedData() {
-    localStorage.setItem(`learnedWords_${playerId}`, JSON.stringify(learnedWords));
-    localStorage.setItem(`learnedArticles_${playerId}`, JSON.stringify(learnedArticles));
-    updateLearnedWordsDisplay();
-}
-
-// Функция показа 25-го кадра - УЛУЧШЕННАЯ ПРОВЕРКА
-function showSubliminalFrame(word) {
-    const checkbox = document.getElementById('subliminalToggle');
-    const isCurrentlyEnabled = checkbox ? checkbox.checked : subliminalEnabled;
-    
-    if (!subliminalEnabled || !isCurrentlyEnabled) {
-        console.log('25 кадр отключен');
-        return;
-    }
-    
-    const frame = document.getElementById('subliminalFrame');
-    const combinedEl = document.getElementById('subliminalCombined');
-    const translationEl = document.getElementById('subliminalTranslation');
-    
-    combinedEl.textContent = `${word.article} ${word.word}`;
-    translationEl.textContent = word.translation_ru;
-    
-    frame.classList.add('visible');
-    
-    setTimeout(() => {
-        frame.classList.remove('visible');
-    }, subliminalDuration);
-}
-
-// Обновление статистики
-function updateStats() {
-    const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
-    stats.games++;
-    stats.totalQuestions += quizWords.length;
-    stats.totalCorrect += score;
-    if (score > stats.bestScore) {
-        stats.bestScore = score;
-    }
-    localStorage.setItem(`stats_${playerId}`, JSON.stringify(stats));
-    
-    if (playerId && playerName) {
-        if (!globalStats.users) globalStats.users = {};
-        globalStats.users[playerId] = {
-            name: playerName,
-            games: stats.games,
-            bestScore: stats.bestScore,
-            totalQuestions: stats.totalQuestions,
-            totalCorrect: stats.totalCorrect,
-            accuracy: stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0,
-            learnedWords: learnedWords.length,
-            learnedArticles: learnedArticles.length,
-            lastActive: new Date().toLocaleDateString()
-        };
-        saveGlobalStats();
-    }
-    
-    updateStatsDisplay();
-}
-
-function updateStatsDisplay() {
-    const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
-    const accuracy = stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0;
-    
-    document.getElementById('statsBox').innerHTML = `
-        <b>Statistik für Sie:</b><br>
-        Spiele: ${stats.games}<br>
-        Bestes Ergebnis: ${stats.bestScore}<br>
-        Genauigkeit: ${accuracy}%<br>
-        Gelernte Wörter: ${learnedWords.length}<br>
-        Gelernte Artikel: ${learnedArticles.length}
+    // Обновляем информацию о количестве слов
+    const wordCount = filteredWords.length;
+    document.getElementById('wordCountInfo').innerHTML = `
+        <h3>Verfügbare Wörter: ${wordCount} von ${words.length}</h3>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: ${(wordCount / words.length) * 100}%"></div>
+        </div>
     `;
 }
 
-// Основная логика викторины
+// Обновление отображения выученных слов
+function updateLearnedWordsDisplay() {
+    const learnedCount = learnedWords.length;
+    const learnedArticlesCount = learnedArticles.length;
+    
+    if (learnedCount > 0 || learnedArticlesCount > 0) {
+        document.getElementById('learnedWordsInfo').style.display = 'block';
+        document.getElementById('learnedCount').textContent = learnedCount;
+        document.getElementById('learnedArticlesCount').textContent = learnedArticlesCount;
+    } else {
+        document.getElementById('learnedWordsInfo').style.display = 'none';
+    }
+}
+
+// Перемешивание массива
+function shuffle(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+// ==============================================
+// ФУНКЦИИ ДЛЯ ПОВТОРЕНИЯ КВИЗОВ
+// ==============================================
+
+// Установка типа квиза
+function setQuizType(type) {
+    quizType = type;
+    updateMenuButtons();
+    loadWords();
+}
+
+// Повторить последний квиз
+function repeatLastQuiz() {
+    if (lastQuizWords.length === 0) {
+        alert('Es gibt noch kein gespieltes Quiz zum Wiederholen.');
+        return;
+    }
+    
+    quizWords = [...lastQuizWords];
+    document.getElementById('menu').style.display = 'none';
+    document.getElementById('quiz').style.display = 'block';
+    
+    index = 0;
+    score = 0;
+    
+    nextQuestion();
+}
+
+// Повторить только невыученные слова из последнего квиза
+function repeatUnlearned() {
+    if (lastQuizWords.length === 0) {
+        alert('Es gibt noch kein gespieltes Quiz.');
+        return;
+    }
+    
+    const unlearnedWords = lastQuizWords.filter(word => 
+        !learnedWords.includes(word.id) && !learnedArticles.includes(word.id)
+    );
+    
+    if (unlearnedWords.length === 0) {
+        alert('Alle Wörter aus dem letzten Quiz sind bereits gelernt!');
+        return;
+    }
+    
+    quizWords = unlearnedWords;
+    document.getElementById('menu').style.display = 'none';
+    document.getElementById('quiz').style.display = 'block';
+    
+    index = 0;
+    score = 0;
+    
+    nextQuestion();
+}
+
+// Повторить те же слова (после завершения квиза)
+function repeatSameWords() {
+    if (quizWords.length === 0) {
+        alert('Keine Wörter zum Wiederholen verfügbar.');
+        return;
+    }
+    
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('quiz').style.display = 'block';
+    
+    index = 0;
+    score = 0;
+    
+    nextQuestion();
+}
+
+// Запуск квиза
+function startQuiz() {
+    if (!filteredWords.length) {
+        alert(`Keine Wörter verfügbar für den ausgewählten Filter (${wordFilter}). Bitte wählen Sie einen anderen Filter.`);
+        return;
+    }
+    
+    let qCount = parseInt(document.getElementById('qCount').value) || 10;
+    qCount = Math.max(5, Math.min(100, qCount));
+    
+    const pool = shuffle([...filteredWords]);
+    quizWords = pool.slice(0, Math.min(qCount, pool.length));
+    
+    // Сохраняем слова текущего квиза для возможного повтора
+    lastQuizWords = [...quizWords];
+    
+    document.getElementById('menu').style.display = 'none';
+    document.getElementById('quiz').style.display = 'block';
+    
+    index = 0;
+    score = 0;
+    
+    nextQuestion();
+}
+
+// Следующий вопрос
 function nextQuestion() {
     if (index >= quizWords.length) {
         finishQuiz();
@@ -1437,18 +1816,28 @@ function nextQuestion() {
     let opts = [];
     let correct;
     
-    if (mode === 'article') {
+    // Если режим "артикли" и у слова есть артикль
+    if (mode === 'article' && q.hasArticle) {
         qText = `Welcher Artikel passt zu:`;
         document.getElementById('word').innerText = q.word;
         document.getElementById('translationBox').textContent = q.translation_ru;
         opts = ['der', 'die', 'das'];
         correct = q.article;
+    } else if (mode === 'article' && !q.hasArticle) {
+        // Если режим артиклей, но у слова нет артикля - переключаемся на режим перевода
+        qText = `Was bedeutet:`;
+        document.getElementById('word').innerText = q.german;
+        const correctT = q.translation_ru;
+        const pool = shuffle(filteredWords.map(w => w.translation_ru).filter(t => t && t !== correctT));
+        opts = pool.slice(0, 3);
+        opts.push(correctT);
+        correct = correctT;
     } else if (mode === 'de_to_l1') {
         const g = q.german;
         qText = `Was bedeutet:`;
         document.getElementById('word').innerText = g;
         const correctT = q.translation_ru;
-        const pool = shuffle(words.map(w => w.translation_ru).filter(t => t && t !== correctT));
+        const pool = shuffle(filteredWords.map(w => w.translation_ru).filter(t => t && t !== correctT));
         opts = pool.slice(0, 3);
         opts.push(correctT);
         correct = correctT;
@@ -1457,7 +1846,7 @@ function nextQuestion() {
         qText = `Wie heißt auf Deutsch:`;
         document.getElementById('word').innerText = trans;
         const correctG = q.german;
-        const pool = shuffle(words.map(w => w.german).filter(g => g !== correctG));
+        const pool = shuffle(filteredWords.map(w => w.german).filter(g => g !== correctG));
         opts = pool.slice(0, 3);
         opts.push(correctG);
         correct = correctG;
@@ -1476,176 +1865,318 @@ function nextQuestion() {
     });
 }
 
-function checkAnswer(button, selected, correct, q) {
+// Проверка ответа
+function checkAnswer(button, answer, correct, word) {
     const allButtons = document.querySelectorAll('#answers button');
     allButtons.forEach(btn => {
-        btn.onclick = null;
+        btn.disabled = true;
+        if (btn.textContent === correct) {
+            btn.style.background = '#4CAF50';
+        } else if (btn === button) {
+            btn.style.background = '#f44336';
+        }
     });
-
-    if (selected === correct) {
-        button.style.background = 'green';
-        score++;
-        
-        showSubliminalFrame(q);
-        
-        if (mode === 'article') {
-            document.getElementById('articleDisplay').textContent = q.article;
-            document.getElementById('articleDisplay').style.color = '#22c55e';
-        } else {
-            showCorrectAnswer(correct);
-        }
+    
+    // Показываем правильный ответ
+    if (mode === 'article' && word.hasArticle) {
+        document.getElementById('articleDisplay').textContent = word.article;
+        document.getElementById('correctAnswerDisplay').textContent = `${word.article} ${word.word}`;
     } else {
-        button.style.background = 'red';
-        allButtons.forEach(btn => {
-            if (btn.textContent === correct) {
-                btn.style.background = 'green';
-            }
-        });
-        
-        showSubliminalFrame(q);
-        
-        if (mode === 'article') {
-            document.getElementById('articleDisplay').textContent = q.article;
-            document.getElementById('articleDisplay').style.color = '#22c55e';
-        } else {
-            showCorrectAnswer(correct);
-        }
+        document.getElementById('correctAnswerDisplay').textContent = correct;
     }
     
+    if (answer === correct) {
+        score++;
+    }
+    
+    // Обновляем статус кнопок изучения
+    updateLearningStatusButtons(word.id);
+    
+    // Показываем 25-й кадр если включен
+    if (subliminalEnabled) {
+        showSubliminal(word);
+    }
+    
+    // Переход к следующему вопросу через 2 секунды
     setTimeout(() => {
         index++;
         nextQuestion();
-    }, 1500);
+    }, 2000);
 }
 
-function showCorrectAnswer(answer) {
-    const el = document.getElementById('correctAnswerDisplay');
-    el.textContent = answer;
-    el.style.color = '#22c55e';
-}
-
+// Завершение квиза
 function finishQuiz() {
+    const percentage = Math.round((score / quizWords.length) * 100);
+    const timeSpent = Math.round((Date.now() - startTime) / 1000);
+    
+    // Сохраняем статистику
+    saveStats(score, quizWords.length, timeSpent);
+    
     document.getElementById('quiz').style.display = 'none';
     document.getElementById('result').style.display = 'block';
-    const accuracy = (score / quizWords.length * 100).toFixed(1);
-    document.getElementById('score').innerText = `${score} / ${quizWords.length} (${accuracy}%)`;
     
-    const resultStats = document.getElementById('resultStats');
-    resultStats.innerHTML = `
-        <div style="margin: 15px 0;">
-            <strong>Gelernte Wörter in diesem Spiel:</strong> ${learnedWords.length}<br>
-            <strong>Gelernte Artikel in diesem Spiel:</strong> ${learnedArticles.length}
-        </div>
+    let resultText = '';
+    if (percentage === 100) {
+        resultText = `Perfekt! 🎉 ${score}/${quizWords.length} (${percentage}%)`;
+    } else if (percentage >= 80) {
+        resultText = `Sehr gut! 👍 ${score}/${quizWords.length} (${percentage}%)`;
+    } else if (percentage >= 60) {
+        resultText = `Gut! 😊 ${score}/${quizWords.length} (${percentage}%)`;
+    } else if (percentage >= 40) {
+        resultText = `Nicht schlecht 🤔 ${score}/${quizWords.length} (${percentage}%)`;
+    } else {
+        resultText = `Üben Sie mehr! 📚 ${score}/${quizWords.length} (${percentage}%)`;
+    }
+    
+    document.getElementById('score').innerHTML = `<h3>${resultText}</h3>`;
+    document.getElementById('resultStats').innerHTML = `
+        <p>Zeit: ${timeSpent} Sekunden</p>
+        <p>Wörter gesamt: ${quizWords.length}</p>
+        <p>Richtig: ${score}</p>
+        <p>Falsch: ${quizWords.length - score}</p>
     `;
-    
-    updateStats();
 }
 
-function showStats() {
-    const stats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"games": 0, "bestScore": 0, "totalQuestions": 0, "totalCorrect": 0}');
-    const accuracy = stats.totalQuestions > 0 ? (stats.totalCorrect / stats.totalQuestions * 100).toFixed(1) : 0;
-    
-    document.getElementById('detailedStats').innerHTML = `
-        <div style="text-align: left; line-height: 1.6;">
-            <h3>📈 Detaillierte Statistik</h3>
-            <p><strong>Gesamtspiele:</strong> ${stats.games}</p>
-            <p><strong>Beste Punktzahl:</strong> ${stats.bestScore}</p>
-            <p><strong>Gesamtfragen:</strong> ${stats.totalQuestions}</p>
-            <p><strong>Richtige Antworten:</strong> ${stats.totalCorrect}</p>
-            <p><strong>Genauigkeit:</strong> ${accuracy}%</p>
-            <p><strong>Gelernte Wörter:</strong> ${learnedWords.length}</p>
-            <p><strong>Gelernte Artikel:</strong> ${learnedArticles.length}</p>
-            <p><strong>Verfügbare Wörter:</strong> ${words.length}</p>
-        </div>
-    `;
-    
-    document.getElementById('menu').style.display = 'none';
-    document.getElementById('stats').style.display = 'block';
-}
-
+// Возврат в меню
 function backToMenu() {
     document.getElementById('quiz').style.display = 'none';
     document.getElementById('result').style.display = 'none';
     document.getElementById('stats').style.display = 'none';
     document.getElementById('menu').style.display = 'block';
+    updateStatsDisplay();
+    updateLearnedWordsDisplay();
 }
 
+// Перезапуск
 function restart() {
     document.getElementById('result').style.display = 'none';
     document.getElementById('menu').style.display = 'block';
-    applyWordFilter();
+    loadWords();
 }
 
-function shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
+// Сброс кнопок статуса изучения
+function resetLearningStatusButtons() {
+    document.getElementById('wordLearnedBtn').classList.remove('word-learned');
+    document.getElementById('wordLearnedIcon').textContent = '□';
+    document.getElementById('articleLearnedBtn').classList.remove('article-learned');
+    document.getElementById('articleLearnedIcon').textContent = '□';
 }
 
-function startSessionTimer() {
-    setInterval(() => {
-        document.getElementById('info').innerHTML = `<span>Sprache: Русский</span> • <span>Modus: ${getModeName(mode)}</span>`;
-    }, 1000);
-}
-
-function getModeName(mode) {
-    const names = {
-        'article': 'Artikel wählen',
-        'de_to_l1': 'Deutsch → Übersetzung',
-        'l1_to_de': 'Übersetzung → Deutsch'
-    };
-    return names[mode] || 'Artikel wählen';
-}
-
-function setLang(language) {
-    lang = language;
-    updateStatsDisplay();
-    updateMenuButtons();
-}
-
-function setMode(gameMode) {
-    mode = gameMode;
-    updateStatsDisplay();
-    updateMenuButtons();
-}
-
-function startQuiz() {
-    if (!filteredWords.length) {
-        alert(`Keine Wörter verfügbar für den ausgewählten Filter (${wordFilter}). Bitte wählen Sie einen anderen Filter.`);
-        return;
+// Обновление кнопок статуса изучения
+function updateLearningStatusButtons(wordId) {
+    const isWordLearned = learnedWords.includes(wordId);
+    const isArticleLearned = learnedArticles.includes(wordId);
+    
+    if (isWordLearned) {
+        document.getElementById('wordLearnedBtn').classList.add('word-learned');
+        document.getElementById('wordLearnedIcon').textContent = '✓';
     }
     
-    let qCount = parseInt(document.getElementById('qCount').value) || 10;
-    qCount = Math.max(5, Math.min(100, qCount));
-    
-    const pool = shuffle([...filteredWords]);
-    quizWords = pool.slice(0, Math.min(qCount, pool.length));
-    
-    document.getElementById('menu').style.display = 'none';
-    document.getElementById('quiz').style.display = 'block';
-    
-    index = 0;
-    score = 0;
-    
-    nextQuestion();
+    if (isArticleLearned) {
+        document.getElementById('articleLearnedBtn').classList.add('article-learned');
+        document.getElementById('articleLearnedIcon').textContent = '✓';
+    }
 }
 
-// Загружаем настройки 25-го кадра
+// Переключение статуса "слово выучено"
+function toggleWordLearned() {
+    if (index >= quizWords.length) return;
+    
+    const wordId = quizWords[index].id;
+    const indexInLearned = learnedWords.indexOf(wordId);
+    
+    if (indexInLearned === -1) {
+        learnedWords.push(wordId);
+        document.getElementById('wordLearnedBtn').classList.add('word-learned');
+        document.getElementById('wordLearnedIcon').textContent = '✓';
+    } else {
+        learnedWords.splice(indexInLearned, 1);
+        document.getElementById('wordLearnedBtn').classList.remove('word-learned');
+        document.getElementById('wordLearnedIcon').textContent = '□';
+    }
+    
+    localStorage.setItem(`learnedWords_${playerId}`, JSON.stringify(learnedWords));
+}
+
+// Переключение статуса "артикль выучен"
+function toggleArticleLearned() {
+    if (index >= quizWords.length) return;
+    
+    const wordId = quizWords[index].id;
+    const indexInLearned = learnedArticles.indexOf(wordId);
+    
+    if (indexInLearned === -1) {
+        learnedArticles.push(wordId);
+        document.getElementById('articleLearnedBtn').classList.add('article-learned');
+        document.getElementById('articleLearnedIcon').textContent = '✓';
+    } else {
+        learnedArticles.splice(indexInLearned, 1);
+        document.getElementById('articleLearnedBtn').classList.remove('article-learned');
+        document.getElementById('articleLearnedIcon').textContent = '□';
+    }
+    
+    localStorage.setItem(`learnedArticles_${playerId}`, JSON.stringify(learnedArticles));
+}
+
+// Загрузка настроек 25-го кадра
 function loadSubliminalSettings() {
     const saved = localStorage.getItem('subliminalEnabled');
     if (saved !== null) {
         subliminalEnabled = JSON.parse(saved);
+        document.getElementById('subliminalToggle').checked = subliminalEnabled;
+    }
+}
+
+// Показать 25-й кадр
+function showSubliminal(word) {
+    const frame = document.getElementById('subliminalFrame');
+    const combined = document.getElementById('subliminalCombined');
+    const translation = document.getElementById('subliminalTranslation');
+    
+    if (word.hasArticle) {
+        combined.textContent = `${word.article} ${word.word}`;
     } else {
-        subliminalEnabled = true;
-        localStorage.setItem('subliminalEnabled', 'true');
+        combined.textContent = word.german;
     }
     
-    const checkbox = document.getElementById('subliminalToggle');
-    if (checkbox) {
-        checkbox.checked = subliminalEnabled;
+    translation.textContent = word.translation_ru;
+    
+    frame.classList.add('visible');
+    
+    setTimeout(() => {
+        frame.classList.remove('visible');
+    }, subliminalDuration);
+}
+
+// Сохранение статистики
+function saveStats(correct, total, timeSpent) {
+    if (!playerId) return;
+    
+    const today = new Date().toISOString().split('T')[0];
+    const userStats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"quizzes": [], "daily": {}}');
+    
+    const quizResult = {
+        date: new Date().toISOString(),
+        correct,
+        total,
+        percentage: Math.round((correct / total) * 100),
+        timeSpent,
+        mode,
+        wordFilter,
+        quizType
+    };
+    
+    userStats.quizzes.push(quizResult);
+    
+    // Сохраняем ежедневную статистику
+    if (!userStats.daily[today]) {
+        userStats.daily[today] = { quizzes: 0, correct: 0, total: 0, timeSpent: 0 };
     }
+    
+    userStats.daily[today].quizzes++;
+    userStats.daily[today].correct += correct;
+    userStats.daily[today].total += total;
+    userStats.daily[today].timeSpent += timeSpent;
+    
+    localStorage.setItem(`stats_${playerId}`, JSON.stringify(userStats));
+}
+
+// Показать статистику
+function showStats() {
+    document.getElementById('menu').style.display = 'none';
+    document.getElementById('stats').style.display = 'block';
+    
+    const userStats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"quizzes": [], "daily": {}}');
+    const quizzes = userStats.quizzes;
+    
+    let statsHTML = '';
+    
+    if (quizzes.length === 0) {
+        statsHTML = '<p>Noch keine Statistik verfügbar.</p>';
+    } else {
+        // Общая статистика
+        const totalQuizzes = quizzes.length;
+        const totalCorrect = quizzes.reduce((sum, q) => sum + q.correct, 0);
+        const totalQuestions = quizzes.reduce((sum, q) => sum + q.total, 0);
+        const avgPercentage = Math.round((totalCorrect / totalQuestions) * 100);
+        const totalTime = quizzes.reduce((sum, q) => sum + q.timeSpent, 0);
+        
+        statsHTML += `
+            <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h3>📈 Gesamtstatistik</h3>
+                <p>Gespielte Quizzes: ${totalQuizzes}</p>
+                <p>Richtige Antworten: ${totalCorrect}/${totalQuestions} (${avgPercentage}%)</p>
+                <p>Gesamtzeit: ${Math.round(totalTime / 60)} Minuten</p>
+            </div>
+        `;
+        
+        // Последние 5 квизов
+        statsHTML += '<h3>📝 Letzte Quizzes</h3>';
+        const recentQuizzes = quizzes.slice(-5).reverse();
+        recentQuizzes.forEach((quiz, i) => {
+            const date = new Date(quiz.date).toLocaleDateString('de-DE');
+            const time = new Date(quiz.date).toLocaleTimeString('de-DE');
+            statsHTML += `
+                <div style="background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 6px;">
+                    <p><strong>${date} ${time}</strong></p>
+                    <p>Ergebnis: ${quiz.correct}/${quiz.total} (${quiz.percentage}%)</p>
+                    <p>Modus: ${getModeName(quiz.mode)} | Filter: ${getFilterName(quiz.wordFilter)}</p>
+                    <p>Zeit: ${quiz.timeSpent} Sekunden</p>
+                </div>
+            `;
+        });
+    }
+    
+    document.getElementById('detailedStats').innerHTML = statsHTML;
+}
+
+// Получение названия режима
+function getModeName(mode) {
+    switch(mode) {
+        case 'article': return 'Artikel';
+        case 'de_to_l1': return 'Deutsch → Übersetzung';
+        case 'l1_to_de': return 'Übersetzung → Deutsch';
+        default: return mode;
+    }
+}
+
+// Получение названия фильтра
+function getFilterName(filter) {
+    switch(filter) {
+        case 'all': return 'Alle';
+        case 'unlearned': return 'Ungelernt';
+        case 'no_article': return 'Artikel nicht gelernt';
+        case 'no_word': return 'Wörter nicht gelernt';
+        default: return filter;
+    }
+}
+
+// Обновление отображения статистики
+function updateStatsDisplay() {
+    const userStats = JSON.parse(localStorage.getItem(`stats_${playerId}`) || '{"quizzes": []}');
+    const quizzes = userStats.quizzes;
+    
+    if (quizzes.length > 0) {
+        const totalCorrect = quizzes.reduce((sum, q) => sum + q.correct, 0);
+        const totalQuestions = quizzes.reduce((sum, q) => sum + q.total, 0);
+        const avgPercentage = Math.round((totalCorrect / totalQuestions) * 100);
+        
+        document.getElementById('statsBox').innerHTML = `
+            <h3>Deine Statistik</h3>
+            <p>Gespielte Quizzes: ${quizzes.length}</p>
+            <p>Durchschnitt: ${avgPercentage}% richtig</p>
+        `;
+    } else {
+        document.getElementById('statsBox').innerHTML = `
+            <h3>Deine Statistik</h3>
+            <p>Noch keine Quizzes gespielt.</p>
+        `;
+    }
+}
+
+// Запуск таймера сессии
+function startSessionTimer() {
+    setInterval(updateOnlineStatus, 300000); // Обновлять каждые 5 минут
 }
 
 // Инициализация
@@ -1674,8 +2205,15 @@ window.onload = init;
     </script>
 
     <div style="text-align: center; padding: 15px; color: #666; font-size: 12px;">
-        powered by Aleksandr Gadzera • @ale11111
+        powered by Aleksandr Gadzera • @ale11111<br>
+        Wörter insgesamt: <span id="totalWordsCount">0</span> | Substantive: <span id="nounsCount">0</span> | Andere: <span id="otherWordsCount">0</span>
     </div>
 
+    <script>
+        // Обновляем счетчики слов
+        document.getElementById('totalWordsCount').textContent = allWords.length;
+        document.getElementById('nounsCount').textContent = nounsDictionary.length;
+        document.getElementById('otherWordsCount').textContent = otherWordsDictionary.length;
+    </script>
 </body>
 </html>
