@@ -1,620 +1,645 @@
 // ============== DEUTSCH LERNSPIEL PRO v2.0 ==============
-// Главное приложение с регистрацией, аутентификацией и системой обучения
 
-// ============== CONFIGURATION ==============
 const CONFIG = {
     version: "2.0.0",
-    appName: "Deutsch Lernspiel Pro",
-    storagePrefixes: {
-        user: "dlp_user_",
-        stats: "dlp_stats_",
-        learned: "dlp_learned_",
-        articles: "dlp_articles_"
+    prefix: "dlp2_"
+};
+
+// ============== UI TRANSLATIONS ==============
+const UI_TEXT = {
+    ru: {
+        appName: "Deutsch Lernspiel",
+        subtitle: "Учи немецкий легко!",
+        login: "Вход",
+        register: "Регистрация",
+        email: "Email",
+        emailPh: "your@email.com",
+        password: "Пароль",
+        passPh: "Минимум 6 символов",
+        passConfirm: "Повтори пароль",
+        name: "Имя",
+        namePh: "Как тебя зовут?",
+        country: "Страна",
+        countrySel: "Выбери страну",
+        loginBtn: "Войти",
+        registerBtn: "Зарегистрироваться",
+        forgot: "Забыл пароль?",
+        logout: "Выход",
+        language: "Язык",
+        settings: "Настройки",
+        mode: "Режим",
+        modeArticle: "Артикли (der/die/das)",
+        modeDe: "Немецкий → Перевод",
+        modeL1: "Перевод → Немецкий",
+        filter: "Слова",
+        filterAll: "Все слова",
+        filterNouns: "Существительные",
+        filterVerbs: "Глаголы",
+        qCount: "Вопросов",
+        startQuiz: "Начать викторину",
+        leaderboard: "Рейтинг",
+        achievements: "Достижения",
+        chooseArt: "Выбери артикль",
+        whatMeans: "Что означает",
+        howGerman: "Как на немецком",
+        of: "из",
+        results: "Результаты",
+        time: "Время",
+        sec: "сек",
+        correctAns: "Правильных",
+        wrongAns: "Ошибок",
+        again: "Ещё раз",
+        menu: "В меню",
+        perfect: "Идеально!",
+        excellent: "Отлично!",
+        good: "Хорошо!",
+        notBad: "Неплохо!",
+        studyMore: "Учи ещё!",
+        games: "Игр",
+        avg: "Средний",
+        words: "Слов",
+        comingSoon: "Скоро будет доступно!",
+        fillAll: "Заполни все поля!",
+        badEmail: "Некорректный email!",
+        passShort: "Пароль минимум 6 символов!",
+        passNoMatch: "Пароли не совпадают!",
+        nameShort: "Имя минимум 2 символа!",
+        userExists: "Этот email уже зарегистрирован!",
+        noUser: "Пользователь не найден!",
+        badPass: "Неправильный пароль!",
+        recoverySent: "Инструкции отправлены на email",
+        logoutQ: "Выйти из аккаунта?"
+    },
+    en: {
+        appName: "Deutsch Lernspiel",
+        subtitle: "Learn German easily!",
+        login: "Login",
+        register: "Register",
+        email: "Email",
+        emailPh: "your@email.com",
+        password: "Password",
+        passPh: "Min 6 characters",
+        passConfirm: "Confirm password",
+        name: "Name",
+        namePh: "What's your name?",
+        country: "Country",
+        countrySel: "Choose country",
+        loginBtn: "Sign In",
+        registerBtn: "Sign Up",
+        forgot: "Forgot password?",
+        logout: "Logout",
+        language: "Language",
+        settings: "Settings",
+        mode: "Mode",
+        modeArticle: "Articles (der/die/das)",
+        modeDe: "German → Translation",
+        modeL1: "Translation → German",
+        filter: "Words",
+        filterAll: "All words",
+        filterNouns: "Nouns",
+        filterVerbs: "Verbs",
+        qCount: "Questions",
+        startQuiz: "Start Quiz",
+        leaderboard: "Leaderboard",
+        achievements: "Achievements",
+        chooseArt: "Choose the article",
+        whatMeans: "What does it mean",
+        howGerman: "How in German",
+        of: "of",
+        results: "Results",
+        time: "Time",
+        sec: "sec",
+        correctAns: "Correct",
+        wrongAns: "Wrong",
+        again: "Try Again",
+        menu: "Menu",
+        perfect: "Perfect!",
+        excellent: "Excellent!",
+        good: "Good!",
+        notBad: "Not bad!",
+        studyMore: "Study more!",
+        games: "Games",
+        avg: "Average",
+        words: "Words",
+        comingSoon: "Coming soon!",
+        fillAll: "Fill all fields!",
+        badEmail: "Invalid email!",
+        passShort: "Password min 6 characters!",
+        passNoMatch: "Passwords don't match!",
+        nameShort: "Name min 2 characters!",
+        userExists: "Email already registered!",
+        noUser: "User not found!",
+        badPass: "Wrong password!",
+        recoverySent: "Instructions sent to email",
+        logoutQ: "Log out?"
+    },
+    uk: {
+        appName: "Deutsch Lernspiel",
+        subtitle: "Вчи німецьку легко!",
+        login: "Вхід",
+        register: "Реєстрація",
+        email: "Email",
+        emailPh: "your@email.com",
+        password: "Пароль",
+        passPh: "Мінімум 6 символів",
+        passConfirm: "Повтори пароль",
+        name: "Ім'я",
+        namePh: "Як тебе звати?",
+        country: "Країна",
+        countrySel: "Обери країну",
+        loginBtn: "Увійти",
+        registerBtn: "Зареєструватися",
+        forgot: "Забув пароль?",
+        logout: "Вийти",
+        language: "Мова",
+        settings: "Налаштування",
+        mode: "Режим",
+        modeArticle: "Артиклі (der/die/das)",
+        modeDe: "Німецька → Переклад",
+        modeL1: "Переклад → Німецька",
+        filter: "Слова",
+        filterAll: "Всі слова",
+        filterNouns: "Іменники",
+        filterVerbs: "Дієслова",
+        qCount: "Питань",
+        startQuiz: "Почати вікторину",
+        leaderboard: "Рейтинг",
+        achievements: "Досягнення",
+        chooseArt: "Обери артикль",
+        whatMeans: "Що означає",
+        howGerman: "Як німецькою",
+        of: "з",
+        results: "Результати",
+        time: "Час",
+        sec: "сек",
+        correctAns: "Правильних",
+        wrongAns: "Помилок",
+        again: "Ще раз",
+        menu: "До меню",
+        perfect: "Ідеально!",
+        excellent: "Чудово!",
+        good: "Добре!",
+        notBad: "Непогано!",
+        studyMore: "Вчи ще!",
+        games: "Ігор",
+        avg: "Середній",
+        words: "Слів",
+        comingSoon: "Скоро буде!",
+        fillAll: "Заповни всі поля!",
+        badEmail: "Некоректний email!",
+        passShort: "Пароль мінімум 6 символів!",
+        passNoMatch: "Паролі не збігаються!",
+        nameShort: "Ім'я мінімум 2 символи!",
+        userExists: "Цей email вже зареєстрований!",
+        noUser: "Користувача не знайдено!",
+        badPass: "Неправильний пароль!",
+        recoverySent: "Інструкції надіслано на email",
+        logoutQ: "Вийти з акаунту?"
+    },
+    tr: {
+        appName: "Deutsch Lernspiel",
+        subtitle: "Almancayı kolay öğren!",
+        login: "Giriş",
+        register: "Kayıt",
+        email: "E-posta",
+        emailPh: "your@email.com",
+        password: "Şifre",
+        passPh: "En az 6 karakter",
+        passConfirm: "Şifreyi tekrarla",
+        name: "İsim",
+        namePh: "İsmin ne?",
+        country: "Ülke",
+        countrySel: "Ülke seç",
+        loginBtn: "Giriş Yap",
+        registerBtn: "Kayıt Ol",
+        forgot: "Şifremi unuttum?",
+        logout: "Çıkış",
+        language: "Dil",
+        settings: "Ayarlar",
+        mode: "Mod",
+        modeArticle: "Artikeller (der/die/das)",
+        modeDe: "Almanca → Çeviri",
+        modeL1: "Çeviri → Almanca",
+        filter: "Kelimeler",
+        filterAll: "Tüm kelimeler",
+        filterNouns: "İsimler",
+        filterVerbs: "Fiiller",
+        qCount: "Soru",
+        startQuiz: "Teste Başla",
+        leaderboard: "Sıralama",
+        achievements: "Başarılar",
+        chooseArt: "Artikeli seç",
+        whatMeans: "Ne anlama geliyor",
+        howGerman: "Almancası ne",
+        of: "/",
+        results: "Sonuçlar",
+        time: "Süre",
+        sec: "sn",
+        correctAns: "Doğru",
+        wrongAns: "Yanlış",
+        again: "Tekrar",
+        menu: "Menü",
+        perfect: "Mükemmel!",
+        excellent: "Harika!",
+        good: "İyi!",
+        notBad: "Fena değil!",
+        studyMore: "Daha çalış!",
+        games: "Oyun",
+        avg: "Ortalama",
+        words: "Kelime",
+        comingSoon: "Yakında!",
+        fillAll: "Tüm alanları doldur!",
+        badEmail: "Geçersiz email!",
+        passShort: "Şifre en az 6 karakter!",
+        passNoMatch: "Şifreler uyuşmuyor!",
+        nameShort: "İsim en az 2 karakter!",
+        userExists: "Bu email zaten kayıtlı!",
+        noUser: "Kullanıcı bulunamadı!",
+        badPass: "Yanlış şifre!",
+        recoverySent: "Talimatlar e-postaya gönderildi",
+        logoutQ: "Çıkış yapmak istiyor musunuz?"
     }
 };
 
-// ============== GLOBAL STATE ==============
+const COUNTRIES = [
+    {f: "🇷🇺", n: "Россия"}, {f: "🇺🇦", n: "Україна"}, {f: "🇧🇾", n: "Беларусь"},
+    {f: "🇰🇿", n: "Казахстан"}, {f: "🇩🇪", n: "Deutschland"}, {f: "🇦🇹", n: "Österreich"},
+    {f: "🇨🇭", n: "Schweiz"}, {f: "🇺🇸", n: "USA"}, {f: "🇬🇧", n: "UK"},
+    {f: "🇹🇷", n: "Türkiye"}, {f: "🇫🇷", n: "France"}, {f: "🇮🇹", n: "Italia"},
+    {f: "🇪🇸", n: "España"}, {f: "🇵🇱", n: "Polska"}, {f: "🇨🇿", n: "Česko"},
+    {f: "🇳🇱", n: "Nederland"}
+];
+
+const LFLAGS = {ru: "🇷🇺", en: "🇬🇧", uk: "🇺🇦", tr: "🇹🇷"};
+const LNAMES = {ru: "Русский", en: "English", uk: "Українська", tr: "Türkçe"};
+
+// ============== STATE ==============
 let APP = {
-    currentUser: null,
-    currentLanguage: 'ru',
-    quizState: {
-        mode: 'article',
-        filter: 'all',
-        type: 'other',
-        words: [],
-        currentIndex: 0,
-        score: 0,
-        startTime: 0
-    },
+    user: null,
+    lang: 'ru',
+    quiz: { mode: 'article', filter: 'all', count: 10, words: [], idx: 0, score: 0, t0: 0 },
     allWords: []
 };
 
-// ============== INITIALIZATION ==============
+// ============== HELPERS ==============
+function t(k) { return (UI_TEXT[APP.lang] || UI_TEXT.ru)[k] || UI_TEXT.ru[k] || k; }
+function $(id) { return document.getElementById(id); }
+function shuffle(a) { const r = [...a]; for (let i = r.length - 1; i > 0; i--) { const j = 0 | Math.random() * (i + 1); [r[i], r[j]] = [r[j], r[i]]; } return r; }
+function hash(s) { let h = 0; for (let i = 0; i < s.length; i++) { h = ((h << 5) - h) + s.charCodeAt(i); h |= 0; } return Math.abs(h).toString(36); }
+function uid(e) { return 'u_' + hash(e.toLowerCase()); }
+function sv(k, v) { localStorage.setItem(CONFIG.prefix + k, JSON.stringify(v)); }
+function ld(k) { try { return JSON.parse(localStorage.getItem(CONFIG.prefix + k)); } catch { return null; } }
+function okEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+function tr(w) { return w.ru || w.german; }
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+function toast(msg) {
+    document.querySelectorAll('.toast').forEach(e => e.remove());
+    const d = document.createElement('div');
+    d.className = 'toast';
+    d.textContent = msg;
+    document.body.appendChild(d);
+    setTimeout(() => d.remove(), 2500);
+}
+
+// ============== INIT ==============
 function initApp() {
-    console.log(`🚀 Инициализация ${CONFIG.appName} v${CONFIG.version}`);
-
-    // Загружаем словари
-    if (typeof NOUNS !== 'undefined' && typeof VERBS !== 'undefined') {
-        APP.allWords = [...NOUNS, ...VERBS];
-        console.log(`✅ Загружено ${APP.allWords.length} слов`);
-    } else {
-        console.error('❌ Словари не загружены!');
-        alert('Ошибка: словари не найдены. Перезагрузите страницу.');
+    if (typeof NOUNS === 'undefined' || typeof VERBS === 'undefined') {
+        $('app').innerHTML = '<p style="text-align:center;padding:40px;color:red;">Word data not loaded!</p>';
         return;
     }
+    APP.allWords = [...NOUNS, ...VERBS];
 
-    // Проверяем авторизацию
-    const savedUserId = localStorage.getItem('dlp_currentUser');
-    if (savedUserId) {
-        const userData = localStorage.getItem(CONFIG.storagePrefixes.user + savedUserId);
-        if (userData) {
-            APP.currentUser = JSON.parse(userData);
-            showMainMenu();
-            updateStatsDisplay();
-            return;
-        }
+    const sLang = localStorage.getItem(CONFIG.prefix + 'lang');
+    if (sLang && UI_TEXT[sLang]) APP.lang = sLang;
+
+    const cuid = localStorage.getItem(CONFIG.prefix + 'cur');
+    if (cuid) {
+        const d = ld('u_' + cuid);
+        if (d) { APP.user = d; showMenu(); return; }
     }
-
-    // Показываем экран авторизации
-    showAuthPage();
+    showAuth();
 }
 
-// ============== AUTHENTICATION ==============
-function showAuthPage() {
-    const html = `
+// ============== AUTH ==============
+function showAuth(tab) {
+    tab = tab || 'login';
+    const cOpts = COUNTRIES.map(c => `<option value="${c.f}">${c.f} ${c.n}</option>`).join('');
+
+    $('app').innerHTML = `
         <div class="auth-page">
-            <div class="auth-card">
-                <h1>🇩🇪 Deutsch Lernspiel Pro</h1>
-                <p class="auth-subtitle">Выучи немецкий язык легко!</p>
-
-                <div id="authForm" class="auth-form">
-                    <div class="form-group">
-                        <label>Email адрес:</label>
-                        <input type="email" id="authEmail" placeholder="your@email.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Пароль:</label>
-                        <input type="password" id="authPassword" placeholder="Минимум 6 символов" required>
-                    </div>
-
-                    <button class="btn btn-primary btn-lg" onclick="handleLogin()">Вход</button>
-                    <button class="btn btn-secondary btn-lg" onclick="showRegistration()">Регистрация</button>
-                    <button class="btn btn-light btn-lg" onclick="showForgotPassword()">Забыл пароль</button>
+            <div class="auth-header">
+                <div class="auth-logo">🇩🇪</div>
+                <h1>${t('appName')}</h1>
+                <p>${t('subtitle')}</p>
+            </div>
+            <div class="auth-body">
+                <div class="auth-tabs">
+                    <button class="auth-tab ${tab==='login'?'active':''}" onclick="showAuth('login')">${t('login')}</button>
+                    <button class="auth-tab ${tab==='register'?'active':''}" onclick="showAuth('register')">${t('register')}</button>
                 </div>
 
-                <div id="registrationForm" class="auth-form hidden">
-                    <h2>Новый аккаунт</h2>
-
+                <div class="auth-form ${tab==='login'?'active':''}" id="fLogin">
                     <div class="form-group">
-                        <label>Имя (никнейм):</label>
-                        <input type="text" id="regName" placeholder="Твоё имя" required>
+                        <label class="form-label">${t('email')}</label>
+                        <input class="form-input" type="email" id="lEmail" placeholder="${t('emailPh')}">
                     </div>
-
                     <div class="form-group">
-                        <label>Email адрес:</label>
-                        <input type="email" id="regEmail" placeholder="your@email.com" required>
+                        <label class="form-label">${t('password')}</label>
+                        <input class="form-input" type="password" id="lPass" placeholder="${t('passPh')}">
                     </div>
-
-                    <div class="form-group">
-                        <label>Страна:</label>
-                        <select id="regCountry" required>
-                            <option value="">-- Выбери страну --</option>
-                            <option value="🇷🇺">🇷🇺 Россия</option>
-                            <option value="🇺🇦">🇺🇦 Украина</option>
-                            <option value="🇧🇾">🇧🇾 Беларусь</option>
-                            <option value="🇰🇿">🇰🇿 Казахстан</option>
-                            <option value="🇩🇪">🇩🇪 Германия</option>
-                            <option value="🇦🇹">🇦🇹 Австрия</option>
-                            <option value="🇨🇭">🇨🇭 Швейцария</option>
-                            <option value="🇺🇸">🇺🇸 США</option>
-                            <option value="🇬🇧">🇬🇧 Британия</option>
-                            <option value="🇫🇷">🇫🇷 Франция</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Пароль (минимум 6 символов):</label>
-                        <input type="password" id="regPassword" placeholder="Надёжный пароль" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Повтори пароль:</label>
-                        <input type="password" id="regPassword2" placeholder="Повтори пароль" required>
-                    </div>
-
-                    <button class="btn btn-primary btn-lg" onclick="handleRegistration()">Зарегистрироваться</button>
-                    <button class="btn btn-secondary btn-lg" onclick="showAuthPage()">← Назад</button>
+                    <button class="btn btn-primary" onclick="doLogin()">${t('loginBtn')}</button>
+                    <div class="auth-footer"><a onclick="doForgot()">${t('forgot')}</a></div>
                 </div>
 
-                <div id="forgotForm" class="auth-form hidden">
-                    <h2>Восстановление пароля</h2>
-
+                <div class="auth-form ${tab==='register'?'active':''}" id="fReg">
                     <div class="form-group">
-                        <label>Email адрес:</label>
-                        <input type="email" id="forgotEmail" placeholder="your@email.com" required>
+                        <label class="form-label">${t('name')}</label>
+                        <input class="form-input" type="text" id="rName" placeholder="${t('namePh')}">
                     </div>
+                    <div class="form-group">
+                        <label class="form-label">${t('email')}</label>
+                        <input class="form-input" type="email" id="rEmail" placeholder="${t('emailPh')}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">${t('country')}</label>
+                        <select class="form-select" id="rCountry"><option value="">${t('countrySel')}</option>${cOpts}</select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">${t('password')}</label>
+                        <input class="form-input" type="password" id="rPass" placeholder="${t('passPh')}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">${t('passConfirm')}</label>
+                        <input class="form-input" type="password" id="rPass2" placeholder="${t('passPh')}">
+                    </div>
+                    <button class="btn btn-primary" onclick="doReg()">${t('registerBtn')}</button>
+                </div>
 
-                    <p class="info-text">На твой email будут отправлены инструкции по восстановлению пароля</p>
-
-                    <button class="btn btn-primary btn-lg" onclick="handleForgotPassword()">Отправить</button>
-                    <button class="btn btn-secondary btn-lg" onclick="showAuthPage()">← Назад</button>
+                <div style="text-align:center;margin-top:20px">
+                    <button class="btn btn-ghost btn-sm" onclick="showLangModal()" style="width:auto;display:inline-flex">${LFLAGS[APP.lang]} ${LNAMES[APP.lang]}</button>
                 </div>
             </div>
         </div>
     `;
-
-    document.getElementById('app').innerHTML = html;
 }
 
-function showRegistration() {
-    document.getElementById('authForm').classList.add('hidden');
-    document.getElementById('registrationForm').classList.remove('hidden');
+function doLogin() {
+    const e = $('lEmail').value.trim(), p = $('lPass').value;
+    if (!e || !p) return toast(t('fillAll'));
+    if (!okEmail(e)) return toast(t('badEmail'));
+    const id = uid(e), d = ld('u_' + id);
+    if (!d) return toast(t('noUser'));
+    if (hash(p) !== d.ph) return toast(t('badPass'));
+    APP.user = d;
+    localStorage.setItem(CONFIG.prefix + 'cur', id);
+    showMenu();
 }
 
-function showForgotPassword() {
-    document.getElementById('authForm').classList.add('hidden');
-    document.getElementById('forgotForm').classList.remove('hidden');
+function doReg() {
+    const nm = $('rName').value.trim(), em = $('rEmail').value.trim(),
+          co = $('rCountry').value, p1 = $('rPass').value, p2 = $('rPass2').value;
+    if (!nm || !em || !co || !p1) return toast(t('fillAll'));
+    if (nm.length < 2) return toast(t('nameShort'));
+    if (!okEmail(em)) return toast(t('badEmail'));
+    if (p1.length < 6) return toast(t('passShort'));
+    if (p1 !== p2) return toast(t('passNoMatch'));
+    const id = uid(em);
+    if (ld('u_' + id)) return toast(t('userExists'));
+    const u = { id, name: nm, email: em, country: co, ph: hash(p1), ts: Date.now() };
+    sv('u_' + id, u);
+    localStorage.setItem(CONFIG.prefix + 'cur', id);
+    APP.user = u;
+    showMenu();
 }
 
-function handleLogin() {
-    const email = document.getElementById('authEmail').value.trim();
-    const password = document.getElementById('authPassword').value;
-
-    if (!email || !password) {
-        alert('Заполни все поля!');
-        return;
-    }
-
-    if (!isValidEmail(email)) {
-        alert('Некорректный email адрес!');
-        return;
-    }
-
-    // Ищем пользователя
-    const userId = hashEmail(email);
-    const userData = localStorage.getItem(CONFIG.storagePrefixes.user + userId);
-
-    if (!userData) {
-        alert('Пользователь не найден. Пожалуйста, зарегистрируйся.');
-        return;
-    }
-
-    const user = JSON.parse(userData);
-
-    // Проверяем пароль
-    if (hashPassword(password) !== user.passwordHash) {
-        alert('Неправильный пароль!');
-        return;
-    }
-
-    // Успешный вход
-    APP.currentUser = user;
-    localStorage.setItem('dlp_currentUser', userId);
-    console.log(`✅ Вход успешен! Пользователь: ${user.name}`);
-
-    showMainMenu();
-    updateStatsDisplay();
+function doForgot() {
+    const e = prompt(t('email') + ':');
+    if (!e) return;
+    if (!okEmail(e)) return toast(t('badEmail'));
+    if (!ld('u_' + uid(e))) return toast(t('noUser'));
+    toast(t('recoverySent'));
 }
 
-function handleRegistration() {
-    const name = document.getElementById('regName').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const country = document.getElementById('regCountry').value;
-    const password = document.getElementById('regPassword').value;
-    const password2 = document.getElementById('regPassword2').value;
+// ============== MENU ==============
+function showMenu() {
+    if (!APP.user) return showAuth();
+    const st = getStats(), nc = NOUNS.length, vc = VERBS.length;
 
-    // Валидация
-    if (!name || !email || !country || !password) {
-        alert('Заполни все поля!');
-        return;
-    }
-
-    if (name.length < 2) {
-        alert('Имя должно быть минимум 2 символа!');
-        return;
-    }
-
-    if (!isValidEmail(email)) {
-        alert('Некорректный email адрес!');
-        return;
-    }
-
-    if (password.length < 6) {
-        alert('Пароль должен быть минимум 6 символов!');
-        return;
-    }
-
-    if (password !== password2) {
-        alert('Пароли не совпадают!');
-        return;
-    }
-
-    // Проверяем, не существует ли уже такой пользователь
-    const userId = hashEmail(email);
-    if (localStorage.getItem(CONFIG.storagePrefixes.user + userId)) {
-        alert('Пользователь с этим email уже зарегистрирован!');
-        return;
-    }
-
-    // Создаём пользователя
-    const newUser = {
-        id: userId,
-        name: name,
-        email: email,
-        country: country,
-        passwordHash: hashPassword(password),
-        createdAt: new Date().toISOString(),
-        lastLogin: new Date().toISOString()
-    };
-
-    // Сохраняем в localStorage
-    localStorage.setItem(CONFIG.storagePrefixes.user + userId, JSON.stringify(newUser));
-    localStorage.setItem('dlp_currentUser', userId);
-
-    console.log(`✅ Регистрация успешна! Пользователь: ${name}`);
-
-    APP.currentUser = newUser;
-    showMainMenu();
-    updateStatsDisplay();
-}
-
-function handleForgotPassword() {
-    const email = document.getElementById('forgotEmail').value.trim();
-
-    if (!email) {
-        alert('Введи свой email!');
-        return;
-    }
-
-    if (!isValidEmail(email)) {
-        alert('Некорректный email адрес!');
-        return;
-    }
-
-    const userId = hashEmail(email);
-    const userData = localStorage.getItem(CONFIG.storagePrefixes.user + userId);
-
-    if (!userData) {
-        alert('Пользователь с таким email не найден.');
-        return;
-    }
-
-    // В реальном приложении здесь было бы отправка email
-    // Сейчас просто показываем временный пароль
-    alert(`Инструкции отправлены на ${email}.\n\nДля демонстрации:\nСброс пароля доступен. Пожалуйста, используй функцию восстановления в полной версии приложения.`);
-
-    showAuthPage();
-}
-
-// ============== MAIN MENU ==============
-function showMainMenu() {
-    const html = `
-        <div class="main-menu">
-            <header class="menu-header">
-                <h1>🇩🇪 Deutsch Lernspiel Pro</h1>
-                <div class="header-controls">
-                    <select id="langSelect" onchange="changeLanguage(this.value)">
-                        <option value="ru">🇷🇺 Русский</option>
-                        <option value="en">🇬🇧 English</option>
-                        <option value="uk">🇺🇦 Українська</option>
-                        <option value="tr">🇹🇷 Türkçe</option>
-                    </select>
-                    <button class="btn btn-small" onclick="handleLogout()">Выход</button>
+    $('app').innerHTML = `
+        <div class="app-shell">
+            <div class="app-header">
+                <div class="app-header-left">
+                    <span style="font-size:1.3rem">🇩🇪</span>
+                    <h1>${t('appName')}</h1>
                 </div>
-            </header>
-
-            <main class="menu-content">
+                <div class="app-header-right">
+                    <button class="lang-chip" onclick="showLangModal()">${LFLAGS[APP.lang]} ${APP.lang.toUpperCase()}</button>
+                    <button class="btn btn-ghost btn-sm" onclick="doLogout()" style="width:auto">${t('logout')}</button>
+                </div>
+            </div>
+            <div class="app-content">
                 <div class="user-card">
-                    <h2>👤 ${APP.currentUser.name} ${APP.currentUser.country}</h2>
-                    <p>Email: ${APP.currentUser.email}</p>
-                </div>
-
-                <div class="settings-section">
-                    <h3>⚙️ Настройки викторины</h3>
-
-                    <div class="setting-group">
-                        <label>Режим:</label>
-                        <select id="quizMode" onchange="APP.quizState.mode = this.value">
-                            <option value="article">Артикли (der/die/das)</option>
-                            <option value="de_to_l1">Немецкий → Перевод</option>
-                            <option value="l1_to_de">Перевод → Немецкий</option>
-                        </select>
+                    <div class="user-card-top">
+                        <div class="user-avatar">${APP.user.country}</div>
+                        <div><div class="user-name">${esc(APP.user.name)}</div><div class="user-email">${esc(APP.user.email)}</div></div>
                     </div>
-
-                    <div class="setting-group">
-                        <label>Фильтр слов:</label>
-                        <select id="quizFilter" onchange="APP.quizState.filter = this.value">
-                            <option value="all">Все слова</option>
-                            <option value="nouns">Только существительные</option>
-                            <option value="verbs">Только глаголы</option>
-                            <option value="unlearned">Невыученные</option>
-                        </select>
-                    </div>
-
-                    <div class="setting-group">
-                        <label>Количество вопросов:</label>
-                        <input type="number" id="quizCount" value="10" min="5" max="100">
+                    <div class="user-stats-row">
+                        <div class="user-stat"><div class="user-stat-value">${st.total}</div><div class="user-stat-label">${t('games')}</div></div>
+                        <div class="user-stat"><div class="user-stat-value">${st.avg}%</div><div class="user-stat-label">${t('avg')}</div></div>
+                        <div class="user-stat"><div class="user-stat-value">${nc+vc}</div><div class="user-stat-label">${t('words')}</div></div>
                     </div>
                 </div>
 
-                <div class="stats-section">
-                    <h3>📊 Моя статистика</h3>
-                    <div id="statsDisplay" class="stats-box"></div>
+                <div class="menu-section stagger">
+                    <div class="menu-section-title">${t('settings')}</div>
+                    <div class="menu-card">
+                        <div class="setting-row">
+                            <span class="setting-label">${t('mode')}</span>
+                            <select class="form-select" id="sMode">
+                                <option value="article">${t('modeArticle')}</option>
+                                <option value="de2l1">${t('modeDe')}</option>
+                                <option value="l12de">${t('modeL1')}</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <span class="setting-label">${t('filter')}</span>
+                            <select class="form-select" id="sFilter">
+                                <option value="all">${t('filterAll')} (${nc+vc})</option>
+                                <option value="nouns">${t('filterNouns')} (${nc})</option>
+                                <option value="verbs">${t('filterVerbs')} (${vc})</option>
+                            </select>
+                        </div>
+                        <div class="setting-row">
+                            <span class="setting-label">${t('qCount')}</span>
+                            <select class="form-select" id="sCount">
+                                <option value="10">10</option><option value="20">20</option>
+                                <option value="30">30</option><option value="50">50</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="action-buttons">
-                    <button class="btn btn-primary btn-lg" onclick="startQuiz()">🚀 Начать викторину!</button>
-                    <button class="btn btn-secondary btn-lg" onclick="showLeaderboard()">🏆 Таблица лидеров</button>
-                    <button class="btn btn-secondary btn-lg" onclick="showAchievements()">🎖️ Достижения</button>
+                <div class="menu-section stagger">
+                    <div class="quick-actions">
+                        <div class="quick-action" onclick="showLB()">
+                            <div class="quick-action-icon">🏆</div>
+                            <div class="quick-action-text">${t('leaderboard')}</div>
+                        </div>
+                        <div class="quick-action" onclick="showAch()">
+                            <div class="quick-action-icon">🎖️</div>
+                            <div class="quick-action-text">${t('achievements')}</div>
+                        </div>
+                    </div>
                 </div>
-            </main>
+                <div style="height:80px"></div>
+            </div>
+            <div class="start-btn-wrap">
+                <button class="start-btn" onclick="startQuiz()">🚀 ${t('startQuiz')}</button>
+            </div>
         </div>
     `;
-
-    document.getElementById('app').innerHTML = html;
 }
 
-function changeLanguage(lang) {
-    APP.currentLanguage = lang;
-    console.log(`🌍 Язык изменён на: ${lang}`);
-    // Здесь будет реализована смена интерфейса
-}
+function doLogout() { if (!confirm(t('logoutQ'))) return; localStorage.removeItem(CONFIG.prefix+'cur'); APP.user=null; showAuth(); }
 
-function handleLogout() {
-    if (confirm('Вы уверены, что хотите выйти?')) {
-        localStorage.removeItem('dlp_currentUser');
-        APP.currentUser = null;
-        showAuthPage();
-        console.log('👋 Пользователь вышел из системы');
-    }
+// ============== LANGUAGE ==============
+function showLangModal() {
+    const opts = ['ru','en','uk','tr'].map(l => `
+        <button class="lang-option ${APP.lang===l?'selected':''}" onclick="setLang('${l}')">
+            <span class="lang-option-flag">${LFLAGS[l]}</span>
+            <span class="lang-option-name">${LNAMES[l]}</span>
+        </button>
+    `).join('');
+    const m = document.createElement('div');
+    m.className = 'modal-overlay'; m.id = 'lm';
+    m.onclick = function(e) { if (e.target === this) closeLM(); };
+    m.innerHTML = `<div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title">${t('language')}</div>${opts}</div>`;
+    document.body.appendChild(m);
 }
+function closeLM() { const m=$('lm'); if(m) m.remove(); }
+function setLang(l) { APP.lang=l; localStorage.setItem(CONFIG.prefix+'lang',l); closeLM(); APP.user ? showMenu() : showAuth(); }
 
-// ============== QUIZ FUNCTIONS ==============
+// ============== QUIZ ==============
 function startQuiz() {
-    if (!APP.currentUser) return;
-
-    const count = parseInt(document.getElementById('quizCount').value) || 10;
-    let selectedWords = [];
-
-    if (APP.quizState.filter === 'nouns') {
-        selectedWords = NOUNS.slice(0, count);
-    } else if (APP.quizState.filter === 'verbs') {
-        selectedWords = VERBS.slice(0, count);
-    } else {
-        selectedWords = APP.allWords.slice(0, count);
-    }
-
-    APP.quizState.words = shuffleArray(selectedWords);
-    APP.quizState.currentIndex = 0;
-    APP.quizState.score = 0;
-    APP.quizState.startTime = Date.now();
-
-    showQuizPage();
+    const mode = $('sMode').value, filter = $('sFilter').value, count = +$('sCount').value;
+    let pool = filter==='nouns' ? [...NOUNS] : filter==='verbs' ? [...VERBS] : [...APP.allWords];
+    if (mode === 'article') pool = pool.filter(w => w.article);
+    if (!pool.length) { toast('No words!'); return; }
+    const n = Math.min(count, pool.length);
+    APP.quiz = { mode, filter, count: n, words: shuffle(pool).slice(0, n), idx: 0, score: 0, t0: Date.now() };
+    showQ();
 }
 
-function showQuizPage() {
-    if (APP.quizState.currentIndex >= APP.quizState.words.length) {
-        showResults();
-        return;
-    }
+function showQ() {
+    if (APP.quiz.idx >= APP.quiz.words.length) { showRes(); return; }
+    const w = APP.quiz.words[APP.quiz.idx];
+    const pct = (APP.quiz.idx / APP.quiz.words.length) * 100;
+    const num = APP.quiz.idx + 1, tot = APP.quiz.words.length;
+    let label, display, hint = '', opts = [], correct, isArt = false;
 
-    const word = APP.quizState.words[APP.quizState.currentIndex];
-    const progress = ((APP.quizState.currentIndex / APP.quizState.words.length) * 100).toFixed(0);
-
-    let questionText = '';
-    let displayWord = '';
-    let displayTranslation = '';
-    let options = [];
-    let correct = '';
-
-    if (APP.quizState.mode === 'article') {
-        questionText = 'Выбери артикль:';
-        displayWord = word.word || word.german;
-        displayTranslation = word[APP.currentLanguage] || word.ru;
-        options = ['der', 'die', 'das'];
-        correct = word.article || '';
-    } else if (APP.quizState.mode === 'de_to_l1') {
-        questionText = 'Что означает:';
-        displayWord = word.german;
-        options = APP.allWords.slice(0, 3).map(w => w[APP.currentLanguage] || w.ru);
-        options.push(word[APP.currentLanguage] || word.ru);
-        correct = word[APP.currentLanguage] || word.ru;
+    if (APP.quiz.mode === 'article') {
+        isArt = true; label = t('chooseArt');
+        display = w.word || w.german; hint = tr(w);
+        opts = ['der','die','das']; correct = w.article;
+    } else if (APP.quiz.mode === 'de2l1') {
+        label = t('whatMeans'); display = w.german;
+        const others = shuffle(APP.allWords.filter(x => x.id !== w.id)).slice(0, 3).map(x => tr(x));
+        correct = tr(w); opts = shuffle([...new Set([...others, correct])]);
     } else {
-        questionText = 'Как на немецком:';
-        displayWord = word[APP.currentLanguage] || word.ru;
-        options = APP.allWords.slice(0, 3).map(w => w.german);
-        options.push(word.german);
-        correct = word.german;
+        label = t('howGerman'); display = tr(w);
+        const others = shuffle(APP.allWords.filter(x => x.id !== w.id)).slice(0, 3).map(x => x.german);
+        correct = w.german; opts = shuffle([...new Set([...others, correct])]);
     }
 
-    options = shuffleArray([...new Set(options)]);
+    const btns = opts.map(o => {
+        const eO = esc(o), eC = esc(correct);
+        return `<button class="answer-btn" data-val="${eO}" data-cor="${eC}" onclick="checkA(this)">${o}</button>`;
+    }).join('');
 
-    const answersHTML = options.map(opt =>
-        `<button class="answer-btn" onclick="checkAnswer('${opt}', '${correct}', this)">${opt}</button>`
-    ).join('');
-
-    const html = `
+    $('app').innerHTML = `
         <div class="quiz-page">
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: ${progress}%"></div>
+            <div class="quiz-header">
+                <div class="quiz-header-left">
+                    <button class="quiz-back" onclick="quitQ()">&#8592;</button>
+                    <span class="quiz-progress-text">${num} ${t('of')} ${tot}</span>
+                </div>
+                <span class="quiz-score" id="qsc">&#10003; ${APP.quiz.score}</span>
             </div>
-
-            <div class="quiz-info">
-                Вопрос ${APP.quizState.currentIndex + 1} из ${APP.quizState.words.length}
+            <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+            <div class="quiz-body">
+                <div class="quiz-question-label">${label}</div>
+                <div class="quiz-word">${display}</div>
+                ${hint ? `<div class="quiz-hint">${hint}</div>` : ''}
+                <div class="quiz-answers ${isArt?'article-mode':''} stagger">${btns}</div>
             </div>
-
-            <div class="question-box">
-                <p class="question-text">${questionText}</p>
-                <div class="word-display">${displayWord}</div>
-                ${displayTranslation ? `<div class="translation-display">${displayTranslation}</div>` : ''}
-            </div>
-
-            <div class="answers-container">
-                ${answersHTML}
-            </div>
-
-            <button class="btn btn-secondary" onclick="showMainMenu()" style="width: 100%; margin-top: 20px;">← Выход</button>
         </div>
     `;
-
-    document.getElementById('app').innerHTML = html;
 }
 
-function checkAnswer(answer, correct, buttonElement) {
-    const isCorrect = answer === correct;
-
-    if (isCorrect) {
-        APP.quizState.score++;
-        buttonElement.classList.add('correct');
-    } else {
-        buttonElement.classList.add('incorrect');
-    }
-
-    // Находим и подсвечиваем правильный ответ
-    document.querySelectorAll('.answer-btn').forEach(btn => {
-        btn.disabled = true;
-        if (btn.textContent === correct) {
-            btn.classList.add('correct');
-        }
+function checkA(btn) {
+    const val = btn.dataset.val, cor = btn.dataset.cor;
+    const ok = val === cor;
+    if (ok) { APP.quiz.score++; btn.classList.add('correct'); }
+    else { btn.classList.add('incorrect'); }
+    document.querySelectorAll('.answer-btn').forEach(b => {
+        b.disabled = true;
+        if (b.dataset.val === cor) b.classList.add('correct');
     });
-
-    // Переходим к следующему вопросу через 2 секунды
-    setTimeout(() => {
-        APP.quizState.currentIndex++;
-        showQuizPage();
-    }, 2000);
+    const sc = $('qsc'); if (sc) sc.innerHTML = '&#10003; ' + APP.quiz.score;
+    setTimeout(() => { APP.quiz.idx++; showQ(); }, 1200);
 }
 
-function showResults() {
-    const timeSpent = Math.round((Date.now() - APP.quizState.startTime) / 1000);
-    const percent = Math.round((APP.quizState.score / APP.quizState.words.length) * 100);
+function quitQ() { if (confirm(t('menu')+'?')) showMenu(); }
 
-    // Сохраняем результат
-    saveQuizResult({
-        date: new Date().toISOString(),
-        score: APP.quizState.score,
-        total: APP.quizState.words.length,
-        percent: percent,
-        time: timeSpent,
-        mode: APP.quizState.mode
-    });
+// ============== RESULTS ==============
+function showRes() {
+    const ts = Math.round((Date.now() - APP.quiz.t0) / 1000);
+    const s = APP.quiz.score, tot = APP.quiz.words.length, pct = Math.round(s/tot*100);
+    saveRes({ d: Date.now(), s, tot, pct, ts, m: APP.quiz.mode });
 
-    let resultMessage = '';
-    if (percent === 100) resultMessage = '🎉 Идеально!';
-    else if (percent >= 80) resultMessage = '👍 Отлично!';
-    else if (percent >= 60) resultMessage = '😊 Хорошо!';
-    else if (percent >= 40) resultMessage = '🤔 Неплохо!';
-    else resultMessage = '📚 Учи больше!';
+    let emoji, msg;
+    if (pct===100) { emoji='🎉'; msg=t('perfect'); }
+    else if (pct>=80) { emoji='🔥'; msg=t('excellent'); }
+    else if (pct>=60) { emoji='👍'; msg=t('good'); }
+    else if (pct>=40) { emoji='💪'; msg=t('notBad'); }
+    else { emoji='📚'; msg=t('studyMore'); }
 
-    const html = `
+    $('app').innerHTML = `
         <div class="results-page">
-            <h1>Результаты</h1>
-
-            <div class="score-display">
-                <div class="result-message">${resultMessage}</div>
-                <div class="score">${APP.quizState.score}/${APP.quizState.words.length}</div>
-                <div class="percent">${percent}%</div>
+            <div class="results-emoji">${emoji}</div>
+            <div class="results-title">${msg}</div>
+            <div class="results-score">${s}/${tot}</div>
+            <div class="results-percent">${pct}%</div>
+            <div class="results-details">
+                <div class="results-detail-row"><span>${t('correctAns')}</span><span style="color:var(--success)">${s}</span></div>
+                <div class="results-detail-row"><span>${t('wrongAns')}</span><span style="color:var(--danger)">${tot-s}</span></div>
+                <div class="results-detail-row"><span>${t('time')}</span><span>${ts} ${t('sec')}</span></div>
             </div>
-
-            <div class="stats-box">
-                <div class="stat-row"><span>Времени затрачено:</span> <strong>${timeSpent} сек</strong></div>
-                <div class="stat-row"><span>Правильных ответов:</span> <strong>${APP.quizState.score}</strong></div>
-                <div class="stat-row"><span>Неправильных ответов:</span> <strong>${APP.quizState.words.length - APP.quizState.score}</strong></div>
-            </div>
-
-            <div class="action-buttons">
-                <button class="btn btn-primary" onclick="startQuiz()">🔄 Повторить</button>
-                <button class="btn btn-secondary" onclick="showMainMenu()">← Меню</button>
+            <div class="results-actions">
+                <button class="btn btn-primary" onclick="showMenu();setTimeout(startQuiz,100)">🔄 ${t('again')}</button>
+                <button class="btn btn-outline" onclick="showMenu()">&#8592; ${t('menu')}</button>
             </div>
         </div>
     `;
-
-    document.getElementById('app').innerHTML = html;
 }
 
-function saveQuizResult(result) {
-    if (!APP.currentUser) return;
-
-    const key = CONFIG.storagePrefixes.stats + APP.currentUser.id;
-    const stats = JSON.parse(localStorage.getItem(key) || '{"quizzes":[]}');
-    stats.quizzes.push(result);
-    localStorage.setItem(key, JSON.stringify(stats));
+// ============== STATS ==============
+function saveRes(r) { if (!APP.user) return; const k='st_'+APP.user.id; const d=ld(k)||{r:[]}; d.r.push(r); sv(k,d); }
+function getStats() {
+    if (!APP.user) return {total:0,avg:0};
+    const d = ld('st_'+APP.user.id);
+    if (!d||!d.r||!d.r.length) return {total:0,avg:0};
+    return { total: d.r.length, avg: Math.round(d.r.reduce((s,x) => s+x.pct, 0)/d.r.length) };
 }
 
-function updateStatsDisplay() {
-    if (!APP.currentUser) return;
-
-    const key = CONFIG.storagePrefixes.stats + APP.currentUser.id;
-    const stats = JSON.parse(localStorage.getItem(key) || '{"quizzes":[]}');
-    const quizzes = stats.quizzes;
-
-    if (quizzes.length === 0) {
-        document.getElementById('statsDisplay').innerHTML = '<p>Пока нет результатов. Начни викторину!</p>';
-        return;
-    }
-
-    const avgPercent = Math.round(quizzes.reduce((s, q) => s + q.percent, 0) / quizzes.length);
-    const totalQuestions = quizzes.reduce((s, q) => s + q.total, 0);
-
-    const html = `
-        <div class="stat-row"><span>Викторин пройдено:</span> <strong>${quizzes.length}</strong></div>
-        <div class="stat-row"><span>Средний результат:</span> <strong>${avgPercent}%</strong></div>
-        <div class="stat-row"><span>Всего вопросов:</span> <strong>${totalQuestions}</strong></div>
-    `;
-
-    document.getElementById('statsDisplay').innerHTML = html;
+// ============== PAGES ==============
+function showLB() {
+    $('app').innerHTML = `<div class="page-container"><div class="page-header"><button class="quiz-back" onclick="showMenu()">&#8592;</button><h1>🏆 ${t('leaderboard')}</h1></div><div class="page-body"><div class="empty-state"><div class="empty-state-icon">🏆</div><div class="empty-state-text">${t('comingSoon')}</div></div></div></div>`;
+}
+function showAch() {
+    $('app').innerHTML = `<div class="page-container"><div class="page-header"><button class="quiz-back" onclick="showMenu()">&#8592;</button><h1>🎖️ ${t('achievements')}</h1></div><div class="page-body"><div class="empty-state"><div class="empty-state-icon">🎖️</div><div class="empty-state-text">${t('comingSoon')}</div></div></div></div>`;
 }
 
-function showLeaderboard() {
-    const html = `
-        <div class="leaderboard-page">
-            <h1>🏆 Таблица лидеров</h1>
-            <p>Скоро будут добавлены глобальные рейтинги!</p>
-            <button class="btn btn-secondary" onclick="showMainMenu()">← Назад</button>
-        </div>
-    `;
-    document.getElementById('app').innerHTML = html;
-}
-
-function showAchievements() {
-    const html = `
-        <div class="achievements-page">
-            <h1>🎖️ Достижения</h1>
-            <p>Достижения разблокируются при прохождении викторин!</p>
-            <button class="btn btn-secondary" onclick="showMainMenu()">← Назад</button>
-        </div>
-    `;
-    document.getElementById('app').innerHTML = html;
-}
-
-// ============== UTILITY FUNCTIONS ==============
-function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function hashPassword(password) {
-    let hash = 0;
-    for (let i = 0; i < password.length; i++) {
-        const char = password.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
-        hash = hash & hash;
-    }
-    return Math.abs(hash).toString(36);
-}
-
-function hashEmail(email) {
-    return 'user_' + email.split('@')[0] + '_' + email.split('@')[1].split('.')[0];
-}
-
-function shuffleArray(array) {
-    const arr = [...array];
-    for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-}
-
-// ============== START APPLICATION ==============
+// ============== START ==============
 window.addEventListener('DOMContentLoaded', initApp);
