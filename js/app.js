@@ -250,7 +250,8 @@ function doReg() {
     if(p1.length<6) return toast(UI.passShort);
     if(p1!==p2) return toast(UI.passNoMatch);
     const id=uid(em);
-    if(ld('u_'+id)) return toast(UI.userExists);
+    const existing=ld('u_'+id);
+    if(existing && !confirm('Dieses Konto existiert bereits. Möchtest du es überschreiben?')) return;
     const u={id,name:nm,email:em,country:co,lang:lang,ph:hash(p1),ts:Date.now()};
     sv('u_'+id,u);
     localStorage.setItem(CONFIG.prefix+'cur',id);
@@ -264,8 +265,14 @@ function doForgot() {
     const e=prompt(UI.email+':');
     if(!e) return;
     if(!okEmail(e)) return toast(UI.badEmail);
-    if(!ld('u_'+uid(e))) return toast(UI.noUser);
-    toast(UI.recoverySent);
+    const id=uid(e), d=ld('u_'+id);
+    if(!d) return toast(UI.noUser);
+    const np=prompt('Neues Passwort (min. 6 Zeichen):');
+    if(!np) return;
+    if(np.length<6) return toast(UI.passShort);
+    d.ph=hash(np);
+    sv('u_'+id,d);
+    toast('Passwort wurde zurückgesetzt! Bitte melde dich an.');
 }
 
 // ============== MENU ==============
