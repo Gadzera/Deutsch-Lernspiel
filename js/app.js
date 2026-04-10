@@ -66,45 +66,59 @@ const UI = {
     badPass: "Falsches Passwort!",
     recoverySent: "Anweisungen an E-Mail gesendet",
     logoutQ: "Möchtest du dich abmelden?",
-    back: "Zurück"
+    back: "Zurück",
+    resetPass: "Passwort zurücksetzen",
+    resetPassDesc: "Gib deine E-Mail und dein neues Passwort ein",
+    newPass: "Neues Passwort",
+    resetBtn: "Zurücksetzen",
+    resetSuccess: "Passwort wurde zurückgesetzt! Du kannst dich jetzt anmelden.",
+    backToLogin: "Zurück zur Anmeldung",
+    regSuccess: "Registrierung erfolgreich!",
+    accountExists: "Konto existiert bereits. Bitte melde dich an oder setze dein Passwort zurück."
 };
 
-// ============== COUNTRIES (expanded) ==============
+// ============== COUNTRIES (expanded, international names) ==============
 const COUNTRIES = [
-    {f:"🇩🇪",n:"Deutschland"},{f:"🇦🇹",n:"Österreich"},{f:"🇨🇭",n:"Schweiz"},
-    {f:"🇷🇺",n:"Russland"},{f:"🇺🇦",n:"Ukraine"},{f:"🇧🇾",n:"Belarus"},
-    {f:"🇰🇿",n:"Kasachstan"},{f:"🇺🇿",n:"Usbekistan"},{f:"🇹🇯",n:"Tadschikistan"},
-    {f:"🇰🇬",n:"Kirgisistan"},{f:"🇹🇲",n:"Turkmenistan"},{f:"🇦🇿",n:"Aserbaidschan"},
-    {f:"🇬🇪",n:"Georgien"},{f:"🇦🇲",n:"Armenien"},{f:"🇲🇩",n:"Moldawien"},
-    {f:"🇺🇸",n:"USA"},{f:"🇬🇧",n:"Großbritannien"},{f:"🇨🇦",n:"Kanada"},
-    {f:"🇦🇺",n:"Australien"},
-    {f:"🇹🇷",n:"Türkei"},{f:"🇮🇷",n:"Iran"},{f:"🇮🇶",n:"Irak"},
-    {f:"🇸🇦",n:"Saudi-Arabien"},{f:"🇦🇪",n:"VAE"},{f:"🇸🇾",n:"Syrien"},
-    {f:"🇦🇫",n:"Afghanistan"},{f:"🇵🇰",n:"Pakistan"},{f:"🇮🇳",n:"Indien"},
-    {f:"🇧🇩",n:"Bangladesch"},{f:"🇱🇰",n:"Sri Lanka"},
-    {f:"🇨🇳",n:"China"},{f:"🇯🇵",n:"Japan"},{f:"🇰🇷",n:"Südkorea"},
-    {f:"🇻🇳",n:"Vietnam"},{f:"🇹🇭",n:"Thailand"},{f:"🇮🇩",n:"Indonesien"},
-    {f:"🇲🇾",n:"Malaysia"},{f:"🇵🇭",n:"Philippinen"},
-    {f:"🇫🇷",n:"Frankreich"},{f:"🇮🇹",n:"Italien"},{f:"🇪🇸",n:"Spanien"},
-    {f:"🇵🇹",n:"Portugal"},{f:"🇳🇱",n:"Niederlande"},{f:"🇧🇪",n:"Belgien"},
-    {f:"🇵🇱",n:"Polen"},{f:"🇨🇿",n:"Tschechien"},{f:"🇸🇰",n:"Slowakei"},
-    {f:"🇭🇺",n:"Ungarn"},{f:"🇷🇴",n:"Rumänien"},{f:"🇧🇬",n:"Bulgarien"},
-    {f:"🇭🇷",n:"Kroatien"},{f:"🇷🇸",n:"Serbien"},{f:"🇧🇦",n:"Bosnien"},
-    {f:"🇦🇱",n:"Albanien"},{f:"🇬🇷",n:"Griechenland"},
-    {f:"🇸🇪",n:"Schweden"},{f:"🇳🇴",n:"Norwegen"},{f:"🇩🇰",n:"Dänemark"},
-    {f:"🇫🇮",n:"Finnland"},{f:"🇪🇪",n:"Estland"},{f:"🇱🇻",n:"Lettland"},
-    {f:"🇱🇹",n:"Litauen"},
-    {f:"🇪🇬",n:"Ägypten"},{f:"🇲🇦",n:"Marokko"},{f:"🇹🇳",n:"Tunesien"},
-    {f:"🇳🇬",n:"Nigeria"},{f:"🇪🇹",n:"Äthiopien"},{f:"🇰🇪",n:"Kenia"},
-    {f:"🇿🇦",n:"Südafrika"},
-    {f:"🇧🇷",n:"Brasilien"},{f:"🇦🇷",n:"Argentinien"},{f:"🇲🇽",n:"Mexiko"},
-    {f:"🇨🇴",n:"Kolumbien"},{f:"🇨🇱",n:"Chile"},{f:"🇵🇪",n:"Peru"},
-    {f:"🇨🇺",n:"Kuba"},{f:"🇮🇱",n:"Israel"},{f:"🇯🇴",n:"Jordanien"},
-    {f:"🇱🇧",n:"Libanon"},{f:"🇰🇼",n:"Kuwait"},{f:"🇶🇦",n:"Katar"},
-    {f:"🇴🇲",n:"Oman"},{f:"🇧🇭",n:"Bahrain"},{f:"🇾🇪",n:"Jemen"},
-    {f:"🇲🇳",n:"Mongolei"},{f:"🇳🇵",n:"Nepal"},{f:"🇲🇲",n:"Myanmar"},
-    {f:"🇰🇭",n:"Kambodscha"},{f:"🇱🇦",n:"Laos"},
-    {f:"🏳️",n:"Anderes Land"}
+    {f:"🇩🇪",n:"Germany"},{f:"🇦🇹",n:"Austria"},{f:"🇨🇭",n:"Switzerland"},
+    {f:"🇷🇺",n:"Russia"},{f:"🇧🇾",n:"Belarus"},
+    {f:"🇰🇿",n:"Kazakhstan"},{f:"🇺🇿",n:"Uzbekistan"},{f:"🇹🇯",n:"Tajikistan"},
+    {f:"🇰🇬",n:"Kyrgyzstan"},{f:"🇹🇲",n:"Turkmenistan"},{f:"🇦🇿",n:"Azerbaijan"},
+    {f:"🇬🇪",n:"Georgia"},{f:"🇦🇲",n:"Armenia"},{f:"🇲🇩",n:"Moldova"},
+    {f:"🇺🇸",n:"USA"},{f:"🇬🇧",n:"United Kingdom"},{f:"🇨🇦",n:"Canada"},
+    {f:"🇦🇺",n:"Australia"},{f:"🇳🇿",n:"New Zealand"},{f:"🇮🇪",n:"Ireland"},
+    {f:"🇹🇷",n:"Türkiye"},{f:"🇮🇷",n:"Iran"},{f:"🇮🇶",n:"Iraq"},
+    {f:"🇸🇦",n:"Saudi Arabia"},{f:"🇦🇪",n:"UAE"},{f:"🇸🇾",n:"Syria"},
+    {f:"🇦🇫",n:"Afghanistan"},{f:"🇵🇰",n:"Pakistan"},{f:"🇮🇳",n:"India"},
+    {f:"🇧🇩",n:"Bangladesh"},{f:"🇱🇰",n:"Sri Lanka"},
+    {f:"🇨🇳",n:"China"},{f:"🇯🇵",n:"Japan"},{f:"🇰🇷",n:"South Korea"},
+    {f:"🇻🇳",n:"Vietnam"},{f:"🇹🇭",n:"Thailand"},{f:"🇮🇩",n:"Indonesia"},
+    {f:"🇲🇾",n:"Malaysia"},{f:"🇵🇭",n:"Philippines"},{f:"🇸🇬",n:"Singapore"},
+    {f:"🇫🇷",n:"France"},{f:"🇮🇹",n:"Italy"},{f:"🇪🇸",n:"Spain"},
+    {f:"🇵🇹",n:"Portugal"},{f:"🇳🇱",n:"Netherlands"},{f:"🇧🇪",n:"Belgium"},
+    {f:"🇱🇺",n:"Luxembourg"},
+    {f:"🇵🇱",n:"Poland"},{f:"🇨🇿",n:"Czechia"},{f:"🇸🇰",n:"Slovakia"},
+    {f:"🇭🇺",n:"Hungary"},{f:"🇷🇴",n:"Romania"},{f:"🇧🇬",n:"Bulgaria"},
+    {f:"🇭🇷",n:"Croatia"},{f:"🇷🇸",n:"Serbia"},{f:"🇧🇦",n:"Bosnia"},
+    {f:"🇦🇱",n:"Albania"},{f:"🇽🇰",n:"Kosovo"},{f:"🇲🇰",n:"North Macedonia"},
+    {f:"🇲🇪",n:"Montenegro"},{f:"🇸🇮",n:"Slovenia"},{f:"🇬🇷",n:"Greece"},
+    {f:"🇸🇪",n:"Sweden"},{f:"🇳🇴",n:"Norway"},{f:"🇩🇰",n:"Denmark"},
+    {f:"🇫🇮",n:"Finland"},{f:"🇮🇸",n:"Iceland"},
+    {f:"🇪🇪",n:"Estonia"},{f:"🇱🇻",n:"Latvia"},{f:"🇱🇹",n:"Lithuania"},
+    {f:"🇪🇬",n:"Egypt"},{f:"🇲🇦",n:"Morocco"},{f:"🇹🇳",n:"Tunisia"},
+    {f:"🇩🇿",n:"Algeria"},{f:"🇱🇾",n:"Libya"},{f:"🇸🇩",n:"Sudan"},
+    {f:"🇳🇬",n:"Nigeria"},{f:"🇪🇹",n:"Ethiopia"},{f:"🇰🇪",n:"Kenya"},
+    {f:"🇿🇦",n:"South Africa"},{f:"🇬🇭",n:"Ghana"},
+    {f:"🇧🇷",n:"Brazil"},{f:"🇦🇷",n:"Argentina"},{f:"🇲🇽",n:"Mexico"},
+    {f:"🇨🇴",n:"Colombia"},{f:"🇨🇱",n:"Chile"},{f:"🇵🇪",n:"Peru"},
+    {f:"🇻🇪",n:"Venezuela"},{f:"🇺🇾",n:"Uruguay"},{f:"🇵🇾",n:"Paraguay"},
+    {f:"🇪🇨",n:"Ecuador"},{f:"🇧🇴",n:"Bolivia"},
+    {f:"🇨🇺",n:"Cuba"},{f:"🇩🇴",n:"Dominican Republic"},
+    {f:"🇮🇱",n:"Israel"},{f:"🇵🇸",n:"Palestine"},{f:"🇯🇴",n:"Jordan"},
+    {f:"🇱🇧",n:"Lebanon"},{f:"🇰🇼",n:"Kuwait"},{f:"🇶🇦",n:"Qatar"},
+    {f:"🇴🇲",n:"Oman"},{f:"🇧🇭",n:"Bahrain"},{f:"🇾🇪",n:"Yemen"},
+    {f:"🇲🇳",n:"Mongolia"},{f:"🇳🇵",n:"Nepal"},{f:"🇲🇲",n:"Myanmar"},
+    {f:"🇰🇭",n:"Cambodia"},{f:"🇱🇦",n:"Laos"},{f:"🇹🇼",n:"Taiwan"},
+    {f:"🏳️",n:"Other"}
 ];
 
 // Helper language names (shown in their own language)
@@ -181,24 +195,24 @@ function showAuth(tab) {
                 <div class="auth-form ${tab==='login'?'active':''}" id="fLogin">
                     <div class="form-group">
                         <label class="form-label">${UI.email}</label>
-                        <input class="form-input" type="email" id="lEmail" placeholder="${UI.emailPh}">
+                        <input class="form-input" type="email" id="lEmail" placeholder="${UI.emailPh}" autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label class="form-label">${UI.password}</label>
-                        <input class="form-input" type="password" id="lPass" placeholder="${UI.passPh}">
+                        <input class="form-input" type="password" id="lPass" placeholder="${UI.passPh}" autocomplete="current-password">
                     </div>
                     <button class="btn btn-primary" onclick="doLogin()">${UI.loginBtn}</button>
-                    <div class="auth-footer"><a onclick="doForgot()">${UI.forgot}</a></div>
+                    <div class="auth-footer"><a onclick="showAuth('forgot')">${UI.forgot}</a></div>
                 </div>
 
                 <div class="auth-form ${tab==='register'?'active':''}" id="fReg">
                     <div class="form-group">
                         <label class="form-label">${UI.name}</label>
-                        <input class="form-input" type="text" id="rName" placeholder="${UI.namePh}">
+                        <input class="form-input" type="text" id="rName" placeholder="${UI.namePh}" autocomplete="name">
                     </div>
                     <div class="form-group">
                         <label class="form-label">${UI.email}</label>
-                        <input class="form-input" type="email" id="rEmail" placeholder="${UI.emailPh}">
+                        <input class="form-input" type="email" id="rEmail" placeholder="${UI.emailPh}" autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label class="form-label">${UI.country}</label>
@@ -213,13 +227,32 @@ function showAuth(tab) {
                     </div>
                     <div class="form-group">
                         <label class="form-label">${UI.password}</label>
-                        <input class="form-input" type="password" id="rPass" placeholder="${UI.passPh}">
+                        <input class="form-input" type="password" id="rPass" placeholder="${UI.passPh}" autocomplete="new-password">
                     </div>
                     <div class="form-group">
                         <label class="form-label">${UI.passConfirm}</label>
-                        <input class="form-input" type="password" id="rPass2" placeholder="${UI.passPh}">
+                        <input class="form-input" type="password" id="rPass2" placeholder="${UI.passPh}" autocomplete="new-password">
                     </div>
                     <button class="btn btn-primary" onclick="doReg()">${UI.registerBtn}</button>
+                </div>
+
+                <div class="auth-form ${tab==='forgot'?'active':''}" id="fForgot">
+                    <h3 style="margin:0 0 8px 0;text-align:center">${UI.resetPass}</h3>
+                    <p style="color:var(--text-light);font-size:0.85rem;text-align:center;margin-bottom:16px">${UI.resetPassDesc}</p>
+                    <div class="form-group">
+                        <label class="form-label">${UI.email}</label>
+                        <input class="form-input" type="email" id="fEmail" placeholder="${UI.emailPh}" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">${UI.newPass}</label>
+                        <input class="form-input" type="password" id="fPass" placeholder="${UI.passPh}" autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">${UI.passConfirm}</label>
+                        <input class="form-input" type="password" id="fPass2" placeholder="${UI.passPh}" autocomplete="new-password">
+                    </div>
+                    <button class="btn btn-primary" onclick="doForgot()">${UI.resetBtn}</button>
+                    <div class="auth-footer"><a onclick="showAuth('login')">&#8592; ${UI.backToLogin}</a></div>
                 </div>
             </div>
         </div>
@@ -227,7 +260,7 @@ function showAuth(tab) {
 }
 
 function doLogin() {
-    const e=$('lEmail').value.trim(), p=$('lPass').value;
+    const e=$('lEmail').value.trim().toLowerCase(), p=$('lPass').value;
     if(!e||!p) return toast(UI.fillAll);
     if(!okEmail(e)) return toast(UI.badEmail);
     const id=uid(e),d=ld('u_'+id);
@@ -241,38 +274,39 @@ function doLogin() {
 }
 
 function doReg() {
-    const nm=$('rName').value.trim(), em=$('rEmail').value.trim(),
+    const nm=$('rName').value.trim(), em=$('rEmail').value.trim().toLowerCase(),
           co=$('rCountry').value, lang=$('rLang').value,
           p1=$('rPass').value, p2=$('rPass2').value;
-    if(!nm||!em||!co||!p1) return toast(UI.fillAll);
+    if(!nm||!em||!co||!p1||!p2) return toast(UI.fillAll);
     if(nm.length<2) return toast(UI.nameShort);
     if(!okEmail(em)) return toast(UI.badEmail);
     if(p1.length<6) return toast(UI.passShort);
     if(p1!==p2) return toast(UI.passNoMatch);
     const id=uid(em);
-    const existing=ld('u_'+id);
-    if(existing && !confirm('Dieses Konto existiert bereits. Möchtest du es überschreiben?')) return;
+    if(ld('u_'+id)) return toast(UI.accountExists);
     const u={id,name:nm,email:em,country:co,lang:lang,ph:hash(p1),ts:Date.now()};
     sv('u_'+id,u);
     localStorage.setItem(CONFIG.prefix+'cur',id);
     APP.lang=lang;
     localStorage.setItem(CONFIG.prefix+'lang',lang);
     APP.user=u;
-    showMenu();
+    toast(UI.regSuccess);
+    setTimeout(showMenu, 300);
 }
 
 function doForgot() {
-    const e=prompt(UI.email+':');
-    if(!e) return;
+    const e=$('fEmail').value.trim().toLowerCase(),
+          p1=$('fPass').value, p2=$('fPass2').value;
+    if(!e||!p1||!p2) return toast(UI.fillAll);
     if(!okEmail(e)) return toast(UI.badEmail);
     const id=uid(e), d=ld('u_'+id);
     if(!d) return toast(UI.noUser);
-    const np=prompt('Neues Passwort (min. 6 Zeichen):');
-    if(!np) return;
-    if(np.length<6) return toast(UI.passShort);
-    d.ph=hash(np);
+    if(p1.length<6) return toast(UI.passShort);
+    if(p1!==p2) return toast(UI.passNoMatch);
+    d.ph=hash(p1);
     sv('u_'+id,d);
-    toast('Passwort wurde zurückgesetzt! Bitte melde dich an.');
+    toast(UI.resetSuccess);
+    setTimeout(()=>showAuth('login'), 600);
 }
 
 // ============== MENU ==============
