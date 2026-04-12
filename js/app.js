@@ -460,7 +460,7 @@ function showMenu() {
             deshalb:'deshalb',denn:'denn-Sätze',aber:'aber-Sätze',nachdem:'nachdem',bevor:'bevor',
             waehrend:'während',relativ:'Relativsätze',passiv:'Passiv',konjunktiv:'Konjunktiv II',
             je_desto:'je...desto',modal:'Modalverben',hauptsatz:'Hauptsätze',sondern:'sondern',
-            seitdem:'seitdem',bis:'bis',sobald:'sobald'};
+            seitdem:'seitdem',bis:'bis',sobald:'sobald',textbau:'Textbau (B2-C2)'};
         snCats.forEach(c=>{snBtns+=sqBtn('📎',snLabels[c]||c,'sentences',c);});
         cats+=catHTML('📐','Satzbau',SENTENCES.length+' Übungen','sentences_all',SENTENCES.length,'catSatz',snBtns);
     }
@@ -478,7 +478,8 @@ function showMenu() {
         sqBtn('🙋','Personalpronomen','pronouns','personal')+
         sqBtn('📎','Possessivpronomen','pronouns','possessiv')+
         sqBtn('🔄','Reflexivpronomen','pronouns','reflexiv')+
-        sqBtn('🔗','Relativpronomen','pronouns','relativ'));
+        sqBtn('🔗','Relativpronomen','pronouns','relativ')+
+        sqBtn('❓','Indefinitpronomen','pronouns','indefinit'));
 
     const regCnt=getUserCount(), onCnt=getOnlineCount();
 
