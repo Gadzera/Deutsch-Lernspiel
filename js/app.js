@@ -1653,7 +1653,19 @@ function rateVWU(rating){
 
 // ============== LESEVERSTEHEN ==============
 function showVWULesen(){
-    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    const v=APP.vwu;
+    let sec=v.test.sections[v.secIdx];
+    // Für EV ZT1: zufälligen Text aus EV_ZT1_LESEN Pool wählen (10 Texte)
+    if(v.test.id==='ev_zt1' && typeof EV_ZT1_LESEN!=='undefined' && EV_ZT1_LESEN.length){
+        if(!v.lesenPick){
+            const pick=EV_ZT1_LESEN[Math.floor(Math.random()*EV_ZT1_LESEN.length)];
+            v.lesenPick=pick;
+        }
+        const p=v.lesenPick;
+        sec={type:'leseverstehen',name:'Leseverstehen',points:sec.points||9,
+             text:'<h3>'+p.title+'</h3>'+p.text,
+             questions:p.questions};
+    }
     let qHTML='';
     sec.questions.forEach((q,qi)=>{
         let inner='';
@@ -1698,7 +1710,11 @@ function showVWULesen(){
         </div>`;
 }
 function checkVWULesen(){
-    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    const v=APP.vwu;
+    let sec=v.test.sections[v.secIdx];
+    if(v.test.id==='ev_zt1' && v.lesenPick){
+        sec={type:'leseverstehen',questions:v.lesenPick.questions};
+    }
     let score=0;
     sec.questions.forEach((q,qi)=>{
         const box=document.getElementById('lvq_'+qi);
