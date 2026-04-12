@@ -1706,6 +1706,21 @@ body {
     color: #333;
     font-weight: 500;
 }
+.corr-formula {
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: rgba(108,99,255,0.08);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: var(--primary);
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.3px;
+}
+[data-theme="dark"] .corr-formula {
+    background: rgba(108,99,255,0.2);
+    color: #a8a0ff;
+}
 .corr-skip-btn {
     width: 44px;
     height: 44px;
