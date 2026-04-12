@@ -424,6 +424,20 @@ function catHTML(icon,title,cnt,progKey,total,bodyId,bodyContent){
 function sqBtn(icon,label,cat,mode){
     return `<button class="sub-quiz-btn" onclick="startQuiz('${cat}','${mode}')">${icon} ${label}</button>`;
 }
+function ruleBtn(cat){
+    if(typeof RULES==='undefined'||!RULES[cat]) return '';
+    return `<button class="sub-quiz-btn rule-btn" onclick="showRule('${cat}')">📖 Regel</button>`;
+}
+function showRule(cat){
+    if(typeof RULES==='undefined'||!RULES[cat]) return;
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="showMenu()">&#8592;</button><span>Grammatikregel</span></div>
+            </div>
+            <div class="quiz-body rule-page">${RULES[cat]}</div>
+        </div>`;
+}
 function toggleCat(id){
     APP.openCat=APP.openCat===id?null:id;
     document.querySelectorAll('.cat-body').forEach(e=>{e.style.display=e.id===APP.openCat?'block':'none';});
@@ -448,10 +462,12 @@ function showMenu() {
         sqBtn('🌍','Übersetzung → Deutsch','words','l12de'));
     // 2. Partizip II
     if(hasPt) cats+=catHTML('📝','Partizip II',PARTIZIP2.length+' Verben','partizip_v2p',PARTIZIP2.length,'catPartiz',
+        ruleBtn('partizip')+
         sqBtn('➡️','Verb → hat/ist + Partizip II','partizip','v2p')+
         sqBtn('🔀','haben oder sein?','partizip','aux'));
     // 3. Reflexive
     if(hasRf) cats+=catHTML('🔄','Reflexive Verben',REFLEXIVE.length+' Verben','reflexive_conj',REFLEXIVE.length,'catReflex',
+        ruleBtn('reflexive')+
         sqBtn('✍️','Konjugation üben','reflexive','conj'));
     // 4. Satzbau
     if(hasSn){
@@ -464,10 +480,11 @@ function showMenu() {
             je_desto:'je...desto',modal:'Modalverben',hauptsatz:'Hauptsätze',sondern:'sondern',
             seitdem:'seitdem',bis:'bis',sobald:'sobald',textbau:'Textbau (B2-C2)'};
         snCats.forEach(c=>{snBtns+=sqBtn('📎',snLabels[c]||c,'sentences',c);});
-        cats+=catHTML('📐','Satzbau',SENTENCES.length+' Übungen','sentences_all',SENTENCES.length,'catSatz',snBtns);
+        cats+=catHTML('📐','Satzbau',SENTENCES.length+' Übungen','sentences_all',SENTENCES.length,'catSatz',ruleBtn('sentences')+snBtns);
     }
     // 5. Präpositionen
     if(hasPp) cats+=catHTML('📌','Präpositionen',PREPOSITIONS.length+' Übungen','prep_all',PREPOSITIONS.length,'catPrep',
+        ruleBtn('prepositions')+
         sqBtn('📌','Alle Präpositionen','prepositions','all')+
         sqBtn('🔄','Wechselpräpositionen','prepositions','wechsel')+
         sqBtn('📗','Dativ-Präpositionen','prepositions','dativ')+
@@ -476,6 +493,7 @@ function showMenu() {
         sqBtn('🔗','Verb + Präposition','prepositions','verb_prep'));
     // 6. Pronomen
     if(hasPn) cats+=catHTML('👥','Pronomen',PRONOUNS.length+' Übungen','pron_all',PRONOUNS.length,'catPron',
+        ruleBtn('pronouns')+
         sqBtn('👤','Alle Pronomen','pronouns','all')+
         sqBtn('🙋','Personalpronomen','pronouns','personal')+
         sqBtn('📎','Possessivpronomen','pronouns','possessiv')+
