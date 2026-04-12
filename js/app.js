@@ -250,6 +250,8 @@ function initApp() {
     if(sL && LANG_NAMES[sL]) APP.lang=sL;
     const sSub=localStorage.getItem(CONFIG.prefix+'sub');
     if(sSub!==null) APP.subliminal=sSub==='true';
+    const sDark=localStorage.getItem(CONFIG.prefix+'dark');
+    if(sDark==='true') document.documentElement.setAttribute('data-theme','dark');
     const cu=localStorage.getItem(CONFIG.prefix+'cur');
     if(cu){const d=ld('u_'+cu);if(d){APP.user=d;showMenu();return;}}
     showAuth();
@@ -447,7 +449,7 @@ function toggleCat(id){
 function showMenu() {
     if(!APP.user) return showAuth();
     updateActivity();
-    const st=getStats(), nc=NOUNS.length, vc=VERBS.length;
+    const st=getStats(), nc=NOUNS.length, vc=VERBS.length, streak=getStreak();
     const hasPt=typeof PARTIZIP2!=='undefined'&&PARTIZIP2.length;
     const hasRf=typeof REFLEXIVE!=='undefined'&&REFLEXIVE.length;
     const hasSn=typeof SENTENCES!=='undefined'&&SENTENCES.length;
@@ -468,7 +470,8 @@ function showMenu() {
     // 3. Reflexive
     if(hasRf) cats+=catHTML('🔄','Reflexive Verben',REFLEXIVE.length+' Verben','reflexive_conj',REFLEXIVE.length,'catReflex',
         ruleBtn('reflexive')+
-        sqBtn('✍️','Konjugation üben','reflexive','conj'));
+        sqBtn('✍️','Satz vervollständigen','reflexive','conj')+
+        sqBtn('🎯','Akkusativ oder Dativ?','reflexive','case'));
     // 4. Satzbau
     if(hasSn){
         const snCats=[...new Set(SENTENCES.map(s=>s.cat))];
@@ -518,10 +521,11 @@ function showMenu() {
                         <div class="user-avatar">${APP.user.country}</div>
                         <div><div class="user-name">${esc(APP.user.name)}</div><div class="user-email">${esc(APP.user.email)}</div></div>
                     </div>
-                    <div class="user-stats-row">
+                    <div class="user-stats-row user-stats-4">
                         <div class="user-stat"><div class="user-stat-value">${st.total}</div><div class="user-stat-label">${UI.games}</div></div>
                         <div class="user-stat"><div class="user-stat-value">${st.avg}%</div><div class="user-stat-label">${UI.avg}</div></div>
                         <div class="user-stat"><div class="user-stat-value">${nc+vc}</div><div class="user-stat-label">${UI.words}</div></div>
+                        <div class="user-stat"><div class="user-stat-value streak-value">${streak.current>0?'🔥 '+streak.current:'-'}</div><div class="user-stat-label">Tage</div></div>
                     </div>
                 </div>
                 <div class="menu-section"><div class="menu-section-title">Quiz-Kategorien</div>${cats}</div>
@@ -540,6 +544,8 @@ function showMenu() {
                             <label class="toggle-switch"><input type="checkbox" ${APP.skipKnown?'checked':''} onchange="APP.skipKnown=this.checked"><span class="toggle-slider"></span></label></div>
                         <div class="toggle-row"><div><div class="toggle-row-label">25. Frame Technologie</div><div class="toggle-row-sub">Unterbewusstes Lernen</div></div>
                             <label class="toggle-switch"><input type="checkbox" ${APP.subliminal?'checked':''} onchange="APP.subliminal=this.checked;localStorage.setItem(CONFIG.prefix+'sub',this.checked)"><span class="toggle-slider"></span></label></div>
+                        <div class="toggle-row"><div><div class="toggle-row-label">Dunkelmodus</div><div class="toggle-row-sub">Augenschonend bei Nacht</div></div>
+                            <label class="toggle-switch"><input type="checkbox" ${localStorage.getItem(CONFIG.prefix+'dark')==='true'?'checked':''} onchange="toggleDark(this.checked)"><span class="toggle-slider"></span></label></div>
                     </div>
                 </div>
                 <div style="text-align:center;margin-bottom:12px"><button class="btn btn-outline" onclick="showStats()" style="width:auto;padding:8px 24px">📊 Meine Statistik</button></div>
@@ -551,6 +557,7 @@ function showMenu() {
 }
 
 function doLogout(){if(!confirm(UI.logoutQ))return;localStorage.removeItem(CONFIG.prefix+'cur');APP.user=null;showAuth();}
+function toggleDark(on){document.documentElement.setAttribute('data-theme',on?'dark':'light');localStorage.setItem(CONFIG.prefix+'dark',on);}
 
 // ============== LANGUAGE MODAL ==============
 function showLangModal(){
@@ -598,7 +605,7 @@ function startQuiz(cat,mode){
     if(!pool.length){toast('Keine Übungen!');return;}
     const n=Math.min(APP.quizCount,pool.length);
     const type=(cat==='sentences')?'builder':'mcq';
-    APP.quiz={type,cat,mode,items:shuffle(pool).slice(0,n),idx:0,score:0,t0:Date.now(),built:[],allW:[],correctS:[]};
+    APP.quiz={type,cat,mode,items:shuffle(pool).slice(0,n),idx:0,score:0,t0:Date.now(),built:[],allW:[],correctS:[],wrongs:[]};
     showQ();
 }
 
@@ -652,12 +659,27 @@ function prepareMCQ(){
             opts=shuffle([...new Set([correct,other,...extras])]).slice(0,5);
         }
     }else if(cat==='reflexive'){
-        const keys=['ich','du','er','wir','ihr','sie'];
-        const labels=['ich ...?','du ...?','er/sie/es ...?','wir ...?','ihr ...?','sie/Sie ...?'];
-        const pi=Math.floor(Math.random()*6);
-        label=labels[pi];display=item.verb;hint=tr(item);correct=item[keys[pi]];
-        const ot=shuffle(REFLEXIVE.filter(x=>x.id!==item.id)).slice(0,3).map(x=>x[keys[pi]]);
-        opts=shuffle([...new Set([...ot,correct])]);
+        if(mode==='case'){
+            label='Akkusativ oder Dativ?';display=item.verb;hint=tr(item);
+            correct=item.case==='akk'?'Akkusativ':'Dativ';
+            opts=['Akkusativ','Dativ'];
+        }else{
+            const keys=['ich','du','er','wir','ihr','sie'];
+            const pronouns=['Ich','Du','Er/Sie/Es','Wir','Ihr','Sie'];
+            const pi=Math.floor(Math.random()*6);
+            const ctx=RF_CONTEXTS[Math.floor(Math.random()*RF_CONTEXTS.length)];
+            label=pronouns[pi]+' ______ '+ctx+'.';
+            display='';
+            hint=tr(item)+' ('+item.verb+')';
+            correct=item[keys[pi]];
+            const sameCase=shuffle(REFLEXIVE.filter(x=>x.id!==item.id&&x.case===item.case));
+            const diffCase=shuffle(REFLEXIVE.filter(x=>x.id!==item.id&&x.case!==item.case));
+            let distractors=[
+                ...sameCase.slice(0,4).map(x=>x[keys[pi]]),
+                ...diffCase.slice(0,2).map(x=>x[keys[pi]])
+            ];
+            opts=shuffle([...new Set([...distractors.slice(0,5),correct])]);
+        }
     }else if(cat==='prepositions'){
         label=item.sentence.replace('___','______');display='';hint=tr(item);
         correct=item.answer;
@@ -708,12 +730,24 @@ function checkA(btn){
     if(ok){
         APP.quiz.score++;btn.classList.add('correct');
         markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);
-    }else{btn.classList.add('incorrect');}
+    }else{
+        btn.classList.add('incorrect');
+        APP.quiz.wrongs.push({item,userAnswer:val,correct:cor});
+        if(navigator.vibrate) navigator.vibrate(100);
+    }
     document.querySelectorAll('.answer-btn').forEach(b=>{b.disabled=true;if(b.dataset.val===cor)b.classList.add('correct');});
     const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+APP.quiz.score;
     if(APP.subliminal) showSubliminal(item);
     setTimeout(()=>{APP.quiz.idx++;showQ();},1200);
 }
+
+// ============== REFLEXIVE CONTEXTS ==============
+const RF_CONTEXTS = [
+    "jeden Morgen","oft","selten","gern","immer","heute","manchmal",
+    "ab und zu","jeden Tag","am Wochenende","morgens","abends",
+    "normalerweise","zu Hause","nach der Arbeit","vor dem Essen",
+    "schnell","langsam","sofort","regelmäßig"
+];
 
 // ============== GRAMMAR HINTS ==============
 const HINTS={
@@ -836,6 +870,7 @@ function checkBuilder(){
     const ok=built.length===correct.length&&built.every((w,i)=>w===correct[i]);
     const item=APP.quiz.items[APP.quiz.idx];
     if(ok){APP.quiz.score++;markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);}
+    else{APP.quiz.wrongs.push({item,userAnswer:built.join(' '),correct:correct.join(' ')});if(navigator.vibrate)navigator.vibrate(100);}
     APP.quiz.checked=true;
     const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+APP.quiz.score;
     if(APP.subliminal) showSubliminal(item);
@@ -879,13 +914,58 @@ function showRes(){
             </div>
             <div class="results-actions">
                 <button class="btn btn-primary" onclick="startQuiz('${APP.quiz.cat}','${APP.quiz.mode}')">🔄 ${UI.again}</button>
+                ${APP.quiz.wrongs&&APP.quiz.wrongs.length?`<button class="btn btn-accent" onclick="showWrongReview()">❌ ${tot-s} Fehler ansehen</button>`:''}
                 <button class="btn btn-outline" onclick="showMenu()">&#8592; ${UI.menu}</button>
             </div>
         </div>`;
 }
 
+function showWrongReview(){
+    if(!APP.quiz||!APP.quiz.wrongs||!APP.quiz.wrongs.length) return;
+    const cards=APP.quiz.wrongs.map((w,i)=>{
+        const q=w.item;
+        const qLabel=q.word||q.german||q.verb||q.sentence||(q.correct?q.correct.join(' '):'')||'';
+        return `<div class="review-card">
+            <div class="review-num">${i+1}</div>
+            <div class="review-body">
+                <div class="review-question">${esc(qLabel)}</div>
+                <div class="review-wrong">✗ ${esc(w.userAnswer)}</div>
+                <div class="review-correct">✓ ${esc(w.correct)}</div>
+            </div>
+        </div>`;
+    }).join('');
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="showRes()">&#8592;</button><span>Fehlerübersicht</span></div>
+            </div>
+            <div class="quiz-body" style="padding-top:16px">
+                ${cards}
+                <button class="btn btn-outline" onclick="showRes()" style="margin-top:16px">&#8592; Zurück</button>
+            </div>
+        </div>`;
+}
+
+// ============== STREAK ==============
+function getStreak(){
+    if(!APP.user) return {current:0,best:0,lastDate:''};
+    return ld('streak_'+APP.user.id)||{current:0,best:0,lastDate:''};
+}
+function updateStreak(){
+    if(!APP.user) return;
+    const k='streak_'+APP.user.id;
+    const d=ld(k)||{current:0,best:0,lastDate:''};
+    const today=new Date().toISOString().slice(0,10);
+    if(d.lastDate===today) return;
+    const yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);
+    d.current=(d.lastDate===yesterday)?(d.current+1):1;
+    d.best=Math.max(d.best,d.current);
+    d.lastDate=today;
+    sv(k,d);
+}
+
 // ============== STATS ==============
-function saveRes(r){if(!APP.user)return;const k='st_'+APP.user.id;const d=ld(k)||{r:[]};d.r.push(r);sv(k,d);}
+function saveRes(r){if(!APP.user)return;updateStreak();const k='st_'+APP.user.id;const d=ld(k)||{r:[]};d.r.push(r);sv(k,d);}
 function getStats(){
     if(!APP.user) return {total:0,avg:0};
     const d=ld('st_'+APP.user.id);
@@ -916,7 +996,7 @@ function getModeName(m){
     const names={
         words_article:'Artikel',words_de2l1:'DE→Übersetzung',words_l12de:'Übersetzung→DE',
         partizip_v2p:'Partizip II',partizip_aux:'haben/sein',
-        reflexive_conj:'Reflexive Verben',
+        reflexive_conj:'Reflexive Verben',reflexive_case:'Reflexiv: Akk/Dat',
         sentences_all:'Satzbau (alle)',
         prep_all:'Präpositionen',pron_all:'Pronomen'
     };
