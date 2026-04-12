@@ -506,18 +506,17 @@ function showMenu() {
         sqBtn('🔗','Relativpronomen','pronouns','relativ')+
         sqBtn('❓','Indefinitpronomen','pronouns','indefinit'));
 
-    // 7. VWU
+    // 7. VWU — каждый уровень отдельной карточкой
     const hasVWU=typeof VWU!=='undefined'&&VWU.levels;
     if(hasVWU){
-        const totalVWU=VWU.levels.reduce((s,l)=>s+l.tests.length,0);
-        let vwuBtns='';
         VWU.levels.forEach(lv=>{
+            let lvBtns='';
             lv.tests.forEach(t=>{
-                vwuBtns+=`<button class="sub-quiz-btn" onclick="startVWU('${lv.id}','${t.id}')">📋 ${t.name}</button>`;
+                lvBtns+=`<button class="sub-quiz-btn" onclick="startVWU('${lv.id}','${t.id}')">📋 ${t.name}</button>`;
             });
-            vwuBtns+=`<div style="border-top:1px solid var(--border);margin:4px 0"></div>`;
+            const lvIcon=lv.id==='av'?'📗':lv.id==='ev'?'📘':lv.id==='gf'?'📙':'📕';
+            cats+=catHTML(lvIcon,lv.name,lv.tests.length+' Tests / '+lv.desc,'vwu_'+lv.id,lv.tests.length,'catVWU_'+lv.id,lvBtns);
         });
-        cats+=catHTML('🎓','VWU Prüfungsvorbereitung',totalVWU+' Tests','vwu_progress',totalVWU,'catVWU',vwuBtns);
     }
 
     const regCnt=getUserCount(), onCnt=getOnlineCount();
