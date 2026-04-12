@@ -1543,16 +1543,35 @@ function startVWU(levelId,testId){
     if(typeof VWU==='undefined') return;
     const level=VWU.levels.find(l=>l.id===levelId);
     if(!level) return;
-    const test=level.tests.find(t=>t.id===testId);
-    if(!test) return;
-    APP.vwu={level,test,secIdx:0,gramIdx:0,gramScore:0,gramTotal:0,wrongs:[],t0:Date.now()};
+    const origTest=level.tests.find(t=>t.id===testId);
+    if(!origTest) return;
+    // Tiefe Kopie der Sektionen, damit Pool-Substitutionen pro Test-Lauf frisch sind
+    const test=Object.assign({},origTest,{sections:origTest.sections.map(s=>Object.assign({},s))});
+    APP.vwu={level,test,secIdx:0,gramIdx:0,gramScore:0,gramTotal:0,wrongs:[],t0:Date.now(),lesenPick:null};
     showVWUSection();
 }
 
 function showVWUSection(){
     const v=APP.vwu;
     if(!v||v.secIdx>=v.test.sections.length){showVWUResults();return;}
-    const sec=v.test.sections[v.secIdx];
+    let sec=v.test.sections[v.secIdx];
+    // EV ZT1: Pool-basierte Substitution für Wortschatz/Strukturen/Grammatik
+    if(v.test.id==='ev_zt1' && typeof EV_ZT1_POOL!=='undefined' && !sec._poolApplied){
+        const pick=(arr)=>arr[Math.floor(Math.random()*arr.length)];
+        if(sec.type==='wortschatz' && EV_ZT1_POOL.wortschatz.length){
+            const p=pick(EV_ZT1_POOL.wortschatz);
+            sec=Object.assign({},sec,{tasks:p.tasks,_poolApplied:true});
+            v.test.sections[v.secIdx]=sec;
+        } else if(sec.type==='strukturen' && EV_ZT1_POOL.strukturen.length){
+            const p=pick(EV_ZT1_POOL.strukturen);
+            sec=Object.assign({},sec,{tasks:p.tasks,_poolApplied:true});
+            v.test.sections[v.secIdx]=sec;
+        } else if(sec.type==='grammatik' && EV_ZT1_POOL.grammatik.length){
+            const p=pick(EV_ZT1_POOL.grammatik);
+            sec=Object.assign({},sec,{items:p.items,_poolApplied:true});
+            v.test.sections[v.secIdx]=sec;
+        }
+    }
     if(sec.type==='grammatik'){v.gramIdx=0;v.gramScore=0;v.gramTotal=sec.items.length;showVWUGram();}
     else if(sec.type==='schreiben'){showVWUSchreiben();}
     else if(sec.type==='leseverstehen'){showVWULesen();}
