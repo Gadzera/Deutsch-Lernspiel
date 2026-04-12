@@ -194,9 +194,10 @@ function resetCatProgress(key) {
 function getUserCount() {
     let c=0;
     for(let i=0;i<localStorage.length;i++){
-        if(localStorage.key(i).startsWith(CONFIG.prefix+'u_u_')) c++;
+        const k=localStorage.key(i);
+        if(k && k.startsWith(CONFIG.prefix+'u_u_')) c++;
     }
-    return c;
+    return Math.max(1,c);
 }
 function updateActivity() {
     if(!APP.user) return;
@@ -484,7 +485,11 @@ function showMenu() {
             waehrend:'während',relativ:'Relativsätze',passiv:'Passiv',konjunktiv:'Konjunktiv II',
             je_desto:'je...desto',modal:'Modalverben',hauptsatz:'Hauptsätze',sondern:'sondern',
             seitdem:'seitdem',bis:'bis',sobald:'sobald',textbau:'Textbau (B2-C2)'};
-        snCats.forEach(c=>{snBtns+=sqBtn('📎',snLabels[c]||c,'sentences',c);});
+        snCats.forEach(c=>{
+            const ruleKey='satz_'+c;
+            const hasRule=typeof RULES!=='undefined'&&RULES[ruleKey];
+            snBtns+=(hasRule?`<button class="sub-quiz-btn rule-btn" onclick="showRule('${ruleKey}')" style="font-size:0.75rem;opacity:0.7;padding:6px 10px">📖 Regel: ${snLabels[c]||c}</button>`:'')+sqBtn('📎',snLabels[c]||c,'sentences',c);
+        });
         cats+=catHTML('📐','Satzbau',SENTENCES.length+' Übungen','sentences_all',SENTENCES.length,'catSatz',ruleBtn('sentences')+snBtns);
     }
     // 5. Präpositionen
@@ -506,17 +511,18 @@ function showMenu() {
         sqBtn('🔗','Relativpronomen','pronouns','relativ')+
         sqBtn('❓','Indefinitpronomen','pronouns','indefinit'));
 
-    // 7. VWU — каждый уровень отдельной карточкой
+    // 7. VWU — отдельная кнопка ведёт в showVWUMenu()
     const hasVWU=typeof VWU!=='undefined'&&VWU.levels;
     if(hasVWU){
-        VWU.levels.forEach(lv=>{
-            let lvBtns='';
-            lv.tests.forEach(t=>{
-                lvBtns+=`<button class="sub-quiz-btn" onclick="startVWU('${lv.id}','${t.id}')">📋 ${t.name}</button>`;
-            });
-            const lvIcon=lv.id==='av'?'📗':lv.id==='ev'?'📘':lv.id==='gf'?'📙':'📕';
-            cats+=catHTML(lvIcon,lv.name,lv.tests.length+' Tests / '+lv.desc,'vwu_'+lv.id,lv.tests.length,'catVWU_'+lv.id,lvBtns);
-        });
+        const totalTests=VWU.levels.reduce((s,l)=>s+l.tests.length,0);
+        cats+=`<div class="cat-card vwu-entry-card">
+            <div class="cat-header" onclick="showVWUMenu()">
+                <span class="cat-icon">🎓</span>
+                <div class="cat-info"><div class="cat-title">Prüfungsvorbereitung VWU</div>
+                <div class="cat-sub">${VWU.levels.length} Stufen &bull; ${totalTests} Zwischentests</div></div>
+                <span class="cat-arrow">&rsaquo;</span>
+            </div>
+        </div>`;
     }
 
     const regCnt=getUserCount(), onCnt=getOnlineCount();
@@ -952,21 +958,8 @@ function getHints(cat){
 // ============== SENTENCE BUILDER ==============
 // ============== SENTENCE SPLITTING + EXTRA DISTRACTORS ==============
 function splitPart(s){
-    // Split phrases of 3+ words, keep 2-word units together
-    const w=s.split(/\s+/);
-    if(w.length<=2) return [s];
-    // Keep common 2-word combos
-    const keep=['zu Hause','ins Kino','im Bett','im Park','im Café','zu spät','zu früh','ein Buch','zum Arzt','zur Arbeit','nach Hause','ins Bett','im Restaurant','am Wochenende','am Montag','zum Bahnhof','ins Ausland','im Garten','im Süden','am Strand','im Norden','aufs Land'];
-    const result=[];
-    let i=0;
-    while(i<w.length){
-        if(i<w.length-1){
-            const pair=w[i]+' '+w[i+1];
-            if(keep.includes(pair)){result.push(pair);i+=2;continue;}
-        }
-        result.push(w[i]);i++;
-    }
-    return result;
+    // Split ALL phrases into individual words — no multi-word chips
+    return s.split(/\s+/).filter(w=>w);
 }
 function splitSentenceParts(arr){
     const out=[];
@@ -1506,6 +1499,45 @@ function showStats(){
         </div>`;
 }
 
+// ============== VWU MENU ==============
+function showVWUMenu(){
+    let content='';
+    VWU.levels.forEach(lv=>{
+        const icon=lv.id==='av'?'📗':lv.id==='ev'?'📘':lv.id==='gf'?'📙':'📕';
+        let testCards='';
+        lv.tests.forEach(t=>{
+            const secTags=t.sections.map(s=>{
+                if(s.type==='leseverstehen') return '<span class="vwu-sec-tag vwu-tag-lesen">📖 Lesen</span>';
+                if(s.type==='wortschatz') return '<span class="vwu-sec-tag vwu-tag-wort">📚 Wortschatz</span>';
+                if(s.type==='strukturen') return '<span class="vwu-sec-tag vwu-tag-struk">🔧 Strukturen</span>';
+                if(s.type==='grammatik') return '<span class="vwu-sec-tag vwu-tag-gram">📝 Grammatik</span>';
+                if(s.type==='schreiben') return '<span class="vwu-sec-tag vwu-tag-schr">✍️ Schreiben</span>';
+                return '<span class="vwu-sec-tag">'+esc(s.name)+'</span>';
+            }).join('');
+            testCards+=`<button class="sub-quiz-btn vwu-test-btn" onclick="startVWU('${lv.id}','${t.id}')">
+                <div class="vwu-test-name">📋 ${esc(t.name)}</div>
+                <div class="vwu-test-tags">${secTags}</div>
+            </button>`;
+        });
+        const open=APP.openCat==='catVWU_'+lv.id;
+        content+=`<div class="cat-card">
+            <div class="cat-header" onclick="toggleCat('catVWU_${lv.id}')">
+                <span class="cat-icon">${icon}</span>
+                <div class="cat-info"><div class="cat-title">${esc(lv.name)}</div><div class="cat-sub">${lv.tests.length} Tests &bull; ${esc(lv.desc)}</div></div>
+                <span class="cat-arrow ${open?'open':''}">&rsaquo;</span>
+            </div>
+            <div class="cat-body" id="catVWU_${lv.id}" style="display:${open?'block':'none'}">${testCards}</div>
+        </div>`;
+    });
+    $('app').innerHTML=`
+        <div class="app-shell">
+            <div class="app-header">
+                <div class="app-header-left"><button class="quiz-back" onclick="showMenu()">&#8592;</button><h1>🎓 Prüfungsvorbereitung</h1></div>
+            </div>
+            <div class="app-content"><div class="menu-scroll" style="padding:12px 16px">${content}</div></div>
+        </div>`;
+}
+
 // ============== VWU TEST ENGINE ==============
 function startVWU(levelId,testId){
     if(typeof VWU==='undefined') return;
@@ -1523,6 +1555,10 @@ function showVWUSection(){
     const sec=v.test.sections[v.secIdx];
     if(sec.type==='grammatik'){v.gramIdx=0;v.gramScore=0;v.gramTotal=sec.items.length;showVWUGram();}
     else if(sec.type==='schreiben'){showVWUSchreiben();}
+    else if(sec.type==='leseverstehen'){showVWULesen();}
+    else if(sec.type==='wortschatz'){showVWUWortschatz();}
+    else if(sec.type==='strukturen'){showVWUStrukturen();}
+    else{v.secIdx++;showVWUSection();}
 }
 
 function showVWUGram(){
@@ -1615,13 +1651,235 @@ function rateVWU(rating){
     showVWUSection();
 }
 
+// ============== LESEVERSTEHEN ==============
+function showVWULesen(){
+    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    let qHTML='';
+    sec.questions.forEach((q,qi)=>{
+        let optsH='';
+        q.opts.forEach((o,oi)=>{
+            optsH+=`<label class="vwu-lv-opt"><input type="radio" name="lvq_${qi}" value="${oi}"><span>${esc(o)}</span></label>`;
+        });
+        qHTML+=`<div class="vwu-lv-question" id="lvq_${qi}">
+            <div class="vwu-lv-qnum">${qi+1}. ${esc(q.q)} <span class="vwu-lv-pts">(${q.points||1} P.)</span></div>
+            ${optsH}
+        </div>`;
+    });
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span>${v.test.name} &bull; Leseverstehen</span></div>
+                <span class="quiz-score" id="qsc">&#10003; ${v.gramScore}</span>
+            </div>
+            <div class="quiz-body">
+                <div class="vwu-section-label">Leseverstehen &bull; ${sec.points||9} Punkte</div>
+                <div class="vwu-text-box">${sec.text}</div>
+                <div class="vwu-lv-questions">${qHTML}</div>
+                <button class="btn btn-primary" onclick="checkVWULesen()" style="margin-top:16px">Prüfen</button>
+            </div>
+        </div>`;
+}
+function checkVWULesen(){
+    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    let score=0;
+    sec.questions.forEach((q,qi)=>{
+        const sel=document.querySelector('input[name="lvq_'+qi+'"]:checked');
+        const userVal=sel?parseInt(sel.value):-1;
+        const ok=userVal===q.ans;
+        const box=document.getElementById('lvq_'+qi);
+        if(!box) return;
+        if(ok){score+=(q.points||1);box.classList.add('vwu-lv-correct');}
+        else{box.classList.add('vwu-lv-wrong');v.wrongs.push({q:q.q,userAnswer:userVal>=0?q.opts[userVal]:'—',correct:q.opts[q.ans],rule:'Leseverstehen: '+q.opts[q.ans]});}
+        box.querySelectorAll('input').forEach(i=>i.disabled=true);
+        // highlight correct
+        box.querySelectorAll('.vwu-lv-opt').forEach((o,oi)=>{if(oi===q.ans)o.classList.add('vwu-lv-opt-correct');});
+    });
+    v.gramScore+=score;
+    const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+v.gramScore;
+    // replace button with next
+    document.querySelectorAll('.quiz-body .btn-primary').forEach(b=>{
+        b.textContent='Weiter →';b.setAttribute('onclick','nextVWUSec()');
+    });
+}
+function nextVWUSec(){APP.vwu.secIdx++;showVWUSection();}
+
+// ============== WORTSCHATZ ==============
+function showVWUWortschatz(){
+    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    let tasksH='';
+    sec.tasks.forEach((task,ti)=>{
+        let innerH='';
+        if(task.type==='noun2verb'){
+            // Noun → Verb transformation + fill sentence
+            innerH=`<div class="vwu-ws-example">Beispiel: <em>${esc(task.example.noun)}</em> → <strong><em>${esc(task.example.verb)}</em></strong>: ${task.example.sentence.replace(task.example.verb,'<u>'+esc(task.example.verb)+'</u>')}</div>`;
+            task.items.forEach((it,ii)=>{
+                innerH+=`<div class="vwu-ws-item"><span class="vwu-ws-noun">${esc(it.noun)}</span> → <input class="vwu-ws-input" id="ws_${ti}_${ii}" placeholder="..." autocomplete="off" autocapitalize="off"><span class="vwu-ws-sent">${esc(it.sentence)}</span></div>`;
+            });
+        } else if(task.type==='adjectives'){
+            // Mark adjectives from word list
+            innerH=`<div class="vwu-ws-wordgrid">`;
+            task.words.forEach((w,wi)=>{
+                innerH+=`<label class="vwu-ws-chip"><input type="checkbox" id="adj_${ti}_${wi}" value="${wi}"><span>${esc(w)}</span></label>`;
+            });
+            innerH+=`</div>`;
+        } else if(task.type==='antonyms'){
+            // Write the opposite
+            innerH=`<div class="vwu-ws-example">Beispiel: <em>${esc(task.example.word)}</em> → <strong><em>${esc(task.example.answer)}</em></strong></div>`;
+            task.items.forEach((it,ii)=>{
+                innerH+=`<div class="vwu-ws-item"><span class="vwu-ws-noun">${esc(it.word)}</span> → <input class="vwu-ws-input" id="ant_${ti}_${ii}" placeholder="..." autocomplete="off" autocapitalize="off"></div>`;
+            });
+        }
+        tasksH+=`<div class="vwu-task-block"><div class="vwu-task-title">${ti+1}. ${esc(task.q)} <span class="vwu-lv-pts">(${esc(task.scoring)})</span></div>${innerH}</div>`;
+    });
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span>${v.test.name} &bull; Wortschatz</span></div>
+                <span class="quiz-score" id="qsc">&#10003; ${v.gramScore}</span>
+            </div>
+            <div class="quiz-body">
+                <div class="vwu-section-label">Wortschatz &bull; ${sec.points||8} Punkte</div>
+                ${tasksH}
+                <button class="btn btn-primary" onclick="checkVWUWortschatz()" style="margin-top:16px">Prüfen</button>
+            </div>
+        </div>`;
+}
+function checkVWUWortschatz(){
+    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    let score=0;
+    sec.tasks.forEach((task,ti)=>{
+        if(task.type==='noun2verb'){
+            task.items.forEach((it,ii)=>{
+                const inp=document.getElementById('ws_'+ti+'_'+ii);
+                if(!inp) return;
+                const val=inp.value.trim().toLowerCase();
+                const ok=it.answers.some(a=>a.toLowerCase()===val);
+                inp.classList.add(ok?'vwu-inp-correct':'vwu-inp-wrong');
+                inp.disabled=true;
+                if(ok) score+=task.perItem||0.5;
+                else{inp.insertAdjacentHTML('afterend','<span class="vwu-ws-answer">'+esc(it.answers[0])+'</span>');v.wrongs.push({q:it.noun+' → ?',userAnswer:val||'—',correct:it.answers[0],rule:'Nomen → Verb'});}
+            });
+        } else if(task.type==='adjectives'){
+            const correctSet=new Set(task.correctIdxs);
+            task.words.forEach((w,wi)=>{
+                const cb=document.getElementById('adj_'+ti+'_'+wi);
+                if(!cb) return;
+                const checked=cb.checked, isCorr=correctSet.has(wi);
+                cb.disabled=true;
+                const lbl=cb.closest('.vwu-ws-chip');
+                if(checked&&isCorr){lbl.classList.add('vwu-chip-correct');score+=task.perItem||0.5;}
+                else if(checked&&!isCorr){lbl.classList.add('vwu-chip-wrong');v.wrongs.push({q:'Adjektiv?',userAnswer:w,correct:'Nein',rule:w+' ist kein Adjektiv'});}
+                else if(!checked&&isCorr){lbl.classList.add('vwu-chip-missed');}
+            });
+        } else if(task.type==='antonyms'){
+            task.items.forEach((it,ii)=>{
+                const inp=document.getElementById('ant_'+ti+'_'+ii);
+                if(!inp) return;
+                const val=inp.value.trim().toLowerCase();
+                const ok=it.answers.some(a=>a.toLowerCase()===val);
+                inp.classList.add(ok?'vwu-inp-correct':'vwu-inp-wrong');
+                inp.disabled=true;
+                if(ok) score+=task.perItem||0.5;
+                else{inp.insertAdjacentHTML('afterend','<span class="vwu-ws-answer">'+esc(it.answers[0])+'</span>');v.wrongs.push({q:it.word+' → Gegenteil?',userAnswer:val||'—',correct:it.answers[0],rule:'Gegenteil: '+it.word+' → '+it.answers[0]});}
+            });
+        }
+    });
+    v.gramScore+=Math.round(score*10)/10;
+    const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+v.gramScore;
+    document.querySelectorAll('.quiz-body .btn-primary').forEach(b=>{b.textContent='Weiter →';b.setAttribute('onclick','nextVWUSec()');});
+}
+
+// ============== STRUKTUREN ==============
+function showVWUStrukturen(){
+    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    let tasksH='';
+    sec.tasks.forEach((task,ti)=>{
+        let innerH='';
+        if(task.type==='fill'){
+            // Fill in blanks in text/sentences
+            if(task.intro) innerH+=`<div class="vwu-str-intro">${task.intro}</div>`;
+            task.items.forEach((it,ii)=>{
+                const sentH=it.sentence.replace(/___/g,`<input class="vwu-ws-input vwu-str-fill" id="str_${ti}_${ii}" placeholder="..." autocomplete="off" autocapitalize="off">`);
+                innerH+=`<div class="vwu-str-item">${it.prefix?'<span class="vwu-str-prefix">'+esc(it.prefix)+'</span>':''} ${sentH}</div>`;
+            });
+        } else if(task.type==='rewrite'){
+            // Rewrite sentences (e.g., Konjunktiv II)
+            if(task.intro) innerH+=`<div class="vwu-str-intro">${task.intro}</div>`;
+            task.items.forEach((it,ii)=>{
+                innerH+=`<div class="vwu-str-item"><div class="vwu-str-orig">${esc(it.original)}</div><input class="vwu-ws-input vwu-str-long" id="rew_${ti}_${ii}" placeholder="..." autocomplete="off"></div>`;
+            });
+        } else if(task.type==='complete'){
+            // Complete sentence beginnings
+            if(task.intro) innerH+=`<div class="vwu-str-intro">${task.intro}</div>`;
+            task.items.forEach((it,ii)=>{
+                innerH+=`<div class="vwu-str-item"><span class="vwu-str-prefix">${esc(it.prefix)}</span><input class="vwu-ws-input vwu-str-long" id="cmp_${ti}_${ii}" placeholder="..." autocomplete="off"></div>`;
+            });
+        } else if(task.type==='verbs_table'){
+            // Select correct verb + build sentence (stehen/liegen/hängen/stellen/legen)
+            if(task.intro) innerH+=`<div class="vwu-str-intro">${task.intro}</div>`;
+            if(task.verbs) innerH+=`<div class="vwu-str-verbs">${task.verbs.map(v=>'<span class="vwu-str-verb">'+esc(v)+'</span>').join(' ')}</div>`;
+            task.items.forEach((it,ii)=>{
+                innerH+=`<div class="vwu-str-item"><span class="vwu-str-prefix">${esc(it.prompt)}</span><input class="vwu-ws-input vwu-str-long" id="vtb_${ti}_${ii}" placeholder="..." autocomplete="off"></div>`;
+            });
+        }
+        tasksH+=`<div class="vwu-task-block"><div class="vwu-task-title">${ti+1}. ${esc(task.q)} <span class="vwu-lv-pts">(${esc(task.scoring)})</span></div>${innerH}</div>`;
+    });
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span>${v.test.name} &bull; Strukturen</span></div>
+                <span class="quiz-score" id="qsc">&#10003; ${v.gramScore}</span>
+            </div>
+            <div class="quiz-body">
+                <div class="vwu-section-label">Strukturen &bull; ${sec.points||23} Punkte</div>
+                ${tasksH}
+                <button class="btn btn-primary" onclick="checkVWUStrukturen()" style="margin-top:16px">Prüfen</button>
+            </div>
+        </div>`;
+}
+function checkVWUStrukturen(){
+    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    let score=0;
+    sec.tasks.forEach((task,ti)=>{
+        const items=task.items||[];
+        items.forEach((it,ii)=>{
+            let inputId='';
+            if(task.type==='fill') inputId='str_'+ti+'_'+ii;
+            else if(task.type==='rewrite') inputId='rew_'+ti+'_'+ii;
+            else if(task.type==='complete') inputId='cmp_'+ti+'_'+ii;
+            else if(task.type==='verbs_table') inputId='vtb_'+ti+'_'+ii;
+            const inp=document.getElementById(inputId);
+            if(!inp) return;
+            const val=inp.value.trim().toLowerCase().replace(/\s+/g,' ');
+            const ok=it.answers.some(a=>a.toLowerCase().replace(/\s+/g,' ')===val);
+            inp.classList.add(ok?'vwu-inp-correct':'vwu-inp-wrong');
+            inp.disabled=true;
+            if(ok) score+=task.perItem||1;
+            else{
+                inp.insertAdjacentHTML('afterend','<span class="vwu-ws-answer">'+esc(it.answers[0])+'</span>');
+                v.wrongs.push({q:it.prefix||it.original||it.prompt||it.sentence||'',userAnswer:val||'—',correct:it.answers[0],rule:task.q});
+            }
+        });
+    });
+    v.gramScore+=Math.round(score*10)/10;
+    const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+v.gramScore;
+    document.querySelectorAll('.quiz-body .btn-primary').forEach(b=>{b.textContent='Weiter →';b.setAttribute('onclick','nextVWUSec()');});
+}
+
 function showVWUResults(){
     const v=APP.vwu;
     if(!v) return showMenu();
     const ts=Math.round((Date.now()-v.t0)/1000);
-    const gramSec=v.test.sections.find(s=>s.type==='grammatik');
-    const tot=gramSec?gramSec.items.length:0;
-    const pct=tot>0?Math.round(v.gramScore/tot*100):0;
+    // Calculate total points across all sections
+    let maxPts=0;
+    v.test.sections.forEach(s=>{
+        if(s.type==='grammatik') maxPts+=s.items.length;
+        else if(s.type==='leseverstehen') maxPts+=(s.points||9);
+        else if(s.type==='wortschatz') maxPts+=(s.points||8);
+        else if(s.type==='strukturen') maxPts+=(s.points||23);
+    });
+    const tot=maxPts||1;
+    const pct=Math.round(v.gramScore/tot*100);
     saveRes({d:Date.now(),s:v.gramScore,tot,pct,ts,m:'vwu_'+v.test.id});
     let emoji,msg;
     if(pct>=80){emoji='🎉';msg='Ausgezeichnet!';}
@@ -1645,7 +1903,7 @@ function showVWUResults(){
             <div class="results-emoji">${emoji}</div>
             <div class="results-title">${msg}</div>
             <div class="results-score">${v.gramScore}/${tot}</div>
-            <div class="results-percent">Grammatik: ${pct}%</div>
+            <div class="results-percent">${pct}%</div>
             ${v.writeRating?`<div style="margin:8px 0;font-size:0.9rem">Schreiben: <strong>${v.writeRating}</strong></div>`:''}
             <div class="results-details">
                 <div class="results-detail-row"><span>Richtig</span><span style="color:var(--success)">${v.gramScore}</span></div>

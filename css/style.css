@@ -1838,3 +1838,79 @@ body {
     border-color: var(--border);
     color: var(--text);
 }
+
+/* VWU Menu */
+.vwu-entry-card { border-left: 3px solid var(--primary); }
+.vwu-test-btn { text-align: left !important; display: flex; flex-direction: column; gap: 4px; }
+.vwu-test-name { font-weight: 600; }
+.vwu-test-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.vwu-sec-tag { font-size: 0.65rem; padding: 2px 6px; border-radius: 8px; background: var(--bg); color: var(--text-secondary); }
+.vwu-tag-lesen { background: #e3f2fd; color: #1565c0; }
+.vwu-tag-wort { background: #f3e5f5; color: #7b1fa2; }
+.vwu-tag-struk { background: #fff3e0; color: #e65100; }
+.vwu-tag-gram { background: #e8f5e9; color: #2e7d32; }
+.vwu-tag-schr { background: #fce4ec; color: #c62828; }
+[data-theme="dark"] .vwu-tag-lesen { background: #0d47a1; color: #bbdefb; }
+[data-theme="dark"] .vwu-tag-wort { background: #4a148c; color: #e1bee7; }
+[data-theme="dark"] .vwu-tag-struk { background: #bf360c; color: #ffccbc; }
+[data-theme="dark"] .vwu-tag-gram { background: #1b5e20; color: #c8e6c9; }
+[data-theme="dark"] .vwu-tag-schr { background: #b71c1c; color: #ffcdd2; }
+
+/* VWU Section Label */
+.vwu-section-label { font-size: 0.85rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; padding: 8px 12px; background: var(--primary-light, #e8eaf6); border-radius: 8px; text-align: center; }
+
+/* Leseverstehen */
+.vwu-text-box { max-height: 50vh; overflow-y: auto; padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--card, #fff); font-size: 0.88rem; line-height: 1.7; margin-bottom: 16px; }
+.vwu-text-box h3 { font-size: 1.05rem; margin-bottom: 10px; font-weight: 700; }
+.vwu-text-box h4 { font-size: 0.9rem; font-weight: 600; margin: 14px 0 6px; color: var(--primary); }
+.vwu-text-box p { margin-bottom: 8px; }
+.vwu-lv-questions { display: flex; flex-direction: column; gap: 10px; }
+.vwu-lv-question { padding: 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--card, #fff); transition: border-color 0.3s; }
+.vwu-lv-qnum { font-weight: 600; font-size: 0.85rem; margin-bottom: 8px; }
+.vwu-lv-pts { font-weight: 400; color: var(--text-secondary); font-size: 0.75rem; }
+.vwu-lv-opt { display: flex; align-items: flex-start; gap: 8px; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: background 0.2s; }
+.vwu-lv-opt:hover { background: var(--bg); }
+.vwu-lv-opt input[type="radio"] { margin-top: 3px; flex-shrink: 0; }
+.vwu-lv-correct { border-color: var(--success) !important; background: rgba(76,175,80,0.06) !important; }
+.vwu-lv-wrong { border-color: var(--danger) !important; background: rgba(229,57,53,0.06) !important; }
+.vwu-lv-opt-correct { background: rgba(76,175,80,0.15) !important; border-radius: 8px; font-weight: 600; }
+
+/* Wortschatz */
+.vwu-task-block { margin-bottom: 20px; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--card, #fff); }
+.vwu-task-title { font-weight: 600; font-size: 0.85rem; margin-bottom: 10px; }
+.vwu-ws-example { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 10px; padding: 8px; background: var(--bg); border-radius: 8px; }
+.vwu-ws-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; font-size: 0.85rem; }
+.vwu-ws-noun { font-weight: 600; min-width: 100px; }
+.vwu-ws-sent { color: var(--text-secondary); font-size: 0.82rem; }
+.vwu-ws-input { border: none; border-bottom: 2px solid var(--border); padding: 4px 8px; font-size: 0.85rem; width: 120px; background: transparent; color: var(--text); outline: none; transition: border-color 0.2s; }
+.vwu-ws-input:focus { border-bottom-color: var(--primary); }
+.vwu-inp-correct { border-bottom-color: var(--success) !important; color: var(--success) !important; font-weight: 600; }
+.vwu-inp-wrong { border-bottom-color: var(--danger) !important; color: var(--danger) !important; text-decoration: line-through; }
+.vwu-ws-answer { font-size: 0.8rem; color: var(--success); font-weight: 600; margin-left: 4px; }
+.vwu-ws-wordgrid { display: flex; flex-wrap: wrap; gap: 6px; }
+.vwu-ws-chip { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; border: 1px solid var(--border); border-radius: 20px; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; user-select: none; }
+.vwu-ws-chip:hover { background: var(--bg); }
+.vwu-ws-chip input { display: none; }
+.vwu-ws-chip input:checked + span { color: var(--primary); font-weight: 600; }
+.vwu-ws-chip input:checked ~ span { color: var(--primary); }
+.vwu-ws-chip:has(input:checked) { border-color: var(--primary); background: var(--primary-light, #e8eaf6); }
+.vwu-chip-correct { border-color: var(--success) !important; background: rgba(76,175,80,0.1) !important; }
+.vwu-chip-wrong { border-color: var(--danger) !important; background: rgba(229,57,53,0.1) !important; }
+.vwu-chip-missed { border-color: var(--warning) !important; background: rgba(255,152,0,0.1) !important; }
+
+/* Strukturen */
+.vwu-str-intro { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.6; }
+.vwu-str-item { margin-bottom: 10px; font-size: 0.85rem; line-height: 1.6; }
+.vwu-str-prefix { font-weight: 600; margin-right: 4px; }
+.vwu-str-orig { font-style: italic; margin-bottom: 4px; color: var(--text-secondary); }
+.vwu-str-long { width: 100%; min-width: 200px; }
+.vwu-str-fill { width: 100px; }
+.vwu-str-verbs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; padding: 8px; background: var(--bg); border-radius: 8px; }
+.vwu-str-verb { padding: 4px 10px; border: 1px solid var(--border); border-radius: 16px; font-size: 0.82rem; font-weight: 500; }
+
+[data-theme="dark"] .vwu-text-box { background: var(--card); }
+[data-theme="dark"] .vwu-lv-question { background: var(--card); }
+[data-theme="dark"] .vwu-task-block { background: var(--card); }
+[data-theme="dark"] .vwu-section-label { background: rgba(99,102,241,0.15); }
+[data-theme="dark"] .vwu-ws-example { background: rgba(255,255,255,0.05); }
+[data-theme="dark"] .vwu-str-verbs { background: rgba(255,255,255,0.05); }
