@@ -631,6 +631,41 @@ function showQ(){
 }
 
 // ============== MCQ QUIZ ==============
+// ============== PARTIZIP FAKE FORMS ==============
+function genFakePForm(p){
+    if(p.endsWith('t')&&!p.endsWith('et')) return p.slice(0,-1)+'en';
+    if(p.endsWith('en')) return p.slice(0,-2)+'t';
+    if(p.endsWith('et')) return p.slice(0,-2)+'t';
+    return p+'t';
+}
+function genFakePartizips(item){
+    const p=item.partizip,aux=item.aux,wrongAux=aux==='haben'?'sein':'haben';
+    const fakes=[];
+    // 1. Wrong aux + correct partizip
+    fakes.push(wrongAux+' '+p);
+    // 2. Wrong ending (-t↔-en)
+    fakes.push(aux+' '+genFakePForm(p));
+    // 3. Missing ge-
+    if(p.startsWith('ge')) fakes.push(aux+' '+p.slice(2));
+    // 4. Extra ge- where shouldn't be
+    if(!p.startsWith('ge')&&!p.includes('ge')) fakes.push(aux+' ge'+p);
+    // 5. Wrong ending + wrong aux
+    fakes.push(wrongAux+' '+genFakePForm(p));
+    // 6. Extra suffix
+    if(p.endsWith('t')) fakes.push(aux+' '+p+'et');
+    else fakes.push(aux+' '+p+'t');
+    // 7. For separable: wrong ge- placement
+    const sepPre='auf,an,ein,aus,zu,zurück,mit,um,vor,weg,nach,ab,hin'.split(',');
+    for(const sp of sepPre){
+        if(p.startsWith(sp+'ge')){
+            fakes.push(aux+' ge'+sp+p.slice(sp.length+2));
+            break;
+        }
+    }
+    const correct=aux+' '+p;
+    return [...new Set(fakes)].filter(f=>f!==correct);
+}
+
 function prepareMCQ(){
     const item=APP.quiz.items[APP.quiz.idx],cat=APP.quiz.cat,mode=APP.quiz.mode;
     let label='',display='',hint='',opts=[],correct='',isArt=false;
@@ -653,25 +688,19 @@ function prepareMCQ(){
         if(mode==='v2p'){
             const fullForm=item.aux+' '+item.partizip;
             label='Wie ist das Perfekt?';display=item.verb;hint=tr(item);correct=fullForm;
-            // Generate similar-looking distractors
-            const sameAux=P.filter(x=>x.id!==item.id&&x.aux===item.aux);
-            const diffAux=P.filter(x=>x.id!==item.id&&x.aux!==item.aux);
-            let distractors=[];
-            // Add same aux + similar partizip (most confusing)
-            distractors.push(...shuffle(sameAux).slice(0,4).map(x=>x.aux+' '+x.partizip));
-            // Add wrong aux + same partizip (tricky)
-            distractors.push((item.aux==='haben'?'sein':'haben')+' '+item.partizip);
-            // Add different aux verbs
-            distractors.push(...shuffle(diffAux).slice(0,2).map(x=>x.aux+' '+x.partizip));
-            opts=shuffle([...new Set([...distractors.slice(0,5),correct])]);
+            const fakes=genFakePartizips(item);
+            const sim=shuffle(P.filter(x=>x.id!==item.id)).slice(0,2).map(x=>x.aux+' '+x.partizip);
+            opts=shuffle([...new Set([...fakes.slice(0,4),...sim,correct])]).slice(0,6);
+            if(!opts.includes(correct)){opts[5]=correct;opts=shuffle(opts);}
         }else{
-            label='haben oder sein?';display=item.verb+' → '+item.partizip;hint=tr(item);
+            label='Wie sagt man im Perfekt?';display=item.verb;hint=tr(item);
             correct=item.aux+' '+item.partizip;
-            const other=(item.aux==='haben'?'sein':'haben')+' '+item.partizip;
-            // Add more confusing options
-            const simP=shuffle(P.filter(x=>x.id!==item.id)).slice(0,3);
-            let extras=simP.map(x=>x.aux+' '+x.partizip);
-            opts=shuffle([...new Set([correct,other,...extras])]).slice(0,5);
+            const wrongAux=(item.aux==='haben'?'sein':'haben');
+            const fakeP=genFakePForm(item.partizip);
+            let dis=[wrongAux+' '+item.partizip, item.aux+' '+fakeP, wrongAux+' '+fakeP];
+            const sim=shuffle(P.filter(x=>x.id!==item.id)).slice(0,2).map(x=>x.aux+' '+x.partizip);
+            opts=shuffle([...new Set([correct,...dis,...sim])]).slice(0,6);
+            if(!opts.includes(correct)){opts[5]=correct;opts=shuffle(opts);}
         }
     }else if(cat==='reflexive'){
         if(mode==='case'){
@@ -682,18 +711,37 @@ function prepareMCQ(){
             const keys=['ich','du','er','wir','ihr','sie'];
             const pronouns=['Ich','Du','Er/Sie/Es','Wir','Ihr','Sie'];
             const pi=Math.floor(Math.random()*6);
-            const ctx=RF_CONTEXTS[Math.floor(Math.random()*RF_CONTEXTS.length)];
+            const ctx=RF_SENTENCES[Math.floor(Math.random()*RF_SENTENCES.length)];
             label=pronouns[pi]+' ______ '+ctx+'.';
             display='';
             hint=tr(item)+' ('+item.verb+')';
             correct=item[keys[pi]];
+            // Find phonetically similar distractors
+            const vBase=item.verb.replace('sich ','');
+            const similar=RF_SIMILAR[vBase]||[];
+            const simForms=[];
+            for(const sv of similar){
+                const match=REFLEXIVE.find(x=>x.verb.includes(sv));
+                if(match) simForms.push(match[keys[pi]]);
+            }
+            // Also add same-case verbs
             const sameCase=shuffle(REFLEXIVE.filter(x=>x.id!==item.id&&x.case===item.case));
-            const diffCase=shuffle(REFLEXIVE.filter(x=>x.id!==item.id&&x.case!==item.case));
+            // And wrong pronoun (akk↔dat swap for ich/du)
+            const wrongPron=[];
+            if(pi===0&&item.case==='akk') wrongPron.push(correct.replace(' mich',' mir'));
+            if(pi===0&&item.case==='dat') wrongPron.push(correct.replace(' mir',' mich'));
+            if(pi===1&&item.case==='akk') wrongPron.push(correct.replace(' dich',' dir'));
+            if(pi===1&&item.case==='dat') wrongPron.push(correct.replace(' dir',' dich'));
             let distractors=[
-                ...sameCase.slice(0,4).map(x=>x[keys[pi]]),
-                ...diffCase.slice(0,2).map(x=>x[keys[pi]])
+                ...simForms.slice(0,3),
+                ...wrongPron,
+                ...sameCase.slice(0,4).map(x=>x[keys[pi]])
             ];
-            opts=shuffle([...new Set([...distractors.slice(0,5),correct])]);
+            opts=shuffle([...new Set([...distractors.slice(0,5),correct].filter(Boolean))]);
+            if(opts.length<4){
+                const extra=shuffle(REFLEXIVE.filter(x=>x.id!==item.id)).slice(0,4).map(x=>x[keys[pi]]);
+                opts=shuffle([...new Set([...opts,...extra])]).slice(0,6);
+            }
         }
     }else if(cat==='prepositions'){
         label=item.sentence.replace('___','______');display='';hint=tr(item);
@@ -756,7 +804,51 @@ function checkA(btn){
     setTimeout(()=>{APP.quiz.idx++;showQ();},1200);
 }
 
-// ============== REFLEXIVE CONTEXTS ==============
+// ============== REFLEXIVE SENTENCES & SIMILAR ==============
+const RF_SENTENCES=[
+    "nach einem langen Arbeitstag gern",
+    "jeden Morgen vor dem Frühstück im Bad schnell",
+    "am Wochenende nach dem Sport im Fitnessstudio",
+    "heute Abend auf die große Party bei Freunden",
+    "an den letzten Sommerurlaub in Spanien immer gern",
+    "über die schlechte Note in Mathe sehr",
+    "nach der Arbeit im Wohnzimmer auf das Sofa",
+    "im Winter vor der Schule immer warm",
+    "nach dem Duschen im Badezimmer sorgfältig",
+    "seit drei Jahren für klassische Musik sehr",
+    "morgens nach dem Aufstehen immer zuerst",
+    "abends vor dem Schlafengehen noch schnell",
+    "in der Mittagspause im Park kurz",
+    "am Montag bei der Chefin über den Kollegen",
+    "beim Arzt immer vor der Untersuchung ein bisschen",
+    "nach dem Essen auf dem Sofa gemütlich",
+    "vor dem Urlaub immer auf die Reise sehr",
+    "nach der langen Wanderung in den Bergen langsam",
+    "in der neuen Stadt noch nicht so gut",
+    "für die schwere Prüfung am Freitag gründlich"
+];
+const RF_SIMILAR={
+    'waschen':['wachsen','wechseln','wünschen'],
+    'setzen':['schätzen','stützen','schützen'],
+    'freuen':['fühlen','führen','fürchten'],
+    'ärgern':['ändern','äußern','anstrengen'],
+    'erinnern':['erkälten','erkundigen','erholen'],
+    'entscheiden':['entschuldigen','entwickeln','entspannen'],
+    'fühlen':['führen','freuen','fürchten'],
+    'anziehen':['anmelden','anstrengen','ansehen'],
+    'ausruhen':['auskennen','aufregen','aufhalten'],
+    'bewegen':['bewerben','beschäftigen','beschweren'],
+    'kümmern':['kämmen','konzentrieren','kaufen'],
+    'vorstellen':['vorbereiten','vornehmen','verabreden'],
+    'unterhalten':['unterscheiden','umziehen','umdrehen'],
+    'interessieren':['informieren','irren','isolieren'],
+    'verabschieden':['verabreden','verändern','verhalten'],
+    'konzentrieren':['kontrollieren','korrigieren','konsultieren'],
+    'beschäftigen':['beschweren','bewerben','beeilen'],
+    'beeilen':['befinden','bewerben','beschäftigen'],
+    'gewöhnen':['gehören','gewinnen','genieren'],
+    'bemühen':['befinden','bewegen','bewerben']
+};
 const RF_CONTEXTS = [
     "jeden Morgen","oft","selten","gern","immer","heute","manchmal",
     "ab und zu","jeden Tag","am Wochenende","morgens","abends",
@@ -858,11 +950,51 @@ function getHints(cat){
 }
 
 // ============== SENTENCE BUILDER ==============
+// ============== SENTENCE SPLITTING + EXTRA DISTRACTORS ==============
+function splitPart(s){
+    // Split phrases of 3+ words, keep 2-word units together
+    const w=s.split(/\s+/);
+    if(w.length<=2) return [s];
+    // Keep common 2-word combos
+    const keep=['zu Hause','ins Kino','im Bett','im Park','im Café','zu spät','zu früh','ein Buch','zum Arzt','zur Arbeit','nach Hause','ins Bett','im Restaurant','am Wochenende','am Montag','zum Bahnhof','ins Ausland','im Garten','im Süden','am Strand','im Norden','aufs Land'];
+    const result=[];
+    let i=0;
+    while(i<w.length){
+        if(i<w.length-1){
+            const pair=w[i]+' '+w[i+1];
+            if(keep.includes(pair)){result.push(pair);i+=2;continue;}
+        }
+        result.push(w[i]);i++;
+    }
+    return result;
+}
+function splitSentenceParts(arr){
+    const out=[];
+    for(const p of arr) out.push(...splitPart(p));
+    return out;
+}
+function genExtraDistractors(item){
+    const extras=[];
+    const connAlts={weil:['dass','denn'],dass:['weil','ob'],wenn:['als','weil'],als:['wenn'],ob:['dass','weil'],obwohl:['weil','trotzdem'],trotzdem:['deshalb','obwohl'],deshalb:['trotzdem','weil'],denn:['weil'],aber:['und','oder'],sondern:['aber'],damit:['weil','um'],nachdem:['bevor'],bevor:['nachdem']};
+    const modalAlts={möchte:['will','kann'],muss:['soll','kann'],kann:['darf','muss'],darf:['kann'],soll:['muss'],will:['möchte']};
+    const subjAlts={ich:['du','er'],du:['ich','er'],er:['sie','ich'],sie:['er','wir'],wir:['sie','ihr'],ihr:['wir','sie']};
+    for(const w of item.correct){
+        const lo=w.toLowerCase().replace(/[,.:?!]/g,'');
+        if(connAlts[lo]) extras.push(...connAlts[lo]);
+        if(modalAlts[lo]) extras.push(...modalAlts[lo]);
+        if(subjAlts[lo]) extras.push(...subjAlts[lo]);
+    }
+    return extras.filter(e=>!item.correct.includes(e)&&!(item.distractors||[]).includes(e));
+}
 function showBuilder(){
     const item=APP.quiz.items[APP.quiz.idx];
-    APP.quiz.allW=shuffle([...item.correct,...(item.distractors||[])]);
+    // Split phrases and generate extra distractors
+    const splitCorrect=splitSentenceParts(item.correct);
+    const splitDist=splitSentenceParts(item.distractors||[]);
+    const extra=genExtraDistractors(item);
+    APP.quiz.allW=shuffle([...splitCorrect,...splitDist,...extra.slice(0,3)]);
     APP.quiz.built=[];
-    APP.quiz.correctS=item.correct;
+    APP.quiz.correctS=splitCorrect;
     APP.quiz.checked=false;
     APP.quiz.hintUsed=false;
     renderBuilder();
@@ -941,11 +1073,13 @@ function addWord(i){if(!APP.quiz.built.includes(i)){APP.quiz.built.push(i);rende
 function removeWord(pos){if(!APP.quiz.checked){APP.quiz.built.splice(pos,1);renderBuilder();}}
 function showHint(){APP.quiz.hintUsed=true;renderBuilder();}
 function nextBuilder(){APP.quiz.idx++;showQ();}
+function arrEq(a,b){return a.length===b.length&&a.every((w,i)=>w===b[i]);}
 function checkBuilder(){
     const built=APP.quiz.built.map(i=>APP.quiz.allW[i]);
     const correct=APP.quiz.correctS;
-    const ok=built.length===correct.length&&built.every((w,i)=>w===correct[i]);
     const item=APP.quiz.items[APP.quiz.idx];
+    const altCorrect=item.alt?splitSentenceParts(item.alt):null;
+    const ok=arrEq(built,correct)||(altCorrect&&arrEq(built,altCorrect));
     if(ok){
         APP.quiz.score++;markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);
         APP.quiz.checked=true;
@@ -966,8 +1100,9 @@ function startCorrections(userWords,correctWords,item){
     const corrs=[];
     for(let i=0;i<correctWords.length;i++){
         if(i>=userWords.length||userWords[i]!==correctWords[i]){
-            corrs.push({pos:i,wrong:i<userWords.length?userWords[i]:'___',correct:correctWords[i],
-                rule:getCorrectionRule(correctWords[i],i,correctWords,item)});
+            const uw=i<userWords.length?userWords[i]:'___';
+            corrs.push({pos:i,wrong:uw,correct:correctWords[i],
+                rule:getCorrectionRule(correctWords[i],uw,i,correctWords,item)});
         }
     }
     if(!corrs.length){renderBuilder();return;}
@@ -1032,7 +1167,10 @@ function showCorrection(){
                 if(wEl)wEl.style.display='none';
                 if(rEl){rEl.style.display='';rEl.classList.add('corr-slide-in');}
                 if(ruleBox){ruleBox.style.opacity='1';ruleBox.style.transition='opacity 0.4s';}
-                if(ruleText)ruleText.innerHTML='📝 '+esc(corr.rule);
+                if(ruleText){
+                    const parts=corr.rule.split('\n📐 ');
+                    ruleText.innerHTML='📝 '+esc(parts[0])+(parts[1]?'<div class="corr-formula">📐 '+esc(parts[1])+'</div>':'');
+                }
             },500);
         },600);
     },300);
@@ -1049,95 +1187,163 @@ function nextCorrection(){
     else{showCorrection();}
 }
 
-function getCorrectionRule(word,pos,sentence,item){
+// ============== WORD PAIR EXPLANATIONS ==============
+const WORD_PAIRS={
+'möchte|will':{de:'«möchte» = höfliche Bitte (ich hätte gern). «will» = fester Wunsch (ich will). Für Bestellungen/Bitten: möchte.',ru:'«möchte» — хотел бы (вежливо). «will» — хочу (категорично). Для просьб/заказов всегда möchte.',en:'"möchte" = would like (polite). "will" = want (firm). For requests: use möchte.',tr:'"möchte" = rica (kibar). "will" = istek (kesin). Sipariş için: möchte.'},
+'möchte|kann':{de:'«möchte» = Wunsch (ich hätte gern). «kann» = Fähigkeit (ich bin in der Lage).',ru:'«möchte» — хотел бы (желание). «kann» — могу (способность). Разные значения!',en:'"möchte" = wish. "kann" = ability. Different meanings!',tr:'"möchte" = istek. "kann" = yetenek.'},
+'muss|soll':{de:'«muss» = Pflicht/Notwendigkeit. «soll» = Empfehlung/Auftrag von jemand anderem.',ru:'«muss» — должен (обязательно). «soll» — следует (рекомендация/чужое поручение).',en:'"muss" = must (obligation). "soll" = should (recommendation).',tr:'"muss" = zorunda. "soll" = tavsiye.'},
+'kann|darf':{de:'«kann» = Fähigkeit. «darf» = Erlaubnis. "Ich kann schwimmen" vs "Ich darf hier schwimmen".',ru:'«kann» — умею/могу (способность). «darf» — разрешено (позволение). "Я умею плавать" vs "Мне можно тут плавать".',en:'"kann" = can (ability). "darf" = may (permission).',tr:'"kann" = yapabilmek. "darf" = izin.'},
+'weil|dass':{de:'«weil» = Grund (warum?). «dass» = Inhalt/Meinung. Nach beiden: Verb am Ende!',ru:'«weil» — потому что (причина). «dass» — что (факт/мнение). После обоих глагол в КОНЦЕ!',en:'"weil" = because (reason). "dass" = that (content). Both: verb at END!',tr:'"weil" = çünkü (neden). "dass" = ki (içerik). İkisinde de fiil SONDA!'},
+'weil|denn':{de:'«weil» → Nebensatz (Verb am Ende). «denn» → Hauptsatz (Verb auf Position 2).',ru:'«weil» → придаточное (глагол в конце). «denn» → главное (глагол на 2-й позиции). Оба = «потому что».',en:'"weil" → subordinate (verb at end). "denn" → main clause (verb position 2). Both = because.',tr:'"weil" → yan cümle (fiil sonda). "denn" → ana cümle (fiil 2. pozisyonda).'},
+'wenn|als':{de:'«wenn» = wiederholte/zukünftige Handlung. «als» = einmaliges Ereignis in der Vergangenheit.',ru:'«wenn» — если/когда (повторяющееся или будущее). «als» — когда (одноразово в прошлом).',en:'"wenn" = if/when (repeated/future). "als" = when (one-time past event).',tr:'"wenn" = her zaman/gelecek. "als" = geçmişte bir kez.'},
+'ob|dass':{de:'«ob» = indirekte Ja/Nein-Frage (ob er kommt?). «dass» = Aussage (dass er kommt).',ru:'«ob» — ли (косвенный вопрос: придёт ли он?). «dass» — что (утверждение: что он придёт).',en:'"ob" = whether (indirect question). "dass" = that (statement).',tr:'"ob" = olup olmadığı (soru). "dass" = ki (ifade).'},
+'obwohl|weil':{de:'«obwohl» = Gegensatz (trotz). «weil» = Grund. Beide: Verb am Ende!',ru:'«obwohl» — хотя (уступка, вопреки). «weil» — потому что (причина). После обоих глагол в КОНЦЕ!',en:'"obwohl" = although (concession). "weil" = because (reason). Both: verb at end!',tr:'"obwohl" = rağmen. "weil" = çünkü. İkisinde de fiil sonda!'},
+'trotzdem|deshalb':{de:'«trotzdem» = dennoch (Gegensatz). «deshalb» = darum (Folge). Beide: Verb auf Position 2!',ru:'«trotzdem» — тем не менее (вопреки). «deshalb» — поэтому (следствие). Оба + глагол на 2-й позиции!',en:'"trotzdem" = nevertheless. "deshalb" = therefore. Both: verb in position 2!',tr:'"trotzdem" = buna rağmen. "deshalb" = bu yüzden. İkisinde de fiil 2. pozisyonda!'},
+'haben|sein':{de:'«haben» für die meisten Verben. «sein» für Bewegung (gehen, fahren) und Zustandsänderung (werden, sterben).',ru:'«haben» — для большинства глаголов. «sein» — для глаголов движения (gehen, fahren, kommen) и смены состояния (werden, sterben, wachsen).',en:'"haben" for most verbs. "sein" for movement (gehen, fahren) and state change (werden, sterben).',tr:'"haben" çoğu fiil için. "sein" hareket (gehen, fahren) ve durum değişikliği (werden) için.'},
+'ist|hat':{de:'«ist» (sein) = Bewegung/Zustandsänderung. «hat» (haben) = alle anderen Verben im Perfekt.',ru:'«ist» (sein) — для движения/смены состояния в Perfekt. «hat» (haben) — для остальных глаголов.',en:'"ist" (sein) = motion/change in Perfekt. "hat" (haben) = other verbs.',tr:'"ist" (sein) = hareket/değişim. "hat" (haben) = diğer fiiller.'},
+'hätte|wäre':{de:'«hätte» = Konjunktiv II von «haben». «wäre» = Konjunktiv II von «sein».',ru:'«hätte» — имел бы (Konjunktiv II от haben). «wäre» — был бы (Konjunktiv II от sein).',en:'"hätte" = would have (from haben). "wäre" = would be (from sein).',tr:'"hätte" = olsaydı (haben). "wäre" = olsaydı (sein).'},
+'würde|könnte':{de:'«würde» = Konjunktiv II allgemein. «könnte» = Konjunktiv II von «können» (Möglichkeit).',ru:'«würde» — бы (общий Konjunktiv II). «könnte» — мог бы (от können, возможность).',en:'"würde" = would (general). "könnte" = could (possibility).',tr:'"würde" = genel dilek. "könnte" = yapabilirdi.'},
+'damit|um':{de:'«damit» = Zweck (verschiedene Subjekte). «um...zu» = Zweck (gleiches Subjekt).',ru:'«damit» — чтобы (разные подлежащие: Я объясняю, чтобы ТЫ понял). «um...zu» — чтобы (одно подлежащее: Я учусь, чтобы сдать).',en:'"damit" = so that (different subjects). "um...zu" = in order to (same subject).',tr:'"damit" = farklı özneler. "um...zu" = aynı özne.'},
+'sondern|aber':{de:'«sondern» = Korrektur nach Verneinung (nicht X, sondern Y). «aber» = einfacher Gegensatz.',ru:'«sondern» — а (после отрицания: не X, а Y). «aber» — но (простое противопоставление).',en:'"sondern" = but rather (after negation: not X, but Y). "aber" = but (simple contrast).',tr:'"sondern" = değil X, aksine Y. "aber" = ama.'},
+'der|die':{de:'«der» = Maskulin/Dativ Feminin. «die» = Feminin/Plural. Achte auf das Genus!',ru:'«der» — мужской род / дат. пад. женского. «die» — женский род / множ. число. Следи за родом!',en:'"der" = masculine/dative feminine. "die" = feminine/plural. Check gender!',tr:'"der" = eril. "die" = dişil/çoğul.'},
+'keine|nicht':{de:'«keine» = Negation VOR Substantiv (kein Geld). «nicht» = Negation bei Verben/Adjektiven.',ru:'«keine» — отрицание ПЕРЕД существительным (нет денег). «nicht» — отрицание при глаголах/прилагательных.',en:'"keine" = negation before nouns. "nicht" = negation for verbs/adjectives.',tr:'"keine" = isimden önce. "nicht" = fiil/sıfat için.'},
+'nachdem|bevor':{de:'«nachdem» = nach einer Handlung (Plusquamperfekt!). «bevor» = vor einer Handlung.',ru:'«nachdem» — после того как (используй Plusquamperfekt!). «bevor» — прежде чем.',en:'"nachdem" = after (use past perfect!). "bevor" = before.',tr:'"nachdem" = sonra (Plusquamperfekt!). "bevor" = önce.'},
+'wurde|hat':{de:'«wurde» = Passiv Präteritum (Das Haus wurde gebaut). «hat» = Perfekt Aktiv (Er hat gebaut).',ru:'«wurde» — пассив прошедшего (Дом был построен). «hat» — перфект актив (Он построил).',en:'"wurde" = passive past (was built). "hat" = active perfect (has built).',tr:'"wurde" = pasif geçmiş. "hat" = aktif perfekt.'},
+'wird|hat':{de:'«wird» = Passiv Präsens (Das Haus wird gebaut) oder Futur. «hat» = Perfekt.',ru:'«wird» — пассив настоящего (Дом строится) или будущее время. «hat» — перфект.',en:'"wird" = passive present / future. "hat" = perfect tense.',tr:'"wird" = pasif şimdiki / gelecek. "hat" = perfekt.'}
+};
+
+// ============== CATEGORY FORMULAS ==============
+const CAT_FORMULAS={
+hauptsatz:{f:'S + V(2) + O',de:'Subjekt + Verb (Position 2) + Objekt',ru:'Подлежащее + Глагол (позиция 2) + Дополнение',en:'Subject + Verb (position 2) + Object',tr:'Özne + Fiil (2.poz) + Nesne'},
+modal:{f:'S + MV(2) + ... + Inf.(Ende)',de:'Subjekt + Modalverb (Pos.2) + ... + Infinitiv (Ende)',ru:'Подл. + Модальный глагол (поз.2) + ... + Инфинитив (конец)',en:'Subject + Modal (pos.2) + ... + Infinitive (end)',tr:'Özne + Modal (2.poz) + ... + Mastar (son)'},
+weil:{f:'HS, weil + S + ... + V(Ende)',de:'Hauptsatz, weil + Subjekt + ... + Verb (Ende)',ru:'Главное, weil + Подлеж. + ... + Глагол (в конце!)',en:'Main clause, weil + S + ... + V (end)',tr:'Ana cümle, weil + Ö + ... + F (son)'},
+dass:{f:'HS, dass + S + ... + V(Ende)',de:'Hauptsatz, dass + Subjekt + ... + Verb (Ende)',ru:'Главное, dass + Подлеж. + ... + Глагол (в конце!)',en:'Main clause, dass + S + ... + V (end)',tr:'Ana cümle, dass + Ö + ... + F (son)'},
+wenn:{f:'Wenn + S + ... + V(Ende), V + S',de:'Wenn + Subjekt + ... + Verb (Ende), Verb + Subjekt',ru:'Wenn + Подлеж. + ... + Глагол (конец), Глагол + Подлеж.',en:'Wenn + S + ... + V (end), V + S',tr:'Wenn + Ö + ... + F (son), F + Ö'},
+als:{f:'Als + S + ... + V(Ende), V + S',de:'Als + Subjekt + ... + Verb (Ende), Verb + Subjekt',ru:'Als + Подлеж. + ... + Глагол (конец), Глагол + Подлеж.',en:'Als + S + ... + V (end), V + S',tr:'Als + Ö + ... + F (son), F + Ö'},
+ob:{f:'HS, ob + S + ... + V(Ende)',de:'Hauptsatz, ob + Subjekt + ... + Verb (Ende)',ru:'Главное, ob + Подлеж. + ... + Глагол (в конце!)',en:'Main clause, ob + S + ... + V (end)',tr:'Ana cümle, ob + Ö + ... + F (son)'},
+obwohl:{f:'Obwohl + S + ... + V(Ende), V + S',de:'Obwohl + Subjekt + ... + Verb (Ende), Hauptsatz',ru:'Obwohl + Подлеж. + ... + Глагол (конец), Главное предложение',en:'Obwohl + S + ... + V (end), main clause',tr:'Obwohl + Ö + ... + F (son), ana cümle'},
+tekamolo:{f:'S + V + Te + Ka + Mo + Lo',de:'Subjekt + Verb + Temporal + Kausal + Modal + Lokal',ru:'Подлеж. + Глагол + Когда? + Почему? + Как? + Где/Куда?',en:'Subject + Verb + When? + Why? + How? + Where?',tr:'Özne + Fiil + Ne zaman + Neden + Nasıl + Nerede'},
+passiv:{f:'S + werden + ... + Part.II',de:'Subjekt + werden/wurde + ... + Partizip II',ru:'Подлеж. + werden/wurde + ... + Причастие II',en:'Subject + werden/wurde + ... + Past Participle',tr:'Özne + werden/wurde + ... + Partizip II'},
+konjunktiv:{f:'Wenn + S + wäre/hätte, würde + S + Inf.',de:'Wenn + Subjekt + wäre/hätte, würde + Subjekt + Infinitiv',ru:'Wenn + Подл. + wäre/hätte, würde + Подл. + Инфинитив',en:'Wenn + S + wäre/hätte, würde + S + Infinitive',tr:'Wenn + Ö + wäre/hätte, würde + Ö + Mastar'},
+je_desto:{f:'Je + Komp., desto + Komp. + V + S',de:'Je + Komparativ, desto + Komparativ + Verb + Subjekt',ru:'Je + сравнит., desto + сравнит. + Глагол + Подлеж.',en:'Je + comparative, desto + comparative + V + S',tr:'Je + karş., desto + karş. + F + Ö'},
+um_zu:{f:'HS, um + ... + zu + Inf.',de:'Hauptsatz, um + ... + zu + Infinitiv (gleiches Subjekt)',ru:'Главное, um + ... + zu + Инфинитив (одно подлежащее)',en:'Main clause, um + ... + zu + Infinitive (same subject)',tr:'Ana cümle, um + ... + zu + Mastar (aynı özne)'},
+damit:{f:'HS, damit + S + ... + V(Ende)',de:'Hauptsatz, damit + Subjekt + ... + Verb (Ende)',ru:'Главное, damit + Подлеж. + ... + Глагол (конец) (разные подлежащие)',en:'Main clause, damit + S + ... + V (end) (different subjects)',tr:'Ana cümle, damit + Ö + ... + F (son)'},
+trotzdem:{f:'HS. Trotzdem + V(2) + S',de:'Hauptsatz. Trotzdem + Verb (Pos.2) + Subjekt',ru:'Главное. Trotzdem + Глагол (поз.2) + Подлеж.',en:'Main clause. Trotzdem + V (pos.2) + S',tr:'Ana cümle. Trotzdem + F (2.poz) + Ö'},
+deshalb:{f:'HS. Deshalb + V(2) + S',de:'Hauptsatz. Deshalb + Verb (Pos.2) + Subjekt',ru:'Главное. Deshalb + Глагол (поз.2) + Подлеж.',en:'Main clause. Deshalb + V (pos.2) + S',tr:'Ana cümle. Deshalb + F (2.poz) + Ö'},
+denn:{f:'HS, denn + S + V(2) + O',de:'Hauptsatz, denn + Subjekt + Verb (Pos.2) — normale Wortstellung!',ru:'Главное, denn + Подлеж. + Глагол (поз.2) — обычный порядок!',en:'Main clause, denn + S + V (pos.2) — normal word order!',tr:'Ana cümle, denn + Ö + F (2.poz) — normal sıra!'},
+aber:{f:'HS, aber + S + V(2)',de:'Hauptsatz, aber + normale Wortstellung',ru:'Главное, aber + обычный порядок слов',en:'Main clause, aber + normal word order',tr:'Ana cümle, aber + normal sıra'},
+sondern:{f:'nicht + X, sondern + Y',de:'nicht + X, sondern + Y (Korrektur nach Verneinung)',ru:'nicht + X, sondern + Y (исправление после отрицания)',en:'nicht + X, sondern + Y (correction after negation)',tr:'nicht + X, sondern + Y (olumsuzluktan sonra düzeltme)'},
+nachdem:{f:'Nachdem + S + PQP + V(Ende), Prät.',de:'Nachdem + Plusquamperfekt (hatte/war + Part.II), Präteritum',ru:'Nachdem + Плюсквамперфект (hatte/war + Прич.II), Претерит',en:'Nachdem + past perfect, simple past',tr:'Nachdem + Plusquamperfekt, Präteritum'},
+bevor:{f:'Bevor + S + ... + V(Ende), HS',de:'Bevor + Subjekt + ... + Verb (Ende), Hauptsatz',ru:'Bevor + Подлеж. + ... + Глагол (конец), Главное',en:'Bevor + S + ... + V (end), main clause',tr:'Bevor + Ö + ... + F (son), ana cümle'},
+waehrend:{f:'Während + S + ... + V(Ende), HS',de:'Während + Subjekt + ... + Verb (Ende), Hauptsatz',ru:'Während + Подлеж. + ... + Глагол (конец), Главное',en:'Während + S + ... + V (end), main clause',tr:'Während + Ö + ... + F (son), ana cümle'},
+seitdem:{f:'Seitdem + S + ... + V(Ende), HS',de:'Seitdem + Subjekt + ... + Verb (Ende), Hauptsatz',ru:'Seitdem + Подлеж. + ... + Глагол (конец), Главное',en:'Seitdem + S + ... + V (end), main clause',tr:'Seitdem + Ö + ... + F (son), ana cümle'},
+bis:{f:'HS, bis + S + ... + V(Ende)',de:'Hauptsatz, bis + Subjekt + ... + Verb (Ende)',ru:'Главное, bis + Подлеж. + ... + Глагол (конец)',en:'Main clause, bis + S + ... + V (end)',tr:'Ana cümle, bis + Ö + ... + F (son)'},
+sobald:{f:'Sobald + S + ... + V(Ende), HS',de:'Sobald + Subjekt + ... + Verb (Ende), Hauptsatz',ru:'Sobald + Подлеж. + ... + Глагол (конец), Главное',en:'Sobald + S + ... + V (end), main clause',tr:'Sobald + Ö + ... + F (son), ana cümle'},
+relativ:{f:'Nomen, Rel.pron. + ... + V(Ende)',de:'Nomen, Relativpronomen + ... + Verb (Ende)',ru:'Сущ., Относит. местоимение + ... + Глагол (конец)',en:'Noun, relative pronoun + ... + V (end)',tr:'İsim, ilgi zamiri + ... + F (son)'},
+textbau:{f:'Konnektor + HS',de:'Textkonnektor + Hauptsatz-Struktur',ru:'Текстовый коннектор + структура главного предложения',en:'Text connector + main clause structure',tr:'Metin bağlacı + ana cümle yapısı'}
+};
+
+function getCorrectionRule(word,wrongWord,pos,sentence,item){
     const L=APP.lang||'de';
     const cat=item.cat||'';
     const lo=word.toLowerCase();
+    const wlo=(wrongWord||'').toLowerCase();
     const verbList='bin,bist,ist,sind,seid,habe,hast,hat,haben,habt,werde,wirst,wird,werden,werdet,kann,kannst,könnt,können,muss,musst,müsst,müssen,soll,sollst,sollt,sollen,will,willst,wollt,wollen,darf,darfst,dürft,dürfen,möchte,möchtest,möchtet,möchten,gehe,gehst,geht,gehen,komme,kommst,kommt,kommen,mache,machst,macht,machen,lese,liest,lesen,fahre,fährst,fährt,fahren,schlafe,schläfst,schläft,schlafen,esse,isst,essen,trinke,trinkst,trinkt,trinken,arbeite,arbeitest,arbeitet,arbeiten,lerne,lernst,lernt,lernen,spiele,spielst,spielt,spielen,wohne,wohnst,wohnt,wohnen,brauche,brauchst,braucht,brauchen,kaufe,kaufst,kauft,kaufen,nehme,nimmst,nimmt,nehmen,gebe,gibst,gibt,geben,sehe,siehst,sieht,sehen,spreche,sprichst,spricht,sprechen,stehe,stehst,steht,stehen,liege,liegst,liegt,liegen,sitze,sitzt,sitzen,laufe,läufst,läuft,laufen,finde,findest,findet,finden,weiß,weißt,wissen,wisst';
     const isVerb=verbList.split(',').includes(lo);
     const nebCats='weil,dass,wenn,als,ob,obwohl,damit,nachdem,bevor,waehrend,seitdem,bis,sobald,relativ';
     const isNeb=nebCats.split(',').includes(cat);
+    const pronouns='ich,du,er,sie,es,wir,ihr,man'.split(',');
+    const isPronoun=pronouns.includes(lo);
+    const connNames={weil:'потому что',dass:'что',wenn:'если/когда',als:'когда (прошлое)',ob:'ли',obwohl:'хотя',damit:'чтобы',nachdem:'после того как',bevor:'прежде чем',seitdem:'с тех пор',bis:'пока не',sobald:'как только',denn:'ведь',aber:'но',sondern:'а (не...а)',trotzdem:'тем не менее',deshalb:'поэтому'};
     const _t=(de,ru,en,tr)=>({de,ru,en,tr})[L]||ru||de;
-    if(isVerb&&pos===1&&!isNeb) return _t(
-        'Im Hauptsatz steht das Verb IMMER auf Position 2!',
-        'В главном предложении глагол ВСЕГДА на 2-й позиции (после подлежащего)!',
-        'In a main clause the verb is ALWAYS in position 2 (after the subject)!',
-        'Ana cümlede fiil HER ZAMAN 2. pozisyonda olur (özneden sonra)!'
-    );
-    if(isVerb&&pos===sentence.length-1&&isNeb) return _t(
-        'Im Nebensatz ('+cat+') steht das Verb am ENDE!',
-        'В придаточном предложении ('+cat+') глагол стоит в КОНЦЕ!',
-        'In a subordinate clause ('+cat+') the verb goes to the END!',
-        'Yan cümlede ('+cat+') fiil SONA gider!'
-    );
-    const connTr={
-        weil:{de:'weil — Grund',ru:'weil — потому что',en:'weil — because',tr:'weil — çünkü'},
-        dass:{de:'dass — Inhalt',ru:'dass — что',en:'dass — that',tr:'dass — ki'},
-        wenn:{de:'wenn — Bedingung/Zeit',ru:'wenn — если/когда',en:'wenn — if/when',tr:'wenn — eğer/ne zaman'},
-        als:{de:'als — Vergangenheit',ru:'als — когда (в прошлом)',en:'als — when (past)',tr:'als — olduğunda (geçmiş)'},
-        ob:{de:'ob — Frage',ru:'ob — ли (вопрос)',en:'ob — whether',tr:'ob — olup olmadığı'},
-        obwohl:{de:'obwohl — Gegensatz',ru:'obwohl — хотя',en:'obwohl — although',tr:'obwohl — rağmen'},
-        damit:{de:'damit — Zweck',ru:'damit — чтобы',en:'damit — so that',tr:'damit — amacıyla'},
-        nachdem:{de:'nachdem — danach',ru:'nachdem — после того как',en:'nachdem — after',tr:'nachdem — sonra'},
-        bevor:{de:'bevor — davor',ru:'bevor — прежде чем',en:'bevor — before',tr:'bevor — önce'},
-        seitdem:{de:'seitdem — Zeitpunkt',ru:'seitdem — с тех пор как',en:'seitdem — since',tr:'seitdem — den beri'},
-        bis:{de:'bis — Zeitgrenze',ru:'bis — пока не',en:'bis — until',tr:'bis — kadar'},
-        sobald:{de:'sobald — sofort wenn',ru:'sobald — как только',en:'sobald — as soon as',tr:'sobald — hemen'}
-    };
-    if(connTr[lo]){
-        const c=connTr[lo][L]||connTr[lo].ru||connTr[lo].de;
+    // Get formula for category
+    const cf=CAT_FORMULAS[cat];
+    const formula=cf?('\n📐 '+cf.f+' — '+(cf[L]||cf.ru||cf.de)):'';
+
+    // === A: MISSING WORD ===
+    if(wrongWord==='___'){
+        if(isVerb){
+            const vpos=isNeb?_t('am Ende (Nebensatz)','в КОНЦЕ (придаточное)','at the END (subordinate)','SONDA (yan cümle)'):_t('auf Position '+(pos+1),'на позиции '+(pos+1),'at position '+(pos+1),(pos+1)+'. pozisyonda');
+            return _t(
+                'Das Verb «'+word+'» fehlt! Es steht '+vpos+'.',
+                'Ты забыл(а) глагол «'+word+'»! Он стоит '+vpos+'.',
+                'You forgot the verb "'+word+'"! It goes '+vpos+'.',
+                '«'+word+'» fiilini unuttun! Yeri: '+vpos+'.'
+            )+formula;
+        }
+        if(isPronoun) return _t(
+            'Das Subjekt «'+word+'» fehlt!'+(isNeb?' Im Nebensatz kommt nach dem Konnektor das Subjekt.':''),
+            'Ты забыл(а) подлежащее «'+word+'»!'+(isNeb?' В придаточном после союза обязательно идёт подлежащее!':''),
+            'You forgot the subject "'+word+'"!'+(isNeb?' In a subordinate clause the subject follows the connector.':''),
+            '«'+word+'» öznesini unuttun!'+(isNeb?' Yan cümlede bağlaçtan sonra özne gelir.':'')
+        )+formula;
+        if(connNames[lo]) return _t(
+            'Der Konnektor «'+word+'» fehlt! Er verbindet die Satzteile.',
+            'Ты забыл(а) союз «'+word+'» ('+connNames[lo]+'). Он соединяет части предложения.',
+            'You forgot the connector "'+word+'" ('+connNames[lo]+'). It joins the clauses.',
+            '«'+word+'» bağlacını unuttun ('+connNames[lo]+').'
+        )+formula;
         return _t(
-            '"'+word+'" ('+c.split('—')[1].trim()+') — leitet Nebensatz ein. Verb ans Ende!',
-            '"'+word+'" ('+c.split('—')[1].trim()+') — начинает придаточное. Глагол в конец!',
-            '"'+word+'" ('+c.split('—')[1].trim()+') — starts a subordinate clause. Verb to the end!',
-            '"'+word+'" ('+c.split('—')[1].trim()+') — yan cümle başlatır. Fiil sona gider!'
-        );
+            'Das Wort «'+word+'» fehlt an Position '+(pos+1)+'.',
+            'Ты забыл(а) слово «'+word+'» на позиции '+(pos+1)+'.',
+            'You forgot the word "'+word+'" at position '+(pos+1)+'.',
+            '«'+word+'» kelimesini unuttun (pozisyon '+(pos+1)+').'
+        )+formula;
     }
-    const artR={'der':'Maskulin Nom.','die':'Feminin Nom./Plural','das':'Neutrum Nom.','den':'Maskulin Akk.','dem':'Dativ','des':'Genitiv','ein':'Mask./Neutr. Nom.','eine':'Feminin Nom.','einen':'Mask. Akk.','einem':'Dativ','kein':'Negation Nom.','keine':'Fem./Pl. Negation','keinen':'Mask. Akk. Negation','keinem':'Dativ Negation','meinem':'Dativ Possessiv','meine':'Fem./Pl. Possessiv','meinen':'Mask. Akk. Possessiv'};
-    if(artR[lo]) return artR[lo]+' — '+_t(
-        'Achte auf Genus und Kasus!',
-        'Следи за родом и падежом существительного!',
-        'Pay attention to gender and case of the noun!',
-        'İsmin cinsiyetine ve haline dikkat et!'
-    );
-    if(cat==='tekamolo') return _t(
-        'TeKaMoLo: Temporal → Kausal → Modal → Lokal!',
-        'TeKaMoLo: Время → Причина → Способ → Место. Соблюдай порядок!',
-        'TeKaMoLo: Time → Cause → Manner → Place. Keep this order!',
-        'TeKaMoLo: Zaman → Neden → Tarz → Yer. Sırayı koru!'
-    );
-    if(cat==='passiv'){
-        if(lo==='wird'||lo==='werden'||lo==='wurde'||lo==='wurden') return _t(
-            'Passiv: werden/wurde + Partizip II am Ende.',
-            'Пассив: werden/wurde + Partizip II в конце.',
-            'Passive: werden/wurde + Partizip II at the end.',
-            'Pasif: werden/wurde + Partizip II sonda.'
-        );
-        return _t('Passiv: Subjekt + werden + ... + Partizip II.','Пассив: подлежащее + werden + ... + Partizip II.','Passive: subject + werden + ... + Partizip II.','Pasif: özne + werden + ... + Partizip II.');
+
+    // === B: WRONG WORD — check pair dictionary ===
+    if(wrongWord&&wrongWord!=='___'&&wrongWord!==word){
+        const k1=lo+'|'+wlo, k2=wlo+'|'+lo;
+        const pair=WORD_PAIRS[k1]||WORD_PAIRS[k2];
+        if(pair){
+            return (pair[L]||pair.ru||pair.de)+formula;
+        }
+        // Check if wrong word is from correct sentence (wrong position)
+        const wrongInCorrect=sentence.indexOf(wrongWord);
+        if(wrongInCorrect!==-1&&wrongInCorrect!==pos){
+            return _t(
+                '«'+wrongWord+'» gehört auf Position '+(wrongInCorrect+1)+', nicht '+(pos+1)+'. Hier steht «'+word+'».',
+                '«'+wrongWord+'» стоит на позиции '+(wrongInCorrect+1)+', а не '+(pos+1)+'. Здесь должно быть «'+word+'».',
+                '"'+wrongWord+'" belongs at position '+(wrongInCorrect+1)+', not '+(pos+1)+'. Here should be "'+word+'".',
+                '"'+wrongWord+'" '+(wrongInCorrect+1)+'. pozisyonda olmalı, '+(pos+1)+' değil. Burada "'+word+'" olmalı.'
+            )+formula;
+        }
+        // Generic wrong word with role explanation
+        let role='';
+        if(isVerb){
+            if(isNeb) role=_t(' Das Verb steht im Nebensatz am Ende.',' Глагол в придаточном стоит в КОНЦЕ.',' Verb goes to the end in subordinate.',' Yan cümlede fiil sonda.');
+            else if(pos===1) role=_t(' Das Verb steht auf Position 2.',' Глагол стоит на 2-й позиции.',' Verb goes in position 2.',' Fiil 2. pozisyonda.');
+        }
+        if(connNames[lo]) role=_t(' «'+word+'» ('+connNames[lo]+') leitet einen Nebensatz ein.',' «'+word+'» ('+connNames[lo]+') — начинает придаточное предложение.',' "'+word+'" ('+connNames[lo]+') starts a subordinate clause.',' "'+word+'" ('+connNames[lo]+') yan cümle başlatır.');
+        return _t(
+            'Hier braucht man «'+word+'», nicht «'+wrongWord+'».'+role,
+            'Здесь нужно «'+word+'», а не «'+wrongWord+'».'+role,
+            'Here you need "'+word+'", not "'+wrongWord+'".'+role,
+            'Burada "'+word+'" olmalı, "'+wrongWord+'" değil.'+role
+        )+formula;
     }
-    if(cat==='konjunktiv'){
-        if(lo==='würde'||lo==='wäre'||lo==='hätte') return _t(
-            'Konjunktiv II: würde/wäre/hätte — irreale Situation.',
-            'Конъюнктив II: würde/wäre/hätte — нереальная ситуация. «Если бы...»',
-            'Subjunctive II: würde/wäre/hätte — unreal situation. "If I were..."',
-            'Dilek kipi II: würde/wäre/hätte — gerçek dışı durum.'
-        );
-        return _t('Konjunktiv II: Achte auf die Verbform!','Конъюнктив II: Следи за формой глагола!','Subjunctive II: Watch the verb form!','Dilek kipi II: Fiil formuna dikkat et!');
-    }
-    if(cat==='je_desto') return _t(
-        'je + Komparativ, desto + Komparativ + Verb!',
-        'je + сравнит., desto + сравнит. + глагол. Чем больше..., тем лучше!',
-        'je + comparative, desto + comparative + verb. The more..., the better!',
-        'je + karşılaştırma, desto + karşılaştırma + fiil. Ne kadar çok..., o kadar iyi!'
-    );
-    if(cat==='um_zu') return _t(
-        'um...zu + Infinitiv am Ende.',
-        'um...zu + инфинитив в конце (одно подлежащее).',
-        'um...zu + infinitive at the end (same subject).',
-        'um...zu + mastar sonda (aynı özne).'
-    );
-    if(item.rule) return item.rule;
-    return _t('Achte auf Wortstellung und Form!','Следи за порядком слов и формой!','Watch word order and form!','Kelime sırasına ve forma dikkat et!');
+
+    // === C: FALLBACK — positional rules (old logic as backup) ===
+    if(isVerb&&pos===1&&!isNeb) return _t(
+        'Das Verb «'+word+'» steht IMMER auf Position 2 im Hauptsatz!',
+        'Глагол «'+word+'» ВСЕГДА на 2-й позиции в главном предложении!',
+        'The verb "'+word+'" is ALWAYS in position 2 in main clauses!',
+        '"'+word+'" fiili ana cümlede HER ZAMAN 2. pozisyonda!'
+    )+formula;
+    if(isVerb&&pos===sentence.length-1&&isNeb) return _t(
+        'Im Nebensatz ('+cat+') steht das Verb «'+word+'» am ENDE!',
+        'В придаточном ('+cat+') глагол «'+word+'» стоит в КОНЦЕ!',
+        'In subordinate ('+cat+') the verb "'+word+'" goes to the END!',
+        'Yan cümlede ('+cat+') "'+word+'" fiili SONA gider!'
+    )+formula;
+    if(connNames[lo]) return _t(
+        '«'+word+'» ('+connNames[lo]+') — Konnektor. Verb ans Ende!',
+        '«'+word+'» ('+connNames[lo]+') — союз. Глагол в конец!',
+        '"'+word+'" ('+connNames[lo]+') — connector. Verb to the end!',
+        '"'+word+'" ('+connNames[lo]+') — bağlaç. Fiil sona!'
+    )+formula;
+    if(item.rule) return item.rule+formula;
+    return _t('Achte auf Wortstellung und Form!','Следи за порядком слов и формой!','Watch word order and form!','Kelime sırasına ve forma dikkat et!')+formula;
 }
 
 // ============== SUBLIMINAL ==============
