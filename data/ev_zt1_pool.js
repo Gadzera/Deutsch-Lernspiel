@@ -189,6 +189,44 @@ strukturen: [
      {nouns:"Buch/Regal",example:"Das Buch steht im Regal."},
      {nouns:"Kind/Boden",example:"Das Kind sitzt auf dem Boden."}
    ]}
+]},
+
+// ---- SET 3 ----
+{tasks:[
+  {type:"infinitiv_zu",q:"Ergänzen Sie die Sätze mit Infinitiv + zu!",scoring:"3 x 1,5 = 4,5 P.",perItem:1.5,
+   items:[
+     {start:"Ich habe vor,",example:"nächstes Jahr nach Deutschland zu reisen."},
+     {start:"Es macht mir Spaß,",example:"neue Menschen aus anderen Ländern kennenzulernen."},
+     {start:"Wir haben keine Zeit,",example:"heute Abend ins Kino zu gehen."}
+   ]},
+  {type:"praepositionen",q:"Ergänzen Sie die passenden Präpositionen und Artikel!",scoring:"6 x 0,5 = 3 P.",perItem:0.5,
+   text:"___ ___ Samstag gehe ich ___ ___ Markt. Dort kaufe ich Obst und Gemüse ___ ___ Biobauern. Danach treffe ich meine Freundin ___ ___ Café. Wir sitzen lange ___ ___ Terrasse und reden. ___ ___ Treffen gehe ich nach Hause.",
+   blanks:[
+     {answers:["Am"]},
+     {answers:["zum","auf den"]},
+     {answers:["von den","beim"]},
+     {answers:["in einem","in dem","im"]},
+     {answers:["auf der"]},
+     {answers:["Nach dem"]}
+   ]},
+  {type:"satzanfaenge",q:"Vervollständigen Sie mit 3 verschiedenen Gedanken!",scoring:"3 x 1 = 3 P.",perItem:1,
+   stem:"Ich fahre in den Urlaub, ...",
+   connectors:["denn","weil","deshalb"],
+   examples:["denn ich brauche eine Pause vom Stress.","weil ich seit Monaten nicht mehr Urlaub hatte.","Deshalb habe ich schon ein Hotel gebucht."]},
+  {type:"konjunktiv2",q:"Sagen Sie es höflicher mit Konjunktiv II!",scoring:"3 x 1,5 = 4,5 P.",perItem:1.5,
+   items:[
+     {imperativ:"„Erklären Sie mir die Aufgabe!\"",example:"Könnten Sie mir bitte die Aufgabe erklären?"},
+     {imperativ:"„Ruf mich heute Abend an!\"",example:"Könntest du mich heute Abend bitte anrufen?"},
+     {imperativ:"„Bringt mir ein Glas Wasser!\"",example:"Könntet ihr mir bitte ein Glas Wasser bringen?"}
+   ]},
+  {type:"stehen_liegen",q:"Bilden Sie mit den folgenden Nomen 4 korrekte Sätze!",scoring:"4 x 1,5 = 6 P.",perItem:1.5,
+   verbs:["stehen","liegen","hängen","stellen","legen","setzen"],
+   items:[
+     {nouns:"Lampe/Schreibtisch",example:"Die Lampe steht auf dem Schreibtisch."},
+     {nouns:"Sie/Decke/Sofa",example:"Sie legt die Decke auf das Sofa."},
+     {nouns:"Jacke/Stuhl",example:"Die Jacke hängt über dem Stuhl."},
+     {nouns:"Mutter/Kind/Stuhl",example:"Die Mutter setzt das Kind auf den Stuhl."}
+   ]}
 ]}
 
 ],
