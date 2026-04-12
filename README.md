@@ -1,52 +1,43 @@
-# 🇩🇪 Deutsch Lernspiel
+# Deutsch Lernspiel Pro
 
-Interaktive Anwendung zum Erlernen deutscher Wörter und Artikel.
+Интерактивное приложение для изучения немецкого языка от A1 до C1.
 
-## 🚀 Funktionen
+## Функции
 
-- Lernen deutscher Artikel (der, die, das)
-- Drei Lernmodi:
-  - Artikel auswählen
-  - Deutsch → Übersetzung  
-  - Übersetzung → Deutsch
-- Unterstützung mehrerer Sprachen (Russisch, Türkisch, Persisch)
-- Fortschrittsverfolgungssystem
-- Globale Statistik
-- Filterung von Wörtern nach Lernstatus
+- PIN-авторизация с сохранением прогресса
+- Адаптивное обучение: правильно отвеченные задания не повторяются
+- 6 категорий викторин с 2248+ упражнениями
+- Конструктор предложений (перетаскивание слов)
+- Множественный выбор (MCQ)
+- Выбор языка-помощника (RU, EN, TR, AR, FA)
+- 25th Frame технология (подсознательное обучение)
+- Мобильный дизайн
 
-## 🎮 So verwenden Sie die App
+## Категории
 
-1. Geben Sie Ihren Namen ein
-2. Wählen Sie die Interface-Sprache
-3. Wählen Sie den Lernmodus
-4. Konfigurieren Sie Wortfilter
-5. Starten Sie das Quiz!
+| Категория | Кол-во | Описание |
+|---|---|---|
+| Wortschatz | 1378 | Существительные с артиклями, глаголы |
+| Partizip II | 200 | Все паттерны причастий |
+| Reflexive Verben | 250 | Возвратные глаголы во всех формах |
+| Satzbau | 200 | Построение предложений A1-C1 |
+| Prepositionen | 120 | Предлоги всех типов |
+| Pronomen | 100 | Местоимения всех типов |
 
-## 🌐 Live Demo
+## Темы Satzbau
 
-[👉 Hier klicken um die App zu starten](https://gadzera.github.io/Deutsch-Lernspiel/)
+TEKAMOLO, Hauptsätze, Modalverben, weil/dass/wenn/als/ob/obwohl, damit/um...zu, trotzdem/deshalb/denn, nachdem/bevor/während, Relativsätze, Passiv, Konjunktiv II, je...desto, Textbau (B2-C1)
 
-## 🛠 Technologien
+## Технологии
 
-- HTML5
-- CSS3 (Grid, Flexbox, Animationen)
-- JavaScript (ES6+)
-- Local Storage für Fortschrittsspeicherung
+- HTML5 / CSS3 / JavaScript (ES6+)
+- localStorage для авторизации и прогресса
+- Mobile-first дизайн с iOS safe area
 
-## 📱 Besonderheiten
+## Live Demo
 
-- Responsives Design
-- Fortschrittsbalken
-- Errungenschaftssystem
-- Hervorhebung richtiger/falscher Antworten
-- Helle visuelle Effekte
+https://gadzera.github.io/Deutsch-Lernspiel/
 
-## 👨‍💻 Entwickler
+## Разработчик
 
 Aleksandr Gadzera
-
----
-
-*Entwickelt mit ❤️ für Deutschlernende*
-
-**Viel Erfolg beim Deutschlernen!** 🎓
