@@ -83,6 +83,9 @@ const UI = {
     buildSentence: "Bilde den Satz",
     checkBtn: "Prüfen",
     tapWords: "Tippe auf Wörter...",
+    hintBtn: "Tipp",
+    nextBtn: "Weiter",
+    tryAgain: "Nochmal versuchen",
     registered: "Registriert",
     online: "Online"
 };
@@ -472,7 +475,7 @@ function showMenu() {
         sqBtn('📘','Genitiv-Präpositionen','prepositions','genitiv')+
         sqBtn('🔗','Verb + Präposition','prepositions','verb_prep'));
     // 6. Pronomen
-    if(hasPn) cats+=catHTML('���','Pronomen',PRONOUNS.length+' Übungen','pron_all',PRONOUNS.length,'catPron',
+    if(hasPn) cats+=catHTML('👥','Pronomen',PRONOUNS.length+' Übungen','pron_all',PRONOUNS.length,'catPron',
         sqBtn('👤','Alle Pronomen','pronouns','all')+
         sqBtn('🙋','Personalpronomen','pronouns','personal')+
         sqBtn('📎','Possessivpronomen','pronouns','possessiv')+
@@ -485,7 +488,7 @@ function showMenu() {
     $('app').innerHTML=`
         <div class="app-shell">
             <div class="app-header">
-                <div class="app-header-left"><span style="font-size:1.3rem">���🇪</span><h1>${UI.appName}</h1></div>
+                <div class="app-header-left"><span style="font-size:1.3rem">🇩🇪</span><h1>${UI.appName}</h1></div>
                 <div class="app-header-right">
                     <button class="lang-chip" onclick="showLangModal()">${LANG_FLAGS[APP.lang]||'🌐'} ${LANG_NAMES[APP.lang]||APP.lang}</button>
                     <button class="btn btn-ghost btn-sm" onclick="doLogout()" style="width:auto">${UI.logout}</button>
@@ -607,16 +610,27 @@ function prepareMCQ(){
     }else if(cat==='partizip'){
         const P=PARTIZIP2;
         if(mode==='v2p'){
-            label='Wie ist das Partizip II?';display=item.verb;hint=tr(item);correct=item.partizip;
-            const ot=shuffle(P.filter(x=>x.id!==item.id)).slice(0,3).map(x=>x.partizip);
-            opts=shuffle([...new Set([...ot,correct])]);
-        }else if(mode==='p2v'){
-            label='Welches Verb?';display=item.partizip;hint=tr(item);correct=item.verb;
-            const ot=shuffle(P.filter(x=>x.id!==item.id)).slice(0,3).map(x=>x.verb);
-            opts=shuffle([...new Set([...ot,correct])]);
+            const fullForm=item.aux+' '+item.partizip;
+            label='Wie ist das Perfekt?';display=item.verb;hint=tr(item);correct=fullForm;
+            // Generate similar-looking distractors
+            const sameAux=P.filter(x=>x.id!==item.id&&x.aux===item.aux);
+            const diffAux=P.filter(x=>x.id!==item.id&&x.aux!==item.aux);
+            let distractors=[];
+            // Add same aux + similar partizip (most confusing)
+            distractors.push(...shuffle(sameAux).slice(0,4).map(x=>x.aux+' '+x.partizip));
+            // Add wrong aux + same partizip (tricky)
+            distractors.push((item.aux==='haben'?'sein':'haben')+' '+item.partizip);
+            // Add different aux verbs
+            distractors.push(...shuffle(diffAux).slice(0,2).map(x=>x.aux+' '+x.partizip));
+            opts=shuffle([...new Set([...distractors.slice(0,5),correct])]);
         }else{
-            isArt=true;label='haben oder sein?';display=item.verb+' → '+item.partizip;hint=tr(item);
-            opts=['haben','sein'];correct=item.aux;
+            label='haben oder sein?';display=item.verb+' → '+item.partizip;hint=tr(item);
+            correct=item.aux+' '+item.partizip;
+            const other=(item.aux==='haben'?'sein':'haben')+' '+item.partizip;
+            // Add more confusing options
+            const simP=shuffle(P.filter(x=>x.id!==item.id)).slice(0,3);
+            let extras=simP.map(x=>x.aux+' '+x.partizip);
+            opts=shuffle([...new Set([correct,other,...extras])]).slice(0,5);
         }
     }else if(cat==='reflexive'){
         const keys=['ich','du','er','wir','ihr','sie'];
@@ -625,9 +639,24 @@ function prepareMCQ(){
         label=labels[pi];display=item.verb;hint=tr(item);correct=item[keys[pi]];
         const ot=shuffle(REFLEXIVE.filter(x=>x.id!==item.id)).slice(0,3).map(x=>x[keys[pi]]);
         opts=shuffle([...new Set([...ot,correct])]);
-    }else if(cat==='prepositions'||cat==='pronouns'){
+    }else if(cat==='prepositions'){
         label=item.sentence.replace('___','______');display='';hint=tr(item);
-        opts=shuffle([...item.options]);correct=item.answer;
+        correct=item.answer;
+        // Generate 10 confusing options
+        const allPreps=['in','an','auf','über','unter','vor','hinter','neben','zwischen','zu','bei','mit','nach','seit','von','aus','durch','für','gegen','ohne','um','wegen','trotz','während','statt','außerhalb','innerhalb','anstelle','aufgrund','entgegen'];
+        const pool=allPreps.filter(p=>p!==item.answer);
+        opts=shuffle([...new Set([...item.options,...shuffle(pool).slice(0,8),correct])]).slice(0,10);
+        if(!opts.includes(correct)) opts[9]=correct;
+        opts=shuffle(opts);
+    }else if(cat==='pronouns'){
+        label=item.sentence.replace('___','______');display='';hint=tr(item);
+        correct=item.answer;
+        // More pronoun options to confuse
+        const allProns=['ich','du','er','sie','es','wir','ihr','mich','dich','sich','uns','euch','mir','dir','ihm','ihr','ihnen','mein','dein','sein','ihre','unser','euer','meinen','meinem','meine','meiner','dieser','diese','dieses','diesem','diesen','der','die','das','den','dem','dessen','deren','denen','jemand','niemand','man','etwas','nichts','alle'];
+        const pool=allProns.filter(p=>p!==item.answer&&!item.options.includes(p));
+        opts=shuffle([...new Set([...item.options,...shuffle(pool).slice(0,4),correct])]).slice(0,8);
+        if(!opts.includes(correct)) opts[7]=correct;
+        opts=shuffle(opts);
     }
     return {label,display,hint,opts,correct,isArt};
 }
@@ -667,23 +696,98 @@ function checkA(btn){
     setTimeout(()=>{APP.quiz.idx++;showQ();},1200);
 }
 
+// ============== GRAMMAR HINTS ==============
+const HINTS={
+    hauptsatz:['Das Verb steht immer auf Position 2.','Subjekt + Verb + Objekt ist die Grundregel.'],
+    tekamolo:['Reihenfolge: Temporal → Kausal → Modal → Lokal.','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
+    modal:['Modalverb auf Position 2, Infinitiv am Ende.','können, müssen, wollen, sollen, dürfen, mögen'],
+    weil:['Nach "weil" steht das Verb am Ende!','weil = потому что → Verb am Satzende'],
+    dass:['Nach "dass" steht das Verb am Ende!','dass = что → Nebensatz, Verb am Ende'],
+    wenn:['Nach "wenn" steht das Verb am Ende!','wenn = если/когда → Verb am Satzende'],
+    als:['Nach "als" steht das Verb am Ende!','als = когда (einmalig in der Vergangenheit)'],
+    ob:['Nach "ob" steht das Verb am Ende!','ob = ли → indirekte Frage'],
+    obwohl:['Nach "obwohl" steht das Verb am Ende!','obwohl = хотя → Nebensatz'],
+    damit:['Nach "damit" steht das Verb am Ende!','damit = чтобы (verschiedene Subjekte)'],
+    um_zu:['um + zu + Infinitiv am Ende.','um...zu = чтобы (gleiches Subjekt)'],
+    trotzdem:['Nach "trotzdem" — normale Wortstellung, Verb auf Position 2!','trotzdem = тем не менее → Hauptsatz'],
+    deshalb:['Nach "deshalb" — Verb auf Position 2!','deshalb = поэтому → Inversion möglich'],
+    denn:['Nach "denn" — normale Wortstellung!','denn = потому что → keine Inversion, Verb auf Position 2'],
+    aber:['Nach "aber" — normale Wortstellung!','aber = но → Hauptsatz + Hauptsatz'],
+    sondern:['nicht...sondern = не...а → Korrektur','sondern folgt immer auf eine Verneinung (nicht)'],
+    nachdem:['Nach "nachdem" — Verb am Ende + Plusquamperfekt!','nachdem = после того как → Zeitenfolge beachten!'],
+    bevor:['Nach "bevor" — Verb am Ende!','bevor = прежде чем → Nebensatz'],
+    waehrend:['Nach "während" — Verb am Ende!','während = в то время как → Gleichzeitigkeit'],
+    seitdem:['Nach "seitdem" — Verb am Ende!','seitdem = с тех пор как → Nebensatz'],
+    bis:['Nach "bis" — Verb am Ende!','bis = пока не → Nebensatz'],
+    sobald:['Nach "sobald" — Verb am Ende!','sobald = как только → Nebensatz'],
+    relativ:['Relativpronomen: der/die/das + Verb am Ende!','Der Mann, DER dort steht, ... → Verb am Ende des Relativsatzes'],
+    passiv:['Passiv: werden + Partizip II','Das Haus WIRD gebaut. Die Häuser WERDEN gebaut.'],
+    konjunktiv:['Konjunktiv II: würde/wäre/hätte + Infinitiv/Partizip','Wenn ich reich WÄRE, WÜRDE ich reisen.'],
+    je_desto:['Je + Komparativ..., desto + Komparativ + Verb','Je mehr man übt, desto besser wird man.'],
+    textbau:['Erstens, zweitens, darüber hinaus, zusammenfassend...','Einerseits... andererseits... → Argumentation']
+};
+
 // ============== SENTENCE BUILDER ==============
 function showBuilder(){
     const item=APP.quiz.items[APP.quiz.idx];
     APP.quiz.allW=shuffle([...item.correct,...(item.distractors||[])]);
     APP.quiz.built=[];
     APP.quiz.correctS=item.correct;
+    APP.quiz.checked=false;
+    APP.quiz.hintUsed=false;
     renderBuilder();
 }
 function renderBuilder(){
     const item=APP.quiz.items[APP.quiz.idx];
     const pct=(APP.quiz.idx/APP.quiz.items.length)*100;
     const num=APP.quiz.idx+1,tot=APP.quiz.items.length;
-    const builtH=APP.quiz.built.map((wi,i)=>`<button class="word-chip selected" onclick="removeWord(${i})">${esc(APP.quiz.allW[wi])}</button>`).join('');
-    const poolH=APP.quiz.allW.map((w,i)=>{
+    const checked=APP.quiz.checked;
+    let builtH='';
+    if(checked){
+        // After check: show per-word green/red
+        const built=APP.quiz.built.map(i=>APP.quiz.allW[i]);
+        const correct=APP.quiz.correctS;
+        builtH=built.map((w,i)=>{
+            const isRight=i<correct.length&&w===correct[i];
+            return `<span class="word-chip ${isRight?'wc-correct':'wc-wrong'}">${esc(w)}</span>`;
+        }).join('');
+        // Show missing words if built is shorter
+        if(built.length<correct.length){
+            for(let i=built.length;i<correct.length;i++){
+                builtH+=`<span class="word-chip wc-wrong" style="opacity:0.4">___</span>`;
+            }
+        }
+    }else{
+        builtH=APP.quiz.built.map((wi,i)=>`<button class="word-chip selected" onclick="removeWord(${i})">${esc(APP.quiz.allW[wi])}</button>`).join('');
+    }
+    const poolH=checked?'':APP.quiz.allW.map((w,i)=>{
         const used=APP.quiz.built.includes(i);
         return `<button class="word-chip${used?' used':''}" onclick="addWord(${i})" ${used?'disabled':''}>${esc(w)}</button>`;
     }).join('');
+
+    // Correct answer display after check
+    let correctLine='';
+    if(checked){
+        correctLine=`<div style="margin-top:12px;padding:10px;background:var(--success);color:#fff;border-radius:10px;font-weight:600;text-align:center">${APP.quiz.correctS.join(' ')}</div>`;
+    }
+
+    // Hint area
+    let hintArea='';
+    if(APP.quiz.hintUsed){
+        const hints=HINTS[item.cat]||['Achte auf die Wortstellung!'];
+        hintArea=`<div class="hint-box">${hints.map(h=>'💡 '+esc(h)).join('<br>')}</div>`;
+    }
+
+    // Buttons
+    let btns='';
+    if(checked){
+        btns=`<button class="btn btn-primary" onclick="nextBuilder()" style="margin-top:12px">${UI.nextBtn} →</button>`;
+    }else{
+        btns=`<div style="display:flex;gap:8px;margin-top:12px">
+            <button class="btn btn-outline" onclick="showHint()" style="flex:1">${UI.hintBtn} 💡</button>
+            <button class="btn btn-primary" onclick="checkBuilder()" style="flex:2">${UI.checkBtn}</button>
+        </div>`;
+    }
 
     $('app').innerHTML=`
         <div class="quiz-page">
@@ -695,29 +799,28 @@ function renderBuilder(){
             <div class="quiz-body">
                 <div class="quiz-question-label">${item.rule||UI.buildSentence}</div>
                 <div class="quiz-hint">${tr(item)}</div>
+                ${hintArea}
                 <div class="sentence-area">${builtH||'<span class="sentence-ph">'+UI.tapWords+'</span>'}</div>
-                <div class="word-pool">${poolH}</div>
-                <button class="btn btn-primary" onclick="checkBuilder()" style="margin-top:16px">${UI.checkBtn}</button>
+                ${poolH?'<div class="word-pool">'+poolH+'</div>':''}
+                ${correctLine}
+                ${btns}
             </div>
         </div>`;
 }
 function addWord(i){if(!APP.quiz.built.includes(i)){APP.quiz.built.push(i);renderBuilder();}}
-function removeWord(pos){APP.quiz.built.splice(pos,1);renderBuilder();}
+function removeWord(pos){if(!APP.quiz.checked){APP.quiz.built.splice(pos,1);renderBuilder();}}
+function showHint(){APP.quiz.hintUsed=true;renderBuilder();}
+function nextBuilder(){APP.quiz.idx++;showQ();}
 function checkBuilder(){
     const built=APP.quiz.built.map(i=>APP.quiz.allW[i]);
     const correct=APP.quiz.correctS;
     const ok=built.length===correct.length&&built.every((w,i)=>w===correct[i]);
     const item=APP.quiz.items[APP.quiz.idx];
     if(ok){APP.quiz.score++;markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);}
-    // Show result visually
-    const area=document.querySelector('.sentence-area');
-    const pool=document.querySelector('.word-pool');
-    if(area)area.innerHTML=correct.map(w=>`<span class="word-chip ${ok?'wc-correct':'wc-wrong'}">${esc(w)}</span>`).join('');
-    if(pool)pool.style.opacity='0.3';
-    document.querySelectorAll('.btn-primary').forEach(b=>b.disabled=true);
+    APP.quiz.checked=true;
     const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+APP.quiz.score;
     if(APP.subliminal) showSubliminal(item);
-    setTimeout(()=>{APP.quiz.idx++;showQ();},2000);
+    renderBuilder();
 }
 
 // ============== SUBLIMINAL ==============
@@ -741,7 +844,7 @@ function showRes(){
     if(pct===100){emoji='🎉';msg=UI.perfect;}
     else if(pct>=80){emoji='🔥';msg=UI.excellent;}
     else if(pct>=60){emoji='👍';msg=UI.good;}
-    else if(pct>=40){emoji='��';msg=UI.notBad;}
+    else if(pct>=40){emoji='💪';msg=UI.notBad;}
     else{emoji='📚';msg=UI.studyMore;}
 
     $('app').innerHTML=`
