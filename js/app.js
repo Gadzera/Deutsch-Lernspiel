@@ -504,6 +504,20 @@ function showMenu() {
         sqBtn('🔗','Relativpronomen','pronouns','relativ')+
         sqBtn('❓','Indefinitpronomen','pronouns','indefinit'));
 
+    // 7. VWU
+    const hasVWU=typeof VWU!=='undefined'&&VWU.levels;
+    if(hasVWU){
+        const totalVWU=VWU.levels.reduce((s,l)=>s+l.tests.length,0);
+        let vwuBtns='';
+        VWU.levels.forEach(lv=>{
+            lv.tests.forEach(t=>{
+                vwuBtns+=`<button class="sub-quiz-btn" onclick="startVWU('${lv.id}','${t.id}')">📋 ${t.name}</button>`;
+            });
+            vwuBtns+=`<div style="border-top:1px solid var(--border);margin:4px 0"></div>`;
+        });
+        cats+=catHTML('🎓','VWU Prüfungsvorbereitung',totalVWU+' Tests','vwu_progress',totalVWU,'catVWU',vwuBtns);
+    }
+
     const regCnt=getUserCount(), onCnt=getOnlineCount();
 
     $('app').innerHTML=`
@@ -1004,6 +1018,7 @@ function getModeName(m){
     if(m.startsWith('sentences_')) return 'Satzbau: '+(m.split('_')[1]||'');
     if(m.startsWith('prep_')) return 'Präp: '+(m.split('_').slice(1).join(' ')||'');
     if(m.startsWith('pron_')) return 'Pron: '+(m.split('_').slice(1).join(' ')||'');
+    if(m.startsWith('vwu_')) return 'VWU: '+(m.split('_').slice(1).join(' ')||'');
     return m;
 }
 function showStats(){
@@ -1035,6 +1050,162 @@ function showStats(){
             </div>
         </div>`;
 }
+
+// ============== VWU TEST ENGINE ==============
+function startVWU(levelId,testId){
+    if(typeof VWU==='undefined') return;
+    const level=VWU.levels.find(l=>l.id===levelId);
+    if(!level) return;
+    const test=level.tests.find(t=>t.id===testId);
+    if(!test) return;
+    APP.vwu={level,test,secIdx:0,gramIdx:0,gramScore:0,gramTotal:0,wrongs:[],t0:Date.now()};
+    showVWUSection();
+}
+
+function showVWUSection(){
+    const v=APP.vwu;
+    if(!v||v.secIdx>=v.test.sections.length){showVWUResults();return;}
+    const sec=v.test.sections[v.secIdx];
+    if(sec.type==='grammatik'){v.gramIdx=0;v.gramScore=0;v.gramTotal=sec.items.length;showVWUGram();}
+    else if(sec.type==='schreiben'){showVWUSchreiben();}
+}
+
+function showVWUGram(){
+    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    if(v.gramIdx>=sec.items.length){v.secIdx++;showVWUSection();return;}
+    const item=sec.items[v.gramIdx];
+    const num=v.gramIdx+1,tot=sec.items.length;
+    const pct=(v.gramIdx/tot)*100;
+    const btns=item.opts.map(o=>`<button class="answer-btn" data-val="${esc(o)}" data-cor="${esc(item.ans)}" onclick="checkVWUGram(this)">${o}</button>`).join('');
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span class="quiz-progress-text">${v.test.name} &bull; Grammatik ${num}/${tot}</span></div>
+                <span class="quiz-score" id="qsc">&#10003; ${v.gramScore}</span>
+            </div>
+            <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+            <div class="quiz-body">
+                <div class="quiz-question-label">Ergänzen Sie:</div>
+                <div class="vwu-sentence">${item.q.replace('___','<span class="vwu-blank">______</span>')}</div>
+                <div class="quiz-answers stagger">${btns}</div>
+                <div class="vwu-rule-hint" id="vwuRule" style="display:none"></div>
+            </div>
+        </div>`;
+}
+
+function checkVWUGram(btn){
+    const val=btn.dataset.val,cor=btn.dataset.cor,ok=val===cor;
+    const v=APP.vwu,sec=v.test.sections[v.secIdx],item=sec.items[v.gramIdx];
+    if(ok){v.gramScore++;btn.classList.add('correct');}
+    else{btn.classList.add('incorrect');v.wrongs.push({q:item.q,userAnswer:val,correct:cor,rule:item.rule});if(navigator.vibrate)navigator.vibrate(100);}
+    document.querySelectorAll('.answer-btn').forEach(b=>{b.disabled=true;if(b.dataset.val===cor)b.classList.add('correct');});
+    const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+v.gramScore;
+    const ruleEl=$('vwuRule');
+    if(ruleEl){ruleEl.style.display='block';ruleEl.innerHTML='📝 '+esc(item.rule);}
+    setTimeout(()=>{v.gramIdx++;showVWUGram();},1500);
+}
+
+function showVWUSchreiben(){
+    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span>${v.test.name} &bull; Schreiben</span></div>
+            </div>
+            <div class="quiz-body">
+                <div class="vwu-write-prompt">${esc(sec.prompt)}</div>
+                ${sec.tip?'<div class="hint-box">💡 '+esc(sec.tip)+'</div>':''}
+                <textarea id="vwuText" class="vwu-textarea" placeholder="Schreiben Sie hier..." oninput="updateWC()"></textarea>
+                <div class="vwu-wc" id="vwuWC">0 Wörter</div>
+                <button class="btn btn-primary" onclick="submitVWUWrite()" style="margin-top:12px">Abgeben</button>
+            </div>
+        </div>`;
+}
+
+function updateWC(){
+    const t=$('vwuText');if(!t)return;
+    const w=t.value.trim().split(/\s+/).filter(x=>x).length;
+    const el=$('vwuWC');if(el)el.textContent=w+' Wörter';
+}
+
+function submitVWUWrite(){
+    const v=APP.vwu,sec=v.test.sections[v.secIdx];
+    const text=($('vwuText')||{}).value||'';
+    const wc=text.trim().split(/\s+/).filter(x=>x).length;
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="showVWUResults()">&#8592;</button><span>Musterantwort</span></div>
+            </div>
+            <div class="quiz-body">
+                <div class="vwu-write-prompt">${esc(sec.prompt)}</div>
+                <div class="vwu-your-text"><strong>Ihr Text (${wc} Wörter):</strong><p>${esc(text)||'<em>Kein Text</em>'}</p></div>
+                <div class="vwu-model"><strong>Musterantwort:</strong><p>${esc(sec.model)}</p></div>
+                <div style="margin-top:16px;text-align:center">
+                    <p style="font-size:0.85rem;color:var(--text-secondary)">Bewerten Sie sich selbst:</p>
+                    <div style="display:flex;gap:8px;margin-top:8px">
+                        <button class="btn btn-outline" onclick="rateVWU('gut')" style="flex:1;border-color:var(--success);color:var(--success)">Gut</button>
+                        <button class="btn btn-outline" onclick="rateVWU('mittel')" style="flex:1;border-color:var(--warning);color:var(--warning)">Mittel</button>
+                        <button class="btn btn-outline" onclick="rateVWU('schlecht')" style="flex:1;border-color:var(--danger);color:var(--danger)">Schlecht</button>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+}
+
+function rateVWU(rating){
+    const v=APP.vwu;
+    v.writeRating=rating;
+    v.secIdx++;
+    showVWUSection();
+}
+
+function showVWUResults(){
+    const v=APP.vwu;
+    if(!v) return showMenu();
+    const ts=Math.round((Date.now()-v.t0)/1000);
+    const gramSec=v.test.sections.find(s=>s.type==='grammatik');
+    const tot=gramSec?gramSec.items.length:0;
+    const pct=tot>0?Math.round(v.gramScore/tot*100):0;
+    saveRes({d:Date.now(),s:v.gramScore,tot,pct,ts,m:'vwu_'+v.test.id});
+    let emoji,msg;
+    if(pct>=80){emoji='🎉';msg='Ausgezeichnet!';}
+    else if(pct>=60){emoji='👍';msg='Gut gemacht!';}
+    else{emoji='📚';msg='Weiter lernen!';}
+
+    const wrongCards=v.wrongs.length?v.wrongs.map((w,i)=>`
+        <div class="review-card">
+            <div class="review-num">${i+1}</div>
+            <div class="review-body">
+                <div class="review-question">${esc(w.q)}</div>
+                <div class="review-wrong">✗ ${esc(w.userAnswer)}</div>
+                <div class="review-correct">✓ ${esc(w.correct)}</div>
+                <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:2px">📝 ${esc(w.rule)}</div>
+            </div>
+        </div>
+    `).join(''):'';
+
+    $('app').innerHTML=`
+        <div class="results-page">
+            <div class="results-emoji">${emoji}</div>
+            <div class="results-title">${msg}</div>
+            <div class="results-score">${v.gramScore}/${tot}</div>
+            <div class="results-percent">Grammatik: ${pct}%</div>
+            ${v.writeRating?`<div style="margin:8px 0;font-size:0.9rem">Schreiben: <strong>${v.writeRating}</strong></div>`:''}
+            <div class="results-details">
+                <div class="results-detail-row"><span>Richtig</span><span style="color:var(--success)">${v.gramScore}</span></div>
+                <div class="results-detail-row"><span>Falsch</span><span style="color:var(--danger)">${tot-v.gramScore}</span></div>
+                <div class="results-detail-row"><span>Zeit</span><span>${ts} Sek</span></div>
+            </div>
+            ${wrongCards?'<div style="margin-top:16px;text-align:left"><div class="stat-section-title">&#10060; Fehler</div>'+wrongCards+'</div>':''}
+            <div class="results-actions">
+                <button class="btn btn-primary" onclick="startVWU('${v.level.id}','${v.test.id}')">🔄 Nochmal</button>
+                <button class="btn btn-outline" onclick="showMenu()">&#8592; Menü</button>
+            </div>
+        </div>`;
+}
+
+function quitVWU(){if(confirm('Test abbrechen?'))showMenu();}
 
 // ============== START ==============
 window.addEventListener('DOMContentLoaded', initApp);
