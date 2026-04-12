@@ -1506,16 +1506,24 @@ function showVWUMenu(){
         const icon=lv.id==='av'?'📗':lv.id==='ev'?'📘':lv.id==='gf'?'📙':'📕';
         let testCards='';
         lv.tests.forEach(t=>{
-            const secTags=t.sections.map(s=>{
-                if(s.type==='leseverstehen') return '<span class="vwu-sec-tag vwu-tag-lesen">📖 Lesen</span>';
-                if(s.type==='wortschatz') return '<span class="vwu-sec-tag vwu-tag-wort">📚 Wortschatz</span>';
-                if(s.type==='strukturen') return '<span class="vwu-sec-tag vwu-tag-struk">🔧 Strukturen</span>';
-                if(s.type==='grammatik') return '<span class="vwu-sec-tag vwu-tag-gram">📝 Grammatik</span>';
-                if(s.type==='schreiben') return '<span class="vwu-sec-tag vwu-tag-schr">✍️ Schreiben</span>';
-                return '<span class="vwu-sec-tag">'+esc(s.name)+'</span>';
-            }).join('');
-            testCards+=`<button class="sub-quiz-btn vwu-test-btn" onclick="startVWU('${lv.id}','${t.id}')">
-                <div class="vwu-test-name">📋 ${esc(t.name)}</div>
+            const isEmpty = t.empty || !t.sections || t.sections.length===0;
+            let secTags;
+            if(isEmpty){
+                secTags='<span class="vwu-sec-tag vwu-tag-empty">🚧 In Vorbereitung</span>';
+            } else {
+                secTags=t.sections.map(s=>{
+                    if(s.type==='leseverstehen') return '<span class="vwu-sec-tag vwu-tag-lesen">📖 Lesen</span>';
+                    if(s.type==='wortschatz') return '<span class="vwu-sec-tag vwu-tag-wort">📚 Wortschatz</span>';
+                    if(s.type==='strukturen') return '<span class="vwu-sec-tag vwu-tag-struk">🔧 Strukturen</span>';
+                    if(s.type==='grammatik') return '<span class="vwu-sec-tag vwu-tag-gram">📝 Grammatik</span>';
+                    if(s.type==='schreiben') return '<span class="vwu-sec-tag vwu-tag-schr">✍️ Schreiben</span>';
+                    return '<span class="vwu-sec-tag">'+esc(s.name)+'</span>';
+                }).join('');
+            }
+            const icon = isEmpty ? '🚧' : '📋';
+            const cls = isEmpty ? 'sub-quiz-btn vwu-test-btn vwu-test-empty' : 'sub-quiz-btn vwu-test-btn';
+            testCards+=`<button class="${cls}" onclick="startVWU('${lv.id}','${t.id}')">
+                <div class="vwu-test-name">${icon} ${esc(t.name)}</div>
                 <div class="vwu-test-tags">${secTags}</div>
             </button>`;
         });
@@ -1539,6 +1547,29 @@ function showVWUMenu(){
 }
 
 // ============== VWU TEST ENGINE ==============
+function showVWUEmptyPlaceholder(){
+    const v=APP.vwu;
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="showVWUMenu()">&#8592;</button><span>${v.test.name}</span></div>
+            </div>
+            <div class="quiz-body" style="text-align:center;padding:40px 20px">
+                <div style="font-size:64px;margin-bottom:16px">🚧</div>
+                <h2 style="color:var(--primary);margin-bottom:12px">In Vorbereitung</h2>
+                <p style="color:var(--text-sub);margin-bottom:8px;line-height:1.6">
+                    Dieser Test ist noch nicht verfügbar.
+                </p>
+                <p style="color:var(--text-sub);margin-bottom:24px;line-height:1.6">
+                    Aktuell ist nur <strong>EV ZT1</strong> vollständig ausgearbeitet
+                    mit Leseverstehen, Wortschatz, Strukturen, Grammatik und Textproduktion.
+                </p>
+                <button class="btn btn-primary" onclick="startVWU('ev','ev_zt1')">EV ZT1 starten</button>
+                <button class="btn btn-outline" onclick="showVWUMenu()" style="margin-top:12px">Zurück</button>
+            </div>
+        </div>`;
+}
+
 function startVWU(levelId,testId){
     if(typeof VWU==='undefined') return;
     const level=VWU.levels.find(l=>l.id===levelId);
@@ -1553,7 +1584,12 @@ function startVWU(levelId,testId){
 
 function showVWUSection(){
     const v=APP.vwu;
-    if(!v||v.secIdx>=v.test.sections.length){showVWUResults();return;}
+    if(!v) return;
+    // Placeholder für leere Tests
+    if(v.test.empty || !v.test.sections || v.test.sections.length===0){
+        showVWUEmptyPlaceholder();return;
+    }
+    if(v.secIdx>=v.test.sections.length){showVWUResults();return;}
     let sec=v.test.sections[v.secIdx];
     // EV ZT1: Pool-basierte Substitution für Wortschatz/Strukturen/Grammatik
     if(v.test.id==='ev_zt1' && typeof EV_ZT1_POOL!=='undefined' && !sec._poolApplied){

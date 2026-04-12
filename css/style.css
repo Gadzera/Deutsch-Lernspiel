@@ -1855,6 +1855,10 @@ body {
 [data-theme="dark"] .vwu-tag-struk { background: #bf360c; color: #ffccbc; }
 [data-theme="dark"] .vwu-tag-gram { background: #1b5e20; color: #c8e6c9; }
 [data-theme="dark"] .vwu-tag-schr { background: #b71c1c; color: #ffcdd2; }
+.vwu-tag-empty { background: #f5f5f5; color: #757575; }
+.vwu-test-empty { opacity: 0.6; }
+.vwu-test-empty .vwu-test-name { color: var(--text-secondary); }
+[data-theme="dark"] .vwu-tag-empty { background: #424242; color: #bdbdbd; }
 
 /* VWU Section Label */
 .vwu-section-label { font-size: 0.85rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; padding: 8px 12px; background: var(--primary-light, #e8eaf6); border-radius: 8px; text-align: center; }
