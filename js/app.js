@@ -883,12 +883,129 @@ function checkBuilder(){
     const correct=APP.quiz.correctS;
     const ok=built.length===correct.length&&built.every((w,i)=>w===correct[i]);
     const item=APP.quiz.items[APP.quiz.idx];
-    if(ok){APP.quiz.score++;markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);}
-    else{APP.quiz.wrongs.push({item,userAnswer:built.join(' '),correct:correct.join(' ')});if(navigator.vibrate)navigator.vibrate(100);}
-    APP.quiz.checked=true;
-    const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+APP.quiz.score;
-    if(APP.subliminal) showSubliminal(item);
-    renderBuilder();
+    if(ok){
+        APP.quiz.score++;markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);
+        APP.quiz.checked=true;
+        const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+APP.quiz.score;
+        if(APP.subliminal) showSubliminal(item);
+        renderBuilder();
+    }else{
+        APP.quiz.wrongs.push({item,userAnswer:built.join(' '),correct:correct.join(' ')});
+        if(navigator.vibrate)navigator.vibrate(100);
+        APP.quiz.checked=true;
+        if(APP.subliminal) showSubliminal(item);
+        startCorrections(built,correct,item);
+    }
+}
+
+// ============== ANIMATED CORRECTIONS ==============
+function startCorrections(userWords,correctWords,item){
+    const corrs=[];
+    for(let i=0;i<correctWords.length;i++){
+        if(i>=userWords.length||userWords[i]!==correctWords[i]){
+            corrs.push({pos:i,wrong:i<userWords.length?userWords[i]:'___',correct:correctWords[i],
+                rule:getCorrectionRule(correctWords[i],i,correctWords,item)});
+        }
+    }
+    if(!corrs.length){renderBuilder();return;}
+    APP.quiz.corrs=corrs;
+    APP.quiz.corrIdx=0;
+    APP.quiz.corrDisplay=[...userWords];
+    while(APP.quiz.corrDisplay.length<correctWords.length) APP.quiz.corrDisplay.push('___');
+    showCorrection();
+}
+
+function showCorrection(){
+    const v=APP.quiz;
+    if(!v.corrs||v.corrIdx>=v.corrs.length){renderBuilder();return;}
+    const corr=v.corrs[v.corrIdx];
+    const item=v.items[v.idx];
+    const pct=(v.idx/v.items.length)*100;
+    const num=v.idx+1,tot=v.items.length;
+    const correct=v.correctS;
+
+    let sentH='';
+    for(let i=0;i<correct.length;i++){
+        if(i<corr.pos){
+            sentH+=`<span class="word-chip wc-correct">${esc(correct[i])}</span>`;
+        }else if(i===corr.pos){
+            sentH+=`<span class="word-chip corr-wrong" id="corrW">${esc(corr.wrong)}</span>`;
+            sentH+=`<span class="word-chip corr-right" id="corrR">${esc(corr.correct)}</span>`;
+        }else{
+            const w=v.corrDisplay[i]||'___';
+            const isOk=i<v.corrDisplay.length&&w===correct[i];
+            sentH+=`<span class="word-chip ${isOk?'':'corr-pending'}">${esc(w)}</span>`;
+        }
+    }
+
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="quitQ()">&#8592;</button><span class="quiz-progress-text">${num} ${UI.of} ${tot}</span></div>
+                <span class="quiz-score" id="qsc">&#10003; ${v.score}</span>
+            </div>
+            <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+            <div class="quiz-body">
+                <div class="quiz-question-label">${item.rule||UI.buildSentence}</div>
+                <div class="quiz-hint">${tr(item)}</div>
+                <div class="sentence-area corr-mode">${sentH}</div>
+                <div class="corr-rule-box" id="corrRule">
+                    <div class="corr-rule-text" id="corrRuleText"></div>
+                    <button class="corr-skip-btn" id="corrSkip" onclick="nextCorrection()">→</button>
+                </div>
+                <div class="corr-counter">${v.corrIdx+1} / ${v.corrs.length} Korrekturen</div>
+            </div>
+        </div>`;
+
+    const wEl=$('corrW'),rEl=$('corrR'),ruleBox=$('corrRule'),ruleText=$('corrRuleText');
+    if(ruleBox)ruleBox.style.opacity='0';
+    if(rEl)rEl.style.display='none';
+
+    setTimeout(()=>{
+        if(wEl)wEl.classList.add('corr-shake');
+        setTimeout(()=>{
+            if(wEl){wEl.classList.remove('corr-shake');wEl.classList.add('corr-fade-out');}
+            setTimeout(()=>{
+                if(wEl)wEl.style.display='none';
+                if(rEl){rEl.style.display='';rEl.classList.add('corr-slide-in');}
+                if(ruleBox){ruleBox.style.opacity='1';ruleBox.style.transition='opacity 0.4s';}
+                if(ruleText)ruleText.innerHTML='📝 '+esc(corr.rule);
+            },500);
+        },600);
+    },300);
+}
+
+function nextCorrection(){
+    const v=APP.quiz;
+    if(v.corrs&&v.corrIdx<v.corrs.length){
+        const corr=v.corrs[v.corrIdx];
+        v.corrDisplay[corr.pos]=corr.correct;
+    }
+    v.corrIdx++;
+    if(v.corrIdx>=v.corrs.length){renderBuilder();}
+    else{showCorrection();}
+}
+
+function getCorrectionRule(word,pos,sentence,item){
+    const cat=item.cat||'';
+    const lo=word.toLowerCase();
+    const verbList='bin,bist,ist,sind,seid,habe,hast,hat,haben,habt,werde,wirst,wird,werden,werdet,kann,kannst,könnt,können,muss,musst,müsst,müssen,soll,sollst,sollt,sollen,will,willst,wollt,wollen,darf,darfst,dürft,dürfen,möchte,möchtest,möchtet,möchten,gehe,gehst,geht,gehen,komme,kommst,kommt,kommen,mache,machst,macht,machen,lese,liest,lesen,fahre,fährst,fährt,fahren,schlafe,schläfst,schläft,schlafen,esse,isst,essen,trinke,trinkst,trinkt,trinken,arbeite,arbeitest,arbeitet,arbeiten,lerne,lernst,lernt,lernen,spiele,spielst,spielt,spielen,wohne,wohnst,wohnt,wohnen,brauche,brauchst,braucht,brauchen,kaufe,kaufst,kauft,kaufen,nehme,nimmst,nimmt,nehmen,gebe,gibst,gibt,geben,sehe,siehst,sieht,sehen,spreche,sprichst,spricht,sprechen,stehe,stehst,steht,stehen,liege,liegst,liegt,liegen,sitze,sitzt,sitzen,laufe,läufst,läuft,laufen,finde,findest,findet,finden,weiß,weißt,wissen,wisst';
+    const isVerb=verbList.split(',').includes(lo);
+    const nebCats='weil,dass,wenn,als,ob,obwohl,damit,nachdem,bevor,waehrend,seitdem,bis,sobald,relativ';
+    const isNeb=nebCats.split(',').includes(cat);
+    if(isVerb&&pos===1&&!isNeb) return 'Im Hauptsatz steht das konjugierte Verb IMMER auf Position 2 (nach dem Subjekt)!';
+    if(isVerb&&pos===sentence.length-1&&isNeb) return 'Im Nebensatz ('+cat+'-Satz) steht das konjugierte Verb am ENDE!';
+    const conns={weil:'weil (потому что)',dass:'dass (что)',wenn:'wenn (если/когда)',als:'als (когда)',ob:'ob (ли)',obwohl:'obwohl (хотя)',damit:'damit (чтобы)',nachdem:'nachdem (после того как)',bevor:'bevor (прежде чем)','während':'während (пока)',seitdem:'seitdem (с тех пор)',bis:'bis (пока не)',sobald:'sobald (как только)'};
+    if(conns[lo]) return '"'+word+'" ('+conns[lo].split('(')[1]+' — leitet einen Nebensatz ein. Das Verb geht ans Ende!';
+    const artR={'der':'Maskulin Nominativ','die':'Feminin Nominativ / Plural','das':'Neutrum Nominativ','den':'Maskulin Akkusativ','dem':'Dativ (mask./neutr.)','des':'Genitiv','ein':'Mask./Neutr. Nominativ (unbest.)','eine':'Feminin Nominativ (unbest.)','einen':'Maskulin Akkusativ (unbest.)','einem':'Dativ (unbest.)','kein':'Mask./Neutr. Negation','keine':'Feminin/Plural Negation','keinen':'Mask. Akkusativ Negation','keinem':'Dativ Negation','meinem':'Dativ Possessiv','meine':'Fem./Plural Possessiv','meinen':'Mask. Akk. Possessiv'};
+    if(artR[lo]) return artR[lo]+'. Achte auf Genus und Kasus des Substantivs!';
+    if(cat==='tekamolo') return 'TeKaMoLo: Temporal → Kausal → Modal → Lokal. Reihenfolge beachten!';
+    if(cat==='passiv'){if(lo==='wird'||lo==='werden'||lo==='wurde'||lo==='wurden')return 'Passiv: werden/wurde + Partizip II am Ende.';return 'Passiv: Subjekt + werden + ... + Partizip II.';}
+    if(cat==='konjunktiv'){if(lo==='würde'||lo==='wäre'||lo==='hätte')return 'Konjunktiv II: würde/wäre/hätte — irreale Situation.';return 'Konjunktiv II: Achte auf die richtige Verbform!';}
+    if(cat==='je_desto') return 'je + Komparativ, desto + Komparativ + Verb. Reihenfolge beachten!';
+    if(cat==='um_zu') return 'um...zu + Infinitiv am Ende (gleiches Subjekt).';
+    if(item.rule) return item.rule;
+    return 'Achte auf die richtige Wortstellung und Form!';
 }
 
 // ============== SUBLIMINAL ==============

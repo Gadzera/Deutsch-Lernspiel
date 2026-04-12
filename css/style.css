@@ -1637,6 +1637,109 @@ body {
     border-color: var(--border);
 }
 
+/* ============ CORRECTION ANIMATIONS ============ */
+.corr-mode {
+    min-height: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+}
+.corr-wrong {
+    background: var(--danger-light) !important;
+    color: var(--danger) !important;
+    border: 2px solid var(--danger) !important;
+    font-weight: 700;
+    transition: all 0.5s ease;
+}
+.corr-right {
+    background: var(--success-light) !important;
+    color: var(--success) !important;
+    border: 2px solid var(--success) !important;
+    font-weight: 700;
+}
+.corr-pending {
+    opacity: 0.4;
+}
+.corr-shake {
+    animation: corrShake 0.5s ease;
+}
+@keyframes corrShake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+}
+.corr-fade-out {
+    animation: corrFadeOut 0.5s ease forwards;
+}
+@keyframes corrFadeOut {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.5) translateY(-20px); }
+}
+.corr-slide-in {
+    animation: corrSlideIn 0.5s ease forwards;
+}
+@keyframes corrSlideIn {
+    0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+    60% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.corr-rule-box {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #FFF3E0, #FFF8E1);
+    border-left: 4px solid #FF9800;
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: opacity 0.4s ease;
+    min-height: 50px;
+}
+.corr-rule-text {
+    flex: 1;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #333;
+    font-weight: 500;
+}
+.corr-skip-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(108,99,255,0.3);
+    transition: transform 0.2s;
+}
+.corr-skip-btn:active {
+    transform: scale(0.9);
+}
+.corr-counter {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 8px;
+}
+[data-theme="dark"] .corr-rule-box {
+    background: linear-gradient(135deg, #2A2000, #1F1A00);
+    border-color: #FF9800;
+}
+[data-theme="dark"] .corr-rule-text {
+    color: var(--text);
+}
+
 /* ============ VWU TEST STYLES ============ */
 .vwu-sentence {
     font-size: 1.15rem;
