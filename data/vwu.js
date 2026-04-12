@@ -86,16 +86,26 @@ const VWU = {
 <p>Britta empfiehlt, zu den ersten Treffen immer einen guten Freund oder eine Freundin mitzunehmen, damit man keine unangenehme Situation erlebt. Von diesem Freund oder dieser Freundin kann man sich später auch beraten lassen. Außerdem sollte man für die ersten Verabredungen immer nur öffentliche Orte auswählen, an denen sich auch viele andere Menschen befinden, wie zum Beispiel ein Kaffeehaus.</p>
 <p>Britta selbst hat das so gemacht und Glück gehabt, denn heute lebt sie in einer harmonischen Partnerschaft.</p>`,
            questions:[
-             {id:"ev1_lv1",q:"Was steht sinngemäß im Text? Kreuzen Sie an!",opts:["Es gibt besondere Portale für Menschen mit unterschiedlichen Interessen.","Ein Onlineportal allein verdient circa 186 Millionen Euro pro Jahr.","Mit Datingportalen kann man im deutschsprachigen Raum nicht viel Geld verdienen."],ans:0,points:1},
-             {id:"ev1_lv2",q:"Was steht sinngemäß im Text?",opts:["Tinder ist eine kostenpflichtige App für ältere Menschen.","Bei Tinder suchen die Menschen eher keine feste Partnerschaft.","Tinder ist ein großes Problem für andere Datingportale."],ans:1,points:1},
-             {id:"ev1_lv3",q:"Was steht sinngemäß im Text?",opts:["Heiratsschwindler suchen im Internet nach Liebe.","Betrüger auf Datingportalen wollen Geld von anderen Menschen.","Alle Onlineportale haben wegen Betrügern geschlossen."],ans:1,points:1},
-             {id:"ev1_lv4",q:"Was steht sinngemäß im Text?",opts:["Britta hat nur schlechte Erfahrungen im Internet gemacht.","Britta hat ihren Mann über ein Internetportal kennengelernt.","Britta war nur wenige Wochen auf einem Onlineportal."],ans:1,points:1},
-             {id:"ev1_lv5",q:"Was steht sinngemäß im Text?",opts:["Britta empfiehlt, allein zu den ersten Treffen zu gehen.","Man sollte sich an privaten Orten treffen.","Man sollte zum ersten Treffen einen Freund mitnehmen."],ans:2,points:1},
-             {id:"ev1_lv6",q:"Richtig oder Falsch: Im deutschsprachigen Raum gibt es mehr als 2000 Singlebörsen.",opts:["Richtig","Falsch"],ans:0,points:1},
-             {id:"ev1_lv7",q:"Richtig oder Falsch: Tinder kam 2010 auf den Markt.",opts:["Richtig","Falsch"],ans:1,points:1},
-             {id:"ev1_lv8",q:"Richtig oder Falsch: Britta hat auf dem Portal auch Freunde gefunden.",opts:["Richtig","Falsch"],ans:0,points:1},
-             {id:"ev1_lv9",q:"Richtig oder Falsch: Britta empfiehlt, sich an ruhigen, privaten Orten zu treffen.",opts:["Richtig","Falsch"],ans:1,points:1}
+             {id:"ev1_lv1",type:"sinngemaess",q:"Was steht sinngemäß im Text? Kreuzen Sie an!",points:1,
+              opts:["Es gibt besondere Portale für Menschen mit unterschiedlichen Interessen.",
+                    "Ein Onlineportal allein verdient circa 186 Millionen Euro pro Jahr.",
+                    "Mit Datingportalen kann man im deutschsprachigen Raum nicht viel Geld verdienen."],ans:0},
+             {id:"ev1_lv2",type:"sinngemaess",q:"Was sagt Britta über die Online-Portale? Markieren Sie eine Antwort!",points:1,
+              opts:["Jede*r kann hier den richtigen Mann oder die Frau fürs Leben finden.",
+                    "Es ist schwer, mit jemandem erst mal nur zu chatten und ihn oder sie nicht zu treffen.",
+                    "Man sollte gut aufpassen."],ans:2},
+             {id:"ev1_lv3",type:"zuordnung",q:"Ordnen Sie den Abschnitten (A–D) eine Überschrift zu! Achtung: Zwei Überschriften passen, eine passt nicht (= X).",points:3,
+              headings:["Gute Tipps für die Online-Partnersuche","Große Konkurrenz für Onlineportale durch Tinder","Auf der Suche nach Geld statt Liebe"],
+              correctMap:{"0":"D","1":"B","2":"C"}},
+             {id:"ev1_lv4",type:"richtigfalsch",q:"Laut Text richtig (R) oder falsch (F)? Kreuzen Sie an!",points:4,
+              statements:[
+                {text:"Jungen Leuten gefällt es, dass sie über Tinder zeigen können, wenn sie jemanden mögen.",ans:"R"},
+                {text:"Laut dem Text suchen viele Menschen auf Tinder den Partner*die Partnerin fürs Leben.",ans:"F"},
+                {text:"Probleme mit Heiratsschwindler*innen auf Online-Portalen gibt es heutzutage kaum.",ans:"F"},
+                {text:"Britta empfiehlt, sich bei der ersten Verabredung allein an einem ruhigen Ort zu treffen.",ans:"F"}
+              ]}
            ]},
+
           // ---- WORTSCHATZ (8P) ----
           {type:"wortschatz", name:"Wortschatz", points:8,
            tasks:[
@@ -105,14 +115,15 @@ const VWU = {
                 {noun:"das Gespräch",sentence:"Ihr ___ oft über Politik.",answers:["sprecht","redet"]},
                 {noun:"das Studium",sentence:"Wir planen, in Wien zu ___.",answers:["studieren"]},
                 {noun:"der Anruf",sentence:"Er hat mir versprochen, dass er mich ___.",answers:["anruft"]},
-                {noun:"die Ankunft",sentence:"Vermutlich ___ er um 17 Uhr.",answers:["kommt an","ankommt"]},
+                {noun:"die Ankunft",sentence:"Vermutlich ___ er um 17 Uhr.",answers:["kommt an","kommt"]},
                 {noun:"die Fahrt",sentence:"Herr Huber ___ meistens zu schnell.",answers:["fährt"]},
                 {noun:"die Hilfe",sentence:"Du ___ deinem Bruder zu selten!",answers:["hilfst"]}
               ]},
-             {type:"adjectives",q:"Markieren Sie die Adjektive!",scoring:"6 x 0,5 = 3 P.",perItem:0.5,
+             {type:"adjectives",q:"Markieren Sie noch weitere 6 Adjektive wie im Beispiel!",scoring:"6 x 0,5 = 3 P.",perItem:0.5,
+              example:"freiwillig",
               words:["jetzt","klug","nun","durstig","still","tut","statt","leer","lässt","sowieso","treu","dann","nur","fein","ob","freiwillig"],
-              correctIdxs:[1,3,7,10,13,15]},
-             {type:"antonyms",q:"Was ist das Gegenteil? Schreiben Sie das Wort!",scoring:"4 x 0,5 = 2 P.",perItem:0.5,
+              correctIdxs:[1,3,4,7,10,13]},
+             {type:"antonyms",q:"Was ist das Gegenteil? Notieren Sie das Wort wie im Beispiel!",scoring:"4 x 0,5 = 2 P.",perItem:0.5,
               example:{word:"gemütlich",answer:"ungemütlich"},
               items:[
                 {word:"einschalten",answers:["ausschalten"]},
@@ -121,21 +132,54 @@ const VWU = {
                 {word:"glücklich",answers:["unglücklich","traurig"]}
               ]}
            ]},
-          // ---- GRAMMATIK (10P) ----
-          {type:"grammatik", name:"Grammatik", items:[
-            {id:"ev1_01",q:"Das Haus ___ gebaut.",opts:["wird","ist","hat","wurde"],ans:"wird",rule:"Passiv Präsens: werden + Partizip II"},
-            {id:"ev1_02",q:"Die Briefe ___ jeden Tag geschrieben.",opts:["werden","sind","haben","wurden"],ans:"werden",rule:"Passiv Plural: werden + Partizip II"},
-            {id:"ev1_03",q:"Wenn ich reich ___, würde ich reisen.",opts:["wäre","bin","sei","war"],ans:"wäre",rule:"Konjunktiv II: wäre"},
-            {id:"ev1_04",q:"An deiner Stelle ___ ich zum Arzt gehen.",opts:["würde","werde","will","wollte"],ans:"würde",rule:"Konjunktiv II: würde + Infinitiv"},
-            {id:"ev1_05",q:"Der Mann, ___ dort steht, ist mein Lehrer.",opts:["der","den","dem","dessen"],ans:"der",rule:"Relativpronomen Nominativ maskulin"},
-            {id:"ev1_06",q:"Die Frau, ___ ich gestern getroffen habe, ist Ärztin.",opts:["die","der","dem","deren"],ans:"die",rule:"Relativpronomen Akkusativ feminin"},
-            {id:"ev1_07",q:"Das Kind, ___ Mutter krank ist, bleibt zu Hause.",opts:["dessen","dem","das","den"],ans:"dessen",rule:"Relativpronomen Genitiv neutrum"},
-            {id:"ev1_08",q:"Wenn ich Zeit ___, würde ich mehr Sport machen.",opts:["hätte","habe","habe","hatte"],ans:"hätte",rule:"Konjunktiv II: hätte"},
-            {id:"ev1_09",q:"Das Auto ___ repariert.",opts:["wird","ist","hat","wurde"],ans:"wird",rule:"Passiv Präsens: Das Auto wird repariert"},
-            {id:"ev1_10",q:"Die Leute, ___ ich helfe, sind dankbar.",opts:["denen","die","deren","den"],ans:"denen",rule:"Relativpronomen Dativ Plural"}
-          ]},
-          // ---- SCHREIBEN (20P) ----
-          {type:"schreiben", name:"Textproduktion", prompt:"Erlebnisbericht: Sie sind Elena und arbeiten in den Sommerferien als Praktikantin in einem Hotel in den Tiroler Bergen. Sie schreiben Ihrer Freundin Anna eine E-Mail.\n\n• Beschreiben Sie: Warum sind Sie dort? Wie haben Sie diesen Job gefunden? Welche Erfahrungen haben Sie bisher gemacht?\n• Begründen Sie: Was hat Ihnen bisher gefallen? Was hat Ihnen nicht so gut gefallen? Warum?\n• Welche Tipps haben Sie für Ihre Freundin Anna, die auch einen Job als Praktikantin in einem Hotel sucht? Was ist wichtig?\n\nSchreiben Sie 140-160 Wörter. Verwenden Sie das Perfekt und komplexen Satzbau (als, dass, weil, wenn...).",
+
+          // ---- STRUKTUREN (23P) ----
+          {type:"strukturen", name:"Strukturen", points:23,
+           tasks:[
+             {type:"infinitiv_zu",q:"Ergänzen Sie die Sätze mittels Infinitiv + zu mit mindestens 5 Wörtern aus dem Wortfeld „Studienwahl"!",scoring:"3 x 1,5 = 4,5 P.",perItem:1.5,
+              items:[
+                {start:"Für Jugendliche ist es nicht leicht,",example:"sich für das richtige Studium zu entscheiden."},
+                {start:"Maturant*innen hoffen,",example:"einen Studienplatz an der Universität zu bekommen."},
+                {start:"Nicht jede*r hat die Möglichkeit,",example:"an einer guten Universität im Ausland zu studieren."}
+              ]},
+             {type:"praepositionen",q:"Ergänzen Sie die passenden Präpositionen und Artikel wie im Beispiel!",scoring:"10 x 0,5 = 5 P.",perItem:0.5,
+              example:"Im Park: In der Mittagspause nützen viele Leute die Zeit, um...",
+              text:"___ ___ Mittagspause nützen viele Leute die Zeit, um ___ ___ Kollegen und Kolleginnen in den Park zu gehen. Sie setzen sich auf eine Bank, holen ihre Jause ___ ___ Taschen und genießen die Sonne und die frische Luft. Andere gehen in der Mittagspause ___ ___ Imbissstand um die Ecke und kaufen sich ein Kebab, eine Pizzaschnitte, Sushi oder eine Wurstsemmel. Ein junger Student sitzt ___ ___ Notebook auf der Wiese und arbeitet an seiner Seminararbeit. ___ ___ Pause kehren die Menschen wieder an ihre Arbeitsplätze zurück.",
+              blanks:[
+                {answers:["In der"]},
+                {answers:["mit den","mit ihren"]},
+                {answers:["aus den","aus ihren"]},
+                {answers:["zu dem","zum","zu einem"]},
+                {answers:["mit dem","mit seinem"]},
+                {answers:["Nach der"]}
+              ]},
+             {type:"satzanfaenge",q:"Vervollständigen Sie die Satzanfänge mit 3 verschiedenen Gedanken!",scoring:"3 x 1 = 3 P.",perItem:1,
+              stem:"Der Umzug nach Österreich war schwierig, ...",
+              connectors:["denn","weil","deshalb"],
+              examples:["denn ich kannte dort niemanden.","weil ich die Sprache nicht konnte.","Deshalb habe ich sofort einen Deutschkurs besucht."]},
+             {type:"konjunktiv2",q:"Sagen Sie es höflicher, indem Sie den Konjunktiv II verwenden!",scoring:"3 x 1,5 = 4,5 P.",perItem:1.5,
+              items:[
+                {imperativ:"„Hilf mir mit der Hausaufgabe!"",example:"Könntest du mir bitte mit der Hausaufgabe helfen?"},
+                {imperativ:"„Gießen Sie bitte meine Blumen!"",example:"Würden Sie bitte meine Blumen gießen?"},
+                {imperativ:"„Tragt die Taschen bitte hinein!"",example:"Könntet ihr bitte die Taschen hineintragen?"}
+              ]},
+             {type:"stehen_liegen",q:"Bilden Sie mit den folgenden Nomen 4 korrekte Sätze. Verwenden Sie dazu die Verben im Kasten unten. Achtung: Ein Verb passt nicht!",scoring:"4 x 1,5 = 6 P.",perItem:1.5,
+              verbs:["stehen","liegen","hängen","stellen","legen"],
+              items:[
+                {nouns:"Peter/Fahrrad/Haus",example:"Peter stellt das Fahrrad vor das Haus."},
+                {nouns:"Er/Mantel/Garderobe",example:"Er hängt den Mantel an die Garderobe."},
+                {nouns:"Gläser/Wohnzimmerregal",example:"Die Gläser stehen im Wohnzimmerregal."},
+                {nouns:"Skripten/Schreibtisch",example:"Die Skripten liegen auf dem Schreibtisch."}
+              ]}
+           ]},
+
+          // ---- TEXTPRODUKTION (20P) ----
+          {type:"schreiben", name:"Textproduktion", points:20,
+           format:"email",
+           emailTo:"a.smiley@gmail.com",
+           emailBetreff:"Hallo aus Tirol",
+           emailAnrede:"Liebe Anna,",
+           prompt:"Erlebnisbericht: Sie sind Elena und arbeiten in den Sommerferien als Praktikantin in einem Hotel in den Tiroler Bergen. Sie schreiben Ihrer Freundin Anna eine E-Mail.\n\n• Beschreiben Sie: Warum sind Sie dort? Wie haben Sie diesen Job gefunden? Welche Erfahrungen haben Sie bisher gemacht?\n• Begründen Sie: Was hat Ihnen bisher gefallen? Was hat Ihnen nicht so gut gefallen? Warum?\n• Welche Tipps haben Sie für Ihre Freundin Anna, die auch einen Job als Praktikantin in einem Hotel sucht? Was ist wichtig?\n\nSchreiben Sie 140–160 Wörter. Achten Sie auf den Textaufbau (Anrede, Einleitung, Schluss) und gehen Sie auf alle Fragen ein. Für eine gute Bewertung verwenden Sie das Perfekt und komplexen Satzbau (z. B. mit als, dass, weil, wenn ...).",
            tip:"Anrede + Einleitung + 3 Punkte beantworten + Gruß. Verwenden Sie: als, dass, weil, wenn, obwohl, um...zu.",
            model:"Liebe Anna,\n\nich schreibe dir aus Tirol! Ich arbeite seit drei Wochen als Praktikantin in einem kleinen Hotel in den Bergen. Ich habe den Job über eine Internetseite gefunden, als ich nach Sommerjobs gesucht habe.\n\nBis jetzt habe ich viele gute Erfahrungen gemacht. Am besten gefällt mir, dass ich mit Menschen aus verschiedenen Ländern sprechen kann. Außerdem ist die Natur hier wunderschön. Was mir nicht so gut gefällt, ist die Arbeitszeit, weil ich manchmal schon um 6 Uhr anfangen muss.\n\nWenn du auch einen Job in einem Hotel suchst, empfehle ich dir, früh zu suchen, weil die besten Stellen schnell vergeben sind. Es ist wichtig, dass du freundlich bist und gut mit Stress umgehen kannst.\n\nLiebe Grüße,\nElena"}
         ]},
