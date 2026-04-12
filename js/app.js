@@ -445,8 +445,7 @@ function showMenu() {
         sqBtn('🌍','Übersetzung → Deutsch','words','l12de'));
     // 2. Partizip II
     if(hasPt) cats+=catHTML('📝','Partizip II',PARTIZIP2.length+' Verben','partizip_v2p',PARTIZIP2.length,'catPartiz',
-        sqBtn('➡️','Verb → Partizip II','partizip','v2p')+
-        sqBtn('⬅️','Partizip II → Verb','partizip','p2v')+
+        sqBtn('➡️','Verb → hat/ist + Partizip II','partizip','v2p')+
         sqBtn('🔀','haben oder sein?','partizip','aux'));
     // 3. Reflexive
     if(hasRf) cats+=catHTML('🔄','Reflexive Verben',REFLEXIVE.length+' Verben','reflexive_conj',REFLEXIVE.length,'catReflex',
