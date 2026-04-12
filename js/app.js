@@ -378,9 +378,11 @@ function doLogin() {
 function doReg() {
     const nm=$('rName').value.trim(),em=$('rEmail').value.trim().toLowerCase(),
           co=$('rCountry').value,lang=$('rLang').value;
-    if(!nm||!em||!co) return toast(UI.fillAll);
+    if(!nm) return toast('Gib deinen Namen ein!');
     if(nm.length<2) return toast(UI.nameShort);
+    if(!em) return toast('Gib deine E-Mail ein!');
     if(!okEmail(em)) return toast(UI.badEmail);
+    if(!co) return toast('Wähle dein Land!');
     if(pinValue.length!==4) return toast(UI.pinShort);
     const id=uid(em);
     if(ld('u_'+id)) return toast(UI.accountExists);
