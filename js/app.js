@@ -764,36 +764,98 @@ const RF_CONTEXTS = [
     "schnell","langsam","sofort","regelmäßig"
 ];
 
-// ============== GRAMMAR HINTS ==============
-const HINTS={
-    hauptsatz:['Das Verb steht immer auf Position 2.','Subjekt + Verb + Objekt ist die Grundregel.'],
-    tekamolo:['Reihenfolge: Temporal → Kausal → Modal → Lokal.','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
-    modal:['Modalverb auf Position 2, Infinitiv am Ende.','können, müssen, wollen, sollen, dürfen, mögen'],
-    weil:['Nach "weil" steht das Verb am Ende!','weil = потому что → Verb am Satzende'],
-    dass:['Nach "dass" steht das Verb am Ende!','dass = что → Nebensatz, Verb am Ende'],
-    wenn:['Nach "wenn" steht das Verb am Ende!','wenn = если/когда → Verb am Satzende'],
-    als:['Nach "als" steht das Verb am Ende!','als = когда (einmalig in der Vergangenheit)'],
-    ob:['Nach "ob" steht das Verb am Ende!','ob = ли → indirekte Frage'],
-    obwohl:['Nach "obwohl" steht das Verb am Ende!','obwohl = хотя → Nebensatz'],
-    damit:['Nach "damit" steht das Verb am Ende!','damit = чтобы (verschiedene Subjekte)'],
-    um_zu:['um + zu + Infinitiv am Ende.','um...zu = чтобы (gleiches Subjekt)'],
-    trotzdem:['Nach "trotzdem" — normale Wortstellung, Verb auf Position 2!','trotzdem = тем не менее → Hauptsatz'],
-    deshalb:['Nach "deshalb" — Verb auf Position 2!','deshalb = поэтому → Inversion möglich'],
-    denn:['Nach "denn" — normale Wortstellung!','denn = потому что → keine Inversion, Verb auf Position 2'],
-    aber:['Nach "aber" — normale Wortstellung!','aber = но → Hauptsatz + Hauptsatz'],
-    sondern:['nicht...sondern = не...а → Korrektur','sondern folgt immer auf eine Verneinung (nicht)'],
-    nachdem:['Nach "nachdem" — Verb am Ende + Plusquamperfekt!','nachdem = после того как → Zeitenfolge beachten!'],
-    bevor:['Nach "bevor" — Verb am Ende!','bevor = прежде чем → Nebensatz'],
-    waehrend:['Nach "während" — Verb am Ende!','während = в то время как → Gleichzeitigkeit'],
-    seitdem:['Nach "seitdem" — Verb am Ende!','seitdem = с тех пор как → Nebensatz'],
-    bis:['Nach "bis" — Verb am Ende!','bis = пока не → Nebensatz'],
-    sobald:['Nach "sobald" — Verb am Ende!','sobald = как только → Nebensatz'],
-    relativ:['Relativpronomen: der/die/das + Verb am Ende!','Der Mann, DER dort steht, ... → Verb am Ende des Relativsatzes'],
-    passiv:['Passiv: werden + Partizip II','Das Haus WIRD gebaut. Die Häuser WERDEN gebaut.'],
-    konjunktiv:['Konjunktiv II: würde/wäre/hätte + Infinitiv/Partizip','Wenn ich reich WÄRE, WÜRDE ich reisen.'],
-    je_desto:['Je + Komparativ..., desto + Komparativ + Verb','Je mehr man übt, desto besser wird man.'],
-    textbau:['Erstens, zweitens, darüber hinaus, zusammenfassend...','Einerseits... andererseits... → Argumentation']
+// ============== GRAMMAR HINTS (multilingual) ==============
+const HINTS_ML={
+    hauptsatz:{de:['Das Verb steht immer auf Position 2.','Subjekt + Verb + Objekt ist die Grundregel.'],
+        ru:['Глагол ВСЕГДА на 2-й позиции.','Подлежащее + Глагол + Дополнение — основное правило.'],
+        en:['The verb is always in position 2.','Subject + Verb + Object is the basic rule.'],
+        tr:['Fiil her zaman 2. pozisyondadır.','Özne + Fiil + Nesne temel kuraldır.']},
+    tekamolo:{de:['Reihenfolge: Temporal → Kausal → Modal → Lokal.','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
+        ru:['Порядок: Когда → Почему → Как → Где (TeKaMoLo).','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
+        en:['Order: When → Why → How → Where (TeKaMoLo).','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
+        tr:['Sıralama: Ne zaman → Neden → Nasıl → Nerede (TeKaMoLo).']},
+    modal:{de:['Modalverb auf Position 2, Infinitiv am Ende.'],
+        ru:['Модальный глагол на 2-й позиции, инфинитив в конце.'],
+        en:['Modal verb in position 2, infinitive at the end.'],
+        tr:['Modal fiil 2. pozisyonda, mastar sonda.']},
+    weil:{de:['Nach "weil" steht das Verb am Ende!'],
+        ru:['После "weil" (потому что) глагол в КОНЦЕ!'],
+        en:['After "weil" (because) the verb goes to the END!'],
+        tr:['"weil" (çünkü) den sonra fiil SONA gider!']},
+    dass:{de:['Nach "dass" steht das Verb am Ende!'],
+        ru:['После "dass" (что) глагол в КОНЦЕ!'],
+        en:['After "dass" (that) the verb goes to the END!'],
+        tr:['"dass" (ki) den sonra fiil SONA gider!']},
+    wenn:{de:['Nach "wenn" steht das Verb am Ende!'],
+        ru:['После "wenn" (если/когда) глагол в КОНЦЕ!'],
+        en:['After "wenn" (if/when) the verb goes to the END!'],
+        tr:['"wenn" (eğer/ne zaman) dan sonra fiil SONA gider!']},
+    als:{de:['Nach "als" steht das Verb am Ende!'],
+        ru:['После "als" (когда — одноразово в прошлом) глагол в КОНЦЕ!'],
+        en:['After "als" (when — one-time past) verb goes to the END!'],
+        tr:['"als" (ne zaman — geçmişte bir kez) dan sonra fiil SONA gider!']},
+    ob:{de:['Nach "ob" steht das Verb am Ende!'],
+        ru:['После "ob" (ли — косвенный вопрос) глагол в КОНЦЕ!'],
+        en:['After "ob" (whether) the verb goes to the END!'],
+        tr:['"ob" (acaba) dan sonra fiil SONA gider!']},
+    obwohl:{de:['Nach "obwohl" steht das Verb am Ende!'],
+        ru:['После "obwohl" (хотя) глагол в КОНЦЕ!'],
+        en:['After "obwohl" (although) the verb goes to the END!'],
+        tr:['"obwohl" (rağmen) den sonra fiil SONA gider!']},
+    damit:{de:['Nach "damit" steht das Verb am Ende!'],
+        ru:['После "damit" (чтобы, разные субъекты) глагол в КОНЦЕ!'],
+        en:['After "damit" (so that, different subjects) verb goes to the END!'],
+        tr:['"damit" (diye, farklı özneler) den sonra fiil SONA gider!']},
+    um_zu:{de:['um + zu + Infinitiv am Ende.'],
+        ru:['um...zu + инфинитив в конце (чтобы, одинаковый субъект).'],
+        en:['um...zu + infinitive at the end (in order to, same subject).'],
+        tr:['um...zu + mastar sonda (amacıyla, aynı özne).']},
+    trotzdem:{de:['Nach "trotzdem" — Verb auf Position 2!'],
+        ru:['После "trotzdem" (тем не менее) — глагол на 2-й позиции! Главное предложение.'],
+        en:['After "trotzdem" (nevertheless) — verb in position 2! Main clause.'],
+        tr:['"trotzdem" (buna rağmen) dan sonra fiil 2. pozisyonda!']},
+    deshalb:{de:['Nach "deshalb" — Verb auf Position 2!'],
+        ru:['После "deshalb" (поэтому) — глагол на 2-й позиции!'],
+        en:['After "deshalb" (therefore) — verb in position 2!'],
+        tr:['"deshalb" (bu yüzden) dan sonra fiil 2. pozisyonda!']},
+    denn:{de:['Nach "denn" — normale Wortstellung!'],
+        ru:['После "denn" (потому что) — обычный порядок слов, глагол на 2-й позиции!'],
+        en:['After "denn" (because) — normal word order, verb in position 2!'],
+        tr:['"denn" (çünkü) den sonra normal sözcük sırası!']},
+    aber:{de:['Nach "aber" — normale Wortstellung!'],
+        ru:['После "aber" (но) — обычный порядок слов.'],
+        en:['After "aber" (but) — normal word order.'],
+        tr:['"aber" (ama) dan sonra normal sözcük sırası.']},
+    sondern:{de:['nicht...sondern — Korrektur einer Aussage.'],
+        ru:['nicht...sondern (не...а) — исправление утверждения.'],
+        en:['nicht...sondern (not...but rather) — correcting a statement.'],
+        tr:['nicht...sondern (değil...aksine) — bir ifadeyi düzeltme.']},
+    nachdem:{de:['Nach "nachdem" — Verb am Ende + Plusquamperfekt!'],
+        ru:['После "nachdem" (после того как) — глагол в конце + Plusquamperfekt!'],
+        en:['After "nachdem" (after) — verb at end + past perfect!'],
+        tr:['"nachdem" (sonra) dan sonra fiil sonda + Plusquamperfekt!']},
+    bevor:{de:['Nach "bevor" — Verb am Ende!'],
+        ru:['После "bevor" (прежде чем) — глагол в КОНЦЕ!'],
+        en:['After "bevor" (before) — verb at the END!'],
+        tr:['"bevor" (önce) den sonra fiil SONDA!']},
+    waehrend:{de:['Nach "während" — Verb am Ende!'],
+        ru:['После "während" (в то время как) — глагол в КОНЦЕ!'],
+        en:['After "während" (while) — verb at the END!'],
+        tr:['"während" (iken) den sonra fiil SONDA!']},
+    seitdem:{de:['Nach "seitdem" — Verb am Ende!'],ru:['После "seitdem" (с тех пор как) — глагол в КОНЦЕ!'],en:['After "seitdem" (since) — verb at the END!'],tr:['"seitdem" dan sonra fiil SONDA!']},
+    bis:{de:['Nach "bis" — Verb am Ende!'],ru:['После "bis" (пока не) — глагол в КОНЦЕ!'],en:['After "bis" (until) — verb at the END!'],tr:['"bis" (kadar) dan sonra fiil SONDA!']},
+    sobald:{de:['Nach "sobald" — Verb am Ende!'],ru:['После "sobald" (как только) — глагол в КОНЦЕ!'],en:['After "sobald" (as soon as) — verb at the END!'],tr:['"sobald" (hemen) dan sonra fiil SONDA!']},
+    relativ:{de:['Relativpronomen + Verb am Ende!'],ru:['Относительное местоимение (der/die/das) + глагол в КОНЦЕ!'],en:['Relative pronoun + verb at the END!'],tr:['İlgi zamiri + fiil SONDA!']},
+    passiv:{de:['Passiv: werden + Partizip II'],ru:['Пассив: werden + Partizip II. Дом строится = Das Haus wird gebaut.'],en:['Passive: werden + past participle.'],tr:['Edilgen: werden + Partizip II.']},
+    konjunktiv:{de:['Konjunktiv II: würde/wäre/hätte'],ru:['Сослагательное: würde/wäre/hätte. Если бы я был богат = Wenn ich reich wäre...'],en:['Subjunctive II: würde/wäre/hätte. If I were rich...'],tr:['Dilek kipi: würde/wäre/hätte.']},
+    je_desto:{de:['Je + Komparativ, desto + Komparativ + Verb'],ru:['Je...desto: Чем больше..., тем лучше... Je mehr, desto besser.'],en:['Je...desto: The more..., the better...'],tr:['Je...desto: Ne kadar çok..., o kadar iyi...']},
+    textbau:{de:['Erstens, zweitens, darüber hinaus, zusammenfassend...'],ru:['Структура текста: Во-первых, во-вторых, кроме того, в итоге...'],en:['Text structure: Firstly, secondly, furthermore, in conclusion...'],tr:['Metin yapısı: Birincisi, ikincisi, ayrıca, sonuç olarak...']}
 };
+function getHints(cat){
+    const h=HINTS_ML[cat];
+    if(!h) return ['Achte auf die Wortstellung!'];
+    return h[APP.lang]||h.ru||h.de||['Achte auf die Wortstellung!'];
+}
 
 // ============== SENTENCE BUILDER ==============
 function showBuilder(){
@@ -842,7 +904,7 @@ function renderBuilder(){
     // Hint area
     let hintArea='';
     if(APP.quiz.hintUsed){
-        const hints=HINTS[item.cat]||['Achte auf die Wortstellung!'];
+        const hints=getHints(item.cat);
         hintArea=`<div class="hint-box">${hints.map(h=>'💡 '+esc(h)).join('<br>')}</div>`;
     }
 
@@ -988,25 +1050,94 @@ function nextCorrection(){
 }
 
 function getCorrectionRule(word,pos,sentence,item){
+    const L=APP.lang||'de';
     const cat=item.cat||'';
     const lo=word.toLowerCase();
     const verbList='bin,bist,ist,sind,seid,habe,hast,hat,haben,habt,werde,wirst,wird,werden,werdet,kann,kannst,könnt,können,muss,musst,müsst,müssen,soll,sollst,sollt,sollen,will,willst,wollt,wollen,darf,darfst,dürft,dürfen,möchte,möchtest,möchtet,möchten,gehe,gehst,geht,gehen,komme,kommst,kommt,kommen,mache,machst,macht,machen,lese,liest,lesen,fahre,fährst,fährt,fahren,schlafe,schläfst,schläft,schlafen,esse,isst,essen,trinke,trinkst,trinkt,trinken,arbeite,arbeitest,arbeitet,arbeiten,lerne,lernst,lernt,lernen,spiele,spielst,spielt,spielen,wohne,wohnst,wohnt,wohnen,brauche,brauchst,braucht,brauchen,kaufe,kaufst,kauft,kaufen,nehme,nimmst,nimmt,nehmen,gebe,gibst,gibt,geben,sehe,siehst,sieht,sehen,spreche,sprichst,spricht,sprechen,stehe,stehst,steht,stehen,liege,liegst,liegt,liegen,sitze,sitzt,sitzen,laufe,läufst,läuft,laufen,finde,findest,findet,finden,weiß,weißt,wissen,wisst';
     const isVerb=verbList.split(',').includes(lo);
     const nebCats='weil,dass,wenn,als,ob,obwohl,damit,nachdem,bevor,waehrend,seitdem,bis,sobald,relativ';
     const isNeb=nebCats.split(',').includes(cat);
-    if(isVerb&&pos===1&&!isNeb) return 'Im Hauptsatz steht das konjugierte Verb IMMER auf Position 2 (nach dem Subjekt)!';
-    if(isVerb&&pos===sentence.length-1&&isNeb) return 'Im Nebensatz ('+cat+'-Satz) steht das konjugierte Verb am ENDE!';
-    const conns={weil:'weil (потому что)',dass:'dass (что)',wenn:'wenn (если/когда)',als:'als (когда)',ob:'ob (ли)',obwohl:'obwohl (хотя)',damit:'damit (чтобы)',nachdem:'nachdem (после того как)',bevor:'bevor (прежде чем)','während':'während (пока)',seitdem:'seitdem (с тех пор)',bis:'bis (пока не)',sobald:'sobald (как только)'};
-    if(conns[lo]) return '"'+word+'" ('+conns[lo].split('(')[1]+' — leitet einen Nebensatz ein. Das Verb geht ans Ende!';
-    const artR={'der':'Maskulin Nominativ','die':'Feminin Nominativ / Plural','das':'Neutrum Nominativ','den':'Maskulin Akkusativ','dem':'Dativ (mask./neutr.)','des':'Genitiv','ein':'Mask./Neutr. Nominativ (unbest.)','eine':'Feminin Nominativ (unbest.)','einen':'Maskulin Akkusativ (unbest.)','einem':'Dativ (unbest.)','kein':'Mask./Neutr. Negation','keine':'Feminin/Plural Negation','keinen':'Mask. Akkusativ Negation','keinem':'Dativ Negation','meinem':'Dativ Possessiv','meine':'Fem./Plural Possessiv','meinen':'Mask. Akk. Possessiv'};
-    if(artR[lo]) return artR[lo]+'. Achte auf Genus und Kasus des Substantivs!';
-    if(cat==='tekamolo') return 'TeKaMoLo: Temporal → Kausal → Modal → Lokal. Reihenfolge beachten!';
-    if(cat==='passiv'){if(lo==='wird'||lo==='werden'||lo==='wurde'||lo==='wurden')return 'Passiv: werden/wurde + Partizip II am Ende.';return 'Passiv: Subjekt + werden + ... + Partizip II.';}
-    if(cat==='konjunktiv'){if(lo==='würde'||lo==='wäre'||lo==='hätte')return 'Konjunktiv II: würde/wäre/hätte — irreale Situation.';return 'Konjunktiv II: Achte auf die richtige Verbform!';}
-    if(cat==='je_desto') return 'je + Komparativ, desto + Komparativ + Verb. Reihenfolge beachten!';
-    if(cat==='um_zu') return 'um...zu + Infinitiv am Ende (gleiches Subjekt).';
+    const _t=(de,ru,en,tr)=>({de,ru,en,tr})[L]||ru||de;
+    if(isVerb&&pos===1&&!isNeb) return _t(
+        'Im Hauptsatz steht das Verb IMMER auf Position 2!',
+        'В главном предложении глагол ВСЕГДА на 2-й позиции (после подлежащего)!',
+        'In a main clause the verb is ALWAYS in position 2 (after the subject)!',
+        'Ana cümlede fiil HER ZAMAN 2. pozisyonda olur (özneden sonra)!'
+    );
+    if(isVerb&&pos===sentence.length-1&&isNeb) return _t(
+        'Im Nebensatz ('+cat+') steht das Verb am ENDE!',
+        'В придаточном предложении ('+cat+') глагол стоит в КОНЦЕ!',
+        'In a subordinate clause ('+cat+') the verb goes to the END!',
+        'Yan cümlede ('+cat+') fiil SONA gider!'
+    );
+    const connTr={
+        weil:{de:'weil — Grund',ru:'weil — потому что',en:'weil — because',tr:'weil — çünkü'},
+        dass:{de:'dass — Inhalt',ru:'dass — что',en:'dass — that',tr:'dass — ki'},
+        wenn:{de:'wenn — Bedingung/Zeit',ru:'wenn — если/когда',en:'wenn — if/when',tr:'wenn — eğer/ne zaman'},
+        als:{de:'als — Vergangenheit',ru:'als — когда (в прошлом)',en:'als — when (past)',tr:'als — olduğunda (geçmiş)'},
+        ob:{de:'ob — Frage',ru:'ob — ли (вопрос)',en:'ob — whether',tr:'ob — olup olmadığı'},
+        obwohl:{de:'obwohl — Gegensatz',ru:'obwohl — хотя',en:'obwohl — although',tr:'obwohl — rağmen'},
+        damit:{de:'damit — Zweck',ru:'damit — чтобы',en:'damit — so that',tr:'damit — amacıyla'},
+        nachdem:{de:'nachdem — danach',ru:'nachdem — после того как',en:'nachdem — after',tr:'nachdem — sonra'},
+        bevor:{de:'bevor — davor',ru:'bevor — прежде чем',en:'bevor — before',tr:'bevor — önce'},
+        seitdem:{de:'seitdem — Zeitpunkt',ru:'seitdem — с тех пор как',en:'seitdem — since',tr:'seitdem — den beri'},
+        bis:{de:'bis — Zeitgrenze',ru:'bis — пока не',en:'bis — until',tr:'bis — kadar'},
+        sobald:{de:'sobald — sofort wenn',ru:'sobald — как только',en:'sobald — as soon as',tr:'sobald — hemen'}
+    };
+    if(connTr[lo]){
+        const c=connTr[lo][L]||connTr[lo].ru||connTr[lo].de;
+        return _t(
+            '"'+word+'" ('+c.split('—')[1].trim()+') — leitet Nebensatz ein. Verb ans Ende!',
+            '"'+word+'" ('+c.split('—')[1].trim()+') — начинает придаточное. Глагол в конец!',
+            '"'+word+'" ('+c.split('—')[1].trim()+') — starts a subordinate clause. Verb to the end!',
+            '"'+word+'" ('+c.split('—')[1].trim()+') — yan cümle başlatır. Fiil sona gider!'
+        );
+    }
+    const artR={'der':'Maskulin Nom.','die':'Feminin Nom./Plural','das':'Neutrum Nom.','den':'Maskulin Akk.','dem':'Dativ','des':'Genitiv','ein':'Mask./Neutr. Nom.','eine':'Feminin Nom.','einen':'Mask. Akk.','einem':'Dativ','kein':'Negation Nom.','keine':'Fem./Pl. Negation','keinen':'Mask. Akk. Negation','keinem':'Dativ Negation','meinem':'Dativ Possessiv','meine':'Fem./Pl. Possessiv','meinen':'Mask. Akk. Possessiv'};
+    if(artR[lo]) return artR[lo]+' — '+_t(
+        'Achte auf Genus und Kasus!',
+        'Следи за родом и падежом существительного!',
+        'Pay attention to gender and case of the noun!',
+        'İsmin cinsiyetine ve haline dikkat et!'
+    );
+    if(cat==='tekamolo') return _t(
+        'TeKaMoLo: Temporal → Kausal → Modal → Lokal!',
+        'TeKaMoLo: Время → Причина → Способ → Место. Соблюдай порядок!',
+        'TeKaMoLo: Time → Cause → Manner → Place. Keep this order!',
+        'TeKaMoLo: Zaman → Neden → Tarz → Yer. Sırayı koru!'
+    );
+    if(cat==='passiv'){
+        if(lo==='wird'||lo==='werden'||lo==='wurde'||lo==='wurden') return _t(
+            'Passiv: werden/wurde + Partizip II am Ende.',
+            'Пассив: werden/wurde + Partizip II в конце.',
+            'Passive: werden/wurde + Partizip II at the end.',
+            'Pasif: werden/wurde + Partizip II sonda.'
+        );
+        return _t('Passiv: Subjekt + werden + ... + Partizip II.','Пассив: подлежащее + werden + ... + Partizip II.','Passive: subject + werden + ... + Partizip II.','Pasif: özne + werden + ... + Partizip II.');
+    }
+    if(cat==='konjunktiv'){
+        if(lo==='würde'||lo==='wäre'||lo==='hätte') return _t(
+            'Konjunktiv II: würde/wäre/hätte — irreale Situation.',
+            'Конъюнктив II: würde/wäre/hätte — нереальная ситуация. «Если бы...»',
+            'Subjunctive II: würde/wäre/hätte — unreal situation. "If I were..."',
+            'Dilek kipi II: würde/wäre/hätte — gerçek dışı durum.'
+        );
+        return _t('Konjunktiv II: Achte auf die Verbform!','Конъюнктив II: Следи за формой глагола!','Subjunctive II: Watch the verb form!','Dilek kipi II: Fiil formuna dikkat et!');
+    }
+    if(cat==='je_desto') return _t(
+        'je + Komparativ, desto + Komparativ + Verb!',
+        'je + сравнит., desto + сравнит. + глагол. Чем больше..., тем лучше!',
+        'je + comparative, desto + comparative + verb. The more..., the better!',
+        'je + karşılaştırma, desto + karşılaştırma + fiil. Ne kadar çok..., o kadar iyi!'
+    );
+    if(cat==='um_zu') return _t(
+        'um...zu + Infinitiv am Ende.',
+        'um...zu + инфинитив в конце (одно подлежащее).',
+        'um...zu + infinitive at the end (same subject).',
+        'um...zu + mastar sonda (aynı özne).'
+    );
     if(item.rule) return item.rule;
-    return 'Achte auf die richtige Wortstellung und Form!';
+    return _t('Achte auf Wortstellung und Form!','Следи за порядком слов и формой!','Watch word order and form!','Kelime sırasına ve forma dikkat et!');
 }
 
 // ============== SUBLIMINAL ==============
