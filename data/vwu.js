@@ -66,10 +66,62 @@ const VWU = {
 
     // ===== EV — Ergänzungsprüfung Vorstufe (B1-B2) =====
     {
-      id:"ev", name:"EV — Ergänzungsprüfung Vorstufe", desc:"Grammatik B1-B2",
+      id:"ev", name:"EV — Ergänzungsprüfung Vorstufe", desc:"B1-B2 · Leseverstehen, Wortschatz, Strukturen, Grammatik, Schreiben",
       tests:[
-        // --- EV ZT1: Passiv Präsens, Konjunktiv II, Relativsätze ---
+        // --- EV ZT1 ---
         {id:"ev_zt1", name:"Zwischentest 1", sections:[
+          // ---- LESEVERSTEHEN (9P) ----
+          {type:"leseverstehen", name:"Leseverstehen", points:9,
+           text:`<h3>Liebe aus dem Internet</h3>
+<h4>Abschnitt A</h4>
+<p>Viele Menschen suchen im Netz nach Schuhen, buchen eine Urlaubsreise oder wollen den Partner bzw. die Partnerin fürs Leben finden – oder einfach nur für eine Nacht. Onlineportale verdienen damit viel Geld.</p>
+<p>Mehr als elf Millionen Nutzer*innen befinden sich regelmäßig auf Internetseiten, wo man Kontakte finden kann. Solche Seiten heißen auch Kontaktbörsen, Datingportale oder Singlebörsen. Im deutschsprachigen Raum gibt es 2500 Singlebörsen und da kann jede*r etwas finden. Es gibt Partnerbörsen für Senior*innen oder Singles mit Kindern. Es gibt Kontaktbörsen für Musikfans, für besonders große Menschen oder für besonders dicke Menschen. Für jede*n ist etwas dabei.</p>
+<p>Die verschiedenen Kontaktbörsen verdienen viel Geld damit. Rund 186 Millionen Euro verdienen die Portale jährlich zusammen.</p>
+<h4>Abschnitt B</h4>
+<p>2014 kam die kostenfreie Dating-App „Tinder" auf den Markt. Bei Tinder kann man ganz einfach einen Partner*eine Partnerin aus der Umgebung finden, ihn oder sie kontaktieren und mit der Person chatten. Dabei kann man auch mitteilen, ob man sie mag oder nicht. Das ist bei jungen Leuten besonders beliebt. „Tinder" ist kostenlos, aber das ist für andere Datingportale kein Problem, denn bei Tinder suchen die Menschen niemanden für eine lebenslange Partnerschaft. Sie nutzen das Portal, weil sie sich nur einmal kurz treffen oder flirten wollen.</p>
+<h4>Abschnitt C</h4>
+<p>Trotzdem ist das Geschäft mit der Online-Liebe heute schwieriger. Die Onlineportale haben zum Beispiel immer wieder Probleme mit modernen „Heiratsschwindlern". Heiratsschwindler*innen sind Betrüger*innen, die keine Liebe, sondern Geld suchen. Sie wollen im Internet jemanden kennenlernen, der viel Geld hat. Dann sagen sie: „Ich liebe dich und möchte dich heiraten!" Und wenn sie das Geld haben, sind sie plötzlich weg. Solche Probleme können sogar am Ende dazu führen, dass einige Portale aufhören.</p>
+<h4>Abschnitt D</h4>
+<p>Die 37-jährige Britta hat im Internet aber gute Erfahrungen gemacht. Sie war mehrere Jahre auf einem Onlineportal aktiv und hat dort nicht nur Männer, sondern auch Freunde gefunden. Es hat ihr gefallen, dass sie zuerst nur von zu Hause aus im Internet Kontakt hatte. Auch ihren Ehemann hat Britta über ein Internetportal kennengelernt. „Man kann ein Internetportal nutzen", sagt sie, „aber man sollte auch sehr aufpassen, was man tut."</p>
+<p>Britta empfiehlt, zu den ersten Treffen immer einen guten Freund oder eine Freundin mitzunehmen, damit man keine unangenehme Situation erlebt. Von diesem Freund oder dieser Freundin kann man sich später auch beraten lassen. Außerdem sollte man für die ersten Verabredungen immer nur öffentliche Orte auswählen, an denen sich auch viele andere Menschen befinden, wie zum Beispiel ein Kaffeehaus.</p>
+<p>Britta selbst hat das so gemacht und Glück gehabt, denn heute lebt sie in einer harmonischen Partnerschaft.</p>`,
+           questions:[
+             {id:"ev1_lv1",q:"Was steht sinngemäß im Text? Kreuzen Sie an!",opts:["Es gibt besondere Portale für Menschen mit unterschiedlichen Interessen.","Ein Onlineportal allein verdient circa 186 Millionen Euro pro Jahr.","Mit Datingportalen kann man im deutschsprachigen Raum nicht viel Geld verdienen."],ans:0,points:1},
+             {id:"ev1_lv2",q:"Was steht sinngemäß im Text?",opts:["Tinder ist eine kostenpflichtige App für ältere Menschen.","Bei Tinder suchen die Menschen eher keine feste Partnerschaft.","Tinder ist ein großes Problem für andere Datingportale."],ans:1,points:1},
+             {id:"ev1_lv3",q:"Was steht sinngemäß im Text?",opts:["Heiratsschwindler suchen im Internet nach Liebe.","Betrüger auf Datingportalen wollen Geld von anderen Menschen.","Alle Onlineportale haben wegen Betrügern geschlossen."],ans:1,points:1},
+             {id:"ev1_lv4",q:"Was steht sinngemäß im Text?",opts:["Britta hat nur schlechte Erfahrungen im Internet gemacht.","Britta hat ihren Mann über ein Internetportal kennengelernt.","Britta war nur wenige Wochen auf einem Onlineportal."],ans:1,points:1},
+             {id:"ev1_lv5",q:"Was steht sinngemäß im Text?",opts:["Britta empfiehlt, allein zu den ersten Treffen zu gehen.","Man sollte sich an privaten Orten treffen.","Man sollte zum ersten Treffen einen Freund mitnehmen."],ans:2,points:1},
+             {id:"ev1_lv6",q:"Richtig oder Falsch: Im deutschsprachigen Raum gibt es mehr als 2000 Singlebörsen.",opts:["Richtig","Falsch"],ans:0,points:1},
+             {id:"ev1_lv7",q:"Richtig oder Falsch: Tinder kam 2010 auf den Markt.",opts:["Richtig","Falsch"],ans:1,points:1},
+             {id:"ev1_lv8",q:"Richtig oder Falsch: Britta hat auf dem Portal auch Freunde gefunden.",opts:["Richtig","Falsch"],ans:0,points:1},
+             {id:"ev1_lv9",q:"Richtig oder Falsch: Britta empfiehlt, sich an ruhigen, privaten Orten zu treffen.",opts:["Richtig","Falsch"],ans:1,points:1}
+           ]},
+          // ---- WORTSCHATZ (8P) ----
+          {type:"wortschatz", name:"Wortschatz", points:8,
+           tasks:[
+             {type:"noun2verb",q:"Bilden Sie Verben aus den Nomen und setzen Sie sie ein!",scoring:"6 x 0,5 = 3 P.",perItem:0.5,
+              example:{noun:"die Wohnung",verb:"wohnt",sentence:"Meine Familie wohnt in einem schönen Haus."},
+              items:[
+                {noun:"das Gespräch",sentence:"Ihr ___ oft über Politik.",answers:["sprecht","redet"]},
+                {noun:"das Studium",sentence:"Wir planen, in Wien zu ___.",answers:["studieren"]},
+                {noun:"der Anruf",sentence:"Er hat mir versprochen, dass er mich ___.",answers:["anruft"]},
+                {noun:"die Ankunft",sentence:"Vermutlich ___ er um 17 Uhr.",answers:["kommt an","ankommt"]},
+                {noun:"die Fahrt",sentence:"Herr Huber ___ meistens zu schnell.",answers:["fährt"]},
+                {noun:"die Hilfe",sentence:"Du ___ deinem Bruder zu selten!",answers:["hilfst"]}
+              ]},
+             {type:"adjectives",q:"Markieren Sie die Adjektive!",scoring:"6 x 0,5 = 3 P.",perItem:0.5,
+              words:["jetzt","klug","nun","durstig","still","tut","statt","leer","lässt","sowieso","treu","dann","nur","fein","ob","freiwillig"],
+              correctIdxs:[1,3,7,10,13,15]},
+             {type:"antonyms",q:"Was ist das Gegenteil? Schreiben Sie das Wort!",scoring:"4 x 0,5 = 2 P.",perItem:0.5,
+              example:{word:"gemütlich",answer:"ungemütlich"},
+              items:[
+                {word:"einschalten",answers:["ausschalten"]},
+                {word:"schnell",answers:["langsam"]},
+                {word:"hell",answers:["dunkel"]},
+                {word:"glücklich",answers:["unglücklich","traurig"]}
+              ]}
+           ]},
+          // ---- GRAMMATIK (10P) ----
           {type:"grammatik", name:"Grammatik", items:[
             {id:"ev1_01",q:"Das Haus ___ gebaut.",opts:["wird","ist","hat","wurde"],ans:"wird",rule:"Passiv Präsens: werden + Partizip II"},
             {id:"ev1_02",q:"Die Briefe ___ jeden Tag geschrieben.",opts:["werden","sind","haben","wurden"],ans:"werden",rule:"Passiv Plural: werden + Partizip II"},
@@ -82,47 +134,151 @@ const VWU = {
             {id:"ev1_09",q:"Das Auto ___ repariert.",opts:["wird","ist","hat","wurde"],ans:"wird",rule:"Passiv Präsens: Das Auto wird repariert"},
             {id:"ev1_10",q:"Die Leute, ___ ich helfe, sind dankbar.",opts:["denen","die","deren","den"],ans:"denen",rule:"Relativpronomen Dativ Plural"}
           ]},
-          {type:"schreiben", name:"Schreiben", prompt:"Schreiben Sie Ihre Meinung zum Thema: 'Sollen Studenten neben dem Studium arbeiten?' Begründen Sie Ihre Meinung. (150-180 Wörter)",
-           tip:"Struktur: Einleitung → Pro-Argumente → Contra-Argumente → Ihre Meinung.",
-           model:"Viele Studenten arbeiten neben dem Studium, um Geld zu verdienen. Ich finde, dass das sowohl Vorteile als auch Nachteile hat. Einerseits sammeln Studenten wertvolle Berufserfahrung. Andererseits kann die Arbeit das Studium negativ beeinflussen, wenn man zu viel arbeitet. Meiner Meinung nach sollte man höchstens 10-15 Stunden pro Woche arbeiten."}
+          // ---- SCHREIBEN (20P) ----
+          {type:"schreiben", name:"Textproduktion", prompt:"Erlebnisbericht: Sie sind Elena und arbeiten in den Sommerferien als Praktikantin in einem Hotel in den Tiroler Bergen. Sie schreiben Ihrer Freundin Anna eine E-Mail.\n\n• Beschreiben Sie: Warum sind Sie dort? Wie haben Sie diesen Job gefunden? Welche Erfahrungen haben Sie bisher gemacht?\n• Begründen Sie: Was hat Ihnen bisher gefallen? Was hat Ihnen nicht so gut gefallen? Warum?\n• Welche Tipps haben Sie für Ihre Freundin Anna, die auch einen Job als Praktikantin in einem Hotel sucht? Was ist wichtig?\n\nSchreiben Sie 140-160 Wörter. Verwenden Sie das Perfekt und komplexen Satzbau (als, dass, weil, wenn...).",
+           tip:"Anrede + Einleitung + 3 Punkte beantworten + Gruß. Verwenden Sie: als, dass, weil, wenn, obwohl, um...zu.",
+           model:"Liebe Anna,\n\nich schreibe dir aus Tirol! Ich arbeite seit drei Wochen als Praktikantin in einem kleinen Hotel in den Bergen. Ich habe den Job über eine Internetseite gefunden, als ich nach Sommerjobs gesucht habe.\n\nBis jetzt habe ich viele gute Erfahrungen gemacht. Am besten gefällt mir, dass ich mit Menschen aus verschiedenen Ländern sprechen kann. Außerdem ist die Natur hier wunderschön. Was mir nicht so gut gefällt, ist die Arbeitszeit, weil ich manchmal schon um 6 Uhr anfangen muss.\n\nWenn du auch einen Job in einem Hotel suchst, empfehle ich dir, früh zu suchen, weil die besten Stellen schnell vergeben sind. Es ist wichtig, dass du freundlich bist und gut mit Stress umgehen kannst.\n\nLiebe Grüße,\nElena"}
         ]},
 
-        // --- EV ZT2: Passiv+Modal, Konjunktiv II, Finalsätze ---
+        // --- EV ZT2 ---
         {id:"ev_zt2", name:"Zwischentest 2", sections:[
+          // ---- LESEVERSTEHEN (9P) ----
+          {type:"leseverstehen", name:"Leseverstehen", points:9,
+           text:`<h3>Gesund leben in der Stadt</h3>
+<h4>Abschnitt A</h4>
+<p>Immer mehr Menschen in Österreich achten auf ihre Gesundheit. Sie kaufen Bio-Lebensmittel, gehen regelmäßig zum Sport und versuchen, Stress zu vermeiden. Besonders in den Großstädten wie Wien, Graz oder Linz gibt es viele Angebote für einen gesunden Lebensstil: Fitnessstudios, Yoga-Kurse, vegane Restaurants und Bioläden.</p>
+<p>Eine Studie der Universität Wien zeigt, dass etwa 65 Prozent der Wiener*innen mindestens einmal pro Woche Sport treiben. Am beliebtesten sind Laufen, Radfahren und Schwimmen. Viele nutzen auch die Parks der Stadt, um sich zu bewegen.</p>
+<h4>Abschnitt B</h4>
+<p>Allerdings gibt es auch Probleme. Die Luftqualität in den Städten ist oft schlecht, besonders im Winter. Außerdem fehlt vielen Berufstätigen die Zeit für Sport und gesundes Kochen. Fast-Food-Restaurants sind oft billiger und schneller als gesunde Alternativen. Besonders junge Menschen zwischen 18 und 25 Jahren ernähren sich häufig ungesund, weil sie wenig Geld haben und nicht kochen können.</p>
+<h4>Abschnitt C</h4>
+<p>Die Stadt Wien hat deshalb verschiedene Programme gestartet. Es gibt kostenlose Sportangebote in Parks, zum Beispiel „Bewegung im Park" im Sommer. Außerdem wurde das Radwegenetz in den letzten Jahren stark ausgebaut. Heute kann man fast überall in Wien sicher Rad fahren.</p>
+<p>Auch in den Schulen wird mehr für die Gesundheit getan. Die Kinder lernen im Unterricht, wie man gesund kocht, und in vielen Schulkantinen gibt es jetzt nur noch gesundes Essen.</p>
+<h4>Abschnitt D</h4>
+<p>Der 42-jährige Thomas aus Wien erzählt: „Vor fünf Jahren war ich übergewichtig und hatte oft Rückenschmerzen. Dann habe ich angefangen, dreimal pro Woche joggen zu gehen und mich gesünder zu ernähren. Heute fühle ich mich viel besser." Thomas empfiehlt, mit kleinen Änderungen anzufangen: „Man muss nicht sofort alles ändern. Es reicht, wenn man zum Beispiel jeden Tag eine halbe Stunde spazieren geht und mehr Gemüse isst."</p>`,
+           questions:[
+             {id:"ev2_lv1",q:"Was steht sinngemäß im Text?",opts:["In Wien gibt es wenige Möglichkeiten für Sport.","Etwa zwei Drittel der Wiener treiben regelmäßig Sport.","Die meisten Wiener gehen ins Fitnessstudio."],ans:1,points:1},
+             {id:"ev2_lv2",q:"Was steht sinngemäß im Text?",opts:["Junge Menschen ernähren sich besonders gesund.","Fast Food ist teurer als gesunde Alternativen.","Viele Berufstätige haben zu wenig Zeit für Sport."],ans:2,points:1},
+             {id:"ev2_lv3",q:"Was steht sinngemäß im Text?",opts:["Die Stadt Wien bietet kostenlose Sportprogramme an.","In Wien kann man nicht sicher Rad fahren.","Es gibt keine Programme für Gesundheit in Schulen."],ans:0,points:1},
+             {id:"ev2_lv4",q:"Was steht sinngemäß im Text?",opts:["Thomas hat sofort sein ganzes Leben geändert.","Thomas empfiehlt, mit kleinen Schritten anzufangen.","Thomas geht jeden Tag zwei Stunden joggen."],ans:1,points:1},
+             {id:"ev2_lv5",q:"Was steht sinngemäß im Text?",opts:["Die Luftqualität in Städten ist immer gut.","Bio-Lebensmittel sind in Österreich nicht beliebt.","Besonders im Winter ist die Luft in den Städten schlecht."],ans:2,points:1},
+             {id:"ev2_lv6",q:"Richtig oder Falsch: Laufen ist die beliebteste Sportart in Wien.",opts:["Richtig","Falsch"],ans:0,points:1},
+             {id:"ev2_lv7",q:"Richtig oder Falsch: Das Programm „Bewegung im Park" kostet 5 Euro.",opts:["Richtig","Falsch"],ans:1,points:1},
+             {id:"ev2_lv8",q:"Richtig oder Falsch: Thomas war vor fünf Jahren übergewichtig.",opts:["Richtig","Falsch"],ans:0,points:1},
+             {id:"ev2_lv9",q:"Richtig oder Falsch: In Wiener Schulkantinen gibt es nur noch Fast Food.",opts:["Richtig","Falsch"],ans:1,points:1}
+           ]},
+          // ---- WORTSCHATZ (8P) ----
+          {type:"wortschatz", name:"Wortschatz", points:8,
+           tasks:[
+             {type:"noun2verb",q:"Bilden Sie Verben aus den Nomen und setzen Sie sie ein!",scoring:"6 x 0,5 = 3 P.",perItem:0.5,
+              example:{noun:"die Empfehlung",verb:"empfiehlt",sentence:"Der Arzt empfiehlt mehr Bewegung."},
+              items:[
+                {noun:"die Ernährung",sentence:"Er ___ sich seit einem Jahr gesund.",answers:["ernährt"]},
+                {noun:"die Bewegung",sentence:"Wir ___ uns jeden Tag mindestens 30 Minuten.",answers:["bewegen"]},
+                {noun:"die Veränderung",sentence:"Sie möchte ihr Leben ___.",answers:["verändern"]},
+                {noun:"die Entscheidung",sentence:"Du musst dich endlich ___.",answers:["entscheiden"]},
+                {noun:"die Beratung",sentence:"Die Ärztin ___ ihre Patienten gut.",answers:["berät"]},
+                {noun:"die Verbesserung",sentence:"Wir wollen unsere Noten ___.",answers:["verbessern"]}
+              ]},
+             {type:"adjectives",q:"Markieren Sie die Adjektive!",scoring:"6 x 0,5 = 3 P.",perItem:0.5,
+              words:["trotzdem","gesund","bereits","günstig","obwohl","müde","plötzlich","deshalb","übergewichtig","weil","kostenlos","allerdings"],
+              correctIdxs:[1,3,5,6,8,10]},
+             {type:"antonyms",q:"Was ist das Gegenteil?",scoring:"4 x 0,5 = 2 P.",perItem:0.5,
+              example:{word:"gesund",answer:"ungesund"},
+              items:[
+                {word:"billig",answers:["teuer"]},
+                {word:"dick",answers:["dünn","schlank"]},
+                {word:"fleißig",answers:["faul"]},
+                {word:"öffentlich",answers:["privat"]}
+              ]}
+           ]},
+          // ---- GRAMMATIK (10P) ----
           {type:"grammatik", name:"Grammatik", items:[
             {id:"ev2_01",q:"Das Problem ___ gelöst werden.",opts:["muss","müsst","musst","müssen"],ans:"muss",rule:"Passiv + Modalverb: muss + Partizip II + werden"},
             {id:"ev2_02",q:"Der Text ___ bis morgen geschrieben werden.",opts:["soll","sollt","sollst","sollen"],ans:"soll",rule:"Passiv + sollen"},
             {id:"ev2_03",q:"Wenn ich du ___, würde ich mehr lernen.",opts:["wäre","bin","sei","war"],ans:"wäre",rule:"Konjunktiv II: Wenn ich du wäre"},
             {id:"ev2_04",q:"Er lernt Deutsch, ___ er in Wien studieren kann.",opts:["damit","um","weil","dass"],ans:"damit",rule:"damit + Nebensatz (verschiedene Subjekte)"},
             {id:"ev2_05",q:"Sie fährt nach Wien, ___ dort zu studieren.",opts:["um","damit","weil","dass"],ans:"um",rule:"um...zu + Infinitiv (gleiches Subjekt)"},
-            {id:"ev2_06",q:"Das Fenster ___ nicht geöffnet werden.",opts:["kann","können","kannst","könnt"],ans:"kann",rule:"Passiv + können: kann + Partizip II + werden"},
+            {id:"ev2_06",q:"Das Fenster ___ nicht geöffnet werden.",opts:["kann","können","kannst","könnt"],ans:"kann",rule:"Passiv + können"},
             {id:"ev2_07",q:"___ ich mehr Geld hätte, würde ich eine Reise machen.",opts:["Wenn","Als","Wann","Ob"],ans:"Wenn",rule:"Konjunktiv II: Wenn + hätte"},
             {id:"ev2_08",q:"Die Hausaufgabe ___ bis Freitag abgegeben werden.",opts:["muss","müsst","musst","mussen"],ans:"muss",rule:"Passiv + müssen"},
-            {id:"ev2_09",q:"Ich lerne Deutsch, ___ eine gute Arbeit zu finden.",opts:["um","damit","weil","für"],ans:"um",rule:"um...zu (Finalssatz, gleiches Subjekt)"},
+            {id:"ev2_09",q:"Ich lerne Deutsch, ___ eine gute Arbeit zu finden.",opts:["um","damit","weil","für"],ans:"um",rule:"um...zu (Finalsatz, gleiches Subjekt)"},
             {id:"ev2_10",q:"An seiner Stelle ___ ich das nicht tun.",opts:["würde","werde","will","wollte"],ans:"würde",rule:"Konjunktiv II: würde + Infinitiv"}
           ]},
-          {type:"schreiben", name:"Schreiben", prompt:"Stellungnahme: 'Soziale Medien haben mehr Nachteile als Vorteile.' Stimmen Sie zu? Begründen Sie. (150-180 Wörter)",
-           tip:"Formulierungen: Meiner Meinung nach..., Ich bin der Meinung, dass..., Einerseits... andererseits..., Zusammenfassend...",
-           model:"Das Thema soziale Medien ist sehr aktuell. Einerseits ermöglichen sie schnelle Kommunikation und den Austausch von Informationen. Andererseits können sie süchtig machen und die psychische Gesundheit beeinflussen. Meiner Meinung nach überwiegen die Vorteile, wenn man soziale Medien verantwortungsvoll nutzt. Zusammenfassend lässt sich sagen, dass es auf die Art der Nutzung ankommt."}
+          // ---- SCHREIBEN ----
+          {type:"schreiben", name:"Textproduktion", prompt:"Stellungnahme: 'Soziale Medien haben mehr Nachteile als Vorteile.' Stimmen Sie zu? Begründen Sie Ihre Meinung.\n\n• Einleitung: Wie aktuell ist das Thema?\n• Vorteile von sozialen Medien\n• Nachteile von sozialen Medien\n• Ihre persönliche Meinung\n\nSchreiben Sie 150-180 Wörter.",
+           tip:"Verwenden Sie: Meiner Meinung nach..., Einerseits... andererseits..., obwohl, weil, dass, Zusammenfassend...",
+           model:"Das Thema soziale Medien ist heute sehr aktuell, weil fast alle Menschen täglich Instagram, TikTok oder WhatsApp benutzen.\n\nEinerseits haben soziale Medien viele Vorteile. Man kann schnell mit Freunden und Familie kommunizieren, auch wenn sie weit weg wohnen. Außerdem kann man interessante Informationen finden und neue Leute kennenlernen.\n\nAndererseits gibt es auch ernste Nachteile. Viele Menschen verbringen zu viel Zeit am Handy, obwohl sie eigentlich lernen oder arbeiten sollten. Außerdem können soziale Medien süchtig machen und die psychische Gesundheit negativ beeinflussen, besonders bei Jugendlichen.\n\nMeiner Meinung nach überwiegen die Vorteile, wenn man soziale Medien verantwortungsvoll nutzt. Es ist wichtig, dass man Pausen macht und nicht alles glaubt, was man im Internet liest. Zusammenfassend lässt sich sagen, dass es auf die Art der Nutzung ankommt."}
         ]},
 
-        // --- EV ZT3: Passiv Vergangenheit, Partizip als Adjektiv ---
+        // --- EV ZT3 ---
         {id:"ev_zt3", name:"Zwischentest 3", sections:[
+          // ---- LESEVERSTEHEN (9P) ----
+          {type:"leseverstehen", name:"Leseverstehen", points:9,
+           text:`<h3>Studieren und Arbeiten in Wien</h3>
+<h4>Abschnitt A</h4>
+<p>Wien ist eine der beliebtesten Städte für internationale Studierende. Jedes Jahr kommen tausende junge Menschen aus der ganzen Welt nach Wien, um an einer der zahlreichen Universitäten zu studieren. Die Universität Wien, die Technische Universität und die Wirtschaftsuniversität gehören zu den bekanntesten Hochschulen des Landes.</p>
+<p>Das Studium in Österreich ist relativ günstig. EU-Bürger*innen zahlen keine Studiengebühren, wenn sie die Regelstudienzeit nicht überschreiten. Studierende aus Drittstaaten müssen etwa 726 Euro pro Semester bezahlen. Dazu kommen noch der ÖH-Beitrag von etwa 21 Euro.</p>
+<h4>Abschnitt B</h4>
+<p>Viele Studierende müssen neben dem Studium arbeiten, um die Lebenshaltungskosten zu decken. Wien ist nicht billig: Eine kleine Wohnung kostet mindestens 500-700 Euro im Monat, und auch Essen und Transport kosten Geld. Die meisten Studierenden arbeiten als Kellner*innen, im Einzelhandel oder als Nachhilfelehrer*innen.</p>
+<p>Internationale Studierende aus EU-Ländern dürfen unbegrenzt arbeiten. Studierende aus Nicht-EU-Ländern dürfen nur 20 Stunden pro Woche arbeiten und brauchen eine spezielle Arbeitsgenehmigung.</p>
+<h4>Abschnitt C</h4>
+<p>Die 25-jährige Marija aus Serbien studiert seit drei Jahren Wirtschaft an der WU Wien. „Am Anfang war es sehr schwierig", erzählt sie. „Ich musste zuerst Deutsch lernen und mich an das neue System gewöhnen. In Serbien war alles anders." Heute spricht Marija fließend Deutsch und arbeitet 15 Stunden pro Woche in einem Büro.</p>
+<h4>Abschnitt D</h4>
+<p>Marija gibt anderen internationalen Studierenden Tipps: „Besucht unbedingt einen Deutschkurs, bevor ihr mit dem Studium anfangt. Und sucht euch früh eine Wohnung – am besten schon im Sommer, weil es im September fast unmöglich ist, etwas zu finden." Außerdem empfiehlt sie, sich bei der ÖH (Österreichische Hochschülerschaft) zu informieren, weil es dort viele kostenlose Beratungsangebote gibt.</p>
+<p>„Wien ist eine wunderbare Stadt zum Studieren", sagt Marija. „Man muss nur gut planen und sich nicht entmutigen lassen, wenn am Anfang nicht alles perfekt läuft."</p>`,
+           questions:[
+             {id:"ev3_lv1",q:"Was steht sinngemäß im Text?",opts:["In Wien gibt es nur eine Universität.","Wien gehört zu den beliebtesten Städten für internationale Studierende.","Alle Studierenden in Wien bekommen ein Stipendium."],ans:1,points:1},
+             {id:"ev3_lv2",q:"Was steht sinngemäß im Text?",opts:["EU-Bürger müssen hohe Studiengebühren bezahlen.","Studierende aus Drittstaaten studieren kostenlos.","EU-Bürger zahlen keine Studiengebühren bei Regelstudienzeit."],ans:2,points:1},
+             {id:"ev3_lv3",q:"Was steht sinngemäß im Text?",opts:["Das Leben in Wien ist billig für Studierende.","Viele Studierende müssen neben dem Studium arbeiten.","Alle Studierenden arbeiten als Kellner."],ans:1,points:1},
+             {id:"ev3_lv4",q:"Was steht sinngemäß im Text?",opts:["Nicht-EU-Studierende dürfen unbegrenzt arbeiten.","Nicht-EU-Studierende dürfen nur 20 Stunden pro Woche arbeiten.","Internationale Studierende dürfen nicht arbeiten."],ans:1,points:1},
+             {id:"ev3_lv5",q:"Was steht sinngemäß im Text?",opts:["Marija fand den Anfang in Wien einfach.","Marija musste sich an ein neues System gewöhnen.","Marija konnte schon Deutsch, als sie nach Wien kam."],ans:1,points:1},
+             {id:"ev3_lv6",q:"Richtig oder Falsch: Der ÖH-Beitrag beträgt etwa 21 Euro.",opts:["Richtig","Falsch"],ans:0,points:1},
+             {id:"ev3_lv7",q:"Richtig oder Falsch: Marija studiert Medizin.",opts:["Richtig","Falsch"],ans:1,points:1},
+             {id:"ev3_lv8",q:"Richtig oder Falsch: Man sollte sich schon im Sommer eine Wohnung suchen.",opts:["Richtig","Falsch"],ans:0,points:1},
+             {id:"ev3_lv9",q:"Richtig oder Falsch: Die ÖH bietet keine Beratung für Studierende an.",opts:["Richtig","Falsch"],ans:1,points:1}
+           ]},
+          // ---- WORTSCHATZ (8P) ----
+          {type:"wortschatz", name:"Wortschatz", points:8,
+           tasks:[
+             {type:"noun2verb",q:"Bilden Sie Verben aus den Nomen und setzen Sie sie ein!",scoring:"6 x 0,5 = 3 P.",perItem:0.5,
+              example:{noun:"die Bezahlung",verb:"bezahlt",sentence:"Man bezahlt die Miete am Anfang des Monats."},
+              items:[
+                {noun:"die Bewerbung",sentence:"Ich ___ mich um eine Stelle als Kellner.",answers:["bewerbe"]},
+                {noun:"die Überschreitung",sentence:"Du sollst die Geschwindigkeit nicht ___.",answers:["überschreiten"]},
+                {noun:"die Gewöhnung",sentence:"Man muss sich an das Klima ___.",answers:["gewöhnen"]},
+                {noun:"die Empfehlung",sentence:"Der Professor ___ dieses Buch.",answers:["empfiehlt"]},
+                {noun:"die Planung",sentence:"Wir müssen unsere Reise besser ___.",answers:["planen"]},
+                {noun:"die Information",sentence:"Bitte ___ Sie sich auf der Webseite.",answers:["informieren"]}
+              ]},
+             {type:"adjectives",q:"Markieren Sie die Adjektive!",scoring:"6 x 0,5 = 3 P.",perItem:0.5,
+              words:["unbegrenzt","mindestens","günstig","zahlreich","trotzdem","fließend","kostenlos","unbedingt","international","deshalb","schwierig","bereits"],
+              correctIdxs:[0,2,3,5,6,8,10]},
+             {type:"antonyms",q:"Was ist das Gegenteil?",scoring:"4 x 0,5 = 2 P.",perItem:0.5,
+              example:{word:"günstig",answer:"teuer"},
+              items:[
+                {word:"schwierig",answers:["einfach","leicht"]},
+                {word:"möglich",answers:["unmöglich"]},
+                {word:"bekannt",answers:["unbekannt"]},
+                {word:"früh",answers:["spät"]}
+              ]}
+           ]},
+          // ---- GRAMMATIK (10P) ----
           {type:"grammatik", name:"Grammatik", items:[
             {id:"ev3_01",q:"Das Buch ___ im 19. Jahrhundert geschrieben.",opts:["wurde","wird","ist","hat"],ans:"wurde",rule:"Passiv Präteritum: wurde + Partizip II"},
             {id:"ev3_02",q:"Die Häuser ___ nach dem Krieg wieder aufgebaut.",opts:["wurden","werden","sind","haben"],ans:"wurden",rule:"Passiv Präteritum Plural"},
             {id:"ev3_03",q:"Der ___ Brief liegt auf dem Tisch.",opts:["geschriebene","geschrieben","schreibende","geschriebener"],ans:"geschriebene",rule:"Partizip II als Adjektiv + Dekl."},
             {id:"ev3_04",q:"Die ___ Studenten warten im Flur.",opts:["geprüften","geprüft","prüfenden","geprüfte"],ans:"geprüften",rule:"Partizip II als Adjektiv Plural"},
             {id:"ev3_05",q:"Das Problem ist schon ___ worden.",opts:["gelöst","lösen","lösend","gelöste"],ans:"gelöst",rule:"Passiv Perfekt: ist + Partizip II + worden"},
-            {id:"ev3_06",q:"Der Kuchen ___ von meiner Mutter gebacken.",opts:["wurde","wird","ist","hat"],ans:"wurde",rule:"Passiv Präteritum: wurde gebacken"},
-            {id:"ev3_07",q:"Das ___ Handy funktioniert nicht mehr.",opts:["reparierte","repariert","reparierende","repariertes"],ans:"reparierte",rule:"Partizip II als Adjektiv: das reparierte Handy"},
+            {id:"ev3_06",q:"Der Kuchen ___ von meiner Mutter gebacken.",opts:["wurde","wird","ist","hat"],ans:"wurde",rule:"Passiv Präteritum"},
+            {id:"ev3_07",q:"Das ___ Handy funktioniert nicht mehr.",opts:["reparierte","repariert","reparierende","repariertes"],ans:"reparierte",rule:"Partizip II als Adjektiv"},
             {id:"ev3_08",q:"Die Aufgabe ist ___ worden.",opts:["erledigt","erledigen","erledigend","erledigte"],ans:"erledigt",rule:"Passiv Perfekt"},
             {id:"ev3_09",q:"Dieses Gebäude ___ 1900 gebaut.",opts:["wurde","wird","hat","ist"],ans:"wurde",rule:"Passiv Präteritum"},
-            {id:"ev3_10",q:"Die ___ Tür muss repariert werden.",opts:["kaputte","kaputt","kaputter","kaputtene"],ans:"kaputte",rule:"Adjektivdeklination: die kaputte Tür"}
+            {id:"ev3_10",q:"Die ___ Tür muss repariert werden.",opts:["kaputte","kaputt","kaputter","kaputtene"],ans:"kaputte",rule:"Adjektivdeklination"}
           ]},
-          {type:"schreiben", name:"Schreiben", prompt:"Stellungnahme: 'Sollte der öffentliche Verkehr kostenlos sein?' Schreiben Sie Ihre Meinung mit Argumenten. (150-180 Wörter)",
-           tip:"Pro: Umweltschutz, weniger Autos, soziale Gerechtigkeit. Contra: Kosten, Qualität, Finanzierung.",
-           model:"Die Frage, ob der öffentliche Verkehr kostenlos sein sollte, wird oft diskutiert. Einerseits würden mehr Menschen den Bus oder die Straßenbahn benutzen, was gut für die Umwelt wäre. Es gäbe weniger Staus und die Luftqualität würde sich verbessern. Andererseits müsste der Staat die Kosten übernehmen, was zu höheren Steuern führen könnte. Meiner Meinung nach wäre ein stark vergünstigter Verkehr die beste Lösung."}
+          // ---- SCHREIBEN ----
+          {type:"schreiben", name:"Textproduktion", prompt:"Stellungnahme: 'Sollte der öffentliche Verkehr kostenlos sein?' Schreiben Sie Ihre Meinung mit Argumenten.\n\n• Einleitung: Warum ist das Thema wichtig?\n• Pro-Argumente (Umwelt, soziale Gerechtigkeit)\n• Contra-Argumente (Kosten, Finanzierung)\n• Ihre Meinung\n\nSchreiben Sie 150-180 Wörter.",
+           tip:"Verwenden Sie: Es wird oft diskutiert, ob...; Einerseits... andererseits...; Meiner Meinung nach...",
+           model:"Die Frage, ob der öffentliche Verkehr kostenlos sein sollte, wird oft diskutiert. Dieses Thema ist wichtig, weil der Klimawandel ein großes Problem ist.\n\nEinerseits gibt es gute Argumente dafür. Wenn Busse und Bahnen kostenlos wären, würden mehr Menschen öffentliche Verkehrsmittel benutzen und weniger Auto fahren. Das wäre gut für die Umwelt, weil es weniger CO2-Emissionen gäbe. Außerdem wäre es sozial gerecht, weil auch Menschen mit wenig Geld mobil sein könnten.\n\nAndererseits müsste jemand die Kosten bezahlen. Der Staat müsste die Verkehrsbetriebe finanzieren, was zu höheren Steuern führen könnte. Außerdem könnte die Qualität sinken, wenn die Verkehrsmittel überfüllt wären.\n\nMeiner Meinung nach wäre ein stark vergünstigter Verkehr die beste Lösung. Ein Jahresticket für 365 Euro, also einen Euro pro Tag, ist ein guter Kompromiss."}
         ]}
       ]
     },
