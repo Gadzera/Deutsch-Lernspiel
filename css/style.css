@@ -1908,9 +1908,32 @@ body {
 .vwu-str-verbs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; padding: 8px; background: var(--bg); border-radius: 8px; }
 .vwu-str-verb { padding: 4px 10px; border: 1px solid var(--border); border-radius: 16px; font-size: 0.82rem; font-weight: 500; }
 
+/* Zuordnung table */
+.vwu-zuord-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0; }
+.vwu-zuord-table th { padding: 6px 8px; text-align: center; font-weight: 700; background: var(--bg); border: 1px solid var(--border); }
+.vwu-zuord-table td { padding: 8px; border: 1px solid var(--border); }
+.vwu-zuord-table td:first-child { text-align: left; font-size: 0.82rem; }
+.vwu-zuord-table td:not(:first-child) { text-align: center; width: 36px; }
+/* Richtig/Falsch table */
+.vwu-rf-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0; }
+.vwu-rf-table th { padding: 6px 8px; text-align: center; font-weight: 700; background: var(--bg); border: 1px solid var(--border); }
+.vwu-rf-table td { padding: 8px; border: 1px solid var(--border); vertical-align: top; }
+.vwu-rf-table td:first-child { text-align: left; }
+.vwu-rf-table td:not(:first-child) { text-align: center; width: 36px; }
+.vwu-rf-correct { background: rgba(67,160,71,0.1); }
+.vwu-rf-wrong { background: rgba(229,57,53,0.1); }
+/* Strukturen extras */
+.vwu-str-text { font-size: 0.85rem; line-height: 2; padding: 12px; background: var(--bg); border-radius: 10px; }
+.vwu-str-stem { font-weight: 600; font-size: 0.9rem; margin-bottom: 10px; padding: 8px; background: var(--bg); border-radius: 8px; }
+.vwu-str-connector { font-weight: 700; color: var(--primary); min-width: 80px; display: inline-block; }
+
 [data-theme="dark"] .vwu-text-box { background: var(--card); }
 [data-theme="dark"] .vwu-lv-question { background: var(--card); }
 [data-theme="dark"] .vwu-task-block { background: var(--card); }
 [data-theme="dark"] .vwu-section-label { background: rgba(99,102,241,0.15); }
 [data-theme="dark"] .vwu-ws-example { background: rgba(255,255,255,0.05); }
 [data-theme="dark"] .vwu-str-verbs { background: rgba(255,255,255,0.05); }
+[data-theme="dark"] .vwu-str-text { background: rgba(255,255,255,0.05); }
+[data-theme="dark"] .vwu-str-stem { background: rgba(255,255,255,0.05); }
+[data-theme="dark"] .vwu-zuord-table th { background: rgba(255,255,255,0.05); }
+[data-theme="dark"] .vwu-rf-table th { background: rgba(255,255,255,0.05); }

@@ -1656,13 +1656,31 @@ function showVWULesen(){
     const v=APP.vwu,sec=v.test.sections[v.secIdx];
     let qHTML='';
     sec.questions.forEach((q,qi)=>{
-        let optsH='';
-        q.opts.forEach((o,oi)=>{
-            optsH+=`<label class="vwu-lv-opt"><input type="radio" name="lvq_${qi}" value="${oi}"><span>${esc(o)}</span></label>`;
-        });
+        let inner='';
+        if(q.type==='zuordnung'){
+            // Match headings to Abschnitte A-D, one = X
+            const cols=['A','B','C','D','X'];
+            inner+=`<table class="vwu-zuord-table"><tr><th></th>${cols.map(c=>'<th>'+c+'</th>').join('')}</tr>`;
+            q.headings.forEach((h,hi)=>{
+                inner+=`<tr><td>${esc(h)}</td>${cols.map(c=>`<td><input type="radio" name="zuord_${qi}_${hi}" value="${c}"></td>`).join('')}</tr>`;
+            });
+            inner+=`</table>`;
+        } else if(q.type==='richtigfalsch'){
+            // R/F for multiple statements
+            inner+=`<table class="vwu-rf-table"><tr><th></th><th>R</th><th>F</th></tr>`;
+            q.statements.forEach((s,si)=>{
+                inner+=`<tr id="rf_${qi}_${si}"><td>${esc(s.text)}</td><td><input type="radio" name="rf_${qi}_${si}" value="R"></td><td><input type="radio" name="rf_${qi}_${si}" value="F"></td></tr>`;
+            });
+            inner+=`</table>`;
+        } else {
+            // sinngemaess or default — radio options
+            (q.opts||[]).forEach((o,oi)=>{
+                inner+=`<label class="vwu-lv-opt"><input type="radio" name="lvq_${qi}" value="${oi}"><span>${esc(o)}</span></label>`;
+            });
+        }
         qHTML+=`<div class="vwu-lv-question" id="lvq_${qi}">
             <div class="vwu-lv-qnum">${qi+1}. ${esc(q.q)} <span class="vwu-lv-pts">(${q.points||1} P.)</span></div>
-            ${optsH}
+            ${inner}
         </div>`;
     });
     $('app').innerHTML=`
@@ -1683,20 +1701,43 @@ function checkVWULesen(){
     const v=APP.vwu,sec=v.test.sections[v.secIdx];
     let score=0;
     sec.questions.forEach((q,qi)=>{
-        const sel=document.querySelector('input[name="lvq_'+qi+'"]:checked');
-        const userVal=sel?parseInt(sel.value):-1;
-        const ok=userVal===q.ans;
         const box=document.getElementById('lvq_'+qi);
         if(!box) return;
-        if(ok){score+=(q.points||1);box.classList.add('vwu-lv-correct');}
-        else{box.classList.add('vwu-lv-wrong');v.wrongs.push({q:q.q,userAnswer:userVal>=0?q.opts[userVal]:'—',correct:q.opts[q.ans],rule:'Leseverstehen: '+q.opts[q.ans]});}
-        box.querySelectorAll('input').forEach(i=>i.disabled=true);
-        // highlight correct
-        box.querySelectorAll('.vwu-lv-opt').forEach((o,oi)=>{if(oi===q.ans)o.classList.add('vwu-lv-opt-correct');});
+        if(q.type==='zuordnung'){
+            let sub=0;
+            q.headings.forEach((h,hi)=>{
+                const sel=document.querySelector('input[name="zuord_'+qi+'_'+hi+'"]:checked');
+                const val=sel?sel.value:'';
+                const correct=q.correctMap[hi]||q.correctMap[''+hi]||'';
+                if(val===correct) sub++;
+                else v.wrongs.push({q:h,userAnswer:val||'—',correct:correct,rule:'Überschrift → Abschnitt '+correct});
+            });
+            score+=sub;
+            box.classList.add(sub===q.headings.length?'vwu-lv-correct':'vwu-lv-wrong');
+            box.querySelectorAll('input').forEach(i=>i.disabled=true);
+        } else if(q.type==='richtigfalsch'){
+            q.statements.forEach((s,si)=>{
+                const sel=document.querySelector('input[name="rf_'+qi+'_'+si+'"]:checked');
+                const val=sel?sel.value:'';
+                const ok=val===s.ans;
+                const row=document.getElementById('rf_'+qi+'_'+si);
+                if(row) row.classList.add(ok?'vwu-rf-correct':'vwu-rf-wrong');
+                if(ok) score++;
+                else v.wrongs.push({q:s.text,userAnswer:val||'—',correct:s.ans,rule:'Richtig/Falsch'});
+            });
+            box.querySelectorAll('input').forEach(i=>i.disabled=true);
+        } else {
+            const sel=document.querySelector('input[name="lvq_'+qi+'"]:checked');
+            const userVal=sel?parseInt(sel.value):-1;
+            const ok=userVal===q.ans;
+            if(ok){score+=(q.points||1);box.classList.add('vwu-lv-correct');}
+            else{box.classList.add('vwu-lv-wrong');v.wrongs.push({q:q.q,userAnswer:userVal>=0?q.opts[userVal]:'—',correct:q.opts[q.ans],rule:'Leseverstehen'});}
+            box.querySelectorAll('input').forEach(i=>i.disabled=true);
+            box.querySelectorAll('.vwu-lv-opt').forEach((o,oi)=>{if(oi===q.ans)o.classList.add('vwu-lv-opt-correct');});
+        }
     });
     v.gramScore+=score;
     const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+v.gramScore;
-    // replace button with next
     document.querySelectorAll('.quiz-body .btn-primary').forEach(b=>{
         b.textContent='Weiter →';b.setAttribute('onclick','nextVWUSec()');
     });
@@ -1795,31 +1836,37 @@ function showVWUStrukturen(){
     let tasksH='';
     sec.tasks.forEach((task,ti)=>{
         let innerH='';
-        if(task.type==='fill'){
-            // Fill in blanks in text/sentences
-            if(task.intro) innerH+=`<div class="vwu-str-intro">${task.intro}</div>`;
+        if(task.type==='infinitiv_zu'){
             task.items.forEach((it,ii)=>{
-                const sentH=it.sentence.replace(/___/g,`<input class="vwu-ws-input vwu-str-fill" id="str_${ti}_${ii}" placeholder="..." autocomplete="off" autocapitalize="off">`);
+                innerH+=`<div class="vwu-str-item"><span class="vwu-str-prefix">${esc(it.start)}</span><input class="vwu-ws-input vwu-str-long" id="infzu_${ti}_${ii}" placeholder="...zu + Infinitiv" autocomplete="off"></div>`;
+            });
+        } else if(task.type==='praepositionen'){
+            // Lückentext mit Präpositionen+Artikel
+            let blankIdx=0;
+            const textH=task.text.replace(/___ ___/g,()=>{
+                const id='praep_'+ti+'_'+blankIdx;blankIdx++;
+                return `<input class="vwu-ws-input vwu-str-fill" id="${id}" placeholder="..." autocomplete="off" style="width:90px">`;
+            });
+            if(task.example) innerH+=`<div class="vwu-ws-example">Beispiel: <em>${esc(task.example)}</em></div>`;
+            innerH+=`<div class="vwu-str-text">${textH}</div>`;
+        } else if(task.type==='satzanfaenge'){
+            innerH+=`<div class="vwu-str-stem">${esc(task.stem)}</div>`;
+            task.connectors.forEach((c,ci)=>{
+                innerH+=`<div class="vwu-str-item"><span class="vwu-str-connector">... ${esc(c)}</span><input class="vwu-ws-input vwu-str-long" id="satza_${ti}_${ci}" placeholder="..." autocomplete="off"></div>`;
+            });
+        } else if(task.type==='konjunktiv2'){
+            task.items.forEach((it,ii)=>{
+                innerH+=`<div class="vwu-str-item"><div class="vwu-str-orig">${esc(it.imperativ)}</div><input class="vwu-ws-input vwu-str-long" id="konj_${ti}_${ii}" placeholder="Könnten Sie / Würdest du ..." autocomplete="off"></div>`;
+            });
+        } else if(task.type==='stehen_liegen'){
+            if(task.verbs) innerH+=`<div class="vwu-str-verbs">${task.verbs.map(vb=>'<span class="vwu-str-verb">'+esc(vb)+'</span>').join(' ')}</div>`;
+            task.items.forEach((it,ii)=>{
+                innerH+=`<div class="vwu-str-item"><span class="vwu-str-prefix">${esc(it.nouns)}</span><input class="vwu-ws-input vwu-str-long" id="stlg_${ti}_${ii}" placeholder="Bilden Sie einen Satz..." autocomplete="off"></div>`;
+            });
+        } else if(task.type==='fill'){
+            task.items.forEach((it,ii)=>{
+                const sentH=it.sentence.replace(/___/g,`<input class="vwu-ws-input vwu-str-fill" id="str_${ti}_${ii}" placeholder="..." autocomplete="off">`);
                 innerH+=`<div class="vwu-str-item">${it.prefix?'<span class="vwu-str-prefix">'+esc(it.prefix)+'</span>':''} ${sentH}</div>`;
-            });
-        } else if(task.type==='rewrite'){
-            // Rewrite sentences (e.g., Konjunktiv II)
-            if(task.intro) innerH+=`<div class="vwu-str-intro">${task.intro}</div>`;
-            task.items.forEach((it,ii)=>{
-                innerH+=`<div class="vwu-str-item"><div class="vwu-str-orig">${esc(it.original)}</div><input class="vwu-ws-input vwu-str-long" id="rew_${ti}_${ii}" placeholder="..." autocomplete="off"></div>`;
-            });
-        } else if(task.type==='complete'){
-            // Complete sentence beginnings
-            if(task.intro) innerH+=`<div class="vwu-str-intro">${task.intro}</div>`;
-            task.items.forEach((it,ii)=>{
-                innerH+=`<div class="vwu-str-item"><span class="vwu-str-prefix">${esc(it.prefix)}</span><input class="vwu-ws-input vwu-str-long" id="cmp_${ti}_${ii}" placeholder="..." autocomplete="off"></div>`;
-            });
-        } else if(task.type==='verbs_table'){
-            // Select correct verb + build sentence (stehen/liegen/hängen/stellen/legen)
-            if(task.intro) innerH+=`<div class="vwu-str-intro">${task.intro}</div>`;
-            if(task.verbs) innerH+=`<div class="vwu-str-verbs">${task.verbs.map(v=>'<span class="vwu-str-verb">'+esc(v)+'</span>').join(' ')}</div>`;
-            task.items.forEach((it,ii)=>{
-                innerH+=`<div class="vwu-str-item"><span class="vwu-str-prefix">${esc(it.prompt)}</span><input class="vwu-ws-input vwu-str-long" id="vtb_${ti}_${ii}" placeholder="..." autocomplete="off"></div>`;
             });
         }
         tasksH+=`<div class="vwu-task-block"><div class="vwu-task-title">${ti+1}. ${esc(task.q)} <span class="vwu-lv-pts">(${esc(task.scoring)})</span></div>${innerH}</div>`;
@@ -1841,25 +1888,64 @@ function checkVWUStrukturen(){
     const v=APP.vwu,sec=v.test.sections[v.secIdx];
     let score=0;
     sec.tasks.forEach((task,ti)=>{
-        const items=task.items||[];
-        items.forEach((it,ii)=>{
-            let inputId='';
-            if(task.type==='fill') inputId='str_'+ti+'_'+ii;
-            else if(task.type==='rewrite') inputId='rew_'+ti+'_'+ii;
-            else if(task.type==='complete') inputId='cmp_'+ti+'_'+ii;
-            else if(task.type==='verbs_table') inputId='vtb_'+ti+'_'+ii;
-            const inp=document.getElementById(inputId);
-            if(!inp) return;
-            const val=inp.value.trim().toLowerCase().replace(/\s+/g,' ');
-            const ok=it.answers.some(a=>a.toLowerCase().replace(/\s+/g,' ')===val);
-            inp.classList.add(ok?'vwu-inp-correct':'vwu-inp-wrong');
-            inp.disabled=true;
-            if(ok) score+=task.perItem||1;
-            else{
-                inp.insertAdjacentHTML('afterend','<span class="vwu-ws-answer">'+esc(it.answers[0])+'</span>');
-                v.wrongs.push({q:it.prefix||it.original||it.prompt||it.sentence||'',userAnswer:val||'—',correct:it.answers[0],rule:task.q});
-            }
-        });
+        if(task.type==='praepositionen'){
+            (task.blanks||[]).forEach((bl,bi)=>{
+                const inp=document.getElementById('praep_'+ti+'_'+bi);
+                if(!inp) return;
+                const val=inp.value.trim().toLowerCase();
+                const ok=bl.answers.some(a=>a.toLowerCase()===val);
+                inp.classList.add(ok?'vwu-inp-correct':'vwu-inp-wrong');
+                inp.disabled=true;
+                if(ok) score+=task.perItem||0.5;
+                else{inp.insertAdjacentHTML('afterend','<span class="vwu-ws-answer">'+esc(bl.answers[0])+'</span>');v.wrongs.push({q:'Präposition + Artikel',userAnswer:val||'—',correct:bl.answers[0],rule:task.q});}
+            });
+        } else if(task.type==='satzanfaenge'){
+            // Free text — show model answers, self-rate
+            task.connectors.forEach((c,ci)=>{
+                const inp=document.getElementById('satza_'+ti+'_'+ci);
+                if(!inp) return;
+                inp.disabled=true;
+                const ex=task.examples&&task.examples[ci]?task.examples[ci]:'';
+                inp.insertAdjacentHTML('afterend','<span class="vwu-ws-answer" style="color:var(--primary)">Beispiel: '+esc(ex)+'</span>');
+                if(inp.value.trim().length>3) score+=task.perItem||1;
+            });
+        } else if(task.type==='konjunktiv2'){
+            task.items.forEach((it,ii)=>{
+                const inp=document.getElementById('konj_'+ti+'_'+ii);
+                if(!inp) return;
+                inp.disabled=true;
+                inp.insertAdjacentHTML('afterend','<span class="vwu-ws-answer" style="color:var(--primary)">Beispiel: '+esc(it.example)+'</span>');
+                if(inp.value.trim().length>5) score+=task.perItem||1.5;
+            });
+        } else if(task.type==='infinitiv_zu'){
+            task.items.forEach((it,ii)=>{
+                const inp=document.getElementById('infzu_'+ti+'_'+ii);
+                if(!inp) return;
+                inp.disabled=true;
+                inp.insertAdjacentHTML('afterend','<span class="vwu-ws-answer" style="color:var(--primary)">Beispiel: '+esc(it.example)+'</span>');
+                if(inp.value.trim().length>5) score+=task.perItem||1.5;
+            });
+        } else if(task.type==='stehen_liegen'){
+            task.items.forEach((it,ii)=>{
+                const inp=document.getElementById('stlg_'+ti+'_'+ii);
+                if(!inp) return;
+                inp.disabled=true;
+                inp.insertAdjacentHTML('afterend','<span class="vwu-ws-answer" style="color:var(--primary)">Beispiel: '+esc(it.example)+'</span>');
+                if(inp.value.trim().length>5) score+=task.perItem||1.5;
+            });
+        } else {
+            // fill type
+            (task.items||[]).forEach((it,ii)=>{
+                const inp=document.getElementById('str_'+ti+'_'+ii);
+                if(!inp) return;
+                const val=inp.value.trim().toLowerCase().replace(/\s+/g,' ');
+                const ok=(it.answers||[]).some(a=>a.toLowerCase().replace(/\s+/g,' ')===val);
+                inp.classList.add(ok?'vwu-inp-correct':'vwu-inp-wrong');
+                inp.disabled=true;
+                if(ok) score+=task.perItem||1;
+                else{inp.insertAdjacentHTML('afterend','<span class="vwu-ws-answer">'+esc((it.answers||[''])[0])+'</span>');v.wrongs.push({q:it.prefix||it.sentence||'',userAnswer:val||'—',correct:(it.answers||[''])[0],rule:task.q});}
+            });
+        }
     });
     v.gramScore+=Math.round(score*10)/10;
     const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+v.gramScore;
