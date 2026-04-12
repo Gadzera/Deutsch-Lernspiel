@@ -524,6 +524,7 @@ function showMenu() {
                             <label class="toggle-switch"><input type="checkbox" ${APP.subliminal?'checked':''} onchange="APP.subliminal=this.checked;localStorage.setItem(CONFIG.prefix+'sub',this.checked)"><span class="toggle-slider"></span></label></div>
                     </div>
                 </div>
+                <div style="text-align:center;margin-bottom:12px"><button class="btn btn-outline" onclick="showStats()" style="width:auto;padding:8px 24px">📊 Meine Statistik</button></div>
                 <div class="user-counter">${UI.registered}: ${regCnt} &bull; ${UI.online}: ${onCnt}</div>
                 <div style="height:20px"></div>
             </div>
@@ -872,6 +873,69 @@ function getStats(){
     const d=ld('st_'+APP.user.id);
     if(!d||!d.r||!d.r.length) return {total:0,avg:0};
     return {total:d.r.length,avg:Math.round(d.r.reduce((s,x)=>s+x.pct,0)/d.r.length)};
+}
+function getDetailedStats(){
+    if(!APP.user) return [];
+    const d=ld('st_'+APP.user.id);
+    if(!d||!d.r||!d.r.length) return [];
+    const byMode={};
+    d.r.forEach(r=>{
+        const k=r.m||'unknown';
+        if(!byMode[k]) byMode[k]={mode:k,total:0,correct:0,wrong:0,games:0,pctSum:0};
+        byMode[k].games++;
+        byMode[k].correct+=r.s;
+        byMode[k].wrong+=(r.tot-r.s);
+        byMode[k].total+=r.tot;
+        byMode[k].pctSum+=r.pct;
+    });
+    return Object.values(byMode).map(s=>({
+        ...s,
+        avg:Math.round(s.pctSum/s.games),
+        label:getModeName(s.mode)
+    })).sort((a,b)=>a.avg-b.avg);
+}
+function getModeName(m){
+    const names={
+        words_article:'Artikel',words_de2l1:'DE→Übersetzung',words_l12de:'Übersetzung→DE',
+        partizip_v2p:'Partizip II',partizip_aux:'haben/sein',
+        reflexive_conj:'Reflexive Verben',
+        sentences_all:'Satzbau (alle)',
+        prep_all:'Präpositionen',pron_all:'Pronomen'
+    };
+    if(names[m]) return names[m];
+    if(m.startsWith('sentences_')) return 'Satzbau: '+(m.split('_')[1]||'');
+    if(m.startsWith('prep_')) return 'Präp: '+(m.split('_').slice(1).join(' ')||'');
+    if(m.startsWith('pron_')) return 'Pron: '+(m.split('_').slice(1).join(' ')||'');
+    return m;
+}
+function showStats(){
+    const stats=getDetailedStats();
+    if(!stats.length){toast('Noch keine Statistik!');return;}
+    const weak=stats.filter(s=>s.avg<60);
+    const strong=stats.filter(s=>s.avg>=80);
+    const mid=stats.filter(s=>s.avg>=60&&s.avg<80);
+
+    const rowH=(arr,color)=>arr.map(s=>`
+        <div class="stat-row">
+            <div class="stat-row-label">${esc(s.label)}</div>
+            <div class="stat-row-bar"><div class="stat-row-fill" style="width:${s.avg}%;background:${color}"></div></div>
+            <div class="stat-row-pct" style="color:${color}">${s.avg}%</div>
+        </div>
+        <div class="stat-row-detail">${s.correct}/${s.total} richtig &bull; ${s.games} Spiele</div>
+    `).join('');
+
+    $('app').innerHTML=`
+        <div class="quiz-page">
+            <div class="quiz-header">
+                <div class="quiz-header-left"><button class="quiz-back" onclick="showMenu()">&#8592;</button><span>Meine Statistik</span></div>
+            </div>
+            <div class="quiz-body" style="padding-top:16px">
+                ${weak.length?'<div class="stat-section"><div class="stat-section-title">&#10060; Schwächen</div>'+rowH(weak,'#e53935')+'</div>':''}
+                ${mid.length?'<div class="stat-section"><div class="stat-section-title">&#9888;&#65039; Mittel</div>'+rowH(mid,'#FB8C00')+'</div>':''}
+                ${strong.length?'<div class="stat-section"><div class="stat-section-title">&#10004; Stärken</div>'+rowH(strong,'#43A047')+'</div>':''}
+                <button class="btn btn-outline" onclick="showMenu()" style="margin-top:20px">&#8592; ${UI.menu}</button>
+            </div>
+        </div>`;
 }
 
 // ============== START ==============
