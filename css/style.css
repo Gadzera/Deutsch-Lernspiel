@@ -1375,6 +1375,55 @@ body {
     border-color: var(--danger);
 }
 
+/* ============ RULE PAGE ============ */
+.rule-page { font-size: 0.9rem; line-height: 1.6; }
+.rule-page h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 12px; border-bottom: 2px solid var(--primary); padding-bottom: 6px; }
+.rule-page h3 { font-size: 1rem; margin: 16px 0 8px; color: #333; }
+.rule-page p { margin: 4px 0; }
+.rule-formula {
+    background: #EDE7F6;
+    border: 2px solid #7E57C2;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 10px 0;
+}
+.rule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 12px;
+    font-size: 0.82rem;
+}
+.rule-table th {
+    background: var(--primary);
+    color: white;
+    padding: 6px 8px;
+    text-align: left;
+    font-weight: 600;
+}
+.rule-table td {
+    padding: 5px 8px;
+    border-bottom: 1px solid var(--border);
+}
+.rule-table tr:nth-child(even) td { background: #f8f8ff; }
+.rule-hl { color: #D32F2F; font-weight: 700; }
+.rule-hl2 { color: #1565C0; font-weight: 700; }
+.rule-hl3 { color: #2E7D32; font-weight: 700; }
+.rule-hl4 { color: #E65100; font-weight: 700; }
+.rule-box {
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin: 8px 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+.rule-green { background: #E8F5E9; border-left: 4px solid #43A047; }
+.rule-blue { background: #E3F2FD; border-left: 4px solid #1E88E5; }
+.rule-purple { background: #F3E5F5; border-left: 4px solid #8E24AA; }
+.rule-btn { background: #FFF3E0 !important; color: #E65100 !important; border-color: #FFB74D !important; font-weight: 700 !important; }
+
 /* ============ HINT BOX ============ */
 .hint-box {
     background: #FFF3E0;
