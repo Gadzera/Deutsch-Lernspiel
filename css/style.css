@@ -1427,6 +1427,9 @@ body {
 .rule-blue { background: #E3F2FD; border-left: 4px solid #1E88E5; }
 .rule-purple { background: #F3E5F5; border-left: 4px solid #8E24AA; }
 .rule-btn { background: #FFF3E0 !important; color: #E65100 !important; border-color: #FFB74D !important; font-weight: 700 !important; }
+.rule-quiz-btn { background: #FFF3E0; color: #E65100; border: 2px solid #FFB74D; font-weight: 700; padding: 8px 14px; font-size: 0.85rem; border-radius: 10px; margin: 6px 0 10px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.rule-quiz-btn:hover { background: #FFE0B2; }
+[data-theme="dark"] .rule-quiz-btn { background: rgba(255,179,71,0.15); color: #FFB74D; border-color: #FFB74D; }
 
 /* ============ HINT BOX ============ */
 .hint-box {

@@ -344,5 +344,100 @@ satz_relativ: `
 <tr><td>Gen</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
 </table>
 <p>Der Mann, <b>der</b> dort <span class="rule-hl2">steht</span>, ist mein Lehrer.</p>
-<p>Die Frau, <b>die</b> ich gestern <span class="rule-hl2">getroffen habe</span>, ist Ärztin.</p>`
+<p>Die Frau, <b>die</b> ich gestern <span class="rule-hl2">getroffen habe</span>, ist Ärztin.</p>`,
+
+satz_bevor: `
+<h2>bevor — перед тем как</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bevor</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bevor</b> вводит придаточное времени. Действие в придаточном происходит ПОЗЖЕ действия главного.</p>
+<table class="rule-table">
+<tr><th>Главное</th><th>Союз</th><th>Подлежащее</th><th>...</th><th>Глагол</th></tr>
+<tr><td>Ich frühstücke,</td><td><b>bevor</b></td><td>ich</td><td>zur Arbeit</td><td><b>gehe</b>.</td></tr>
+</table>
+<p>Wasch dir die Hände, <b>bevor</b> du <span class="rule-hl2">isst</span>.</p>
+<p>Bevor ich nach Hause <span class="rule-hl2">komme</span>, kaufe ich Brot.</p>`,
+
+satz_bis: `
+<h2>bis — до тех пор пока (не)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bis</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bis</b> обозначает конечную точку во времени.</p>
+<p>Ich warte hier, <b>bis</b> du <span class="rule-hl2">kommst</span>.</p>
+<p>Bleib im Bett, <b>bis</b> der Arzt <span class="rule-hl2">kommt</span>!</p>
+<p>Wir spielen, <b>bis</b> es dunkel <span class="rule-hl2">wird</span>.</p>`,
+
+satz_deshalb: `
+<h2>deshalb / darum / deswegen — поэтому</h2>
+<div class="rule-formula">HS1. <span class="rule-hl">Deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>Союзные наречия — после них идёт ИНВЕРСИЯ (глагол на 2-м месте, подлежащее после).</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Verb)</th><th>Pos. 3</th><th>...</th></tr>
+<tr><td><b>Deshalb</b></td><td><b>bleibe</b></td><td>ich</td><td>zu Hause.</td></tr>
+</table>
+<p>Es regnet. <b>Deshalb</b> <span class="rule-hl2">nehme</span> ich den Regenschirm.</p>
+<p>Ich bin müde. <b>Darum</b> <span class="rule-hl2">gehe</span> ich ins Bett.</p>
+<p>Er war krank. <b>Deswegen</b> <span class="rule-hl2">ist</span> er nicht gekommen.</p>`,
+
+satz_seitdem: `
+<h2>seit / seitdem — с тех пор как</h2>
+<div class="rule-formula">HS, <span class="rule-hl">seitdem</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>seit/seitdem</b> вводит придаточное времени — действие началось в прошлом и продолжается.</p>
+<p>Ich lerne Deutsch, <b>seitdem</b> ich in Wien <span class="rule-hl2">wohne</span>.</p>
+<p><b>Seit</b> er Sport <span class="rule-hl2">macht</span>, fühlt er sich besser.</p>
+<p>Es regnet, <b>seitdem</b> wir hier <span class="rule-hl2">sind</span>.</p>`,
+
+satz_sobald: `
+<h2>sobald — как только</h2>
+<div class="rule-formula">HS, <span class="rule-hl">sobald</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>sobald</b> — действия следуют непосредственно одно за другим.</p>
+<p>Ich rufe dich an, <b>sobald</b> ich zu Hause <span class="rule-hl2">bin</span>.</p>
+<p><b>Sobald</b> die Sonne <span class="rule-hl2">scheint</span>, gehen wir in den Park.</p>
+<p>Wir fangen an, <b>sobald</b> alle da <span class="rule-hl2">sind</span>.</p>`,
+
+satz_sondern: `
+<h2>sondern — а / но (после отрицания)</h2>
+<div class="rule-formula">nicht/kein ..., <span class="rule-hl">sondern</span> ...</div>
+<p><b>sondern</b> используется ТОЛЬКО после отрицания (nicht, kein, nie). Сочинительный союз — порядок слов прямой.</p>
+<table class="rule-table">
+<tr><th>Отрицание</th><th>Союз</th><th>Альтернатива</th></tr>
+<tr><td>Das ist <b>nicht</b> Peter,</td><td><b>sondern</b></td><td>Paul.</td></tr>
+<tr><td>Ich trinke <b>keinen</b> Kaffee,</td><td><b>sondern</b></td><td>Tee.</td></tr>
+</table>
+<p>Er kommt <b>nicht</b> heute, <b>sondern</b> morgen.</p>
+<p>Das Buch ist <b>nicht</b> langweilig, <b>sondern</b> sehr interessant.</p>`,
+
+satz_textbau: `
+<h2>Textaufbau — Построение текста (B2-C2)</h2>
+<p>Хороший текст имеет чёткую структуру: <b>Einleitung → Hauptteil → Schluss</b>.</p>
+<table class="rule-table">
+<tr><th>Часть</th><th>Функция</th><th>Konnektoren</th></tr>
+<tr><td>Einleitung</td><td>Тема, проблема</td><td>zunächst, einerseits, in letzter Zeit</td></tr>
+<tr><td>Hauptteil</td><td>Аргументы, примеры</td><td>außerdem, darüber hinaus, zum Beispiel, dagegen</td></tr>
+<tr><td>Schluss</td><td>Вывод, мнение</td><td>schließlich, zusammenfassend, meiner Meinung nach</td></tr>
+</table>
+<div class="rule-formula">Argument + <span class="rule-hl">Beispiel</span> + <span class="rule-hl2">Folgerung</span></div>
+<p><b>Einerseits</b> bietet das Internet viele Vorteile, <b>andererseits</b> gibt es auch Risiken.</p>
+<p><b>Zum Beispiel</b> kann man schnell Informationen finden. <b>Außerdem</b> kann man mit Freunden in Kontakt bleiben.</p>
+<p><b>Zusammenfassend</b> lässt sich sagen, dass das Internet aus unserem Leben nicht mehr wegzudenken ist.</p>`,
+
+satz_um_zu: `
+<h2>um ... zu + Infinitiv — чтобы (одно подлежащее)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">um</span> ... <span class="rule-hl2">zu + Infinitiv</span></div>
+<p><b>um...zu</b> используется только когда подлежащее в обеих частях ОДНО И ТО ЖЕ. Иначе используем <b>damit</b>.</p>
+<table class="rule-table">
+<tr><th>Главное</th><th>um</th><th>...</th><th>zu + Inf</th></tr>
+<tr><td>Ich lerne Deutsch,</td><td><b>um</b></td><td>in Wien</td><td><b>zu studieren</b>.</td></tr>
+<tr><td>Sie geht ins Café,</td><td><b>um</b></td><td>einen Kaffee</td><td><b>zu trinken</b>.</td></tr>
+</table>
+<p>⚠ Trennbare Verben: <b>um</b> ein<span class="rule-hl">zu</span>kaufen / <b>um</b> auf<span class="rule-hl">zu</span>stehen.</p>
+<p>Er fährt nach Deutschland, <b>um</b> seine Familie <span class="rule-hl2">zu besuchen</span>.</p>`,
+
+satz_waehrend: `
+<h2>während — в то время как / пока</h2>
+<div class="rule-formula">HS, <span class="rule-hl">während</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>während</b> имеет два значения:<br>
+1. <b>Время</b> — одновременность действий<br>
+2. <b>Противопоставление</b> — в то время как (контраст)</p>
+<p>Ich höre Musik, <b>während</b> ich <span class="rule-hl2">koche</span>. <i>(время)</i></p>
+<p><b>Während</b> er gern Sport <span class="rule-hl2">macht</span>, liest sie lieber Bücher. <i>(контраст)</i></p>
+<p><b>Während</b> meine Schwester schläft, <span class="rule-hl2">lerne</span> ich.</p>`
 };

@@ -433,12 +433,13 @@ function ruleBtn(cat){
     if(typeof RULES==='undefined'||!RULES[cat]) return '';
     return `<button class="sub-quiz-btn rule-btn" onclick="showRule('${cat}')">📖 Regel</button>`;
 }
-function showRule(cat){
+function showRule(cat,fromQuiz){
     if(typeof RULES==='undefined'||!RULES[cat]) return;
+    const back=fromQuiz?'renderBuilder()':'showMenu()';
     $('app').innerHTML=`
         <div class="quiz-page">
             <div class="quiz-header">
-                <div class="quiz-header-left"><button class="quiz-back" onclick="showMenu()">&#8592;</button><span>Grammatikregel</span></div>
+                <div class="quiz-header-left"><button class="quiz-back" onclick="${back}">&#8592;</button><span>Grammatikregel</span></div>
             </div>
             <div class="quiz-body rule-page">${RULES[cat]}</div>
         </div>`;
@@ -575,6 +576,16 @@ function showMenu() {
             </div>
         </div>
     `;
+    // Scroll restore: if a category is open, scroll it into view
+    if(APP.openCat){
+        setTimeout(()=>{
+            const el=document.getElementById(APP.openCat);
+            if(el){
+                const card=el.closest('.cat-card');
+                if(card) card.scrollIntoView({block:'start',behavior:'auto'});
+            }
+        },0);
+    }
 }
 
 function doLogout(){if(!confirm(UI.logoutQ))return;localStorage.removeItem(CONFIG.prefix+'cur');APP.user=null;showAuth();}
@@ -1044,6 +1055,12 @@ function renderBuilder(){
         </div>`;
     }
 
+    // Regel button for current sentence rule (per-item or per-mode)
+    const itemCat=item.cat||APP.quiz.mode;
+    const ruleKey='satz_'+itemCat;
+    const hasItemRule=typeof RULES!=='undefined'&&RULES[ruleKey];
+    const ruleBtnH=hasItemRule?`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('${ruleKey}',true)">📖 Regel</button>`:'';
+
     $('app').innerHTML=`
         <div class="quiz-page">
             <div class="quiz-header">
@@ -1053,6 +1070,7 @@ function renderBuilder(){
             <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
             <div class="quiz-body">
                 <div class="quiz-question-label">${item.rule||UI.buildSentence}</div>
+                ${ruleBtnH}
                 <div class="quiz-hint">${tr(item)}</div>
                 ${hintArea}
                 <div class="sentence-area">${builtH||'<span class="sentence-ph">'+UI.tapWords+'</span>'}</div>
@@ -1349,7 +1367,7 @@ function showSubliminal(word){
     setTimeout(()=>frame.classList.remove('visible'),APP.subliminalMs);
 }
 
-function quitQ(){if(confirm(UI.back+'?'))showMenu();}
+function quitQ(){showMenu();}
 
 // ============== RESULTS ==============
 function showRes(){
@@ -1544,6 +1562,12 @@ function showVWUMenu(){
             </div>
             <div class="app-content"><div class="menu-scroll" style="padding:12px 16px">${content}</div></div>
         </div>`;
+    if(APP.openCat&&APP.openCat.indexOf('catVWU_')===0){
+        setTimeout(()=>{
+            const el=document.getElementById(APP.openCat);
+            if(el){const card=el.closest('.cat-card');if(card)card.scrollIntoView({block:'start',behavior:'auto'});}
+        },0);
+    }
 }
 
 // ============== VWU TEST ENGINE ==============
@@ -2075,7 +2099,7 @@ function showVWUResults(){
         </div>`;
 }
 
-function quitVWU(){if(confirm('Test abbrechen?'))showMenu();}
+function quitVWU(){showVWUMenu();}
 
 // ============== START ==============
 window.addEventListener('DOMContentLoaded', initApp);
