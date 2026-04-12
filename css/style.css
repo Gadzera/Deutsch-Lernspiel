@@ -1375,6 +1375,18 @@ body {
     border-color: var(--danger);
 }
 
+/* ============ HINT BOX ============ */
+.hint-box {
+    background: #FFF3E0;
+    border-left: 4px solid #FF9800;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #E65100;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
 /* ============ USER COUNTER ============ */
 .user-counter {
     text-align: center;
