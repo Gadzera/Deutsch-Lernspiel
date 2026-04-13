@@ -245,10 +245,6 @@ const REFLEXIVE = [
    ich:"erkälte mich", du:"erkältest dich", er:"erkältet sich", wir:"erkälten uns", ihr:"erkältet euch", sie:"erkälten sich",
    ru:"простужаться", en:"to catch a cold", tr:"üşütmek"},
 
-  {id:"rf062", verb:"sich verletzen", case:"akk",
-   ich:"verletze mich", du:"verletzt dich", er:"verletzt sich", wir:"verletzen uns", ihr:"verletzt euch", sie:"verletzen sich",
-   ru:"пораниться", en:"to injure oneself", tr:"yaralanmak"},
-
   {id:"rf063", verb:"sich täuschen", case:"akk",
    ich:"täusche mich", du:"täuschst dich", er:"täuscht sich", wir:"täuschen uns", ihr:"täuscht euch", sie:"täuschen sich",
    ru:"обманываться", en:"to be deceived", tr:"aldanmak"},
