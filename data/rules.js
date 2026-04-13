@@ -1,5 +1,6 @@
 const RULES = {
-partizip: `
+partizip: {
+de: `
 <h2>Partizip II — Perfekt</h2>
 <div class="rule-formula">haben/sein + <span class="rule-hl">Partizip II</span></div>
 <table class="rule-table">
@@ -18,8 +19,124 @@ partizip: `
 <p>Er <b>ist</b> nach Berlin <span class="rule-hl">gefahren</span>.</p>
 <p>Sie <b>hat</b> den Film <span class="rule-hl">gesehen</span>.</p>
 <p>Wir <b>sind</b> spät <span class="rule-hl">aufgewacht</span>.</p>`,
+ru: `
+<h2>Partizip II — Перфект</h2>
+<div class="rule-formula">haben/sein + <span class="rule-hl">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>Тип</th><th>Формула</th><th>Пример</th></tr>
+<tr><td>Правильные</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">t</span></td><td>machen → <b>ge</b>mach<b>t</b></td></tr>
+<tr><td>Неправильные</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">en</span></td><td>gehen → <b>ge</b>gang<b>en</b></td></tr>
+<tr><td>Отделяемые</td><td>Приставка-<span class="rule-hl">ge</span>-...-t/en</td><td>aufmachen → <b>aufge</b>mach<b>t</b></td></tr>
+<tr><td>Неотделяемые (be/ver/er/ent/emp/zer)</td><td>БЕЗ ge-</td><td>verstehen → <b>verstanden</b></td></tr>
+<tr><td>-ieren</td><td>БЕЗ ge-, ...-<span class="rule-hl">t</span></td><td>studieren → <b>studiert</b></td></tr>
+</table>
+<h3>haben или sein?</h3>
+<div class="rule-box rule-green"><b>sein</b> — движение (gehen, fahren, fliegen) + изменение состояния (werden, sterben, aufwachen, einschlafen) + sein, bleiben</div>
+<div class="rule-box rule-blue"><b>haben</b> — все остальные глаголы</div>
+<h3>Примеры</h3>
+<p>Ich <b>habe</b> Deutsch <span class="rule-hl">gelernt</span>. — Я учил немецкий.</p>
+<p>Er <b>ist</b> nach Berlin <span class="rule-hl">gefahren</span>. — Он поехал в Берлин.</p>
+<p>Sie <b>hat</b> den Film <span class="rule-hl">gesehen</span>. — Она посмотрела фильм.</p>
+<p>Wir <b>sind</b> spät <span class="rule-hl">aufgewacht</span>. — Мы поздно проснулись.</p>`,
+en: `
+<h2>Partizip II — Perfect Tense</h2>
+<div class="rule-formula">haben/sein + <span class="rule-hl">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>Type</th><th>Pattern</th><th>Example</th></tr>
+<tr><td>Regular</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">t</span></td><td>machen → <b>ge</b>mach<b>t</b></td></tr>
+<tr><td>Irregular</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">en</span></td><td>gehen → <b>ge</b>gang<b>en</b></td></tr>
+<tr><td>Separable</td><td>Prefix-<span class="rule-hl">ge</span>-...-t/en</td><td>aufmachen → <b>aufge</b>mach<b>t</b></td></tr>
+<tr><td>Inseparable (be/ver/er/ent/emp/zer)</td><td>NO ge-</td><td>verstehen → <b>verstanden</b></td></tr>
+<tr><td>-ieren</td><td>NO ge-, ...-<span class="rule-hl">t</span></td><td>studieren → <b>studiert</b></td></tr>
+</table>
+<h3>haben or sein?</h3>
+<div class="rule-box rule-green"><b>sein</b> — movement (gehen, fahren, fliegen) + change of state (werden, sterben, aufwachen, einschlafen) + sein, bleiben</div>
+<div class="rule-box rule-blue"><b>haben</b> — all other verbs</div>
+<h3>Examples</h3>
+<p>Ich <b>habe</b> Deutsch <span class="rule-hl">gelernt</span>. — I learned German.</p>
+<p>Er <b>ist</b> nach Berlin <span class="rule-hl">gefahren</span>. — He went to Berlin.</p>
+<p>Sie <b>hat</b> den Film <span class="rule-hl">gesehen</span>. — She watched the movie.</p>
+<p>Wir <b>sind</b> spät <span class="rule-hl">aufgewacht</span>. — We woke up late.</p>`,
+tr: `
+<h2>Partizip II — Perfekt (Geçmiş Zaman)</h2>
+<div class="rule-formula">haben/sein + <span class="rule-hl">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>Tip</th><th>Formül</th><th>Örnek</th></tr>
+<tr><td>Düzenli</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">t</span></td><td>machen → <b>ge</b>mach<b>t</b></td></tr>
+<tr><td>Düzensiz</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">en</span></td><td>gehen → <b>ge</b>gang<b>en</b></td></tr>
+<tr><td>Ayrılabilir</td><td>Önek-<span class="rule-hl">ge</span>-...-t/en</td><td>aufmachen → <b>aufge</b>mach<b>t</b></td></tr>
+<tr><td>Ayrılmaz (be/ver/er/ent/emp/zer)</td><td>ge- YOK</td><td>verstehen → <b>verstanden</b></td></tr>
+<tr><td>-ieren</td><td>ge- YOK, ...-<span class="rule-hl">t</span></td><td>studieren → <b>studiert</b></td></tr>
+</table>
+<h3>haben mi sein mi?</h3>
+<div class="rule-box rule-green"><b>sein</b> — hareket (gehen, fahren, fliegen) + durum değişikliği (werden, sterben, aufwachen, einschlafen) + sein, bleiben</div>
+<div class="rule-box rule-blue"><b>haben</b> — diğer tüm fiiller</div>
+<h3>Örnekler</h3>
+<p>Ich <b>habe</b> Deutsch <span class="rule-hl">gelernt</span>. — Almanca öğrendim.</p>
+<p>Er <b>ist</b> nach Berlin <span class="rule-hl">gefahren</span>. — Berlin'e gitti.</p>
+<p>Sie <b>hat</b> den Film <span class="rule-hl">gesehen</span>. — Filmi izledi.</p>
+<p>Wir <b>sind</b> spät <span class="rule-hl">aufgewacht</span>. — Geç uyandık.</p>`,
+ar: `
+<h2>Partizip II — زمن الماضي</h2>
+<div class="rule-formula">haben/sein + <span class="rule-hl">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>النوع</th><th>الصيغة</th><th>مثال</th></tr>
+<tr><td>منتظم</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">t</span></td><td>machen → <b>ge</b>mach<b>t</b></td></tr>
+<tr><td>غير منتظم</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">en</span></td><td>gehen → <b>ge</b>gang<b>en</b></td></tr>
+<tr><td>قابل للفصل</td><td>البادئة-<span class="rule-hl">ge</span>-...-t/en</td><td>aufmachen → <b>aufge</b>mach<b>t</b></td></tr>
+<tr><td>غير قابل للفصل (be/ver/er/ent/emp/zer)</td><td>بدون ge-</td><td>verstehen → <b>verstanden</b></td></tr>
+<tr><td>-ieren</td><td>بدون ge-، ...-<span class="rule-hl">t</span></td><td>studieren → <b>studiert</b></td></tr>
+</table>
+<h3>haben أم sein؟</h3>
+<div class="rule-box rule-green"><b>sein</b> — الحركة (gehen, fahren, fliegen) + تغير الحالة (werden, sterben, aufwachen, einschlafen) + sein, bleiben</div>
+<div class="rule-box rule-blue"><b>haben</b> — جميع الأفعال الأخرى</div>
+<h3>أمثلة</h3>
+<p>Ich <b>habe</b> Deutsch <span class="rule-hl">gelernt</span>. — تعلمت الألمانية.</p>
+<p>Er <b>ist</b> nach Berlin <span class="rule-hl">gefahren</span>. — ذهب إلى برلين.</p>
+<p>Sie <b>hat</b> den Film <span class="rule-hl">gesehen</span>. — شاهدت الفيلم.</p>
+<p>Wir <b>sind</b> spät <span class="rule-hl">aufgewacht</span>. — استيقظنا متأخرين.</p>`,
+fa: `
+<h2>Partizip II — گذشته کامل</h2>
+<div class="rule-formula">haben/sein + <span class="rule-hl">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>نوع</th><th>الگو</th><th>مثال</th></tr>
+<tr><td>باقاعده</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">t</span></td><td>machen → <b>ge</b>mach<b>t</b></td></tr>
+<tr><td>بی‌قاعده</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">en</span></td><td>gehen → <b>ge</b>gang<b>en</b></td></tr>
+<tr><td>جداشدنی</td><td>پیشوند-<span class="rule-hl">ge</span>-...-t/en</td><td>aufmachen → <b>aufge</b>mach<b>t</b></td></tr>
+<tr><td>جدانشدنی (be/ver/er/ent/emp/zer)</td><td>بدون ge-</td><td>verstehen → <b>verstanden</b></td></tr>
+<tr><td>-ieren</td><td>بدون ge-، ...-<span class="rule-hl">t</span></td><td>studieren → <b>studiert</b></td></tr>
+</table>
+<h3>haben یا sein؟</h3>
+<div class="rule-box rule-green"><b>sein</b> — حرکت (gehen, fahren, fliegen) + تغییر حالت (werden, sterben, aufwachen, einschlafen) + sein, bleiben</div>
+<div class="rule-box rule-blue"><b>haben</b> — همه فعل‌های دیگر</div>
+<h3>مثال‌ها</h3>
+<p>Ich <b>habe</b> Deutsch <span class="rule-hl">gelernt</span>. — آلمانی یاد گرفتم.</p>
+<p>Er <b>ist</b> nach Berlin <span class="rule-hl">gefahren</span>. — او به برلین رفت.</p>
+<p>Sie <b>hat</b> den Film <span class="rule-hl">gesehen</span>. — او فیلم را دید.</p>
+<p>Wir <b>sind</b> spät <span class="rule-hl">aufgewacht</span>. — ما دیر بیدار شدیم.</p>`,
+vi: `
+<h2>Partizip II — Thì hoàn thành</h2>
+<div class="rule-formula">haben/sein + <span class="rule-hl">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>Loại</th><th>Công thức</th><th>Ví dụ</th></tr>
+<tr><td>Quy tắc</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">t</span></td><td>machen → <b>ge</b>mach<b>t</b></td></tr>
+<tr><td>Bất quy tắc</td><td><span class="rule-hl">ge</span>-...-<span class="rule-hl">en</span></td><td>gehen → <b>ge</b>gang<b>en</b></td></tr>
+<tr><td>Có thể tách</td><td>Tiền tố-<span class="rule-hl">ge</span>-...-t/en</td><td>aufmachen → <b>aufge</b>mach<b>t</b></td></tr>
+<tr><td>Không tách (be/ver/er/ent/emp/zer)</td><td>KHÔNG ge-</td><td>verstehen → <b>verstanden</b></td></tr>
+<tr><td>-ieren</td><td>KHÔNG ge-, ...-<span class="rule-hl">t</span></td><td>studieren → <b>studiert</b></td></tr>
+</table>
+<h3>haben hay sein?</h3>
+<div class="rule-box rule-green"><b>sein</b> — chuyển động (gehen, fahren, fliegen) + thay đổi trạng thái (werden, sterben, aufwachen, einschlafen) + sein, bleiben</div>
+<div class="rule-box rule-blue"><b>haben</b> — tất cả các động từ khác</div>
+<h3>Ví dụ</h3>
+<p>Ich <b>habe</b> Deutsch <span class="rule-hl">gelernt</span>. — Tôi đã học tiếng Đức.</p>
+<p>Er <b>ist</b> nach Berlin <span class="rule-hl">gefahren</span>. — Anh ấy đã đi Berlin.</p>
+<p>Sie <b>hat</b> den Film <span class="rule-hl">gesehen</span>. — Cô ấy đã xem phim.</p>
+<p>Wir <b>sind</b> spät <span class="rule-hl">aufgewacht</span>. — Chúng tôi dậy muộn.</p>`
+},
 
-reflexive: `
+reflexive: {
+de: `
 <h2>Reflexive Verben</h2>
 <div class="rule-formula">Subjekt + Verb + <span class="rule-hl">Reflexivpronomen</span></div>
 <h3>Akkusativ-Reflexivpronomen</h3>
@@ -44,6 +161,157 @@ reflexive: `
 </table>
 <div class="rule-box rule-green"><b>Akkusativ</b> — wenn KEIN anderes Akkusativobjekt im Satz: Ich wasche <b>mich</b></div>
 <div class="rule-box rule-blue"><b>Dativ</b> — wenn ein Akkusativobjekt vorhanden: Ich wasche <b>mir</b> die Hände</div>`,
+ru: `
+<h2>Возвратные глаголы</h2>
+<div class="rule-formula">Подлежащее + Глагол + <span class="rule-hl">Возвратное местоимение</span></div>
+<h3>Возвратное местоимение в Аккузативе</h3>
+<table class="rule-table">
+<tr><th>Лицо</th><th>Местоимение</th><th>Пример</th></tr>
+<tr><td>ich</td><td><span class="rule-hl">mich</span></td><td>Ich wasche <b>mich</b> — Я моюсь</td></tr>
+<tr><td>du</td><td><span class="rule-hl">dich</span></td><td>Du setzt <b>dich</b> — Ты садишься</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl">sich</span></td><td>Er fühlt <b>sich</b> gut</td></tr>
+<tr><td>wir</td><td><span class="rule-hl">uns</span></td><td>Wir freuen <b>uns</b> — Мы радуемся</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl">euch</span></td><td>Ihr beeilt <b>euch</b> — Вы спешите</td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl">sich</span></td><td>Sie erinnern <b>sich</b> — Они вспоминают</td></tr>
+</table>
+<h3>Возвратное местоимение в Дативе</h3>
+<table class="rule-table">
+<tr><th>Лицо</th><th>Местоимение</th><th>Пример</th></tr>
+<tr><td>ich</td><td><span class="rule-hl2">mir</span></td><td>Ich stelle <b>mir</b> das vor — Я это представляю</td></tr>
+<tr><td>du</td><td><span class="rule-hl2">dir</span></td><td>Du merkst <b>dir</b> das — Ты это запоминаешь</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl2">sich</span></td><td>Er wünscht <b>sich</b> ein Auto</td></tr>
+<tr><td>wir</td><td><span class="rule-hl2">uns</span></td><td>Wir kaufen <b>uns</b> ein Eis</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl2">euch</span></td><td>Ihr sucht <b>euch</b> etwas aus</td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl2">sich</span></td><td>Sie nehmen <b>sich</b> Zeit</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Аккузатив</b> — когда в предложении НЕТ другого прямого дополнения: Ich wasche <b>mich</b></div>
+<div class="rule-box rule-blue"><b>Датив</b> — когда есть другое прямое дополнение: Ich wasche <b>mir</b> die Hände (Я мою себе руки)</div>`,
+en: `
+<h2>Reflexive Verbs</h2>
+<div class="rule-formula">Subject + Verb + <span class="rule-hl">Reflexive pronoun</span></div>
+<h3>Accusative reflexive pronouns</h3>
+<table class="rule-table">
+<tr><th>Person</th><th>Pronoun</th><th>Example</th></tr>
+<tr><td>ich</td><td><span class="rule-hl">mich</span></td><td>Ich wasche <b>mich</b> — I wash myself</td></tr>
+<tr><td>du</td><td><span class="rule-hl">dich</span></td><td>Du setzt <b>dich</b> — You sit down</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl">sich</span></td><td>Er fühlt <b>sich</b> gut</td></tr>
+<tr><td>wir</td><td><span class="rule-hl">uns</span></td><td>Wir freuen <b>uns</b> — We are happy</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl">euch</span></td><td>Ihr beeilt <b>euch</b> — You hurry</td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl">sich</span></td><td>Sie erinnern <b>sich</b> — They remember</td></tr>
+</table>
+<h3>Dative reflexive pronouns</h3>
+<table class="rule-table">
+<tr><th>Person</th><th>Pronoun</th><th>Example</th></tr>
+<tr><td>ich</td><td><span class="rule-hl2">mir</span></td><td>Ich stelle <b>mir</b> das vor — I imagine that</td></tr>
+<tr><td>du</td><td><span class="rule-hl2">dir</span></td><td>Du merkst <b>dir</b> das — You memorize that</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl2">sich</span></td><td>Er wünscht <b>sich</b> ein Auto</td></tr>
+<tr><td>wir</td><td><span class="rule-hl2">uns</span></td><td>Wir kaufen <b>uns</b> ein Eis</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl2">euch</span></td><td>Ihr sucht <b>euch</b> etwas aus</td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl2">sich</span></td><td>Sie nehmen <b>sich</b> Zeit</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Accusative</b> — when there is NO other accusative object in the sentence: Ich wasche <b>mich</b></div>
+<div class="rule-box rule-blue"><b>Dative</b> — when an accusative object is present: Ich wasche <b>mir</b> die Hände (I wash my hands)</div>`,
+tr: `
+<h2>Dönüşlü Fiiller</h2>
+<div class="rule-formula">Özne + Fiil + <span class="rule-hl">Dönüşlü zamir</span></div>
+<h3>Akkusativ dönüşlü zamirler</h3>
+<table class="rule-table">
+<tr><th>Kişi</th><th>Zamir</th><th>Örnek</th></tr>
+<tr><td>ich</td><td><span class="rule-hl">mich</span></td><td>Ich wasche <b>mich</b> — Yıkanıyorum</td></tr>
+<tr><td>du</td><td><span class="rule-hl">dich</span></td><td>Du setzt <b>dich</b> — Oturuyorsun</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl">sich</span></td><td>Er fühlt <b>sich</b> gut</td></tr>
+<tr><td>wir</td><td><span class="rule-hl">uns</span></td><td>Wir freuen <b>uns</b> — Seviniyoruz</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl">euch</span></td><td>Ihr beeilt <b>euch</b> — Acele ediyorsunuz</td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl">sich</span></td><td>Sie erinnern <b>sich</b> — Hatırlıyorlar</td></tr>
+</table>
+<h3>Dativ dönüşlü zamirler</h3>
+<table class="rule-table">
+<tr><th>Kişi</th><th>Zamir</th><th>Örnek</th></tr>
+<tr><td>ich</td><td><span class="rule-hl2">mir</span></td><td>Ich stelle <b>mir</b> das vor — Bunu hayal ediyorum</td></tr>
+<tr><td>du</td><td><span class="rule-hl2">dir</span></td><td>Du merkst <b>dir</b> das — Bunu aklında tutuyorsun</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl2">sich</span></td><td>Er wünscht <b>sich</b> ein Auto</td></tr>
+<tr><td>wir</td><td><span class="rule-hl2">uns</span></td><td>Wir kaufen <b>uns</b> ein Eis</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl2">euch</span></td><td>Ihr sucht <b>euch</b> etwas aus</td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl2">sich</span></td><td>Sie nehmen <b>sich</b> Zeit</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Akkusativ</b> — cümlede başka Akkusativ nesnesi YOKSA: Ich wasche <b>mich</b></div>
+<div class="rule-box rule-blue"><b>Dativ</b> — Akkusativ nesnesi varsa: Ich wasche <b>mir</b> die Hände (Ellerimi yıkıyorum)</div>`,
+ar: `
+<h2>الأفعال الانعكاسية</h2>
+<div class="rule-formula">الفاعل + الفعل + <span class="rule-hl">ضمير انعكاسي</span></div>
+<h3>الضمير الانعكاسي في حالة النصب (Akkusativ)</h3>
+<table class="rule-table">
+<tr><th>الضمير</th><th>الصيغة</th><th>مثال</th></tr>
+<tr><td>ich</td><td><span class="rule-hl">mich</span></td><td>Ich wasche <b>mich</b> — أغسل نفسي</td></tr>
+<tr><td>du</td><td><span class="rule-hl">dich</span></td><td>Du setzt <b>dich</b> — أنت تجلس</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl">sich</span></td><td>Er fühlt <b>sich</b> gut</td></tr>
+<tr><td>wir</td><td><span class="rule-hl">uns</span></td><td>Wir freuen <b>uns</b> — نحن نفرح</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl">euch</span></td><td>Ihr beeilt <b>euch</b></td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl">sich</span></td><td>Sie erinnern <b>sich</b></td></tr>
+</table>
+<h3>الضمير الانعكاسي في حالة الجر (Dativ)</h3>
+<table class="rule-table">
+<tr><th>الضمير</th><th>الصيغة</th><th>مثال</th></tr>
+<tr><td>ich</td><td><span class="rule-hl2">mir</span></td><td>Ich stelle <b>mir</b> das vor — أتخيل ذلك</td></tr>
+<tr><td>du</td><td><span class="rule-hl2">dir</span></td><td>Du merkst <b>dir</b> das</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl2">sich</span></td><td>Er wünscht <b>sich</b> ein Auto</td></tr>
+<tr><td>wir</td><td><span class="rule-hl2">uns</span></td><td>Wir kaufen <b>uns</b> ein Eis</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl2">euch</span></td><td>Ihr sucht <b>euch</b> etwas aus</td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl2">sich</span></td><td>Sie nehmen <b>sich</b> Zeit</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Akkusativ</b> — عندما لا يوجد مفعول مباشر آخر في الجملة: Ich wasche <b>mich</b></div>
+<div class="rule-box rule-blue"><b>Dativ</b> — عندما يوجد مفعول مباشر: Ich wasche <b>mir</b> die Hände (أغسل يديّ)</div>`,
+fa: `
+<h2>افعال انعکاسی</h2>
+<div class="rule-formula">فاعل + فعل + <span class="rule-hl">ضمیر انعکاسی</span></div>
+<h3>ضمایر انعکاسی در حالت مفعولی (Akkusativ)</h3>
+<table class="rule-table">
+<tr><th>شخص</th><th>ضمیر</th><th>مثال</th></tr>
+<tr><td>ich</td><td><span class="rule-hl">mich</span></td><td>Ich wasche <b>mich</b> — خودم را می‌شویم</td></tr>
+<tr><td>du</td><td><span class="rule-hl">dich</span></td><td>Du setzt <b>dich</b> — می‌نشینی</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl">sich</span></td><td>Er fühlt <b>sich</b> gut</td></tr>
+<tr><td>wir</td><td><span class="rule-hl">uns</span></td><td>Wir freuen <b>uns</b> — خوشحال می‌شویم</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl">euch</span></td><td>Ihr beeilt <b>euch</b></td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl">sich</span></td><td>Sie erinnern <b>sich</b></td></tr>
+</table>
+<h3>ضمایر انعکاسی در حالت مفعول غیرمستقیم (Dativ)</h3>
+<table class="rule-table">
+<tr><th>شخص</th><th>ضمیر</th><th>مثال</th></tr>
+<tr><td>ich</td><td><span class="rule-hl2">mir</span></td><td>Ich stelle <b>mir</b> das vor — آن را تصور می‌کنم</td></tr>
+<tr><td>du</td><td><span class="rule-hl2">dir</span></td><td>Du merkst <b>dir</b> das</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl2">sich</span></td><td>Er wünscht <b>sich</b> ein Auto</td></tr>
+<tr><td>wir</td><td><span class="rule-hl2">uns</span></td><td>Wir kaufen <b>uns</b> ein Eis</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl2">euch</span></td><td>Ihr sucht <b>euch</b> etwas aus</td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl2">sich</span></td><td>Sie nehmen <b>sich</b> Zeit</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Akkusativ</b> — وقتی مفعول مستقیم دیگری در جمله نباشد: Ich wasche <b>mich</b></div>
+<div class="rule-box rule-blue"><b>Dativ</b> — وقتی مفعول مستقیم وجود دارد: Ich wasche <b>mir</b> die Hände (دست‌هایم را می‌شویم)</div>`,
+vi: `
+<h2>Động từ phản thân</h2>
+<div class="rule-formula">Chủ ngữ + Động từ + <span class="rule-hl">Đại từ phản thân</span></div>
+<h3>Đại từ phản thân Akkusativ</h3>
+<table class="rule-table">
+<tr><th>Ngôi</th><th>Đại từ</th><th>Ví dụ</th></tr>
+<tr><td>ich</td><td><span class="rule-hl">mich</span></td><td>Ich wasche <b>mich</b> — Tôi tự tắm</td></tr>
+<tr><td>du</td><td><span class="rule-hl">dich</span></td><td>Du setzt <b>dich</b> — Bạn ngồi xuống</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl">sich</span></td><td>Er fühlt <b>sich</b> gut</td></tr>
+<tr><td>wir</td><td><span class="rule-hl">uns</span></td><td>Wir freuen <b>uns</b> — Chúng tôi vui mừng</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl">euch</span></td><td>Ihr beeilt <b>euch</b> — Các bạn vội vàng</td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl">sich</span></td><td>Sie erinnern <b>sich</b> — Họ nhớ lại</td></tr>
+</table>
+<h3>Đại từ phản thân Dativ</h3>
+<table class="rule-table">
+<tr><th>Ngôi</th><th>Đại từ</th><th>Ví dụ</th></tr>
+<tr><td>ich</td><td><span class="rule-hl2">mir</span></td><td>Ich stelle <b>mir</b> das vor — Tôi hình dung điều đó</td></tr>
+<tr><td>du</td><td><span class="rule-hl2">dir</span></td><td>Du merkst <b>dir</b> das</td></tr>
+<tr><td>er/sie/es</td><td><span class="rule-hl2">sich</span></td><td>Er wünscht <b>sich</b> ein Auto</td></tr>
+<tr><td>wir</td><td><span class="rule-hl2">uns</span></td><td>Wir kaufen <b>uns</b> ein Eis</td></tr>
+<tr><td>ihr</td><td><span class="rule-hl2">euch</span></td><td>Ihr sucht <b>euch</b> etwas aus</td></tr>
+<tr><td>sie/Sie</td><td><span class="rule-hl2">sich</span></td><td>Sie nehmen <b>sich</b> Zeit</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Akkusativ</b> — khi KHÔNG có tân ngữ trực tiếp khác trong câu: Ich wasche <b>mich</b></div>
+<div class="rule-box rule-blue"><b>Dativ</b> — khi có tân ngữ trực tiếp: Ich wasche <b>mir</b> die Hände (Tôi rửa tay)</div>`
+},
 
 sentences: `
 <h2>Satzbau — Wortstellung</h2>
