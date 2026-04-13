@@ -769,6 +769,40 @@ body {
     flex-direction: row;
 }
 
+.quiz-answers.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.quiz-answers.two-col .answer-btn {
+    padding: 14px 12px;
+    font-size: 1rem;
+    min-height: 56px;
+}
+
+/* MCQ explanation animation */
+.mcq-explain {
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: var(--card-bg, #fff);
+    border: 2px solid var(--border, #e0e0e0);
+    border-radius: 14px;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: mcqExplainIn 0.35s ease forwards;
+}
+@keyframes mcqExplainIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+.mcq-ex-head { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+.mcq-ex-head.ok { color: #2e7d32; }
+.mcq-ex-head.err { color: #c62828; }
+.mcq-ex-why { font-size: 0.95rem; color: var(--text, #222); margin-bottom: 4px; line-height: 1.45; }
+.mcq-ex-tr { font-size: 0.85rem; color: var(--text-sub, #666); font-style: italic; }
+[data-theme="dark"] .mcq-explain { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); }
+[data-theme="dark"] .mcq-ex-head.ok { color: #66bb6a; }
+[data-theme="dark"] .mcq-ex-head.err { color: #ef5350; }
+
 .answer-btn {
     padding: 16px 20px;
     border: 2px solid var(--border);
