@@ -489,7 +489,7 @@ function showMenu() {
         snCats.forEach(c=>{
             const ruleKey='satz_'+c;
             const hasRule=typeof RULES!=='undefined'&&RULES[ruleKey];
-            snBtns+=(hasRule?`<button class="sub-quiz-btn rule-btn" onclick="showRule('${ruleKey}')" style="font-size:0.75rem;opacity:0.7;padding:6px 10px">📖 Regel: ${snLabels[c]||c}</button>`:'')+sqBtn('📎',snLabels[c]||c,'sentences',c);
+            snBtns+=sqBtn('📎',snLabels[c]||c,'sentences',c);
         });
         cats+=catHTML('📐','Satzbau',SENTENCES.length+' Übungen','sentences_all',SENTENCES.length,'catSatz',ruleBtn('sentences')+snBtns);
     }
