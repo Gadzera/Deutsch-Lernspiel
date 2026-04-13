@@ -1142,7 +1142,20 @@ vi: `
 },
 
 // ===== Satzbau — отдельные правила для каждой подкатегории =====
-satz_hauptsatz: `
+satz_hauptsatz: {
+de: `
+<h2>Hauptsatz</h2>
+<div class="rule-formula">Subjekt + <span class="rule-hl">Verb (Pos. 2)</span> + Objekt/Adverb</div>
+<p><b>Regel:</b> Das Verb steht IMMER auf Position 2!</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Verb!)</th><th>Rest</th></tr>
+<tr><td>Ich</td><td><span class="rule-hl">trinke</span></td><td>Kaffee.</td></tr>
+<tr><td>Morgen</td><td><span class="rule-hl">gehe</span></td><td>ich ins Kino.</td></tr>
+<tr><td>Den Film</td><td><span class="rule-hl">habe</span></td><td>ich gesehen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Perfekt:</b> haben/sein auf Pos. 2, Partizip II ans Ende!<br>Ich <b>habe</b> gestern einen Film <span class="rule-hl">gesehen</span>.</div>
+<div class="rule-box rule-blue"><b>Negation:</b><br>nicht — vor Adjektiv/Verb: Ich verstehe das <b>nicht</b>.<br>kein — statt ein: Ich habe <b>keine</b> Zeit.</div>`,
+ru: `
 <h2>Hauptsatz — Главное предложение</h2>
 <div class="rule-formula">Subjekt + <span class="rule-hl">Verb (Pos. 2)</span> + Objekt/Adverb</div>
 <p><b>Правило:</b> Глагол ВСЕГДА на 2-й позиции!</p>
@@ -1154,8 +1167,83 @@ satz_hauptsatz: `
 </table>
 <div class="rule-box rule-green"><b>Perfekt:</b> haben/sein на Pos. 2, Partizip II — в конце!<br>Ich <b>habe</b> gestern einen Film <span class="rule-hl">gesehen</span>.</div>
 <div class="rule-box rule-blue"><b>Negation:</b><br>nicht — перед прилагательным/глаголом: Ich verstehe das <b>nicht</b>.<br>kein — вместо ein: Ich habe <b>keine</b> Zeit.</div>`,
+en: `
+<h2>Hauptsatz — Main clause</h2>
+<div class="rule-formula">Subject + <span class="rule-hl">Verb (Pos. 2)</span> + Object/Adverb</div>
+<p><b>Rule:</b> The verb ALWAYS sits in position 2!</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Verb!)</th><th>Rest</th></tr>
+<tr><td>Ich</td><td><span class="rule-hl">trinke</span></td><td>Kaffee.</td></tr>
+<tr><td>Morgen</td><td><span class="rule-hl">gehe</span></td><td>ich ins Kino.</td></tr>
+<tr><td>Den Film</td><td><span class="rule-hl">habe</span></td><td>ich gesehen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Perfekt:</b> haben/sein in pos. 2, Partizip II at the end!<br>Ich <b>habe</b> gestern einen Film <span class="rule-hl">gesehen</span>.</div>
+<div class="rule-box rule-blue"><b>Negation:</b><br>nicht — before adjective/verb: Ich verstehe das <b>nicht</b>.<br>kein — instead of ein: Ich habe <b>keine</b> Zeit.</div>`,
+tr: `
+<h2>Hauptsatz — Ana cümle</h2>
+<div class="rule-formula">Özne + <span class="rule-hl">Fiil (Poz. 2)</span> + Nesne/Zarf</div>
+<p><b>Kural:</b> Fiil DAİMA 2. pozisyondadır!</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Fiil!)</th><th>Kalan</th></tr>
+<tr><td>Ich</td><td><span class="rule-hl">trinke</span></td><td>Kaffee.</td></tr>
+<tr><td>Morgen</td><td><span class="rule-hl">gehe</span></td><td>ich ins Kino.</td></tr>
+<tr><td>Den Film</td><td><span class="rule-hl">habe</span></td><td>ich gesehen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Perfekt:</b> haben/sein 2. pozisyonda, Partizip II sonda!<br>Ich <b>habe</b> gestern einen Film <span class="rule-hl">gesehen</span>.</div>
+<div class="rule-box rule-blue"><b>Olumsuzluk:</b><br>nicht — sıfat/fiilden önce: Ich verstehe das <b>nicht</b>.<br>kein — ein yerine: Ich habe <b>keine</b> Zeit.</div>`,
+ar: `
+<h2>Hauptsatz — الجملة الرئيسية</h2>
+<div class="rule-formula">الفاعل + <span class="rule-hl">الفعل (الموضع 2)</span> + مفعول/ظرف</div>
+<p><b>القاعدة:</b> الفعل دائماً في الموضع الثاني!</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (الفعل!)</th><th>الباقي</th></tr>
+<tr><td>Ich</td><td><span class="rule-hl">trinke</span></td><td>Kaffee.</td></tr>
+<tr><td>Morgen</td><td><span class="rule-hl">gehe</span></td><td>ich ins Kino.</td></tr>
+<tr><td>Den Film</td><td><span class="rule-hl">habe</span></td><td>ich gesehen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Perfekt:</b> haben/sein في الموضع 2، Partizip II في النهاية!<br>Ich <b>habe</b> gestern einen Film <span class="rule-hl">gesehen</span>.</div>
+<div class="rule-box rule-blue"><b>النفي:</b><br>nicht — قبل الصفة/الفعل: Ich verstehe das <b>nicht</b>.<br>kein — بدلاً من ein: Ich habe <b>keine</b> Zeit.</div>`,
+fa: `
+<h2>Hauptsatz — جمله اصلی</h2>
+<div class="rule-formula">فاعل + <span class="rule-hl">فعل (موقعیت ۲)</span> + مفعول/قید</div>
+<p><b>قاعده:</b> فعل همیشه در موقعیت دوم قرار می‌گیرد!</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (فعل!)</th><th>بقیه</th></tr>
+<tr><td>Ich</td><td><span class="rule-hl">trinke</span></td><td>Kaffee.</td></tr>
+<tr><td>Morgen</td><td><span class="rule-hl">gehe</span></td><td>ich ins Kino.</td></tr>
+<tr><td>Den Film</td><td><span class="rule-hl">habe</span></td><td>ich gesehen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Perfekt:</b> haben/sein در موقعیت ۲، Partizip II در پایان!<br>Ich <b>habe</b> gestern einen Film <span class="rule-hl">gesehen</span>.</div>
+<div class="rule-box rule-blue"><b>منفی:</b><br>nicht — قبل از صفت/فعل: Ich verstehe das <b>nicht</b>.<br>kein — به جای ein: Ich habe <b>keine</b> Zeit.</div>`,
+vi: `
+<h2>Hauptsatz — Câu chính</h2>
+<div class="rule-formula">Chủ ngữ + <span class="rule-hl">Động từ (Pos. 2)</span> + Tân ngữ/Trạng từ</div>
+<p><b>Quy tắc:</b> Động từ LUÔN ở vị trí 2!</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Động từ!)</th><th>Phần còn lại</th></tr>
+<tr><td>Ich</td><td><span class="rule-hl">trinke</span></td><td>Kaffee.</td></tr>
+<tr><td>Morgen</td><td><span class="rule-hl">gehe</span></td><td>ich ins Kino.</td></tr>
+<tr><td>Den Film</td><td><span class="rule-hl">habe</span></td><td>ich gesehen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Perfekt:</b> haben/sein ở vị trí 2, Partizip II ở cuối!<br>Ich <b>habe</b> gestern einen Film <span class="rule-hl">gesehen</span>.</div>
+<div class="rule-box rule-blue"><b>Phủ định:</b><br>nicht — trước tính từ/động từ: Ich verstehe das <b>nicht</b>.<br>kein — thay cho ein: Ich habe <b>keine</b> Zeit.</div>`
+},
 
-satz_modal: `
+satz_modal: {
+de: `
+<h2>Modalverben</h2>
+<div class="rule-formula">Subjekt + <span class="rule-hl">Modalverb (Pos. 2)</span> + ... + <span class="rule-hl2">Infinitiv (Ende)</span></div>
+<table class="rule-table">
+<tr><th>Modalverb</th><th>Bedeutung</th><th>Beispiel</th></tr>
+<tr><td><b>können</b></td><td>können</td><td>Ich <b>kann</b> schwimmen.</td></tr>
+<tr><td><b>müssen</b></td><td>müssen</td><td>Du <b>musst</b> lernen.</td></tr>
+<tr><td><b>wollen</b></td><td>wollen</td><td>Er <b>will</b> spielen.</td></tr>
+<tr><td><b>möchte</b></td><td>wünschen (höflich)</td><td>Ich <b>möchte</b> bestellen.</td></tr>
+<tr><td><b>sollen</b></td><td>sollen (Pflicht)</td><td>Du <b>sollst</b> aufräumen.</td></tr>
+<tr><td><b>dürfen</b></td><td>dürfen (Erlaubnis)</td><td>Man <b>darf</b> hier nicht rauchen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Der Infinitiv steht immer am Ende!</b><br>Ich <b>möchte</b> eine Pizza <span class="rule-hl">bestellen</span>.</div>`,
+ru: `
 <h2>Modalverben — Модальные глаголы</h2>
 <div class="rule-formula">Subjekt + <span class="rule-hl">Modalverb (Pos. 2)</span> + ... + <span class="rule-hl2">Infinitiv (Ende)</span></div>
 <table class="rule-table">
@@ -1168,8 +1256,89 @@ satz_modal: `
 <tr><td><b>dürfen</b></td><td>разрешено</td><td>Man <b>darf</b> hier nicht rauchen.</td></tr>
 </table>
 <div class="rule-box rule-green"><b>Инфинитив всегда в конце!</b><br>Ich <b>möchte</b> eine Pizza <span class="rule-hl">bestellen</span>.</div>`,
+en: `
+<h2>Modalverben — Modal verbs</h2>
+<div class="rule-formula">Subject + <span class="rule-hl">Modal (Pos. 2)</span> + ... + <span class="rule-hl2">Infinitive (end)</span></div>
+<table class="rule-table">
+<tr><th>Modalverb</th><th>Meaning</th><th>Beispiel</th></tr>
+<tr><td><b>können</b></td><td>can, be able</td><td>Ich <b>kann</b> schwimmen.</td></tr>
+<tr><td><b>müssen</b></td><td>must</td><td>Du <b>musst</b> lernen.</td></tr>
+<tr><td><b>wollen</b></td><td>want</td><td>Er <b>will</b> spielen.</td></tr>
+<tr><td><b>möchte</b></td><td>would like</td><td>Ich <b>möchte</b> bestellen.</td></tr>
+<tr><td><b>sollen</b></td><td>should</td><td>Du <b>sollst</b> aufräumen.</td></tr>
+<tr><td><b>dürfen</b></td><td>be allowed</td><td>Man <b>darf</b> hier nicht rauchen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>The infinitive always goes at the end!</b><br>Ich <b>möchte</b> eine Pizza <span class="rule-hl">bestellen</span>.</div>`,
+tr: `
+<h2>Modal fiiller</h2>
+<div class="rule-formula">Özne + <span class="rule-hl">Modal fiil (Poz. 2)</span> + ... + <span class="rule-hl2">Mastar (sonda)</span></div>
+<table class="rule-table">
+<tr><th>Modalverb</th><th>Anlam</th><th>Beispiel</th></tr>
+<tr><td><b>können</b></td><td>yapabilmek</td><td>Ich <b>kann</b> schwimmen.</td></tr>
+<tr><td><b>müssen</b></td><td>zorunda olmak</td><td>Du <b>musst</b> lernen.</td></tr>
+<tr><td><b>wollen</b></td><td>istemek</td><td>Er <b>will</b> spielen.</td></tr>
+<tr><td><b>möchte</b></td><td>istemek (kibar)</td><td>Ich <b>möchte</b> bestellen.</td></tr>
+<tr><td><b>sollen</b></td><td>gerekmek</td><td>Du <b>sollst</b> aufräumen.</td></tr>
+<tr><td><b>dürfen</b></td><td>izin verilmek</td><td>Man <b>darf</b> hier nicht rauchen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Mastar her zaman sondadır!</b><br>Ich <b>möchte</b> eine Pizza <span class="rule-hl">bestellen</span>.</div>`,
+ar: `
+<h2>الأفعال المساعدة (Modalverben)</h2>
+<div class="rule-formula">الفاعل + <span class="rule-hl">الفعل المساعد (الموضع 2)</span> + ... + <span class="rule-hl2">المصدر (النهاية)</span></div>
+<table class="rule-table">
+<tr><th>Modalverb</th><th>المعنى</th><th>Beispiel</th></tr>
+<tr><td><b>können</b></td><td>يستطيع</td><td>Ich <b>kann</b> schwimmen.</td></tr>
+<tr><td><b>müssen</b></td><td>يجب</td><td>Du <b>musst</b> lernen.</td></tr>
+<tr><td><b>wollen</b></td><td>يريد</td><td>Er <b>will</b> spielen.</td></tr>
+<tr><td><b>möchte</b></td><td>أود</td><td>Ich <b>möchte</b> bestellen.</td></tr>
+<tr><td><b>sollen</b></td><td>ينبغي</td><td>Du <b>sollst</b> aufräumen.</td></tr>
+<tr><td><b>dürfen</b></td><td>يُسمح</td><td>Man <b>darf</b> hier nicht rauchen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>المصدر دائماً في النهاية!</b><br>Ich <b>möchte</b> eine Pizza <span class="rule-hl">bestellen</span>.</div>`,
+fa: `
+<h2>افعال کمکی وجهی</h2>
+<div class="rule-formula">فاعل + <span class="rule-hl">فعل کمکی (موقعیت ۲)</span> + ... + <span class="rule-hl2">مصدر (پایان)</span></div>
+<table class="rule-table">
+<tr><th>Modalverb</th><th>معنی</th><th>Beispiel</th></tr>
+<tr><td><b>können</b></td><td>توانستن</td><td>Ich <b>kann</b> schwimmen.</td></tr>
+<tr><td><b>müssen</b></td><td>باید</td><td>Du <b>musst</b> lernen.</td></tr>
+<tr><td><b>wollen</b></td><td>خواستن</td><td>Er <b>will</b> spielen.</td></tr>
+<tr><td><b>möchte</b></td><td>مایل بودن</td><td>Ich <b>möchte</b> bestellen.</td></tr>
+<tr><td><b>sollen</b></td><td>بایستی</td><td>Du <b>sollst</b> aufräumen.</td></tr>
+<tr><td><b>dürfen</b></td><td>اجازه داشتن</td><td>Man <b>darf</b> hier nicht rauchen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>مصدر همیشه در پایان است!</b><br>Ich <b>möchte</b> eine Pizza <span class="rule-hl">bestellen</span>.</div>`,
+vi: `
+<h2>Modalverben — Động từ khuyết thiếu</h2>
+<div class="rule-formula">Chủ ngữ + <span class="rule-hl">Động từ khuyết thiếu (Pos. 2)</span> + ... + <span class="rule-hl2">Nguyên thể (cuối)</span></div>
+<table class="rule-table">
+<tr><th>Modalverb</th><th>Nghĩa</th><th>Beispiel</th></tr>
+<tr><td><b>können</b></td><td>có thể</td><td>Ich <b>kann</b> schwimmen.</td></tr>
+<tr><td><b>müssen</b></td><td>phải</td><td>Du <b>musst</b> lernen.</td></tr>
+<tr><td><b>wollen</b></td><td>muốn</td><td>Er <b>will</b> spielen.</td></tr>
+<tr><td><b>möchte</b></td><td>muốn (lịch sự)</td><td>Ich <b>möchte</b> bestellen.</td></tr>
+<tr><td><b>sollen</b></td><td>nên</td><td>Du <b>sollst</b> aufräumen.</td></tr>
+<tr><td><b>dürfen</b></td><td>được phép</td><td>Man <b>darf</b> hier nicht rauchen.</td></tr>
+</table>
+<div class="rule-box rule-green"><b>Động từ nguyên thể luôn ở cuối câu!</b><br>Ich <b>möchte</b> eine Pizza <span class="rule-hl">bestellen</span>.</div>`
+},
 
-satz_tekamolo: `
+satz_tekamolo: {
+de: `
+<h2>TEKAMOLO — Reihenfolge der Ergänzungen</h2>
+<div class="rule-formula"><span class="rule-hl">Te</span>mporal → <span class="rule-hl2">Ka</span>usal → <span class="rule-hl3">Mo</span>dal → <span class="rule-hl4">Lo</span>kal</div>
+<p><b>WANN → WARUM → WIE → WO/WOHIN</b></p>
+<table class="rule-table">
+<tr><th>Typ</th><th>Frage</th><th>Beispiel</th></tr>
+<tr><td><span class="rule-hl">Temporal</span></td><td>Wann?</td><td>morgen, gestern, jeden Tag</td></tr>
+<tr><td><span class="rule-hl2">Kausal</span></td><td>Warum?</td><td>wegen der Arbeit, aus Liebe</td></tr>
+<tr><td><span class="rule-hl3">Modal</span></td><td>Wie?</td><td>schnell, gern, mit dem Bus</td></tr>
+<tr><td><span class="rule-hl4">Lokal</span></td><td>Wo? Wohin?</td><td>nach Berlin, im Park</td></tr>
+</table>
+<div class="rule-box rule-green">
+Ich fahre <span class="rule-hl">morgen</span> <span class="rule-hl2">wegen der Arbeit</span> <span class="rule-hl3">schnell</span> <span class="rule-hl4">nach Berlin</span>.
+</div>`,
+ru: `
 <h2>TEKAMOLO — Порядок дополнений</h2>
 <div class="rule-formula"><span class="rule-hl">Te</span>mporal → <span class="rule-hl2">Ka</span>usal → <span class="rule-hl3">Mo</span>dal → <span class="rule-hl4">Lo</span>kal</div>
 <p><b>КОГДА → ПОЧЕМУ → КАК → ГДЕ/КУДА</b></p>
@@ -1183,6 +1352,77 @@ satz_tekamolo: `
 <div class="rule-box rule-green">
 Ich fahre <span class="rule-hl">morgen</span> <span class="rule-hl2">wegen der Arbeit</span> <span class="rule-hl3">schnell</span> <span class="rule-hl4">nach Berlin</span>.
 </div>`,
+en: `
+<h2>TEKAMOLO — Order of complements</h2>
+<div class="rule-formula"><span class="rule-hl">Te</span>mporal → <span class="rule-hl2">Ka</span>usal → <span class="rule-hl3">Mo</span>dal → <span class="rule-hl4">Lo</span>kal</div>
+<p><b>WHEN → WHY → HOW → WHERE</b></p>
+<table class="rule-table">
+<tr><th>Type</th><th>Question</th><th>Beispiel</th></tr>
+<tr><td><span class="rule-hl">Temporal</span></td><td>When?</td><td>morgen, gestern, jeden Tag</td></tr>
+<tr><td><span class="rule-hl2">Kausal</span></td><td>Why?</td><td>wegen der Arbeit, aus Liebe</td></tr>
+<tr><td><span class="rule-hl3">Modal</span></td><td>How?</td><td>schnell, gern, mit dem Bus</td></tr>
+<tr><td><span class="rule-hl4">Lokal</span></td><td>Where? Where to?</td><td>nach Berlin, im Park</td></tr>
+</table>
+<div class="rule-box rule-green">
+Ich fahre <span class="rule-hl">morgen</span> <span class="rule-hl2">wegen der Arbeit</span> <span class="rule-hl3">schnell</span> <span class="rule-hl4">nach Berlin</span>.
+</div>`,
+tr: `
+<h2>TEKAMOLO — Tümleç sıralaması</h2>
+<div class="rule-formula"><span class="rule-hl">Te</span>mporal → <span class="rule-hl2">Ka</span>usal → <span class="rule-hl3">Mo</span>dal → <span class="rule-hl4">Lo</span>kal</div>
+<p><b>NE ZAMAN → NEDEN → NASIL → NEREDE/NEREYE</b></p>
+<table class="rule-table">
+<tr><th>Tür</th><th>Soru</th><th>Beispiel</th></tr>
+<tr><td><span class="rule-hl">Temporal</span></td><td>Wann?</td><td>morgen, gestern, jeden Tag</td></tr>
+<tr><td><span class="rule-hl2">Kausal</span></td><td>Warum?</td><td>wegen der Arbeit, aus Liebe</td></tr>
+<tr><td><span class="rule-hl3">Modal</span></td><td>Wie?</td><td>schnell, gern, mit dem Bus</td></tr>
+<tr><td><span class="rule-hl4">Lokal</span></td><td>Wo? Wohin?</td><td>nach Berlin, im Park</td></tr>
+</table>
+<div class="rule-box rule-green">
+Ich fahre <span class="rule-hl">morgen</span> <span class="rule-hl2">wegen der Arbeit</span> <span class="rule-hl3">schnell</span> <span class="rule-hl4">nach Berlin</span>.
+</div>`,
+ar: `
+<h2>TEKAMOLO — ترتيب المتممات</h2>
+<div class="rule-formula"><span class="rule-hl">Te</span>mporal → <span class="rule-hl2">Ka</span>usal → <span class="rule-hl3">Mo</span>dal → <span class="rule-hl4">Lo</span>kal</div>
+<p><b>متى → لماذا → كيف → أين/إلى أين</b></p>
+<table class="rule-table">
+<tr><th>النوع</th><th>السؤال</th><th>Beispiel</th></tr>
+<tr><td><span class="rule-hl">Temporal</span></td><td>متى؟</td><td>morgen, gestern, jeden Tag</td></tr>
+<tr><td><span class="rule-hl2">Kausal</span></td><td>لماذا؟</td><td>wegen der Arbeit, aus Liebe</td></tr>
+<tr><td><span class="rule-hl3">Modal</span></td><td>كيف؟</td><td>schnell, gern, mit dem Bus</td></tr>
+<tr><td><span class="rule-hl4">Lokal</span></td><td>أين؟ إلى أين؟</td><td>nach Berlin, im Park</td></tr>
+</table>
+<div class="rule-box rule-green">
+Ich fahre <span class="rule-hl">morgen</span> <span class="rule-hl2">wegen der Arbeit</span> <span class="rule-hl3">schnell</span> <span class="rule-hl4">nach Berlin</span>.
+</div>`,
+fa: `
+<h2>TEKAMOLO — ترتیب متمم‌ها</h2>
+<div class="rule-formula"><span class="rule-hl">Te</span>mporal → <span class="rule-hl2">Ka</span>usal → <span class="rule-hl3">Mo</span>dal → <span class="rule-hl4">Lo</span>kal</div>
+<p><b>چه وقت → چرا → چگونه → کجا</b></p>
+<table class="rule-table">
+<tr><th>نوع</th><th>سؤال</th><th>Beispiel</th></tr>
+<tr><td><span class="rule-hl">Temporal</span></td><td>کی؟</td><td>morgen, gestern, jeden Tag</td></tr>
+<tr><td><span class="rule-hl2">Kausal</span></td><td>چرا؟</td><td>wegen der Arbeit, aus Liebe</td></tr>
+<tr><td><span class="rule-hl3">Modal</span></td><td>چگونه؟</td><td>schnell, gern, mit dem Bus</td></tr>
+<tr><td><span class="rule-hl4">Lokal</span></td><td>کجا؟</td><td>nach Berlin, im Park</td></tr>
+</table>
+<div class="rule-box rule-green">
+Ich fahre <span class="rule-hl">morgen</span> <span class="rule-hl2">wegen der Arbeit</span> <span class="rule-hl3">schnell</span> <span class="rule-hl4">nach Berlin</span>.
+</div>`,
+vi: `
+<h2>TEKAMOLO — Thứ tự bổ ngữ</h2>
+<div class="rule-formula"><span class="rule-hl">Te</span>mporal → <span class="rule-hl2">Ka</span>usal → <span class="rule-hl3">Mo</span>dal → <span class="rule-hl4">Lo</span>kal</div>
+<p><b>KHI NÀO → TẠI SAO → NHƯ THẾ NÀO → Ở ĐÂU</b></p>
+<table class="rule-table">
+<tr><th>Loại</th><th>Câu hỏi</th><th>Beispiel</th></tr>
+<tr><td><span class="rule-hl">Temporal</span></td><td>Khi nào?</td><td>morgen, gestern, jeden Tag</td></tr>
+<tr><td><span class="rule-hl2">Kausal</span></td><td>Tại sao?</td><td>wegen der Arbeit, aus Liebe</td></tr>
+<tr><td><span class="rule-hl3">Modal</span></td><td>Như thế nào?</td><td>schnell, gern, mit dem Bus</td></tr>
+<tr><td><span class="rule-hl4">Lokal</span></td><td>Ở đâu? Đến đâu?</td><td>nach Berlin, im Park</td></tr>
+</table>
+<div class="rule-box rule-green">
+Ich fahre <span class="rule-hl">morgen</span> <span class="rule-hl2">wegen der Arbeit</span> <span class="rule-hl3">schnell</span> <span class="rule-hl4">nach Berlin</span>.
+</div>`
+},
 
 satz_weil: `
 <h2>weil — потому что</h2>
@@ -1277,8 +1517,9 @@ satz_nachdem: `
 <p><b>bevor</b> = прежде чем:</p>
 <p><b>Bevor</b> du <span class="rule-hl2">gehst</span>, ruf mich an!</p>`,
 
-satz_passiv: `
-<h2>Passiv — Пассивный залог</h2>
+satz_passiv: {
+de: `
+<h2>Passiv</h2>
 <div class="rule-formula">Subjekt + <span class="rule-hl">werden</span> + ... + <span class="rule-hl2">Partizip II</span></div>
 <table class="rule-table">
 <tr><th>Tempus</th><th>Formel</th><th>Beispiel</th></tr>
@@ -1287,20 +1528,161 @@ satz_passiv: `
 <tr><td>Perfekt</td><td>ist + P.II + worden</td><td>Das Haus <b>ist</b> <span class="rule-hl2">gebaut</span> <b>worden</b>.</td></tr>
 <tr><td>mit Modal</td><td>Modal + P.II + werden</td><td>Das Haus <b>muss</b> <span class="rule-hl2">gebaut</span> <b>werden</b>.</td></tr>
 </table>`,
+ru: `
+<h2>Passiv — Пассивный залог</h2>
+<div class="rule-formula">Subjekt + <span class="rule-hl">werden</span> + ... + <span class="rule-hl2">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>Время</th><th>Формула</th><th>Beispiel</th></tr>
+<tr><td>Präsens</td><td>wird + P.II</td><td>Das Haus <b>wird</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Präteritum</td><td>wurde + P.II</td><td>Das Haus <b>wurde</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Perfekt</td><td>ist + P.II + worden</td><td>Das Haus <b>ist</b> <span class="rule-hl2">gebaut</span> <b>worden</b>.</td></tr>
+<tr><td>mit Modal</td><td>Modal + P.II + werden</td><td>Das Haus <b>muss</b> <span class="rule-hl2">gebaut</span> <b>werden</b>.</td></tr>
+</table>`,
+en: `
+<h2>Passiv — Passive voice</h2>
+<div class="rule-formula">Subjekt + <span class="rule-hl">werden</span> + ... + <span class="rule-hl2">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>Tense</th><th>Formula</th><th>Example</th></tr>
+<tr><td>Präsens</td><td>wird + P.II</td><td>Das Haus <b>wird</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Präteritum</td><td>wurde + P.II</td><td>Das Haus <b>wurde</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Perfekt</td><td>ist + P.II + worden</td><td>Das Haus <b>ist</b> <span class="rule-hl2">gebaut</span> <b>worden</b>.</td></tr>
+<tr><td>mit Modal</td><td>Modal + P.II + werden</td><td>Das Haus <b>muss</b> <span class="rule-hl2">gebaut</span> <b>werden</b>.</td></tr>
+</table>`,
+tr: `
+<h2>Passiv — Edilgen çatı</h2>
+<div class="rule-formula">Subjekt + <span class="rule-hl">werden</span> + ... + <span class="rule-hl2">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>Zaman</th><th>Formül</th><th>Örnek</th></tr>
+<tr><td>Präsens</td><td>wird + P.II</td><td>Das Haus <b>wird</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Präteritum</td><td>wurde + P.II</td><td>Das Haus <b>wurde</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Perfekt</td><td>ist + P.II + worden</td><td>Das Haus <b>ist</b> <span class="rule-hl2">gebaut</span> <b>worden</b>.</td></tr>
+<tr><td>mit Modal</td><td>Modal + P.II + werden</td><td>Das Haus <b>muss</b> <span class="rule-hl2">gebaut</span> <b>werden</b>.</td></tr>
+</table>`,
+ar: `
+<h2>Passiv — المبني للمجهول</h2>
+<div class="rule-formula">Subjekt + <span class="rule-hl">werden</span> + ... + <span class="rule-hl2">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>الزمن</th><th>الصيغة</th><th>مثال</th></tr>
+<tr><td>Präsens</td><td>wird + P.II</td><td>Das Haus <b>wird</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Präteritum</td><td>wurde + P.II</td><td>Das Haus <b>wurde</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Perfekt</td><td>ist + P.II + worden</td><td>Das Haus <b>ist</b> <span class="rule-hl2">gebaut</span> <b>worden</b>.</td></tr>
+<tr><td>mit Modal</td><td>Modal + P.II + werden</td><td>Das Haus <b>muss</b> <span class="rule-hl2">gebaut</span> <b>werden</b>.</td></tr>
+</table>`,
+fa: `
+<h2>Passiv — ساختار مجهول</h2>
+<div class="rule-formula">Subjekt + <span class="rule-hl">werden</span> + ... + <span class="rule-hl2">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>زمان</th><th>فرمول</th><th>مثال</th></tr>
+<tr><td>Präsens</td><td>wird + P.II</td><td>Das Haus <b>wird</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Präteritum</td><td>wurde + P.II</td><td>Das Haus <b>wurde</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Perfekt</td><td>ist + P.II + worden</td><td>Das Haus <b>ist</b> <span class="rule-hl2">gebaut</span> <b>worden</b>.</td></tr>
+<tr><td>mit Modal</td><td>Modal + P.II + werden</td><td>Das Haus <b>muss</b> <span class="rule-hl2">gebaut</span> <b>werden</b>.</td></tr>
+</table>`,
+vi: `
+<h2>Passiv — Thể bị động</h2>
+<div class="rule-formula">Subjekt + <span class="rule-hl">werden</span> + ... + <span class="rule-hl2">Partizip II</span></div>
+<table class="rule-table">
+<tr><th>Thì</th><th>Công thức</th><th>Ví dụ</th></tr>
+<tr><td>Präsens</td><td>wird + P.II</td><td>Das Haus <b>wird</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Präteritum</td><td>wurde + P.II</td><td>Das Haus <b>wurde</b> <span class="rule-hl2">gebaut</span>.</td></tr>
+<tr><td>Perfekt</td><td>ist + P.II + worden</td><td>Das Haus <b>ist</b> <span class="rule-hl2">gebaut</span> <b>worden</b>.</td></tr>
+<tr><td>mit Modal</td><td>Modal + P.II + werden</td><td>Das Haus <b>muss</b> <span class="rule-hl2">gebaut</span> <b>werden</b>.</td></tr>
+</table>`
+},
 
-satz_konjunktiv: `
-<h2>Konjunktiv II — Сослагательное наклонение</h2>
+satz_konjunktiv: {
+de: `
+<h2>Konjunktiv II</h2>
 <div class="rule-formula"><span class="rule-hl">Wenn</span> + S + hätte/wäre, <span class="rule-hl2">würde</span> + S + Infinitiv</div>
 <table class="rule-table">
 <tr><th>Verb</th><th>Konjunktiv II</th><th>Beispiel</th></tr>
-<tr><td>sein</td><td><b>wäre</b></td><td>Wenn ich reich <b>wäre</b>...</td></tr>
+<tr><td>sein</td><td><b>wäre</b></td><td>Wenn ich reich <b>wäre</b>... (wenn ich reich wäre)</td></tr>
 <tr><td>haben</td><td><b>hätte</b></td><td>Wenn ich Zeit <b>hätte</b>...</td></tr>
 <tr><td>andere</td><td><b>würde</b> + Inf.</td><td>Ich <b>würde</b> reisen.</td></tr>
 <tr><td>können</td><td><b>könnte</b></td><td>Ich <b>könnte</b> helfen.</td></tr>
 <tr><td>müssen</td><td><b>müsste</b></td><td>Du <b>müsstest</b> lernen.</td></tr>
 </table>
 <p>Wenn ich mehr Geld <b>hätte</b>, <b>würde</b> ich eine Reise machen.</p>
+<div class="rule-box rule-green"><b>An deiner Stelle würde ich...</b> — höflicher Rat</div>`,
+ru: `
+<h2>Konjunktiv II — Сослагательное наклонение</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + hätte/wäre, <span class="rule-hl2">würde</span> + S + Infinitiv</div>
+<table class="rule-table">
+<tr><th>Verb</th><th>Konjunktiv II</th><th>Beispiel</th></tr>
+<tr><td>sein</td><td><b>wäre</b></td><td>Wenn ich reich <b>wäre</b>... (если бы я был богатым)</td></tr>
+<tr><td>haben</td><td><b>hätte</b></td><td>Wenn ich Zeit <b>hätte</b>... (если бы у меня было время)</td></tr>
+<tr><td>andere</td><td><b>würde</b> + Inf.</td><td>Ich <b>würde</b> reisen. (я бы путешествовал)</td></tr>
+<tr><td>können</td><td><b>könnte</b></td><td>Ich <b>könnte</b> helfen.</td></tr>
+<tr><td>müssen</td><td><b>müsste</b></td><td>Du <b>müsstest</b> lernen.</td></tr>
+</table>
+<p>Wenn ich mehr Geld <b>hätte</b>, <b>würde</b> ich eine Reise machen.</p>
 <div class="rule-box rule-green"><b>An deiner Stelle würde ich...</b> — вежливый совет</div>`,
+en: `
+<h2>Konjunktiv II — Subjunctive</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + hätte/wäre, <span class="rule-hl2">würde</span> + S + Infinitiv</div>
+<table class="rule-table">
+<tr><th>Verb</th><th>Konjunktiv II</th><th>Example</th></tr>
+<tr><td>sein</td><td><b>wäre</b></td><td>Wenn ich reich <b>wäre</b>... (if I were rich)</td></tr>
+<tr><td>haben</td><td><b>hätte</b></td><td>Wenn ich Zeit <b>hätte</b>... (if I had time)</td></tr>
+<tr><td>andere</td><td><b>würde</b> + Inf.</td><td>Ich <b>würde</b> reisen. (I would travel)</td></tr>
+<tr><td>können</td><td><b>könnte</b></td><td>Ich <b>könnte</b> helfen.</td></tr>
+<tr><td>müssen</td><td><b>müsste</b></td><td>Du <b>müsstest</b> lernen.</td></tr>
+</table>
+<p>Wenn ich mehr Geld <b>hätte</b>, <b>würde</b> ich eine Reise machen.</p>
+<div class="rule-box rule-green"><b>An deiner Stelle würde ich...</b> — polite advice</div>`,
+tr: `
+<h2>Konjunktiv II — Dilek kipi</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + hätte/wäre, <span class="rule-hl2">würde</span> + S + Infinitiv</div>
+<table class="rule-table">
+<tr><th>Verb</th><th>Konjunktiv II</th><th>Örnek</th></tr>
+<tr><td>sein</td><td><b>wäre</b></td><td>Wenn ich reich <b>wäre</b>... (zengin olsaydım)</td></tr>
+<tr><td>haben</td><td><b>hätte</b></td><td>Wenn ich Zeit <b>hätte</b>... (zamanım olsaydı)</td></tr>
+<tr><td>andere</td><td><b>würde</b> + Inf.</td><td>Ich <b>würde</b> reisen. (seyahat ederdim)</td></tr>
+<tr><td>können</td><td><b>könnte</b></td><td>Ich <b>könnte</b> helfen.</td></tr>
+<tr><td>müssen</td><td><b>müsste</b></td><td>Du <b>müsstest</b> lernen.</td></tr>
+</table>
+<p>Wenn ich mehr Geld <b>hätte</b>, <b>würde</b> ich eine Reise machen.</p>
+<div class="rule-box rule-green"><b>An deiner Stelle würde ich...</b> — kibar öneri</div>`,
+ar: `
+<h2>Konjunktiv II — صيغة الشرط</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + hätte/wäre, <span class="rule-hl2">würde</span> + S + Infinitiv</div>
+<table class="rule-table">
+<tr><th>Verb</th><th>Konjunktiv II</th><th>مثال</th></tr>
+<tr><td>sein</td><td><b>wäre</b></td><td>Wenn ich reich <b>wäre</b>... (لو كنت غنياً)</td></tr>
+<tr><td>haben</td><td><b>hätte</b></td><td>Wenn ich Zeit <b>hätte</b>... (لو كان لدي وقت)</td></tr>
+<tr><td>andere</td><td><b>würde</b> + Inf.</td><td>Ich <b>würde</b> reisen. (كنت سأسافر)</td></tr>
+<tr><td>können</td><td><b>könnte</b></td><td>Ich <b>könnte</b> helfen.</td></tr>
+<tr><td>müssen</td><td><b>müsste</b></td><td>Du <b>müsstest</b> lernen.</td></tr>
+</table>
+<p>Wenn ich mehr Geld <b>hätte</b>, <b>würde</b> ich eine Reise machen.</p>
+<div class="rule-box rule-green"><b>An deiner Stelle würde ich...</b> — نصيحة مهذبة</div>`,
+fa: `
+<h2>Konjunktiv II — وجه شرطی</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + hätte/wäre, <span class="rule-hl2">würde</span> + S + Infinitiv</div>
+<table class="rule-table">
+<tr><th>Verb</th><th>Konjunktiv II</th><th>مثال</th></tr>
+<tr><td>sein</td><td><b>wäre</b></td><td>Wenn ich reich <b>wäre</b>... (اگر ثروتمند بودم)</td></tr>
+<tr><td>haben</td><td><b>hätte</b></td><td>Wenn ich Zeit <b>hätte</b>... (اگر وقت داشتم)</td></tr>
+<tr><td>andere</td><td><b>würde</b> + Inf.</td><td>Ich <b>würde</b> reisen. (سفر می‌کردم)</td></tr>
+<tr><td>können</td><td><b>könnte</b></td><td>Ich <b>könnte</b> helfen.</td></tr>
+<tr><td>müssen</td><td><b>müsste</b></td><td>Du <b>müsstest</b> lernen.</td></tr>
+</table>
+<p>Wenn ich mehr Geld <b>hätte</b>, <b>würde</b> ich eine Reise machen.</p>
+<div class="rule-box rule-green"><b>An deiner Stelle würde ich...</b> — توصیه مؤدبانه</div>`,
+vi: `
+<h2>Konjunktiv II — Thức giả định</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + hätte/wäre, <span class="rule-hl2">würde</span> + S + Infinitiv</div>
+<table class="rule-table">
+<tr><th>Verb</th><th>Konjunktiv II</th><th>Ví dụ</th></tr>
+<tr><td>sein</td><td><b>wäre</b></td><td>Wenn ich reich <b>wäre</b>... (nếu tôi giàu)</td></tr>
+<tr><td>haben</td><td><b>hätte</b></td><td>Wenn ich Zeit <b>hätte</b>... (nếu tôi có thời gian)</td></tr>
+<tr><td>andere</td><td><b>würde</b> + Inf.</td><td>Ich <b>würde</b> reisen. (tôi sẽ đi du lịch)</td></tr>
+<tr><td>können</td><td><b>könnte</b></td><td>Ich <b>könnte</b> helfen.</td></tr>
+<tr><td>müssen</td><td><b>müsste</b></td><td>Du <b>müsstest</b> lernen.</td></tr>
+</table>
+<p>Wenn ich mehr Geld <b>hätte</b>, <b>würde</b> ich eine Reise machen.</p>
+<div class="rule-box rule-green"><b>An deiner Stelle würde ich...</b> — lời khuyên lịch sự</div>`
+},
 
 satz_je_desto: `
 <h2>je...desto — чем...тем</h2>
