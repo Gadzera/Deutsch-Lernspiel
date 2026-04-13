@@ -1424,98 +1424,556 @@ Ich fahre <span class="rule-hl">morgen</span> <span class="rule-hl2">wegen der A
 </div>`
 },
 
-satz_weil: `
+satz_weil: {
+de: `
+<h2>weil — weil (Grund)</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">weil</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>weil</b> = weil. Das Verb geht ans ENDE!</p>
+<p>Ich bleibe zu Hause, <b>weil</b> ich krank <span class="rule-hl2">bin</span>.</p>
+<p>Er lernt Deutsch, <b>weil</b> er in Wien arbeiten <span class="rule-hl2">will</span>.</p>
+<div class="rule-box rule-blue"><b>weil vs. denn:</b><br><b>weil</b> → Nebensatz (Verb am Ende): ..., weil er müde <b>ist</b>.<br><b>denn</b> → Hauptsatz (normale Stellung): ..., denn er <b>ist</b> müde.</div>`,
+ru: `
 <h2>weil — потому что</h2>
 <div class="rule-formula">Hauptsatz, <span class="rule-hl">weil</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
 <p><b>weil</b> = потому что. Глагол уходит в КОНЕЦ!</p>
 <p>Ich bleibe zu Hause, <b>weil</b> ich krank <span class="rule-hl2">bin</span>.</p>
 <p>Er lernt Deutsch, <b>weil</b> er in Wien arbeiten <span class="rule-hl2">will</span>.</p>
-<div class="rule-box rule-blue"><b>weil vs. denn:</b><br>
-<b>weil</b> → придаточное (Verb am Ende): ..., weil er müde <b>ist</b>.<br>
-<b>denn</b> → главное (нормальный порядок): ..., denn er <b>ist</b> müde.</div>`,
+<div class="rule-box rule-blue"><b>weil vs. denn:</b><br><b>weil</b> → придаточное (Verb am Ende): ..., weil er müde <b>ist</b>.<br><b>denn</b> → главное (нормальный порядок): ..., denn er <b>ist</b> müde.</div>`,
+en: `
+<h2>weil — because</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">weil</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>weil</b> = because. The verb moves to the END!</p>
+<p>Ich bleibe zu Hause, <b>weil</b> ich krank <span class="rule-hl2">bin</span>.</p>
+<p>Er lernt Deutsch, <b>weil</b> er in Wien arbeiten <span class="rule-hl2">will</span>.</p>
+<div class="rule-box rule-blue"><b>weil vs. denn:</b><br><b>weil</b> → subordinate (verb at end): ..., weil er müde <b>ist</b>.<br><b>denn</b> → main clause (normal order): ..., denn er <b>ist</b> müde.</div>`,
+tr: `
+<h2>weil — çünkü</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">weil</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>weil</b> = çünkü. Fiil SONA gider!</p>
+<p>Ich bleibe zu Hause, <b>weil</b> ich krank <span class="rule-hl2">bin</span>.</p>
+<p>Er lernt Deutsch, <b>weil</b> er in Wien arbeiten <span class="rule-hl2">will</span>.</p>
+<div class="rule-box rule-blue"><b>weil vs. denn:</b><br><b>weil</b> → yan cümle (fiil sonda): ..., weil er müde <b>ist</b>.<br><b>denn</b> → ana cümle (normal sıra): ..., denn er <b>ist</b> müde.</div>`,
+ar: `
+<h2>weil — لأن</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">weil</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>weil</b> = لأن. الفعل يذهب إلى النهاية!</p>
+<p>Ich bleibe zu Hause, <b>weil</b> ich krank <span class="rule-hl2">bin</span>.</p>
+<p>Er lernt Deutsch, <b>weil</b> er in Wien arbeiten <span class="rule-hl2">will</span>.</p>
+<div class="rule-box rule-blue"><b>weil vs. denn:</b><br><b>weil</b> → جملة تابعة (الفعل في النهاية): ..., weil er müde <b>ist</b>.<br><b>denn</b> → جملة رئيسية (ترتيب عادي): ..., denn er <b>ist</b> müde.</div>`,
+fa: `
+<h2>weil — چون</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">weil</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>weil</b> = چون. فعل به پایان می‌رود!</p>
+<p>Ich bleibe zu Hause, <b>weil</b> ich krank <span class="rule-hl2">bin</span>.</p>
+<p>Er lernt Deutsch, <b>weil</b> er in Wien arbeiten <span class="rule-hl2">will</span>.</p>
+<div class="rule-box rule-blue"><b>weil vs. denn:</b><br><b>weil</b> → جمله فرعی (فعل در پایان): ..., weil er müde <b>ist</b>.<br><b>denn</b> → جمله اصلی (ترتیب عادی): ..., denn er <b>ist</b> müde.</div>`,
+vi: `
+<h2>weil — bởi vì</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">weil</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>weil</b> = bởi vì. Động từ về CUỐI câu!</p>
+<p>Ich bleibe zu Hause, <b>weil</b> ich krank <span class="rule-hl2">bin</span>.</p>
+<p>Er lernt Deutsch, <b>weil</b> er in Wien arbeiten <span class="rule-hl2">will</span>.</p>
+<div class="rule-box rule-blue"><b>weil vs. denn:</b><br><b>weil</b> → mệnh đề phụ (động từ cuối): ..., weil er müde <b>ist</b>.<br><b>denn</b> → mệnh đề chính (trật tự thường): ..., denn er <b>ist</b> müde.</div>`
+},
 
-satz_dass: `
+satz_dass: {
+de: `
+<h2>dass — dass (Tatsache)</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">dass</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>dass</b> = dass. Verb ans ENDE!</p>
+<p>Ich denke, <b>dass</b> er recht <span class="rule-hl2">hat</span>.</p>
+<p>Es ist wichtig, <b>dass</b> du pünktlich <span class="rule-hl2">kommst</span>.</p>
+<div class="rule-box rule-blue"><b>dass vs. ob:</b><br><b>dass</b> = Tatsache: Ich weiß, <b>dass</b> er kommt.<br><b>ob</b> = Frage: Ich weiß nicht, <b>ob</b> er kommt.</div>`,
+ru: `
 <h2>dass — что</h2>
 <div class="rule-formula">Hauptsatz, <span class="rule-hl">dass</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
 <p><b>dass</b> = что. Глагол уходит в КОНЕЦ!</p>
 <p>Ich denke, <b>dass</b> er recht <span class="rule-hl2">hat</span>.</p>
 <p>Es ist wichtig, <b>dass</b> du pünktlich <span class="rule-hl2">kommst</span>.</p>
-<div class="rule-box rule-blue"><b>dass vs. ob:</b><br>
-<b>dass</b> = что (факт): Ich weiß, <b>dass</b> er kommt.<br>
-<b>ob</b> = ли (вопрос): Ich weiß nicht, <b>ob</b> er kommt.</div>`,
+<div class="rule-box rule-blue"><b>dass vs. ob:</b><br><b>dass</b> = что (факт): Ich weiß, <b>dass</b> er kommt.<br><b>ob</b> = ли (вопрос): Ich weiß nicht, <b>ob</b> er kommt.</div>`,
+en: `
+<h2>dass — that</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">dass</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>dass</b> = that. Verb goes to the END!</p>
+<p>Ich denke, <b>dass</b> er recht <span class="rule-hl2">hat</span>.</p>
+<p>Es ist wichtig, <b>dass</b> du pünktlich <span class="rule-hl2">kommst</span>.</p>
+<div class="rule-box rule-blue"><b>dass vs. ob:</b><br><b>dass</b> = that (fact): Ich weiß, <b>dass</b> er kommt.<br><b>ob</b> = whether (question): Ich weiß nicht, <b>ob</b> er kommt.</div>`,
+tr: `
+<h2>dass — ki / diye</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">dass</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>dass</b> = ki. Fiil SONA gider!</p>
+<p>Ich denke, <b>dass</b> er recht <span class="rule-hl2">hat</span>.</p>
+<p>Es ist wichtig, <b>dass</b> du pünktlich <span class="rule-hl2">kommst</span>.</p>
+<div class="rule-box rule-blue"><b>dass vs. ob:</b><br><b>dass</b> = ki (gerçek): Ich weiß, <b>dass</b> er kommt.<br><b>ob</b> = mı/mi (soru): Ich weiß nicht, <b>ob</b> er kommt.</div>`,
+ar: `
+<h2>dass — أن</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">dass</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>dass</b> = أن. الفعل في النهاية!</p>
+<p>Ich denke, <b>dass</b> er recht <span class="rule-hl2">hat</span>.</p>
+<p>Es ist wichtig, <b>dass</b> du pünktlich <span class="rule-hl2">kommst</span>.</p>
+<div class="rule-box rule-blue"><b>dass vs. ob:</b><br><b>dass</b> = أن (حقيقة): Ich weiß, <b>dass</b> er kommt.<br><b>ob</b> = إذا ما (سؤال): Ich weiß nicht, <b>ob</b> er kommt.</div>`,
+fa: `
+<h2>dass — که</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">dass</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>dass</b> = که. فعل در انتها!</p>
+<p>Ich denke, <b>dass</b> er recht <span class="rule-hl2">hat</span>.</p>
+<p>Es ist wichtig, <b>dass</b> du pünktlich <span class="rule-hl2">kommst</span>.</p>
+<div class="rule-box rule-blue"><b>dass vs. ob:</b><br><b>dass</b> = که (حقیقت): Ich weiß, <b>dass</b> er kommt.<br><b>ob</b> = آیا (پرسش): Ich weiß nicht, <b>ob</b> er kommt.</div>`,
+vi: `
+<h2>dass — rằng</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">dass</span> + Subjekt + ... + <span class="rule-hl2">Verb (Ende!)</span></div>
+<p><b>dass</b> = rằng. Động từ ở CUỐI!</p>
+<p>Ich denke, <b>dass</b> er recht <span class="rule-hl2">hat</span>.</p>
+<p>Es ist wichtig, <b>dass</b> du pünktlich <span class="rule-hl2">kommst</span>.</p>
+<div class="rule-box rule-blue"><b>dass vs. ob:</b><br><b>dass</b> = rằng (sự thật): Ich weiß, <b>dass</b> er kommt.<br><b>ob</b> = liệu có (câu hỏi): Ich weiß nicht, <b>ob</b> er kommt.</div>`
+},
 
-satz_wenn: `
+satz_wenn: {
+de: `
+<h2>wenn — wenn / falls</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, <span class="rule-hl3">V</span> + S + ...</div>
+<p><b>wenn</b> = wenn (wiederholt, Präsens, Zukunft)</p>
+<p><b>Wenn</b> es <span class="rule-hl2">regnet</span>, <span class="rule-hl3">bleibe</span> ich zu Hause.</p>
+<p><b>Wenn</b> ich Zeit <span class="rule-hl2">habe</span>, <span class="rule-hl3">lese</span> ich ein Buch.</p>
+<div class="rule-box rule-green"><b>wenn vs. als:</b><br><b>wenn</b> = wiederholt / Gegenwart / Zukunft<br><b>als</b> = einmalige Vergangenheit</div>`,
+ru: `
 <h2>wenn — если / когда</h2>
 <div class="rule-formula"><span class="rule-hl">Wenn</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, <span class="rule-hl3">V</span> + S + ...</div>
 <p><b>wenn</b> = если / когда (повторяющееся, настоящее, будущее)</p>
 <p><b>Wenn</b> es <span class="rule-hl2">regnet</span>, <span class="rule-hl3">bleibe</span> ich zu Hause.</p>
 <p><b>Wenn</b> ich Zeit <span class="rule-hl2">habe</span>, <span class="rule-hl3">lese</span> ich ein Buch.</p>
-<div class="rule-box rule-green"><b>wenn vs. als:</b><br>
-<b>wenn</b> = повторяющееся / будущее / настоящее<br>
-<b>als</b> = однократное в прошлом</div>`,
+<div class="rule-box rule-green"><b>wenn vs. als:</b><br><b>wenn</b> = повторяющееся / будущее / настоящее<br><b>als</b> = однократное в прошлом</div>`,
+en: `
+<h2>wenn — if / when</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, <span class="rule-hl3">V</span> + S + ...</div>
+<p><b>wenn</b> = if / when (repeated, present, future)</p>
+<p><b>Wenn</b> es <span class="rule-hl2">regnet</span>, <span class="rule-hl3">bleibe</span> ich zu Hause.</p>
+<p><b>Wenn</b> ich Zeit <span class="rule-hl2">habe</span>, <span class="rule-hl3">lese</span> ich ein Buch.</p>
+<div class="rule-box rule-green"><b>wenn vs. als:</b><br><b>wenn</b> = repeated / present / future<br><b>als</b> = single event in past</div>`,
+tr: `
+<h2>wenn — eğer / -diği zaman</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, <span class="rule-hl3">V</span> + S + ...</div>
+<p><b>wenn</b> = eğer / -diği zaman (tekrarlayan, şimdi, gelecek)</p>
+<p><b>Wenn</b> es <span class="rule-hl2">regnet</span>, <span class="rule-hl3">bleibe</span> ich zu Hause.</p>
+<p><b>Wenn</b> ich Zeit <span class="rule-hl2">habe</span>, <span class="rule-hl3">lese</span> ich ein Buch.</p>
+<div class="rule-box rule-green"><b>wenn vs. als:</b><br><b>wenn</b> = tekrar / şimdi / gelecek<br><b>als</b> = geçmişte tek olay</div>`,
+ar: `
+<h2>wenn — إذا / عندما</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, <span class="rule-hl3">V</span> + S + ...</div>
+<p><b>wenn</b> = إذا / عندما (متكرر، حاضر، مستقبل)</p>
+<p><b>Wenn</b> es <span class="rule-hl2">regnet</span>, <span class="rule-hl3">bleibe</span> ich zu Hause.</p>
+<p><b>Wenn</b> ich Zeit <span class="rule-hl2">habe</span>, <span class="rule-hl3">lese</span> ich ein Buch.</p>
+<div class="rule-box rule-green"><b>wenn vs. als:</b><br><b>wenn</b> = متكرر / حاضر / مستقبل<br><b>als</b> = حدث واحد في الماضي</div>`,
+fa: `
+<h2>wenn — اگر / وقتی</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, <span class="rule-hl3">V</span> + S + ...</div>
+<p><b>wenn</b> = اگر / وقتی (تکراری، حال، آینده)</p>
+<p><b>Wenn</b> es <span class="rule-hl2">regnet</span>, <span class="rule-hl3">bleibe</span> ich zu Hause.</p>
+<p><b>Wenn</b> ich Zeit <span class="rule-hl2">habe</span>, <span class="rule-hl3">lese</span> ich ein Buch.</p>
+<div class="rule-box rule-green"><b>wenn vs. als:</b><br><b>wenn</b> = تکراری / حال / آینده<br><b>als</b> = یک رویداد در گذشته</div>`,
+vi: `
+<h2>wenn — nếu / khi</h2>
+<div class="rule-formula"><span class="rule-hl">Wenn</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, <span class="rule-hl3">V</span> + S + ...</div>
+<p><b>wenn</b> = nếu / khi (lặp lại, hiện tại, tương lai)</p>
+<p><b>Wenn</b> es <span class="rule-hl2">regnet</span>, <span class="rule-hl3">bleibe</span> ich zu Hause.</p>
+<p><b>Wenn</b> ich Zeit <span class="rule-hl2">habe</span>, <span class="rule-hl3">lese</span> ich ein Buch.</p>
+<div class="rule-box rule-green"><b>wenn vs. als:</b><br><b>wenn</b> = lặp lại / hiện tại / tương lai<br><b>als</b> = sự kiện một lần trong quá khứ</div>`
+},
 
-satz_als: `
+satz_als: {
+de: `
+<h2>als — als (einmalig in Vergangenheit)</h2>
+<div class="rule-formula"><span class="rule-hl">Als</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>als</b> = als (ein Ereignis in der Vergangenheit)</p>
+<p><b>Als</b> ich ein Kind <span class="rule-hl2">war</span>, spielte ich oft draußen.</p>
+<p><b>Als</b> er nach Deutschland <span class="rule-hl2">kam</span>, sprach er kein Deutsch.</p>
+<div class="rule-box rule-blue"><b>als</b> — NUR einmalige Vergangenheit!<br><b>wenn</b> — Wiederholung oder Zukunft/Gegenwart.</div>`,
+ru: `
 <h2>als — когда (прошлое, однократно)</h2>
 <div class="rule-formula"><span class="rule-hl">Als</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
 <p><b>als</b> = когда (одно событие в прошлом)</p>
 <p><b>Als</b> ich ein Kind <span class="rule-hl2">war</span>, spielte ich oft draußen.</p>
 <p><b>Als</b> er nach Deutschland <span class="rule-hl2">kam</span>, sprach er kein Deutsch.</p>
 <div class="rule-box rule-blue"><b>als</b> — ТОЛЬКО одноразово в прошлом!<br><b>wenn</b> — повторение или будущее/настоящее.</div>`,
+en: `
+<h2>als — when (single past event)</h2>
+<div class="rule-formula"><span class="rule-hl">Als</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>als</b> = when (one event in the past)</p>
+<p><b>Als</b> ich ein Kind <span class="rule-hl2">war</span>, spielte ich oft draußen.</p>
+<p><b>Als</b> er nach Deutschland <span class="rule-hl2">kam</span>, sprach er kein Deutsch.</p>
+<div class="rule-box rule-blue"><b>als</b> — ONLY a single past event!<br><b>wenn</b> — repetition or future/present.</div>`,
+tr: `
+<h2>als — -dığı zaman (geçmişte bir kez)</h2>
+<div class="rule-formula"><span class="rule-hl">Als</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>als</b> = -dığı zaman (geçmişte tek olay)</p>
+<p><b>Als</b> ich ein Kind <span class="rule-hl2">war</span>, spielte ich oft draußen.</p>
+<p><b>Als</b> er nach Deutschland <span class="rule-hl2">kam</span>, sprach er kein Deutsch.</p>
+<div class="rule-box rule-blue"><b>als</b> — SADECE geçmişte tek seferlik!<br><b>wenn</b> — tekrar veya gelecek/şimdi.</div>`,
+ar: `
+<h2>als — عندما (حدث واحد في الماضي)</h2>
+<div class="rule-formula"><span class="rule-hl">Als</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>als</b> = عندما (حدث واحد في الماضي)</p>
+<p><b>Als</b> ich ein Kind <span class="rule-hl2">war</span>, spielte ich oft draußen.</p>
+<p><b>Als</b> er nach Deutschland <span class="rule-hl2">kam</span>, sprach er kein Deutsch.</p>
+<div class="rule-box rule-blue"><b>als</b> — فقط للحدث الواحد في الماضي!<br><b>wenn</b> — التكرار أو المستقبل/الحاضر.</div>`,
+fa: `
+<h2>als — وقتی (یک رویداد در گذشته)</h2>
+<div class="rule-formula"><span class="rule-hl">Als</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>als</b> = وقتی (یک رویداد در گذشته)</p>
+<p><b>Als</b> ich ein Kind <span class="rule-hl2">war</span>, spielte ich oft draußen.</p>
+<p><b>Als</b> er nach Deutschland <span class="rule-hl2">kam</span>, sprach er kein Deutsch.</p>
+<div class="rule-box rule-blue"><b>als</b> — فقط رویداد یک‌باره در گذشته!<br><b>wenn</b> — تکرار یا آینده/حال.</div>`,
+vi: `
+<h2>als — khi (sự kiện một lần quá khứ)</h2>
+<div class="rule-formula"><span class="rule-hl">Als</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>als</b> = khi (một sự kiện trong quá khứ)</p>
+<p><b>Als</b> ich ein Kind <span class="rule-hl2">war</span>, spielte ich oft draußen.</p>
+<p><b>Als</b> er nach Deutschland <span class="rule-hl2">kam</span>, sprach er kein Deutsch.</p>
+<div class="rule-box rule-blue"><b>als</b> — CHỈ cho sự kiện một lần ở quá khứ!<br><b>wenn</b> — lặp lại hoặc tương lai/hiện tại.</div>`
+},
 
-satz_ob: `
+satz_ob: {
+de: `
+<h2>ob — ob (indirekte Frage)</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">ob</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>ob</b> = ob. Indirekte Frage. Verb am ENDE!</p>
+<p>Ich weiß nicht, <b>ob</b> er morgen <span class="rule-hl2">kommt</span>.</p>
+<p>Kannst du mir sagen, <b>ob</b> das Geschäft noch offen <span class="rule-hl2">ist</span>?</p>`,
+ru: `
 <h2>ob — ли (косвенный вопрос)</h2>
 <div class="rule-formula">Hauptsatz, <span class="rule-hl">ob</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
 <p><b>ob</b> = ли. Вопрос в придаточном. Глагол в КОНЦЕ!</p>
 <p>Ich weiß nicht, <b>ob</b> er morgen <span class="rule-hl2">kommt</span>.</p>
 <p>Kannst du mir sagen, <b>ob</b> das Geschäft noch offen <span class="rule-hl2">ist</span>?</p>`,
+en: `
+<h2>ob — whether (indirect question)</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">ob</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>ob</b> = whether. Indirect question. Verb at END!</p>
+<p>Ich weiß nicht, <b>ob</b> er morgen <span class="rule-hl2">kommt</span>.</p>
+<p>Kannst du mir sagen, <b>ob</b> das Geschäft noch offen <span class="rule-hl2">ist</span>?</p>`,
+tr: `
+<h2>ob — -ıp -madığını</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">ob</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>ob</b> = -ıp -madığını. Dolaylı soru. Fiil SONDA!</p>
+<p>Ich weiß nicht, <b>ob</b> er morgen <span class="rule-hl2">kommt</span>.</p>
+<p>Kannst du mir sagen, <b>ob</b> das Geschäft noch offen <span class="rule-hl2">ist</span>?</p>`,
+ar: `
+<h2>ob — ما إذا (سؤال غير مباشر)</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">ob</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>ob</b> = ما إذا. سؤال غير مباشر. الفعل في النهاية!</p>
+<p>Ich weiß nicht, <b>ob</b> er morgen <span class="rule-hl2">kommt</span>.</p>
+<p>Kannst du mir sagen, <b>ob</b> das Geschäft noch offen <span class="rule-hl2">ist</span>?</p>`,
+fa: `
+<h2>ob — آیا (پرسش غیرمستقیم)</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">ob</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>ob</b> = آیا. پرسش غیرمستقیم. فعل در پایان!</p>
+<p>Ich weiß nicht, <b>ob</b> er morgen <span class="rule-hl2">kommt</span>.</p>
+<p>Kannst du mir sagen, <b>ob</b> das Geschäft noch offen <span class="rule-hl2">ist</span>?</p>`,
+vi: `
+<h2>ob — liệu có (câu hỏi gián tiếp)</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">ob</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>ob</b> = liệu có. Câu hỏi gián tiếp. Động từ ở CUỐI!</p>
+<p>Ich weiß nicht, <b>ob</b> er morgen <span class="rule-hl2">kommt</span>.</p>
+<p>Kannst du mir sagen, <b>ob</b> das Geschäft noch offen <span class="rule-hl2">ist</span>?</p>`
+},
 
-satz_obwohl: `
+satz_obwohl: {
+de: `
+<h2>obwohl — obwohl</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">obwohl</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>obwohl</b> = obwohl (Nebensatz, Verb am Ende!)</p>
+<p>Er geht spazieren, <b>obwohl</b> es <span class="rule-hl2">regnet</span>.</p>
+<div class="rule-box rule-blue"><b>obwohl vs. trotzdem:</b><br><b>obwohl</b> → Nebensatz (V am Ende): ..., obwohl es regnet.<br><b>trotzdem</b> → Hauptsatz (Inversion): Es regnet. <b>Trotzdem</b> geht er spazieren.</div>`,
+ru: `
 <h2>obwohl — хотя</h2>
 <div class="rule-formula">Hauptsatz, <span class="rule-hl">obwohl</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
 <p><b>obwohl</b> = хотя (Nebensatz, глагол в конце!)</p>
 <p>Er geht spazieren, <b>obwohl</b> es <span class="rule-hl2">regnet</span>.</p>
-<div class="rule-box rule-blue"><b>obwohl vs. trotzdem:</b><br>
-<b>obwohl</b> → Nebensatz (V am Ende): ..., obwohl es regnet.<br>
-<b>trotzdem</b> → Hauptsatz (Inversion): Es regnet. <b>Trotzdem</b> geht er spazieren.</div>`,
+<div class="rule-box rule-blue"><b>obwohl vs. trotzdem:</b><br><b>obwohl</b> → Nebensatz (V am Ende): ..., obwohl es regnet.<br><b>trotzdem</b> → Hauptsatz (Inversion): Es regnet. <b>Trotzdem</b> geht er spazieren.</div>`,
+en: `
+<h2>obwohl — although</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">obwohl</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>obwohl</b> = although (subordinate, verb at end!)</p>
+<p>Er geht spazieren, <b>obwohl</b> es <span class="rule-hl2">regnet</span>.</p>
+<div class="rule-box rule-blue"><b>obwohl vs. trotzdem:</b><br><b>obwohl</b> → subordinate (V at end): ..., obwohl es regnet.<br><b>trotzdem</b> → main clause (inversion): Es regnet. <b>Trotzdem</b> geht er spazieren.</div>`,
+tr: `
+<h2>obwohl — -masına rağmen</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">obwohl</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>obwohl</b> = -masına rağmen (yan cümle, fiil sonda!)</p>
+<p>Er geht spazieren, <b>obwohl</b> es <span class="rule-hl2">regnet</span>.</p>
+<div class="rule-box rule-blue"><b>obwohl vs. trotzdem:</b><br><b>obwohl</b> → yan cümle (V sonda): ..., obwohl es regnet.<br><b>trotzdem</b> → ana cümle (devrik): Es regnet. <b>Trotzdem</b> geht er spazieren.</div>`,
+ar: `
+<h2>obwohl — رغم أن</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">obwohl</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>obwohl</b> = رغم أن (جملة تابعة، الفعل في النهاية!)</p>
+<p>Er geht spazieren, <b>obwohl</b> es <span class="rule-hl2">regnet</span>.</p>
+<div class="rule-box rule-blue"><b>obwohl vs. trotzdem:</b><br><b>obwohl</b> → جملة تابعة (الفعل في النهاية): ..., obwohl es regnet.<br><b>trotzdem</b> → جملة رئيسية (قلب): Es regnet. <b>Trotzdem</b> geht er spazieren.</div>`,
+fa: `
+<h2>obwohl — اگرچه</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">obwohl</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>obwohl</b> = اگرچه (جمله فرعی، فعل در پایان!)</p>
+<p>Er geht spazieren, <b>obwohl</b> es <span class="rule-hl2">regnet</span>.</p>
+<div class="rule-box rule-blue"><b>obwohl vs. trotzdem:</b><br><b>obwohl</b> → جمله فرعی (فعل در پایان): ..., obwohl es regnet.<br><b>trotzdem</b> → جمله اصلی (وارونه): Es regnet. <b>Trotzdem</b> geht er spazieren.</div>`,
+vi: `
+<h2>obwohl — mặc dù</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">obwohl</span> + S + ... + <span class="rule-hl2">V(Ende)</span></div>
+<p><b>obwohl</b> = mặc dù (mệnh đề phụ, động từ cuối!)</p>
+<p>Er geht spazieren, <b>obwohl</b> es <span class="rule-hl2">regnet</span>.</p>
+<div class="rule-box rule-blue"><b>obwohl vs. trotzdem:</b><br><b>obwohl</b> → mệnh đề phụ (V cuối): ..., obwohl es regnet.<br><b>trotzdem</b> → mệnh đề chính (đảo): Es regnet. <b>Trotzdem</b> geht er spazieren.</div>`
+},
 
-satz_damit: `
+satz_damit: {
+de: `
+<h2>damit / um...zu — damit</h2>
+<div class="rule-formula"><span class="rule-hl">damit</span> + S + ... + V(Ende) | <span class="rule-hl2">um</span> + ... + <span class="rule-hl2">zu</span> + Infinitiv</div>
+<p><b>damit</b> — verschiedene Subjekte:</p>
+<p>Ich erkläre es, <b>damit</b> alle es <span class="rule-hl">verstehen</span>.</p>
+<p><b>um...zu</b> — gleiches Subjekt:</p>
+<p>Ich lerne Deutsch, <b>um</b> eine Arbeit <b>zu</b> <span class="rule-hl2">finden</span>.</p>`,
+ru: `
 <h2>damit / um...zu — чтобы</h2>
 <div class="rule-formula"><span class="rule-hl">damit</span> + S + ... + V(Ende) | <span class="rule-hl2">um</span> + ... + <span class="rule-hl2">zu</span> + Infinitiv</div>
 <p><b>damit</b> — разные подлежащие:</p>
 <p>Ich erkläre es, <b>damit</b> alle es <span class="rule-hl">verstehen</span>.</p>
 <p><b>um...zu</b> — одно подлежащее:</p>
 <p>Ich lerne Deutsch, <b>um</b> eine Arbeit <b>zu</b> <span class="rule-hl2">finden</span>.</p>`,
+en: `
+<h2>damit / um...zu — so that</h2>
+<div class="rule-formula"><span class="rule-hl">damit</span> + S + ... + V(Ende) | <span class="rule-hl2">um</span> + ... + <span class="rule-hl2">zu</span> + Infinitiv</div>
+<p><b>damit</b> — different subjects:</p>
+<p>Ich erkläre es, <b>damit</b> alle es <span class="rule-hl">verstehen</span>.</p>
+<p><b>um...zu</b> — same subject:</p>
+<p>Ich lerne Deutsch, <b>um</b> eine Arbeit <b>zu</b> <span class="rule-hl2">finden</span>.</p>`,
+tr: `
+<h2>damit / um...zu — -sin diye</h2>
+<div class="rule-formula"><span class="rule-hl">damit</span> + S + ... + V(Ende) | <span class="rule-hl2">um</span> + ... + <span class="rule-hl2">zu</span> + Infinitiv</div>
+<p><b>damit</b> — farklı özneler:</p>
+<p>Ich erkläre es, <b>damit</b> alle es <span class="rule-hl">verstehen</span>.</p>
+<p><b>um...zu</b> — aynı özne:</p>
+<p>Ich lerne Deutsch, <b>um</b> eine Arbeit <b>zu</b> <span class="rule-hl2">finden</span>.</p>`,
+ar: `
+<h2>damit / um...zu — لكي</h2>
+<div class="rule-formula"><span class="rule-hl">damit</span> + S + ... + V(Ende) | <span class="rule-hl2">um</span> + ... + <span class="rule-hl2">zu</span> + Infinitiv</div>
+<p><b>damit</b> — فاعلان مختلفان:</p>
+<p>Ich erkläre es, <b>damit</b> alle es <span class="rule-hl">verstehen</span>.</p>
+<p><b>um...zu</b> — نفس الفاعل:</p>
+<p>Ich lerne Deutsch, <b>um</b> eine Arbeit <b>zu</b> <span class="rule-hl2">finden</span>.</p>`,
+fa: `
+<h2>damit / um...zu — تا</h2>
+<div class="rule-formula"><span class="rule-hl">damit</span> + S + ... + V(Ende) | <span class="rule-hl2">um</span> + ... + <span class="rule-hl2">zu</span> + Infinitiv</div>
+<p><b>damit</b> — فاعل متفاوت:</p>
+<p>Ich erkläre es, <b>damit</b> alle es <span class="rule-hl">verstehen</span>.</p>
+<p><b>um...zu</b> — فاعل یکسان:</p>
+<p>Ich lerne Deutsch, <b>um</b> eine Arbeit <b>zu</b> <span class="rule-hl2">finden</span>.</p>`,
+vi: `
+<h2>damit / um...zu — để</h2>
+<div class="rule-formula"><span class="rule-hl">damit</span> + S + ... + V(Ende) | <span class="rule-hl2">um</span> + ... + <span class="rule-hl2">zu</span> + Infinitiv</div>
+<p><b>damit</b> — hai chủ ngữ khác nhau:</p>
+<p>Ich erkläre es, <b>damit</b> alle es <span class="rule-hl">verstehen</span>.</p>
+<p><b>um...zu</b> — cùng một chủ ngữ:</p>
+<p>Ich lerne Deutsch, <b>um</b> eine Arbeit <b>zu</b> <span class="rule-hl2">finden</span>.</p>`
+},
 
-satz_denn: `
+satz_denn: {
+de: `
+<h2>denn — denn</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">denn</span> + S + V + O</div>
+<p><b>denn</b> = denn. Hauptsatz — normale Wortstellung!</p>
+<p>Ich bleibe zu Hause, <b>denn</b> ich <span class="rule-hl">bin</span> krank.</p>
+<div class="rule-box rule-green"><b>denn</b> (V auf Pos. 2) ≠ <b>weil</b> (V am Ende)</div>`,
+ru: `
 <h2>denn — ведь, потому что</h2>
-<div class="rule-formula">Hauptsatz, <span class="rule-hl">denn</span> + S + V + O (нормальный порядок!)</div>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">denn</span> + S + V + O</div>
 <p><b>denn</b> = потому что, ведь. Главное предложение — обычный порядок слов!</p>
 <p>Ich bleibe zu Hause, <b>denn</b> ich <span class="rule-hl">bin</span> krank.</p>
 <div class="rule-box rule-green"><b>denn</b> (V на Pos. 2) ≠ <b>weil</b> (V am Ende)</div>`,
+en: `
+<h2>denn — because, for</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">denn</span> + S + V + O</div>
+<p><b>denn</b> = because. Main clause — normal word order!</p>
+<p>Ich bleibe zu Hause, <b>denn</b> ich <span class="rule-hl">bin</span> krank.</p>
+<div class="rule-box rule-green"><b>denn</b> (V at Pos. 2) ≠ <b>weil</b> (V at end)</div>`,
+tr: `
+<h2>denn — çünkü</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">denn</span> + S + V + O</div>
+<p><b>denn</b> = çünkü. Ana cümle — normal sıra!</p>
+<p>Ich bleibe zu Hause, <b>denn</b> ich <span class="rule-hl">bin</span> krank.</p>
+<div class="rule-box rule-green"><b>denn</b> (V Pos. 2) ≠ <b>weil</b> (V sonda)</div>`,
+ar: `
+<h2>denn — لأن</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">denn</span> + S + V + O</div>
+<p><b>denn</b> = لأن. جملة رئيسية — ترتيب عادي!</p>
+<p>Ich bleibe zu Hause, <b>denn</b> ich <span class="rule-hl">bin</span> krank.</p>
+<div class="rule-box rule-green"><b>denn</b> (الفعل في الموقع 2) ≠ <b>weil</b> (الفعل في النهاية)</div>`,
+fa: `
+<h2>denn — زیرا</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">denn</span> + S + V + O</div>
+<p><b>denn</b> = زیرا. جمله اصلی — ترتیب عادی!</p>
+<p>Ich bleibe zu Hause, <b>denn</b> ich <span class="rule-hl">bin</span> krank.</p>
+<div class="rule-box rule-green"><b>denn</b> (فعل در موقعیت 2) ≠ <b>weil</b> (فعل در پایان)</div>`,
+vi: `
+<h2>denn — bởi vì</h2>
+<div class="rule-formula">Hauptsatz, <span class="rule-hl">denn</span> + S + V + O</div>
+<p><b>denn</b> = bởi vì. Mệnh đề chính — trật tự từ bình thường!</p>
+<p>Ich bleibe zu Hause, <b>denn</b> ich <span class="rule-hl">bin</span> krank.</p>
+<div class="rule-box rule-green"><b>denn</b> (V ở vị trí 2) ≠ <b>weil</b> (V ở cuối)</div>`
+},
 
-satz_aber: `
+satz_aber: {
+de: `
+<h2>aber / sondern — aber / sondern</h2>
+<div class="rule-formula">HS, <span class="rule-hl">aber</span> + S + V + O | HS, <span class="rule-hl2">sondern</span> + ...</div>
+<p><b>aber</b> = aber (Gegensatz):</p>
+<p>Das Essen ist teuer, <b>aber</b> es schmeckt gut.</p>
+<p><b>sondern</b> = sondern (nach Negation):</p>
+<p>Er trinkt nicht Kaffee, <b>sondern</b> Tee.`,
+ru: `
 <h2>aber / sondern — но</h2>
 <div class="rule-formula">HS, <span class="rule-hl">aber</span> + S + V + O | HS, <span class="rule-hl2">sondern</span> + ...</div>
 <p><b>aber</b> = но (противопоставление):</p>
 <p>Das Essen ist teuer, <b>aber</b> es schmeckt gut.</p>
 <p><b>sondern</b> = а (после отрицания):</p>
-<p>Er trinkt nicht Kaffee, <b>sondern</b> Tee.</p>`,
+<p>Er trinkt nicht Kaffee, <b>sondern</b> Tee.`,
+en: `
+<h2>aber / sondern — but</h2>
+<div class="rule-formula">HS, <span class="rule-hl">aber</span> + S + V + O | HS, <span class="rule-hl2">sondern</span> + ...</div>
+<p><b>aber</b> = but (contrast):</p>
+<p>Das Essen ist teuer, <b>aber</b> es schmeckt gut.</p>
+<p><b>sondern</b> = but rather (after negation):</p>
+<p>Er trinkt nicht Kaffee, <b>sondern</b> Tee.`,
+tr: `
+<h2>aber / sondern — ama</h2>
+<div class="rule-formula">HS, <span class="rule-hl">aber</span> + S + V + O | HS, <span class="rule-hl2">sondern</span> + ...</div>
+<p><b>aber</b> = ama (karşıtlık):</p>
+<p>Das Essen ist teuer, <b>aber</b> es schmeckt gut.</p>
+<p><b>sondern</b> = aksine (olumsuzlamadan sonra):</p>
+<p>Er trinkt nicht Kaffee, <b>sondern</b> Tee.`,
+ar: `
+<h2>aber / sondern — لكن</h2>
+<div class="rule-formula">HS, <span class="rule-hl">aber</span> + S + V + O | HS, <span class="rule-hl2">sondern</span> + ...</div>
+<p><b>aber</b> = لكن (تباين):</p>
+<p>Das Essen ist teuer, <b>aber</b> es schmeckt gut.</p>
+<p><b>sondern</b> = بل (بعد النفي):</p>
+<p>Er trinkt nicht Kaffee, <b>sondern</b> Tee.`,
+fa: `
+<h2>aber / sondern — ولی</h2>
+<div class="rule-formula">HS, <span class="rule-hl">aber</span> + S + V + O | HS, <span class="rule-hl2">sondern</span> + ...</div>
+<p><b>aber</b> = ولی (تضاد):</p>
+<p>Das Essen ist teuer, <b>aber</b> es schmeckt gut.</p>
+<p><b>sondern</b> = بلکه (بعد از نفی):</p>
+<p>Er trinkt nicht Kaffee, <b>sondern</b> Tee.`,
+vi: `
+<h2>aber / sondern — nhưng</h2>
+<div class="rule-formula">HS, <span class="rule-hl">aber</span> + S + V + O | HS, <span class="rule-hl2">sondern</span> + ...</div>
+<p><b>aber</b> = nhưng (tương phản):</p>
+<p>Das Essen ist teuer, <b>aber</b> es schmeckt gut.</p>
+<p><b>sondern</b> = mà là (sau phủ định):</p>
+<p>Er trinkt nicht Kaffee, <b>sondern</b> Tee.`
+},
 
-satz_trotzdem: `
+satz_trotzdem: {
+de: `
+<h2>trotzdem / deshalb — trotzdem / deshalb</h2>
+<div class="rule-formula"><span class="rule-hl">trotzdem/deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>Nach trotzdem und deshalb: <b>Inversion</b> (V+S)!</p>
+<p>Es regnet. <b>Trotzdem</b> <span class="rule-hl2">geht</span> er spazieren.</p>
+<p>Er ist müde. <b>Deshalb</b> <span class="rule-hl2">bleibt</span> er zu Hause.</p>
+<div class="rule-box rule-blue"><b>trotzdem</b> = trotzdem (entgegen)<br><b>deshalb</b> = deshalb (Folge)</div>`,
+ru: `
 <h2>trotzdem / deshalb — тем не менее / поэтому</h2>
 <div class="rule-formula"><span class="rule-hl">trotzdem/deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
 <p>После trotzdem и deshalb — <b>инверсия</b> (V+S)!</p>
 <p>Es regnet. <b>Trotzdem</b> <span class="rule-hl2">geht</span> er spazieren.</p>
 <p>Er ist müde. <b>Deshalb</b> <span class="rule-hl2">bleibt</span> er zu Hause.</p>
 <div class="rule-box rule-blue"><b>trotzdem</b> = тем не менее (вопреки)<br><b>deshalb</b> = поэтому (следствие)</div>`,
+en: `
+<h2>trotzdem / deshalb — nevertheless / therefore</h2>
+<div class="rule-formula"><span class="rule-hl">trotzdem/deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>After trotzdem and deshalb: <b>inversion</b> (V+S)!</p>
+<p>Es regnet. <b>Trotzdem</b> <span class="rule-hl2">geht</span> er spazieren.</p>
+<p>Er ist müde. <b>Deshalb</b> <span class="rule-hl2">bleibt</span> er zu Hause.</p>
+<div class="rule-box rule-blue"><b>trotzdem</b> = nevertheless (despite)<br><b>deshalb</b> = therefore (consequence)</div>`,
+tr: `
+<h2>trotzdem / deshalb — yine de / bu yüzden</h2>
+<div class="rule-formula"><span class="rule-hl">trotzdem/deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>trotzdem ve deshalb'den sonra: <b>devrik</b> (V+S)!</p>
+<p>Es regnet. <b>Trotzdem</b> <span class="rule-hl2">geht</span> er spazieren.</p>
+<p>Er ist müde. <b>Deshalb</b> <span class="rule-hl2">bleibt</span> er zu Hause.</p>
+<div class="rule-box rule-blue"><b>trotzdem</b> = yine de (buna rağmen)<br><b>deshalb</b> = bu yüzden (sonuç)</div>`,
+ar: `
+<h2>trotzdem / deshalb — رغم ذلك / لذلك</h2>
+<div class="rule-formula"><span class="rule-hl">trotzdem/deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>بعد trotzdem و deshalb: <b>قلب</b> (V+S)!</p>
+<p>Es regnet. <b>Trotzdem</b> <span class="rule-hl2">geht</span> er spazieren.</p>
+<p>Er ist müde. <b>Deshalb</b> <span class="rule-hl2">bleibt</span> er zu Hause.</p>
+<div class="rule-box rule-blue"><b>trotzdem</b> = رغم ذلك<br><b>deshalb</b> = لذلك (نتيجة)</div>`,
+fa: `
+<h2>trotzdem / deshalb — با این حال / بنابراین</h2>
+<div class="rule-formula"><span class="rule-hl">trotzdem/deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>بعد از trotzdem و deshalb: <b>وارونه</b> (V+S)!</p>
+<p>Es regnet. <b>Trotzdem</b> <span class="rule-hl2">geht</span> er spazieren.</p>
+<p>Er ist müde. <b>Deshalb</b> <span class="rule-hl2">bleibt</span> er zu Hause.</p>
+<div class="rule-box rule-blue"><b>trotzdem</b> = با این حال (علی‌رغم)<br><b>deshalb</b> = بنابراین (نتیجه)</div>`,
+vi: `
+<h2>trotzdem / deshalb — tuy nhiên / vì vậy</h2>
+<div class="rule-formula"><span class="rule-hl">trotzdem/deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>Sau trotzdem và deshalb: <b>đảo</b> (V+S)!</p>
+<p>Es regnet. <b>Trotzdem</b> <span class="rule-hl2">geht</span> er spazieren.</p>
+<p>Er ist müde. <b>Deshalb</b> <span class="rule-hl2">bleibt</span> er zu Hause.</p>
+<div class="rule-box rule-blue"><b>trotzdem</b> = tuy nhiên (bất chấp)<br><b>deshalb</b> = vì vậy (hệ quả)</div>`
+},
 
-satz_nachdem: `
+satz_nachdem: {
+de: `
+<h2>nachdem / bevor — nachdem / bevor</h2>
+<div class="rule-formula"><span class="rule-hl">Nachdem</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>nachdem</b> = nachdem. Wichtig: verschiedene Zeiten!</p>
+<p><b>Nachdem</b> er gegessen <span class="rule-hl2">hatte</span>, ging er spazieren. (Plusquamperfekt → Präteritum)</p>
+<p><b>bevor</b> = bevor:</p>
+<p><b>Bevor</b> du <span class="rule-hl2">gehst</span>, ruf mich an!</p>`,
+ru: `
 <h2>nachdem / bevor — после того как / прежде чем</h2>
 <div class="rule-formula"><span class="rule-hl">Nachdem</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
 <p><b>nachdem</b> = после того как. Важно: разные времена!</p>
 <p><b>Nachdem</b> er gegessen <span class="rule-hl2">hatte</span>, ging er spazieren. (Plusquamperfekt → Präteritum)</p>
 <p><b>bevor</b> = прежде чем:</p>
 <p><b>Bevor</b> du <span class="rule-hl2">gehst</span>, ruf mich an!</p>`,
+en: `
+<h2>nachdem / bevor — after / before</h2>
+<div class="rule-formula"><span class="rule-hl">Nachdem</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>nachdem</b> = after. Important: different tenses!</p>
+<p><b>Nachdem</b> er gegessen <span class="rule-hl2">hatte</span>, ging er spazieren. (Plusquamperfekt → Präteritum)</p>
+<p><b>bevor</b> = before:</p>
+<p><b>Bevor</b> du <span class="rule-hl2">gehst</span>, ruf mich an!</p>`,
+tr: `
+<h2>nachdem / bevor — -dıktan sonra / -meden önce</h2>
+<div class="rule-formula"><span class="rule-hl">Nachdem</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>nachdem</b> = -dıktan sonra. Önemli: farklı zamanlar!</p>
+<p><b>Nachdem</b> er gegessen <span class="rule-hl2">hatte</span>, ging er spazieren. (Plusquamperfekt → Präteritum)</p>
+<p><b>bevor</b> = -meden önce:</p>
+<p><b>Bevor</b> du <span class="rule-hl2">gehst</span>, ruf mich an!</p>`,
+ar: `
+<h2>nachdem / bevor — بعد أن / قبل أن</h2>
+<div class="rule-formula"><span class="rule-hl">Nachdem</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>nachdem</b> = بعد أن. مهم: أزمنة مختلفة!</p>
+<p><b>Nachdem</b> er gegessen <span class="rule-hl2">hatte</span>, ging er spazieren. (Plusquamperfekt → Präteritum)</p>
+<p><b>bevor</b> = قبل أن:</p>
+<p><b>Bevor</b> du <span class="rule-hl2">gehst</span>, ruf mich an!</p>`,
+fa: `
+<h2>nachdem / bevor — بعد از آنکه / قبل از آنکه</h2>
+<div class="rule-formula"><span class="rule-hl">Nachdem</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>nachdem</b> = بعد از آنکه. مهم: زمان‌های متفاوت!</p>
+<p><b>Nachdem</b> er gegessen <span class="rule-hl2">hatte</span>, ging er spazieren. (Plusquamperfekt → Präteritum)</p>
+<p><b>bevor</b> = قبل از آنکه:</p>
+<p><b>Bevor</b> du <span class="rule-hl2">gehst</span>, ruf mich an!</p>`,
+vi: `
+<h2>nachdem / bevor — sau khi / trước khi</h2>
+<div class="rule-formula"><span class="rule-hl">Nachdem</span> + S + ... + <span class="rule-hl2">V(Ende)</span>, V + S + ...</div>
+<p><b>nachdem</b> = sau khi. Quan trọng: thì khác nhau!</p>
+<p><b>Nachdem</b> er gegessen <span class="rule-hl2">hatte</span>, ging er spazieren. (Plusquamperfekt → Präteritum)</p>
+<p><b>bevor</b> = trước khi:</p>
+<p><b>Bevor</b> du <span class="rule-hl2">gehst</span>, ruf mich an!</p>`
+},
 
 satz_passiv: {
 de: `
@@ -1684,14 +2142,65 @@ vi: `
 <div class="rule-box rule-green"><b>An deiner Stelle würde ich...</b> — lời khuyên lịch sự</div>`
 },
 
-satz_je_desto: `
+satz_je_desto: {
+de: `
+<h2>je...desto — je...desto</h2>
+<div class="rule-formula"><span class="rule-hl">Je</span> + Komparativ + S + V(Ende), <span class="rule-hl2">desto</span> + Komparativ + V + S</div>
+<p><b>Je</b> mehr man übt, <b>desto</b> besser wird man.</p>
+<p><b>Je</b> älter man wird, <b>desto</b> weiser wird man.</p>
+<div class="rule-box rule-blue">Im je-Teil: Verb am Ende!<br>Im desto-Teil: Inversion (V+S)!</div>`,
+ru: `
 <h2>je...desto — чем...тем</h2>
 <div class="rule-formula"><span class="rule-hl">Je</span> + Komparativ + S + V(Ende), <span class="rule-hl2">desto</span> + Komparativ + V + S</div>
 <p><b>Je</b> mehr man übt, <b>desto</b> besser wird man.</p>
 <p><b>Je</b> älter man wird, <b>desto</b> weiser wird man.</p>
 <div class="rule-box rule-blue">В je-части: Verb am Ende!<br>В desto-части: Inversion (V+S)!</div>`,
+en: `
+<h2>je...desto — the...the</h2>
+<div class="rule-formula"><span class="rule-hl">Je</span> + Komparativ + S + V(Ende), <span class="rule-hl2">desto</span> + Komparativ + V + S</div>
+<p><b>Je</b> mehr man übt, <b>desto</b> besser wird man.</p>
+<p><b>Je</b> älter man wird, <b>desto</b> weiser wird man.</p>
+<div class="rule-box rule-blue">In the je-part: verb at the end!<br>In the desto-part: inversion (V+S)!</div>`,
+tr: `
+<h2>je...desto — ne kadar...o kadar</h2>
+<div class="rule-formula"><span class="rule-hl">Je</span> + Komparativ + S + V(Ende), <span class="rule-hl2">desto</span> + Komparativ + V + S</div>
+<p><b>Je</b> mehr man übt, <b>desto</b> besser wird man.</p>
+<p><b>Je</b> älter man wird, <b>desto</b> weiser wird man.</p>
+<div class="rule-box rule-blue">je kısmında: fiil sonda!<br>desto kısmında: devrik (V+S)!</div>`,
+ar: `
+<h2>je...desto — كلما...كلما</h2>
+<div class="rule-formula"><span class="rule-hl">Je</span> + Komparativ + S + V(Ende), <span class="rule-hl2">desto</span> + Komparativ + V + S</div>
+<p><b>Je</b> mehr man übt, <b>desto</b> besser wird man.</p>
+<p><b>Je</b> älter man wird, <b>desto</b> weiser wird man.</p>
+<div class="rule-box rule-blue">في قسم je: الفعل في النهاية!<br>في قسم desto: قلب (V+S)!</div>`,
+fa: `
+<h2>je...desto — هرچه...آنقدر</h2>
+<div class="rule-formula"><span class="rule-hl">Je</span> + Komparativ + S + V(Ende), <span class="rule-hl2">desto</span> + Komparativ + V + S</div>
+<p><b>Je</b> mehr man übt, <b>desto</b> besser wird man.</p>
+<p><b>Je</b> älter man wird, <b>desto</b> weiser wird man.</p>
+<div class="rule-box rule-blue">در بخش je: فعل در پایان!<br>در بخش desto: وارونه (V+S)!</div>`,
+vi: `
+<h2>je...desto — càng...càng</h2>
+<div class="rule-formula"><span class="rule-hl">Je</span> + Komparativ + S + V(Ende), <span class="rule-hl2">desto</span> + Komparativ + V + S</div>
+<p><b>Je</b> mehr man übt, <b>desto</b> besser wird man.</p>
+<p><b>Je</b> älter man wird, <b>desto</b> weiser wird man.</p>
+<div class="rule-box rule-blue">Ở phần je: động từ ở cuối!<br>Ở phần desto: đảo (V+S)!</div>`
+},
 
-satz_relativ: `
+satz_relativ: {
+de: `
+<h2>Relativsätze — Relativsätze</h2>
+<div class="rule-formula">Nomen, + <span class="rule-hl">Relativpronomen</span> + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<table class="rule-table">
+<tr><th></th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr>
+<tr><td>Nom</td><td><b>der</b></td><td><b>die</b></td><td><b>das</b></td><td><b>die</b></td></tr>
+<tr><td>Akk</td><td><span class="rule-hl">den</span></td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Dat</td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">der</span></td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">denen</span></td></tr>
+<tr><td>Gen</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
+</table>
+<p>Der Mann, <b>der</b> dort <span class="rule-hl2">steht</span>, ist mein Lehrer.</p>
+<p>Die Frau, <b>die</b> ich gestern <span class="rule-hl2">getroffen habe</span>, ist Ärztin.`,
+ru: `
 <h2>Relativsätze — Относительные предложения</h2>
 <div class="rule-formula">Nomen, + <span class="rule-hl">Relativpronomen</span> + ... + <span class="rule-hl2">Verb(Ende)</span></div>
 <table class="rule-table">
@@ -1702,28 +2211,207 @@ satz_relativ: `
 <tr><td>Gen</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
 </table>
 <p>Der Mann, <b>der</b> dort <span class="rule-hl2">steht</span>, ist mein Lehrer.</p>
-<p>Die Frau, <b>die</b> ich gestern <span class="rule-hl2">getroffen habe</span>, ist Ärztin.</p>`,
+<p>Die Frau, <b>die</b> ich gestern <span class="rule-hl2">getroffen habe</span>, ist Ärztin.`,
+en: `
+<h2>Relativsätze — Relative clauses</h2>
+<div class="rule-formula">Nomen, + <span class="rule-hl">Relativpronomen</span> + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<table class="rule-table">
+<tr><th></th><th>Masc.</th><th>Fem.</th><th>Neut.</th><th>Plural</th></tr>
+<tr><td>Nom</td><td><b>der</b></td><td><b>die</b></td><td><b>das</b></td><td><b>die</b></td></tr>
+<tr><td>Akk</td><td><span class="rule-hl">den</span></td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Dat</td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">der</span></td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">denen</span></td></tr>
+<tr><td>Gen</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
+</table>
+<p>Der Mann, <b>der</b> dort <span class="rule-hl2">steht</span>, ist mein Lehrer.</p>
+<p>Die Frau, <b>die</b> ich gestern <span class="rule-hl2">getroffen habe</span>, ist Ärztin.`,
+tr: `
+<h2>Relativsätze — İlgi cümleleri</h2>
+<div class="rule-formula">Nomen, + <span class="rule-hl">Relativpronomen</span> + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<table class="rule-table">
+<tr><th></th><th>Eril</th><th>Dişil</th><th>Nötr</th><th>Çoğul</th></tr>
+<tr><td>Nom</td><td><b>der</b></td><td><b>die</b></td><td><b>das</b></td><td><b>die</b></td></tr>
+<tr><td>Akk</td><td><span class="rule-hl">den</span></td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Dat</td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">der</span></td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">denen</span></td></tr>
+<tr><td>Gen</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
+</table>
+<p>Der Mann, <b>der</b> dort <span class="rule-hl2">steht</span>, ist mein Lehrer.</p>
+<p>Die Frau, <b>die</b> ich gestern <span class="rule-hl2">getroffen habe</span>, ist Ärztin.`,
+ar: `
+<h2>Relativsätze — جمل الوصل</h2>
+<div class="rule-formula">Nomen, + <span class="rule-hl">Relativpronomen</span> + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<table class="rule-table">
+<tr><th></th><th>مذكر</th><th>مؤنث</th><th>محايد</th><th>جمع</th></tr>
+<tr><td>Nom</td><td><b>der</b></td><td><b>die</b></td><td><b>das</b></td><td><b>die</b></td></tr>
+<tr><td>Akk</td><td><span class="rule-hl">den</span></td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Dat</td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">der</span></td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">denen</span></td></tr>
+<tr><td>Gen</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
+</table>
+<p>Der Mann, <b>der</b> dort <span class="rule-hl2">steht</span>, ist mein Lehrer.</p>
+<p>Die Frau, <b>die</b> ich gestern <span class="rule-hl2">getroffen habe</span>, ist Ärztin.`,
+fa: `
+<h2>Relativsätze — جملات موصولی</h2>
+<div class="rule-formula">Nomen, + <span class="rule-hl">Relativpronomen</span> + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<table class="rule-table">
+<tr><th></th><th>مذکر</th><th>مؤنث</th><th>خنثی</th><th>جمع</th></tr>
+<tr><td>Nom</td><td><b>der</b></td><td><b>die</b></td><td><b>das</b></td><td><b>die</b></td></tr>
+<tr><td>Akk</td><td><span class="rule-hl">den</span></td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Dat</td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">der</span></td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">denen</span></td></tr>
+<tr><td>Gen</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
+</table>
+<p>Der Mann, <b>der</b> dort <span class="rule-hl2">steht</span>, ist mein Lehrer.</p>
+<p>Die Frau, <b>die</b> ich gestern <span class="rule-hl2">getroffen habe</span>, ist Ärztin.`,
+vi: `
+<h2>Relativsätze — Mệnh đề quan hệ</h2>
+<div class="rule-formula">Nomen, + <span class="rule-hl">Relativpronomen</span> + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<table class="rule-table">
+<tr><th></th><th>g.đực</th><th>g.cái</th><th>t.tính</th><th>số nh.</th></tr>
+<tr><td>Nom</td><td><b>der</b></td><td><b>die</b></td><td><b>das</b></td><td><b>die</b></td></tr>
+<tr><td>Akk</td><td><span class="rule-hl">den</span></td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Dat</td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">der</span></td><td><span class="rule-hl2">dem</span></td><td><span class="rule-hl2">denen</span></td></tr>
+<tr><td>Gen</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
+</table>
+<p>Der Mann, <b>der</b> dort <span class="rule-hl2">steht</span>, ist mein Lehrer.</p>
+<p>Die Frau, <b>die</b> ich gestern <span class="rule-hl2">getroffen habe</span>, ist Ärztin.`
+},
 
-satz_bevor: `
-<h2>bevor — перед тем как</h2>
+satz_bevor: {
+de: `
+<h2>bevor — bevor</h2>
 <div class="rule-formula">HS, <span class="rule-hl">bevor</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
-<p><b>bevor</b> вводит придаточное времени. Действие в придаточном происходит ПОЗЖЕ действия главного.</p>
+<p><b>bevor</b> leitet einen Nebensatz ein — das Verb steht am Ende.</p>
+<table class="rule-table">
+<tr><th>HS</th><th>Konj.</th><th>Subjekt</th><th>...</th><th>Verb</th></tr>
+<tr><td>Ich frühstücke,</td><td><b>bevor</b></td><td>ich</td><td>zur Arbeit</td><td><b>gehe</b>.</td></tr>
+</table>
+<p>Wasch dir die Hände, <b>bevor</b> du <span class="rule-hl2">isst</span>.</p>
+<p>Bevor ich nach Hause <span class="rule-hl2">komme</span>, kaufe ich Brot.</p>`,
+ru: `
+<h2>bevor — прежде чем</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bevor</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bevor</b> вводит придаточное — глагол идёт в конец.</p>
 <table class="rule-table">
 <tr><th>Главное</th><th>Союз</th><th>Подлежащее</th><th>...</th><th>Глагол</th></tr>
 <tr><td>Ich frühstücke,</td><td><b>bevor</b></td><td>ich</td><td>zur Arbeit</td><td><b>gehe</b>.</td></tr>
 </table>
 <p>Wasch dir die Hände, <b>bevor</b> du <span class="rule-hl2">isst</span>.</p>
 <p>Bevor ich nach Hause <span class="rule-hl2">komme</span>, kaufe ich Brot.</p>`,
+en: `
+<h2>bevor — before</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bevor</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bevor</b> introduces a subordinate clause — verb at the end.</p>
+<table class="rule-table">
+<tr><th>Main</th><th>Conj.</th><th>Subject</th><th>...</th><th>Verb</th></tr>
+<tr><td>Ich frühstücke,</td><td><b>bevor</b></td><td>ich</td><td>zur Arbeit</td><td><b>gehe</b>.</td></tr>
+</table>
+<p>Wasch dir die Hände, <b>bevor</b> du <span class="rule-hl2">isst</span>.</p>
+<p>Bevor ich nach Hause <span class="rule-hl2">komme</span>, kaufe ich Brot.</p>`,
+tr: `
+<h2>bevor — -meden önce</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bevor</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bevor</b> yan cümle başlatır — fiil sonda.</p>
+<table class="rule-table">
+<tr><th>Ana</th><th>Bağlaç</th><th>Özne</th><th>...</th><th>Fiil</th></tr>
+<tr><td>Ich frühstücke,</td><td><b>bevor</b></td><td>ich</td><td>zur Arbeit</td><td><b>gehe</b>.</td></tr>
+</table>
+<p>Wasch dir die Hände, <b>bevor</b> du <span class="rule-hl2">isst</span>.</p>
+<p>Bevor ich nach Hause <span class="rule-hl2">komme</span>, kaufe ich Brot.</p>`,
+ar: `
+<h2>bevor — قبل أن</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bevor</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bevor</b> تبدأ جملة تابعة — الفعل في النهاية.</p>
+<table class="rule-table">
+<tr><th>الرئيسية</th><th>الرابط</th><th>الفاعل</th><th>...</th><th>الفعل</th></tr>
+<tr><td>Ich frühstücke,</td><td><b>bevor</b></td><td>ich</td><td>zur Arbeit</td><td><b>gehe</b>.</td></tr>
+</table>
+<p>Wasch dir die Hände, <b>bevor</b> du <span class="rule-hl2">isst</span>.</p>
+<p>Bevor ich nach Hause <span class="rule-hl2">komme</span>, kaufe ich Brot.</p>`,
+fa: `
+<h2>bevor — قبل از آنکه</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bevor</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bevor</b> یک جمله فرعی را آغاز می‌کند — فعل در پایان.</p>
+<table class="rule-table">
+<tr><th>اصلی</th><th>رابط</th><th>فاعل</th><th>...</th><th>فعل</th></tr>
+<tr><td>Ich frühstücke,</td><td><b>bevor</b></td><td>ich</td><td>zur Arbeit</td><td><b>gehe</b>.</td></tr>
+</table>
+<p>Wasch dir die Hände, <b>bevor</b> du <span class="rule-hl2">isst</span>.</p>
+<p>Bevor ich nach Hause <span class="rule-hl2">komme</span>, kaufe ich Brot.</p>`,
+vi: `
+<h2>bevor — trước khi</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bevor</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bevor</b> giới thiệu mệnh đề phụ — động từ ở cuối.</p>
+<table class="rule-table">
+<tr><th>Chính</th><th>Liên từ</th><th>Chủ ngữ</th><th>...</th><th>Động từ</th></tr>
+<tr><td>Ich frühstücke,</td><td><b>bevor</b></td><td>ich</td><td>zur Arbeit</td><td><b>gehe</b>.</td></tr>
+</table>
+<p>Wasch dir die Hände, <b>bevor</b> du <span class="rule-hl2">isst</span>.</p>
+<p>Bevor ich nach Hause <span class="rule-hl2">komme</span>, kaufe ich Brot.</p>`
+},
 
-satz_bis: `
+satz_bis: {
+de: `
+<h2>bis — bis</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bis</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bis</b> bezeichnet einen Endpunkt in der Zeit.</p>
+<p>Ich warte hier, <b>bis</b> du <span class="rule-hl2">kommst</span>.</p>
+<p>Bleib im Bett, <b>bis</b> der Arzt <span class="rule-hl2">kommt</span>!</p>
+<p>Wir spielen, <b>bis</b> es dunkel <span class="rule-hl2">wird</span>.`,
+ru: `
 <h2>bis — до тех пор пока (не)</h2>
 <div class="rule-formula">HS, <span class="rule-hl">bis</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
 <p><b>bis</b> обозначает конечную точку во времени.</p>
 <p>Ich warte hier, <b>bis</b> du <span class="rule-hl2">kommst</span>.</p>
 <p>Bleib im Bett, <b>bis</b> der Arzt <span class="rule-hl2">kommt</span>!</p>
-<p>Wir spielen, <b>bis</b> es dunkel <span class="rule-hl2">wird</span>.</p>`,
+<p>Wir spielen, <b>bis</b> es dunkel <span class="rule-hl2">wird</span>.`,
+en: `
+<h2>bis — until</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bis</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bis</b> marks an end point in time.</p>
+<p>Ich warte hier, <b>bis</b> du <span class="rule-hl2">kommst</span>.</p>
+<p>Bleib im Bett, <b>bis</b> der Arzt <span class="rule-hl2">kommt</span>!</p>
+<p>Wir spielen, <b>bis</b> es dunkel <span class="rule-hl2">wird</span>.`,
+tr: `
+<h2>bis — -ene kadar</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bis</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bis</b> zamanda bir son noktayı belirtir.</p>
+<p>Ich warte hier, <b>bis</b> du <span class="rule-hl2">kommst</span>.</p>
+<p>Bleib im Bett, <b>bis</b> der Arzt <span class="rule-hl2">kommt</span>!</p>
+<p>Wir spielen, <b>bis</b> es dunkel <span class="rule-hl2">wird</span>.`,
+ar: `
+<h2>bis — حتى</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bis</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bis</b> تشير إلى نقطة نهاية في الزمن.</p>
+<p>Ich warte hier, <b>bis</b> du <span class="rule-hl2">kommst</span>.</p>
+<p>Bleib im Bett, <b>bis</b> der Arzt <span class="rule-hl2">kommt</span>!</p>
+<p>Wir spielen, <b>bis</b> es dunkel <span class="rule-hl2">wird</span>.`,
+fa: `
+<h2>bis — تا زمانی که</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bis</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bis</b> یک نقطه پایانی در زمان را مشخص می‌کند.</p>
+<p>Ich warte hier, <b>bis</b> du <span class="rule-hl2">kommst</span>.</p>
+<p>Bleib im Bett, <b>bis</b> der Arzt <span class="rule-hl2">kommt</span>!</p>
+<p>Wir spielen, <b>bis</b> es dunkel <span class="rule-hl2">wird</span>.`,
+vi: `
+<h2>bis — cho đến khi</h2>
+<div class="rule-formula">HS, <span class="rule-hl">bis</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>bis</b> đánh dấu điểm kết thúc trong thời gian.</p>
+<p>Ich warte hier, <b>bis</b> du <span class="rule-hl2">kommst</span>.</p>
+<p>Bleib im Bett, <b>bis</b> der Arzt <span class="rule-hl2">kommt</span>!</p>
+<p>Wir spielen, <b>bis</b> es dunkel <span class="rule-hl2">wird</span>.`
+},
 
-satz_deshalb: `
+satz_deshalb: {
+de: `
+<h2>deshalb / darum / deswegen — deshalb</h2>
+<div class="rule-formula">HS1. <span class="rule-hl">Deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>Konjunktionaladverbien — danach <b>Inversion</b> (Verb auf Pos. 2, Subjekt danach).</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Verb)</th><th>Pos. 3</th><th>...</th></tr>
+<tr><td><b>Deshalb</b></td><td><b>bleibe</b></td><td>ich</td><td>zu Hause.</td></tr>
+</table>
+<p>Es regnet. <b>Deshalb</b> <span class="rule-hl2">nehme</span> ich den Regenschirm.</p>
+<p>Ich bin müde. <b>Darum</b> <span class="rule-hl2">gehe</span> ich ins Bett.</p>
+<p>Er war krank. <b>Deswegen</b> <span class="rule-hl2">ist</span> er nicht gekommen.`,
+ru: `
 <h2>deshalb / darum / deswegen — поэтому</h2>
 <div class="rule-formula">HS1. <span class="rule-hl">Deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
 <p>Союзные наречия — после них идёт ИНВЕРСИЯ (глагол на 2-м месте, подлежащее после).</p>
@@ -1733,25 +2421,179 @@ satz_deshalb: `
 </table>
 <p>Es regnet. <b>Deshalb</b> <span class="rule-hl2">nehme</span> ich den Regenschirm.</p>
 <p>Ich bin müde. <b>Darum</b> <span class="rule-hl2">gehe</span> ich ins Bett.</p>
-<p>Er war krank. <b>Deswegen</b> <span class="rule-hl2">ist</span> er nicht gekommen.</p>`,
+<p>Er war krank. <b>Deswegen</b> <span class="rule-hl2">ist</span> er nicht gekommen.`,
+en: `
+<h2>deshalb / darum / deswegen — therefore</h2>
+<div class="rule-formula">HS1. <span class="rule-hl">Deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>Conjunctional adverbs — followed by <b>inversion</b> (verb at position 2, subject after).</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Verb)</th><th>Pos. 3</th><th>...</th></tr>
+<tr><td><b>Deshalb</b></td><td><b>bleibe</b></td><td>ich</td><td>zu Hause.</td></tr>
+</table>
+<p>Es regnet. <b>Deshalb</b> <span class="rule-hl2">nehme</span> ich den Regenschirm.</p>
+<p>Ich bin müde. <b>Darum</b> <span class="rule-hl2">gehe</span> ich ins Bett.</p>
+<p>Er war krank. <b>Deswegen</b> <span class="rule-hl2">ist</span> er nicht gekommen.`,
+tr: `
+<h2>deshalb / darum / deswegen — bu yüzden</h2>
+<div class="rule-formula">HS1. <span class="rule-hl">Deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>Bağlaç zarfları — bunlardan sonra <b>devrik</b> (fiil 2. pozisyonda, özne sonra).</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Verb)</th><th>Pos. 3</th><th>...</th></tr>
+<tr><td><b>Deshalb</b></td><td><b>bleibe</b></td><td>ich</td><td>zu Hause.</td></tr>
+</table>
+<p>Es regnet. <b>Deshalb</b> <span class="rule-hl2">nehme</span> ich den Regenschirm.</p>
+<p>Ich bin müde. <b>Darum</b> <span class="rule-hl2">gehe</span> ich ins Bett.</p>
+<p>Er war krank. <b>Deswegen</b> <span class="rule-hl2">ist</span> er nicht gekommen.`,
+ar: `
+<h2>deshalb / darum / deswegen — لذلك</h2>
+<div class="rule-formula">HS1. <span class="rule-hl">Deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>أحرف عطف — بعدها <b>قلب</b> (الفعل في الموقع 2، الفاعل بعده).</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Verb)</th><th>Pos. 3</th><th>...</th></tr>
+<tr><td><b>Deshalb</b></td><td><b>bleibe</b></td><td>ich</td><td>zu Hause.</td></tr>
+</table>
+<p>Es regnet. <b>Deshalb</b> <span class="rule-hl2">nehme</span> ich den Regenschirm.</p>
+<p>Ich bin müde. <b>Darum</b> <span class="rule-hl2">gehe</span> ich ins Bett.</p>
+<p>Er war krank. <b>Deswegen</b> <span class="rule-hl2">ist</span> er nicht gekommen.`,
+fa: `
+<h2>deshalb / darum / deswegen — بنابراین</h2>
+<div class="rule-formula">HS1. <span class="rule-hl">Deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>قیدهای ربطی — پس از آنها <b>وارونه</b> (فعل در موقعیت 2، فاعل بعد).</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Verb)</th><th>Pos. 3</th><th>...</th></tr>
+<tr><td><b>Deshalb</b></td><td><b>bleibe</b></td><td>ich</td><td>zu Hause.</td></tr>
+</table>
+<p>Es regnet. <b>Deshalb</b> <span class="rule-hl2">nehme</span> ich den Regenschirm.</p>
+<p>Ich bin müde. <b>Darum</b> <span class="rule-hl2">gehe</span> ich ins Bett.</p>
+<p>Er war krank. <b>Deswegen</b> <span class="rule-hl2">ist</span> er nicht gekommen.`,
+vi: `
+<h2>deshalb / darum / deswegen — vì vậy</h2>
+<div class="rule-formula">HS1. <span class="rule-hl">Deshalb</span> + <span class="rule-hl2">Verb</span> + Subjekt + ...</div>
+<p>Trạng từ liên từ — sau chúng là <b>đảo</b> (động từ ở vị trí 2, chủ ngữ sau).</p>
+<table class="rule-table">
+<tr><th>Pos. 1</th><th>Pos. 2 (Verb)</th><th>Pos. 3</th><th>...</th></tr>
+<tr><td><b>Deshalb</b></td><td><b>bleibe</b></td><td>ich</td><td>zu Hause.</td></tr>
+</table>
+<p>Es regnet. <b>Deshalb</b> <span class="rule-hl2">nehme</span> ich den Regenschirm.</p>
+<p>Ich bin müde. <b>Darum</b> <span class="rule-hl2">gehe</span> ich ins Bett.</p>
+<p>Er war krank. <b>Deswegen</b> <span class="rule-hl2">ist</span> er nicht gekommen.`
+},
 
-satz_seitdem: `
+satz_seitdem: {
+de: `
+<h2>seit / seitdem — seit / seitdem</h2>
+<div class="rule-formula">HS, <span class="rule-hl">seitdem</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>seit/seitdem</b> leitet einen Temporal-Nebensatz ein — die Handlung begann in der Vergangenheit und dauert an.</p>
+<p>Ich lerne Deutsch, <b>seitdem</b> ich in Wien <span class="rule-hl2">wohne</span>.</p>
+<p><b>Seit</b> er Sport <span class="rule-hl2">macht</span>, fühlt er sich besser.</p>
+<p>Es regnet, <b>seitdem</b> wir hier <span class="rule-hl2">sind</span>.`,
+ru: `
 <h2>seit / seitdem — с тех пор как</h2>
 <div class="rule-formula">HS, <span class="rule-hl">seitdem</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
 <p><b>seit/seitdem</b> вводит придаточное времени — действие началось в прошлом и продолжается.</p>
 <p>Ich lerne Deutsch, <b>seitdem</b> ich in Wien <span class="rule-hl2">wohne</span>.</p>
 <p><b>Seit</b> er Sport <span class="rule-hl2">macht</span>, fühlt er sich besser.</p>
-<p>Es regnet, <b>seitdem</b> wir hier <span class="rule-hl2">sind</span>.</p>`,
+<p>Es regnet, <b>seitdem</b> wir hier <span class="rule-hl2">sind</span>.`,
+en: `
+<h2>seit / seitdem — since</h2>
+<div class="rule-formula">HS, <span class="rule-hl">seitdem</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>seit/seitdem</b> introduces a temporal clause — the action started in the past and continues.</p>
+<p>Ich lerne Deutsch, <b>seitdem</b> ich in Wien <span class="rule-hl2">wohne</span>.</p>
+<p><b>Seit</b> er Sport <span class="rule-hl2">macht</span>, fühlt er sich besser.</p>
+<p>Es regnet, <b>seitdem</b> wir hier <span class="rule-hl2">sind</span>.`,
+tr: `
+<h2>seit / seitdem — -den beri</h2>
+<div class="rule-formula">HS, <span class="rule-hl">seitdem</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>seit/seitdem</b> zaman yan cümlesi başlatır — eylem geçmişte başlamış ve devam ediyor.</p>
+<p>Ich lerne Deutsch, <b>seitdem</b> ich in Wien <span class="rule-hl2">wohne</span>.</p>
+<p><b>Seit</b> er Sport <span class="rule-hl2">macht</span>, fühlt er sich besser.</p>
+<p>Es regnet, <b>seitdem</b> wir hier <span class="rule-hl2">sind</span>.`,
+ar: `
+<h2>seit / seitdem — منذ أن</h2>
+<div class="rule-formula">HS, <span class="rule-hl">seitdem</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>seit/seitdem</b> تبدأ جملة زمنية — بدأ الفعل في الماضي ولا يزال مستمراً.</p>
+<p>Ich lerne Deutsch, <b>seitdem</b> ich in Wien <span class="rule-hl2">wohne</span>.</p>
+<p><b>Seit</b> er Sport <span class="rule-hl2">macht</span>, fühlt er sich besser.</p>
+<p>Es regnet, <b>seitdem</b> wir hier <span class="rule-hl2">sind</span>.`,
+fa: `
+<h2>seit / seitdem — از زمانی که</h2>
+<div class="rule-formula">HS, <span class="rule-hl">seitdem</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>seit/seitdem</b> یک جمله زمانی را آغاز می‌کند — عمل در گذشته شروع شده و ادامه دارد.</p>
+<p>Ich lerne Deutsch, <b>seitdem</b> ich in Wien <span class="rule-hl2">wohne</span>.</p>
+<p><b>Seit</b> er Sport <span class="rule-hl2">macht</span>, fühlt er sich besser.</p>
+<p>Es regnet, <b>seitdem</b> wir hier <span class="rule-hl2">sind</span>.`,
+vi: `
+<h2>seit / seitdem — kể từ khi</h2>
+<div class="rule-formula">HS, <span class="rule-hl">seitdem</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>seit/seitdem</b> giới thiệu mệnh đề thời gian — hành động bắt đầu trong quá khứ và tiếp tục.</p>
+<p>Ich lerne Deutsch, <b>seitdem</b> ich in Wien <span class="rule-hl2">wohne</span>.</p>
+<p><b>Seit</b> er Sport <span class="rule-hl2">macht</span>, fühlt er sich besser.</p>
+<p>Es regnet, <b>seitdem</b> wir hier <span class="rule-hl2">sind</span>.`
+},
 
-satz_sobald: `
+satz_sobald: {
+de: `
+<h2>sobald — sobald</h2>
+<div class="rule-formula">HS, <span class="rule-hl">sobald</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>sobald</b> — Handlungen folgen unmittelbar aufeinander.</p>
+<p>Ich rufe dich an, <b>sobald</b> ich zu Hause <span class="rule-hl2">bin</span>.</p>
+<p><b>Sobald</b> die Sonne <span class="rule-hl2">scheint</span>, gehen wir in den Park.</p>
+<p>Wir fangen an, <b>sobald</b> alle da <span class="rule-hl2">sind</span>.`,
+ru: `
 <h2>sobald — как только</h2>
 <div class="rule-formula">HS, <span class="rule-hl">sobald</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
 <p><b>sobald</b> — действия следуют непосредственно одно за другим.</p>
 <p>Ich rufe dich an, <b>sobald</b> ich zu Hause <span class="rule-hl2">bin</span>.</p>
 <p><b>Sobald</b> die Sonne <span class="rule-hl2">scheint</span>, gehen wir in den Park.</p>
-<p>Wir fangen an, <b>sobald</b> alle da <span class="rule-hl2">sind</span>.</p>`,
+<p>Wir fangen an, <b>sobald</b> alle da <span class="rule-hl2">sind</span>.`,
+en: `
+<h2>sobald — as soon as</h2>
+<div class="rule-formula">HS, <span class="rule-hl">sobald</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>sobald</b> — actions follow immediately one after another.</p>
+<p>Ich rufe dich an, <b>sobald</b> ich zu Hause <span class="rule-hl2">bin</span>.</p>
+<p><b>Sobald</b> die Sonne <span class="rule-hl2">scheint</span>, gehen wir in den Park.</p>
+<p>Wir fangen an, <b>sobald</b> alle da <span class="rule-hl2">sind</span>.`,
+tr: `
+<h2>sobald — -er -mez</h2>
+<div class="rule-formula">HS, <span class="rule-hl">sobald</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>sobald</b> — eylemler hemen art arda gelir.</p>
+<p>Ich rufe dich an, <b>sobald</b> ich zu Hause <span class="rule-hl2">bin</span>.</p>
+<p><b>Sobald</b> die Sonne <span class="rule-hl2">scheint</span>, gehen wir in den Park.</p>
+<p>Wir fangen an, <b>sobald</b> alle da <span class="rule-hl2">sind</span>.`,
+ar: `
+<h2>sobald — حالما</h2>
+<div class="rule-formula">HS, <span class="rule-hl">sobald</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>sobald</b> — تتبع الأفعال بعضها البعض مباشرة.</p>
+<p>Ich rufe dich an, <b>sobald</b> ich zu Hause <span class="rule-hl2">bin</span>.</p>
+<p><b>Sobald</b> die Sonne <span class="rule-hl2">scheint</span>, gehen wir in den Park.</p>
+<p>Wir fangen an, <b>sobald</b> alle da <span class="rule-hl2">sind</span>.`,
+fa: `
+<h2>sobald — به محض اینکه</h2>
+<div class="rule-formula">HS, <span class="rule-hl">sobald</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>sobald</b> — اعمال بلافاصله یکی پس از دیگری می‌آیند.</p>
+<p>Ich rufe dich an, <b>sobald</b> ich zu Hause <span class="rule-hl2">bin</span>.</p>
+<p><b>Sobald</b> die Sonne <span class="rule-hl2">scheint</span>, gehen wir in den Park.</p>
+<p>Wir fangen an, <b>sobald</b> alle da <span class="rule-hl2">sind</span>.`,
+vi: `
+<h2>sobald — ngay khi</h2>
+<div class="rule-formula">HS, <span class="rule-hl">sobald</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>sobald</b> — các hành động nối tiếp nhau ngay lập tức.</p>
+<p>Ich rufe dich an, <b>sobald</b> ich zu Hause <span class="rule-hl2">bin</span>.</p>
+<p><b>Sobald</b> die Sonne <span class="rule-hl2">scheint</span>, gehen wir in den Park.</p>
+<p>Wir fangen an, <b>sobald</b> alle da <span class="rule-hl2">sind</span>.`
+},
 
-satz_sondern: `
+satz_sondern: {
+de: `
+<h2>sondern — sondern (nach Negation)</h2>
+<div class="rule-formula">nicht/kein ..., <span class="rule-hl">sondern</span> ...</div>
+<p><b>sondern</b> wird NUR nach Negation (nicht, kein, nie) verwendet. Beiordnende Konjunktion — normale Wortstellung.</p>
+<table class="rule-table">
+<tr><th>Negation</th><th>Konj.</th><th>Alternative</th></tr>
+<tr><td>Das ist <b>nicht</b> Peter,</td><td><b>sondern</b></td><td>Paul.</td></tr>
+<tr><td>Ich trinke <b>keinen</b> Kaffee,</td><td><b>sondern</b></td><td>Tee.</td></tr>
+</table>`,
+ru: `
 <h2>sondern — а / но (после отрицания)</h2>
 <div class="rule-formula">nicht/kein ..., <span class="rule-hl">sondern</span> ...</div>
 <p><b>sondern</b> используется ТОЛЬКО после отрицания (nicht, kein, nie). Сочинительный союз — порядок слов прямой.</p>
@@ -1759,43 +2601,270 @@ satz_sondern: `
 <tr><th>Отрицание</th><th>Союз</th><th>Альтернатива</th></tr>
 <tr><td>Das ist <b>nicht</b> Peter,</td><td><b>sondern</b></td><td>Paul.</td></tr>
 <tr><td>Ich trinke <b>keinen</b> Kaffee,</td><td><b>sondern</b></td><td>Tee.</td></tr>
-</table>
-<p>Er kommt <b>nicht</b> heute, <b>sondern</b> morgen.</p>
-<p>Das Buch ist <b>nicht</b> langweilig, <b>sondern</b> sehr interessant.</p>`,
-
-satz_textbau: `
-<h2>Textaufbau — Построение текста (B2-C2)</h2>
-<p>Хороший текст имеет чёткую структуру: <b>Einleitung → Hauptteil → Schluss</b>.</p>
+</table>`,
+en: `
+<h2>sondern — but rather (after negation)</h2>
+<div class="rule-formula">nicht/kein ..., <span class="rule-hl">sondern</span> ...</div>
+<p><b>sondern</b> is used ONLY after negation (nicht, kein, nie). Coordinating conjunction — normal word order.</p>
 <table class="rule-table">
-<tr><th>Часть</th><th>Функция</th><th>Konnektoren</th></tr>
-<tr><td>Einleitung</td><td>Тема, проблема</td><td>zunächst, einerseits, in letzter Zeit</td></tr>
-<tr><td>Hauptteil</td><td>Аргументы, примеры</td><td>außerdem, darüber hinaus, zum Beispiel, dagegen</td></tr>
-<tr><td>Schluss</td><td>Вывод, мнение</td><td>schließlich, zusammenfassend, meiner Meinung nach</td></tr>
-</table>
-<div class="rule-formula">Argument + <span class="rule-hl">Beispiel</span> + <span class="rule-hl2">Folgerung</span></div>
-<p><b>Einerseits</b> bietet das Internet viele Vorteile, <b>andererseits</b> gibt es auch Risiken.</p>
-<p><b>Zum Beispiel</b> kann man schnell Informationen finden. <b>Außerdem</b> kann man mit Freunden in Kontakt bleiben.</p>
-<p><b>Zusammenfassend</b> lässt sich sagen, dass das Internet aus unserem Leben nicht mehr wegzudenken ist.</p>`,
+<tr><th>Negation</th><th>Conj.</th><th>Alternative</th></tr>
+<tr><td>Das ist <b>nicht</b> Peter,</td><td><b>sondern</b></td><td>Paul.</td></tr>
+<tr><td>Ich trinke <b>keinen</b> Kaffee,</td><td><b>sondern</b></td><td>Tee.</td></tr>
+</table>`,
+tr: `
+<h2>sondern — aksine (olumsuzlamadan sonra)</h2>
+<div class="rule-formula">nicht/kein ..., <span class="rule-hl">sondern</span> ...</div>
+<p><b>sondern</b> SADECE olumsuzlamadan sonra (nicht, kein, nie) kullanılır. Eşgüdüm bağlacı — normal sıra.</p>
+<table class="rule-table">
+<tr><th>Olumsuz</th><th>Bağlaç</th><th>Alternatif</th></tr>
+<tr><td>Das ist <b>nicht</b> Peter,</td><td><b>sondern</b></td><td>Paul.</td></tr>
+<tr><td>Ich trinke <b>keinen</b> Kaffee,</td><td><b>sondern</b></td><td>Tee.</td></tr>
+</table>`,
+ar: `
+<h2>sondern — بل (بعد النفي)</h2>
+<div class="rule-formula">nicht/kein ..., <span class="rule-hl">sondern</span> ...</div>
+<p><b>sondern</b> يُستخدم فقط بعد النفي (nicht, kein, nie). حرف عطف تنسيقي — ترتيب عادي.</p>
+<table class="rule-table">
+<tr><th>النفي</th><th>الرابط</th><th>البديل</th></tr>
+<tr><td>Das ist <b>nicht</b> Peter,</td><td><b>sondern</b></td><td>Paul.</td></tr>
+<tr><td>Ich trinke <b>keinen</b> Kaffee,</td><td><b>sondern</b></td><td>Tee.</td></tr>
+</table>`,
+fa: `
+<h2>sondern — بلکه (بعد از نفی)</h2>
+<div class="rule-formula">nicht/kein ..., <span class="rule-hl">sondern</span> ...</div>
+<p><b>sondern</b> فقط بعد از نفی (nicht, kein, nie) استفاده می‌شود. حرف ربط هم‌پایه — ترتیب عادی.</p>
+<table class="rule-table">
+<tr><th>نفی</th><th>رابط</th><th>جایگزین</th></tr>
+<tr><td>Das ist <b>nicht</b> Peter,</td><td><b>sondern</b></td><td>Paul.</td></tr>
+<tr><td>Ich trinke <b>keinen</b> Kaffee,</td><td><b>sondern</b></td><td>Tee.</td></tr>
+</table>`,
+vi: `
+<h2>sondern — mà là (sau phủ định)</h2>
+<div class="rule-formula">nicht/kein ..., <span class="rule-hl">sondern</span> ...</div>
+<p><b>sondern</b> CHỈ dùng sau phủ định (nicht, kein, nie). Liên từ đẳng lập — trật tự thường.</p>
+<table class="rule-table">
+<tr><th>Phủ định</th><th>Liên từ</th><th>Thay thế</th></tr>
+<tr><td>Das ist <b>nicht</b> Peter,</td><td><b>sondern</b></td><td>Paul.</td></tr>
+<tr><td>Ich trinke <b>keinen</b> Kaffee,</td><td><b>sondern</b></td><td>Tee.</td></tr>
+</table>`
+},
 
-satz_um_zu: `
-<h2>um ... zu + Infinitiv — чтобы (одно подлежащее)</h2>
+satz_textbau: {
+de: `
+<h2>Textbau / Konnektoren — Textaufbau</h2>
+<div class="rule-formula">zuerst → dann → danach → schließlich / zum Schluss</div>
+<p>Temporal-Konnektoren strukturieren einen Text. Nach ihnen: <b>Inversion</b> (V+S).</p>
+<table class="rule-table">
+<tr><th>Konnektor</th><th>Bedeutung</th></tr>
+<tr><td><b>zuerst</b></td><td>zuerst (am Anfang)</td></tr>
+<tr><td><b>dann</b></td><td>dann (als nächstes)</td></tr>
+<tr><td><b>danach</b></td><td>danach (später)</td></tr>
+<tr><td><b>zum Schluss / schließlich</b></td><td>schließlich / zuletzt</td></tr>
+</table>
+<p><b>Zuerst</b> <span class="rule-hl2">stehe</span> ich auf. <b>Dann</b> <span class="rule-hl2">frühstücke</span> ich. <b>Danach</b> <span class="rule-hl2">gehe</span> ich zur Arbeit. <b>Zum Schluss</b> <span class="rule-hl2">komme</span> ich nach Hause.</p>`,
+ru: `
+<h2>Textbau / Konnektoren — построение текста</h2>
+<div class="rule-formula">zuerst → dann → danach → schließlich / zum Schluss</div>
+<p>Временные коннекторы структурируют текст. После них — <b>инверсия</b> (V+S).</p>
+<table class="rule-table">
+<tr><th>Konnektor</th><th>Bedeutung</th></tr>
+<tr><td><b>zuerst</b></td><td>сначала</td></tr>
+<tr><td><b>dann</b></td><td>потом</td></tr>
+<tr><td><b>danach</b></td><td>затем</td></tr>
+<tr><td><b>zum Schluss / schließlich</b></td><td>наконец</td></tr>
+</table>
+<p><b>Zuerst</b> <span class="rule-hl2">stehe</span> ich auf. <b>Dann</b> <span class="rule-hl2">frühstücke</span> ich. <b>Danach</b> <span class="rule-hl2">gehe</span> ich zur Arbeit. <b>Zum Schluss</b> <span class="rule-hl2">komme</span> ich nach Hause.</p>`,
+en: `
+<h2>Textbau / Konnektoren — text structure</h2>
+<div class="rule-formula">zuerst → dann → danach → schließlich / zum Schluss</div>
+<p>Temporal connectors structure a text. After them: <b>inversion</b> (V+S).</p>
+<table class="rule-table">
+<tr><th>Konnektor</th><th>Bedeutung</th></tr>
+<tr><td><b>zuerst</b></td><td>first</td></tr>
+<tr><td><b>dann</b></td><td>then</td></tr>
+<tr><td><b>danach</b></td><td>afterwards</td></tr>
+<tr><td><b>zum Schluss / schließlich</b></td><td>finally / at the end</td></tr>
+</table>
+<p><b>Zuerst</b> <span class="rule-hl2">stehe</span> ich auf. <b>Dann</b> <span class="rule-hl2">frühstücke</span> ich. <b>Danach</b> <span class="rule-hl2">gehe</span> ich zur Arbeit. <b>Zum Schluss</b> <span class="rule-hl2">komme</span> ich nach Hause.</p>`,
+tr: `
+<h2>Textbau / Konnektoren — metin yapısı</h2>
+<div class="rule-formula">zuerst → dann → danach → schließlich / zum Schluss</div>
+<p>Zaman bağlaçları metni yapılandırır. Bunlardan sonra: <b>devrik</b> (V+S).</p>
+<table class="rule-table">
+<tr><th>Konnektor</th><th>Bedeutung</th></tr>
+<tr><td><b>zuerst</b></td><td>önce</td></tr>
+<tr><td><b>dann</b></td><td>sonra</td></tr>
+<tr><td><b>danach</b></td><td>ardından</td></tr>
+<tr><td><b>zum Schluss / schließlich</b></td><td>son olarak</td></tr>
+</table>
+<p><b>Zuerst</b> <span class="rule-hl2">stehe</span> ich auf. <b>Dann</b> <span class="rule-hl2">frühstücke</span> ich. <b>Danach</b> <span class="rule-hl2">gehe</span> ich zur Arbeit. <b>Zum Schluss</b> <span class="rule-hl2">komme</span> ich nach Hause.</p>`,
+ar: `
+<h2>Textbau / Konnektoren — بناء النص</h2>
+<div class="rule-formula">zuerst → dann → danach → schließlich / zum Schluss</div>
+<p>الروابط الزمنية تنظم النص. بعدها: <b>قلب</b> (V+S).</p>
+<table class="rule-table">
+<tr><th>Konnektor</th><th>Bedeutung</th></tr>
+<tr><td><b>zuerst</b></td><td>أولاً</td></tr>
+<tr><td><b>dann</b></td><td>ثم</td></tr>
+<tr><td><b>danach</b></td><td>بعد ذلك</td></tr>
+<tr><td><b>zum Schluss / schließlich</b></td><td>أخيراً</td></tr>
+</table>
+<p><b>Zuerst</b> <span class="rule-hl2">stehe</span> ich auf. <b>Dann</b> <span class="rule-hl2">frühstücke</span> ich. <b>Danach</b> <span class="rule-hl2">gehe</span> ich zur Arbeit. <b>Zum Schluss</b> <span class="rule-hl2">komme</span> ich nach Hause.</p>`,
+fa: `
+<h2>Textbau / Konnektoren — ساختار متن</h2>
+<div class="rule-formula">zuerst → dann → danach → schließlich / zum Schluss</div>
+<p>رابط‌های زمانی متن را ساختار می‌دهند. پس از آنها: <b>وارونه</b> (V+S).</p>
+<table class="rule-table">
+<tr><th>Konnektor</th><th>Bedeutung</th></tr>
+<tr><td><b>zuerst</b></td><td>اول</td></tr>
+<tr><td><b>dann</b></td><td>سپس</td></tr>
+<tr><td><b>danach</b></td><td>بعد از آن</td></tr>
+<tr><td><b>zum Schluss / schließlich</b></td><td>در نهایت</td></tr>
+</table>
+<p><b>Zuerst</b> <span class="rule-hl2">stehe</span> ich auf. <b>Dann</b> <span class="rule-hl2">frühstücke</span> ich. <b>Danach</b> <span class="rule-hl2">gehe</span> ich zur Arbeit. <b>Zum Schluss</b> <span class="rule-hl2">komme</span> ich nach Hause.</p>`,
+vi: `
+<h2>Textbau / Konnektoren — cấu trúc văn bản</h2>
+<div class="rule-formula">zuerst → dann → danach → schließlich / zum Schluss</div>
+<p>Liên từ chỉ thời gian cấu trúc văn bản. Sau chúng: <b>đảo</b> (V+S).</p>
+<table class="rule-table">
+<tr><th>Konnektor</th><th>Bedeutung</th></tr>
+<tr><td><b>zuerst</b></td><td>đầu tiên</td></tr>
+<tr><td><b>dann</b></td><td>sau đó</td></tr>
+<tr><td><b>danach</b></td><td>tiếp theo</td></tr>
+<tr><td><b>zum Schluss / schließlich</b></td><td>cuối cùng</td></tr>
+</table>
+<p><b>Zuerst</b> <span class="rule-hl2">stehe</span> ich auf. <b>Dann</b> <span class="rule-hl2">frühstücke</span> ich. <b>Danach</b> <span class="rule-hl2">gehe</span> ich zur Arbeit. <b>Zum Schluss</b> <span class="rule-hl2">komme</span> ich nach Hause.</p>`
+},
+
+satz_um_zu: {
+de: `
+<h2>um...zu — um zu</h2>
 <div class="rule-formula">HS, <span class="rule-hl">um</span> ... <span class="rule-hl2">zu + Infinitiv</span></div>
-<p><b>um...zu</b> используется только когда подлежащее в обеих частях ОДНО И ТО ЖЕ. Иначе используем <b>damit</b>.</p>
+<p><b>um...zu</b> wird nur benutzt, wenn beide Subjekte GLEICH sind. Sonst nimmt man <b>damit</b>.</p>
 <table class="rule-table">
-<tr><th>Главное</th><th>um</th><th>...</th><th>zu + Inf</th></tr>
+<tr><th>HS</th><th>um</th><th>...</th><th>zu + Inf</th></tr>
 <tr><td>Ich lerne Deutsch,</td><td><b>um</b></td><td>in Wien</td><td><b>zu studieren</b>.</td></tr>
 <tr><td>Sie geht ins Café,</td><td><b>um</b></td><td>einen Kaffee</td><td><b>zu trinken</b>.</td></tr>
 </table>
 <p>⚠ Trennbare Verben: <b>um</b> ein<span class="rule-hl">zu</span>kaufen / <b>um</b> auf<span class="rule-hl">zu</span>stehen.</p>
-<p>Er fährt nach Deutschland, <b>um</b> seine Familie <span class="rule-hl2">zu besuchen</span>.</p>`,
+<p>Er fährt nach Deutschland, <b>um</b> seine Familie <span class="rule-hl2">zu besuchen</span>.`,
+ru: `
+<h2>um...zu — чтобы</h2>
+<div class="rule-formula">HS, <span class="rule-hl">um</span> ... <span class="rule-hl2">zu + Infinitiv</span></div>
+<p><b>um...zu</b> используется только когда подлежащее в обеих частях ОДНО И ТО ЖЕ. Иначе используем <b>damit</b>.</p>
+<table class="rule-table">
+<tr><th>HS</th><th>um</th><th>...</th><th>zu + Inf</th></tr>
+<tr><td>Ich lerne Deutsch,</td><td><b>um</b></td><td>in Wien</td><td><b>zu studieren</b>.</td></tr>
+<tr><td>Sie geht ins Café,</td><td><b>um</b></td><td>einen Kaffee</td><td><b>zu trinken</b>.</td></tr>
+</table>
+<p>⚠ Trennbare Verben: <b>um</b> ein<span class="rule-hl">zu</span>kaufen / <b>um</b> auf<span class="rule-hl">zu</span>stehen.</p>
+<p>Er fährt nach Deutschland, <b>um</b> seine Familie <span class="rule-hl2">zu besuchen</span>.`,
+en: `
+<h2>um...zu — in order to</h2>
+<div class="rule-formula">HS, <span class="rule-hl">um</span> ... <span class="rule-hl2">zu + Infinitiv</span></div>
+<p><b>um...zu</b> is used ONLY when both subjects are THE SAME. Otherwise use <b>damit</b>.</p>
+<table class="rule-table">
+<tr><th>HS</th><th>um</th><th>...</th><th>zu + Inf</th></tr>
+<tr><td>Ich lerne Deutsch,</td><td><b>um</b></td><td>in Wien</td><td><b>zu studieren</b>.</td></tr>
+<tr><td>Sie geht ins Café,</td><td><b>um</b></td><td>einen Kaffee</td><td><b>zu trinken</b>.</td></tr>
+</table>
+<p>⚠ Separable verbs: <b>um</b> ein<span class="rule-hl">zu</span>kaufen / <b>um</b> auf<span class="rule-hl">zu</span>stehen.</p>
+<p>Er fährt nach Deutschland, <b>um</b> seine Familie <span class="rule-hl2">zu besuchen</span>.`,
+tr: `
+<h2>um...zu — -mek için</h2>
+<div class="rule-formula">HS, <span class="rule-hl">um</span> ... <span class="rule-hl2">zu + Infinitiv</span></div>
+<p><b>um...zu</b> sadece her iki öznenin AYNI olduğu durumda kullanılır. Aksi halde <b>damit</b> kullanılır.</p>
+<table class="rule-table">
+<tr><th>HS</th><th>um</th><th>...</th><th>zu + Inf</th></tr>
+<tr><td>Ich lerne Deutsch,</td><td><b>um</b></td><td>in Wien</td><td><b>zu studieren</b>.</td></tr>
+<tr><td>Sie geht ins Café,</td><td><b>um</b></td><td>einen Kaffee</td><td><b>zu trinken</b>.</td></tr>
+</table>
+<p>⚠ Ayrılabilen fiiller: <b>um</b> ein<span class="rule-hl">zu</span>kaufen / <b>um</b> auf<span class="rule-hl">zu</span>stehen.</p>
+<p>Er fährt nach Deutschland, <b>um</b> seine Familie <span class="rule-hl2">zu besuchen</span>.`,
+ar: `
+<h2>um...zu — من أجل أن</h2>
+<div class="rule-formula">HS, <span class="rule-hl">um</span> ... <span class="rule-hl2">zu + Infinitiv</span></div>
+<p><b>um...zu</b> يُستخدم فقط عندما يكون الفاعل نفسه في الجملتين. وإلا نستخدم <b>damit</b>.</p>
+<table class="rule-table">
+<tr><th>HS</th><th>um</th><th>...</th><th>zu + Inf</th></tr>
+<tr><td>Ich lerne Deutsch,</td><td><b>um</b></td><td>in Wien</td><td><b>zu studieren</b>.</td></tr>
+<tr><td>Sie geht ins Café,</td><td><b>um</b></td><td>einen Kaffee</td><td><b>zu trinken</b>.</td></tr>
+</table>
+<p>⚠ الأفعال المنفصلة: <b>um</b> ein<span class="rule-hl">zu</span>kaufen / <b>um</b> auf<span class="rule-hl">zu</span>stehen.</p>
+<p>Er fährt nach Deutschland, <b>um</b> seine Familie <span class="rule-hl2">zu besuchen</span>.`,
+fa: `
+<h2>um...zu — برای اینکه</h2>
+<div class="rule-formula">HS, <span class="rule-hl">um</span> ... <span class="rule-hl2">zu + Infinitiv</span></div>
+<p><b>um...zu</b> فقط زمانی استفاده می‌شود که فاعل هر دو جمله یکسان باشد. در غیر این صورت از <b>damit</b> استفاده می‌کنیم.</p>
+<table class="rule-table">
+<tr><th>HS</th><th>um</th><th>...</th><th>zu + Inf</th></tr>
+<tr><td>Ich lerne Deutsch,</td><td><b>um</b></td><td>in Wien</td><td><b>zu studieren</b>.</td></tr>
+<tr><td>Sie geht ins Café,</td><td><b>um</b></td><td>einen Kaffee</td><td><b>zu trinken</b>.</td></tr>
+</table>
+<p>⚠ افعال جداشدنی: <b>um</b> ein<span class="rule-hl">zu</span>kaufen / <b>um</b> auf<span class="rule-hl">zu</span>stehen.</p>
+<p>Er fährt nach Deutschland, <b>um</b> seine Familie <span class="rule-hl2">zu besuchen</span>.`,
+vi: `
+<h2>um...zu — để</h2>
+<div class="rule-formula">HS, <span class="rule-hl">um</span> ... <span class="rule-hl2">zu + Infinitiv</span></div>
+<p><b>um...zu</b> chỉ dùng khi cả hai mệnh đề có CÙNG một chủ ngữ. Nếu không, dùng <b>damit</b>.</p>
+<table class="rule-table">
+<tr><th>HS</th><th>um</th><th>...</th><th>zu + Inf</th></tr>
+<tr><td>Ich lerne Deutsch,</td><td><b>um</b></td><td>in Wien</td><td><b>zu studieren</b>.</td></tr>
+<tr><td>Sie geht ins Café,</td><td><b>um</b></td><td>einen Kaffee</td><td><b>zu trinken</b>.</td></tr>
+</table>
+<p>⚠ Động từ tách: <b>um</b> ein<span class="rule-hl">zu</span>kaufen / <b>um</b> auf<span class="rule-hl">zu</span>stehen.</p>
+<p>Er fährt nach Deutschland, <b>um</b> seine Familie <span class="rule-hl2">zu besuchen</span>.`
+},
 
-satz_waehrend: `
+satz_waehrend: {
+de: `
+<h2>während — während</h2>
+<div class="rule-formula">HS, <span class="rule-hl">während</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>während</b> hat zwei Bedeutungen:<br>1. <b>Zeit</b> — gleichzeitige Handlungen<br>2. <b>Gegensatz</b> — während (Kontrast)</p>
+<p>Ich höre Musik, <b>während</b> ich <span class="rule-hl2">koche</span>. <i>(Zeit)</i></p>
+<p><b>Während</b> er gern Sport <span class="rule-hl2">macht</span>, liest sie lieber Bücher. <i>(Kontrast)</i></p>
+<p><b>Während</b> meine Schwester schläft, <span class="rule-hl2">lerne</span> ich.`,
+ru: `
 <h2>während — в то время как / пока</h2>
 <div class="rule-formula">HS, <span class="rule-hl">während</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
-<p><b>während</b> имеет два значения:<br>
-1. <b>Время</b> — одновременность действий<br>
-2. <b>Противопоставление</b> — в то время как (контраст)</p>
+<p><b>während</b> имеет два значения:<br>1. <b>Время</b> — одновременность действий<br>2. <b>Противопоставление</b> — в то время как (контраст)</p>
 <p>Ich höre Musik, <b>während</b> ich <span class="rule-hl2">koche</span>. <i>(время)</i></p>
 <p><b>Während</b> er gern Sport <span class="rule-hl2">macht</span>, liest sie lieber Bücher. <i>(контраст)</i></p>
-<p><b>Während</b> meine Schwester schläft, <span class="rule-hl2">lerne</span> ich.</p>`
+<p><b>Während</b> meine Schwester schläft, <span class="rule-hl2">lerne</span> ich.`,
+en: `
+<h2>während — while / whereas</h2>
+<div class="rule-formula">HS, <span class="rule-hl">während</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>während</b> has two meanings:<br>1. <b>Time</b> — simultaneous actions<br>2. <b>Contrast</b> — whereas</p>
+<p>Ich höre Musik, <b>während</b> ich <span class="rule-hl2">koche</span>. <i>(time)</i></p>
+<p><b>Während</b> er gern Sport <span class="rule-hl2">macht</span>, liest sie lieber Bücher. <i>(contrast)</i></p>
+<p><b>Während</b> meine Schwester schläft, <span class="rule-hl2">lerne</span> ich.`,
+tr: `
+<h2>während — -irken / oysa</h2>
+<div class="rule-formula">HS, <span class="rule-hl">während</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>während</b>'in iki anlamı vardır:<br>1. <b>Zaman</b> — eşzamanlı eylemler<br>2. <b>Karşıtlık</b> — oysa</p>
+<p>Ich höre Musik, <b>während</b> ich <span class="rule-hl2">koche</span>. <i>(zaman)</i></p>
+<p><b>Während</b> er gern Sport <span class="rule-hl2">macht</span>, liest sie lieber Bücher. <i>(karşıtlık)</i></p>
+<p><b>Während</b> meine Schwester schläft, <span class="rule-hl2">lerne</span> ich.`,
+ar: `
+<h2>während — بينما</h2>
+<div class="rule-formula">HS, <span class="rule-hl">während</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>während</b> له معنيان:<br>1. <b>الزمن</b> — أفعال متزامنة<br>2. <b>التضاد</b> — بينما</p>
+<p>Ich höre Musik, <b>während</b> ich <span class="rule-hl2">koche</span>. <i>(الزمن)</i></p>
+<p><b>Während</b> er gern Sport <span class="rule-hl2">macht</span>, liest sie lieber Bücher. <i>(التضاد)</i></p>
+<p><b>Während</b> meine Schwester schläft, <span class="rule-hl2">lerne</span> ich.`,
+fa: `
+<h2>während — در حالی که</h2>
+<div class="rule-formula">HS, <span class="rule-hl">während</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>während</b> دو معنی دارد:<br>1. <b>زمان</b> — اعمال همزمان<br>2. <b>تضاد</b> — در حالی که</p>
+<p>Ich höre Musik, <b>während</b> ich <span class="rule-hl2">koche</span>. <i>(زمان)</i></p>
+<p><b>Während</b> er gern Sport <span class="rule-hl2">macht</span>, liest sie lieber Bücher. <i>(تضاد)</i></p>
+<p><b>Während</b> meine Schwester schläft, <span class="rule-hl2">lerne</span> ich.`,
+vi: `
+<h2>während — trong khi</h2>
+<div class="rule-formula">HS, <span class="rule-hl">während</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>während</b> có hai nghĩa:<br>1. <b>Thời gian</b> — hành động đồng thời<br>2. <b>Tương phản</b> — trong khi</p>
+<p>Ich höre Musik, <b>während</b> ich <span class="rule-hl2">koche</span>. <i>(thời gian)</i></p>
+<p><b>Während</b> er gern Sport <span class="rule-hl2">macht</span>, liest sie lieber Bücher. <i>(tương phản)</i></p>
+<p><b>Während</b> meine Schwester schläft, <span class="rule-hl2">lerne</span> ich.`
+}
 };
