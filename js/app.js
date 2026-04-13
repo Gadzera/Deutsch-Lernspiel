@@ -882,7 +882,7 @@ function getMCQExplanation(item,cat,userAns,correct,isOk){
     const head=isOk
         ? `<div class="mcq-ex-head ok">✓ ${T('Richtig!','Correct!','Richtig!','Doğru!','Đúng rồi!')}</div>`
         : `<div class="mcq-ex-head err">✗ ${T('Falsch','Wrong','Falsch','Yanlış','Sai')} — <s>${esc(userAns)}</s></div>`;
-    const trDisplay=(lang==='vi'&&item.vi)?item.vi:item.ru;
+    const trDisplay=item[lang]||item.en||item.ru;
     const trLine=trDisplay?`<div class="mcq-ex-tr">${esc(trDisplay)}</div>`:'';
     return `${head}<div class="mcq-ex-why">${why}</div>${trLine}`;
 }
@@ -1077,7 +1077,7 @@ const HINTS_ML={
 function getHints(cat){
     const h=HINTS_ML[cat];
     if(!h) return ['Achte auf die Wortstellung!'];
-    return h[APP.lang]||h.ru||h.de||['Achte auf die Wortstellung!'];
+    return h[APP.lang]||(APP.lang==='ru'?h.ru:h.en)||h.de||h.ru||['Achte auf die Wortstellung!'];
 }
 
 // ============== SENTENCE BUILDER ==============
@@ -1384,7 +1384,7 @@ function getCorrectionRule(word,wrongWord,pos,sentence,item){
     const _t=(de,ru,en,tr)=>({de,ru,en,tr})[L]||ru||de;
     // Get formula for category
     const cf=CAT_FORMULAS[cat];
-    const formula=cf?('\n📐 '+cf.f+' — '+(cf[L]||cf.ru||cf.de)):'';
+    const formula=cf?('\n📐 '+cf.f+' — '+(cf[L]||(L==='ru'?cf.ru:cf.en)||cf.de||cf.ru)):'';
 
     // === A: MISSING WORD ===
     if(wrongWord==='___'){
@@ -1422,7 +1422,7 @@ function getCorrectionRule(word,wrongWord,pos,sentence,item){
         const k1=lo+'|'+wlo, k2=wlo+'|'+lo;
         const pair=WORD_PAIRS[k1]||WORD_PAIRS[k2];
         if(pair){
-            return (pair[L]||pair.ru||pair.de)+formula;
+            return (pair[L]||(L==='ru'?pair.ru:pair.en)||pair.de||pair.ru)+formula;
         }
         // Check if wrong word is from correct sentence (wrong position)
         const wrongInCorrect=sentence.indexOf(wrongWord);
