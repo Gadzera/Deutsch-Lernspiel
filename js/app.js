@@ -763,21 +763,15 @@ function prepareMCQ(){
     }else if(cat==='prepositions'){
         label=item.sentence.replace('___','______');display='';hint=tr(item);
         correct=item.answer;
-        // Generate 10 confusing options
-        const allPreps=['in','an','auf','über','unter','vor','hinter','neben','zwischen','zu','bei','mit','nach','seit','von','aus','durch','für','gegen','ohne','um','wegen','trotz','während','statt','außerhalb','innerhalb','anstelle','aufgrund','entgegen'];
-        const pool=allPreps.filter(p=>p!==item.answer);
-        opts=shuffle([...new Set([...item.options,...shuffle(pool).slice(0,8),correct])]).slice(0,10);
-        if(!opts.includes(correct)) opts[9]=correct;
-        opts=shuffle(opts);
+        // Use exactly the 4 options from the data (designed to be confusing)
+        opts=shuffle([...new Set([...item.options,correct])]).slice(0,4);
+        if(!opts.includes(correct)){opts[3]=correct;opts=shuffle(opts);}
     }else if(cat==='pronouns'){
         label=item.sentence.replace('___','______');display='';hint=tr(item);
         correct=item.answer;
-        // More pronoun options to confuse
-        const allProns=['ich','du','er','sie','es','wir','ihr','mich','dich','sich','uns','euch','mir','dir','ihm','ihr','ihnen','mein','dein','sein','ihre','unser','euer','meinen','meinem','meine','meiner','dieser','diese','dieses','diesem','diesen','der','die','das','den','dem','dessen','deren','denen','jemand','niemand','man','etwas','nichts','alle'];
-        const pool=allProns.filter(p=>p!==item.answer&&!item.options.includes(p));
-        opts=shuffle([...new Set([...item.options,...shuffle(pool).slice(0,4),correct])]).slice(0,8);
-        if(!opts.includes(correct)) opts[7]=correct;
-        opts=shuffle(opts);
+        // Use exactly the 4 options from the data (case variations of same root)
+        opts=shuffle([...new Set([...item.options,correct])]).slice(0,4);
+        if(!opts.includes(correct)){opts[3]=correct;opts=shuffle(opts);}
     }
     return {label,display,hint,opts,correct,isArt};
 }
@@ -786,6 +780,9 @@ function showMCQ(){
     const q=prepareMCQ();
     const pct=(APP.quiz.idx/APP.quiz.items.length)*100;
     const num=APP.quiz.idx+1,tot=APP.quiz.items.length;
+    const cat=APP.quiz.cat;
+    // 2-column grid for prepositions/pronouns (4 options) — fits on one screen
+    const isGrid=(cat==='prepositions'||cat==='pronouns')&&q.opts.length<=6;
     const btns=q.opts.map(o=>`<button class="answer-btn" data-val="${esc(o)}" data-cor="${esc(q.correct)}" onclick="checkA(this)">${o}</button>`).join('');
 
     $('app').innerHTML=`
@@ -799,14 +796,53 @@ function showMCQ(){
                 <div class="quiz-question-label">${q.label}</div>
                 ${q.display?`<div class="quiz-word">${q.display}</div>`:''}
                 ${q.hint?`<div class="quiz-hint">${q.hint}</div>`:''}
-                <div class="quiz-answers ${q.isArt?'article-mode':''} stagger">${btns}</div>
+                <div class="quiz-answers ${q.isArt?'article-mode':''} ${isGrid?'two-col':''} stagger">${btns}</div>
+                <div id="mcqExplain" class="mcq-explain" style="display:none"></div>
+                <button id="mcqNext" class="btn btn-primary" style="display:none;margin-top:12px" onclick="APP.quiz.idx++;showQ();">${UI.nextBtn||'Weiter'} →</button>
             </div>
         </div>`;
+}
+
+function getMCQExplanation(item,cat,userAns,correct,isOk){
+    // Build a localized explanation for prepositions / pronouns
+    const lang=APP.lang||'ru';
+    const T=(ru,en,de,tr)=>(lang==='ru'?ru:lang==='en'?en:lang==='tr'?tr:de);
+    let why='';
+    if(cat==='prepositions'){
+        const typeNames={
+            wechsel:T('Wechselpräposition (Akk/Dat)','Two-way preposition','Wechselpräposition','Yön/Yer edatı'),
+            dativ:T('Präposition mit Dativ','Dative preposition','Präposition + Dativ','Datif edatı'),
+            akkusativ:T('Präposition mit Akkusativ','Accusative preposition','Präposition + Akkusativ','Akuzatif edatı'),
+            genitiv:T('Präposition mит Genitiv','Genitive preposition','Präposition + Genitiv','Genitif edatı'),
+            verb_prep:T('Verb + feste Präposition','Verb + fixed preposition','Verb + feste Präposition','Fiil + sabit edat')
+        };
+        const tn=typeNames[item.type]||'';
+        why=`<b>${correct}</b> — ${tn}`;
+        if(item.case) why+=` · <i>${item.case}</i>`;
+    }else if(cat==='pronouns'){
+        const typeNames={
+            personal:T('Personalpronomen','Personal pronoun','Personalpronomen','Şahıs zamiri'),
+            possessiv:T('Possessivpronomen','Possessive pronoun','Possessivpronomen','İyelik zamiri'),
+            reflexiv:T('Reflexivpronomen','Reflexive pronoun','Reflexivpronomen','Dönüşlü zamir'),
+            relativ:T('Relativpronomen','Relative pronoun','Relativpronomen','İlgi zamiri'),
+            demonstrativ:T('Demonstrativpronomen','Demonstrative pronoun','Demonstrativpronomen','İşaret zamiri'),
+            indefinit:T('Indefinitpronomen','Indefinite pronoun','Indefinitpronomen','Belirsiz zamir')
+        };
+        const tn=typeNames[item.type]||'';
+        why=`<b>${correct}</b> — ${tn}`;
+        if(item.case) why+=` · <i>${item.case}</i>`;
+    }
+    const head=isOk
+        ? `<div class="mcq-ex-head ok">✓ ${T('Richtig!','Correct!','Richtig!','Doğru!')}</div>`
+        : `<div class="mcq-ex-head err">✗ ${T('Falsch','Wrong','Falsch','Yanlış')} — <s>${esc(userAns)}</s></div>`;
+    const ru=item.ru?`<div class="mcq-ex-tr">${esc(item.ru)}</div>`:'';
+    return `${head}<div class="mcq-ex-why">${why}</div>${ru}`;
 }
 
 function checkA(btn){
     const val=btn.dataset.val,cor=btn.dataset.cor,ok=val===cor;
     const item=APP.quiz.items[APP.quiz.idx];
+    const cat=APP.quiz.cat;
     if(ok){
         APP.quiz.score++;btn.classList.add('correct');
         markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);
@@ -818,7 +854,18 @@ function checkA(btn){
     document.querySelectorAll('.answer-btn').forEach(b=>{b.disabled=true;if(b.dataset.val===cor)b.classList.add('correct');});
     const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+APP.quiz.score;
     if(APP.subliminal) showSubliminal(item);
-    setTimeout(()=>{APP.quiz.idx++;showQ();},1200);
+    // Show explanation animation for prepositions/pronouns; advance with button
+    if(cat==='prepositions'||cat==='pronouns'){
+        const ex=$('mcqExplain'),nb=$('mcqNext');
+        if(ex){
+            ex.innerHTML=getMCQExplanation(item,cat,val,cor,ok);
+            ex.style.display='block';
+            ex.classList.add('mcq-ex-anim');
+        }
+        if(nb) nb.style.display='block';
+    }else{
+        setTimeout(()=>{APP.quiz.idx++;showQ();},1200);
+    }
 }
 
 // ============== REFLEXIVE SENTENCES & SIMILAR ==============
