@@ -1358,6 +1358,19 @@ body {
 }
 .sub-quiz-btn:active { background: var(--primary-light); }
 .sub-quiz-btn + .sub-quiz-btn { border-top: 1px solid var(--border); }
+.satz-group-title {
+    padding: 10px 12px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: var(--primary);
+    background: var(--primary-light);
+    border-radius: 6px;
+    margin-top: 8px;
+}
+.satz-group-title:first-child { margin-top: 0; }
+.satz-group-title + .sub-quiz-btn { border-top: none; }
 
 /* ============ SENTENCE BUILDER ============ */
 .sentence-area {

@@ -419,6 +419,93 @@ function doForgot() {
 }
 
 // ============== MENU ==============
+// Satzbau submenu: group connectors by grammatical structure (verb position)
+// Groups:
+//   hauptV2   — Hauptsatz, Verb auf Position 2 (basic clauses, modal, TEKAMOLO, Passiv, Konjunktiv)
+//   koordP0   — Koordinierende Konjunktionen Position 0 (aber/denn/sondern — keine Inversion)
+//   advV2     — Verbindungsadverbien → Verb auf Position 2 (trotzdem/deshalb — Inversion)
+//   nebenEnd  — Nebensatz-Konnektoren, Verb am Ende (weil/dass/wenn/als/ob/obwohl/damit/um...zu/bevor/nachdem/während/seitdem/bis/sobald)
+//   relativ   — Relativsätze
+//   spezial   — je...desto, Textbau (Stil-Konnektoren B2-C2)
+const SATZ_GROUPS=[
+    {key:'hauptV2',cats:['hauptsatz','modal','tekamolo','passiv','konjunktiv'],
+     t:{de:'Hauptsatz · Verb Position 2',ru:'Главное предложение · глагол на 2-й позиции',
+        en:'Main clause · verb in position 2',tr:'Ana cümle · fiil 2. pozisyonda',
+        ar:'جملة رئيسية · الفعل في الموضع 2',fa:'جمله اصلی · فعل در جایگاه ۲',
+        vi:'Mệnh đề chính · động từ ở vị trí 2'}},
+    {key:'koordP0',cats:['aber','denn','sondern'],
+     t:{de:'Koord. Konjunktion · Position 0',ru:'Сочинительные союзы · позиция 0',
+        en:'Coord. conjunction · position 0',tr:'Sıralama bağlacı · pozisyon 0',
+        ar:'أدوات عطف · الموضع 0',fa:'حروف ربط هم‌پایه · جایگاه ۰',
+        vi:'Liên từ đẳng lập · vị trí 0'}},
+    {key:'advV2',cats:['trotzdem','deshalb'],
+     t:{de:'Verbindungsadverb · Verb Position 2 (Inversion)',
+        ru:'Союзное наречие · глагол на 2-й (инверсия)',
+        en:'Conj. adverb · verb in position 2 (inversion)',
+        tr:'Bağlaç zarfı · fiil 2. pozisyonda (devrik)',
+        ar:'ظرف رابط · الفعل في الموضع 2 (انقلاب)',
+        fa:'قید ربط · فعل در جایگاه ۲ (معکوس)',
+        vi:'Trạng từ liên kết · động từ ở vị trí 2 (đảo ngữ)'}},
+    {key:'nebenEnd',cats:['weil','dass','wenn','als','ob','obwohl','damit','um_zu','bevor','nachdem','waehrend','seitdem','bis','sobald'],
+     t:{de:'Nebensatz · Verb am Ende',ru:'Придаточное предложение · глагол в конце',
+        en:'Subordinate clause · verb at end',tr:'Yan cümle · fiil sonda',
+        ar:'جملة تابعة · الفعل في النهاية',fa:'جمله پیرو · فعل در انتها',
+        vi:'Mệnh đề phụ · động từ ở cuối'}},
+    {key:'relativ',cats:['relativ'],
+     t:{de:'Relativsätze',ru:'Относительные предложения',en:'Relative clauses',
+        tr:'İlgi cümleleri',ar:'جمل الوصل',fa:'جمله‌های موصولی',vi:'Mệnh đề quan hệ'}},
+    {key:'spezial',cats:['je_desto','textbau'],
+     t:{de:'Speziell · je...desto, Textbau',ru:'Особые · je...desto, текст (B2-C2)',
+        en:'Special · je...desto, text connectors',tr:'Özel · je...desto, metin yapısı',
+        ar:'خاص · je...desto، بناء النص',fa:'ویژه · je...desto، ساخت متن',
+        vi:'Đặc biệt · je...desto, cấu trúc văn bản'}}
+];
+const SATZ_LABELS={
+    hauptsatz:{de:'Hauptsätze',ru:'Главные предложения',en:'Main clauses',tr:'Ana cümleler',ar:'جمل رئيسية',fa:'جمله‌های اصلی',vi:'Mệnh đề chính'},
+    modal:{de:'Modalverben',ru:'Модальные глаголы',en:'Modal verbs',tr:'Kip fiilleri',ar:'أفعال شكلية',fa:'افعال وجهی',vi:'Động từ khiếm khuyết'},
+    tekamolo:{de:'TEKAMOLO',ru:'TEKAMOLO (порядок обстоятельств)',en:'TEKAMOLO (adverb order)',tr:'TEKAMOLO (zarf sırası)',ar:'TEKAMOLO (ترتيب الظروف)',fa:'TEKAMOLO (ترتیب قیدها)',vi:'TEKAMOLO (thứ tự trạng ngữ)'},
+    passiv:{de:'Passiv',ru:'Пассивный залог',en:'Passive voice',tr:'Edilgen çatı',ar:'المبني للمجهول',fa:'مجهول',vi:'Thể bị động'},
+    konjunktiv:{de:'Konjunktiv II',ru:'Сослагательное наклонение II',en:'Subjunctive II',tr:'Konjunktiv II',ar:'الصيغة الشرطية II',fa:'وجه التزامی II',vi:'Thức giả định II'},
+    aber:{de:'aber',ru:'aber (но)',en:'aber (but)',tr:'aber (ama)',ar:'aber (لكن)',fa:'aber (اما)',vi:'aber (nhưng)'},
+    denn:{de:'denn',ru:'denn (так как)',en:'denn (because)',tr:'denn (çünkü)',ar:'denn (لأن)',fa:'denn (زیرا)',vi:'denn (vì)'},
+    sondern:{de:'sondern',ru:'sondern (а, но)',en:'sondern (but rather)',tr:'sondern (bilakis)',ar:'sondern (بل)',fa:'sondern (بلکه)',vi:'sondern (mà là)'},
+    trotzdem:{de:'trotzdem',ru:'trotzdem (всё же)',en:'trotzdem (nevertheless)',tr:'trotzdem (yine de)',ar:'trotzdem (مع ذلك)',fa:'trotzdem (با این حال)',vi:'trotzdem (tuy nhiên)'},
+    deshalb:{de:'deshalb',ru:'deshalb (поэтому)',en:'deshalb (therefore)',tr:'deshalb (bu yüzden)',ar:'deshalb (لذلك)',fa:'deshalb (به همین دلیل)',vi:'deshalb (vì vậy)'},
+    weil:{de:'weil',ru:'weil (потому что)',en:'weil (because)',tr:'weil (çünkü)',ar:'weil (لأن)',fa:'weil (چون)',vi:'weil (bởi vì)'},
+    dass:{de:'dass',ru:'dass (что)',en:'dass (that)',tr:'dass (-dığı)',ar:'dass (أن)',fa:'dass (که)',vi:'dass (rằng)'},
+    wenn:{de:'wenn',ru:'wenn (если/когда)',en:'wenn (if/when)',tr:'wenn (eğer/-dığında)',ar:'wenn (إذا/عندما)',fa:'wenn (اگر/وقتی)',vi:'wenn (nếu/khi)'},
+    als:{de:'als',ru:'als (когда — однократно в прошлом)',en:'als (when — past single)',tr:'als (-dığı zaman, geçmiş)',ar:'als (عندما — في الماضي)',fa:'als (وقتی — گذشته)',vi:'als (khi — quá khứ một lần)'},
+    ob:{de:'ob',ru:'ob (ли)',en:'ob (whether)',tr:'ob (-ıp -madığı)',ar:'ob (ما إذا)',fa:'ob (آیا)',vi:'ob (liệu)'},
+    obwohl:{de:'obwohl',ru:'obwohl (хотя)',en:'obwohl (although)',tr:'obwohl (-mesine rağmen)',ar:'obwohl (على الرغم من)',fa:'obwohl (اگرچه)',vi:'obwohl (mặc dù)'},
+    damit:{de:'damit',ru:'damit (чтобы)',en:'damit (so that)',tr:'damit (-sin diye)',ar:'damit (لكي)',fa:'damit (تا اینکه)',vi:'damit (để mà)'},
+    um_zu:{de:'um...zu',ru:'um...zu (чтобы + inf)',en:'um...zu (in order to)',tr:'um...zu (için)',ar:'um...zu (لكي)',fa:'um...zu (برای اینکه)',vi:'um...zu (để)'},
+    bevor:{de:'bevor',ru:'bevor (прежде чем)',en:'bevor (before)',tr:'bevor (-meden önce)',ar:'bevor (قبل أن)',fa:'bevor (قبل از)',vi:'bevor (trước khi)'},
+    nachdem:{de:'nachdem',ru:'nachdem (после того как)',en:'nachdem (after)',tr:'nachdem (-dikten sonra)',ar:'nachdem (بعد أن)',fa:'nachdem (بعد از اینکه)',vi:'nachdem (sau khi)'},
+    waehrend:{de:'während',ru:'während (в то время как)',en:'während (while)',tr:'während (-iken)',ar:'während (بينما)',fa:'während (در حالی که)',vi:'während (trong khi)'},
+    seitdem:{de:'seitdem',ru:'seitdem (с тех пор как)',en:'seitdem (since)',tr:'seitdem (-den beri)',ar:'seitdem (منذ أن)',fa:'seitdem (از زمانی که)',vi:'seitdem (kể từ khi)'},
+    bis:{de:'bis',ru:'bis (пока не)',en:'bis (until)',tr:'bis (-ene kadar)',ar:'bis (حتى)',fa:'bis (تا اینکه)',vi:'bis (cho đến khi)'},
+    sobald:{de:'sobald',ru:'sobald (как только)',en:'sobald (as soon as)',tr:'sobald (-er -mez)',ar:'sobald (بمجرد أن)',fa:'sobald (به محض اینکه)',vi:'sobald (ngay khi)'},
+    relativ:{de:'Relativsätze',ru:'Относительные предложения',en:'Relative clauses',tr:'İlgi cümleleri',ar:'جمل الوصل',fa:'جمله‌های موصولی',vi:'Mệnh đề quan hệ'},
+    je_desto:{de:'je...desto',ru:'je...desto (чем...тем)',en:'je...desto (the...the)',tr:'je...desto (-dikçe)',ar:'je...desto (كلما...كلما)',fa:'je...desto (هرچه...همان‌قدر)',vi:'je...desto (càng...càng)'},
+    textbau:{de:'Textbau (B2-C2)',ru:'Текстовые конструкции (B2-C2)',en:'Text builders (B2-C2)',tr:'Metin yapısı (B2-C2)',ar:'بناء النص (B2-C2)',fa:'ساخت متن (B2-C2)',vi:'Cấu trúc văn bản (B2-C2)'}
+};
+function buildSatzbauGroups(snCatsSet){
+    const L=APP.lang||'ru';
+    const pick=(o)=>o[L]||o.en||o.de;
+    const allLabel={de:'Alle Themen',ru:'Все темы',en:'All topics',tr:'Tüm konular',ar:'جميع المواضيع',fa:'همه موضوعات',vi:'Tất cả chủ đề'};
+    let html=sqBtn('📐',pick(allLabel),'sentences','all');
+    SATZ_GROUPS.forEach(g=>{
+        const groupCats=g.cats.filter(c=>snCatsSet.has(c));
+        if(!groupCats.length) return;
+        html+=`<div class="satz-group-title">${pick(g.t)}</div>`;
+        groupCats.forEach(c=>{
+            const lbl=SATZ_LABELS[c]?pick(SATZ_LABELS[c]):c;
+            html+=sqBtn('📎',lbl,'sentences',c);
+        });
+    });
+    return html;
+}
+
 function catHTML(icon,title,cnt,progKey,total,bodyId,bodyContent){
     const p=getProgressPct(progKey,total);
     const open=APP.openCat===bodyId;
@@ -496,21 +583,10 @@ function showMenu() {
         ruleBtn('reflexive')+
         sqBtn('✍️','Satz vervollständigen','reflexive','conj')+
         sqBtn('🎯','Akkusativ oder Dativ?','reflexive','case'));
-    // 4. Satzbau
+    // 4. Satzbau — gruppiert nach Konnektor-Typ / Verb-Position
     if(hasSn){
-        const snCats=[...new Set(SENTENCES.map(s=>s.cat))];
-        let snBtns=sqBtn('📐','Alle Themen','sentences','all');
-        const snLabels={tekamolo:'TEKAMOLO',weil:'weil-Sätze',dass:'dass-Sätze',wenn:'wenn-Sätze',als:'als-Sätze',
-            ob:'ob-Sätze',obwohl:'obwohl-Sätze',damit:'damit-Sätze',um_zu:'um...zu',trotzdem:'trotzdem',
-            deshalb:'deshalb',denn:'denn-Sätze',aber:'aber-Sätze',nachdem:'nachdem',bevor:'bevor',
-            waehrend:'während',relativ:'Relativsätze',passiv:'Passiv',konjunktiv:'Konjunktiv II',
-            je_desto:'je...desto',modal:'Modalverben',hauptsatz:'Hauptsätze',sondern:'sondern',
-            seitdem:'seitdem',bis:'bis',sobald:'sobald',textbau:'Textbau (B2-C2)'};
-        snCats.forEach(c=>{
-            const ruleKey='satz_'+c;
-            const hasRule=typeof RULES!=='undefined'&&RULES[ruleKey];
-            snBtns+=sqBtn('📎',snLabels[c]||c,'sentences',c);
-        });
+        const snCatsSet=new Set(SENTENCES.map(s=>s.cat));
+        const snBtns=buildSatzbauGroups(snCatsSet);
         cats+=catHTML('📐','Satzbau',SENTENCES.length+' Übungen','sentences_all',SENTENCES.length,'catSatz',snBtns);
     }
     // 5. Präpositionen
@@ -985,105 +1061,105 @@ const HINTS_ML={
         ru:['Глагол ВСЕГДА на 2-й позиции.','Подлежащее + Глагол + Дополнение — основное правило.'],
         en:['The verb is always in position 2.','Subject + Verb + Object is the basic rule.'],
         tr:['Fiil her zaman 2. pozisyondadır.','Özne + Fiil + Nesne temel kuraldır.'],
-        vi:['Động từ LUÔN ở vị trí thứ 2.','Chủ ngữ + Động từ + Tân ngữ là quy tắc cơ bản.']},
+        vi:['Động từ LUÔN ở vị trí thứ 2.','Chủ ngữ + Động từ + Tân ngữ là quy tắc cơ bản.'],ar:["الفعل دائماً في الموضع الثاني.","فاعل + فعل + مفعول هي القاعدة الأساسية."],fa:["فعل همیشه در جایگاه ۲ است.","فاعل + فعل + مفعول قاعدهٔ اصلی است."]},
     tekamolo:{de:['Reihenfolge: Temporal → Kausal → Modal → Lokal.','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
         ru:['Порядок: Когда → Почему → Как → Где (TeKaMoLo).','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
         en:['Order: When → Why → How → Where (TeKaMoLo).','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
         tr:['Sıralama: Ne zaman → Neden → Nasıl → Nerede (TeKaMoLo).'],
-        vi:['Thứ tự: Thời gian → Lý do → Cách thức → Nơi chốn (TeKaMoLo).','Khi nào? Tại sao? Như thế nào? Ở đâu?']},
+        vi:['Thứ tự: Thời gian → Lý do → Cách thức → Nơi chốn (TeKaMoLo).','Khi nào? Tại sao? Như thế nào? Ở đâu?'],ar:["الترتيب: الزمن ← السبب ← الطريقة ← المكان (TeKaMoLo).","متى؟ لماذا؟ كيف؟ أين؟ — TeKaMoLo!"],fa:["ترتیب: زمان ← علت ← روش ← مکان (TeKaMoLo).","چه زمانی؟ چرا؟ چگونه؟ کجا؟ — TeKaMoLo!"]},
     modal:{de:['Modalverb auf Position 2, Infinitiv am Ende.'],
         ru:['Модальный глагол на 2-й позиции, инфинитив в конце.'],
         en:['Modal verb in position 2, infinitive at the end.'],
         tr:['Modal fiil 2. pozisyonda, mastar sonda.'],
-        vi:['Động từ khuyết thiếu ở vị trí 2, động từ nguyên thể ở cuối câu.']},
+        vi:['Động từ khuyết thiếu ở vị trí 2, động từ nguyên thể ở cuối câu.'],ar:["الفعل الشكلي في الموضع الثاني، المصدر في النهاية."],fa:["فعل وجهی در جایگاه ۲، مصدر در انتها."]},
     weil:{de:['Nach "weil" steht das Verb am Ende!'],
         ru:['После "weil" (потому что) глагол в КОНЦЕ!'],
         en:['After "weil" (because) the verb goes to the END!'],
         tr:['"weil" (çünkü) den sonra fiil SONA gider!'],
-        vi:['Sau "weil" (bởi vì) động từ đi xuống CUỐI câu!']},
+        vi:['Sau "weil" (bởi vì) động từ đi xuống CUỐI câu!'],ar:["بعد \"weil\" (لأن) يأتي الفعل في النهاية!"],fa:["بعد از \"weil\" (چون) فعل به انتها می‌رود!"]},
     dass:{de:['Nach "dass" steht das Verb am Ende!'],
         ru:['После "dass" (что) глагол в КОНЦЕ!'],
         en:['After "dass" (that) the verb goes to the END!'],
         tr:['"dass" (ki) den sonra fiil SONA gider!'],
-        vi:['Sau "dass" (rằng) động từ ở CUỐI câu!']},
+        vi:['Sau "dass" (rằng) động từ ở CUỐI câu!'],ar:["بعد \"dass\" (أن) يأتي الفعل في النهاية!"],fa:["بعد از \"dass\" (که) فعل در انتهاست!"]},
     wenn:{de:['Nach "wenn" steht das Verb am Ende!'],
         ru:['После "wenn" (если/когда) глагол в КОНЦЕ!'],
         en:['After "wenn" (if/when) the verb goes to the END!'],
         tr:['"wenn" (eğer/ne zaman) dan sonra fiil SONA gider!'],
-        vi:['Sau "wenn" (nếu/khi) động từ ở CUỐI câu!']},
+        vi:['Sau "wenn" (nếu/khi) động từ ở CUỐI câu!'],ar:["بعد \"wenn\" (إذا/عندما) يأتي الفعل في النهاية!"],fa:["بعد از \"wenn\" (اگر/وقتی) فعل در انتهاست!"]},
     als:{de:['Nach "als" steht das Verb am Ende!'],
         ru:['После "als" (когда — одноразово в прошлом) глагол в КОНЦЕ!'],
         en:['After "als" (when — one-time past) verb goes to the END!'],
         tr:['"als" (ne zaman — geçmişte bir kez) dan sonra fiil SONA gider!'],
-        vi:['Sau "als" (khi — sự kiện đơn lẻ trong quá khứ) động từ ở CUỐI câu!']},
+        vi:['Sau "als" (khi — sự kiện đơn lẻ trong quá khứ) động từ ở CUỐI câu!'],ar:["بعد \"als\" (عندما — حدث مرة في الماضي) يأتي الفعل في النهاية!"],fa:["بعد از \"als\" (وقتی — گذشتهٔ یک‌بار) فعل در انتهاست!"]},
     ob:{de:['Nach "ob" steht das Verb am Ende!'],
         ru:['После "ob" (ли — косвенный вопрос) глагол в КОНЦЕ!'],
         en:['After "ob" (whether) the verb goes to the END!'],
         tr:['"ob" (acaba) dan sonra fiil SONA gider!'],
-        vi:['Sau "ob" (liệu có) động từ ở CUỐI câu!']},
+        vi:['Sau "ob" (liệu có) động từ ở CUỐI câu!'],ar:["بعد \"ob\" (ما إذا) يأتي الفعل في النهاية!"],fa:["بعد از \"ob\" (آیا) فعل در انتهاست!"]},
     obwohl:{de:['Nach "obwohl" steht das Verb am Ende!'],
         ru:['После "obwohl" (хотя) глагол в КОНЦЕ!'],
         en:['After "obwohl" (although) the verb goes to the END!'],
         tr:['"obwohl" (rağmen) den sonra fiil SONA gider!'],
-        vi:['Sau "obwohl" (mặc dù) động từ ở CUỐI câu!']},
+        vi:['Sau "obwohl" (mặc dù) động từ ở CUỐI câu!'],ar:["بعد \"obwohl\" (على الرغم من) يأتي الفعل في النهاية!"],fa:["بعد از \"obwohl\" (اگرچه) فعل در انتهاست!"]},
     damit:{de:['Nach "damit" steht das Verb am Ende!'],
         ru:['После "damit" (чтобы, разные субъекты) глагол в КОНЦЕ!'],
         en:['After "damit" (so that, different subjects) verb goes to the END!'],
         tr:['"damit" (diye, farklı özneler) den sonra fiil SONA gider!'],
-        vi:['Sau "damit" (để, chủ ngữ khác nhau) động từ ở CUỐI câu!']},
+        vi:['Sau "damit" (để, chủ ngữ khác nhau) động từ ở CUỐI câu!'],ar:["بعد \"damit\" (لكي، فاعل مختلف) يأتي الفعل في النهاية!"],fa:["بعد از \"damit\" (برای اینکه، فاعل متفاوت) فعل در انتهاست!"]},
     um_zu:{de:['um + zu + Infinitiv am Ende.'],
         ru:['um...zu + инфинитив в конце (чтобы, одинаковый субъект).'],
         en:['um...zu + infinitive at the end (in order to, same subject).'],
         tr:['um...zu + mastar sonda (amacıyla, aynı özne).'],
-        vi:['um...zu + động từ nguyên thể ở cuối (để, cùng chủ ngữ).']},
+        vi:['um...zu + động từ nguyên thể ở cuối (để, cùng chủ ngữ).'],ar:["um + zu + مصدر في النهاية (لكي، نفس الفاعل)."],fa:["um + zu + مصدر در انتها (برای، فاعل یکسان)."]},
     trotzdem:{de:['Nach "trotzdem" — Verb auf Position 2!'],
         ru:['После "trotzdem" (тем не менее) — глагол на 2-й позиции! Главное предложение.'],
         en:['After "trotzdem" (nevertheless) — verb in position 2! Main clause.'],
         tr:['"trotzdem" (buna rağmen) dan sonra fiil 2. pozisyonda!'],
-        vi:['Sau "trotzdem" (tuy nhiên) — động từ ở vị trí 2! Mệnh đề chính.']},
+        vi:['Sau "trotzdem" (tuy nhiên) — động từ ở vị trí 2! Mệnh đề chính.'],ar:["بعد \"trotzdem\" (مع ذلك) — الفعل في الموضع الثاني! جملة رئيسية."],fa:["بعد از \"trotzdem\" (با این حال) — فعل در جایگاه ۲! جملهٔ اصلی."]},
     deshalb:{de:['Nach "deshalb" — Verb auf Position 2!'],
         ru:['После "deshalb" (поэтому) — глагол на 2-й позиции!'],
         en:['After "deshalb" (therefore) — verb in position 2!'],
         tr:['"deshalb" (bu yüzden) dan sonra fiil 2. pozisyonda!'],
-        vi:['Sau "deshalb" (do đó) — động từ ở vị trí 2!']},
+        vi:['Sau "deshalb" (do đó) — động từ ở vị trí 2!'],ar:["بعد \"deshalb\" (لذلك) — الفعل في الموضع الثاني!"],fa:["بعد از \"deshalb\" (به همین دلیل) — فعل در جایگاه ۲!"]},
     denn:{de:['Nach "denn" — normale Wortstellung!'],
         ru:['После "denn" (потому что) — обычный порядок слов, глагол на 2-й позиции!'],
         en:['After "denn" (because) — normal word order, verb in position 2!'],
         tr:['"denn" (çünkü) den sonra normal sözcük sırası!'],
-        vi:['Sau "denn" (vì) — trật tự từ bình thường, động từ ở vị trí 2!']},
+        vi:['Sau "denn" (vì) — trật tự từ bình thường, động từ ở vị trí 2!'],ar:["بعد \"denn\" (لأن) — ترتيب الكلمات عادي، الفعل في الموضع الثاني!"],fa:["بعد از \"denn\" (زیرا) — ترتیب عادی کلمات، فعل در جایگاه ۲!"]},
     aber:{de:['Nach "aber" — normale Wortstellung!'],
         ru:['После "aber" (но) — обычный порядок слов.'],
         en:['After "aber" (but) — normal word order.'],
         tr:['"aber" (ama) dan sonra normal sözcük sırası.'],
-        vi:['Sau "aber" (nhưng) — trật tự từ bình thường.']},
+        vi:['Sau "aber" (nhưng) — trật tự từ bình thường.'],ar:["بعد \"aber\" (لكن) — ترتيب الكلمات عادي."],fa:["بعد از \"aber\" (اما) — ترتیب عادی کلمات."]},
     sondern:{de:['nicht...sondern — Korrektur einer Aussage.'],
         ru:['nicht...sondern (не...а) — исправление утверждения.'],
         en:['nicht...sondern (not...but rather) — correcting a statement.'],
         tr:['nicht...sondern (değil...aksine) — bir ifadeyi düzeltme.'],
-        vi:['nicht...sondern (không...mà là) — sửa một câu khẳng định.']},
+        vi:['nicht...sondern (không...mà là) — sửa một câu khẳng định.'],ar:["nicht...sondern (ليس...بل) — لتصحيح جملة."],fa:["nicht...sondern (نه...بلکه) — اصلاح یک گزاره."]},
     nachdem:{de:['Nach "nachdem" — Verb am Ende + Plusquamperfekt!'],
         ru:['После "nachdem" (после того как) — глагол в конце + Plusquamperfekt!'],
         en:['After "nachdem" (after) — verb at end + past perfect!'],
         tr:['"nachdem" (sonra) dan sonra fiil sonda + Plusquamperfekt!'],
-        vi:['Sau "nachdem" (sau khi) — động từ ở cuối + Plusquamperfekt!']},
+        vi:['Sau "nachdem" (sau khi) — động từ ở cuối + Plusquamperfekt!'],ar:["بعد \"nachdem\" (بعد أن) — الفعل في النهاية + الماضي التام!"],fa:["بعد از \"nachdem\" (پس از اینکه) — فعل در انتها + گذشتهٔ کامل!"]},
     bevor:{de:['Nach "bevor" — Verb am Ende!'],
         ru:['После "bevor" (прежде чем) — глагол в КОНЦЕ!'],
         en:['After "bevor" (before) — verb at the END!'],
         tr:['"bevor" (önce) den sonra fiil SONDA!'],
-        vi:['Sau "bevor" (trước khi) — động từ ở CUỐI câu!']},
+        vi:['Sau "bevor" (trước khi) — động từ ở CUỐI câu!'],ar:["بعد \"bevor\" (قبل أن) — الفعل في النهاية!"],fa:["بعد از \"bevor\" (قبل از) — فعل در انتها!"]},
     waehrend:{de:['Nach "während" — Verb am Ende!'],
         ru:['После "während" (в то время как) — глагол в КОНЦЕ!'],
         en:['After "während" (while) — verb at the END!'],
         tr:['"während" (iken) den sonra fiil SONDA!'],
-        vi:['Sau "während" (trong khi) — động từ ở CUỐI câu!']},
-    seitdem:{de:['Nach "seitdem" — Verb am Ende!'],ru:['После "seitdem" (с тех пор как) — глагол в КОНЦЕ!'],en:['After "seitdem" (since) — verb at the END!'],tr:['"seitdem" dan sonra fiil SONDA!'],vi:['Sau "seitdem" (từ khi) — động từ ở CUỐI câu!']},
-    bis:{de:['Nach "bis" — Verb am Ende!'],ru:['После "bis" (пока не) — глагол в КОНЦЕ!'],en:['After "bis" (until) — verb at the END!'],tr:['"bis" (kadar) dan sonra fiil SONDA!'],vi:['Sau "bis" (cho đến khi) — động từ ở CUỐI câu!']},
-    sobald:{de:['Nach "sobald" — Verb am Ende!'],ru:['После "sobald" (как только) — глагол в КОНЦЕ!'],en:['After "sobald" (as soon as) — verb at the END!'],tr:['"sobald" (hemen) dan sonra fiil SONDA!'],vi:['Sau "sobald" (ngay khi) — động từ ở CUỐI câu!']},
-    relativ:{de:['Relativpronomen + Verb am Ende!'],ru:['Относительное местоимение (der/die/das) + глагол в КОНЦЕ!'],en:['Relative pronoun + verb at the END!'],tr:['İlgi zamiri + fiil SONDA!'],vi:['Đại từ quan hệ (der/die/das) + động từ ở CUỐI câu!']},
-    passiv:{de:['Passiv: werden + Partizip II'],ru:['Пассив: werden + Partizip II. Дом строится = Das Haus wird gebaut.'],en:['Passive: werden + past participle.'],tr:['Edilgen: werden + Partizip II.'],vi:['Bị động: werden + Partizip II. Ngôi nhà được xây = Das Haus wird gebaut.']},
-    konjunktiv:{de:['Konjunktiv II: würde/wäre/hätte'],ru:['Сослагательное: würde/wäre/hätte. Если бы я был богат = Wenn ich reich wäre...'],en:['Subjunctive II: würde/wäre/hätte. If I were rich...'],tr:['Dilek kipi: würde/wäre/hätte.'],vi:['Thức giả định II: würde/wäre/hätte. Nếu tôi giàu = Wenn ich reich wäre...']},
-    je_desto:{de:['Je + Komparativ, desto + Komparativ + Verb'],ru:['Je...desto: Чем больше..., тем лучше... Je mehr, desto besser.'],en:['Je...desto: The more..., the better...'],tr:['Je...desto: Ne kadar çok..., o kadar iyi...'],vi:['Je...desto: Càng nhiều..., càng tốt... Je mehr, desto besser.']},
-    textbau:{de:['Erstens, zweitens, darüber hinaus, zusammenfassend...'],ru:['Структура текста: Во-первых, во-вторых, кроме того, в итоге...'],en:['Text structure: Firstly, secondly, furthermore, in conclusion...'],tr:['Metin yapısı: Birincisi, ikincisi, ayrıca, sonuç olarak...'],vi:['Cấu trúc văn bản: Thứ nhất, thứ hai, ngoài ra, tóm lại...']}
+        vi:['Sau "während" (trong khi) — động từ ở CUỐI câu!'],ar:["بعد \"während\" (بينما) — الفعل في النهاية!"],fa:["بعد از \"während\" (در حالی که) — فعل در انتها!"]},
+    seitdem:{de:['Nach "seitdem" — Verb am Ende!'],ru:['После "seitdem" (с тех пор как) — глагол в КОНЦЕ!'],en:['After "seitdem" (since) — verb at the END!'],tr:['"seitdem" dan sonra fiil SONDA!'],vi:['Sau "seitdem" (từ khi) — động từ ở CUỐI câu!'],ar:["بعد \"seitdem\" (منذ أن) — الفعل في النهاية!"],fa:["بعد از \"seitdem\" (از زمانی که) — فعل در انتها!"]},
+    bis:{de:['Nach "bis" — Verb am Ende!'],ru:['После "bis" (пока не) — глагол в КОНЦЕ!'],en:['After "bis" (until) — verb at the END!'],tr:['"bis" (kadar) dan sonra fiil SONDA!'],vi:['Sau "bis" (cho đến khi) — động từ ở CUỐI câu!'],ar:["بعد \"bis\" (حتى) — الفعل في النهاية!"],fa:["بعد از \"bis\" (تا اینکه) — فعل در انتها!"]},
+    sobald:{de:['Nach "sobald" — Verb am Ende!'],ru:['После "sobald" (как только) — глагол в КОНЦЕ!'],en:['After "sobald" (as soon as) — verb at the END!'],tr:['"sobald" (hemen) dan sonra fiil SONDA!'],vi:['Sau "sobald" (ngay khi) — động từ ở CUỐI câu!'],ar:["بعد \"sobald\" (بمجرد أن) — الفعل في النهاية!"],fa:["بعد از \"sobald\" (به محض اینکه) — فعل در انتها!"]},
+    relativ:{de:['Relativpronomen + Verb am Ende!'],ru:['Относительное местоимение (der/die/das) + глагол в КОНЦЕ!'],en:['Relative pronoun + verb at the END!'],tr:['İlgi zamiri + fiil SONDA!'],vi:['Đại từ quan hệ (der/die/das) + động từ ở CUỐI câu!'],ar:["ضمير الوصل (der/die/das) + الفعل في النهاية!"],fa:["ضمیر موصولی (der/die/das) + فعل در انتها!"]},
+    passiv:{de:['Passiv: werden + Partizip II'],ru:['Пассив: werden + Partizip II. Дом строится = Das Haus wird gebaut.'],en:['Passive: werden + past participle.'],tr:['Edilgen: werden + Partizip II.'],vi:['Bị động: werden + Partizip II. Ngôi nhà được xây = Das Haus wird gebaut.'],ar:["المبني للمجهول: werden + اسم المفعول. البيت يُبنى = Das Haus wird gebaut."],fa:["مجهول: werden + اسم مفعول. خانه ساخته می‌شود = Das Haus wird gebaut."]},
+    konjunktiv:{de:['Konjunktiv II: würde/wäre/hätte'],ru:['Сослагательное: würde/wäre/hätte. Если бы я был богат = Wenn ich reich wäre...'],en:['Subjunctive II: würde/wäre/hätte. If I were rich...'],tr:['Dilek kipi: würde/wäre/hätte.'],vi:['Thức giả định II: würde/wäre/hätte. Nếu tôi giàu = Wenn ich reich wäre...'],ar:["الصيغة الشرطية II: würde/wäre/hätte. لو كنت غنياً = Wenn ich reich wäre..."],fa:["وجه التزامی II: würde/wäre/hätte. اگر ثروتمند بودم = Wenn ich reich wäre..."]},
+    je_desto:{de:['Je + Komparativ, desto + Komparativ + Verb'],ru:['Je...desto: Чем больше..., тем лучше... Je mehr, desto besser.'],en:['Je...desto: The more..., the better...'],tr:['Je...desto: Ne kadar çok..., o kadar iyi...'],vi:['Je...desto: Càng nhiều..., càng tốt... Je mehr, desto besser.'],ar:["Je + مقارن، desto + مقارن + فعل. كلما... كلما..."],fa:["Je + صفت تفضیلی، desto + صفت تفضیلی + فعل. هرچه بیشتر...همان‌قدر بهتر..."]},
+    textbau:{de:['Erstens, zweitens, darüber hinaus, zusammenfassend...'],ru:['Структура текста: Во-первых, во-вторых, кроме того, в итоге...'],en:['Text structure: Firstly, secondly, furthermore, in conclusion...'],tr:['Metin yapısı: Birincisi, ikincisi, ayrıca, sonuç olarak...'],vi:['Cấu trúc văn bản: Thứ nhất, thứ hai, ngoài ra, tóm lại...'],ar:["بنية النص: أولاً، ثانياً، علاوة على ذلك، في الختام..."],fa:["ساختار متن: نخست، دوم، علاوه بر این، در نهایت..."]}
 };
 function getHints(cat){
     const h=HINTS_ML[cat];
