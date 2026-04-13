@@ -846,6 +846,17 @@ function markKnownAndSkip(){
     const item=APP.quiz.items[APP.quiz.idx];
     const key=APP.quiz.cat+'_'+APP.quiz.mode;
     markKnown(item.id,key);
+    const l=APP.lang||'ru';
+    const msgs={
+        ru:'✓ Отмечено как известное',
+        en:'✓ Marked as known',
+        de:'✓ Als bekannt markiert',
+        tr:'✓ Bildiğiniz olarak işaretlendi',
+        ar:'✓ تم وضع علامة كمعروف',
+        fa:'✓ به عنوان شناخته‌شده علامت‌گذاری شد',
+        vi:'✓ Đã đánh dấu là đã biết'
+    };
+    toast(msgs[l]||msgs.en);
     APP.quiz.idx++;
     showQ();
 }
