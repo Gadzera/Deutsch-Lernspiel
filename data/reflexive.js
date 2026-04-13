@@ -245,10 +245,6 @@ const REFLEXIVE = [
    ich:"erkälte mich", du:"erkältest dich", er:"erkältet sich", wir:"erkälten uns", ihr:"erkältet euch", sie:"erkälten sich",
    ru:"простужаться", en:"to catch a cold", tr:"üşütmek"},
 
-  {id:"rf062", verb:"sich verletzen", case:"akk",
-   ich:"verletze mich", du:"verletzt dich", er:"verletzt sich", wir:"verletzen uns", ihr:"verletzt euch", sie:"verletzen sich",
-   ru:"пораниться", en:"to injure oneself", tr:"yaralanmak"},
-
   {id:"rf063", verb:"sich täuschen", case:"akk",
    ich:"täusche mich", du:"täuschst dich", er:"täuscht sich", wir:"täuschen uns", ihr:"täuscht euch", sie:"täuschen sich",
    ru:"обманываться", en:"to be deceived", tr:"aldanmak"},
@@ -432,8 +428,7 @@ const REFLEXIVE = [
   {id:"rf157",verb:"sich räuspern",case:"akk",ich:"räuspere mich",du:"räusperst dich",er:"räuspert sich",wir:"räuspern uns",ihr:"räuspert euch",sie:"räuspern sich",ru:"откашливаться",en:"to clear one's throat",tr:"boğazını temizlemek"},
   {id:"rf158",verb:"sich scheiden lassen",case:"akk",ich:"lasse mich scheiden",du:"lässt dich scheiden",er:"lässt sich scheiden",wir:"lassen uns scheiden",ihr:"lasst euch scheiden",sie:"lassen sich scheiden",ru:"разводиться",en:"to get divorced",tr:"boşanmak"},
   {id:"rf159",verb:"sich sträuben",case:"akk",ich:"sträube mich",du:"sträubst dich",er:"sträubt sich",wir:"sträuben uns",ihr:"sträubt euch",sie:"sträuben sich",ru:"противиться",en:"to resist",tr:"direnmek"},
-  {id:"rf160",verb:"sich umbringen",case:"akk",ich:"bringe mich um",du:"bringst dich um",er:"bringt sich um",wir:"bringen uns um",ihr:"bringt euch um",sie:"bringen sich um",ru:"покончить с собой",en:"to kill oneself",tr:"intihar etmek"},
-  {id:"rf161",verb:"sich umstellen",case:"akk",ich:"stelle mich um",du:"stellst dich um",er:"stellt sich um",wir:"stellen uns um",ihr:"stellt euch um",sie:"stellen sich um",ru:"перестраиваться",en:"to adjust",tr:"ayak uydurmak"},
+  {id:"rf160",verb:"sich umstellen",case:"akk",ich:"stelle mich um",du:"stellst dich um",er:"stellt sich um",wir:"stellen uns um",ihr:"stellt euch um",sie:"stellen sich um",ru:"перестраиваться",en:"to adjust",tr:"ayak uydurmak"},
   {id:"rf162",verb:"sich unterordnen",case:"akk",ich:"ordne mich unter",du:"ordnest dich unter",er:"ordnet sich unter",wir:"ordnen uns unter",ihr:"ordnet euch unter",sie:"ordnen sich unter",ru:"подчиняться",en:"to subordinate oneself",tr:"boyun eğmek"},
   {id:"rf163",verb:"sich verbeugen",case:"akk",ich:"verbeuge mich",du:"verbeugst dich",er:"verbeugt sich",wir:"verbeugen uns",ihr:"verbeugt euch",sie:"verbeugen sich",ru:"кланяться",en:"to bow",tr:"eğilmek"},
   {id:"rf164",verb:"sich verbreiten",case:"akk",ich:"verbreite mich",du:"verbreitest dich",er:"verbreitet sich",wir:"verbreiten uns",ihr:"verbreitet euch",sie:"verbreiten sich",ru:"распространяться",en:"to spread",tr:"yayılmak"},
