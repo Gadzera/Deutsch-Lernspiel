@@ -7,7 +7,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#6C63FF">
     <title>Deutsch Lernspiel Pro v2.1</title>
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Cache-busting: bump ?v=... on every deploy so phones get new JS -->
+    <link rel="stylesheet" href="css/style.css?v=20260413a">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 </head>
 <body>
     <div id="app"></div>
@@ -19,17 +23,17 @@
             <div id="subliminalTrans" class="subliminal-translation"></div>
         </div>
     </div>
-    <script src="data/nouns.js"></script>
-    <script src="data/verbs.js"></script>
-    <script src="data/partizip2.js"></script>
-    <script src="data/reflexive.js"></script>
-    <script src="data/sentences.js"></script>
-    <script src="data/prepositions.js"></script>
-    <script src="data/pronouns.js"></script>
-    <script src="data/rules.js"></script>
-    <script src="data/vwu.js"></script>
-    <script src="data/ev_zt1_lesen.js"></script>
-    <script src="data/ev_zt1_pool.js"></script>
-    <script src="js/app.js"></script>
+    <script src="data/nouns.js?v=20260413a"></script>
+    <script src="data/verbs.js?v=20260413a"></script>
+    <script src="data/partizip2.js?v=20260413a"></script>
+    <script src="data/reflexive.js?v=20260413a"></script>
+    <script src="data/sentences.js?v=20260413a"></script>
+    <script src="data/prepositions.js?v=20260413a"></script>
+    <script src="data/pronouns.js?v=20260413a"></script>
+    <script src="data/rules.js?v=20260413a"></script>
+    <script src="data/vwu.js?v=20260413a"></script>
+    <script src="data/ev_zt1_lesen.js?v=20260413a"></script>
+    <script src="data/ev_zt1_pool.js?v=20260413a"></script>
+    <script src="js/app.js?v=20260413a"></script>
 </body>
 </html>
