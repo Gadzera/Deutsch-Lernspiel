@@ -491,7 +491,7 @@ function showMenu() {
             const hasRule=typeof RULES!=='undefined'&&RULES[ruleKey];
             snBtns+=sqBtn('📎',snLabels[c]||c,'sentences',c);
         });
-        cats+=catHTML('📐','Satzbau',SENTENCES.length+' Übungen','sentences_all',SENTENCES.length,'catSatz',ruleBtn('sentences')+snBtns);
+        cats+=catHTML('📐','Satzbau',SENTENCES.length+' Übungen','sentences_all',SENTENCES.length,'catSatz',snBtns);
     }
     // 5. Präpositionen
     if(hasPp) cats+=catHTML('📌','Präpositionen',PREPOSITIONS.length+' Übungen','prep_all',PREPOSITIONS.length,'catPrep',
