@@ -1465,6 +1465,28 @@ body {
 .rule-quiz-btn:hover { background: #FFE0B2; }
 [data-theme="dark"] .rule-quiz-btn { background: rgba(255,179,71,0.15); color: #FFB74D; border-color: #FFB74D; }
 
+/* ============ "I KNOW THIS" BUTTON ============ */
+.know-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 2px dashed #66BB6A;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.know-btn:hover { background: #C8E6C9; border-style: solid; }
+[data-theme="dark"] .know-btn {
+    background: rgba(102, 187, 106, 0.15);
+    color: #81C784;
+    border-color: #66BB6A;
+}
+[data-theme="dark"] .know-btn:hover { background: rgba(102, 187, 106, 0.25); }
+
 /* ============ HINT BOX ============ */
 .hint-box {
     background: #FFF3E0;

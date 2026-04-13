@@ -135,8 +135,8 @@ const COUNTRIES = [
 ];
 
 // Helper language names (shown in their own language)
-const LANG_FLAGS = {ru:"🇷🇺", en:"🇬🇧", tr:"🇹🇷", ar:"🇸🇦", fa:"🇮🇷"};
-const LANG_NAMES = {ru:"Русский", en:"English", tr:"Türkçe", ar:"العربية", fa:"فارسی"};
+const LANG_FLAGS = {ru:"🇷🇺", en:"🇬🇧", tr:"🇹🇷", ar:"🇸🇦", fa:"🇮🇷", vi:"🇻🇳"};
+const LANG_NAMES = {ru:"Русский", en:"English", tr:"Türkçe", ar:"العربية", fa:"فارسی", vi:"Tiếng Việt"};
 
 // ============== STATE ==============
 let APP = {
@@ -162,10 +162,16 @@ function ld(k) { try{return JSON.parse(localStorage.getItem(CONFIG.prefix+k));}c
 function okEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 function esc(s) { const d=document.createElement('div');d.textContent=s;return d.innerHTML; }
 
-// Get translation of a word in the current helper language
+// Get translation of a word in the current helper language.
+// Fallback chain: selected language → English → Russian → German.
+// For non-Russian helper languages we never fall back to Russian before English,
+// otherwise Arabic/Farsi/Turkish/Vietnamese users would see Cyrillic.
 function tr(w) {
-    if (APP.lang !== 'ru' && w[APP.lang]) return w[APP.lang];
-    return w.ru || w.en || w.german || w.verb || '';
+    const l = APP.lang || 'ru';
+    if (l !== 'ru' && w[l]) return w[l];
+    if (l === 'ru') return w.ru || w.en || w.german || w.verb || '';
+    // Non-ru: prefer English, then German, then Russian as last resort
+    return w.en || w.german || w.verb || w.ru || '';
 }
 
 // ============== PROGRESS ==============
@@ -436,12 +442,26 @@ function ruleBtn(cat){
 function showRule(cat,fromQuiz){
     if(typeof RULES==='undefined'||!RULES[cat]) return;
     const back=fromQuiz?'renderBuilder()':'showMenu()';
+    // Multilingual rule selection: RULES[cat] can be either an HTML string (legacy)
+    // or an object { de, ru, en, tr, ar, fa, vi }. Pick the current language
+    // and fall back through a chain.
+    const entry=RULES[cat];
+    const lang=APP.lang||'ru';
+    let html='';
+    if(typeof entry==='string'){
+        html=entry;
+    }else if(typeof entry==='object'){
+        html=entry[lang]||entry.en||entry.de||entry.ru||'';
+    }
+    // Header title in the user's language
+    const titles={ru:'Грамматическое правило',en:'Grammar rule',de:'Grammatikregel',tr:'Dilbilgisi kuralı',ar:'قاعدة نحوية',fa:'قاعده دستوری',vi:'Quy tắc ngữ pháp'};
+    const title=titles[lang]||titles.de;
     $('app').innerHTML=`
         <div class="quiz-page">
             <div class="quiz-header">
-                <div class="quiz-header-left"><button class="quiz-back" onclick="${back}">&#8592;</button><span>Grammatikregel</span></div>
+                <div class="quiz-header-left"><button class="quiz-back" onclick="${back}">&#8592;</button><span>${title}</span></div>
             </div>
-            <div class="quiz-body rule-page">${RULES[cat]}</div>
+            <div class="quiz-body rule-page">${html}</div>
         </div>`;
 }
 function toggleCat(id){
@@ -785,6 +805,7 @@ function showMCQ(){
     const isGrid=(cat==='prepositions'||cat==='pronouns')&&q.opts.length<=6;
     const btns=q.opts.map(o=>`<button class="answer-btn" data-val="${esc(o)}" data-cor="${esc(q.correct)}" onclick="checkA(this)">${o}</button>`).join('');
 
+    const knowLabel=knowBtnLabel();
     $('app').innerHTML=`
         <div class="quiz-page">
             <div class="quiz-header">
@@ -799,44 +820,71 @@ function showMCQ(){
                 <div class="quiz-answers ${q.isArt?'article-mode':''} ${isGrid?'two-col':''} stagger">${btns}</div>
                 <div id="mcqExplain" class="mcq-explain" style="display:none"></div>
                 <button id="mcqNext" class="btn btn-primary" style="display:none;margin-top:12px" onclick="APP.quiz.idx++;showQ();">${UI.nextBtn||'Weiter'} →</button>
+                <button class="btn btn-ghost know-btn" onclick="markKnownAndSkip()">✓ ${knowLabel}</button>
             </div>
         </div>`;
+}
+
+// Multilingual label for the "I know this" button
+function knowBtnLabel(){
+    const l=APP.lang||'ru';
+    const M={
+        ru:'Знаю — пропустить',
+        en:'I know this — skip',
+        de:'Kenne ich — überspringen',
+        tr:'Biliyorum — atla',
+        ar:'أعرف هذا — تخطي',
+        fa:'می‌دانم — رد کردن',
+        vi:'Tôi biết — bỏ qua'
+    };
+    return M[l]||M.de;
+}
+
+// Mark the current quiz item as known and skip to next question
+function markKnownAndSkip(){
+    if(!APP.quiz||APP.quiz.idx>=APP.quiz.items.length) return;
+    const item=APP.quiz.items[APP.quiz.idx];
+    const key=APP.quiz.cat+'_'+APP.quiz.mode;
+    markKnown(item.id,key);
+    APP.quiz.idx++;
+    showQ();
 }
 
 function getMCQExplanation(item,cat,userAns,correct,isOk){
     // Build a localized explanation for prepositions / pronouns
     const lang=APP.lang||'ru';
-    const T=(ru,en,de,tr)=>(lang==='ru'?ru:lang==='en'?en:lang==='tr'?tr:de);
+    const T=(ru,en,de,tr,vi)=>(lang==='ru'?ru:lang==='en'?en:lang==='tr'?tr:lang==='vi'?(vi||en):de);
     let why='';
     if(cat==='prepositions'){
         const typeNames={
-            wechsel:T('Wechselpräposition (Akk/Dat)','Two-way preposition','Wechselpräposition','Yön/Yer edatı'),
-            dativ:T('Präposition mit Dativ','Dative preposition','Präposition + Dativ','Datif edatı'),
-            akkusativ:T('Präposition mit Akkusativ','Accusative preposition','Präposition + Akkusativ','Akuzatif edatı'),
-            genitiv:T('Präposition mит Genitiv','Genitive preposition','Präposition + Genitiv','Genitif edatı'),
-            verb_prep:T('Verb + feste Präposition','Verb + fixed preposition','Verb + feste Präposition','Fiil + sabit edat')
+            wechsel:T('Wechselpräposition (Akk/Dat)','Two-way preposition','Wechselpräposition','Yön/Yer edatı','Giới từ hai cách (Akk/Dat)'),
+            dativ:T('Präposition mit Dativ','Dative preposition','Präposition + Dativ','Datif edatı','Giới từ với cách Dativ'),
+            akkusativ:T('Präposition mit Akkusativ','Accusative preposition','Präposition + Akkusativ','Akuzatif edatı','Giới từ với cách Akkusativ'),
+            genitiv:T('Präposition mit Genitiv','Genitive preposition','Präposition + Genitiv','Genitif edatı','Giới từ với cách Genitiv'),
+            verb_prep:T('Verb + feste Präposition','Verb + fixed preposition','Verb + feste Präposition','Fiil + sabit edat','Động từ + giới từ cố định')
         };
         const tn=typeNames[item.type]||'';
         why=`<b>${correct}</b> — ${tn}`;
         if(item.case) why+=` · <i>${item.case}</i>`;
     }else if(cat==='pronouns'){
         const typeNames={
-            personal:T('Personalpronomen','Personal pronoun','Personalpronomen','Şahıs zamiri'),
-            possessiv:T('Possessivpronomen','Possessive pronoun','Possessivpronomen','İyelik zamiri'),
-            reflexiv:T('Reflexivpronomen','Reflexive pronoun','Reflexivpronomen','Dönüşlü zamir'),
-            relativ:T('Relativpronomen','Relative pronoun','Relativpronomen','İlgi zamiri'),
-            demonstrativ:T('Demonstrativpronomen','Demonstrative pronoun','Demonstrativpronomen','İşaret zamiri'),
-            indefinit:T('Indefinitpronomen','Indefinite pronoun','Indefinitpronomen','Belirsiz zamir')
+            personal:T('Personalpronomen','Personal pronoun','Personalpronomen','Şahıs zamiri','Đại từ nhân xưng'),
+            possessiv:T('Possessivpronomen','Possessive pronoun','Possessivpronomen','İyelik zamiri','Đại từ sở hữu'),
+            reflexiv:T('Reflexivpronomen','Reflexive pronoun','Reflexivpronomen','Dönüşlü zamir','Đại từ phản thân'),
+            relativ:T('Relativpronomen','Relative pronoun','Relativpronomen','İlgi zamiri','Đại từ quan hệ'),
+            demonstrativ:T('Demonstrativpronomen','Demonstrative pronoun','Demonstrativpronomen','İşaret zamiri','Đại từ chỉ định'),
+            indefinit:T('Indefinitpronomen','Indefinite pronoun','Indefinitpronomen','Belirsiz zamir','Đại từ không xác định')
         };
         const tn=typeNames[item.type]||'';
         why=`<b>${correct}</b> — ${tn}`;
         if(item.case) why+=` · <i>${item.case}</i>`;
     }
     const head=isOk
-        ? `<div class="mcq-ex-head ok">✓ ${T('Richtig!','Correct!','Richtig!','Doğru!')}</div>`
-        : `<div class="mcq-ex-head err">✗ ${T('Falsch','Wrong','Falsch','Yanlış')} — <s>${esc(userAns)}</s></div>`;
-    const ru=item.ru?`<div class="mcq-ex-tr">${esc(item.ru)}</div>`:'';
-    return `${head}<div class="mcq-ex-why">${why}</div>${ru}`;
+        ? `<div class="mcq-ex-head ok">✓ ${T('Richtig!','Correct!','Richtig!','Doğru!','Đúng rồi!')}</div>`
+        : `<div class="mcq-ex-head err">✗ ${T('Falsch','Wrong','Falsch','Yanlış','Sai')} — <s>${esc(userAns)}</s></div>`;
+    const trDisplay=(lang==='vi'&&item.vi)?item.vi:item.ru;
+    const trLine=trDisplay?`<div class="mcq-ex-tr">${esc(trDisplay)}</div>`:'';
+    return `${head}<div class="mcq-ex-why">${why}</div>${trLine}`;
 }
 
 function checkA(btn){
@@ -925,87 +973,106 @@ const HINTS_ML={
     hauptsatz:{de:['Das Verb steht immer auf Position 2.','Subjekt + Verb + Objekt ist die Grundregel.'],
         ru:['Глагол ВСЕГДА на 2-й позиции.','Подлежащее + Глагол + Дополнение — основное правило.'],
         en:['The verb is always in position 2.','Subject + Verb + Object is the basic rule.'],
-        tr:['Fiil her zaman 2. pozisyondadır.','Özne + Fiil + Nesne temel kuraldır.']},
+        tr:['Fiil her zaman 2. pozisyondadır.','Özne + Fiil + Nesne temel kuraldır.'],
+        vi:['Động từ LUÔN ở vị trí thứ 2.','Chủ ngữ + Động từ + Tân ngữ là quy tắc cơ bản.']},
     tekamolo:{de:['Reihenfolge: Temporal → Kausal → Modal → Lokal.','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
         ru:['Порядок: Когда → Почему → Как → Где (TeKaMoLo).','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
         en:['Order: When → Why → How → Where (TeKaMoLo).','Wann? Warum? Wie? Wo? — TeKaMoLo!'],
-        tr:['Sıralama: Ne zaman → Neden → Nasıl → Nerede (TeKaMoLo).']},
+        tr:['Sıralama: Ne zaman → Neden → Nasıl → Nerede (TeKaMoLo).'],
+        vi:['Thứ tự: Thời gian → Lý do → Cách thức → Nơi chốn (TeKaMoLo).','Khi nào? Tại sao? Như thế nào? Ở đâu?']},
     modal:{de:['Modalverb auf Position 2, Infinitiv am Ende.'],
         ru:['Модальный глагол на 2-й позиции, инфинитив в конце.'],
         en:['Modal verb in position 2, infinitive at the end.'],
-        tr:['Modal fiil 2. pozisyonda, mastar sonda.']},
+        tr:['Modal fiil 2. pozisyonda, mastar sonda.'],
+        vi:['Động từ khuyết thiếu ở vị trí 2, động từ nguyên thể ở cuối câu.']},
     weil:{de:['Nach "weil" steht das Verb am Ende!'],
         ru:['После "weil" (потому что) глагол в КОНЦЕ!'],
         en:['After "weil" (because) the verb goes to the END!'],
-        tr:['"weil" (çünkü) den sonra fiil SONA gider!']},
+        tr:['"weil" (çünkü) den sonra fiil SONA gider!'],
+        vi:['Sau "weil" (bởi vì) động từ đi xuống CUỐI câu!']},
     dass:{de:['Nach "dass" steht das Verb am Ende!'],
         ru:['После "dass" (что) глагол в КОНЦЕ!'],
         en:['After "dass" (that) the verb goes to the END!'],
-        tr:['"dass" (ki) den sonra fiil SONA gider!']},
+        tr:['"dass" (ki) den sonra fiil SONA gider!'],
+        vi:['Sau "dass" (rằng) động từ ở CUỐI câu!']},
     wenn:{de:['Nach "wenn" steht das Verb am Ende!'],
         ru:['После "wenn" (если/когда) глагол в КОНЦЕ!'],
         en:['After "wenn" (if/when) the verb goes to the END!'],
-        tr:['"wenn" (eğer/ne zaman) dan sonra fiil SONA gider!']},
+        tr:['"wenn" (eğer/ne zaman) dan sonra fiil SONA gider!'],
+        vi:['Sau "wenn" (nếu/khi) động từ ở CUỐI câu!']},
     als:{de:['Nach "als" steht das Verb am Ende!'],
         ru:['После "als" (когда — одноразово в прошлом) глагол в КОНЦЕ!'],
         en:['After "als" (when — one-time past) verb goes to the END!'],
-        tr:['"als" (ne zaman — geçmişte bir kez) dan sonra fiil SONA gider!']},
+        tr:['"als" (ne zaman — geçmişte bir kez) dan sonra fiil SONA gider!'],
+        vi:['Sau "als" (khi — sự kiện đơn lẻ trong quá khứ) động từ ở CUỐI câu!']},
     ob:{de:['Nach "ob" steht das Verb am Ende!'],
         ru:['После "ob" (ли — косвенный вопрос) глагол в КОНЦЕ!'],
         en:['After "ob" (whether) the verb goes to the END!'],
-        tr:['"ob" (acaba) dan sonra fiil SONA gider!']},
+        tr:['"ob" (acaba) dan sonra fiil SONA gider!'],
+        vi:['Sau "ob" (liệu có) động từ ở CUỐI câu!']},
     obwohl:{de:['Nach "obwohl" steht das Verb am Ende!'],
         ru:['После "obwohl" (хотя) глагол в КОНЦЕ!'],
         en:['After "obwohl" (although) the verb goes to the END!'],
-        tr:['"obwohl" (rağmen) den sonra fiil SONA gider!']},
+        tr:['"obwohl" (rağmen) den sonra fiil SONA gider!'],
+        vi:['Sau "obwohl" (mặc dù) động từ ở CUỐI câu!']},
     damit:{de:['Nach "damit" steht das Verb am Ende!'],
         ru:['После "damit" (чтобы, разные субъекты) глагол в КОНЦЕ!'],
         en:['After "damit" (so that, different subjects) verb goes to the END!'],
-        tr:['"damit" (diye, farklı özneler) den sonra fiil SONA gider!']},
+        tr:['"damit" (diye, farklı özneler) den sonra fiil SONA gider!'],
+        vi:['Sau "damit" (để, chủ ngữ khác nhau) động từ ở CUỐI câu!']},
     um_zu:{de:['um + zu + Infinitiv am Ende.'],
         ru:['um...zu + инфинитив в конце (чтобы, одинаковый субъект).'],
         en:['um...zu + infinitive at the end (in order to, same subject).'],
-        tr:['um...zu + mastar sonda (amacıyla, aynı özne).']},
+        tr:['um...zu + mastar sonda (amacıyla, aynı özne).'],
+        vi:['um...zu + động từ nguyên thể ở cuối (để, cùng chủ ngữ).']},
     trotzdem:{de:['Nach "trotzdem" — Verb auf Position 2!'],
         ru:['После "trotzdem" (тем не менее) — глагол на 2-й позиции! Главное предложение.'],
         en:['After "trotzdem" (nevertheless) — verb in position 2! Main clause.'],
-        tr:['"trotzdem" (buna rağmen) dan sonra fiil 2. pozisyonda!']},
+        tr:['"trotzdem" (buna rağmen) dan sonra fiil 2. pozisyonda!'],
+        vi:['Sau "trotzdem" (tuy nhiên) — động từ ở vị trí 2! Mệnh đề chính.']},
     deshalb:{de:['Nach "deshalb" — Verb auf Position 2!'],
         ru:['После "deshalb" (поэтому) — глагол на 2-й позиции!'],
         en:['After "deshalb" (therefore) — verb in position 2!'],
-        tr:['"deshalb" (bu yüzden) dan sonra fiil 2. pozisyonda!']},
+        tr:['"deshalb" (bu yüzden) dan sonra fiil 2. pozisyonda!'],
+        vi:['Sau "deshalb" (do đó) — động từ ở vị trí 2!']},
     denn:{de:['Nach "denn" — normale Wortstellung!'],
         ru:['После "denn" (потому что) — обычный порядок слов, глагол на 2-й позиции!'],
         en:['After "denn" (because) — normal word order, verb in position 2!'],
-        tr:['"denn" (çünkü) den sonra normal sözcük sırası!']},
+        tr:['"denn" (çünkü) den sonra normal sözcük sırası!'],
+        vi:['Sau "denn" (vì) — trật tự từ bình thường, động từ ở vị trí 2!']},
     aber:{de:['Nach "aber" — normale Wortstellung!'],
         ru:['После "aber" (но) — обычный порядок слов.'],
         en:['After "aber" (but) — normal word order.'],
-        tr:['"aber" (ama) dan sonra normal sözcük sırası.']},
+        tr:['"aber" (ama) dan sonra normal sözcük sırası.'],
+        vi:['Sau "aber" (nhưng) — trật tự từ bình thường.']},
     sondern:{de:['nicht...sondern — Korrektur einer Aussage.'],
         ru:['nicht...sondern (не...а) — исправление утверждения.'],
         en:['nicht...sondern (not...but rather) — correcting a statement.'],
-        tr:['nicht...sondern (değil...aksine) — bir ifadeyi düzeltme.']},
+        tr:['nicht...sondern (değil...aksine) — bir ifadeyi düzeltme.'],
+        vi:['nicht...sondern (không...mà là) — sửa một câu khẳng định.']},
     nachdem:{de:['Nach "nachdem" — Verb am Ende + Plusquamperfekt!'],
         ru:['После "nachdem" (после того как) — глагол в конце + Plusquamperfekt!'],
         en:['After "nachdem" (after) — verb at end + past perfect!'],
-        tr:['"nachdem" (sonra) dan sonra fiil sonda + Plusquamperfekt!']},
+        tr:['"nachdem" (sonra) dan sonra fiil sonda + Plusquamperfekt!'],
+        vi:['Sau "nachdem" (sau khi) — động từ ở cuối + Plusquamperfekt!']},
     bevor:{de:['Nach "bevor" — Verb am Ende!'],
         ru:['После "bevor" (прежде чем) — глагол в КОНЦЕ!'],
         en:['After "bevor" (before) — verb at the END!'],
-        tr:['"bevor" (önce) den sonra fiil SONDA!']},
+        tr:['"bevor" (önce) den sonra fiil SONDA!'],
+        vi:['Sau "bevor" (trước khi) — động từ ở CUỐI câu!']},
     waehrend:{de:['Nach "während" — Verb am Ende!'],
         ru:['После "während" (в то время как) — глагол в КОНЦЕ!'],
         en:['After "während" (while) — verb at the END!'],
-        tr:['"während" (iken) den sonra fiil SONDA!']},
-    seitdem:{de:['Nach "seitdem" — Verb am Ende!'],ru:['После "seitdem" (с тех пор как) — глагол в КОНЦЕ!'],en:['After "seitdem" (since) — verb at the END!'],tr:['"seitdem" dan sonra fiil SONDA!']},
-    bis:{de:['Nach "bis" — Verb am Ende!'],ru:['После "bis" (пока не) — глагол в КОНЦЕ!'],en:['After "bis" (until) — verb at the END!'],tr:['"bis" (kadar) dan sonra fiil SONDA!']},
-    sobald:{de:['Nach "sobald" — Verb am Ende!'],ru:['После "sobald" (как только) — глагол в КОНЦЕ!'],en:['After "sobald" (as soon as) — verb at the END!'],tr:['"sobald" (hemen) dan sonra fiil SONDA!']},
-    relativ:{de:['Relativpronomen + Verb am Ende!'],ru:['Относительное местоимение (der/die/das) + глагол в КОНЦЕ!'],en:['Relative pronoun + verb at the END!'],tr:['İlgi zamiri + fiil SONDA!']},
-    passiv:{de:['Passiv: werden + Partizip II'],ru:['Пассив: werden + Partizip II. Дом строится = Das Haus wird gebaut.'],en:['Passive: werden + past participle.'],tr:['Edilgen: werden + Partizip II.']},
-    konjunktiv:{de:['Konjunktiv II: würde/wäre/hätte'],ru:['Сослагательное: würde/wäre/hätte. Если бы я был богат = Wenn ich reich wäre...'],en:['Subjunctive II: würde/wäre/hätte. If I were rich...'],tr:['Dilek kipi: würde/wäre/hätte.']},
-    je_desto:{de:['Je + Komparativ, desto + Komparativ + Verb'],ru:['Je...desto: Чем больше..., тем лучше... Je mehr, desto besser.'],en:['Je...desto: The more..., the better...'],tr:['Je...desto: Ne kadar çok..., o kadar iyi...']},
-    textbau:{de:['Erstens, zweitens, darüber hinaus, zusammenfassend...'],ru:['Структура текста: Во-первых, во-вторых, кроме того, в итоге...'],en:['Text structure: Firstly, secondly, furthermore, in conclusion...'],tr:['Metin yapısı: Birincisi, ikincisi, ayrıca, sonuç olarak...']}
+        tr:['"während" (iken) den sonra fiil SONDA!'],
+        vi:['Sau "während" (trong khi) — động từ ở CUỐI câu!']},
+    seitdem:{de:['Nach "seitdem" — Verb am Ende!'],ru:['После "seitdem" (с тех пор как) — глагол в КОНЦЕ!'],en:['After "seitdem" (since) — verb at the END!'],tr:['"seitdem" dan sonra fiil SONDA!'],vi:['Sau "seitdem" (từ khi) — động từ ở CUỐI câu!']},
+    bis:{de:['Nach "bis" — Verb am Ende!'],ru:['После "bis" (пока не) — глагол в КОНЦЕ!'],en:['After "bis" (until) — verb at the END!'],tr:['"bis" (kadar) dan sonra fiil SONDA!'],vi:['Sau "bis" (cho đến khi) — động từ ở CUỐI câu!']},
+    sobald:{de:['Nach "sobald" — Verb am Ende!'],ru:['После "sobald" (как только) — глагол в КОНЦЕ!'],en:['After "sobald" (as soon as) — verb at the END!'],tr:['"sobald" (hemen) dan sonra fiil SONDA!'],vi:['Sau "sobald" (ngay khi) — động từ ở CUỐI câu!']},
+    relativ:{de:['Relativpronomen + Verb am Ende!'],ru:['Относительное местоимение (der/die/das) + глагол в КОНЦЕ!'],en:['Relative pronoun + verb at the END!'],tr:['İlgi zamiri + fiil SONDA!'],vi:['Đại từ quan hệ (der/die/das) + động từ ở CUỐI câu!']},
+    passiv:{de:['Passiv: werden + Partizip II'],ru:['Пассив: werden + Partizip II. Дом строится = Das Haus wird gebaut.'],en:['Passive: werden + past participle.'],tr:['Edilgen: werden + Partizip II.'],vi:['Bị động: werden + Partizip II. Ngôi nhà được xây = Das Haus wird gebaut.']},
+    konjunktiv:{de:['Konjunktiv II: würde/wäre/hätte'],ru:['Сослагательное: würde/wäre/hätte. Если бы я был богат = Wenn ich reich wäre...'],en:['Subjunctive II: würde/wäre/hätte. If I were rich...'],tr:['Dilek kipi: würde/wäre/hätte.'],vi:['Thức giả định II: würde/wäre/hätte. Nếu tôi giàu = Wenn ich reich wäre...']},
+    je_desto:{de:['Je + Komparativ, desto + Komparativ + Verb'],ru:['Je...desto: Чем больше..., тем лучше... Je mehr, desto besser.'],en:['Je...desto: The more..., the better...'],tr:['Je...desto: Ne kadar çok..., o kadar iyi...'],vi:['Je...desto: Càng nhiều..., càng tốt... Je mehr, desto besser.']},
+    textbau:{de:['Erstens, zweitens, darüber hinaus, zusammenfassend...'],ru:['Структура текста: Во-первых, во-вторых, кроме того, в итоге...'],en:['Text structure: Firstly, secondly, furthermore, in conclusion...'],tr:['Metin yapısı: Birincisi, ikincisi, ayrıca, sonuç olarak...'],vi:['Cấu trúc văn bản: Thứ nhất, thứ hai, ngoài ra, tóm lại...']}
 };
 function getHints(cat){
     const h=HINTS_ML[cat];
@@ -1099,7 +1166,8 @@ function renderBuilder(){
         btns=`<div style="display:flex;gap:8px;margin-top:12px">
             <button class="btn btn-outline" onclick="showHint()" style="flex:1">${UI.hintBtn} 💡</button>
             <button class="btn btn-primary" onclick="checkBuilder()" style="flex:2">${UI.checkBtn}</button>
-        </div>`;
+        </div>
+        <button class="btn btn-ghost know-btn" onclick="markKnownAndSkip()">✓ ${knowBtnLabel()}</button>`;
     }
 
     // Regel button for current sentence rule (per-item or per-mode)
