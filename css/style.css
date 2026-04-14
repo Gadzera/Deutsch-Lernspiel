@@ -1478,27 +1478,87 @@ body {
 .rule-quiz-btn:hover { background: #FFE0B2; }
 [data-theme="dark"] .rule-quiz-btn { background: rgba(255,179,71,0.15); color: #FFB74D; border-color: #FFB74D; }
 
-/* ============ "I KNOW THIS" BUTTON ============ */
-.know-btn {
-    width: 100%;
-    margin-top: 10px;
-    padding: 10px 14px;
+/* ============ "I KNOW THIS" TICK CHECKBOX ============ */
+.quiz-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.tick-btn {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #66BB6A;
     background: #E8F5E9;
     color: #2E7D32;
-    border: 2px dashed #66BB6A;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    border-radius: 8px;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.18s ease;
+    padding: 0;
+    line-height: 1;
 }
-.know-btn:hover { background: #C8E6C9; border-style: solid; }
-[data-theme="dark"] .know-btn {
-    background: rgba(102, 187, 106, 0.15);
+.tick-btn:hover { background: #C8E6C9; transform: scale(1.05); }
+.tick-btn.on {
+    background: #2E7D32;
+    color: #fff;
+    border-color: #2E7D32;
+    box-shadow: 0 2px 6px rgba(46,125,50,0.4);
+}
+[data-theme="dark"] .tick-btn {
+    background: rgba(102,187,106,0.15);
     color: #81C784;
     border-color: #66BB6A;
 }
-[data-theme="dark"] .know-btn:hover { background: rgba(102, 187, 106, 0.25); }
+[data-theme="dark"] .tick-btn:hover { background: rgba(102,187,106,0.28); }
+[data-theme="dark"] .tick-btn.on {
+    background: #66BB6A;
+    color: #0a1a0a;
+    border-color: #81C784;
+}
+.tick-hint {
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: #F1F8E9;
+    border-left: 3px solid #66BB6A;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    color: #2E7D32;
+    line-height: 1.4;
+}
+[data-theme="dark"] .tick-hint {
+    background: rgba(102,187,106,0.10);
+    color: #A5D6A7;
+}
+
+/* ============ RESET PROGRESS BUTTON (in cat header) ============ */
+.cat-reset-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: var(--text-muted, #888);
+    margin-right: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.15s;
+}
+.cat-reset-btn:hover {
+    background: #FFEBEE;
+    border-color: #EF5350;
+    color: #C62828;
+}
+[data-theme="dark"] .cat-reset-btn:hover {
+    background: rgba(239,83,80,0.15);
+    color: #EF9A9A;
+}
 
 /* ============ HINT BOX ============ */
 .hint-box {
