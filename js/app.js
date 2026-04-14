@@ -714,7 +714,8 @@ function showMenu() {
         sqBtn('📗','Dativ-Präpositionen','prepositions','dativ')+
         sqBtn('📕','Akkusativ-Präpositionen','prepositions','akkusativ')+
         sqBtn('📘','Genitiv-Präpositionen','prepositions','genitiv')+
-        sqBtn('🔗','Verb + Präposition','prepositions','verb_prep'));
+        sqBtn('🔗','Verb + Präposition','prepositions','verb_prep')+
+        sqBtn('🎯','Verb + Prep + Kasus','prepositions','verb_prep_kasus'));
     // 6. Pronomen
     if(hasPn) cats+=catHTML('👥','Pronomen',PRONOUNS.length+' Übungen','pron_all',PRONOUNS.length,'catPron',
         ruleBtn('pronouns')+
@@ -1157,7 +1158,8 @@ function getMCQExplanation(item,cat,userAns,correct,isOk){
             dativ:T('Präposition mit Dativ','Dative preposition','Präposition + Dativ','Datif edatı','Giới từ với cách Dativ','حرف جر مع الداتيف','حرف اضافهٔ داتیو'),
             akkusativ:T('Präposition mit Akkusativ','Accusative preposition','Präposition + Akkusativ','Akuzatif edatı','Giới từ với cách Akkusativ','حرف جر مع الأكوزاتيف','حرف اضافهٔ آکوزاتیو'),
             genitiv:T('Präposition mit Genitiv','Genitive preposition','Präposition + Genitiv','Genitif edatı','Giới từ với cách Genitiv','حرف جر مع الجينيتيف','حرف اضافهٔ گنیتیو'),
-            verb_prep:T('Verb + feste Präposition','Verb + fixed preposition','Verb + feste Präposition','Fiil + sabit edat','Động từ + giới từ cố định','فعل + حرف جر ثابت','فعل + حرف اضافهٔ ثابت')
+            verb_prep:T('Verb + feste Präposition','Verb + fixed preposition','Verb + feste Präposition','Fiil + sabit edat','Động từ + giới từ cố định','فعل + حرف جر ثابت','فعل + حرف اضافهٔ ثابت'),
+            verb_prep_kasus:T('Verb + Präposition + Kasus','Verb + preposition + case','Verb + Präposition + Kasus','Fiil + edat + hâl','Động từ + giới từ + cách','فعل + حرف جر + حالة','فعل + حرف اضافه + حالت')
         };
         const tn=typeNames[item.type]||'';
         why=`<b>${correct}</b> — ${tn}`;
@@ -1180,7 +1182,16 @@ function getMCQExplanation(item,cat,userAns,correct,isOk){
         : `<div class="mcq-ex-head err">✗ ${T('Falsch','Wrong','Falsch','Yanlış','Sai','خطأ','اشتباه')} — <s>${esc(userAns)}</s></div>`;
     const trDisplay=item[lang]||item.en||item.german||item.verb||'';
     const trLine=trDisplay?`<div class="mcq-ex-tr">${esc(trDisplay)}</div>`:'';
-    return `${head}<div class="mcq-ex-why">${why}</div>${trLine}`;
+    let exBlock='';
+    if(item.type==='verb_prep_kasus'&&item.example){
+        const caseShort=item.case==='Dativ'?'D':(item.case==='Akkusativ'?'A':(item.case==='Genitiv'?'G':item.case));
+        const formula=esc(item.verb||'')+' + <b>'+esc(item.prep||'')+'</b> + <b>'+esc(caseShort)+'</b>';
+        const tipLabel=T('Beispiel','Example','Beispiel','Örnek','Ví dụ','مثال','مثال');
+        exBlock=`<div class="verb-example"><div class="ve-label">${tipLabel}</div>`
+              +`<div class="ve-de">${esc(item.example)}</div>`
+              +`<div class="ve-formula">${formula}</div></div>`;
+    }
+    return `${head}<div class="mcq-ex-why">${why}</div>${trLine}${exBlock}`;
 }
 
 function checkA(btn){
@@ -1210,6 +1221,8 @@ function checkA(btn){
             ex.innerHTML=getMCQExplanation(item,cat,val,cor,ok);
             ex.style.display='block';
             ex.classList.add('mcq-ex-anim');
+            const veEl=ex.querySelector('.verb-example');
+            if(veEl) setTimeout(()=>veEl.classList.add('ve-show'),450);
         }
         if(nb) nb.style.display='block';
     }else{
