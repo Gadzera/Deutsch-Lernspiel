@@ -733,7 +733,8 @@ function showMenu() {
     const hasDk=typeof DEKLINATION!=='undefined'&&DEKLINATION.length;
     if(hasDk) cats+=catHTML('🏛️','Deklination',DEKLINATION.length+' Übungen','dekl_all',DEKLINATION.length,'catDekl',
         sqBtn('🏛️','Alle Deklinationen','deklination','all')+
-        sqBtn('👨','n-Deklination','deklination','n_dekl'));
+        sqBtn('👨','n-Deklination','deklination','n_dekl')+
+        sqBtn('📖','Genitiv-Attribute','deklination','genitiv_attr'));
 
     // 8. VWU — отдельная кнопка ведёт в showVWUMenu()
     const hasVWU=typeof VWU!=='undefined'&&VWU.levels;
