@@ -1215,7 +1215,7 @@ function getMCQExplanation(item,cat,userAns,correct,isOk){
     const trLine=trDisplay?`<div class="mcq-ex-tr">${esc(trDisplay)}</div>`:'';
     let exBlock='';
     if((item.type==='verb_prep_kasus'||item.type==='adjektiv_prep')&&item.example){
-        const caseShort=item.case==='Dativ'?'D':(item.case==='Akkusativ'?'A':(item.case==='Genitiv'?'G':item.case));
+        const caseShort=item.case==='Dativ'?'Dat':(item.case==='Akkusativ'?'Akk':(item.case==='Genitiv'?'Gen':item.case));
         const head=item.verb||item.adj||'';
         const formula=esc(head)+' + <b>'+esc(item.prep||'')+'</b> + <b>'+esc(caseShort)+'</b>';
         const tipLabel=T('Beispiel','Example','Beispiel','Örnek','Ví dụ','مثال','مثال');
