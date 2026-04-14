@@ -3424,6 +3424,178 @@ vi: `
 
 <h3>4. Các từ phủ định khác</h3>
 <ul><li><b>nichts</b> (không gì)</li><li><b>niemand</b> (không ai)</li><li><b>nie</b> (không bao giờ)</li><li><b>nirgendwo</b> (không nơi nào)</li></ul>`
+},
+
+satz_koord: {
+de: `
+<h2>Koordinierende Konjunktionen — Position 0 (und / oder / doch)</h2>
+<div class="rule-formula">HS1, <span class="rule-hl">und / oder / doch</span> + <b>Subj</b> + <span class="rule-hl2">Verb</span>(Pos 2) + ...</div>
+<p>Koordinierende (nebenordnende) Konjunktionen verbinden zwei <b>gleichrangige Hauptsätze</b>. Sie stehen auf der sogenannten <b>Position 0</b> (vor Position 1) und <b>verändern die Wortstellung NICHT</b>: das konjugierte Verb bleibt im zweiten Hauptsatz auf <b>Position 2</b>.</p>
+<p><b>Die wichtigsten:</b> und, oder, aber, sondern, denn, doch.</p>
+<table class="rule-table"><tr><th>Pos 0</th><th>Pos 1</th><th>Pos 2</th><th>...</th></tr>
+<tr><td><b>und</b></td><td>er</td><td>kommt</td><td>nach Hause</td></tr>
+<tr><td><b>oder</b></td><td>wir</td><td>verpassen</td><td>den Zug</td></tr>
+<tr><td><b>doch</b></td><td>er</td><td>spricht</td><td>wenig Deutsch</td></tr></table>
+
+<h3>und (gleichzeitig / Reihenfolge)</h3>
+<p>Verbindet zwei Aussagen ohne Gegensatz.</p>
+<p>Ich trinke Kaffee <b>und</b> sie trinkt Tee.</p>
+<p>Er öffnet die Tür <b>und</b> tritt ins Zimmer.</p>
+<p><i>Tipp: Bei <b>gleichem Subjekt</b> wird das Subjekt im 2. Satz oft weggelassen → "Er öffnet die Tür und (er) tritt ins Zimmer."</i></p>
+
+<h3>oder (Alternative)</h3>
+<p>Drückt eine Wahl aus.</p>
+<p>Möchtest du Tee <b>oder</b> möchtest du Kaffee?</p>
+<p>Beeil dich, <b>oder</b> wir verpassen den Zug. (= sonst …)</p>
+
+<h3>doch (Gegensatz, betont)</h3>
+<p>Wie <b>aber</b>, aber etwas <b>stärker</b> und schriftsprachlich. Markiert einen unerwarteten Gegensatz.</p>
+<p>Er ist klein, <b>doch</b> er spielt sehr gut Basketball.</p>
+<p>Ich bin müde, <b>doch</b> ich muss weiterarbeiten.</p>
+
+<p><b>Achtung:</b> Verwechsle <b>doch</b>-Konjunktion (Position 0) nicht mit der Modalpartikel <b>doch</b> ("Komm <b>doch</b> mit!") oder mit der Antwort-<b>doch</b> auf eine negative Frage.</p>`,
+ru: `
+<h2>Сочинительные союзы — нулевая позиция (und / oder / doch)</h2>
+<div class="rule-formula">HS1, <span class="rule-hl">und / oder / doch</span> + <b>подл.</b> + <span class="rule-hl2">глагол</span>(Pos 2) + ...</div>
+<p>Сочинительные союзы соединяют <b>два равноправных главных предложения</b>. Они стоят на так называемой <b>нулевой позиции</b> (перед позицией 1) и <b>НЕ меняют порядок слов</b>: спрягаемый глагол во втором главном предложении остаётся на <b>2-й позиции</b>.</p>
+<p><b>Главные:</b> und (и), oder (или), aber (но), sondern (а), denn (потому что), doch (но всё же).</p>
+<table class="rule-table"><tr><th>Поз 0</th><th>Поз 1</th><th>Поз 2</th><th>...</th></tr>
+<tr><td><b>und</b></td><td>er</td><td>kommt</td><td>nach Hause</td></tr>
+<tr><td><b>oder</b></td><td>wir</td><td>verpassen</td><td>den Zug</td></tr>
+<tr><td><b>doch</b></td><td>er</td><td>spricht</td><td>wenig Deutsch</td></tr></table>
+
+<h3>und (одновременно / последовательно)</h3>
+<p>Соединяет два высказывания без противопоставления.</p>
+<p>Ich trinke Kaffee <b>und</b> sie trinkt Tee. — Я пью кофе, а она чай.</p>
+<p><i>При одинаковом подлежащем во втором предложении подлежащее часто опускается: "Er öffnet die Tür und (er) tritt ins Zimmer."</i></p>
+
+<h3>oder (выбор)</h3>
+<p>Möchtest du Tee <b>oder</b> möchtest du Kaffee? — Хочешь чай или кофе?</p>
+<p>Beeil dich, <b>oder</b> wir verpassen den Zug. — Поторопись, иначе опоздаем на поезд.</p>
+
+<h3>doch (но всё же — сильнее, чем aber)</h3>
+<p>Как <b>aber</b>, но <b>сильнее</b> и более книжно. Подчёркивает неожиданное противопоставление.</p>
+<p>Er ist klein, <b>doch</b> er spielt sehr gut Basketball. — Он маленького роста, но играет в баскетбол очень хорошо.</p>
+<p>Ich bin müde, <b>doch</b> ich muss weiterarbeiten.</p>
+
+<p><b>Внимание:</b> не путай союз <b>doch</b> с модальной частицей <b>doch</b> ("Komm <b>doch</b> mit!" — Да приходи же!) или с утвердительным ответом <b>doch</b> на отрицательный вопрос.</p>`,
+en: `
+<h2>Coordinating conjunctions — Position 0 (und / oder / doch)</h2>
+<div class="rule-formula">HS1, <span class="rule-hl">und / oder / doch</span> + <b>subj</b> + <span class="rule-hl2">verb</span>(Pos 2) + ...</div>
+<p>Coordinating conjunctions link <b>two main clauses of equal rank</b>. They sit in what's called <b>Position 0</b> (before Position 1) and do <b>NOT change word order</b>: the conjugated verb in the second main clause stays in <b>Position 2</b>.</p>
+<p><b>The key ones:</b> und (and), oder (or), aber (but), sondern (but rather), denn (because), doch (yet/however).</p>
+<table class="rule-table"><tr><th>Pos 0</th><th>Pos 1</th><th>Pos 2</th><th>...</th></tr>
+<tr><td><b>und</b></td><td>er</td><td>kommt</td><td>nach Hause</td></tr>
+<tr><td><b>oder</b></td><td>wir</td><td>verpassen</td><td>den Zug</td></tr>
+<tr><td><b>doch</b></td><td>er</td><td>spricht</td><td>wenig Deutsch</td></tr></table>
+
+<h3>und (simultaneously / in sequence)</h3>
+<p>Connects two statements without contrast.</p>
+<p>Ich trinke Kaffee <b>und</b> sie trinkt Tee. — I drink coffee and she drinks tea.</p>
+<p><i>Tip: With the <b>same subject</b>, the subject is often dropped in the 2nd clause → "Er öffnet die Tür und (er) tritt ins Zimmer."</i></p>
+
+<h3>oder (alternative)</h3>
+<p>Möchtest du Tee <b>oder</b> möchtest du Kaffee?</p>
+<p>Beeil dich, <b>oder</b> wir verpassen den Zug. — Hurry up, or we'll miss the train.</p>
+
+<h3>doch (contrast, stronger than aber)</h3>
+<p>Like <b>aber</b>, but <b>stronger</b> and more literary. Marks an unexpected contrast.</p>
+<p>Er ist klein, <b>doch</b> er spielt sehr gut Basketball.</p>
+<p>Ich bin müde, <b>doch</b> ich muss weiterarbeiten.</p>
+
+<p><b>Note:</b> Don't confuse the conjunction <b>doch</b> (Position 0) with the modal particle <b>doch</b> ("Komm <b>doch</b> mit!") or with the affirmative answer <b>doch</b> to a negative question.</p>`,
+tr: `
+<h2>Eşgüdümlü bağlaçlar — Sıfır pozisyon (und / oder / doch)</h2>
+<div class="rule-formula">HS1, <span class="rule-hl">und / oder / doch</span> + <b>özne</b> + <span class="rule-hl2">fiil</span>(Pos 2) + ...</div>
+<p>Eşgüdümlü bağlaçlar <b>iki eşit ana cümleyi</b> bağlar. <b>Sıfır pozisyonda</b> (1. pozisyondan önce) yer alır ve kelime sırasını <b>DEĞİŞTİRMEZ</b>: ikinci ana cümledeki çekimli fiil <b>2. pozisyonda</b> kalır.</p>
+<p><b>Önemli olanlar:</b> und, oder, aber, sondern, denn, doch.</p>
+<table class="rule-table"><tr><th>Pos 0</th><th>Pos 1</th><th>Pos 2</th><th>...</th></tr>
+<tr><td><b>und</b></td><td>er</td><td>kommt</td><td>nach Hause</td></tr>
+<tr><td><b>oder</b></td><td>wir</td><td>verpassen</td><td>den Zug</td></tr>
+<tr><td><b>doch</b></td><td>er</td><td>spricht</td><td>wenig Deutsch</td></tr></table>
+
+<h3>und (eş zamanlı / sırayla)</h3>
+<p>Iki ifadeyi karşıtlık olmadan bağlar. Ich trinke Kaffee <b>und</b> sie trinkt Tee.</p>
+<p><i>İpucu: <b>Aynı özne</b> varsa 2. cümlede özne genellikle düşürülür.</i></p>
+
+<h3>oder (alternatif)</h3>
+<p>Möchtest du Tee <b>oder</b> möchtest du Kaffee?</p>
+<p>Beeil dich, <b>oder</b> wir verpassen den Zug. — Acele et, yoksa treni kaçırırız.</p>
+
+<h3>doch (zıtlık, aber'den daha güçlü)</h3>
+<p><b>aber</b> gibi, ama daha <b>güçlü</b> ve edebî. Beklenmeyen bir zıtlığı belirtir.</p>
+<p>Er ist klein, <b>doch</b> er spielt sehr gut Basketball.</p>
+
+<p><b>Dikkat:</b> bağlaç <b>doch</b>'u (Pos 0) modal parçacık <b>doch</b> ("Komm <b>doch</b> mit!") veya olumsuz soruya verilen <b>doch</b> yanıtıyla karıştırma.</p>`,
+ar: `
+<h2>حروف العطف الترتيبية — الموقع 0 (und / oder / doch)</h2>
+<div class="rule-formula">HS1, <span class="rule-hl">und / oder / doch</span> + <b>فاعل</b> + <span class="rule-hl2">فعل</span>(الموقع 2) + ...</div>
+<p>حروف العطف الترتيبية تربط <b>جملتين رئيسيتين متكافئتين</b>. تأتي في ما يُسمى <b>الموقع 0</b> (قبل الموقع 1) ولا <b>تُغيّر ترتيب الكلمات</b>: الفعل المُصرّف في الجملة الرئيسية الثانية يبقى في <b>الموقع 2</b>.</p>
+<p><b>الأهم:</b> und (و), oder (أو), aber (لكن), sondern (بل), denn (لأن), doch (ومع ذلك).</p>
+<table class="rule-table"><tr><th>الموقع 0</th><th>الموقع 1</th><th>الموقع 2</th><th>...</th></tr>
+<tr><td><b>und</b></td><td>er</td><td>kommt</td><td>nach Hause</td></tr>
+<tr><td><b>oder</b></td><td>wir</td><td>verpassen</td><td>den Zug</td></tr>
+<tr><td><b>doch</b></td><td>er</td><td>spricht</td><td>wenig Deutsch</td></tr></table>
+
+<h3>und (متزامن / بالتسلسل)</h3>
+<p>يربط عبارتين دون تناقض. Ich trinke Kaffee <b>und</b> sie trinkt Tee.</p>
+<p><i>نصيحة: عند تطابق الفاعل، يُحذف الفاعل عادة في الجملة الثانية.</i></p>
+
+<h3>oder (بديل)</h3>
+<p>Möchtest du Tee <b>oder</b> möchtest du Kaffee?</p>
+<p>Beeil dich, <b>oder</b> wir verpassen den Zug. — أسرع وإلا فاتنا القطار.</p>
+
+<h3>doch (تضاد، أقوى من aber)</h3>
+<p>مثل <b>aber</b>، لكن <b>أقوى</b> وأدبي. يدل على تضاد غير متوقع.</p>
+<p>Er ist klein, <b>doch</b> er spielt sehr gut Basketball.</p>
+
+<p><b>تنبيه:</b> لا تخلط بين حرف العطف <b>doch</b> (الموقع 0) وأداة المعنى <b>doch</b> ("Komm <b>doch</b> mit!") أو إجابة <b>doch</b> الإيجابية على سؤال منفي.</p>`,
+fa: `
+<h2>حروف ربط همپایه — موقعیت ۰ (und / oder / doch)</h2>
+<div class="rule-formula">HS1, <span class="rule-hl">und / oder / doch</span> + <b>فاعل</b> + <span class="rule-hl2">فعل</span>(موقعیت ۲) + ...</div>
+<p>حروف ربط همپایه دو <b>جملهٔ اصلی هم‌رتبه</b> را به هم وصل می‌کنند. در آنچه <b>موقعیت ۰</b> نامیده می‌شود (پیش از موقعیت ۱) قرار می‌گیرند و ترتیب کلمات را <b>تغییر نمی‌دهند</b>: فعل صرف‌شده در جملهٔ اصلی دوم در <b>موقعیت ۲</b> باقی می‌ماند.</p>
+<p><b>مهم‌ترین‌ها:</b> und (و)، oder (یا)، aber (اما)، sondern (بلکه)، denn (زیرا)، doch (با این حال).</p>
+<table class="rule-table"><tr><th>موقعیت ۰</th><th>موقعیت ۱</th><th>موقعیت ۲</th><th>...</th></tr>
+<tr><td><b>und</b></td><td>er</td><td>kommt</td><td>nach Hause</td></tr>
+<tr><td><b>oder</b></td><td>wir</td><td>verpassen</td><td>den Zug</td></tr>
+<tr><td><b>doch</b></td><td>er</td><td>spricht</td><td>wenig Deutsch</td></tr></table>
+
+<h3>und (هم‌زمان / به ترتیب)</h3>
+<p>دو گزاره را بدون تضاد به هم وصل می‌کند. Ich trinke Kaffee <b>und</b> sie trinkt Tee.</p>
+<p><i>نکته: اگر فاعل یکسان باشد، در جملهٔ دوم اغلب حذف می‌شود.</i></p>
+
+<h3>oder (انتخاب)</h3>
+<p>Möchtest du Tee <b>oder</b> möchtest du Kaffee?</p>
+<p>Beeil dich, <b>oder</b> wir verpassen den Zug. — عجله کن، وگرنه به قطار نمی‌رسیم.</p>
+
+<h3>doch (تضاد، قوی‌تر از aber)</h3>
+<p>مانند <b>aber</b>، اما <b>قوی‌تر</b> و ادبی‌تر. تضادی غیرمنتظره را نشان می‌دهد.</p>
+<p>Er ist klein, <b>doch</b> er spielt sehr gut Basketball.</p>
+
+<p><b>توجه:</b> حرف ربط <b>doch</b> (موقعیت ۰) را با ادات معنایی <b>doch</b> ("Komm <b>doch</b> mit!") یا با پاسخ مثبت <b>doch</b> به پرسش منفی اشتباه نگیرید.</p>`,
+vi: `
+<h2>Liên từ đẳng lập — Vị trí 0 (und / oder / doch)</h2>
+<div class="rule-formula">HS1, <span class="rule-hl">und / oder / doch</span> + <b>chủ ngữ</b> + <span class="rule-hl2">động từ</span>(Pos 2) + ...</div>
+<p>Liên từ đẳng lập nối <b>hai mệnh đề chính ngang hàng</b>. Chúng đứng ở cái gọi là <b>Vị trí 0</b> (trước Vị trí 1) và <b>KHÔNG thay đổi</b> trật tự từ: động từ chia trong mệnh đề chính thứ hai vẫn ở <b>Vị trí 2</b>.</p>
+<p><b>Những liên từ chính:</b> und (và), oder (hoặc), aber (nhưng), sondern (mà là), denn (vì), doch (tuy nhiên).</p>
+<table class="rule-table"><tr><th>Pos 0</th><th>Pos 1</th><th>Pos 2</th><th>...</th></tr>
+<tr><td><b>und</b></td><td>er</td><td>kommt</td><td>nach Hause</td></tr>
+<tr><td><b>oder</b></td><td>wir</td><td>verpassen</td><td>den Zug</td></tr>
+<tr><td><b>doch</b></td><td>er</td><td>spricht</td><td>wenig Deutsch</td></tr></table>
+
+<h3>und (đồng thời / tuần tự)</h3>
+<p>Nối hai phát biểu mà không đối lập. Ich trinke Kaffee <b>und</b> sie trinkt Tee.</p>
+<p><i>Mẹo: Khi cùng <b>chủ ngữ</b>, chủ ngữ thường được lược bỏ trong mệnh đề thứ 2.</i></p>
+
+<h3>oder (lựa chọn)</h3>
+<p>Möchtest du Tee <b>oder</b> möchtest du Kaffee?</p>
+<p>Beeil dich, <b>oder</b> wir verpassen den Zug. — Nhanh lên, không thì chúng ta sẽ lỡ tàu.</p>
+
+<h3>doch (đối lập, mạnh hơn aber)</h3>
+<p>Giống <b>aber</b>, nhưng <b>mạnh hơn</b> và mang tính văn chương. Đánh dấu sự đối lập bất ngờ.</p>
+<p>Er ist klein, <b>doch</b> er spielt sehr gut Basketball.</p>
+
+<p><b>Lưu ý:</b> Đừng nhầm lẫn liên từ <b>doch</b> (Vị trí 0) với tiểu từ tình thái <b>doch</b> ("Komm <b>doch</b> mit!") hay câu trả lời khẳng định <b>doch</b> cho câu hỏi phủ định.</p>`
 }
 
 };
