@@ -725,7 +725,8 @@ function showMenu() {
         sqBtn('📎','Possessivpronomen','pronouns','possessiv')+
         sqBtn('🔄','Reflexivpronomen','pronouns','reflexiv')+
         sqBtn('🔗','Relativpronomen','pronouns','relativ')+
-        sqBtn('❓','Indefinitpronomen','pronouns','indefinit'));
+        sqBtn('❓','Indefinitpronomen','pronouns','indefinit')+
+        sqBtn('❔','welch- / was für ein-','pronouns','frageartikel'));
 
     // 7. VWU — отдельная кнопка ведёт в showVWUMenu()
     const hasVWU=typeof VWU!=='undefined'&&VWU.levels;
@@ -1173,7 +1174,8 @@ function getMCQExplanation(item,cat,userAns,correct,isOk){
             reflexiv:T('Reflexivpronomen','Reflexive pronoun','Reflexivpronomen','Dönüşlü zamir','Đại từ phản thân','ضمير انعكاسي','ضمیر انعکاسی'),
             relativ:T('Relativpronomen','Relative pronoun','Relativpronomen','İlgi zamiri','Đại từ quan hệ','ضمير الوصل','ضمیر موصولی'),
             demonstrativ:T('Demonstrativpronomen','Demonstrative pronoun','Demonstrativpronomen','İşaret zamiri','Đại từ chỉ định','ضمير الإشارة','ضمیر اشاره'),
-            indefinit:T('Indefinitpronomen','Indefinite pronoun','Indefinitpronomen','Belirsiz zamir','Đại từ không xác định','ضمير غير معرف','ضمیر نامعین')
+            indefinit:T('Indefinitpronomen','Indefinite pronoun','Indefinitpronomen','Belirsiz zamir','Đại từ không xác định','ضمير غير معرف','ضمیر نامعین'),
+            frageartikel:T('Frageartikel (welch- / was für ein-)','Question article (welch- / was für ein-)','Frageartikel','Soru artikeli','Mạo từ nghi vấn','أداة السؤال','حرف تعریف پرسشی')
         };
         const tn=typeNames[item.type]||'';
         why=`<b>${correct}</b> — ${tn}`;
