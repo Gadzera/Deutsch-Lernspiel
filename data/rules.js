@@ -4055,4 +4055,296 @@ vi: `<h2>So sánh hơn và so sánh nhất (Komparativ und Superlativ)</h2>
 <p><b>Lưu ý:</b> không bao giờ «als wie»! Sau Komparativ chỉ dùng <b>als</b>, sau so/genauso chỉ dùng <b>wie</b>.</p>`,
 },
 
+satz_praeteritum: {
+de: `<h2>Präteritum (schriftliche Vergangenheit)</h2>
+<div class="rule-formula">Schwach: Stamm + <span class="rule-hl">-te</span> · Stark: <span class="rule-hl2">Vokalwechsel</span> · sein→war, haben→hatte</div>
+<p>Präteritum ist die <b>schriftliche Erzählform</b> (Roman, Märchen, Zeitung). Im Gespräch wird meist <b>Perfekt</b> benutzt — AUSSER bei <b>sein, haben, werden</b> und den <b>Modalverben</b>, die fast immer im Präteritum stehen.</p>
+
+<h3>1. Schwache (regelmäßige) Verben — Stamm + -te</h3>
+<table class="rule-table"><tr><th>Person</th><th>lernen</th><th>arbeiten (t/d → -ete)</th></tr>
+<tr><td>ich</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>du</td><td>lern<b>test</b></td><td>arbeit<b>etest</b></td></tr>
+<tr><td>er/sie/es</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>wir</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr>
+<tr><td>ihr</td><td>lern<b>tet</b></td><td>arbeit<b>etet</b></td></tr>
+<tr><td>sie/Sie</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr></table>
+
+<h3>2. Starke Verben — Vokalwechsel, KEIN -te</h3>
+<p>1./3. Person Singular ohne Endung!</p>
+<table class="rule-table"><tr><th>Infinitiv</th><th>Präteritum</th><th>Beispiel</th></tr>
+<tr><td>gehen</td><td>ging</td><td>Er <b>ging</b> zur Arbeit.</td></tr>
+<tr><td>kommen</td><td>kam</td><td>Sie <b>kam</b> zu spät.</td></tr>
+<tr><td>sehen</td><td>sah</td><td>Ich <b>sah</b> ihn im Park.</td></tr>
+<tr><td>fahren</td><td>fuhr</td><td>Wir <b>fuhren</b> nach Hamburg.</td></tr>
+<tr><td>nehmen</td><td>nahm</td><td>Er <b>nahm</b> den Bus.</td></tr>
+<tr><td>geben</td><td>gab</td><td>Es <b>gab</b> viele Probleme.</td></tr>
+<tr><td>schreiben</td><td>schrieb</td><td>Goethe <b>schrieb</b> Gedichte.</td></tr>
+<tr><td>sprechen</td><td>sprach</td><td>Er <b>sprach</b> laut.</td></tr>
+<tr><td>finden</td><td>fand</td><td>Ich <b>fand</b> den Weg.</td></tr>
+<tr><td>trinken</td><td>trank</td><td>Sie <b>trank</b> Wasser.</td></tr></table>
+
+<h3>3. Hilfsverben (immer Präteritum, auch im Gespräch!)</h3>
+<table class="rule-table"><tr><th></th><th>sein</th><th>haben</th><th>werden</th></tr>
+<tr><td>ich</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>du</td><td>warst</td><td>hattest</td><td>wurdest</td></tr>
+<tr><td>er/sie/es</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>wir</td><td>waren</td><td>hatten</td><td>wurden</td></tr>
+<tr><td>ihr</td><td>wart</td><td>hattet</td><td>wurdet</td></tr>
+<tr><td>sie/Sie</td><td>waren</td><td>hatten</td><td>wurden</td></tr></table>
+
+<h3>4. Modalverben im Präteritum (sehr häufig!)</h3>
+<table class="rule-table"><tr><th>Infinitiv</th><th>ich/er</th><th>Beispiel</th></tr>
+<tr><td>können</td><td><b>konnte</b></td><td>Ich <b>konnte</b> nicht schlafen.</td></tr>
+<tr><td>müssen</td><td><b>musste</b></td><td>Er <b>musste</b> früh aufstehen.</td></tr>
+<tr><td>wollen</td><td><b>wollte</b></td><td>Wir <b>wollten</b> ins Kino.</td></tr>
+<tr><td>sollen</td><td><b>sollte</b></td><td>Sie <b>sollte</b> anrufen.</td></tr>
+<tr><td>dürfen</td><td><b>durfte</b></td><td>Ich <b>durfte</b> nicht lange.</td></tr>
+<tr><td>mögen</td><td><b>mochte</b></td><td>Ich <b>mochte</b> ihn nicht.</td></tr></table>
+
+<h3>5. Gemischte Verben (Stammwechsel + -te)</h3>
+<p>bringen → <b>brachte</b> · denken → <b>dachte</b> · wissen → <b>wusste</b> · kennen → <b>kannte</b> · nennen → <b>nannte</b>.</p>`,
+ru: `<h2>Präteritum (письменная форма прошедшего)</h2>
+<div class="rule-formula">Слабые: основа + <span class="rule-hl">-te</span> · Сильные: <span class="rule-hl2">смена гласной</span> · sein→war, haben→hatte</div>
+<p>Präteritum — <b>письменная</b> форма прошедшего (роман, сказка, газета). В устной речи обычно используют <b>Perfekt</b> — КРОМЕ <b>sein, haben, werden</b> и <b>модальных</b>, которые почти всегда в Präteritum и в разговоре.</p>
+
+<h3>1. Слабые (правильные) глаголы — основа + -te</h3>
+<table class="rule-table"><tr><th>Лицо</th><th>lernen</th><th>arbeiten (осн. на t/d → -ete)</th></tr>
+<tr><td>ich</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>du</td><td>lern<b>test</b></td><td>arbeit<b>etest</b></td></tr>
+<tr><td>er/sie/es</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>wir</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr>
+<tr><td>ihr</td><td>lern<b>tet</b></td><td>arbeit<b>etet</b></td></tr>
+<tr><td>sie/Sie</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr></table>
+
+<h3>2. Сильные глаголы — смена гласной, БЕЗ -te</h3>
+<p>1-е и 3-е лицо ед. ч. — БЕЗ окончания!</p>
+<table class="rule-table"><tr><th>Infinitiv</th><th>Präteritum</th><th>Пример</th></tr>
+<tr><td>gehen (идти)</td><td>ging</td><td>Er <b>ging</b> zur Arbeit.</td></tr>
+<tr><td>kommen (приходить)</td><td>kam</td><td>Sie <b>kam</b> zu spät.</td></tr>
+<tr><td>sehen (видеть)</td><td>sah</td><td>Ich <b>sah</b> ihn im Park.</td></tr>
+<tr><td>fahren (ехать)</td><td>fuhr</td><td>Wir <b>fuhren</b> nach Hamburg.</td></tr>
+<tr><td>nehmen (брать)</td><td>nahm</td><td>Er <b>nahm</b> den Bus.</td></tr>
+<tr><td>geben (давать)</td><td>gab</td><td>Es <b>gab</b> viele Probleme.</td></tr>
+<tr><td>schreiben (писать)</td><td>schrieb</td><td>Goethe <b>schrieb</b> Gedichte.</td></tr>
+<tr><td>sprechen (говорить)</td><td>sprach</td><td>Er <b>sprach</b> laut.</td></tr>
+<tr><td>finden (находить)</td><td>fand</td><td>Ich <b>fand</b> den Weg.</td></tr>
+<tr><td>trinken (пить)</td><td>trank</td><td>Sie <b>trank</b> Wasser.</td></tr></table>
+
+<h3>3. Вспомогательные (даже в разговоре — в Präteritum!)</h3>
+<table class="rule-table"><tr><th></th><th>sein (быть)</th><th>haben (иметь)</th><th>werden (становиться)</th></tr>
+<tr><td>ich</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>du</td><td>warst</td><td>hattest</td><td>wurdest</td></tr>
+<tr><td>er/sie/es</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>wir</td><td>waren</td><td>hatten</td><td>wurden</td></tr>
+<tr><td>ihr</td><td>wart</td><td>hattet</td><td>wurdet</td></tr>
+<tr><td>sie/Sie</td><td>waren</td><td>hatten</td><td>wurden</td></tr></table>
+
+<h3>4. Модальные глаголы в Präteritum (очень часто!)</h3>
+<table class="rule-table"><tr><th>Infinitiv</th><th>ich/er</th><th>Пример</th></tr>
+<tr><td>können (мочь)</td><td><b>konnte</b></td><td>Ich <b>konnte</b> nicht schlafen.</td></tr>
+<tr><td>müssen (должен)</td><td><b>musste</b></td><td>Er <b>musste</b> früh aufstehen.</td></tr>
+<tr><td>wollen (хотеть)</td><td><b>wollte</b></td><td>Wir <b>wollten</b> ins Kino.</td></tr>
+<tr><td>sollen (следует)</td><td><b>sollte</b></td><td>Sie <b>sollte</b> anrufen.</td></tr>
+<tr><td>dürfen (можно)</td><td><b>durfte</b></td><td>Ich <b>durfte</b> nicht lange.</td></tr>
+<tr><td>mögen (нравиться)</td><td><b>mochte</b></td><td>Ich <b>mochte</b> ihn nicht.</td></tr></table>
+
+<h3>5. Смешанные глаголы (смена гласной + -te)</h3>
+<p>bringen → <b>brachte</b> · denken → <b>dachte</b> · wissen → <b>wusste</b> · kennen → <b>kannte</b> · nennen → <b>nannte</b>.</p>`,
+en: `<h2>Präteritum (written past tense)</h2>
+<div class="rule-formula">Weak: stem + <span class="rule-hl">-te</span> · Strong: <span class="rule-hl2">vowel change</span> · sein→war, haben→hatte</div>
+<p>Präteritum is the <b>written</b> past tense (novels, fairy tales, newspapers). In speech Germans use <b>Perfekt</b> — EXCEPT with <b>sein, haben, werden</b> and <b>modal verbs</b>, which stay in Präteritum even in conversation.</p>
+
+<h3>1. Weak (regular) verbs — stem + -te</h3>
+<table class="rule-table"><tr><th>Person</th><th>lernen</th><th>arbeiten (t/d → -ete)</th></tr>
+<tr><td>ich</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>du</td><td>lern<b>test</b></td><td>arbeit<b>etest</b></td></tr>
+<tr><td>er/sie/es</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>wir</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr>
+<tr><td>ihr</td><td>lern<b>tet</b></td><td>arbeit<b>etet</b></td></tr>
+<tr><td>sie/Sie</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr></table>
+
+<h3>2. Strong verbs — vowel change, NO -te</h3>
+<p>1st/3rd person singular take NO ending!</p>
+<table class="rule-table"><tr><th>Infinitiv</th><th>Präteritum</th></tr>
+<tr><td>gehen</td><td>ging</td></tr><tr><td>kommen</td><td>kam</td></tr>
+<tr><td>sehen</td><td>sah</td></tr><tr><td>fahren</td><td>fuhr</td></tr>
+<tr><td>nehmen</td><td>nahm</td></tr><tr><td>geben</td><td>gab</td></tr>
+<tr><td>schreiben</td><td>schrieb</td></tr><tr><td>sprechen</td><td>sprach</td></tr>
+<tr><td>finden</td><td>fand</td></tr><tr><td>trinken</td><td>trank</td></tr></table>
+
+<h3>3. Auxiliaries (always Präteritum, even in speech!)</h3>
+<table class="rule-table"><tr><th></th><th>sein</th><th>haben</th><th>werden</th></tr>
+<tr><td>ich</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>du</td><td>warst</td><td>hattest</td><td>wurdest</td></tr>
+<tr><td>er/sie/es</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>wir</td><td>waren</td><td>hatten</td><td>wurden</td></tr>
+<tr><td>ihr</td><td>wart</td><td>hattet</td><td>wurdet</td></tr>
+<tr><td>sie/Sie</td><td>waren</td><td>hatten</td><td>wurden</td></tr></table>
+
+<h3>4. Modal verbs in Präteritum (very frequent!)</h3>
+<table class="rule-table"><tr><th>Infinitiv</th><th>ich/er</th></tr>
+<tr><td>können</td><td><b>konnte</b></td></tr><tr><td>müssen</td><td><b>musste</b></td></tr>
+<tr><td>wollen</td><td><b>wollte</b></td></tr><tr><td>sollen</td><td><b>sollte</b></td></tr>
+<tr><td>dürfen</td><td><b>durfte</b></td></tr><tr><td>mögen</td><td><b>mochte</b></td></tr></table>
+
+<h3>5. Mixed verbs (vowel change + -te)</h3>
+<p>bringen → <b>brachte</b> · denken → <b>dachte</b> · wissen → <b>wusste</b> · kennen → <b>kannte</b> · nennen → <b>nannte</b>.</p>`,
+tr: `<h2>Präteritum (yazılı geçmiş zaman)</h2>
+<div class="rule-formula">Zayıf: kök + <span class="rule-hl">-te</span> · Kuvvetli: <span class="rule-hl2">ünlü değişimi</span> · sein→war, haben→hatte</div>
+<p>Präteritum, <b>yazılı</b> geçmiş zamandır (roman, masal, gazete). Konuşmada <b>Perfekt</b> kullanılır — ancak <b>sein, haben, werden</b> ve <b>modal fiiller</b> konuşmada bile Präteritum ile kalır.</p>
+
+<h3>1. Zayıf (kurallı) fiiller — kök + -te</h3>
+<table class="rule-table"><tr><th>Person</th><th>lernen</th><th>arbeiten (t/d → -ete)</th></tr>
+<tr><td>ich</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>du</td><td>lern<b>test</b></td><td>arbeit<b>etest</b></td></tr>
+<tr><td>er/sie/es</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>wir</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr>
+<tr><td>ihr</td><td>lern<b>tet</b></td><td>arbeit<b>etet</b></td></tr>
+<tr><td>sie/Sie</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr></table>
+
+<h3>2. Kuvvetli fiiller — ünlü değişimi, -te YOK</h3>
+<p>1. ve 3. tekil kişi ekSIZdir!</p>
+<table class="rule-table"><tr><th>Infinitiv</th><th>Präteritum</th></tr>
+<tr><td>gehen</td><td>ging</td></tr><tr><td>kommen</td><td>kam</td></tr>
+<tr><td>sehen</td><td>sah</td></tr><tr><td>fahren</td><td>fuhr</td></tr>
+<tr><td>nehmen</td><td>nahm</td></tr><tr><td>geben</td><td>gab</td></tr>
+<tr><td>schreiben</td><td>schrieb</td></tr><tr><td>sprechen</td><td>sprach</td></tr>
+<tr><td>finden</td><td>fand</td></tr><tr><td>trinken</td><td>trank</td></tr></table>
+
+<h3>3. Yardımcı fiiller (konuşmada bile Präteritum!)</h3>
+<table class="rule-table"><tr><th></th><th>sein</th><th>haben</th><th>werden</th></tr>
+<tr><td>ich</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>du</td><td>warst</td><td>hattest</td><td>wurdest</td></tr>
+<tr><td>er/sie/es</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>wir</td><td>waren</td><td>hatten</td><td>wurden</td></tr>
+<tr><td>ihr</td><td>wart</td><td>hattet</td><td>wurdet</td></tr>
+<tr><td>sie/Sie</td><td>waren</td><td>hatten</td><td>wurden</td></tr></table>
+
+<h3>4. Modal fiiller Präteritum'da (çok sık!)</h3>
+<table class="rule-table"><tr><th>Infinitiv</th><th>ich/er</th></tr>
+<tr><td>können</td><td><b>konnte</b></td></tr><tr><td>müssen</td><td><b>musste</b></td></tr>
+<tr><td>wollen</td><td><b>wollte</b></td></tr><tr><td>sollen</td><td><b>sollte</b></td></tr>
+<tr><td>dürfen</td><td><b>durfte</b></td></tr><tr><td>mögen</td><td><b>mochte</b></td></tr></table>
+
+<h3>5. Karışık fiiller (ünlü değişimi + -te)</h3>
+<p>bringen → <b>brachte</b> · denken → <b>dachte</b> · wissen → <b>wusste</b> · kennen → <b>kannte</b> · nennen → <b>nannte</b>.</p>`,
+ar: `<h2>Präteritum (صيغة الماضي المكتوبة)</h2>
+<div class="rule-formula">ضعيف: جذر + <span class="rule-hl">-te</span> · قوي: <span class="rule-hl2">تغيير حرف العلة</span> · sein→war, haben→hatte</div>
+<p>Präteritum هو صيغة الماضي <b>المكتوبة</b> (روايات، حكايات، صحف). في المحادثة يُستعمل <b>Perfekt</b>، باستثناء <b>sein وhaben وwerden والأفعال الشكلية</b> التي تبقى بصيغة Präteritum حتى في الكلام.</p>
+
+<h3>١. الأفعال الضعيفة (المنتظمة) — الجذر + -te</h3>
+<table class="rule-table"><tr><th>Person</th><th>lernen</th><th>arbeiten (t/d → -ete)</th></tr>
+<tr><td>ich</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>du</td><td>lern<b>test</b></td><td>arbeit<b>etest</b></td></tr>
+<tr><td>er/sie/es</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>wir</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr>
+<tr><td>ihr</td><td>lern<b>tet</b></td><td>arbeit<b>etet</b></td></tr>
+<tr><td>sie/Sie</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr></table>
+
+<h3>٢. الأفعال القوية — تغيير حرف العلة، بلا -te</h3>
+<p>الشخص الأول والثالث المفرد بلا نهاية!</p>
+<table class="rule-table"><tr><th>Infinitiv</th><th>Präteritum</th></tr>
+<tr><td>gehen</td><td>ging</td></tr><tr><td>kommen</td><td>kam</td></tr>
+<tr><td>sehen</td><td>sah</td></tr><tr><td>fahren</td><td>fuhr</td></tr>
+<tr><td>nehmen</td><td>nahm</td></tr><tr><td>geben</td><td>gab</td></tr>
+<tr><td>schreiben</td><td>schrieb</td></tr><tr><td>sprechen</td><td>sprach</td></tr>
+<tr><td>finden</td><td>fand</td></tr><tr><td>trinken</td><td>trank</td></tr></table>
+
+<h3>٣. الأفعال المساعدة (دائماً Präteritum حتى في المحادثة!)</h3>
+<table class="rule-table"><tr><th></th><th>sein</th><th>haben</th><th>werden</th></tr>
+<tr><td>ich</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>du</td><td>warst</td><td>hattest</td><td>wurdest</td></tr>
+<tr><td>er/sie/es</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>wir</td><td>waren</td><td>hatten</td><td>wurden</td></tr>
+<tr><td>ihr</td><td>wart</td><td>hattet</td><td>wurdet</td></tr>
+<tr><td>sie/Sie</td><td>waren</td><td>hatten</td><td>wurden</td></tr></table>
+
+<h3>٤. الأفعال الشكلية في Präteritum (شائعة جداً!)</h3>
+<table class="rule-table"><tr><th>Infinitiv</th><th>ich/er</th></tr>
+<tr><td>können</td><td><b>konnte</b></td></tr><tr><td>müssen</td><td><b>musste</b></td></tr>
+<tr><td>wollen</td><td><b>wollte</b></td></tr><tr><td>sollen</td><td><b>sollte</b></td></tr>
+<tr><td>dürfen</td><td><b>durfte</b></td></tr><tr><td>mögen</td><td><b>mochte</b></td></tr></table>
+
+<h3>٥. الأفعال المختلطة (تغيير حرف علة + -te)</h3>
+<p>bringen → <b>brachte</b> · denken → <b>dachte</b> · wissen → <b>wusste</b> · kennen → <b>kannte</b> · nennen → <b>nannte</b>.</p>`,
+fa: `<h2>Präteritum (گذشتهٔ نوشتاری)</h2>
+<div class="rule-formula">ضعیف: ریشه + <span class="rule-hl">-te</span> · قوی: <span class="rule-hl2">تغییر مصوت</span> · sein→war, haben→hatte</div>
+<p>Präteritum زمان گذشتهٔ <b>نوشتاری</b> است (رمان، افسانه، روزنامه). در مکالمه <b>Perfekt</b> به کار می‌رود — به جز <b>sein، haben، werden</b> و <b>افعال وجهی</b> که حتی در گفتار هم در Präteritum باقی می‌مانند.</p>
+
+<h3>۱. افعال ضعیف (باقاعده) — ریشه + -te</h3>
+<table class="rule-table"><tr><th>Person</th><th>lernen</th><th>arbeiten (t/d → -ete)</th></tr>
+<tr><td>ich</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>du</td><td>lern<b>test</b></td><td>arbeit<b>etest</b></td></tr>
+<tr><td>er/sie/es</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>wir</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr>
+<tr><td>ihr</td><td>lern<b>tet</b></td><td>arbeit<b>etet</b></td></tr>
+<tr><td>sie/Sie</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr></table>
+
+<h3>۲. افعال قوی — تغییر مصوت، بدون -te</h3>
+<p>اول و سوم شخص مفرد بدون پایانه!</p>
+<table class="rule-table"><tr><th>Infinitiv</th><th>Präteritum</th></tr>
+<tr><td>gehen</td><td>ging</td></tr><tr><td>kommen</td><td>kam</td></tr>
+<tr><td>sehen</td><td>sah</td></tr><tr><td>fahren</td><td>fuhr</td></tr>
+<tr><td>nehmen</td><td>nahm</td></tr><tr><td>geben</td><td>gab</td></tr>
+<tr><td>schreiben</td><td>schrieb</td></tr><tr><td>sprechen</td><td>sprach</td></tr>
+<tr><td>finden</td><td>fand</td></tr><tr><td>trinken</td><td>trank</td></tr></table>
+
+<h3>۳. افعال کمکی (همیشه Präteritum، حتی در گفتار!)</h3>
+<table class="rule-table"><tr><th></th><th>sein</th><th>haben</th><th>werden</th></tr>
+<tr><td>ich</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>du</td><td>warst</td><td>hattest</td><td>wurdest</td></tr>
+<tr><td>er/sie/es</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>wir</td><td>waren</td><td>hatten</td><td>wurden</td></tr>
+<tr><td>ihr</td><td>wart</td><td>hattet</td><td>wurdet</td></tr>
+<tr><td>sie/Sie</td><td>waren</td><td>hatten</td><td>wurden</td></tr></table>
+
+<h3>۴. افعال وجهی در Präteritum (بسیار پرکاربرد!)</h3>
+<table class="rule-table"><tr><th>Infinitiv</th><th>ich/er</th></tr>
+<tr><td>können</td><td><b>konnte</b></td></tr><tr><td>müssen</td><td><b>musste</b></td></tr>
+<tr><td>wollen</td><td><b>wollte</b></td></tr><tr><td>sollen</td><td><b>sollte</b></td></tr>
+<tr><td>dürfen</td><td><b>durfte</b></td></tr><tr><td>mögen</td><td><b>mochte</b></td></tr></table>
+
+<h3>۵. افعال مختلط (تغییر مصوت + -te)</h3>
+<p>bringen → <b>brachte</b> · denken → <b>dachte</b> · wissen → <b>wusste</b> · kennen → <b>kannte</b> · nennen → <b>nannte</b>.</p>`,
+vi: `<h2>Präteritum (thì quá khứ văn viết)</h2>
+<div class="rule-formula">Yếu: gốc + <span class="rule-hl">-te</span> · Mạnh: <span class="rule-hl2">đổi nguyên âm</span> · sein→war, haben→hatte</div>
+<p>Präteritum là thì quá khứ <b>văn viết</b> (tiểu thuyết, truyện cổ tích, báo chí). Trong hội thoại người Đức dùng <b>Perfekt</b> — NGOẠI TRỪ <b>sein, haben, werden</b> và các <b>động từ khiếm khuyết</b>, luôn ở Präteritum kể cả trong lời nói.</p>
+
+<h3>1. Động từ yếu (có quy tắc) — gốc + -te</h3>
+<table class="rule-table"><tr><th>Person</th><th>lernen</th><th>arbeiten (t/d → -ete)</th></tr>
+<tr><td>ich</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>du</td><td>lern<b>test</b></td><td>arbeit<b>etest</b></td></tr>
+<tr><td>er/sie/es</td><td>lern<b>te</b></td><td>arbeit<b>ete</b></td></tr>
+<tr><td>wir</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr>
+<tr><td>ihr</td><td>lern<b>tet</b></td><td>arbeit<b>etet</b></td></tr>
+<tr><td>sie/Sie</td><td>lern<b>ten</b></td><td>arbeit<b>eten</b></td></tr></table>
+
+<h3>2. Động từ mạnh — đổi nguyên âm, KHÔNG có -te</h3>
+<p>Ngôi 1 và 3 số ít KHÔNG có đuôi!</p>
+<table class="rule-table"><tr><th>Infinitiv</th><th>Präteritum</th></tr>
+<tr><td>gehen</td><td>ging</td></tr><tr><td>kommen</td><td>kam</td></tr>
+<tr><td>sehen</td><td>sah</td></tr><tr><td>fahren</td><td>fuhr</td></tr>
+<tr><td>nehmen</td><td>nahm</td></tr><tr><td>geben</td><td>gab</td></tr>
+<tr><td>schreiben</td><td>schrieb</td></tr><tr><td>sprechen</td><td>sprach</td></tr>
+<tr><td>finden</td><td>fand</td></tr><tr><td>trinken</td><td>trank</td></tr></table>
+
+<h3>3. Trợ động từ (luôn ở Präteritum, kể cả trong hội thoại!)</h3>
+<table class="rule-table"><tr><th></th><th>sein</th><th>haben</th><th>werden</th></tr>
+<tr><td>ich</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>du</td><td>warst</td><td>hattest</td><td>wurdest</td></tr>
+<tr><td>er/sie/es</td><td><b>war</b></td><td><b>hatte</b></td><td><b>wurde</b></td></tr>
+<tr><td>wir</td><td>waren</td><td>hatten</td><td>wurden</td></tr>
+<tr><td>ihr</td><td>wart</td><td>hattet</td><td>wurdet</td></tr>
+<tr><td>sie/Sie</td><td>waren</td><td>hatten</td><td>wurden</td></tr></table>
+
+<h3>4. Động từ khiếm khuyết ở Präteritum (rất phổ biến!)</h3>
+<table class="rule-table"><tr><th>Infinitiv</th><th>ich/er</th></tr>
+<tr><td>können</td><td><b>konnte</b></td></tr><tr><td>müssen</td><td><b>musste</b></td></tr>
+<tr><td>wollen</td><td><b>wollte</b></td></tr><tr><td>sollen</td><td><b>sollte</b></td></tr>
+<tr><td>dürfen</td><td><b>durfte</b></td></tr><tr><td>mögen</td><td><b>mochte</b></td></tr></table>
+
+<h3>5. Động từ hỗn hợp (đổi nguyên âm + -te)</h3>
+<p>bringen → <b>brachte</b> · denken → <b>dachte</b> · wissen → <b>wusste</b> · kennen → <b>kannte</b> · nennen → <b>nannte</b>.</p>`,
+},
+
 };
