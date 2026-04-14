@@ -715,7 +715,8 @@ function showMenu() {
         sqBtn('📕','Akkusativ-Präpositionen','prepositions','akkusativ')+
         sqBtn('📘','Genitiv-Präpositionen','prepositions','genitiv')+
         sqBtn('🔗','Verb + Präposition','prepositions','verb_prep')+
-        sqBtn('🎯','Verb + Prep + Kasus','prepositions','verb_prep_kasus'));
+        sqBtn('🎯','Verb + Prep + Kasus','prepositions','verb_prep_kasus')+
+        sqBtn('💡','Adjektiv + Präposition','prepositions','adjektiv_prep'));
     // 6. Pronomen
     if(hasPn) cats+=catHTML('👥','Pronomen',PRONOUNS.length+' Übungen','pron_all',PRONOUNS.length,'catPron',
         ruleBtn('pronouns')+
@@ -1159,7 +1160,8 @@ function getMCQExplanation(item,cat,userAns,correct,isOk){
             akkusativ:T('Präposition mit Akkusativ','Accusative preposition','Präposition + Akkusativ','Akuzatif edatı','Giới từ với cách Akkusativ','حرف جر مع الأكوزاتيف','حرف اضافهٔ آکوزاتیو'),
             genitiv:T('Präposition mit Genitiv','Genitive preposition','Präposition + Genitiv','Genitif edatı','Giới từ với cách Genitiv','حرف جر مع الجينيتيف','حرف اضافهٔ گنیتیو'),
             verb_prep:T('Verb + feste Präposition','Verb + fixed preposition','Verb + feste Präposition','Fiil + sabit edat','Động từ + giới từ cố định','فعل + حرف جر ثابت','فعل + حرف اضافهٔ ثابت'),
-            verb_prep_kasus:T('Verb + Präposition + Kasus','Verb + preposition + case','Verb + Präposition + Kasus','Fiil + edat + hâl','Động từ + giới từ + cách','فعل + حرف جر + حالة','فعل + حرف اضافه + حالت')
+            verb_prep_kasus:T('Verb + Präposition + Kasus','Verb + preposition + case','Verb + Präposition + Kasus','Fiil + edat + hâl','Động từ + giới từ + cách','فعل + حرف جر + حالة','فعل + حرف اضافه + حالت'),
+            adjektiv_prep:T('Adjektiv + Präposition + Kasus','Adjective + preposition + case','Adjektiv + Präposition + Kasus','Sıfat + edat + hâl','Tính từ + giới từ + cách','صفة + حرف جر + حالة','صفت + حرف اضافه + حالت')
         };
         const tn=typeNames[item.type]||'';
         why=`<b>${correct}</b> — ${tn}`;
@@ -1183,9 +1185,10 @@ function getMCQExplanation(item,cat,userAns,correct,isOk){
     const trDisplay=item[lang]||item.en||item.german||item.verb||'';
     const trLine=trDisplay?`<div class="mcq-ex-tr">${esc(trDisplay)}</div>`:'';
     let exBlock='';
-    if(item.type==='verb_prep_kasus'&&item.example){
+    if((item.type==='verb_prep_kasus'||item.type==='adjektiv_prep')&&item.example){
         const caseShort=item.case==='Dativ'?'D':(item.case==='Akkusativ'?'A':(item.case==='Genitiv'?'G':item.case));
-        const formula=esc(item.verb||'')+' + <b>'+esc(item.prep||'')+'</b> + <b>'+esc(caseShort)+'</b>';
+        const head=item.verb||item.adj||'';
+        const formula=esc(head)+' + <b>'+esc(item.prep||'')+'</b> + <b>'+esc(caseShort)+'</b>';
         const tipLabel=T('Beispiel','Example','Beispiel','Örnek','Ví dụ','مثال','مثال');
         exBlock=`<div class="verb-example"><div class="ve-label">${tipLabel}</div>`
               +`<div class="ve-de">${esc(item.example)}</div>`
