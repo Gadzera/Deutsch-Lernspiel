@@ -174,6 +174,25 @@ function tr(w) {
     return w.en || w.german || w.verb || w.ru || '';
 }
 
+// Full-SENTENCE translation for quiz items where the word-level `ru`/`en`
+// is just a dictionary gloss (adjektiv_prep, verb_prep_kasus). Returns the
+// `sent_${lang}` field if present, otherwise falls back cross-language
+// (en → ru → any other available), and finally to the short `tr()`
+// translation so nothing regresses for items that only have word-level
+// fields. The field prefix is `sent_` (not `${lang}Sent`) to avoid name
+// collisions with helper-language codes like `tr`.
+function fullSent(w) {
+    const l = APP.lang || 'ru';
+    const k = 'sent_' + l;
+    if (w[k]) return w[k];
+    // Fallback chain across languages: en → ru → tr → ar → fa → vi
+    const chain = ['en','ru','tr','ar','fa','vi'];
+    for (const cl of chain) {
+        if (cl !== l && w['sent_'+cl]) return w['sent_'+cl];
+    }
+    return tr(w);
+}
+
 // ============== PROGRESS ==============
 function getKnownIds(key) {
     if(!APP.user) return new Set();
@@ -1077,7 +1096,7 @@ function prepareMCQ(){
             }
         }
     }else if(cat==='prepositions'){
-        label=item.sentence.replace('___','______');display='';hint=tr(item);
+        label=item.sentence.replace('___','______');display='';hint=fullSent(item);
         correct=item.answer;
         // Use exactly the 4 options from the data (designed to be confusing)
         opts=shuffle([...new Set([...item.options,correct])]).slice(0,4);
