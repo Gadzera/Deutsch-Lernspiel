@@ -3804,4 +3804,255 @@ vi: `<h2>Biểu thức thời gian và kích thước ở Akkusativ (không có 
 <p><b>Lưu ý:</b> Khi có giới từ, cách thay đổi → <i>seit einem Monat</i> (Dativ), <i>vor zwei Wochen</i> (Dativ).</p>`,
 },
 
+satz_komparativ: {
+de: `<h2>Komparativ und Superlativ</h2>
+<div class="rule-formula">Positiv → <span class="rule-hl">Komparativ (-er + als)</span> → <span class="rule-hl2">Superlativ (am …-sten)</span></div>
+
+<h3>1. Komparativ: Adjektiv + -er + als</h3>
+<table class="rule-table"><tr><th>Positiv</th><th>Komparativ</th><th>Beispiel</th></tr>
+<tr><td>klein</td><td>klein<b>er</b></td><td>Anna ist klein<b>er</b> als ihr Bruder.</td></tr>
+<tr><td>interessant</td><td>interessant<b>er</b></td><td>Dieses Buch ist interessant<b>er</b> als das andere.</td></tr>
+<tr><td>schnell</td><td>schnell<b>er</b></td><td>Er fährt schnell<b>er</b> als ich.</td></tr></table>
+
+<h3>2. Umlaut bei kurzen Adjektiven</h3>
+<table class="rule-table"><tr><th>Positiv</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>alt</td><td><b>ä</b>lter</td><td>am <b>ä</b>ltesten</td></tr>
+<tr><td>jung</td><td>j<b>ü</b>nger</td><td>am j<b>ü</b>ngsten</td></tr>
+<tr><td>warm</td><td>w<b>ä</b>rmer</td><td>am w<b>ä</b>rmsten</td></tr>
+<tr><td>kurz</td><td>k<b>ü</b>rzer</td><td>am k<b>ü</b>rzesten</td></tr>
+<tr><td>groß</td><td>gr<b>ö</b>ßer</td><td>am gr<b>ö</b>ßten</td></tr></table>
+
+<h3>3. Unregelmäßige Formen</h3>
+<table class="rule-table"><tr><th>Positiv</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>gut</td><td><b>besser</b></td><td>am <b>besten</b></td></tr>
+<tr><td>viel</td><td><b>mehr</b></td><td>am <b>meisten</b></td></tr>
+<tr><td>gern</td><td><b>lieber</b></td><td>am <b>liebsten</b></td></tr>
+<tr><td>hoch</td><td><b>höher</b></td><td>am <b>höchsten</b></td></tr>
+<tr><td>nah</td><td><b>näher</b></td><td>am <b>nächsten</b></td></tr></table>
+
+<h3>4. Superlativ</h3>
+<p><b>Prädikativ:</b> <span class="rule-hl">am</span> + Adjektiv + <span class="rule-hl">-sten</span> → Im Winter ist es <b>am kältesten</b>.</p>
+<p><b>Attributiv:</b> <b>der / die / das</b> + Adjektiv + <b>-ste</b> → Berlin ist <b>die größte</b> Stadt Deutschlands.</p>
+
+<h3>5. Gleichheit</h3>
+<p><b>(genau)so + Adjektiv + wie:</b> Er ist <b>so alt wie</b> ich. · <b>nicht so ... wie:</b> Heute ist es <b>nicht so kalt wie</b> gestern.</p>
+
+<h3>6. Zunehmende Steigerung: immer + Komparativ</h3>
+<p>Die Tage werden <b>immer kürzer</b>. · Die Miete wird <b>immer teurer</b>.</p>
+
+<p><b>Achtung:</b> niemals «als wie»! Nur <b>als</b> nach Komparativ, nur <b>wie</b> nach so/genauso.</p>`,
+ru: `<h2>Сравнительная и превосходная степень (Komparativ und Superlativ)</h2>
+<div class="rule-formula">Положит. → <span class="rule-hl">Komparativ (-er + als)</span> → <span class="rule-hl2">Superlativ (am …-sten)</span></div>
+
+<h3>1. Komparativ: прилагательное + -er + als</h3>
+<table class="rule-table"><tr><th>Положит.</th><th>Komparativ</th><th>Пример</th></tr>
+<tr><td>klein</td><td>klein<b>er</b></td><td>Anna ist klein<b>er</b> als ihr Bruder. — Анна меньше брата.</td></tr>
+<tr><td>interessant</td><td>interessant<b>er</b></td><td>Dieses Buch ist interessant<b>er</b> als das andere.</td></tr>
+<tr><td>schnell</td><td>schnell<b>er</b></td><td>Er fährt schnell<b>er</b> als ich.</td></tr></table>
+
+<h3>2. Umlaut у коротких прилагательных</h3>
+<table class="rule-table"><tr><th>Положит.</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>alt — старый</td><td><b>ä</b>lter</td><td>am <b>ä</b>ltesten</td></tr>
+<tr><td>jung — молодой</td><td>j<b>ü</b>nger</td><td>am j<b>ü</b>ngsten</td></tr>
+<tr><td>warm — тёплый</td><td>w<b>ä</b>rmer</td><td>am w<b>ä</b>rmsten</td></tr>
+<tr><td>kurz — короткий</td><td>k<b>ü</b>rzer</td><td>am k<b>ü</b>rzesten</td></tr>
+<tr><td>groß — большой</td><td>gr<b>ö</b>ßer</td><td>am gr<b>ö</b>ßten</td></tr></table>
+
+<h3>3. Исключения (выучить!)</h3>
+<table class="rule-table"><tr><th>Положит.</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>gut — хороший</td><td><b>besser</b> — лучше</td><td>am <b>besten</b> — лучше всего</td></tr>
+<tr><td>viel — много</td><td><b>mehr</b> — больше</td><td>am <b>meisten</b> — больше всего</td></tr>
+<tr><td>gern — охотно</td><td><b>lieber</b> — охотнее</td><td>am <b>liebsten</b> — охотнее всего</td></tr>
+<tr><td>hoch — высокий</td><td><b>höher</b></td><td>am <b>höchsten</b></td></tr>
+<tr><td>nah — близкий</td><td><b>näher</b></td><td>am <b>nächsten</b></td></tr></table>
+
+<h3>4. Superlativ — превосходная степень</h3>
+<p><b>Предикативный:</b> <span class="rule-hl">am</span> + прилагательное + <span class="rule-hl">-sten</span> → Im Winter ist es <b>am kältesten</b>. — Зимой холоднее всего.</p>
+<p><b>Атрибутивный:</b> <b>der / die / das</b> + прилагательное + <b>-ste</b> → Berlin ist <b>die größte</b> Stadt Deutschlands.</p>
+
+<h3>5. Сравнение равенства</h3>
+<p><b>(genau)so + прил. + wie:</b> Er ist <b>so alt wie</b> ich. — Он моего возраста.<br><b>nicht so … wie:</b> Heute ist es <b>nicht so kalt wie</b> gestern.</p>
+
+<h3>6. Постепенное нарастание: immer + Komparativ</h3>
+<p>Die Tage werden <b>immer kürzer</b>. — Дни становятся всё короче.<br>Die Miete wird <b>immer teurer</b>. — Аренда всё дороже.</p>
+
+<p><b>Важно:</b> никогда не «als wie»! После Komparativ — только <b>als</b>, после so/genauso — только <b>wie</b>.</p>`,
+en: `<h2>Comparative and superlative (Komparativ und Superlativ)</h2>
+<div class="rule-formula">Positive → <span class="rule-hl">Comparative (-er + als)</span> → <span class="rule-hl2">Superlative (am …-sten)</span></div>
+
+<h3>1. Comparative: adjective + -er + als</h3>
+<table class="rule-table"><tr><th>Positive</th><th>Comparative</th><th>Example</th></tr>
+<tr><td>klein</td><td>klein<b>er</b></td><td>Anna ist klein<b>er</b> als ihr Bruder.</td></tr>
+<tr><td>interessant</td><td>interessant<b>er</b></td><td>Dieses Buch ist interessant<b>er</b> als das andere.</td></tr>
+<tr><td>schnell</td><td>schnell<b>er</b></td><td>Er fährt schnell<b>er</b> als ich.</td></tr></table>
+
+<h3>2. Umlaut in short adjectives</h3>
+<table class="rule-table"><tr><th>Positive</th><th>Comparative</th><th>Superlative</th></tr>
+<tr><td>alt</td><td><b>ä</b>lter</td><td>am <b>ä</b>ltesten</td></tr>
+<tr><td>jung</td><td>j<b>ü</b>nger</td><td>am j<b>ü</b>ngsten</td></tr>
+<tr><td>warm</td><td>w<b>ä</b>rmer</td><td>am w<b>ä</b>rmsten</td></tr>
+<tr><td>kurz</td><td>k<b>ü</b>rzer</td><td>am k<b>ü</b>rzesten</td></tr>
+<tr><td>groß</td><td>gr<b>ö</b>ßer</td><td>am gr<b>ö</b>ßten</td></tr></table>
+
+<h3>3. Irregular forms</h3>
+<table class="rule-table"><tr><th>Positive</th><th>Comparative</th><th>Superlative</th></tr>
+<tr><td>gut</td><td><b>besser</b></td><td>am <b>besten</b></td></tr>
+<tr><td>viel</td><td><b>mehr</b></td><td>am <b>meisten</b></td></tr>
+<tr><td>gern</td><td><b>lieber</b></td><td>am <b>liebsten</b></td></tr>
+<tr><td>hoch</td><td><b>höher</b></td><td>am <b>höchsten</b></td></tr>
+<tr><td>nah</td><td><b>näher</b></td><td>am <b>nächsten</b></td></tr></table>
+
+<h3>4. Superlative</h3>
+<p><b>Predicative:</b> <span class="rule-hl">am</span> + adjective + <span class="rule-hl">-sten</span> → Im Winter ist es <b>am kältesten</b>.</p>
+<p><b>Attributive:</b> <b>der / die / das</b> + adjective + <b>-ste</b> → Berlin ist <b>die größte</b> Stadt Deutschlands.</p>
+
+<h3>5. Equality</h3>
+<p><b>(genau)so + adjective + wie:</b> Er ist <b>so alt wie</b> ich. — He's as old as I am.<br><b>nicht so … wie:</b> Heute ist es <b>nicht so kalt wie</b> gestern.</p>
+
+<h3>6. Progressive increase: immer + comparative</h3>
+<p>Die Tage werden <b>immer kürzer</b>. — The days are getting shorter and shorter.<br>Die Miete wird <b>immer teurer</b>.</p>
+
+<p><b>Warning:</b> never «als wie»! Only <b>als</b> after the comparative, only <b>wie</b> after so/genauso.</p>`,
+tr: `<h2>Komparativ ve Superlativ (Üstünlük ve En Üstünlük)</h2>
+<div class="rule-formula">Olumlu → <span class="rule-hl">Komparativ (-er + als)</span> → <span class="rule-hl2">Superlativ (am …-sten)</span></div>
+
+<h3>1. Komparativ: sıfat + -er + als</h3>
+<table class="rule-table"><tr><th>Olumlu</th><th>Komparativ</th><th>Örnek</th></tr>
+<tr><td>klein</td><td>klein<b>er</b></td><td>Anna ist klein<b>er</b> als ihr Bruder. — Anna kardeşinden daha küçüktür.</td></tr>
+<tr><td>interessant</td><td>interessant<b>er</b></td><td>Dieses Buch ist interessant<b>er</b> als das andere.</td></tr>
+<tr><td>schnell</td><td>schnell<b>er</b></td><td>Er fährt schnell<b>er</b> als ich.</td></tr></table>
+
+<h3>2. Kısa sıfatlarda Umlaut</h3>
+<table class="rule-table"><tr><th>Olumlu</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>alt</td><td><b>ä</b>lter</td><td>am <b>ä</b>ltesten</td></tr>
+<tr><td>jung</td><td>j<b>ü</b>nger</td><td>am j<b>ü</b>ngsten</td></tr>
+<tr><td>warm</td><td>w<b>ä</b>rmer</td><td>am w<b>ä</b>rmsten</td></tr>
+<tr><td>groß</td><td>gr<b>ö</b>ßer</td><td>am gr<b>ö</b>ßten</td></tr></table>
+
+<h3>3. Kuraldışı sıfatlar</h3>
+<table class="rule-table"><tr><th>Olumlu</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>gut</td><td><b>besser</b></td><td>am <b>besten</b></td></tr>
+<tr><td>viel</td><td><b>mehr</b></td><td>am <b>meisten</b></td></tr>
+<tr><td>gern</td><td><b>lieber</b></td><td>am <b>liebsten</b></td></tr>
+<tr><td>hoch</td><td><b>höher</b></td><td>am <b>höchsten</b></td></tr>
+<tr><td>nah</td><td><b>näher</b></td><td>am <b>nächsten</b></td></tr></table>
+
+<h3>4. Superlativ</h3>
+<p><b>Yüklemsel:</b> <span class="rule-hl">am</span> + sıfat + <span class="rule-hl">-sten</span> → Im Winter ist es <b>am kältesten</b>.</p>
+<p><b>Sıfat tamlaması:</b> <b>der / die / das</b> + sıfat + <b>-ste</b> → Berlin ist <b>die größte</b> Stadt Deutschlands.</p>
+
+<h3>5. Eşitlik</h3>
+<p><b>(genau)so + sıfat + wie:</b> Er ist <b>so alt wie</b> ich.<br><b>nicht so … wie:</b> Heute ist es <b>nicht so kalt wie</b> gestern.</p>
+
+<h3>6. Kademeli artış: immer + Komparativ</h3>
+<p>Die Tage werden <b>immer kürzer</b>. — Günler gittikçe kısalıyor.</p>
+
+<p><b>Dikkat:</b> asla «als wie» değil! Komparativ'den sonra sadece <b>als</b>, so/genauso'dan sonra sadece <b>wie</b>.</p>`,
+ar: `<h2>التفضيل والمطلق (Komparativ و Superlativ)</h2>
+<div class="rule-formula">المثبت → <span class="rule-hl">Komparativ (-er + als)</span> → <span class="rule-hl2">Superlativ (am …-sten)</span></div>
+
+<h3>١. Komparativ: صفة + -er + als</h3>
+<table class="rule-table"><tr><th>المثبت</th><th>Komparativ</th><th>المثال</th></tr>
+<tr><td>klein</td><td>klein<b>er</b></td><td>Anna ist klein<b>er</b> als ihr Bruder. — آنّا أصغر من أخيها.</td></tr>
+<tr><td>interessant</td><td>interessant<b>er</b></td><td>Dieses Buch ist interessant<b>er</b> als das andere.</td></tr>
+<tr><td>schnell</td><td>schnell<b>er</b></td><td>Er fährt schnell<b>er</b> als ich.</td></tr></table>
+
+<h3>٢. الـ Umlaut في الصفات القصيرة</h3>
+<table class="rule-table"><tr><th>المثبت</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>alt (قديم/كبير)</td><td><b>ä</b>lter</td><td>am <b>ä</b>ltesten</td></tr>
+<tr><td>jung (شاب)</td><td>j<b>ü</b>nger</td><td>am j<b>ü</b>ngsten</td></tr>
+<tr><td>warm (دافئ)</td><td>w<b>ä</b>rmer</td><td>am w<b>ä</b>rmsten</td></tr>
+<tr><td>groß (كبير)</td><td>gr<b>ö</b>ßer</td><td>am gr<b>ö</b>ßten</td></tr></table>
+
+<h3>٣. الصفات الشاذة</h3>
+<table class="rule-table"><tr><th>المثبت</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>gut</td><td><b>besser</b></td><td>am <b>besten</b></td></tr>
+<tr><td>viel</td><td><b>mehr</b></td><td>am <b>meisten</b></td></tr>
+<tr><td>gern</td><td><b>lieber</b></td><td>am <b>liebsten</b></td></tr>
+<tr><td>hoch</td><td><b>höher</b></td><td>am <b>höchsten</b></td></tr>
+<tr><td>nah</td><td><b>näher</b></td><td>am <b>nächsten</b></td></tr></table>
+
+<h3>٤. Superlativ</h3>
+<p><b>خبري:</b> <span class="rule-hl">am</span> + صفة + <span class="rule-hl">-sten</span> → Im Winter ist es <b>am kältesten</b>.</p>
+<p><b>نعتي:</b> <b>der / die / das</b> + صفة + <b>-ste</b> → Berlin ist <b>die größte</b> Stadt Deutschlands.</p>
+
+<h3>٥. المساواة</h3>
+<p><b>(genau)so + صفة + wie:</b> Er ist <b>so alt wie</b> ich.<br><b>nicht so … wie:</b> Heute ist es <b>nicht so kalt wie</b> gestern.</p>
+
+<h3>٦. التزايد التدريجي: immer + Komparativ</h3>
+<p>Die Tage werden <b>immer kürzer</b>. — الأيام تقصر أكثر فأكثر.</p>
+
+<p><b>تنبيه:</b> لا تستعمل أبداً «als wie»! بعد Komparativ استعمل <b>als</b> فقط، وبعد so/genauso استعمل <b>wie</b> فقط.</p>`,
+fa: `<h2>صفت تفضیلی و عالی (Komparativ و Superlativ)</h2>
+<div class="rule-formula">ساده → <span class="rule-hl">Komparativ (-er + als)</span> → <span class="rule-hl2">Superlativ (am …-sten)</span></div>
+
+<h3>۱. Komparativ: صفت + -er + als</h3>
+<table class="rule-table"><tr><th>ساده</th><th>Komparativ</th><th>مثال</th></tr>
+<tr><td>klein</td><td>klein<b>er</b></td><td>Anna ist klein<b>er</b> als ihr Bruder. — آنّا از برادرش کوچک‌تر است.</td></tr>
+<tr><td>interessant</td><td>interessant<b>er</b></td><td>Dieses Buch ist interessant<b>er</b> als das andere.</td></tr>
+<tr><td>schnell</td><td>schnell<b>er</b></td><td>Er fährt schnell<b>er</b> als ich.</td></tr></table>
+
+<h3>۲. Umlaut در صفات کوتاه</h3>
+<table class="rule-table"><tr><th>ساده</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>alt</td><td><b>ä</b>lter</td><td>am <b>ä</b>ltesten</td></tr>
+<tr><td>jung</td><td>j<b>ü</b>nger</td><td>am j<b>ü</b>ngsten</td></tr>
+<tr><td>warm</td><td>w<b>ä</b>rmer</td><td>am w<b>ä</b>rmsten</td></tr>
+<tr><td>groß</td><td>gr<b>ö</b>ßer</td><td>am gr<b>ö</b>ßten</td></tr></table>
+
+<h3>۳. شکل‌های بی‌قاعده</h3>
+<table class="rule-table"><tr><th>ساده</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>gut</td><td><b>besser</b></td><td>am <b>besten</b></td></tr>
+<tr><td>viel</td><td><b>mehr</b></td><td>am <b>meisten</b></td></tr>
+<tr><td>gern</td><td><b>lieber</b></td><td>am <b>liebsten</b></td></tr>
+<tr><td>hoch</td><td><b>höher</b></td><td>am <b>höchsten</b></td></tr>
+<tr><td>nah</td><td><b>näher</b></td><td>am <b>nächsten</b></td></tr></table>
+
+<h3>۴. Superlativ — صفت عالی</h3>
+<p><b>خبری:</b> <span class="rule-hl">am</span> + صفت + <span class="rule-hl">-sten</span> → Im Winter ist es <b>am kältesten</b>.</p>
+<p><b>وصفی:</b> <b>der / die / das</b> + صفت + <b>-ste</b> → Berlin ist <b>die größte</b> Stadt Deutschlands.</p>
+
+<h3>۵. مقایسهٔ برابری</h3>
+<p><b>(genau)so + صفت + wie:</b> Er ist <b>so alt wie</b> ich.<br><b>nicht so … wie:</b> Heute ist es <b>nicht so kalt wie</b> gestern.</p>
+
+<h3>۶. افزایش تدریجی: immer + Komparativ</h3>
+<p>Die Tage werden <b>immer kürzer</b>. — روزها هر روز کوتاه‌تر می‌شوند.</p>
+
+<p><b>نکتهٔ مهم:</b> هرگز «als wie» نگویید! بعد از Komparativ فقط <b>als</b>، بعد از so/genauso فقط <b>wie</b>.</p>`,
+vi: `<h2>So sánh hơn và so sánh nhất (Komparativ und Superlativ)</h2>
+<div class="rule-formula">Bậc thường → <span class="rule-hl">Komparativ (-er + als)</span> → <span class="rule-hl2">Superlativ (am …-sten)</span></div>
+
+<h3>1. Komparativ: tính từ + -er + als</h3>
+<table class="rule-table"><tr><th>Bậc thường</th><th>Komparativ</th><th>Ví dụ</th></tr>
+<tr><td>klein</td><td>klein<b>er</b></td><td>Anna ist klein<b>er</b> als ihr Bruder. — Anna nhỏ hơn em trai.</td></tr>
+<tr><td>interessant</td><td>interessant<b>er</b></td><td>Dieses Buch ist interessant<b>er</b> als das andere.</td></tr>
+<tr><td>schnell</td><td>schnell<b>er</b></td><td>Er fährt schnell<b>er</b> als ich.</td></tr></table>
+
+<h3>2. Umlaut ở các tính từ ngắn</h3>
+<table class="rule-table"><tr><th>Bậc thường</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>alt</td><td><b>ä</b>lter</td><td>am <b>ä</b>ltesten</td></tr>
+<tr><td>jung</td><td>j<b>ü</b>nger</td><td>am j<b>ü</b>ngsten</td></tr>
+<tr><td>warm</td><td>w<b>ä</b>rmer</td><td>am w<b>ä</b>rmsten</td></tr>
+<tr><td>groß</td><td>gr<b>ö</b>ßer</td><td>am gr<b>ö</b>ßten</td></tr></table>
+
+<h3>3. Hình thái bất quy tắc</h3>
+<table class="rule-table"><tr><th>Bậc thường</th><th>Komparativ</th><th>Superlativ</th></tr>
+<tr><td>gut</td><td><b>besser</b></td><td>am <b>besten</b></td></tr>
+<tr><td>viel</td><td><b>mehr</b></td><td>am <b>meisten</b></td></tr>
+<tr><td>gern</td><td><b>lieber</b></td><td>am <b>liebsten</b></td></tr>
+<tr><td>hoch</td><td><b>höher</b></td><td>am <b>höchsten</b></td></tr>
+<tr><td>nah</td><td><b>näher</b></td><td>am <b>nächsten</b></td></tr></table>
+
+<h3>4. Superlativ</h3>
+<p><b>Vị ngữ:</b> <span class="rule-hl">am</span> + tính từ + <span class="rule-hl">-sten</span> → Im Winter ist es <b>am kältesten</b>.</p>
+<p><b>Định ngữ:</b> <b>der / die / das</b> + tính từ + <b>-ste</b> → Berlin ist <b>die größte</b> Stadt Deutschlands.</p>
+
+<h3>5. So sánh bằng</h3>
+<p><b>(genau)so + tính từ + wie:</b> Er ist <b>so alt wie</b> ich.<br><b>nicht so … wie:</b> Heute ist es <b>nicht so kalt wie</b> gestern.</p>
+
+<h3>6. Tăng dần: immer + Komparativ</h3>
+<p>Die Tage werden <b>immer kürzer</b>. — Những ngày ngày càng ngắn hơn.</p>
+
+<p><b>Lưu ý:</b> không bao giờ «als wie»! Sau Komparativ chỉ dùng <b>als</b>, sau so/genauso chỉ dùng <b>wie</b>.</p>`,
+},
+
 };
