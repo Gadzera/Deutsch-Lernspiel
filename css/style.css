@@ -1522,53 +1522,41 @@ body {
     align-items: center;
     gap: 10px;
 }
-.tick-btn {
-    width: 36px;
-    height: 36px;
+.tick-inline {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    border: 2px solid #66BB6A;
+    gap: 6px;
+    margin: 8px 0 14px;
+    padding: 6px 14px;
+    border: 1.5px solid #66BB6A;
     background: #E8F5E9;
     color: #2E7D32;
-    border-radius: 8px;
-    font-size: 1.1rem;
+    border-radius: 20px;
+    font-size: 0.86rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.18s ease;
-    padding: 0;
-    line-height: 1;
+    line-height: 1.2;
+    font-family: inherit;
 }
-.tick-btn:hover { background: #C8E6C9; transform: scale(1.05); }
-.tick-btn.on {
+.tick-inline:hover { background: #C8E6C9; transform: translateY(-1px); }
+.tick-inline:active { transform: translateY(0); }
+.tick-inline.on {
     background: #2E7D32;
     color: #fff;
     border-color: #2E7D32;
-    box-shadow: 0 2px 6px rgba(46,125,50,0.4);
+    box-shadow: 0 2px 6px rgba(46,125,50,0.35);
 }
-[data-theme="dark"] .tick-btn {
+[data-theme="dark"] .tick-inline {
     background: rgba(102,187,106,0.15);
     color: #81C784;
     border-color: #66BB6A;
 }
-[data-theme="dark"] .tick-btn:hover { background: rgba(102,187,106,0.28); }
-[data-theme="dark"] .tick-btn.on {
+[data-theme="dark"] .tick-inline:hover { background: rgba(102,187,106,0.28); }
+[data-theme="dark"] .tick-inline.on {
     background: #66BB6A;
     color: #0a1a0a;
     border-color: #81C784;
-}
-.tick-hint {
-    margin-top: 12px;
-    padding: 8px 12px;
-    background: #F1F8E9;
-    border-left: 3px solid #66BB6A;
-    border-radius: 6px;
-    font-size: 0.78rem;
-    color: #2E7D32;
-    line-height: 1.4;
-}
-[data-theme="dark"] .tick-hint {
-    background: rgba(102,187,106,0.10);
-    color: #A5D6A7;
 }
 
 /* ============ RESET PROGRESS BUTTON (in cat header) ============ */

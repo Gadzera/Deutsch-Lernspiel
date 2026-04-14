@@ -947,12 +947,11 @@ function toggleKnowTick(){
     if(btn){
         const on=APP.quiz.knownTicked.has(item.id);
         btn.classList.toggle('on',on);
-        btn.innerHTML=on?'☑':'☐';
-        btn.title=tickBtnLabel();
+        btn.innerHTML=(on?'☑':'☐')+' '+tickBtnLabel();
     }
 }
 function tickBtnLabel(){
-    const M={ru:'Я это знаю',en:'I know this',de:'Kenne ich',tr:'Biliyorum',ar:'أعرف هذا',fa:'این را می‌دانم',vi:'Tôi biết điều này'};
+    const M={ru:'Знаю',en:'Know',de:'Kenne',tr:'Biliyorum',ar:'أعرف',fa:'می‌دانم',vi:'Đã biết'};
     return M[APP.lang||'ru']||M.de;
 }
 
@@ -1113,7 +1112,6 @@ function showMCQ(){
             <div class="quiz-header">
                 <div class="quiz-header-left"><button class="quiz-back" onclick="quitQ()">&#8592;</button><span class="quiz-progress-text">${num} ${UI.of} ${tot}</span></div>
                 <div class="quiz-header-right">
-                    <button id="tickBtn" class="tick-btn ${ticked?'on':''}" title="${tickLbl}" onclick="toggleKnowTick()">${ticked?'☑':'☐'}</button>
                     <span class="quiz-score" id="qsc">&#10003; ${APP.quiz.score}</span>
                 </div>
             </div>
@@ -1122,10 +1120,10 @@ function showMCQ(){
                 <div class="quiz-question-label">${q.label}</div>
                 ${q.display?`<div class="quiz-word">${q.display}</div>`:''}
                 ${q.hint?`<div class="quiz-hint">${q.hint}</div>`:''}
+                <button id="tickBtn" class="tick-inline ${ticked?'on':''}" onclick="toggleKnowTick()">${ticked?'☑':'☐'} ${tickLbl}</button>
                 <div class="quiz-answers ${q.isArt?'article-mode':''} ${isGrid?'two-col':''} stagger">${btns}</div>
                 <div id="mcqExplain" class="mcq-explain" style="display:none"></div>
                 <button id="mcqNext" class="btn btn-primary" style="display:none;margin-top:12px" onclick="APP.quiz.idx++;showQ();">${UI.nextBtn||'Weiter'} →</button>
-                <div class="tick-hint">${tickLbl} — <span style="opacity:.7">${{ru:'отметь, и слово запомнится при правильном ответе',en:'tick to remember it on a correct answer',de:'aktivieren, dann bei richtiger Antwort speichern',tr:'işaretle, doğru cevapta hatırlanacak',ar:'ضع علامة، يُحفظ عند الإجابة الصحيحة',fa:'علامت بزن، با پاسخ درست ذخیره می‌شود',vi:'đánh dấu để được ghi nhớ khi trả lời đúng'}[APP.lang||'ru']}</span></div>
             </div>
         </div>`;
 }
@@ -1583,7 +1581,6 @@ function renderBuilder(){
             <div class="quiz-header">
                 <div class="quiz-header-left"><button class="quiz-back" onclick="quitQ()">&#8592;</button><span class="quiz-progress-text">${num} ${UI.of} ${tot}</span></div>
                 <div class="quiz-header-right">
-                    <button id="tickBtn" class="tick-btn ${tickedB?'on':''}" title="${tickLblB}" onclick="toggleKnowTick()">${tickedB?'☑':'☐'}</button>
                     <span class="quiz-score" id="qsc">&#10003; ${APP.quiz.score}</span>
                 </div>
             </div>
@@ -1592,6 +1589,7 @@ function renderBuilder(){
                 <div class="quiz-question-label">${item.rule||UI.buildSentence}</div>
                 ${ruleBtnH}
                 <div class="quiz-hint">${tr(item)}</div>
+                <button id="tickBtn" class="tick-inline ${tickedB?'on':''}" onclick="toggleKnowTick()">${tickedB?'☑':'☐'} ${tickLblB}</button>
                 ${hintArea}
                 <div class="sentence-area">${builtH||'<span class="sentence-ph">'+UI.tapWords+'</span>'}</div>
                 ${poolH?'<div class="word-pool">'+poolH+'</div>':''}
