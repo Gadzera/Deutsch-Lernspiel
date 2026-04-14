@@ -1659,8 +1659,13 @@ function showCorrection(){
                 if(rEl){rEl.style.display='';rEl.classList.add('corr-slide-in');}
                 if(ruleBox){ruleBox.style.opacity='1';ruleBox.style.transition='opacity 0.4s';}
                 if(ruleText){
-                    const parts=corr.rule.split('\n📐 ');
-                    ruleText.innerHTML='📝 '+esc(parts[0])+(parts[1]?'<div class="corr-formula">📐 '+esc(parts[1])+'</div>':'');
+                    let rt=corr.rule;
+                    let main=rt, fm='', dt='';
+                    const iD=rt.indexOf('\n💡 ');
+                    if(iD>=0){dt=rt.slice(iD+2);rt=rt.slice(0,iD);}
+                    const iF=rt.indexOf('\n📐 ');
+                    if(iF>=0){fm=rt.slice(iF+2);main=rt.slice(0,iF);}else{main=rt;}
+                    ruleText.innerHTML='📝 '+esc(main)+(fm?'<div class="corr-formula">'+esc(fm)+'</div>':'')+(dt?'<div class="corr-detail">'+esc(dt)+'</div>':'');
                 }
             },500);
         },600);
@@ -1705,6 +1710,15 @@ const WORD_PAIRS={
 
 // ============== CATEGORY FORMULAS ==============
 const CAT_FORMULAS={
+da:{f:'Da + S + ... + V(Ende), V + S',de:'Da + Subjekt + ... + Verb (Ende), Verb + Subjekt (formelle Begründung)',ru:'Da + Подлеж. + ... + Глагол (конец), Глагол + Подлеж. (формальная причина)',en:'Da + S + ... + V (end), V + S (formal reason)',tr:'Da + Ö + ... + F (son), F + Ö (resmi neden)'},
+falls:{f:'Falls + S + ... + V(Ende), V + S',de:'Falls + Subjekt + ... + Verb (Ende), Verb + Subjekt (Bedingung)',ru:'Falls + Подлеж. + ... + Глагол (конец), Глагол + Подлеж. (условие «на случай»)',en:'Falls + S + ... + V (end), V + S (conditional "in case")',tr:'Falls + Ö + ... + F (son), F + Ö (koşul)'},
+zu_infinitiv:{f:'HS, ... + zu + Inf.',de:'Hauptsatz, (Komma) + Objekte + zu + Infinitiv (am Ende!)',ru:'Главное предл., (запятая) + дополнения + zu + Инфинитив (в КОНЦЕ!)',en:'Main clause, (comma) + objects + zu + Infinitive (at END!)',tr:'Ana cümle, (virgül) + nesneler + zu + Mastar (SONDA!)'},
+indirekt_w:{f:'HS, W-Wort + S + ... + V(Ende)',de:'Hauptsatz, W-Wort (wer/was/wann…) + Subjekt + ... + Verb (Ende)',ru:'Главное предл., W-слово (wer/was/wann…) + Подлеж. + ... + Глагол (в КОНЦЕ!)',en:'Main clause, W-word + S + ... + V (end)',tr:'Ana cümle, W-kelime + Ö + ... + F (son)'},
+negation:{f:'... nicht / kein + N',de:'«nicht» = vor dem zu verneinenden Wort oder am Satzende. «kein» = vor einem Substantiv (statt ein/der).',ru:'«nicht» — перед отрицаемым словом или в конце предложения. «kein» — перед существительным (вместо ein/der).',en:'"nicht" before the negated word or at end. "kein" before a noun (replacing ein/der).',tr:'"nicht" = olumsuzlanan kelimeden önce / cümle sonunda. "kein" = isimden önce.'},
+koord:{f:'HS + und/aber/denn/oder/sondern + HS',de:'Hauptsatz + Koordinator (Position 0) + Hauptsatz — normale V2-Wortstellung nach dem Koordinator!',ru:'Главное + Коорд. союз (позиция 0) + Главное — после коорд. союза обычный порядок V2 (глагол на 2-й)!',en:'Main + coord. conjunction (position 0) + Main — normal V2 word order after the coordinator!',tr:'Ana + bağlaç (0. pozisyon) + Ana — bağlaçtan sonra normal V2 sırası!'},
+zeitmass_akk:{f:'S + V + Akk-Zeit/Maß + ...',de:'Zeit-/Maßangaben ohne Präposition stehen im AKKUSATIV: einen Monat, jeden Tag, einen Meter, nächsten Montag.',ru:'Указания времени/меры БЕЗ предлога — в АККУЗАТИВЕ: einen Monat, jeden Tag, einen Meter, nächsten Montag.',en:'Time/measure without preposition → ACCUSATIVE: einen Monat, jeden Tag, einen Meter.',tr:'Edatsız süre/ölçü AKKUSATIF alır: einen Monat, jeden Tag, einen Meter.'},
+komparativ:{f:'Adj+er … als / am Adj+sten',de:'Komparativ: Adj+er + als. Superlativ: am + Adj+sten / der/die/das … -ste. Irregulär: gut→besser, viel→mehr, gern→lieber.',ru:'Сравнит.: прил.+er + als. Превосх.: am + прил.+sten / der/die/das … -ste. Неправ.: gut→besser, viel→mehr, gern→lieber.',en:'Comparative: adj+er + als. Superlative: am + adj+sten. Irregular: gut→besser, viel→mehr, gern→lieber.',tr:'Karş.: sıfat+er + als. Üstün.: am + sıfat+sten. Düzensiz: gut→besser, viel→mehr, gern→lieber.'},
+praeteritum:{f:'Schwach: Stamm+te · Stark: Vokalwechsel · sein→war, haben→hatte',de:'Schwache Verben: Stamm + -te. Starke: Vokalwechsel (ging, kam, sah). Hilfs-/Modalverben immer im Präteritum, auch mündlich (war, hatte, konnte, musste).',ru:'Слабые: основа + -te. Сильные: смена гласной (ging, kam, sah). Вспом./модальные — в Präteritum даже в разговоре (war, hatte, konnte, musste).',en:'Weak: stem + -te. Strong: vowel change (ging, kam, sah). Aux/modals always in Präteritum even orally (war, hatte, konnte, musste).',tr:'Zayıf: kök + -te. Güçlü: ünlü değişimi (ging, kam, sah). Yardımcı/modal fiiller her zaman Präteritum (war, hatte, konnte).'},
 hauptsatz:{f:'S + V(2) + O',de:'Subjekt + Verb (Position 2) + Objekt',ru:'Подлежащее + Глагол (позиция 2) + Дополнение',en:'Subject + Verb (position 2) + Object',tr:'Özne + Fiil (2.poz) + Nesne'},
 modal:{f:'S + MV(2) + ... + Inf.(Ende)',de:'Subjekt + Modalverb (Pos.2) + ... + Infinitiv (Ende)',ru:'Подл. + Модальный глагол (поз.2) + ... + Инфинитив (конец)',en:'Subject + Modal (pos.2) + ... + Infinitive (end)',tr:'Özne + Modal (2.poz) + ... + Mastar (son)'},
 weil:{f:'HS, weil + S + ... + V(Ende)',de:'Hauptsatz, weil + Subjekt + ... + Verb (Ende)',ru:'Главное, weil + Подлеж. + ... + Глагол (в конце!)',en:'Main clause, weil + S + ... + V (end)',tr:'Ana cümle, weil + Ö + ... + F (son)'},
@@ -1734,6 +1748,196 @@ relativ:{f:'Nomen, Rel.pron. + ... + V(Ende)',de:'Nomen, Relativpronomen + ... +
 textbau:{f:'Konnektor + HS',de:'Textkonnektor + Hauptsatz-Struktur',ru:'Текстовый коннектор + структура главного предложения',en:'Text connector + main clause structure',tr:'Metin bağlacı + ana cümle yapısı'}
 };
 
+// ============== CATEGORY DETAIL (richer explanations) ==============
+const CAT_DETAIL_ML={
+de:{
+tekamolo:'📏 TEKAMOLO: Adverbialen in der Reihenfolge Te(wann) → Ka(warum) → Mo(wie) → Lo(wo/wohin).',
+negation:'❗ nicht — vor dem zu verneinenden Wort oder am Satzende. kein — vor einem Nomen (statt ein/der).',
+koord:'🔗 und/aber/denn/oder/sondern — koord. Konnektoren auf Position 0. Danach NORMALE V2-Stellung!',
+zu_infinitiv:'➡️ zu-Infinitiv: zu + Verb am Ende des Nebensatzes. «Es ist wichtig, pünktlich zu sein».',
+indirekt_w:'❓ Indirekte W-Frage: nach W-Wort kommt Subjekt, VERB AM ENDE (wie im Nebensatz).',
+zeitmass_akk:'⏱️ Zeit-/Maßangaben ohne Präposition → AKKUSATIV: einen Monat, jeden Tag, einen Meter.',
+komparativ:'📐 Komparativ: Adj+er als. Superlativ: am Adj+sten. Irregulär: gut→besser, viel→mehr, gern→lieber.',
+praeteritum:'📜 Präteritum — schriftlich. Schwach: Stamm+te. Stark: Vokalwechsel. sein/haben/Modalverben IMMER Präteritum.',
+da:'📌 da — formale Begründung (wie weil, aber gehoben): VERB AM ENDE des Nebensatzes.',
+falls:'📌 falls — konditional «für den Fall»: VERB AM ENDE des Nebensatzes.',
+weil:'📌 weil — kausaler Subjunktor. VERB geht ans ENDE des Nebensatzes.',
+dass:'📌 dass — Subjunktor. VERB ans ENDE des Nebensatzes.',
+wenn:'📌 wenn — konditional/wiederholt. VERB ans ENDE des Nebensatzes.',
+als:'📌 als — einmaliges Ereignis in der Vergangenheit. VERB ans ENDE.',
+ob:'📌 ob — indirekte Ja/Nein-Frage. VERB ans ENDE.',
+obwohl:'📌 obwohl — Konzessivsatz «obwohl». VERB ans ENDE.',
+um_zu:'➡️ um … zu + Infinitiv — Finalsatz bei GLEICHEM Subjekt. zu + Inf. am ENDE.',
+damit:'➡️ damit — Finalsatz bei VERSCHIEDENEN Subjekten. VERB ans ENDE.',
+trotzdem:'🔄 trotzdem auf Position 1, VERB auf Position 2, dann Subjekt (Inversion).',
+deshalb:'🔄 deshalb auf Position 1, VERB auf Position 2, dann Subjekt (Inversion).',
+hauptsatz:'✅ Hauptsatz: V2-Regel — VERB auf Position 2 (nach dem 1. Element).',
+modal:'🎯 Modalverben: MV auf Position 2, Hauptverb im INFINITIV am ENDE (Satzklammer).',
+passiv:'⚙️ Passiv: werden/wurde + Partizip II am ENDE (Passivklammer).',
+konjunktiv:'💭 Konjunktiv II: wenn + wäre/hätte/würde + Inf. am Ende. Irrealer Wunsch.'
+},
+ru:{
+tekamolo:'📏 TEKAMOLO: обстоятельства в порядке Te(когда) → Ka(причина) → Mo(как) → Lo(где/куда).',
+negation:'❗ nicht — перед отрицаемым словом или в конце. kein — перед существительным (вместо ein/der).',
+koord:'🔗 und/aber/denn/oder/sondern — коорд. союзы на позиции 0. После них ОБЫЧНЫЙ порядок V2 (глагол на 2-й позиции).',
+zu_infinitiv:'➡️ Конструкция zu + Infinitiv: zu + глагол в конце придаточной части. «Es ist wichtig, pünktlich zu sein».',
+indirekt_w:'❓ Косвенный вопрос с W-словом (wer/was/wann…): после W-слова подлежащее, ГЛАГОЛ В КОНЦЕ, как в придаточном.',
+zeitmass_akk:'⏱️ Указания времени/меры БЕЗ предлога стоят в АККУЗАТИВЕ: einen Monat, jeden Tag, einen Meter, nächsten Montag.',
+komparativ:'📐 Сравнит.: Adj+er als. Превосх.: am Adj+sten. Неправ.: gut→besser, viel→mehr, gern→lieber.',
+praeteritum:'📜 Präteritum — письменная форма. Слабые: Stamm+te. Сильные: смена гласной. sein/haben/модальные — ВСЕГДА в Präteritum.',
+da:'📌 da — формальная причина (как weil, но книжное): ГЛАГОЛ В КОНЦЕ придаточного.',
+falls:'📌 falls — «на случай если» (условие): ГЛАГОЛ В КОНЦЕ придаточного.',
+weil:'📌 weil — подчинительный союз причины. ГЛАГОЛ уходит в КОНЕЦ придаточного.',
+dass:'📌 dass — подчинительный союз. ГЛАГОЛ в КОНЦЕ придаточного.',
+wenn:'📌 wenn — условное/повторяющееся. ГЛАГОЛ в КОНЦЕ придаточного.',
+als:'📌 als — однократное событие в прошлом. ГЛАГОЛ в КОНЦЕ придаточного.',
+ob:'📌 ob — косвенный да/нет вопрос. ГЛАГОЛ в КОНЦЕ придаточного.',
+obwohl:'📌 obwohl — уступка «хотя». ГЛАГОЛ в КОНЦЕ придаточного.',
+um_zu:'➡️ um … zu + Infinitiv — цель при ОДНОМ подлежащем. zu + инфинитив в КОНЦЕ.',
+damit:'➡️ damit — цель при РАЗНЫХ подлежащих. ГЛАГОЛ в КОНЦЕ придаточного.',
+trotzdem:'🔄 trotzdem — на позиции 1, ГЛАГОЛ на позиции 2, затем подлежащее (инверсия).',
+deshalb:'🔄 deshalb — на позиции 1, ГЛАГОЛ на позиции 2, затем подлежащее (инверсия).',
+hauptsatz:'✅ Главное предложение: V2-правило — ГЛАГОЛ на позиции 2 (после 1-го элемента).',
+modal:'🎯 Модальные: MV на позиции 2, основной глагол в ИНФИНИТИВЕ в КОНЦЕ (рамочная конструкция).',
+passiv:'⚙️ Пассив: werden/wurde + Partizip II в КОНЦЕ. Deponens-рамка.',
+konjunktiv:'💭 Konjunktiv II: wenn + wäre/hätte/würde + Inf. в конце. Ирреальное условие.'
+},
+en:{
+tekamolo:'📏 TEKAMOLO rule: adverbials in order Te(when) → Ka(why) → Mo(how) → Lo(where).',
+negation:'❗ nicht — before the negated word or at sentence end. kein — before a noun (replaces ein/der).',
+koord:'🔗 und/aber/denn/oder/sondern — coord. conjunctions at position 0. After them NORMAL V2 order!',
+zu_infinitiv:'➡️ zu-Infinitive: zu + verb at the end of the subclause. «Es ist wichtig, pünktlich zu sein».',
+indirekt_w:'❓ Indirect W-question: after W-word comes subject, VERB AT END (like a subclause).',
+zeitmass_akk:'⏱️ Time/measure without preposition → ACCUSATIVE: einen Monat, jeden Tag, einen Meter.',
+komparativ:'📐 Comparative: adj+er als. Superlative: am adj+sten. Irregular: gut→besser, viel→mehr, gern→lieber.',
+praeteritum:'📜 Präteritum — written form. Weak: stem+te. Strong: vowel change. sein/haben/modals ALWAYS Präteritum.',
+da:'📌 da — formal reason (like weil, but literary): VERB AT END of subclause.',
+falls:'📌 falls — conditional "in case": VERB AT END of subclause.',
+weil:'📌 weil — causal subordinator. VERB goes to the END.',
+dass:'📌 dass — subordinator. VERB at END.',
+wenn:'📌 wenn — conditional/repeated. VERB at END.',
+als:'📌 als — one-time past event. VERB at END.',
+ob:'📌 ob — indirect yes/no question. VERB at END.',
+obwohl:'📌 obwohl — concessive. VERB at END.',
+um_zu:'➡️ um … zu + Inf. — purpose with SAME subject. zu + inf. at END.',
+damit:'➡️ damit — purpose with DIFFERENT subjects. VERB at END.',
+trotzdem:'🔄 trotzdem at pos.1, VERB at pos.2, then subject (inversion).',
+deshalb:'🔄 deshalb at pos.1, VERB at pos.2, then subject (inversion).',
+hauptsatz:'✅ Main clause: V2 rule — VERB at position 2 (after the 1st element).',
+modal:'🎯 Modals: MV at pos.2, main verb INFINITIVE at END (sentence bracket).',
+passiv:'⚙️ Passive: werden/wurde + Partizip II at END.',
+konjunktiv:'💭 Konjunktiv II: wenn + wäre/hätte/würde + inf. at end. Irrealis.'
+},
+tr:{
+tekamolo:'📏 TEKAMOLO: zarflar sırası Te(ne zaman) → Ka(neden) → Mo(nasıl) → Lo(nerede).',
+negation:'❗ nicht — olumsuzlanan kelimeden önce / sonda. kein — isimden önce (ein/der yerine).',
+koord:'🔗 und/aber/denn/oder/sondern — 0. pozisyonda bağlaç. Sonrasında NORMAL V2 sırası!',
+zu_infinitiv:'➡️ zu-Mastar: zu + fiil yan cümlenin sonunda. «Es ist wichtig, pünktlich zu sein».',
+indirekt_w:'❓ Dolaylı W-soru: W-kelimesinden sonra özne, FİİL SONDA.',
+zeitmass_akk:'⏱️ Edatsız süre/ölçü AKKUSATİF alır: einen Monat, jeden Tag, einen Meter.',
+komparativ:'📐 Karş.: sıfat+er als. Üstün.: am sıfat+sten. Düzensiz: gut→besser, viel→mehr, gern→lieber.',
+praeteritum:'📜 Präteritum — yazılı geçmiş. Zayıf: kök+te. Güçlü: ünlü değişimi. sein/haben/modal: HER ZAMAN Präteritum.',
+da:'📌 da — resmi neden (weil gibi ama edebi): FİİL yan cümlenin SONUNDA.',
+falls:'📌 falls — koşul «durumunda»: FİİL SONDA.',
+weil:'📌 weil — neden bağlacı. FİİL SONA gider.',
+dass:'📌 dass — bağlaç. FİİL SONDA.',
+wenn:'📌 wenn — koşul/tekrar. FİİL SONDA.',
+als:'📌 als — geçmişte tek olay. FİİL SONDA.',
+ob:'📌 ob — dolaylı evet/hayır sorusu. FİİL SONDA.',
+obwohl:'📌 obwohl — «rağmen» yan cümlesi. FİİL SONDA.',
+um_zu:'➡️ um … zu + mastar — AYNI özneli amaç. zu + mastar SONDA.',
+damit:'➡️ damit — FARKLI özneli amaç. FİİL SONDA.',
+trotzdem:'🔄 trotzdem 1.poz, FİİL 2.poz, sonra özne (devrik).',
+deshalb:'🔄 deshalb 1.poz, FİİL 2.poz, sonra özne (devrik).',
+hauptsatz:'✅ Ana cümle: V2 kuralı — FİİL 2. pozisyonda.',
+modal:'🎯 Modal: MV 2.poz, ana fiil MASTAR olarak SONDA (cümle çerçevesi).',
+passiv:'⚙️ Pasif: werden/wurde + Partizip II SONDA.',
+konjunktiv:'💭 Konjunktiv II: wenn + wäre/hätte/würde + mastar sonda.'
+},
+ar:{
+tekamolo:'📏 قاعدة TEKAMOLO: ترتيب الظروف الزمان ← السبب ← الحال ← المكان.',
+negation:'❗ nicht قبل الكلمة المنفية أو في نهاية الجملة. kein قبل الاسم (بدل ein/der).',
+koord:'🔗 und/aber/denn/oder/sondern — روابط تنسيقية في الموضع 0. بعدها ترتيب V2 العادي!',
+zu_infinitiv:'➡️ zu + مصدر في نهاية الجملة الفرعية. «Es ist wichtig, pünktlich zu sein».',
+indirekt_w:'❓ سؤال غير مباشر بـ W: بعد كلمة W الفاعل ثم الفعل في النهاية.',
+zeitmass_akk:'⏱️ تعبيرات الزمان/المقدار بدون حرف جر ← حالة النصب: einen Monat, jeden Tag.',
+komparativ:'📐 المقارنة: Adj+er als. التفضيل: am Adj+sten. شاذ: gut→besser, viel→mehr, gern→lieber.',
+praeteritum:'📜 Präteritum — صيغة كتابية. الضعيفة: الجذر+te. القوية: تغيير حرف العلة. sein/haben/modal دائماً Präteritum.',
+da:'📌 da — تعليل رسمي (مثل weil): الفعل في نهاية الجملة الفرعية.',
+falls:'📌 falls — «في حالة»: الفعل في النهاية.',
+weil:'📌 weil — أداة تعليل ربط. الفعل ينتقل إلى النهاية.',
+dass:'📌 dass — أداة ربط. الفعل في النهاية.',
+wenn:'📌 wenn — شرطي/متكرر. الفعل في النهاية.',
+als:'📌 als — حدث لمرة واحدة في الماضي. الفعل في النهاية.',
+ob:'📌 ob — سؤال غير مباشر نعم/لا. الفعل في النهاية.',
+obwohl:'📌 obwohl — «على الرغم من». الفعل في النهاية.',
+um_zu:'➡️ um … zu + مصدر — الغرض مع فاعل واحد. zu + مصدر في النهاية.',
+damit:'➡️ damit — الغرض مع فاعلين مختلفين. الفعل في النهاية.',
+trotzdem:'🔄 trotzdem في الموضع 1، الفعل في الموضع 2، ثم الفاعل.',
+deshalb:'🔄 deshalb في الموضع 1، الفعل في الموضع 2، ثم الفاعل.',
+hauptsatz:'✅ الجملة الرئيسية: قاعدة V2 — الفعل في الموضع 2.',
+modal:'🎯 الأفعال الناقصة: MV في الموضع 2، الفعل الرئيسي في المصدر في النهاية.',
+passiv:'⚙️ المبني للمجهول: werden/wurde + Partizip II في النهاية.',
+konjunktiv:'💭 Konjunktiv II: wenn + wäre/hätte/würde + مصدر في النهاية.'
+},
+fa:{
+tekamolo:'📏 قاعده TEKAMOLO: ترتیب قیدها زمان ← علت ← حالت ← مکان.',
+negation:'❗ nicht قبل از کلمه منفی یا انتهای جمله. kein قبل از اسم (به جای ein/der).',
+koord:'🔗 und/aber/denn/oder/sondern — حروف ربط هم‌پایه در موقعیت 0. بعد از آن‌ها ترتیب عادی V2!',
+zu_infinitiv:'➡️ zu + مصدر در انتهای جمله فرعی. «Es ist wichtig, pünktlich zu sein».',
+indirekt_w:'❓ سؤال غیرمستقیم با W: بعد از W فاعل، سپس فعل در انتها.',
+zeitmass_akk:'⏱️ عبارات زمان/اندازه بدون حرف اضافه ← حالت مفعولی: einen Monat, jeden Tag.',
+komparativ:'📐 تفضیلی: Adj+er als. عالی: am Adj+sten. بی‌قاعده: gut→besser, viel→mehr, gern→lieber.',
+praeteritum:'📜 Präteritum — فرم نوشتاری. ضعیف: ریشه+te. قوی: تغییر مصوت. sein/haben/modal همیشه Präteritum.',
+da:'📌 da — دلیل رسمی (مثل weil اما ادبی): فعل در انتها.',
+falls:'📌 falls — «در صورتی که»: فعل در انتها.',
+weil:'📌 weil — حرف ربط علت. فعل به انتها می‌رود.',
+dass:'📌 dass — حرف ربط. فعل در انتها.',
+wenn:'📌 wenn — شرطی/تکراری. فعل در انتها.',
+als:'📌 als — یک بار در گذشته. فعل در انتها.',
+ob:'📌 ob — سؤال غیرمستقیم بله/خیر. فعل در انتها.',
+obwohl:'📌 obwohl — «اگرچه». فعل در انتها.',
+um_zu:'➡️ um … zu + مصدر — هدف با یک فاعل. zu + مصدر در انتها.',
+damit:'➡️ damit — هدف با فاعل‌های متفاوت. فعل در انتها.',
+trotzdem:'🔄 trotzdem در موقعیت 1، فعل در موقعیت 2، سپس فاعل.',
+deshalb:'🔄 deshalb در موقعیت 1، فعل در موقعیت 2، سپس فاعل.',
+hauptsatz:'✅ جمله اصلی: قاعده V2 — فعل در موقعیت 2.',
+modal:'🎯 افعال مدال: MV موقعیت 2، فعل اصلی مصدر در انتها.',
+passiv:'⚙️ مجهول: werden/wurde + Partizip II در انتها.',
+konjunktiv:'💭 Konjunktiv II: wenn + wäre/hätte/würde + مصدر در انتها.'
+},
+vi:{
+tekamolo:'📏 Quy tắc TEKAMOLO: trạng ngữ theo thứ tự Te(khi nào) → Ka(vì sao) → Mo(thế nào) → Lo(ở đâu).',
+negation:'❗ nicht — trước từ bị phủ định hoặc cuối câu. kein — trước danh từ (thay ein/der).',
+koord:'🔗 und/aber/denn/oder/sondern — liên từ kết hợp ở vị trí 0. Sau đó trật tự V2 BÌNH THƯỜNG!',
+zu_infinitiv:'➡️ zu + động từ ở cuối mệnh đề phụ. «Es ist wichtig, pünktlich zu sein».',
+indirekt_w:'❓ Câu hỏi gián tiếp với W: sau từ W là chủ ngữ, ĐỘNG TỪ Ở CUỐI.',
+zeitmass_akk:'⏱️ Thời gian/đo lường không giới từ → CÁCH AKKUSATIV: einen Monat, jeden Tag.',
+komparativ:'📐 So sánh hơn: Adj+er als. So sánh nhất: am Adj+sten. Bất quy tắc: gut→besser, viel→mehr, gern→lieber.',
+praeteritum:'📜 Präteritum — dạng văn viết. Yếu: gốc+te. Mạnh: đổi nguyên âm. sein/haben/modal LUÔN Präteritum.',
+da:'📌 da — lý do trang trọng (như weil, văn chương): ĐỘNG TỪ Ở CUỐI.',
+falls:'📌 falls — «trong trường hợp»: ĐỘNG TỪ Ở CUỐI.',
+weil:'📌 weil — liên từ phụ thuộc. ĐỘNG TỪ ra CUỐI.',
+dass:'📌 dass — liên từ phụ thuộc. ĐỘNG TỪ ở CUỐI.',
+wenn:'📌 wenn — điều kiện/lặp lại. ĐỘNG TỪ ở CUỐI.',
+als:'📌 als — sự kiện một lần trong quá khứ. ĐỘNG TỪ ở CUỐI.',
+ob:'📌 ob — câu hỏi gián tiếp có/không. ĐỘNG TỪ ở CUỐI.',
+obwohl:'📌 obwohl — «mặc dù». ĐỘNG TỪ ở CUỐI.',
+um_zu:'➡️ um … zu + nguyên thể — mục đích cùng chủ ngữ. zu + nguyên thể ở CUỐI.',
+damit:'➡️ damit — mục đích với chủ ngữ khác. ĐỘNG TỪ ở CUỐI.',
+trotzdem:'🔄 trotzdem ở vị trí 1, ĐỘNG TỪ ở vị trí 2, rồi chủ ngữ.',
+deshalb:'🔄 deshalb ở vị trí 1, ĐỘNG TỪ ở vị trí 2, rồi chủ ngữ.',
+hauptsatz:'✅ Mệnh đề chính: quy tắc V2 — ĐỘNG TỪ ở vị trí 2.',
+modal:'🎯 Modal: MV ở vị trí 2, động từ chính NGUYÊN THỂ ở CUỐI.',
+passiv:'⚙️ Bị động: werden/wurde + Partizip II ở CUỐI.',
+konjunktiv:'💭 Konjunktiv II: wenn + wäre/hätte/würde + nguyên thể ở cuối.'
+}
+};
+function getCatDetail(cat,L){
+    const m=CAT_DETAIL_ML[L]||CAT_DETAIL_ML.en;
+    return m[cat]||'';
+}
+
 function getCorrectionRule(word,wrongWord,pos,sentence,item){
     const L=APP.lang||'de';
     const cat=item.cat||'';
@@ -1758,7 +1962,8 @@ function getCorrectionRule(word,wrongWord,pos,sentence,item){
     const _t=(de,ru,en,tr,ar,fa,vi)=>({de,ru,en,tr,ar,fa,vi}[L]||en||de);
     // Get formula for category
     const cf=CAT_FORMULAS[cat];
-    const formula=cf?('\n📐 '+cf.f+' — '+(cf[L]||cf.en||cf.de||'')):'';
+    const catDetail=getCatDetail(cat,L);
+    const formula=(cf?('\n📐 '+cf.f+' — '+(cf[L]||cf.en||cf.de||'')):'')+(catDetail?('\n💡 '+catDetail):'');
 
     // === A: MISSING WORD ===
     if(wrongWord==='___'){
