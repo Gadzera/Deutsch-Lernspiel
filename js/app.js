@@ -729,7 +729,13 @@ function showMenu() {
         sqBtn('❔','welch- / was für ein-','pronouns','frageartikel')+
         sqBtn('🔖','dieser/jeder/mancher','pronouns','artikelwort'));
 
-    // 7. VWU — отдельная кнопка ведёт в showVWUMenu()
+    // 7. Deklination — новая карточка (n-Deklination, Genitiv, Adjektiv)
+    const hasDk=typeof DEKLINATION!=='undefined'&&DEKLINATION.length;
+    if(hasDk) cats+=catHTML('🏛️','Deklination',DEKLINATION.length+' Übungen','dekl_all',DEKLINATION.length,'catDekl',
+        sqBtn('🏛️','Alle Deklinationen','deklination','all')+
+        sqBtn('👨','n-Deklination','deklination','n_dekl'));
+
+    // 8. VWU — отдельная кнопка ведёт в showVWUMenu()
     const hasVWU=typeof VWU!=='undefined'&&VWU.levels;
     if(hasVWU){
         const totalTests=VWU.levels.reduce((s,l)=>s+l.tests.length,0);
@@ -888,6 +894,9 @@ function getPool(cat,mode){
         case 'pronouns':
             if(typeof PRONOUNS==='undefined') return [];
             return mode==='all'?[...PRONOUNS]:PRONOUNS.filter(p=>p.type===mode);
+        case 'deklination':
+            if(typeof DEKLINATION==='undefined') return [];
+            return mode==='all'?[...DEKLINATION]:DEKLINATION.filter(p=>p.type===mode);
     }
     return [];
 }
@@ -1076,6 +1085,11 @@ function prepareMCQ(){
         // Use exactly the 4 options from the data (case variations of same root)
         opts=shuffle([...new Set([...item.options,correct])]).slice(0,4);
         if(!opts.includes(correct)){opts[3]=correct;opts=shuffle(opts);}
+    }else if(cat==='deklination'){
+        label=item.sentence.replace('___','______');display='';hint=tr(item);
+        correct=item.answer;
+        opts=shuffle([...new Set([...item.options,correct])]).slice(0,4);
+        if(!opts.includes(correct)){opts[3]=correct;opts=shuffle(opts);}
     }
     return {label,display,hint,opts,correct,isArt};
 }
@@ -1182,6 +1196,15 @@ function getMCQExplanation(item,cat,userAns,correct,isOk){
         const tn=typeNames[item.type]||'';
         why=`<b>${correct}</b> — ${tn}`;
         if(item.case) why+=` · <i>${item.case}</i>`;
+    }else if(cat==='deklination'){
+        const typeNames={
+            n_dekl:T('n-Deklination (schwache Maskulina)','n-Declension (weak masculines)','n-Deklination','n-çekimi (zayıf erilin)','n-Deklination (danh từ nam yếu)','تصريف n (المذكر الضعيف)','تصریف n (مذکر ضعیف)'),
+            genitiv_attr:T('Genitiv-Attribut','Genitive attribute','Genitiv-Attribut','Genitif niteleme','Thuộc ngữ Genitiv','صفة المضاف إليه','اضافهٔ ملکی'),
+            adj_dekl:T('Adjektivdeklination','Adjective declension','Adjektivdeklination','Sıfat çekimi','Biến cách tính từ','تصريف الصفة','تصریف صفت')
+        };
+        const tn=typeNames[item.type]||'';
+        why=`<b>${correct}</b> — ${tn}`;
+        if(item.case) why+=` · <i>${item.case}</i>`;
     }
     const head=isOk
         ? `<div class="mcq-ex-head ok">✓ ${T('Richtig!','Correct!','Richtig!','Doğru!','Đúng rồi!','صحيح!','درست!')}</div>`
@@ -1221,8 +1244,8 @@ function checkA(btn){
     document.querySelectorAll('.answer-btn').forEach(b=>{b.disabled=true;if(b.dataset.val===cor)b.classList.add('correct');});
     const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+APP.quiz.score;
     if(APP.subliminal) showSubliminal(item);
-    // Show explanation animation for prepositions/pronouns; advance with button
-    if(cat==='prepositions'||cat==='pronouns'){
+    // Show explanation animation for prepositions/pronouns/deklination; advance with button
+    if(cat==='prepositions'||cat==='pronouns'||cat==='deklination'){
         const ex=$('mcqExplain'),nb=$('mcqNext');
         if(ex){
             ex.innerHTML=getMCQExplanation(item,cat,val,cor,ok);
