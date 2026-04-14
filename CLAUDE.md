@@ -47,12 +47,37 @@ Edit/Write приемлем для:
 
 ## Git workflow
 
-- Основная ветка: `main` (из неё деплоится GitHub Pages → gadzera.github.io)
+- Основная ветка: `main`
 - Feature-ветка: `claude/fix-quiz-app-6cQbS`
 - Пуш: `git -c user.name=Gadzera -c user.email=gadzera@users.noreply.github.com commit ...`
   Имя "Claude" в git-авторе НЕ использовать — только Gadzera.
-- После коммита на feature-ветку делать squash-merge в `main` и пушить `main`,
-  иначе GitHub Pages не обновится.
+- После коммита на feature-ветку делать squash-merge в `main` и пушить `main`.
+
+## ⚠️ КРИТИЧЕСКИ ВАЖНО: GitHub Pages деплоится из `gh-pages`, не из `main`
+
+GitHub Pages этого репозитория настроен на деплой **из отдельной ветки
+`gh-pages`**. В `main` есть workflow-файл `.github/workflows/deploy-pages.yml`,
+но он НЕ используется — Pages читает файлы напрямую из `gh-pages`.
+
+**Полный workflow деплоя**:
+```bash
+# 1. Коммит в feature-ветку
+git checkout claude/<branch>
+git commit ...
+
+# 2. Squash-merge в main
+git checkout main
+git merge --squash claude/<branch>
+git -c user.name=Gadzera -c user.email=gadzera@users.noreply.github.com commit ...
+git push origin main
+
+# 3. ОБЯЗАТЕЛЬНО: force-push main → gh-pages, иначе сайт не обновится!
+git push origin main:gh-pages --force
+```
+
+**Без шага 3** пользователь будет продолжать видеть старую версию
+независимо от cache-busting и очистки кэша. Проверено 14 апреля 2026 —
+убил на это сутки, пуская коммиты в `main`, который Pages не смотрит.
 
 ## Структура приложения
 
