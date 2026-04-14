@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#6C63FF">
+    <title>Deutsch Lernspiel</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <script>
+    // Brand-new bootstrap: never cached by the browser (this file did not
+    // exist before). Unregister any leftover service workers, clear caches,
+    // then inject all resources with Date.now() so they are always fresh.
+    (function(){
+      try{
+        if('serviceWorker' in navigator){
+          navigator.serviceWorker.getRegistrations().then(function(rs){
+            rs.forEach(function(r){ r.unregister().catch(function(){}); });
+          }).catch(function(){});
+        }
+        if('caches' in window){
+          caches.keys().then(function(ks){
+            ks.forEach(function(k){ caches.delete(k).catch(function(){}); });
+          }).catch(function(){});
+        }
+      }catch(e){}
+      var T='?t='+Date.now();
+      document.write('<link rel="stylesheet" href="css/style.css'+T+'">');
+    })();
+    </script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <!-- 25th Frame (Subliminal Learning) -->
+    <div id="subliminalFrame" class="subliminal-frame">
+        <div class="subliminal-content">
+            <div id="subliminalWord" class="subliminal-word"></div>
+            <div id="subliminalTrans" class="subliminal-translation"></div>
+        </div>
+    </div>
+    <script>
+    (function(){
+      var T='?t='+Date.now();
+      var files=[
+        'data/nouns.js','data/verbs.js','data/partizip2.js','data/reflexive.js',
+        'data/sentences.js','data/prepositions.js','data/pronouns.js',
+        'data/rules.js','data/vwu.js','data/ev_zt1_lesen.js','data/ev_zt1_pool.js',
+        'js/app.js'
+      ];
+      files.forEach(function(f){
+        document.write('<scr'+'ipt src="'+f+T+'"></scr'+'ipt>');
+      });
+    })();
+    </script>
+</body>
+</html>
