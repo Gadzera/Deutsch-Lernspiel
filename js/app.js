@@ -940,36 +940,36 @@ function markKnownAndSkip(){
 function getMCQExplanation(item,cat,userAns,correct,isOk){
     // Build a localized explanation for prepositions / pronouns
     const lang=APP.lang||'ru';
-    const T=(ru,en,de,tr,vi)=>(lang==='ru'?ru:lang==='en'?en:lang==='tr'?tr:lang==='vi'?(vi||en):de);
+    const T=(ru,en,de,tr,vi,ar,fa)=>({ru,en,de,tr,vi,ar,fa}[lang]||en||de);
     let why='';
     if(cat==='prepositions'){
         const typeNames={
-            wechsel:T('Wechselpräposition (Akk/Dat)','Two-way preposition','Wechselpräposition','Yön/Yer edatı','Giới từ hai cách (Akk/Dat)'),
-            dativ:T('Präposition mit Dativ','Dative preposition','Präposition + Dativ','Datif edatı','Giới từ với cách Dativ'),
-            akkusativ:T('Präposition mit Akkusativ','Accusative preposition','Präposition + Akkusativ','Akuzatif edatı','Giới từ với cách Akkusativ'),
-            genitiv:T('Präposition mit Genitiv','Genitive preposition','Präposition + Genitiv','Genitif edatı','Giới từ với cách Genitiv'),
-            verb_prep:T('Verb + feste Präposition','Verb + fixed preposition','Verb + feste Präposition','Fiil + sabit edat','Động từ + giới từ cố định')
+            wechsel:T('Wechselpräposition (Akk/Dat)','Two-way preposition','Wechselpräposition','Yön/Yer edatı','Giới từ hai cách (Akk/Dat)','حرف جر ثنائي (Akk/Dat)','حرف اضافهٔ دوسویه (Akk/Dat)'),
+            dativ:T('Präposition mit Dativ','Dative preposition','Präposition + Dativ','Datif edatı','Giới từ với cách Dativ','حرف جر مع الداتيف','حرف اضافهٔ داتیو'),
+            akkusativ:T('Präposition mit Akkusativ','Accusative preposition','Präposition + Akkusativ','Akuzatif edatı','Giới từ với cách Akkusativ','حرف جر مع الأكوزاتيف','حرف اضافهٔ آکوزاتیو'),
+            genitiv:T('Präposition mit Genitiv','Genitive preposition','Präposition + Genitiv','Genitif edatı','Giới từ với cách Genitiv','حرف جر مع الجينيتيف','حرف اضافهٔ گنیتیو'),
+            verb_prep:T('Verb + feste Präposition','Verb + fixed preposition','Verb + feste Präposition','Fiil + sabit edat','Động từ + giới từ cố định','فعل + حرف جر ثابت','فعل + حرف اضافهٔ ثابت')
         };
         const tn=typeNames[item.type]||'';
         why=`<b>${correct}</b> — ${tn}`;
         if(item.case) why+=` · <i>${item.case}</i>`;
     }else if(cat==='pronouns'){
         const typeNames={
-            personal:T('Personalpronomen','Personal pronoun','Personalpronomen','Şahıs zamiri','Đại từ nhân xưng'),
-            possessiv:T('Possessivpronomen','Possessive pronoun','Possessivpronomen','İyelik zamiri','Đại từ sở hữu'),
-            reflexiv:T('Reflexivpronomen','Reflexive pronoun','Reflexivpronomen','Dönüşlü zamir','Đại từ phản thân'),
-            relativ:T('Relativpronomen','Relative pronoun','Relativpronomen','İlgi zamiri','Đại từ quan hệ'),
-            demonstrativ:T('Demonstrativpronomen','Demonstrative pronoun','Demonstrativpronomen','İşaret zamiri','Đại từ chỉ định'),
-            indefinit:T('Indefinitpronomen','Indefinite pronoun','Indefinitpronomen','Belirsiz zamir','Đại từ không xác định')
+            personal:T('Personalpronomen','Personal pronoun','Personalpronomen','Şahıs zamiri','Đại từ nhân xưng','ضمير شخصي','ضمیر شخصی'),
+            possessiv:T('Possessivpronomen','Possessive pronoun','Possessivpronomen','İyelik zamiri','Đại từ sở hữu','ضمير ملكية','ضمیر ملکی'),
+            reflexiv:T('Reflexivpronomen','Reflexive pronoun','Reflexivpronomen','Dönüşlü zamir','Đại từ phản thân','ضمير انعكاسي','ضمیر انعکاسی'),
+            relativ:T('Relativpronomen','Relative pronoun','Relativpronomen','İlgi zamiri','Đại từ quan hệ','ضمير الوصل','ضمیر موصولی'),
+            demonstrativ:T('Demonstrativpronomen','Demonstrative pronoun','Demonstrativpronomen','İşaret zamiri','Đại từ chỉ định','ضمير الإشارة','ضمیر اشاره'),
+            indefinit:T('Indefinitpronomen','Indefinite pronoun','Indefinitpronomen','Belirsiz zamir','Đại từ không xác định','ضمير غير معرف','ضمیر نامعین')
         };
         const tn=typeNames[item.type]||'';
         why=`<b>${correct}</b> — ${tn}`;
         if(item.case) why+=` · <i>${item.case}</i>`;
     }
     const head=isOk
-        ? `<div class="mcq-ex-head ok">✓ ${T('Richtig!','Correct!','Richtig!','Doğru!','Đúng rồi!')}</div>`
-        : `<div class="mcq-ex-head err">✗ ${T('Falsch','Wrong','Falsch','Yanlış','Sai')} — <s>${esc(userAns)}</s></div>`;
-    const trDisplay=item[lang]||item.en||item.ru;
+        ? `<div class="mcq-ex-head ok">✓ ${T('Richtig!','Correct!','Richtig!','Doğru!','Đúng rồi!','صحيح!','درست!')}</div>`
+        : `<div class="mcq-ex-head err">✗ ${T('Falsch','Wrong','Falsch','Yanlış','Sai','خطأ','اشتباه')} — <s>${esc(userAns)}</s></div>`;
+    const trDisplay=item[lang]||item.en||item.german||item.verb||'';
     const trLine=trDisplay?`<div class="mcq-ex-tr">${esc(trDisplay)}</div>`:'';
     return `${head}<div class="mcq-ex-why">${why}</div>${trLine}`;
 }
@@ -1467,11 +1467,20 @@ function getCorrectionRule(word,wrongWord,pos,sentence,item){
     const isNeb=nebCats.split(',').includes(cat);
     const pronouns='ich,du,er,sie,es,wir,ihr,man'.split(',');
     const isPronoun=pronouns.includes(lo);
-    const connNames={weil:'потому что',dass:'что',wenn:'если/когда',als:'когда (прошлое)',ob:'ли',obwohl:'хотя',damit:'чтобы',nachdem:'после того как',bevor:'прежде чем',seitdem:'с тех пор',bis:'пока не',sobald:'как только',denn:'ведь',aber:'но',sondern:'а (не...а)',trotzdem:'тем не менее',deshalb:'поэтому'};
-    const _t=(de,ru,en,tr)=>({de,ru,en,tr})[L]||ru||de;
+    const CONN_NAMES_ML={
+        ru:{weil:'потому что',dass:'что',wenn:'если/когда',als:'когда (прошлое)',ob:'ли',obwohl:'хотя',damit:'чтобы',nachdem:'после того как',bevor:'прежде чем',seitdem:'с тех пор',bis:'пока не',sobald:'как только',denn:'ведь',aber:'но',sondern:'а (не...а)',trotzdem:'тем не менее',deshalb:'поэтому'},
+        en:{weil:'because',dass:'that',wenn:'if/when',als:'when (past)',ob:'whether',obwohl:'although',damit:'so that',nachdem:'after',bevor:'before',seitdem:'since',bis:'until',sobald:'as soon as',denn:'because',aber:'but',sondern:'but rather',trotzdem:'nevertheless',deshalb:'therefore'},
+        de:{weil:'weil',dass:'dass',wenn:'wenn',als:'als',ob:'ob',obwohl:'obwohl',damit:'damit',nachdem:'nachdem',bevor:'bevor',seitdem:'seitdem',bis:'bis',sobald:'sobald',denn:'denn',aber:'aber',sondern:'sondern',trotzdem:'trotzdem',deshalb:'deshalb'},
+        tr:{weil:'çünkü',dass:'ki',wenn:'eğer/ne zaman',als:'iken (geçmiş)',ob:'olup olmadığı',obwohl:'rağmen',damit:'amacıyla',nachdem:'sonra',bevor:'önce',seitdem:'o zamandan beri',bis:'kadar',sobald:'hemen',denn:'çünkü',aber:'ama',sondern:'aksine',trotzdem:'buna rağmen',deshalb:'bu yüzden'},
+        ar:{weil:'لأن',dass:'أن',wenn:'إذا/عندما',als:'عندما (الماضي)',ob:'ما إذا',obwohl:'على الرغم من',damit:'لكي',nachdem:'بعد أن',bevor:'قبل أن',seitdem:'منذ أن',bis:'حتى',sobald:'بمجرد أن',denn:'لأن',aber:'لكن',sondern:'بل',trotzdem:'مع ذلك',deshalb:'لذلك'},
+        fa:{weil:'چون',dass:'که',wenn:'اگر/وقتی',als:'وقتی (گذشته)',ob:'آیا',obwohl:'اگرچه',damit:'برای اینکه',nachdem:'پس از اینکه',bevor:'قبل از',seitdem:'از زمانی که',bis:'تا اینکه',sobald:'به محض اینکه',denn:'زیرا',aber:'اما',sondern:'بلکه',trotzdem:'با این حال',deshalb:'به همین دلیل'},
+        vi:{weil:'bởi vì',dass:'rằng',wenn:'nếu/khi',als:'khi (quá khứ)',ob:'liệu',obwohl:'mặc dù',damit:'để',nachdem:'sau khi',bevor:'trước khi',seitdem:'từ khi',bis:'cho đến khi',sobald:'ngay khi',denn:'vì',aber:'nhưng',sondern:'mà là',trotzdem:'tuy nhiên',deshalb:'do đó'}
+    };
+    const connNames=CONN_NAMES_ML[L]||CONN_NAMES_ML.en;
+    const _t=(de,ru,en,tr,ar,fa,vi)=>({de,ru,en,tr,ar,fa,vi}[L]||en||de);
     // Get formula for category
     const cf=CAT_FORMULAS[cat];
-    const formula=cf?('\n📐 '+cf.f+' — '+(cf[L]||(L==='ru'?cf.ru:cf.en)||cf.de||cf.ru)):'';
+    const formula=cf?('\n📐 '+cf.f+' — '+(cf[L]||cf.en||cf.de||'')):'';
 
     // === A: MISSING WORD ===
     if(wrongWord==='___'){
@@ -1509,7 +1518,7 @@ function getCorrectionRule(word,wrongWord,pos,sentence,item){
         const k1=lo+'|'+wlo, k2=wlo+'|'+lo;
         const pair=WORD_PAIRS[k1]||WORD_PAIRS[k2];
         if(pair){
-            return (pair[L]||(L==='ru'?pair.ru:pair.en)||pair.de||pair.ru)+formula;
+            return (pair[L]||pair.en||pair.de||'')+formula;
         }
         // Check if wrong word is from correct sentence (wrong position)
         const wrongInCorrect=sentence.indexOf(wrongWord);
