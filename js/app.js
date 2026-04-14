@@ -1045,7 +1045,9 @@ function prepareMCQ(){
             const ctx=RF_SENTENCES[Math.floor(Math.random()*RF_SENTENCES.length)];
             label=pronouns[pi]+' ______ '+ctx+'.';
             display='';
-            hint=tr(item)+' ('+item.verb+')';
+            // Nur die Übersetzung im Hilfesprache zeigen — den deutschen Infinitiv NICHT,
+            // weil er sonst die Antwort verrät.
+            hint=tr(item);
             correct=item[keys[pi]];
             // Find phonetically similar distractors
             const vBase=item.verb.replace('sich ','');
