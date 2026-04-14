@@ -3201,6 +3201,229 @@ vi: `
 <li>Trong Perfekt, trợ động từ ở vị trí cuối cùng — ..., was er gesagt <b>hat</b>.</li>
 </ul>
 <p><i>Lưu ý: Đối với câu hỏi có/không, dùng <b>ob</b>, không phải <b>dass</b>!</i>`
+},
+
+satz_negation: {
+de: `
+<h2>Negation: nicht / kein</h2>
+<div class="rule-formula"><span class="rule-hl">kein</span> + Substantiv &nbsp;|&nbsp; ... + <span class="rule-hl2">nicht</span> + (Adj/Adv/PP/Inf/Part/Vorsilbe)</div>
+
+<h3>1. kein oder nicht?</h3>
+<ul>
+<li><b>kein</b> verneint Substantive <b>ohne Artikel</b> oder mit <b>ein-</b>.<br>Ich habe <b>ein</b> Auto. → Ich habe <b>kein</b> Auto.<br>Ich trinke Kaffee. → Ich trinke <b>keinen</b> Kaffee.</li>
+<li><b>nicht</b> verneint alles andere: Verben, Sätze, Adjektive, Adverbien, Eigennamen, Substantive mit <b>bestimmtem Artikel</b>.<br>Ich kaufe das Auto <b>nicht</b>.</li>
+</ul>
+<p><b>kein</b> wird wie <b>ein</b> dekliniert: kein/keine/keinen/keinem/keiner/keines.</p>
+
+<h3>2. Position von nicht</h3>
+<p>Bei Satznegation steht <b>nicht</b> am <b>Ende</b> des Satzes:</p>
+<p>Er kommt heute <b>nicht</b>.</p>
+<p>ABER: <b>nicht</b> rückt nach <b>vor</b>, wenn rechts ein bestimmtes Element steht:</p>
+<ul>
+<li><b>vor Adjektiv/Adverb:</b> Das Buch ist <b>nicht</b> interessant. — Sie fährt <b>nicht</b> schnell.</li>
+<li><b>vor Präpositionalphrase (Ort/Richtung):</b> Wir gehen <b>nicht</b> ins Kino. — Ich wohne <b>nicht</b> in Berlin.</li>
+<li><b>vor Infinitiv (Modalverb):</b> Ich kann heute <b>nicht</b> kommen. — Du darfst hier <b>nicht</b> rauchen.</li>
+<li><b>vor Partizip II (Perfekt/Passiv):</b> Ich habe das <b>nicht</b> gesagt. — Wir sind <b>nicht</b> gegangen.</li>
+<li><b>vor trennbarer Vorsilbe:</b> Er steht heute <b>nicht</b> auf. — Sie ruft mich <b>nicht</b> an.</li>
+</ul>
+
+<h3>3. Teilnegation: nicht ... sondern</h3>
+<p><b>nicht</b> kann auch nur <b>ein einzelnes Element</b> verneinen — dann steht es direkt davor und wird oft mit <b>sondern</b> korrigiert:</p>
+<p>Ich fahre <b>nicht</b> morgen, <b>sondern</b> heute.</p>
+<p>Er heißt <b>nicht</b> Peter, <b>sondern</b> Paul.</p>
+
+<h3>4. Andere Negationswörter</h3>
+<ul>
+<li><b>nichts</b> = ничего → Ich habe <b>nichts</b> verstanden.</li>
+<li><b>niemand</b> = никто → <b>Niemand</b> hat mir das gesagt.</li>
+<li><b>nie / niemals</b> = никогда → Er kommt <b>nie</b> zu spät.</li>
+<li><b>nirgendwo / nirgends</b> = нигде</li>
+</ul>`,
+ru: `
+<h2>Отрицание: nicht / kein</h2>
+<div class="rule-formula"><span class="rule-hl">kein</span> + сущ. &nbsp;|&nbsp; ... + <span class="rule-hl2">nicht</span> + (прил./нар./PP/инф./Part/приставка)</div>
+
+<h3>1. kein или nicht?</h3>
+<ul>
+<li><b>kein</b> отрицает существительные <b>без артикля</b> или с <b>ein-</b>.<br>Ich habe <b>ein</b> Auto. → Ich habe <b>kein</b> Auto.<br>Ich trinke Kaffee. → Ich trinke <b>keinen</b> Kaffee.</li>
+<li><b>nicht</b> отрицает всё остальное: глаголы, целое предложение, прилагательные, наречия, имена собственные, существительные с <b>определённым артиклем</b>.<br>Ich kaufe das Auto <b>nicht</b>. — Я не покупаю эту машину.</li>
+</ul>
+<p><b>kein</b> склоняется как <b>ein</b>: kein/keine/keinen/keinem/keiner/keines.</p>
+
+<h3>2. Где стоит nicht?</h3>
+<p>При отрицании всего предложения <b>nicht</b> ставится в <b>конце</b>:</p>
+<p>Er kommt heute <b>nicht</b>. — Он сегодня не придёт.</p>
+<p>НО: <b>nicht</b> сдвигается <b>влево</b>, если справа стоит определённый элемент:</p>
+<ul>
+<li><b>перед прилагательным/наречием:</b> Das Buch ist <b>nicht</b> interessant. — Sie fährt <b>nicht</b> schnell.</li>
+<li><b>перед предложной группой (место/направление):</b> Wir gehen <b>nicht</b> ins Kino. — Ich wohne <b>nicht</b> in Berlin.</li>
+<li><b>перед инфинитивом (с модальным):</b> Ich kann heute <b>nicht</b> kommen.</li>
+<li><b>перед Partizip II:</b> Ich habe das <b>nicht</b> gesagt.</li>
+<li><b>перед отделяемой приставкой:</b> Er steht heute <b>nicht</b> auf. — Sie ruft mich <b>nicht</b> an.</li>
+</ul>
+
+<h3>3. Частичное отрицание: nicht ... sondern</h3>
+<p><b>nicht</b> может отрицать только <b>один элемент</b> — тогда оно ставится прямо перед ним, часто с поправкой через <b>sondern</b>:</p>
+<p>Ich fahre <b>nicht</b> morgen, <b>sondern</b> heute. — Я еду не завтра, а сегодня.</p>
+<p>Er heißt <b>nicht</b> Peter, <b>sondern</b> Paul.</p>
+
+<h3>4. Другие отрицательные слова</h3>
+<ul>
+<li><b>nichts</b> — ничего</li>
+<li><b>niemand</b> — никто</li>
+<li><b>nie / niemals</b> — никогда</li>
+<li><b>nirgendwo / nirgends</b> — нигде</li>
+</ul>`,
+en: `
+<h2>Negation: nicht / kein</h2>
+<div class="rule-formula"><span class="rule-hl">kein</span> + noun &nbsp;|&nbsp; ... + <span class="rule-hl2">nicht</span> + (Adj/Adv/PP/Inf/Part/prefix)</div>
+
+<h3>1. kein or nicht?</h3>
+<ul>
+<li><b>kein</b> negates nouns <b>without an article</b> or with <b>ein-</b>.<br>Ich habe <b>ein</b> Auto. → Ich habe <b>kein</b> Auto. (I don't have a car)<br>Ich trinke Kaffee. → Ich trinke <b>keinen</b> Kaffee.</li>
+<li><b>nicht</b> negates everything else: verbs, whole sentences, adjectives, adverbs, proper names, nouns with the <b>definite article</b>.<br>Ich kaufe das Auto <b>nicht</b>.</li>
+</ul>
+<p><b>kein</b> is declined like <b>ein</b>: kein/keine/keinen/keinem/keiner/keines.</p>
+
+<h3>2. Position of nicht</h3>
+<p>For sentence negation, <b>nicht</b> stands at the <b>end</b>:</p>
+<p>Er kommt heute <b>nicht</b>. — He's not coming today.</p>
+<p>BUT: <b>nicht</b> moves to the left when a specific element stands to its right:</p>
+<ul>
+<li><b>before adjective/adverb:</b> Das Buch ist <b>nicht</b> interessant.</li>
+<li><b>before a prepositional phrase:</b> Wir gehen <b>nicht</b> ins Kino.</li>
+<li><b>before an infinitive (modal):</b> Ich kann heute <b>nicht</b> kommen.</li>
+<li><b>before Partizip II:</b> Ich habe das <b>nicht</b> gesagt.</li>
+<li><b>before a separable prefix:</b> Er steht heute <b>nicht</b> auf.</li>
+</ul>
+
+<h3>3. Partial negation: nicht ... sondern</h3>
+<p><b>nicht</b> can negate just <b>one element</b> — then it stands directly in front of it, often corrected with <b>sondern</b>:</p>
+<p>Ich fahre <b>nicht</b> morgen, <b>sondern</b> heute.</p>
+
+<h3>4. Other negative words</h3>
+<ul>
+<li><b>nichts</b> = nothing</li>
+<li><b>niemand</b> = nobody</li>
+<li><b>nie / niemals</b> = never</li>
+<li><b>nirgendwo</b> = nowhere</li>
+</ul>`,
+tr: `
+<h2>Olumsuzluk: nicht / kein</h2>
+<div class="rule-formula"><span class="rule-hl">kein</span> + isim &nbsp;|&nbsp; ... + <span class="rule-hl2">nicht</span> + (sıfat/zarf/PP/mastar/Partizip/ön ek)</div>
+
+<h3>1. kein mi nicht mi?</h3>
+<ul>
+<li><b>kein</b> <b>artikelsiz</b> isimleri ya da <b>ein-</b> ile gelen isimleri olumsuzlar.<br>Ich habe <b>ein</b> Auto. → Ich habe <b>kein</b> Auto.</li>
+<li><b>nicht</b> diğer her şeyi olumsuzlar: fiiller, tüm cümleyi, sıfatlar, zarflar, özel isimler, <b>belirli artikelli</b> isimler.<br>Ich kaufe das Auto <b>nicht</b>.</li>
+</ul>
+<p><b>kein</b> tıpkı <b>ein</b> gibi çekilir.</p>
+
+<h3>2. nicht'in yeri</h3>
+<p>Cümle olumsuzlamasında <b>nicht</b> <b>sonda</b> olur:</p>
+<p>Er kommt heute <b>nicht</b>.</p>
+<p>ANCAK: Sağında belirli bir öge olduğunda <b>nicht</b> sola kayar:</p>
+<ul>
+<li><b>sıfat/zarf önünde:</b> Das Buch ist <b>nicht</b> interessant.</li>
+<li><b>edat öbeği önünde:</b> Wir gehen <b>nicht</b> ins Kino.</li>
+<li><b>mastar (modal) önünde:</b> Ich kann heute <b>nicht</b> kommen.</li>
+<li><b>Partizip II önünde:</b> Ich habe das <b>nicht</b> gesagt.</li>
+<li><b>ayrılabilir ön ek önünde:</b> Er steht heute <b>nicht</b> auf.</li>
+</ul>
+
+<h3>3. Kısmi olumsuzluk: nicht ... sondern</h3>
+<p><b>nicht</b> tek bir öğeyi olumsuzlayabilir — o zaman tam onun önünde durur ve <b>sondern</b> ile düzeltilir:</p>
+<p>Ich fahre <b>nicht</b> morgen, <b>sondern</b> heute.</p>
+
+<h3>4. Diğer olumsuz kelimeler</h3>
+<ul><li><b>nichts</b> (hiçbir şey)</li><li><b>niemand</b> (kimse)</li><li><b>nie</b> (asla)</li><li><b>nirgendwo</b> (hiçbir yerde)</li></ul>`,
+ar: `
+<h2>النفي: nicht / kein</h2>
+<div class="rule-formula"><span class="rule-hl">kein</span> + اسم &nbsp;|&nbsp; ... + <span class="rule-hl2">nicht</span> + (صفة/ظرف/شبه جملة/مصدر/Partizip/بادئة)</div>
+
+<h3>1. kein أم nicht؟</h3>
+<ul>
+<li><b>kein</b> ينفي الأسماء <b>بدون أداة تعريف</b> أو مع <b>ein-</b>.<br>Ich habe <b>ein</b> Auto. → Ich habe <b>kein</b> Auto.</li>
+<li><b>nicht</b> ينفي كل شيء آخر: الأفعال، الجملة كاملة، الصفات، الظروف، أسماء العَلَم، الأسماء مع <b>أداة التعريف</b>.<br>Ich kaufe das Auto <b>nicht</b>.</li>
+</ul>
+<p><b>kein</b> يُصرّف مثل <b>ein</b>.</p>
+
+<h3>2. موضع nicht</h3>
+<p>عند نفي الجملة كلها، يقف <b>nicht</b> في <b>النهاية</b>:</p>
+<p>Er kommt heute <b>nicht</b>.</p>
+<p>لكن <b>nicht</b> يتقدم إلى الأمام عندما يأتي عنصر محدد على يمينه:</p>
+<ul>
+<li><b>قبل صفة/ظرف:</b> Das Buch ist <b>nicht</b> interessant.</li>
+<li><b>قبل شبه جملة جر:</b> Wir gehen <b>nicht</b> ins Kino.</li>
+<li><b>قبل المصدر (مع مساعد):</b> Ich kann heute <b>nicht</b> kommen.</li>
+<li><b>قبل Partizip II:</b> Ich habe das <b>nicht</b> gesagt.</li>
+<li><b>قبل البادئة المنفصلة:</b> Er steht heute <b>nicht</b> auf.</li>
+</ul>
+
+<h3>3. النفي الجزئي: nicht ... sondern</h3>
+<p><b>nicht</b> يمكن أن ينفي عنصراً واحداً فقط — يقف مباشرة قبله ويُصحّح عادة بـ <b>sondern</b>:</p>
+<p>Ich fahre <b>nicht</b> morgen, <b>sondern</b> heute.</p>
+
+<h3>4. كلمات نفي أخرى</h3>
+<ul><li><b>nichts</b> (لا شيء)</li><li><b>niemand</b> (لا أحد)</li><li><b>nie</b> (أبداً)</li><li><b>nirgendwo</b> (لا في أي مكان)</li></ul>`,
+fa: `
+<h2>نفی: nicht / kein</h2>
+<div class="rule-formula"><span class="rule-hl">kein</span> + اسم &nbsp;|&nbsp; ... + <span class="rule-hl2">nicht</span> + (صفت/قید/گروه حرف اضافه/مصدر/Partizip/پیشوند)</div>
+
+<h3>۱. kein یا nicht؟</h3>
+<ul>
+<li><b>kein</b> اسم‌های <b>بدون حرف تعریف</b> یا با <b>ein-</b> را نفی می‌کند.<br>Ich habe <b>ein</b> Auto. → Ich habe <b>kein</b> Auto.</li>
+<li><b>nicht</b> بقیهٔ موارد را نفی می‌کند: افعال، کل جمله، صفات، قیدها، اسم‌های خاص و اسم‌های با <b>حرف تعریف معین</b>.<br>Ich kaufe das Auto <b>nicht</b>.</li>
+</ul>
+<p><b>kein</b> مانند <b>ein</b> صرف می‌شود.</p>
+
+<h3>۲. جایگاه nicht</h3>
+<p>در نفی کل جمله، <b>nicht</b> در <b>انتها</b> می‌آید:</p>
+<p>Er kommt heute <b>nicht</b>.</p>
+<p>اما <b>nicht</b> به سمت چپ می‌رود اگر سمت راستش عنصر مشخصی باشد:</p>
+<ul>
+<li><b>پیش از صفت/قید:</b> Das Buch ist <b>nicht</b> interessant.</li>
+<li><b>پیش از گروه حرف اضافه:</b> Wir gehen <b>nicht</b> ins Kino.</li>
+<li><b>پیش از مصدر (با فعل وجهی):</b> Ich kann heute <b>nicht</b> kommen.</li>
+<li><b>پیش از Partizip II:</b> Ich habe das <b>nicht</b> gesagt.</li>
+<li><b>پیش از پیشوند جداشدنی:</b> Er steht heute <b>nicht</b> auf.</li>
+</ul>
+
+<h3>۳. نفی جزئی: nicht ... sondern</h3>
+<p><b>nicht</b> می‌تواند فقط یک عنصر را نفی کند — آنگاه مستقیماً پیش از آن می‌آید و معمولاً با <b>sondern</b> اصلاح می‌شود:</p>
+<p>Ich fahre <b>nicht</b> morgen, <b>sondern</b> heute.</p>
+
+<h3>۴. سایر واژه‌های نفی</h3>
+<ul><li><b>nichts</b> (هیچ چیز)</li><li><b>niemand</b> (هیچ‌کس)</li><li><b>nie</b> (هرگز)</li><li><b>nirgendwo</b> (هیچ‌جا)</li></ul>`,
+vi: `
+<h2>Phủ định: nicht / kein</h2>
+<div class="rule-formula"><span class="rule-hl">kein</span> + danh từ &nbsp;|&nbsp; ... + <span class="rule-hl2">nicht</span> + (tính từ/trạng từ/cụm giới từ/động từ nguyên thể/Partizip/tiền tố)</div>
+
+<h3>1. kein hay nicht?</h3>
+<ul>
+<li><b>kein</b> phủ định danh từ <b>không có mạo từ</b> hoặc với <b>ein-</b>.<br>Ich habe <b>ein</b> Auto. → Ich habe <b>kein</b> Auto.</li>
+<li><b>nicht</b> phủ định mọi thứ khác: động từ, cả câu, tính từ, trạng từ, danh riêng, danh từ với <b>mạo từ xác định</b>.<br>Ich kaufe das Auto <b>nicht</b>.</li>
+</ul>
+<p><b>kein</b> được biến đổi giống như <b>ein</b>.</p>
+
+<h3>2. Vị trí của nicht</h3>
+<p>Khi phủ định cả câu, <b>nicht</b> đứng ở <b>cuối câu</b>:</p>
+<p>Er kommt heute <b>nicht</b>. — Hôm nay anh ấy không đến.</p>
+<p>NHƯNG <b>nicht</b> chuyển sang trái khi bên phải nó là một thành phần cụ thể:</p>
+<ul>
+<li><b>trước tính từ/trạng từ:</b> Das Buch ist <b>nicht</b> interessant.</li>
+<li><b>trước cụm giới từ:</b> Wir gehen <b>nicht</b> ins Kino.</li>
+<li><b>trước động từ nguyên thể (với động từ khiếm khuyết):</b> Ich kann heute <b>nicht</b> kommen.</li>
+<li><b>trước Partizip II:</b> Ich habe das <b>nicht</b> gesagt.</li>
+<li><b>trước tiền tố tách được:</b> Er steht heute <b>nicht</b> auf.</li>
+</ul>
+
+<h3>3. Phủ định bộ phận: nicht ... sondern</h3>
+<p><b>nicht</b> có thể chỉ phủ định một thành phần — khi đó nó đứng ngay trước thành phần đó, thường được sửa lại bằng <b>sondern</b>:</p>
+<p>Ich fahre <b>nicht</b> morgen, <b>sondern</b> heute.</p>
+
+<h3>4. Các từ phủ định khác</h3>
+<ul><li><b>nichts</b> (không gì)</li><li><b>niemand</b> (không ai)</li><li><b>nie</b> (không bao giờ)</li><li><b>nirgendwo</b> (không nơi nào)</li></ul>`
 }
 
 };
