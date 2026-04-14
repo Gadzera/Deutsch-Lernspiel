@@ -803,6 +803,44 @@ body {
 [data-theme="dark"] .mcq-ex-head.ok { color: #66bb6a; }
 [data-theme="dark"] .mcq-ex-head.err { color: #ef5350; }
 
+.verb-example {
+    margin-top: 12px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, rgba(255,152,0,0.14), rgba(255,193,7,0.08));
+    border-left: 4px solid #ff9800;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(22px) scale(0.96);
+    transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.verb-example.ve-show { opacity: 1; transform: translateY(0) scale(1); }
+.ve-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ff9800;
+    margin-bottom: 6px;
+}
+.ve-de {
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--text, #222);
+    margin-bottom: 8px;
+    line-height: 1.45;
+}
+.ve-formula {
+    font-size: 0.85rem;
+    color: #e65100;
+    font-family: 'Courier New', Consolas, monospace;
+    letter-spacing: 0.4px;
+}
+[data-theme="dark"] .verb-example {
+    background: linear-gradient(135deg, rgba(255,152,0,0.2), rgba(255,193,7,0.1));
+}
+[data-theme="dark"] .ve-formula { color: #ffb74d; }
+[data-theme="dark"] .ve-de { color: #f5f5f5; }
+
 .answer-btn {
     padding: 16px 20px;
     border: 2px solid var(--border);
