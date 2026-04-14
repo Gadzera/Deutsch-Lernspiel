@@ -3093,6 +3093,114 @@ vi: `
 <p>Ich versuche, jeden Tag Deutsch <b>zu lernen</b>. — Tôi cố gắng học tiếng Đức mỗi ngày.</p>
 <p><b>Động từ tách được:</b> <i>zu</i> đặt giữa tiền tố và gốc, viết liền thành một từ: <b>einzuparken</b>, <b>aufzustehen</b>.</p>
 <p><i>Lưu ý: Động từ khiếm khuyết (können, müssen, dürfen, sollen, wollen, mögen) <b>không</b> dùng zu! → Ich kann schwimmen.</i>`
+},
+
+satz_indirekt_w: {
+de: `
+<h2>Indirekte W-Fragen</h2>
+<div class="rule-formula">..., <span class="rule-hl">W-Wort</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p>Eine direkte W-Frage wird zu einer <b>indirekten Frage</b>, wenn sie in einen Hauptsatz eingebettet wird (<i>Ich weiß nicht, ... / Können Sie mir sagen, ...</i>). Dann wird sie zum <b>Nebensatz</b> — und das Verb wandert <b>ans Ende</b>.</p>
+<p><b>Direkt:</b> Wo wohnt er? → <b>Indirekt:</b> Ich weiß nicht, <b>wo</b> er <span class="rule-hl2">wohnt</span>.</p>
+<p><b>Direkt:</b> Wann fährt der Zug? → <b>Indirekt:</b> Können Sie mir sagen, <b>wann</b> der Zug <span class="rule-hl2">fährt</span>?</p>
+<p><b>Häufige Auslöser:</b> Ich weiß (nicht), Ich frage mich, Ich verstehe nicht, Ich habe vergessen, Können Sie mir sagen, Wissen Sie, Es ist (un)klar, Sag mir bitte, Ich möchte wissen, Hast du gehört.</p>
+<p><b>W-Wörter:</b> wer, was, wo, wohin, woher, wann, wie, warum, wie viel, wie lange, wie oft, mit wem, wofür, worüber, worum.</p>
+<ul>
+<li>Komma <b>vor</b> dem W-Wort.</li>
+<li>Konjugiertes Verb steht <b>am Ende</b> des indirekten Fragesatzes.</li>
+<li>Bei trennbaren Verben: alles <b>zusammen</b> am Ende — Ich weiß nicht, wann der Zug <b>abfährt</b>.</li>
+<li>Im Perfekt: Hilfsverb ans Ende — Ich frage mich, was er gesagt <b>hat</b>.</li>
+</ul>
+<p><i>Achtung: Bei Ja/Nein-Fragen → <b>ob</b>, nicht <b>dass</b>! Ich weiß nicht, <b>ob</b> er kommt.</i>`,
+ru: `
+<h2>Косвенные W-вопросы (indirekte W-Fragen)</h2>
+<div class="rule-formula">..., <span class="rule-hl">W-слово</span> + подлежащее + ... + <span class="rule-hl2">глагол(в конце)</span></div>
+<p>Прямой W-вопрос становится <b>косвенным</b>, когда встраивается в главное предложение (<i>Я не знаю, ... / Можете сказать, ...</i>). Тогда он становится <b>придаточным</b> — и глагол уходит <b>в конец</b>.</p>
+<p><b>Прямо:</b> Wo wohnt er? → <b>Косв.:</b> Ich weiß nicht, <b>wo</b> er <span class="rule-hl2">wohnt</span>. — Я не знаю, где он живёт.</p>
+<p><b>Прямо:</b> Wann fährt der Zug? → <b>Косв.:</b> Können Sie mir sagen, <b>wann</b> der Zug <span class="rule-hl2">fährt</span>? — Можете сказать, когда отправляется поезд?</p>
+<p><b>Частые вводные:</b> Ich weiß (nicht) — я (не) знаю, Ich frage mich — спрашиваю себя, Ich verstehe nicht — не понимаю, Ich habe vergessen — забыл(а), Können Sie mir sagen — можете сказать, Wissen Sie — знаете ли, Sag mir bitte — скажи мне.</p>
+<p><b>W-слова:</b> wer (кто), was (что), wo (где), wohin (куда), woher (откуда), wann (когда), wie (как), warum (почему), wie viel (сколько), wie lange (как долго), wie oft (как часто), mit wem (с кем), wofür (для чего).</p>
+<ul>
+<li>Запятая <b>перед</b> W-словом.</li>
+<li>Спрягаемый глагол стоит <b>в конце</b>.</li>
+<li>У отделяемых глаголов всё <b>вместе</b> в конце — abfährt.</li>
+<li>В Perfekt вспомогательный глагол в самый конец — ..., was er gesagt <b>hat</b>.</li>
+</ul>
+<p><i>Внимание: для да/нет-вопросов используется <b>ob</b>, а не <b>dass</b>! Ich weiß nicht, <b>ob</b> er kommt.</i>`,
+en: `
+<h2>Indirect W-questions</h2>
+<div class="rule-formula">..., <span class="rule-hl">W-word</span> + subject + ... + <span class="rule-hl2">verb(end)</span></div>
+<p>A direct W-question becomes an <b>indirect question</b> when embedded in a main clause (<i>I don't know... / Can you tell me...</i>). It then becomes a <b>subordinate clause</b> — and the verb moves to the <b>end</b>.</p>
+<p><b>Direct:</b> Wo wohnt er? → <b>Indirect:</b> Ich weiß nicht, <b>wo</b> er <span class="rule-hl2">wohnt</span>. — I don't know where he lives.</p>
+<p><b>Direct:</b> Wann fährt der Zug? → <b>Indirect:</b> Können Sie mir sagen, <b>wann</b> der Zug <span class="rule-hl2">fährt</span>? — Can you tell me when the train leaves?</p>
+<p><b>Common triggers:</b> Ich weiß (nicht), Ich frage mich, Ich verstehe nicht, Ich habe vergessen, Können Sie mir sagen, Wissen Sie, Sag mir bitte, Ich möchte wissen.</p>
+<p><b>W-words:</b> wer, was, wo, wohin, woher, wann, wie, warum, wie viel, wie lange, wie oft, mit wem, wofür, worüber.</p>
+<ul>
+<li>Comma <b>before</b> the W-word.</li>
+<li>Conjugated verb at the <b>end</b>.</li>
+<li>Separable verbs stay <b>together</b> at the end — abfährt.</li>
+<li>In Perfekt the auxiliary goes at the very end — ..., was er gesagt <b>hat</b>.</li>
+</ul>
+<p><i>Note: for yes/no questions use <b>ob</b>, not <b>dass</b>! Ich weiß nicht, <b>ob</b> er kommt.</i>`,
+tr: `
+<h2>Dolaylı W-soruları</h2>
+<div class="rule-formula">..., <span class="rule-hl">W-kelimesi</span> + özne + ... + <span class="rule-hl2">fiil(sonda)</span></div>
+<p>Doğrudan W-sorusu, bir ana cümlenin içine yerleştirildiğinde (<i>Bilmiyorum... / Söyleyebilir misiniz...</i>) <b>dolaylı soru</b> hâline gelir. Bu durumda <b>yan cümle</b> olur ve fiil <b>sona</b> gider.</p>
+<p><b>Doğrudan:</b> Wo wohnt er? → <b>Dolaylı:</b> Ich weiß nicht, <b>wo</b> er <span class="rule-hl2">wohnt</span>. — Nerede yaşadığını bilmiyorum.</p>
+<p><b>Doğrudan:</b> Wann fährt der Zug? → <b>Dolaylı:</b> Können Sie mir sagen, <b>wann</b> der Zug <span class="rule-hl2">fährt</span>? — Trenin ne zaman kalktığını söyleyebilir misiniz?</p>
+<p><b>Sık tetikleyiciler:</b> Ich weiß (nicht), Ich frage mich, Ich verstehe nicht, Ich habe vergessen, Können Sie mir sagen, Wissen Sie, Sag mir bitte.</p>
+<p><b>W-kelimeleri:</b> wer, was, wo, wohin, woher, wann, wie, warum, wie viel, wie lange, wie oft, mit wem, wofür.</p>
+<ul>
+<li>W-kelimesinden <b>önce</b> virgül.</li>
+<li>Çekimli fiil <b>sonda</b>.</li>
+<li>Ayrılabilir fiiller sonda <b>birleşir</b> — abfährt.</li>
+<li>Perfekt'te yardımcı fiil tam <b>sonda</b> — ..., was er gesagt <b>hat</b>.</li>
+</ul>
+<p><i>Dikkat: Evet/hayır soruları için <b>ob</b> kullanılır, <b>dass</b> değil!</i>`,
+ar: `
+<h2>الأسئلة غير المباشرة بـ W</h2>
+<div class="rule-formula">..., <span class="rule-hl">كلمة W</span> + الفاعل + ... + <span class="rule-hl2">الفعل (في النهاية)</span></div>
+<p>السؤال المباشر بـ W يصبح <b>سؤالاً غير مباشر</b> عندما يُدرج داخل جملة رئيسية (<i>لا أعرف... / هل يمكنك أن تخبرني...</i>). فيتحول إلى <b>جملة فرعية</b> — ويذهب الفعل إلى <b>النهاية</b>.</p>
+<p><b>مباشر:</b> Wo wohnt er? → <b>غير مباشر:</b> Ich weiß nicht, <b>wo</b> er <span class="rule-hl2">wohnt</span>. — لا أعرف أين يسكن.</p>
+<p><b>مباشر:</b> Wann fährt der Zug? → <b>غير مباشر:</b> Können Sie mir sagen, <b>wann</b> der Zug <span class="rule-hl2">fährt</span>? — هل يمكنك إخباري متى يغادر القطار؟</p>
+<p><b>المُحفّزات الشائعة:</b> Ich weiß (nicht)، Ich frage mich، Ich verstehe nicht، Ich habe vergessen، Können Sie mir sagen، Wissen Sie.</p>
+<p><b>كلمات W:</b> wer (من)، was (ماذا)، wo (أين)، wohin (إلى أين)، woher (من أين)، wann (متى)، wie (كيف)، warum (لماذا)، wie viel (كم)، wie lange (كم من الوقت)، mit wem (مع من).</p>
+<ul>
+<li>فاصلة <b>قبل</b> كلمة W.</li>
+<li>الفعل المُصرّف في <b>النهاية</b>.</li>
+<li>الأفعال القابلة للفصل تبقى <b>متّصلة</b> في النهاية — abfährt.</li>
+<li>في Perfekt الفعل المساعد في النهاية تماماً — ..., was er gesagt <b>hat</b>.</li>
+</ul>
+<p><i>تنبيه: لأسئلة نعم/لا نستخدم <b>ob</b>، وليس <b>dass</b>!</i>`,
+fa: `
+<h2>پرسش‌های غیرمستقیم با W</h2>
+<div class="rule-formula">..., <span class="rule-hl">واژهٔ W</span> + فاعل + ... + <span class="rule-hl2">فعل (در انتها)</span></div>
+<p>پرسش مستقیم با W هنگامی که در یک جملهٔ اصلی جای می‌گیرد (<i>نمی‌دانم... / می‌توانید بگویید...</i>) به <b>پرسش غیرمستقیم</b> تبدیل می‌شود. آنگاه به <b>جملهٔ پیرو</b> بدل می‌شود و فعل به <b>انتها</b> می‌رود.</p>
+<p><b>مستقیم:</b> Wo wohnt er? → <b>غیرمستقیم:</b> Ich weiß nicht, <b>wo</b> er <span class="rule-hl2">wohnt</span>. — نمی‌دانم کجا زندگی می‌کند.</p>
+<p><b>مستقیم:</b> Wann fährt der Zug? → <b>غیرمستقیم:</b> Können Sie mir sagen, <b>wann</b> der Zug <span class="rule-hl2">fährt</span>? — می‌توانید بگویید قطار چه ساعتی حرکت می‌کند؟</p>
+<p><b>محرک‌های رایج:</b> Ich weiß (nicht)، Ich frage mich، Ich verstehe nicht، Ich habe vergessen، Können Sie mir sagen.</p>
+<p><b>واژه‌های W:</b> wer (چه کسی)، was (چه)، wo (کجا)، wohin (به کجا)، woher (از کجا)، wann (کی)، wie (چگونه)، warum (چرا)، wie viel (چقدر)، mit wem (با چه کسی).</p>
+<ul>
+<li>ویرگول <b>پیش از</b> واژهٔ W.</li>
+<li>فعل صرف‌شده در <b>انتها</b>.</li>
+<li>افعال جداشدنی در انتها <b>یکی می‌شوند</b> — abfährt.</li>
+<li>در Perfekt فعل کمکی در آخرین جای جمله — ..., was er gesagt <b>hat</b>.</li>
+</ul>
+<p><i>توجه: برای پرسش‌های بله/خیر از <b>ob</b> استفاده می‌شود، نه <b>dass</b>!</i>`,
+vi: `
+<h2>Câu hỏi W gián tiếp</h2>
+<div class="rule-formula">..., <span class="rule-hl">từ W</span> + chủ ngữ + ... + <span class="rule-hl2">động từ (ở cuối)</span></div>
+<p>Một câu hỏi W trực tiếp trở thành <b>câu hỏi gián tiếp</b> khi được đặt trong một mệnh đề chính (<i>Tôi không biết... / Bạn có thể cho tôi biết...</i>). Khi đó nó trở thành <b>mệnh đề phụ</b> và động từ đi xuống <b>cuối câu</b>.</p>
+<p><b>Trực tiếp:</b> Wo wohnt er? → <b>Gián tiếp:</b> Ich weiß nicht, <b>wo</b> er <span class="rule-hl2">wohnt</span>. — Tôi không biết anh ấy sống ở đâu.</p>
+<p><b>Trực tiếp:</b> Wann fährt der Zug? → <b>Gián tiếp:</b> Können Sie mir sagen, <b>wann</b> der Zug <span class="rule-hl2">fährt</span>? — Bạn có thể cho tôi biết tàu khởi hành lúc nào không?</p>
+<p><b>Cụm dẫn thường gặp:</b> Ich weiß (nicht), Ich frage mich, Ich verstehe nicht, Ich habe vergessen, Können Sie mir sagen, Wissen Sie.</p>
+<p><b>Từ W:</b> wer (ai), was (cái gì), wo (ở đâu), wohin (đi đâu), woher (từ đâu), wann (khi nào), wie (thế nào), warum (tại sao), wie viel (bao nhiêu), wie lange (bao lâu).</p>
+<ul>
+<li>Dấu phẩy <b>trước</b> từ W.</li>
+<li>Động từ chia ở <b>cuối câu</b>.</li>
+<li>Động từ tách được <b>nối lại</b> ở cuối — abfährt.</li>
+<li>Trong Perfekt, trợ động từ ở vị trí cuối cùng — ..., was er gesagt <b>hat</b>.</li>
+</ul>
+<p><i>Lưu ý: Đối với câu hỏi có/không, dùng <b>ob</b>, không phải <b>dass</b>!</i>`
 }
 
 };
