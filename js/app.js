@@ -534,10 +534,9 @@ const SATZ_LABELS={
     textbau:{de:'Textbau (B2-C2)',ru:'Текстовые конструкции (B2-C2)',en:'Text builders (B2-C2)',tr:'Metin yapısı (B2-C2)',ar:'بناء النص (B2-C2)',fa:'ساخت متن (B2-C2)',vi:'Cấu trúc văn bản (B2-C2)'}
 };
 function buildSatzbauGroups(snCatsSet){
-    const L=APP.lang||'ru';
-    const pick=(o)=>o[L]||o.en||o.de;
-    const allLabel={de:'Alle Themen',ru:'Все темы',en:'All topics',tr:'Tüm konular',ar:'جميع المواضيع',fa:'همه موضوعات',vi:'Tất cả chủ đề'};
-    let html=sqBtn('📐',pick(allLabel),'sentences','all');
+    // Satzbau menu — все названия (групп, упражнений, "Alle Themen") всегда
+    // по-немецки, потому что это немецкие грамматические термины.
+    let html=sqBtn('📐','Alle Themen','sentences','all');
     SATZ_GROUPS.forEach(g=>{
         const groupCats=g.cats.filter(c=>snCatsSet.has(c));
         if(!groupCats.length) return;
