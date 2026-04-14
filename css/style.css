@@ -1676,13 +1676,45 @@ body {
 [data-theme="dark"] .rule-page {
     color: var(--text);
 }
+[data-theme="dark"] .rule-page h3 { color: var(--text); }
 [data-theme="dark"] .rule-table td {
     border-color: var(--border);
+    color: var(--text);
+}
+[data-theme="dark"] .rule-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
 }
 [data-theme="dark"] .rule-formula {
     background: #1A1530;
     border-color: #5A4A8A;
+    color: var(--text);
 }
+[data-theme="dark"] .rule-box { color: var(--text); }
+[data-theme="dark"] .rule-green {
+    background: rgba(67,160,71,0.18);
+    border-left-color: #66BB6A;
+    color: #C8E6C9;
+}
+[data-theme="dark"] .rule-blue {
+    background: rgba(30,136,229,0.18);
+    border-left-color: #64B5F6;
+    color: #BBDEFB;
+}
+[data-theme="dark"] .rule-purple {
+    background: rgba(142,36,170,0.18);
+    border-left-color: #BA68C8;
+    color: #E1BEE7;
+}
+[data-theme="dark"] .rule-btn {
+    background: rgba(255,179,71,0.18) !important;
+    color: #FFB74D !important;
+    border-color: #FFB74D !important;
+}
+[data-theme="dark"] .rule-hl { color: #FF8A80; }
+[data-theme="dark"] .rule-hl2 { color: #82B1FF; }
+[data-theme="dark"] .rule-hl3 { color: #B9F6CA; }
+[data-theme="dark"] .rule-hl4 { color: #FFAB40; }
 [data-theme="dark"] .pin-key {
     background: var(--card);
     color: var(--text);
