@@ -593,15 +593,29 @@ function buildSatzbauGroups(snCatsSet){
 function catHTML(icon,title,cnt,progKey,total,bodyId,bodyContent){
     const p=getProgressPct(progKey,total);
     const open=APP.openCat===bodyId;
+    const resetTitle=resetBtnLabel();
+    const showReset=p>0;
     return `<div class="cat-card">
         <div class="cat-header" onclick="toggleCat('${bodyId}')">
             <span class="cat-icon">${icon}</span>
             <div class="cat-info"><div class="cat-title">${title}</div><div class="cat-sub">${cnt} &bull; ${p}% gelernt</div></div>
+            ${showReset?`<button class="cat-reset-btn" title="${resetTitle}" onclick="event.stopPropagation();confirmResetCat('${progKey}','${esc(title)}')">↺</button>`:''}
             <span class="cat-arrow ${open?'open':''}">&rsaquo;</span>
         </div>
         <div class="cat-progress"><div class="cat-progress-fill" style="width:${p}%"></div></div>
         <div class="cat-body" id="${bodyId}" style="display:${open?'block':'none'}">${bodyContent}</div>
     </div>`;
+}
+function resetBtnLabel(){
+    const M={ru:'Сбросить прогресс',en:'Reset progress',de:'Fortschritt zurücksetzen',tr:'İlerlemeyi sıfırla',ar:'إعادة ضبط التقدم',fa:'بازنشانی پیشرفت',vi:'Đặt lại tiến độ'};
+    return M[APP.lang||'ru']||M.de;
+}
+function confirmResetCat(progKey,title){
+    const M={ru:'Сбросить прогресс по этой категории?',en:'Reset progress for this category?',de:'Fortschritt für diese Kategorie zurücksetzen?',tr:'Bu kategorinin ilerlemesi sıfırlansın mı?',ar:'هل تريد إعادة ضبط التقدم لهذه الفئة؟',fa:'پیشرفت این دسته بازنشانی شود؟',vi:'Đặt lại tiến độ cho mục này?'};
+    if(confirm((M[APP.lang||'ru']||M.de)+'\n\n'+title)){
+        resetCatProgress(progKey);
+        showMenu();
+    }
 }
 function sqBtn(icon,label,cat,mode){
     return `<button class="sub-quiz-btn" onclick="startQuiz('${cat}','${mode}')">${icon} ${label}</button>`;
@@ -869,8 +883,43 @@ function startQuiz(cat,mode){
     if(!pool.length){toast('Keine Übungen!');return;}
     const n=Math.min(APP.quizCount,pool.length);
     const type=(cat==='sentences')?'builder':'mcq';
-    APP.quiz={type,cat,mode,items:shuffle(pool).slice(0,n),idx:0,score:0,t0:Date.now(),built:[],allW:[],correctS:[],wrongs:[]};
+    APP.quiz={type,cat,mode,items:shuffle(pool).slice(0,n),idx:0,score:0,t0:Date.now(),built:[],allW:[],correctS:[],wrongs:[],knownTicked:new Set(),poolSnapshot:[...pool]};
     showQ();
+}
+
+// Restart quiz with only items the user did NOT mark as known in the previous session
+function repeatUnmarked(){
+    if(!APP.quiz) return;
+    const ticked=APP.quiz.knownTicked||new Set();
+    const remaining=APP.quiz.items.filter(it=>!ticked.has(it.id));
+    if(!remaining.length){
+        toast({ru:'Все слова отмечены как знакомые!',en:'All items already marked as known!',de:'Alle als bekannt markiert!',tr:'Hepsi bildiğin olarak işaretli!',ar:'الكل معروف بالفعل!',fa:'همه شناخته‌شده هستند!',vi:'Tất cả đã được đánh dấu!'}[APP.lang]||'Nothing to repeat');
+        showMenu();return;
+    }
+    const cat=APP.quiz.cat,mode=APP.quiz.mode;
+    const type=(cat==='sentences')?'builder':'mcq';
+    APP.quiz={type,cat,mode,items:shuffle(remaining),idx:0,score:0,t0:Date.now(),built:[],allW:[],correctS:[],wrongs:[],knownTicked:new Set(),poolSnapshot:remaining};
+    showQ();
+}
+
+// Toggle the "I know this" tick on the current quiz item
+function toggleKnowTick(){
+    if(!APP.quiz||APP.quiz.idx>=APP.quiz.items.length) return;
+    const item=APP.quiz.items[APP.quiz.idx];
+    if(!APP.quiz.knownTicked) APP.quiz.knownTicked=new Set();
+    if(APP.quiz.knownTicked.has(item.id)) APP.quiz.knownTicked.delete(item.id);
+    else APP.quiz.knownTicked.add(item.id);
+    const btn=$('tickBtn');
+    if(btn){
+        const on=APP.quiz.knownTicked.has(item.id);
+        btn.classList.toggle('on',on);
+        btn.innerHTML=on?'☑':'☐';
+        btn.title=tickBtnLabel();
+    }
+}
+function tickBtnLabel(){
+    const M={ru:'Я это знаю',en:'I know this',de:'Kenne ich',tr:'Biliyorum',ar:'أعرف هذا',fa:'این را می‌دانم',vi:'Tôi biết điều này'};
+    return M[APP.lang||'ru']||M.de;
 }
 
 function showQ(){
@@ -1017,12 +1066,17 @@ function showMCQ(){
     const isGrid=(cat==='prepositions'||cat==='pronouns')&&q.opts.length<=6;
     const btns=q.opts.map(o=>`<button class="answer-btn" data-val="${esc(o)}" data-cor="${esc(q.correct)}" onclick="checkA(this)">${o}</button>`).join('');
 
-    const knowLabel=knowBtnLabel();
+    const item=APP.quiz.items[APP.quiz.idx];
+    const ticked=APP.quiz.knownTicked&&APP.quiz.knownTicked.has(item.id);
+    const tickLbl=tickBtnLabel();
     $('app').innerHTML=`
         <div class="quiz-page">
             <div class="quiz-header">
                 <div class="quiz-header-left"><button class="quiz-back" onclick="quitQ()">&#8592;</button><span class="quiz-progress-text">${num} ${UI.of} ${tot}</span></div>
-                <span class="quiz-score" id="qsc">&#10003; ${APP.quiz.score}</span>
+                <div class="quiz-header-right">
+                    <button id="tickBtn" class="tick-btn ${ticked?'on':''}" title="${tickLbl}" onclick="toggleKnowTick()">${ticked?'☑':'☐'}</button>
+                    <span class="quiz-score" id="qsc">&#10003; ${APP.quiz.score}</span>
+                </div>
             </div>
             <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
             <div class="quiz-body">
@@ -1032,7 +1086,7 @@ function showMCQ(){
                 <div class="quiz-answers ${q.isArt?'article-mode':''} ${isGrid?'two-col':''} stagger">${btns}</div>
                 <div id="mcqExplain" class="mcq-explain" style="display:none"></div>
                 <button id="mcqNext" class="btn btn-primary" style="display:none;margin-top:12px" onclick="APP.quiz.idx++;showQ();">${UI.nextBtn||'Weiter'} →</button>
-                <button class="btn btn-ghost know-btn" onclick="markKnownAndSkip()">✓ ${knowLabel}</button>
+                <div class="tick-hint">${tickLbl} — <span style="opacity:.7">${{ru:'отметь, и слово запомнится при правильном ответе',en:'tick to remember it on a correct answer',de:'aktivieren, dann bei richtiger Antwort speichern',tr:'işaretle, doğru cevapta hatırlanacak',ar:'ضع علامة، يُحفظ عند الإجابة الصحيحة',fa:'علامت بزن، با پاسخ درست ذخیره می‌شود',vi:'đánh dấu để được ghi nhớ khi trả lời đúng'}[APP.lang||'ru']}</span></div>
             </div>
         </div>`;
 }
@@ -1116,9 +1170,14 @@ function checkA(btn){
     const cat=APP.quiz.cat;
     if(ok){
         APP.quiz.score++;btn.classList.add('correct');
-        markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);
+        // Only persist as "known" if user explicitly ticked the checkmark
+        if(APP.quiz.knownTicked&&APP.quiz.knownTicked.has(item.id)){
+            markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);
+        }
     }else{
         btn.classList.add('incorrect');
+        // A wrong answer un-marks the tick — you don't actually know it
+        if(APP.quiz.knownTicked) APP.quiz.knownTicked.delete(item.id);
         APP.quiz.wrongs.push({item,userAnswer:val,correct:cor});
         if(navigator.vibrate) navigator.vibrate(100);
     }
@@ -1423,9 +1482,10 @@ function renderBuilder(){
         btns=`<div style="display:flex;gap:8px;margin-top:12px">
             <button class="btn btn-outline" onclick="showHint()" style="flex:1">${UI.hintBtn} 💡</button>
             <button class="btn btn-primary" onclick="checkBuilder()" style="flex:2">${UI.checkBtn}</button>
-        </div>
-        <button class="btn btn-ghost know-btn" onclick="markKnownAndSkip()">✓ ${knowBtnLabel()}</button>`;
+        </div>`;
     }
+    const tickedB=APP.quiz.knownTicked&&APP.quiz.knownTicked.has(item.id);
+    const tickLblB=tickBtnLabel();
 
     // Regel button for current sentence rule (per-item or per-mode)
     const itemCat=item.cat||APP.quiz.mode;
@@ -1437,7 +1497,10 @@ function renderBuilder(){
         <div class="quiz-page">
             <div class="quiz-header">
                 <div class="quiz-header-left"><button class="quiz-back" onclick="quitQ()">&#8592;</button><span class="quiz-progress-text">${num} ${UI.of} ${tot}</span></div>
-                <span class="quiz-score" id="qsc">&#10003; ${APP.quiz.score}</span>
+                <div class="quiz-header-right">
+                    <button id="tickBtn" class="tick-btn ${tickedB?'on':''}" title="${tickLblB}" onclick="toggleKnowTick()">${tickedB?'☑':'☐'}</button>
+                    <span class="quiz-score" id="qsc">&#10003; ${APP.quiz.score}</span>
+                </div>
             </div>
             <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
             <div class="quiz-body">
@@ -1464,12 +1527,17 @@ function checkBuilder(){
     const altCorrect=item.alt?splitSentenceParts(item.alt):null;
     const ok=arrEq(built,correct)||(altCorrect&&arrEq(built,altCorrect));
     if(ok){
-        APP.quiz.score++;markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);
+        APP.quiz.score++;
+        // Only persist as "known" if user explicitly ticked the checkmark
+        if(APP.quiz.knownTicked&&APP.quiz.knownTicked.has(item.id)){
+            markKnown(item.id,APP.quiz.cat+'_'+APP.quiz.mode);
+        }
         APP.quiz.checked=true;
         const sc=$('qsc');if(sc)sc.innerHTML='&#10003; '+APP.quiz.score;
         if(APP.subliminal) showSubliminal(item);
         renderBuilder();
     }else{
+        if(APP.quiz.knownTicked) APP.quiz.knownTicked.delete(item.id);
         APP.quiz.wrongs.push({item,userAnswer:built.join(' '),correct:correct.join(' ')});
         if(navigator.vibrate)navigator.vibrate(100);
         APP.quiz.checked=true;
@@ -1775,10 +1843,15 @@ function showRes(){
             </div>
             <div class="results-actions">
                 <button class="btn btn-primary" onclick="startQuiz('${APP.quiz.cat}','${APP.quiz.mode}')">🔄 ${UI.again}</button>
+                ${(APP.quiz.items.length-(APP.quiz.knownTicked?APP.quiz.knownTicked.size:0))>0?`<button class="btn btn-accent" onclick="repeatUnmarked()">🎯 ${repeatUnmarkedLabel()} (${APP.quiz.items.length-(APP.quiz.knownTicked?APP.quiz.knownTicked.size:0)})</button>`:''}
                 ${APP.quiz.wrongs&&APP.quiz.wrongs.length?`<button class="btn btn-accent" onclick="showWrongReview()">❌ ${tot-s} Fehler ansehen</button>`:''}
                 <button class="btn btn-outline" onclick="showMenu()">&#8592; ${UI.menu}</button>
             </div>
         </div>`;
+}
+function repeatUnmarkedLabel(){
+    const M={ru:'Повторить незнакомые',en:'Repeat unmarked',de:'Unbekannte wiederholen',tr:'İşaretsizleri tekrarla',ar:'كرر غير المعروفة',fa:'ناشناخته‌ها را تکرار کن',vi:'Lặp lại từ chưa biết'};
+    return M[APP.lang||'ru']||M.de;
 }
 
 function showWrongReview(){
