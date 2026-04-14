@@ -7,8 +7,28 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#6C63FF">
     <title>Deutsch Lernspiel Pro v2.1</title>
+    <script>
+    // Nuclear cache cleanup: clear service workers + CacheStorage on every load.
+    // This runs before all other scripts so old cached resources get flushed.
+    (function(){
+      try{
+        if('serviceWorker' in navigator){
+          navigator.serviceWorker.getRegistrations().then(function(rs){
+            rs.forEach(function(r){ r.unregister().catch(function(){}); });
+          }).catch(function(){});
+        }
+        if('caches' in window){
+          caches.keys().then(function(ks){
+            ks.forEach(function(k){ caches.delete(k).catch(function(){}); });
+          }).catch(function(){});
+        }
+      }catch(e){}
+    })();
+    </script>
     <!-- Cache-busting: bump ?v=... on every deploy so phones get new JS -->
-    <link rel="stylesheet" href="css/style.css?v=20260414b">
+    <script>
+      document.write('<link rel="stylesheet" href="css/style.css?t='+Date.now()+'">');
+    </script>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -23,17 +43,21 @@
             <div id="subliminalTrans" class="subliminal-translation"></div>
         </div>
     </div>
-    <script src="data/nouns.js?v=20260414b"></script>
-    <script src="data/verbs.js?v=20260414b"></script>
-    <script src="data/partizip2.js?v=20260414b"></script>
-    <script src="data/reflexive.js?v=20260414b"></script>
-    <script src="data/sentences.js?v=20260414b"></script>
-    <script src="data/prepositions.js?v=20260414b"></script>
-    <script src="data/pronouns.js?v=20260414b"></script>
-    <script src="data/rules.js?v=20260414b"></script>
-    <script src="data/vwu.js?v=20260414b"></script>
-    <script src="data/ev_zt1_lesen.js?v=20260414b"></script>
-    <script src="data/ev_zt1_pool.js?v=20260414b"></script>
-    <script src="js/app.js?v=20260414b"></script>
+    <script>
+    // Dynamically inject all scripts with a fresh timestamp so browser cannot
+    // use a stale cached version of any JS/data file.
+    (function(){
+      var V='?t='+Date.now();
+      var files=[
+        'data/nouns.js','data/verbs.js','data/partizip2.js','data/reflexive.js',
+        'data/sentences.js','data/prepositions.js','data/pronouns.js',
+        'data/rules.js','data/vwu.js','data/ev_zt1_lesen.js','data/ev_zt1_pool.js',
+        'js/app.js'
+      ];
+      files.forEach(function(f){
+        document.write('<scr'+'ipt src="'+f+V+'"></scr'+'ipt>');
+      });
+    })();
+    </script>
 </body>
 </html>
