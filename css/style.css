@@ -1906,6 +1906,21 @@ body {
     background: rgba(108,99,255,0.2);
     color: #a8a0ff;
 }
+.corr-detail {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: rgba(255,193,7,0.12);
+    border-left: 3px solid #ffc107;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    color: #6b5d00;
+    line-height: 1.45;
+    font-weight: 500;
+}
+[data-theme="dark"] .corr-detail {
+    background: rgba(255,193,7,0.18);
+    color: #ffe082;
+}
 .corr-skip-btn {
     width: 44px;
     height: 44px;
