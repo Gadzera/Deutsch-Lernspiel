@@ -541,7 +541,8 @@ function buildSatzbauGroups(snCatsSet){
     SATZ_GROUPS.forEach(g=>{
         const groupCats=g.cats.filter(c=>snCatsSet.has(c));
         if(!groupCats.length) return;
-        html+=`<div class="satz-group-title">${pick(g.t)}</div>`;
+        // Group titles always in German — they describe German grammar topics.
+        html+=`<div class="satz-group-title">${g.t.de||g.t}</div>`;
         groupCats.forEach(c=>{
             // Exercise names always in German — they are German grammar terms
             // and should not be translated to helper languages.
