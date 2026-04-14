@@ -2866,5 +2866,111 @@ vi: `
 <p>Ich höre Musik, <b>während</b> ich <span class="rule-hl2">koche</span>. <i>(thời gian)</i></p>
 <p><b>Während</b> er gern Sport <span class="rule-hl2">macht</span>, liest sie lieber Bücher. <i>(tương phản)</i></p>
 <p><b>Während</b> meine Schwester schläft, <span class="rule-hl2">lerne</span> ich.`
+},
+
+satz_da: {
+de: `
+<h2>da — kausal (formell, schriftsprachlich)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">da</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>da</b> leitet einen kausalen Nebensatz ein. Bedeutung wie <b>weil</b>, aber:</p>
+<ul><li>Der Grund ist dem Hörer schon <b>bekannt</b>.</li><li>Klingt <b>formell</b> / schriftlich (Briefe, Berichte, Vorträge).</li><li>Der <b>da</b>-Satz steht oft <b>vor</b> dem Hauptsatz.</li></ul>
+<p><b>Da</b> es <span class="rule-hl2">regnet</span>, bleiben wir zu Hause.</p>
+<p><b>Da</b> ich krank <span class="rule-hl2">bin</span>, gehe ich nicht zur Arbeit.</p>
+<p><i>Achtung: nicht verwechseln mit <b>da</b> als Adverb („dort") oder als Pronominaladverb (<b>damit, davon</b>).</i>`,
+ru: `
+<h2>da — потому что / поскольку (формальный стиль)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">da</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>da</b> вводит причинное придаточное. Значение как у <b>weil</b>, но:</p>
+<ul><li>Причина уже <b>известна</b> слушателю.</li><li>Звучит <b>формально</b>, в письменной речи (письма, доклады).</li><li><b>da</b>-предложение часто стоит <b>перед</b> главным.</li></ul>
+<p><b>Da</b> es <span class="rule-hl2">regnet</span>, bleiben wir zu Hause. — Поскольку идёт дождь, мы остаёмся дома.</p>
+<p><b>Da</b> ich krank <span class="rule-hl2">bin</span>, gehe ich nicht zur Arbeit. — Так как я болен, я не иду на работу.</p>
+<p><i>Не путать с <b>da</b> в значении «там» или с <b>damit/davon</b>.</i>`,
+en: `
+<h2>da — since / as (formal causal)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">da</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>da</b> introduces a causal subordinate clause. Same meaning as <b>weil</b>, but:</p>
+<ul><li>The reason is already <b>known</b> to the listener.</li><li>Sounds <b>formal</b> / written (letters, reports, lectures).</li><li>The <b>da</b>-clause often stands <b>before</b> the main clause.</li></ul>
+<p><b>Da</b> es <span class="rule-hl2">regnet</span>, bleiben wir zu Hause. — Since it's raining, we're staying home.</p>
+<p><b>Da</b> ich krank <span class="rule-hl2">bin</span>, gehe ich nicht zur Arbeit. — As I'm sick, I'm not going to work.</p>
+<p><i>Don't confuse with <b>da</b> as adverb ("there") or pronominal <b>damit/davon</b>.</i>`,
+tr: `
+<h2>da — -dığı için (resmî, yazılı dil)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">da</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>da</b> sebep yan cümlesi başlatır. <b>weil</b> ile aynı anlamda, ancak:</p>
+<ul><li>Sebep dinleyici tarafından zaten <b>bilinmektedir</b>.</li><li><b>Resmî</b> / yazılı dilde kullanılır (mektup, rapor, sunum).</li><li><b>da</b>-cümlesi genellikle ana cümleden <b>önce</b> gelir.</li></ul>
+<p><b>Da</b> es <span class="rule-hl2">regnet</span>, bleiben wir zu Hause. — Yağmur yağdığı için evde kalıyoruz.</p>
+<p><b>Da</b> ich krank <span class="rule-hl2">bin</span>, gehe ich nicht zur Arbeit. — Hasta olduğum için işe gitmiyorum.</p>`,
+ar: `
+<h2>da — بما أن (سببية رسمية)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">da</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>da</b> تُقدّم جملة فرعية سببية. المعنى كما في <b>weil</b>، ولكن:</p>
+<ul><li>السبب <b>معروف مسبقاً</b> للمستمع.</li><li>أسلوب <b>رسمي</b> / كتابي (الرسائل، التقارير).</li><li>جملة <b>da</b> غالباً ما تأتي <b>قبل</b> الجملة الرئيسية.</li></ul>
+<p><b>Da</b> es <span class="rule-hl2">regnet</span>, bleiben wir zu Hause. — بما أن السماء تمطر، نبقى في البيت.</p>
+<p><b>Da</b> ich krank <span class="rule-hl2">bin</span>, gehe ich nicht zur Arbeit. — بما أنني مريض، لا أذهب إلى العمل.</p>`,
+fa: `
+<h2>da — از آنجا که (سببی، رسمی)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">da</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>da</b> یک جمله‌واره‌ی علّی را معرفی می‌کند. هم‌معنی <b>weil</b>، اما:</p>
+<ul><li>دلیل برای شنونده <b>از قبل معلوم</b> است.</li><li>سبک <b>رسمی</b> / کتبی (نامه، گزارش، سخنرانی).</li><li>جمله‌ی <b>da</b> اغلب <b>پیش از</b> جمله‌ی اصلی می‌آید.</li></ul>
+<p><b>Da</b> es <span class="rule-hl2">regnet</span>, bleiben wir zu Hause. — از آنجا که باران می‌بارد، در خانه می‌مانیم.</p>
+<p><b>Da</b> ich krank <span class="rule-hl2">bin</span>, gehe ich nicht zur Arbeit. — از آنجا که مریضم، به سر کار نمی‌روم.</p>`,
+vi: `
+<h2>da — vì (nguyên nhân, trang trọng)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">da</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>da</b> mở đầu mệnh đề phụ chỉ nguyên nhân. Nghĩa giống <b>weil</b>, nhưng:</p>
+<ul><li>Nguyên nhân đã được <b>người nghe biết</b>.</li><li>Văn phong <b>trang trọng</b> / viết (thư, báo cáo, thuyết trình).</li><li>Mệnh đề <b>da</b> thường đứng <b>trước</b> mệnh đề chính.</li></ul>
+<p><b>Da</b> es <span class="rule-hl2">regnet</span>, bleiben wir zu Hause. — Vì trời đang mưa nên chúng tôi ở nhà.</p>
+<p><b>Da</b> ich krank <span class="rule-hl2">bin</span>, gehe ich nicht zur Arbeit. — Vì tôi bị ốm nên tôi không đi làm.</p>`
+},
+
+satz_falls: {
+de: `
+<h2>falls — konditional (für den Fall, dass)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">falls</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>falls</b> drückt eine <b>Bedingung</b> aus — synonym mit <b>wenn</b> (konditional), aber:</p>
+<ul><li>Betont, dass das Eintreten <b>unsicher</b> ist („für den Fall, dass").</li><li>Wird häufig <b>formell</b> verwendet (Briefe, Verträge, Anweisungen).</li><li>Niemals temporal — <b>falls</b> bedeutet nie „wann".</li></ul>
+<p><b>Falls</b> es <span class="rule-hl2">regnet</span>, nehmen wir einen Schirm mit.</p>
+<p><b>Falls</b> Sie Fragen <span class="rule-hl2">haben</span>, wenden Sie sich an unseren Service.</p>
+<p>Ich rufe dich an, <b>falls</b> ich später <span class="rule-hl2">komme</span>.`,
+ru: `
+<h2>falls — на случай если (условие)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">falls</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>falls</b> выражает <b>условие</b> — синоним <b>wenn</b> (условного), но:</p>
+<ul><li>Подчёркивает, что событие <b>необязательно</b> произойдёт.</li><li>Часто используется в <b>формальном</b> стиле (письма, договоры, инструкции).</li><li>Никогда не временное — <b>falls</b> не значит «когда».</li></ul>
+<p><b>Falls</b> es <span class="rule-hl2">regnet</span>, nehmen wir einen Schirm mit. — На случай если пойдёт дождь, возьмём зонт.</p>
+<p><b>Falls</b> Sie Fragen <span class="rule-hl2">haben</span>, wenden Sie sich an unseren Service. — Если у Вас возникнут вопросы, обратитесь в нашу службу.</p>`,
+en: `
+<h2>falls — in case (conditional)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">falls</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>falls</b> expresses a <b>condition</b> — synonym of <b>wenn</b> (conditional), but:</p>
+<ul><li>Emphasises that the event is <b>uncertain</b> ("just in case").</li><li>Often used in <b>formal</b> style (letters, contracts, instructions).</li><li>Never temporal — <b>falls</b> never means "when".</li></ul>
+<p><b>Falls</b> es <span class="rule-hl2">regnet</span>, nehmen wir einen Schirm mit. — In case it rains, we'll take an umbrella.</p>
+<p><b>Falls</b> Sie Fragen <span class="rule-hl2">haben</span>, wenden Sie sich an unseren Service. — In case you have questions, please contact our service.</p>`,
+tr: `
+<h2>falls — -se diye, ihtimale karşı</h2>
+<div class="rule-formula">HS, <span class="rule-hl">falls</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>falls</b> bir <b>koşul</b> ifade eder — koşullu <b>wenn</b> ile eş anlamlıdır, ancak:</p>
+<ul><li>Olayın gerçekleşmesinin <b>belirsiz</b> olduğunu vurgular.</li><li>Genellikle <b>resmî</b> dilde kullanılır (mektup, sözleşme, talimat).</li><li>Hiçbir zaman zaman bildirmez — <b>falls</b> asla „ne zaman" anlamına gelmez.</li></ul>
+<p><b>Falls</b> es <span class="rule-hl2">regnet</span>, nehmen wir einen Schirm mit. — Yağmur yağarsa diye şemsiye götürüyoruz.</p>`,
+ar: `
+<h2>falls — في حال (شرطي)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">falls</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>falls</b> تُعبّر عن <b>شرط</b> — مرادف لـ <b>wenn</b> الشرطية، ولكن:</p>
+<ul><li>تُؤكّد أن وقوع الحدث <b>غير مؤكد</b>.</li><li>تُستخدم غالباً في الأسلوب <b>الرسمي</b> (الرسائل، العقود، التعليمات).</li><li>ليست زمنية أبداً — <b>falls</b> لا تعني „متى".</li></ul>
+<p><b>Falls</b> es <span class="rule-hl2">regnet</span>, nehmen wir einen Schirm mit. — في حال أمطرت، سنأخذ مظلة معنا.</p>
+<p><b>Falls</b> Sie Fragen <span class="rule-hl2">haben</span>, wenden Sie sich an unseren Service. — في حال كانت لديكم أسئلة، يرجى التواصل مع خدمتنا.</p>`,
+fa: `
+<h2>falls — در صورتی که (شرطی)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">falls</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>falls</b> یک <b>شرط</b> را بیان می‌کند — هم‌معنی <b>wenn</b> شرطی است، اما:</p>
+<ul><li>تأکید می‌کند که وقوع رویداد <b>قطعی نیست</b>.</li><li>اغلب در سبک <b>رسمی</b> به کار می‌رود (نامه، قرارداد، دستورالعمل).</li><li>هرگز زمانی نیست — <b>falls</b> هرگز به معنای «وقتی» نیست.</li></ul>
+<p><b>Falls</b> es <span class="rule-hl2">regnet</span>, nehmen wir einen Schirm mit. — در صورتی که باران ببارد، چتر می‌بریم.</p>`,
+vi: `
+<h2>falls — phòng khi (điều kiện)</h2>
+<div class="rule-formula">HS, <span class="rule-hl">falls</span> + Subjekt + ... + <span class="rule-hl2">Verb(Ende)</span></div>
+<p><b>falls</b> diễn đạt một <b>điều kiện</b> — đồng nghĩa với <b>wenn</b> điều kiện, nhưng:</p>
+<ul><li>Nhấn mạnh rằng việc xảy ra là <b>không chắc chắn</b>.</li><li>Thường dùng trong văn phong <b>trang trọng</b> (thư, hợp đồng, chỉ dẫn).</li><li>Không bao giờ chỉ thời gian — <b>falls</b> không bao giờ có nghĩa „khi nào".</li></ul>
+<p><b>Falls</b> es <span class="rule-hl2">regnet</span>, nehmen wir einen Schirm mit. — Phòng khi trời mưa chúng tôi mang theo ô.</p>`
 }
+
 };

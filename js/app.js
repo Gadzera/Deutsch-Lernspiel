@@ -439,7 +439,7 @@ const SATZ_GROUPS=[
         ar:'جملة رئيسية · الفعل في الموضع 2',
         fa:'جمله اصلی · فعل در جایگاه ۲',
         vi:'Mệnh đề chính · động từ ở vị trí 2'}},
-    {key:'kausal',cats:['weil','denn','deshalb'],
+    {key:'kausal',cats:['weil','denn','deshalb','da'],
      t:{de:'Kausal · Begründung (warum?)',
         ru:'Причина (warum? — почему?)',
         en:'Causal · reason (warum? — why?)',
@@ -463,6 +463,14 @@ const SATZ_GROUPS=[
         ar:'الزمان (wann؟)',
         fa:'زمانی (wann؟)',
         vi:'Thời gian (wann? — khi nào?)'}},
+    {key:'konditional',cats:['falls'],
+     t:{de:'Konditional · Bedingung (falls, im Fall)',
+        ru:'Условие (на случай если)',
+        en:'Conditional · condition (in case)',
+        tr:'Koşul (-se diye)',
+        ar:'الشرط (في حال)',
+        fa:'شرطی (در صورتی که)',
+        vi:'Điều kiện (phòng khi)'}},
     {key:'final',cats:['damit','um_zu'],
      t:{de:'Final · Absicht (wozu? wofür?)',
         ru:'Цель (wozu? — зачем?)',
@@ -515,6 +523,8 @@ const SATZ_LABELS={
     sondern:{de:'sondern',ru:'sondern (а, но)',en:'sondern (but rather)',tr:'sondern (bilakis)',ar:'sondern (بل)',fa:'sondern (بلکه)',vi:'sondern (mà là)'},
     trotzdem:{de:'trotzdem',ru:'trotzdem (всё же)',en:'trotzdem (nevertheless)',tr:'trotzdem (yine de)',ar:'trotzdem (مع ذلك)',fa:'trotzdem (با این حال)',vi:'trotzdem (tuy nhiên)'},
     deshalb:{de:'deshalb',ru:'deshalb (поэтому)',en:'deshalb (therefore)',tr:'deshalb (bu yüzden)',ar:'deshalb (لذلك)',fa:'deshalb (به همین دلیل)',vi:'deshalb (vì vậy)'},
+    da:{de:'da',ru:'da (так как)',en:'da (since)',tr:'da (-dığı için)',ar:'da (بما أن)',fa:'da (از آنجا که)',vi:'da (vì)'},
+    falls:{de:'falls',ru:'falls (на случай если)',en:'falls (in case)',tr:'falls (-se diye)',ar:'falls (في حال)',fa:'falls (در صورتی که)',vi:'falls (phòng khi)'},
     weil:{de:'weil',ru:'weil (потому что)',en:'weil (because)',tr:'weil (çünkü)',ar:'weil (لأن)',fa:'weil (چون)',vi:'weil (bởi vì)'},
     dass:{de:'dass',ru:'dass (что)',en:'dass (that)',tr:'dass (-dığı)',ar:'dass (أن)',fa:'dass (که)',vi:'dass (rằng)'},
     wenn:{de:'wenn',ru:'wenn (если/когда)',en:'wenn (if/when)',tr:'wenn (eğer/-dığında)',ar:'wenn (إذا/عندما)',fa:'wenn (اگر/وقتی)',vi:'wenn (nếu/khi)'},
@@ -1257,7 +1267,21 @@ const HINTS_ML={
     passiv:{de:['Passiv: werden + Partizip II'],ru:['Пассив: werden + Partizip II. Дом строится = Das Haus wird gebaut.'],en:['Passive: werden + past participle.'],tr:['Edilgen: werden + Partizip II.'],vi:['Bị động: werden + Partizip II. Ngôi nhà được xây = Das Haus wird gebaut.'],ar:["المبني للمجهول: werden + اسم المفعول. البيت يُبنى = Das Haus wird gebaut."],fa:["مجهول: werden + اسم مفعول. خانه ساخته می‌شود = Das Haus wird gebaut."]},
     konjunktiv:{de:['Konjunktiv II: würde/wäre/hätte'],ru:['Сослагательное: würde/wäre/hätte. Если бы я был богат = Wenn ich reich wäre...'],en:['Subjunctive II: würde/wäre/hätte. If I were rich...'],tr:['Dilek kipi: würde/wäre/hätte.'],vi:['Thức giả định II: würde/wäre/hätte. Nếu tôi giàu = Wenn ich reich wäre...'],ar:["الصيغة الشرطية II: würde/wäre/hätte. لو كنت غنياً = Wenn ich reich wäre..."],fa:["وجه التزامی II: würde/wäre/hätte. اگر ثروتمند بودم = Wenn ich reich wäre..."]},
     je_desto:{de:['Je + Komparativ, desto + Komparativ + Verb'],ru:['Je...desto: Чем больше..., тем лучше... Je mehr, desto besser.'],en:['Je...desto: The more..., the better...'],tr:['Je...desto: Ne kadar çok..., o kadar iyi...'],vi:['Je...desto: Càng nhiều..., càng tốt... Je mehr, desto besser.'],ar:["Je + مقارن، desto + مقارن + فعل. كلما... كلما..."],fa:["Je + صفت تفضیلی، desto + صفت تفضیلی + فعل. هرچه بیشتر...همان‌قدر بهتر..."]},
-    textbau:{de:['Erstens, zweitens, darüber hinaus, zusammenfassend...'],ru:['Структура текста: Во-первых, во-вторых, кроме того, в итоге...'],en:['Text structure: Firstly, secondly, furthermore, in conclusion...'],tr:['Metin yapısı: Birincisi, ikincisi, ayrıca, sonuç olarak...'],vi:['Cấu trúc văn bản: Thứ nhất, thứ hai, ngoài ra, tóm lại...'],ar:["بنية النص: أولاً، ثانياً، علاوة على ذلك، في الختام..."],fa:["ساختار متن: نخست، دوم، علاوه بر این، در نهایت..."]}
+    textbau:{de:['Erstens, zweitens, darüber hinaus, zusammenfassend...'],ru:['Структура текста: Во-первых, во-вторых, кроме того, в итоге...'],en:['Text structure: Firstly, secondly, furthermore, in conclusion...'],tr:['Metin yapısı: Birincisi, ikincisi, ayrıca, sonuç olarak...'],vi:['Cấu trúc văn bản: Thứ nhất, thứ hai, ngoài ra, tóm lại...'],ar:["بنية النص: أولاً، ثانياً، علاوة على ذلك، في الختام..."],fa:["ساختار متن: نخست، دوم، علاوه بر این، در نهایت..."]},
+    da:{de:['Nach "da" — Verb am Ende! Wie "weil", aber formell.'],
+        ru:['После "da" (так как) — глагол в КОНЦЕ. Как "weil", но формально.'],
+        en:['After "da" (since) — verb at the END. Like "weil", but formal.'],
+        tr:['"da" (-dığı için) den sonra fiil SONDA. "weil" gibi, ama resmî.'],
+        vi:['Sau "da" (vì) — động từ ở CUỐI. Giống "weil" nhưng trang trọng.'],
+        ar:["بعد \"da\" (بما أن) — الفعل في النهاية. مثل \"weil\" ولكن رسمي."],
+        fa:["بعد از \"da\" (از آنجا که) — فعل در انتها. مثل \"weil\" اما رسمی."]},
+    falls:{de:['Nach "falls" — Verb am Ende! Bedingung wie "wenn", formell.'],
+        ru:['После "falls" (на случай если) — глагол в КОНЦЕ. Условие, формальный стиль.'],
+        en:['After "falls" (in case) — verb at the END. Conditional, formal.'],
+        tr:['"falls" (-se diye) den sonra fiil SONDA. Koşul, resmî.'],
+        vi:['Sau "falls" (phòng khi) — động từ ở CUỐI. Điều kiện, trang trọng.'],
+        ar:["بعد \"falls\" (في حال) — الفعل في النهاية. شرط، أسلوب رسمي."],
+        fa:["بعد از \"falls\" (در صورتی که) — فعل در انتها. شرط، رسمی."]}
 };
 function getHints(cat){
     const h=HINTS_ML[cat];
@@ -1278,7 +1302,7 @@ function splitSentenceParts(arr){
 }
 function genExtraDistractors(item){
     const extras=[];
-    const connAlts={weil:['dass','denn'],dass:['weil','ob'],wenn:['als','weil'],als:['wenn'],ob:['dass','weil'],obwohl:['weil','trotzdem'],trotzdem:['deshalb','obwohl'],deshalb:['trotzdem','weil'],denn:['weil'],aber:['und','oder'],sondern:['aber'],damit:['weil','um'],nachdem:['bevor'],bevor:['nachdem']};
+    const connAlts={weil:['dass','denn'],dass:['weil','ob'],wenn:['als','weil'],als:['wenn'],ob:['dass','weil'],obwohl:['weil','trotzdem'],trotzdem:['deshalb','obwohl'],deshalb:['trotzdem','weil'],denn:['weil'],aber:['und','oder'],sondern:['aber'],damit:['weil','um'],nachdem:['bevor'],bevor:['nachdem'],da:['weil','denn'],falls:['wenn','ob']};
     const modalAlts={möchte:['will','kann'],muss:['soll','kann'],kann:['darf','muss'],darf:['kann'],soll:['muss'],will:['möchte']};
     const subjAlts={ich:['du','er'],du:['ich','er'],er:['sie','ich'],sie:['er','wir'],wir:['sie','ihr'],ihr:['wir','sie']};
     for(const w of item.correct){
@@ -1566,13 +1590,13 @@ function getCorrectionRule(word,wrongWord,pos,sentence,item){
     const pronouns='ich,du,er,sie,es,wir,ihr,man'.split(',');
     const isPronoun=pronouns.includes(lo);
     const CONN_NAMES_ML={
-        ru:{weil:'потому что',dass:'что',wenn:'если/когда',als:'когда (прошлое)',ob:'ли',obwohl:'хотя',damit:'чтобы',nachdem:'после того как',bevor:'прежде чем',seitdem:'с тех пор',bis:'пока не',sobald:'как только',denn:'ведь',aber:'но',sondern:'а (не...а)',trotzdem:'тем не менее',deshalb:'поэтому'},
-        en:{weil:'because',dass:'that',wenn:'if/when',als:'when (past)',ob:'whether',obwohl:'although',damit:'so that',nachdem:'after',bevor:'before',seitdem:'since',bis:'until',sobald:'as soon as',denn:'because',aber:'but',sondern:'but rather',trotzdem:'nevertheless',deshalb:'therefore'},
-        de:{weil:'weil',dass:'dass',wenn:'wenn',als:'als',ob:'ob',obwohl:'obwohl',damit:'damit',nachdem:'nachdem',bevor:'bevor',seitdem:'seitdem',bis:'bis',sobald:'sobald',denn:'denn',aber:'aber',sondern:'sondern',trotzdem:'trotzdem',deshalb:'deshalb'},
-        tr:{weil:'çünkü',dass:'ki',wenn:'eğer/ne zaman',als:'iken (geçmiş)',ob:'olup olmadığı',obwohl:'rağmen',damit:'amacıyla',nachdem:'sonra',bevor:'önce',seitdem:'o zamandan beri',bis:'kadar',sobald:'hemen',denn:'çünkü',aber:'ama',sondern:'aksine',trotzdem:'buna rağmen',deshalb:'bu yüzden'},
-        ar:{weil:'لأن',dass:'أن',wenn:'إذا/عندما',als:'عندما (الماضي)',ob:'ما إذا',obwohl:'على الرغم من',damit:'لكي',nachdem:'بعد أن',bevor:'قبل أن',seitdem:'منذ أن',bis:'حتى',sobald:'بمجرد أن',denn:'لأن',aber:'لكن',sondern:'بل',trotzdem:'مع ذلك',deshalb:'لذلك'},
-        fa:{weil:'چون',dass:'که',wenn:'اگر/وقتی',als:'وقتی (گذشته)',ob:'آیا',obwohl:'اگرچه',damit:'برای اینکه',nachdem:'پس از اینکه',bevor:'قبل از',seitdem:'از زمانی که',bis:'تا اینکه',sobald:'به محض اینکه',denn:'زیرا',aber:'اما',sondern:'بلکه',trotzdem:'با این حال',deshalb:'به همین دلیل'},
-        vi:{weil:'bởi vì',dass:'rằng',wenn:'nếu/khi',als:'khi (quá khứ)',ob:'liệu',obwohl:'mặc dù',damit:'để',nachdem:'sau khi',bevor:'trước khi',seitdem:'từ khi',bis:'cho đến khi',sobald:'ngay khi',denn:'vì',aber:'nhưng',sondern:'mà là',trotzdem:'tuy nhiên',deshalb:'do đó'}
+        ru:{weil:'потому что',dass:'что',wenn:'если/когда',als:'когда (прошлое)',ob:'ли',obwohl:'хотя',damit:'чтобы',nachdem:'после того как',bevor:'прежде чем',seitdem:'с тех пор',bis:'пока не',sobald:'как только',denn:'ведь',aber:'но',sondern:'а (не...а)',trotzdem:'тем не менее',deshalb:'поэтому',da:'так как (формально)',falls:'на случай если'},
+        en:{weil:'because',dass:'that',wenn:'if/when',als:'when (past)',ob:'whether',obwohl:'although',damit:'so that',nachdem:'after',bevor:'before',seitdem:'since',bis:'until',sobald:'as soon as',denn:'because',aber:'but',sondern:'but rather',trotzdem:'nevertheless',deshalb:'therefore',da:'since (formal)',falls:'in case'},
+        de:{weil:'weil',dass:'dass',wenn:'wenn',als:'als',ob:'ob',obwohl:'obwohl',damit:'damit',nachdem:'nachdem',bevor:'bevor',seitdem:'seitdem',bis:'bis',sobald:'sobald',denn:'denn',aber:'aber',sondern:'sondern',trotzdem:'trotzdem',deshalb:'deshalb',da:'da',falls:'falls'},
+        tr:{weil:'çünkü',dass:'ki',wenn:'eğer/ne zaman',als:'iken (geçmiş)',ob:'olup olmadığı',obwohl:'rağmen',damit:'amacıyla',nachdem:'sonra',bevor:'önce',seitdem:'o zamandan beri',bis:'kadar',sobald:'hemen',denn:'çünkü',aber:'ama',sondern:'aksine',trotzdem:'buna rağmen',deshalb:'bu yüzden',da:'-dığı için',falls:'-se diye'},
+        ar:{weil:'لأن',dass:'أن',wenn:'إذا/عندما',als:'عندما (الماضي)',ob:'ما إذا',obwohl:'على الرغم من',damit:'لكي',nachdem:'بعد أن',bevor:'قبل أن',seitdem:'منذ أن',bis:'حتى',sobald:'بمجرد أن',denn:'لأن',aber:'لكن',sondern:'بل',trotzdem:'مع ذلك',deshalb:'لذلك',da:'بما أن',falls:'في حال'},
+        fa:{weil:'چون',dass:'که',wenn:'اگر/وقتی',als:'وقتی (گذشته)',ob:'آیا',obwohl:'اگرچه',damit:'برای اینکه',nachdem:'پس از اینکه',bevor:'قبل از',seitdem:'از زمانی که',bis:'تا اینکه',sobald:'به محض اینکه',denn:'زیرا',aber:'اما',sondern:'بلکه',trotzdem:'با این حال',deshalb:'به همین دلیل',da:'از آنجا که',falls:'در صورتی که'},
+        vi:{weil:'bởi vì',dass:'rằng',wenn:'nếu/khi',als:'khi (quá khứ)',ob:'liệu',obwohl:'mặc dù',damit:'để',nachdem:'sau khi',bevor:'trước khi',seitdem:'từ khi',bis:'cho đến khi',sobald:'ngay khi',denn:'vì',aber:'nhưng',sondern:'mà là',trotzdem:'tuy nhiên',deshalb:'do đó',da:'vì (trang trọng)',falls:'phòng khi'}
     };
     const connNames=CONN_NAMES_ML[L]||CONN_NAMES_ML.en;
     const _t=(de,ru,en,tr,ar,fa,vi)=>({de,ru,en,tr,ar,fa,vi}[L]||en||de);
