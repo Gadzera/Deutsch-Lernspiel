@@ -1720,6 +1720,27 @@ body {
     color: var(--text);
     border-color: var(--border);
 }
+/* Quiz answer buttons — dark mode visibility fix.
+   The default --success-light / --danger-light backgrounds are too close
+   to the dark card color, so the highlighted correct/incorrect button
+   is invisible. Override with brighter colors and a glow. */
+[data-theme="dark"] .answer-btn.correct {
+    background: rgba(0,230,118,0.22) !important;
+    color: #69F0AE !important;
+    border-color: #00E676 !important;
+    box-shadow: 0 0 0 2px rgba(0,230,118,0.35), 0 0 16px rgba(0,230,118,0.25);
+}
+[data-theme="dark"] .answer-btn.incorrect {
+    background: rgba(255,82,82,0.22) !important;
+    color: #FF8A80 !important;
+    border-color: #FF5252 !important;
+    box-shadow: 0 0 0 2px rgba(255,82,82,0.35), 0 0 16px rgba(255,82,82,0.25);
+}
+[data-theme="dark"] .word-chip.wc-correct {
+    background: #00E676 !important;
+    color: #0F0F1A !important;
+    border-color: #00E676 !important;
+}
 [data-theme="dark"] .toast {
     background: var(--card);
     color: var(--text);
