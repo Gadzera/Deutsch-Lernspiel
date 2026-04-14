@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#6C63FF">
+    <title>Deutsch Lernspiel — NEU</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <script>
+    // Brand-new file (neu.html) — never seen by any browser before.
+    // Forces fresh download. Clears SW + caches before loading anything.
+    (function(){
+      try{
+        if('serviceWorker' in navigator){
+          navigator.serviceWorker.getRegistrations().then(function(rs){
+            rs.forEach(function(r){ r.unregister().catch(function(){}); });
+          }).catch(function(){});
+        }
+        if('caches' in window){
+          caches.keys().then(function(ks){
+            ks.forEach(function(k){ caches.delete(k).catch(function(){}); });
+          }).catch(function(){});
+        }
+      }catch(e){}
+      var T='?t='+Date.now()+'_'+Math.random().toString(36).slice(2);
+      document.write('<link rel="stylesheet" href="css/style.css'+T+'">');
+    })();
+    </script>
+</head>
+<body>
+    <div id="app"></div>
+    <div id="subliminalFrame" class="subliminal-frame">
+        <div class="subliminal-content">
+            <div id="subliminalWord" class="subliminal-word"></div>
+            <div id="subliminalTrans" class="subliminal-translation"></div>
+        </div>
+    </div>
+    <script>
+    (function(){
+      var T='?t='+Date.now()+'_'+Math.random().toString(36).slice(2);
+      var files=[
+        'data/nouns.js','data/verbs.js','data/partizip2.js','data/reflexive.js',
+        'data/sentences.js','data/prepositions.js','data/pronouns.js',
+        'data/rules.js','data/vwu.js','data/ev_zt1_lesen.js','data/ev_zt1_pool.js',
+        'js/app.js'
+      ];
+      files.forEach(function(f){
+        document.write('<scr'+'ipt src="'+f+T+'"></scr'+'ipt>');
+      });
+    })();
+    </script>
+</body>
+</html>
