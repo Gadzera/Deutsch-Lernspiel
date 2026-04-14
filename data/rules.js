@@ -2971,6 +2971,128 @@ vi: `
 <p><b>falls</b> diễn đạt một <b>điều kiện</b> — đồng nghĩa với <b>wenn</b> điều kiện, nhưng:</p>
 <ul><li>Nhấn mạnh rằng việc xảy ra là <b>không chắc chắn</b>.</li><li>Thường dùng trong văn phong <b>trang trọng</b> (thư, hợp đồng, chỉ dẫn).</li><li>Không bao giờ chỉ thời gian — <b>falls</b> không bao giờ có nghĩa „khi nào".</li></ul>
 <p><b>Falls</b> es <span class="rule-hl2">regnet</span>, nehmen wir einen Schirm mit. — Phòng khi trời mưa chúng tôi mang theo ô.</p>`
+},
+
+satz_zu_infinitiv: {
+de: `
+<h2>Infinitiv mit zu (zu + Infinitiv)</h2>
+<div class="rule-formula">..., <span class="rule-hl">zu</span> + <span class="rule-hl2">Infinitiv</span> (am Ende)</div>
+<p>Viele Verben, Adjektive und feste Ausdrücke verlangen einen <b>Infinitiv mit zu</b>. Der Infinitiv steht <b>am Ende</b> des Satzes oder Nebensatzes.</p>
+<p><b>Häufige Auslöser:</b></p>
+<ul>
+<li><b>Verben:</b> versuchen, vergessen, hoffen, beginnen, anfangen, aufhören, vorhaben, sich entscheiden, sich freuen, scheinen, glauben, brauchen (nur + nicht/kein)</li>
+<li><b>Es ist + Adjektiv:</b> Es ist <b>wichtig/schön/möglich</b>, ... <b>zu</b> + Inf.</li>
+<li><b>Substantiv + haben:</b> Lust / Zeit / Angst / Möglichkeit / vor + ... <b>zu</b> + Inf.</li>
+<li><b>ohne ... zu</b>, <b>statt ... zu</b>, <b>(an)statt zu</b></li>
+<li><b>sein + zu</b> (Passiv-Ersatz): Das ist leicht <b>zu</b> machen.</li>
+</ul>
+<p><b>Beispiele:</b></p>
+<p>Es ist wichtig, pünktlich <b>zu sein</b>.</p>
+<p>Ich versuche, jeden Tag Deutsch <b>zu lernen</b>.</p>
+<p>Sie hat keine Lust, ins Kino <b>zu gehen</b>.</p>
+<p><b>Trennbare Verben:</b> <i>zu</i> steht zwischen Vorsilbe und Stamm — als <b>ein Wort</b>: <b>einzuparken</b>, <b>aufzustehen</b>, <b>mitzukommen</b>.</p>
+<p>Es ist nicht leicht, hier <b>einzuparken</b>.</p>
+<p><i>Achtung: Modalverben (können, müssen, dürfen, sollen, wollen, mögen) bekommen <b>kein</b> zu! → Ich kann schwimmen.</i>`,
+ru: `
+<h2>Инфинитив с zu (zu + Infinitiv)</h2>
+<div class="rule-formula">..., <span class="rule-hl">zu</span> + <span class="rule-hl2">Infinitiv</span> (в конце)</div>
+<p>Многие глаголы, прилагательные и устойчивые выражения требуют <b>инфинитив с zu</b>. Инфинитив стоит <b>в конце</b> предложения.</p>
+<p><b>Когда нужен:</b></p>
+<ul>
+<li><b>Глаголы:</b> versuchen (пытаться), vergessen (забыть), hoffen (надеяться), anfangen / beginnen (начинать), aufhören (прекращать), vorhaben (планировать), sich entscheiden (решить), sich freuen (радоваться), scheinen (казаться), glauben (полагать), brauchen (только с nicht/kein)</li>
+<li><b>Es ist + прилагательное:</b> Es ist <b>wichtig/schön/möglich</b>, ... <b>zu</b> + Inf.</li>
+<li><b>Существительное + haben:</b> Lust / Zeit / Angst / vor + ... <b>zu</b> + Inf.</li>
+<li><b>ohne ... zu</b> (не делая чего-то), <b>statt ... zu</b> (вместо того чтобы)</li>
+<li><b>sein + zu</b> (вместо пассива): Das ist leicht <b>zu</b> machen.</li>
+</ul>
+<p><b>Примеры:</b></p>
+<p>Es ist wichtig, pünktlich <b>zu sein</b>. — Важно быть пунктуальным.</p>
+<p>Ich versuche, jeden Tag Deutsch <b>zu lernen</b>. — Я пытаюсь учить немецкий каждый день.</p>
+<p>Sie hat keine Lust, ins Kino <b>zu gehen</b>. — У неё нет желания идти в кино.</p>
+<p><b>Отделяемые глаголы:</b> <i>zu</i> ставится между приставкой и основой <b>одним словом</b>: <b>einzuparken</b>, <b>aufzustehen</b>, <b>mitzukommen</b>.</p>
+<p>Es ist nicht leicht, hier <b>einzuparken</b>. — Здесь нелегко припарковаться.</p>
+<p><i>Внимание: модальные глаголы (können, müssen, dürfen, sollen, wollen, mögen) НЕ требуют zu! → Ich kann schwimmen.</i>`,
+en: `
+<h2>Infinitive with zu (zu + Infinitive)</h2>
+<div class="rule-formula">..., <span class="rule-hl">zu</span> + <span class="rule-hl2">Infinitive</span> (at the end)</div>
+<p>Many verbs, adjectives and fixed expressions require an <b>infinitive with zu</b>. The infinitive goes <b>at the end</b> of the clause.</p>
+<p><b>Common triggers:</b></p>
+<ul>
+<li><b>Verbs:</b> versuchen (try), vergessen (forget), hoffen (hope), anfangen / beginnen (start), aufhören (stop), vorhaben (plan), sich entscheiden (decide), sich freuen (be happy), scheinen (seem), glauben (believe), brauchen (only with nicht/kein)</li>
+<li><b>Es ist + adjective:</b> Es ist <b>wichtig/schön/möglich</b>, ... <b>zu</b> + Inf.</li>
+<li><b>Noun + haben:</b> Lust / Zeit / Angst / vor + ... <b>zu</b> + Inf.</li>
+<li><b>ohne ... zu</b> (without doing), <b>statt ... zu</b> (instead of)</li>
+<li><b>sein + zu</b> (passive substitute): Das ist leicht <b>zu</b> machen.</li>
+</ul>
+<p><b>Examples:</b></p>
+<p>Es ist wichtig, pünktlich <b>zu sein</b>. — It's important to be on time.</p>
+<p>Ich versuche, jeden Tag Deutsch <b>zu lernen</b>. — I try to learn German every day.</p>
+<p>Sie hat keine Lust, ins Kino <b>zu gehen</b>. — She doesn't feel like going to the cinema.</p>
+<p><b>Separable verbs:</b> <i>zu</i> sits between prefix and stem as <b>one word</b>: <b>einzuparken</b>, <b>aufzustehen</b>, <b>mitzukommen</b>.</p>
+<p>Es ist nicht leicht, hier <b>einzuparken</b>. — It's not easy to park here.</p>
+<p><i>Note: Modal verbs (können, müssen, dürfen, sollen, wollen, mögen) take <b>no</b> zu! → Ich kann schwimmen.</i>`,
+tr: `
+<h2>zu ile mastar (zu + Infinitiv)</h2>
+<div class="rule-formula">..., <span class="rule-hl">zu</span> + <span class="rule-hl2">Mastar</span> (sonda)</div>
+<p>Birçok fiil, sıfat ve kalıp ifade <b>zu ile mastar</b> ister. Mastar cümlenin <b>sonunda</b> yer alır.</p>
+<p><b>Tetikleyiciler:</b></p>
+<ul>
+<li><b>Fiiller:</b> versuchen (denemek), vergessen (unutmak), hoffen (ummak), anfangen / beginnen (başlamak), aufhören (bırakmak), vorhaben (planlamak), sich entscheiden (karar vermek), sich freuen (sevinmek), scheinen (görünmek), glauben (sanmak), brauchen (yalnızca nicht/kein ile)</li>
+<li><b>Es ist + sıfat:</b> Es ist <b>wichtig/schön/möglich</b>, ... <b>zu</b> + Mastar.</li>
+<li><b>İsim + haben:</b> Lust / Zeit / Angst / vor + ... <b>zu</b> + Mastar.</li>
+<li><b>ohne ... zu</b> (-meden), <b>statt ... zu</b> (-mek yerine)</li>
+<li><b>sein + zu</b> (edilgen yerine): Das ist leicht <b>zu</b> machen.</li>
+</ul>
+<p><b>Örnekler:</b></p>
+<p>Es ist wichtig, pünktlich <b>zu sein</b>. — Zamanında olmak önemlidir.</p>
+<p>Ich versuche, jeden Tag Deutsch <b>zu lernen</b>. — Her gün Almanca öğrenmeye çalışıyorum.</p>
+<p><b>Ayrılabilir fiiller:</b> <i>zu</i> ön ek ile kök arasına girer ve <b>tek kelime</b> yazılır: <b>einzuparken</b>, <b>aufzustehen</b>, <b>mitzukommen</b>.</p>
+<p><i>Dikkat: Modal fiiller (können, müssen, dürfen, sollen, wollen, mögen) zu <b>almaz</b>! → Ich kann schwimmen.</i>`,
+ar: `
+<h2>المصدر مع zu</h2>
+<div class="rule-formula">..., <span class="rule-hl">zu</span> + <span class="rule-hl2">المصدر</span> (في النهاية)</div>
+<p>كثير من الأفعال والصفات والتعابير الثابتة تتطلب <b>مصدراً مع zu</b>. يأتي المصدر في <b>نهاية</b> الجملة.</p>
+<p><b>الحالات الشائعة:</b></p>
+<ul>
+<li><b>أفعال:</b> versuchen (يحاول)، vergessen (ينسى)، hoffen (يأمل)، anfangen / beginnen (يبدأ)، aufhören (يتوقف)، vorhaben (يخطط)، sich entscheiden (يقرر)، sich freuen (يفرح)، scheinen (يبدو)، glauben (يظن)، brauchen (مع nicht/kein فقط)</li>
+<li><b>Es ist + صفة:</b> Es ist <b>wichtig/schön/möglich</b>, ... <b>zu</b> + مصدر.</li>
+<li><b>اسم + haben:</b> Lust / Zeit / Angst / vor + ... <b>zu</b> + مصدر.</li>
+<li><b>ohne ... zu</b> (دون أن)، <b>statt ... zu</b> (بدلاً من أن)</li>
+</ul>
+<p>Es ist wichtig, pünktlich <b>zu sein</b>. — من المهم أن تكون في الوقت المحدد.</p>
+<p>Ich versuche, jeden Tag Deutsch <b>zu lernen</b>. — أحاول تعلم الألمانية كل يوم.</p>
+<p><b>الأفعال القابلة للفصل:</b> <i>zu</i> توضع بين البادئة والجذر ككلمة واحدة: <b>einzuparken</b>، <b>aufzustehen</b>.</p>
+<p><i>تنبيه: الأفعال المساعدة (können، müssen، dürfen، sollen، wollen، mögen) لا تأخذ zu! → Ich kann schwimmen.</i>`,
+fa: `
+<h2>مصدر با zu</h2>
+<div class="rule-formula">..., <span class="rule-hl">zu</span> + <span class="rule-hl2">مصدر</span> (در انتها)</div>
+<p>بسیاری از افعال، صفت‌ها و عبارت‌های ثابت به <b>مصدر با zu</b> نیاز دارند. مصدر در <b>انتهای</b> جمله می‌آید.</p>
+<p><b>نمونه‌های رایج:</b></p>
+<ul>
+<li><b>افعال:</b> versuchen (تلاش کردن)، vergessen (فراموش کردن)، hoffen (امیدوار بودن)، anfangen / beginnen (شروع کردن)، aufhören (متوقف کردن)، vorhaben (قصد داشتن)، sich entscheiden (تصمیم گرفتن)، sich freuen (خوشحال بودن)، scheinen (به نظر رسیدن)، glauben (پنداشتن)، brauchen (فقط با nicht/kein)</li>
+<li><b>Es ist + صفت:</b> Es ist <b>wichtig/schön/möglich</b>, ... <b>zu</b> + مصدر.</li>
+<li><b>اسم + haben:</b> Lust / Zeit / Angst / vor + ... <b>zu</b> + مصدر.</li>
+<li><b>ohne ... zu</b> (بدون اینکه)، <b>statt ... zu</b> (به جای اینکه)</li>
+</ul>
+<p>Es ist wichtig, pünktlich <b>zu sein</b>. — مهم است که سر وقت باشی.</p>
+<p>Ich versuche, jeden Tag Deutsch <b>zu lernen</b>. — تلاش می‌کنم هر روز آلمانی یاد بگیرم.</p>
+<p><b>افعال جداشدنی:</b> <i>zu</i> میان پیشوند و ریشه به‌صورت یک کلمه می‌آید: <b>einzuparken</b>.</p>
+<p><i>توجه: افعال وجهی (können، müssen، dürfen، sollen، wollen، mögen) zu <b>نمی‌گیرند</b>! → Ich kann schwimmen.</i>`,
+vi: `
+<h2>Động từ nguyên thể với zu (zu + Infinitiv)</h2>
+<div class="rule-formula">..., <span class="rule-hl">zu</span> + <span class="rule-hl2">động từ nguyên thể</span> (ở cuối)</div>
+<p>Nhiều động từ, tính từ và cụm cố định đòi hỏi <b>động từ nguyên thể với zu</b>. Động từ nguyên thể đứng ở <b>cuối</b> mệnh đề.</p>
+<p><b>Các trường hợp thường gặp:</b></p>
+<ul>
+<li><b>Động từ:</b> versuchen (cố gắng), vergessen (quên), hoffen (hy vọng), anfangen / beginnen (bắt đầu), aufhören (dừng), vorhaben (dự định), sich entscheiden (quyết định), sich freuen (vui mừng), scheinen (có vẻ), glauben (tin), brauchen (chỉ với nicht/kein)</li>
+<li><b>Es ist + tính từ:</b> Es ist <b>wichtig/schön/möglich</b>, ... <b>zu</b> + Inf.</li>
+<li><b>Danh từ + haben:</b> Lust / Zeit / Angst / vor + ... <b>zu</b> + Inf.</li>
+<li><b>ohne ... zu</b> (mà không), <b>statt ... zu</b> (thay vì)</li>
+</ul>
+<p>Es ist wichtig, pünktlich <b>zu sein</b>. — Đúng giờ là điều quan trọng.</p>
+<p>Ich versuche, jeden Tag Deutsch <b>zu lernen</b>. — Tôi cố gắng học tiếng Đức mỗi ngày.</p>
+<p><b>Động từ tách được:</b> <i>zu</i> đặt giữa tiền tố và gốc, viết liền thành một từ: <b>einzuparken</b>, <b>aufzustehen</b>.</p>
+<p><i>Lưu ý: Động từ khiếm khuyết (können, müssen, dürfen, sollen, wollen, mögen) <b>không</b> dùng zu! → Ich kann schwimmen.</i>`
 }
 
 };
