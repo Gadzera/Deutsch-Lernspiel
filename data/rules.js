@@ -3596,6 +3596,212 @@ vi: `
 <p>Er ist klein, <b>doch</b> er spielt sehr gut Basketball.</p>
 
 <p><b>Lưu ý:</b> Đừng nhầm lẫn liên từ <b>doch</b> (Vị trí 0) với tiểu từ tình thái <b>doch</b> ("Komm <b>doch</b> mit!") hay câu trả lời khẳng định <b>doch</b> cho câu hỏi phủ định.</p>`
-}
+},
+
+satz_zeitmass_akk: {
+de: `<h2>Zeit- und Maßangaben im Akkusativ (ohne Präposition)</h2>
+<div class="rule-formula">Dauer / Wiederholung / Maß <b>ohne Präposition</b> → <span class="rule-hl">Akkusativ</span></div>
+<p>Wenn eine Zeit-, Dauer-, Maß-, Gewichts- oder Preisangabe <b>ohne Präposition</b> im Satz steht, wird sie in den <b>Akkusativ</b> gesetzt.</p>
+
+<h3>1. Dauer (wie lange?)</h3>
+<table class="rule-table"><tr><th>Akkusativ</th><th>Beispiel</th></tr>
+<tr><td><b>einen Monat</b></td><td>Ich war <b>einen Monat</b> in Berlin.</td></tr>
+<tr><td><b>eine Stunde</b></td><td>Wir warten schon <b>eine Stunde</b>.</td></tr>
+<tr><td><b>den ganzen Tag</b></td><td>Er bleibt <b>den ganzen Tag</b> zu Hause.</td></tr>
+<tr><td><b>drei Jahre</b></td><td>Sie lernt schon <b>drei Jahre</b> Deutsch.</td></tr></table>
+
+<h3>2. Wiederholung (wie oft?) — jeden / jede / jedes</h3>
+<table class="rule-table"><tr><th>Genus</th><th>Akkusativ</th><th>Beispiel</th></tr>
+<tr><td>der Tag</td><td><b>jeden</b> Tag</td><td>Er fährt <b>jeden Tag</b> mit dem Bus.</td></tr>
+<tr><td>die Woche</td><td><b>jede</b> Woche</td><td>Wir gehen <b>jede Woche</b> ins Kino.</td></tr>
+<tr><td>das Jahr</td><td><b>jedes</b> Jahr</td><td>Sie reist <b>jedes Jahr</b> nach Italien.</td></tr></table>
+
+<h3>3. Zeitpunkt — nächste/letzte/diese + n</h3>
+<p><b>Nächsten</b> Montag · <b>Letztes</b> Jahr · <b>Diesen</b> Sommer · <b>Letzte</b> Woche.</p>
+
+<h3>4. Maße: Größe / Gewicht / Alter / Preis / Strecke</h3>
+<table class="rule-table"><tr><th>Maß</th><th>Beispiel</th></tr>
+<tr><td>Größe</td><td>Das Kind ist <b>einen Meter</b> groß.</td></tr>
+<tr><td>Gewicht</td><td>Das Paket wiegt <b>einen Kilogramm</b>.</td></tr>
+<tr><td>Alter</td><td>Mein Sohn ist <b>einen Monat</b> alt.</td></tr>
+<tr><td>Preis</td><td>Das Buch kostet <b>einen Euro</b>.</td></tr>
+<tr><td>Strecke</td><td>Wir sind <b>einen Kilometer</b> gelaufen.</td></tr></table>
+
+<p><b>Achtung:</b> Mit Präposition ändert sich der Kasus → <i>seit einem Monat</i> (Dativ), <i>vor zwei Wochen</i> (Dativ).</p>`,
+ru: `<h2>Указания времени и меры в Akkusativ (без предлога)</h2>
+<div class="rule-formula">Длительность / повтор / мера <b>без предлога</b> → <span class="rule-hl">Akkusativ</span></div>
+<p>Если в предложении длительность, время, мера, вес, возраст или цена стоят <b>без предлога</b>, они оформляются в <b>Akkusativ</b>.</p>
+
+<h3>1. Длительность (как долго?)</h3>
+<table class="rule-table"><tr><th>Akkusativ</th><th>Пример</th></tr>
+<tr><td><b>einen Monat</b></td><td>Ich war <b>einen Monat</b> in Berlin. — Я был в Берлине месяц.</td></tr>
+<tr><td><b>eine Stunde</b></td><td>Wir warten schon <b>eine Stunde</b>. — Мы ждём уже час.</td></tr>
+<tr><td><b>den ganzen Tag</b></td><td>Er bleibt <b>den ganzen Tag</b> zu Hause.</td></tr>
+<tr><td><b>drei Jahre</b></td><td>Sie lernt schon <b>drei Jahre</b> Deutsch.</td></tr></table>
+
+<h3>2. Повторяемость (как часто?) — jeden / jede / jedes</h3>
+<table class="rule-table"><tr><th>Род</th><th>Akkusativ</th><th>Пример</th></tr>
+<tr><td>der Tag (м)</td><td><b>jeden</b> Tag</td><td>Er fährt <b>jeden Tag</b> mit dem Bus. — Каждый день.</td></tr>
+<tr><td>die Woche (ж)</td><td><b>jede</b> Woche</td><td>Wir gehen <b>jede Woche</b> ins Kino. — Каждую неделю.</td></tr>
+<tr><td>das Jahr (ср)</td><td><b>jedes</b> Jahr</td><td>Sie reist <b>jedes Jahr</b> nach Italien. — Каждый год.</td></tr></table>
+
+<h3>3. Точка во времени — nächste / letzte / diese + n</h3>
+<p><b>Nächsten</b> Montag (в следующий понедельник) · <b>Letztes</b> Jahr (в прошлом году) · <b>Diesen</b> Sommer (этим летом).</p>
+
+<h3>4. Меры: рост / вес / возраст / цена / расстояние</h3>
+<table class="rule-table"><tr><th>Мера</th><th>Пример</th></tr>
+<tr><td>Рост</td><td>Das Kind ist <b>einen Meter</b> groß.</td></tr>
+<tr><td>Вес</td><td>Das Paket wiegt <b>einen Kilogramm</b>.</td></tr>
+<tr><td>Возраст</td><td>Mein Sohn ist <b>einen Monat</b> alt.</td></tr>
+<tr><td>Цена</td><td>Das Buch kostet <b>einen Euro</b>.</td></tr>
+<tr><td>Расстояние</td><td>Wir sind <b>einen Kilometer</b> gelaufen.</td></tr></table>
+
+<p><b>Внимание:</b> с предлогом падеж меняется → <i>seit einem Monat</i> (Dativ), <i>vor zwei Wochen</i> (Dativ).</p>`,
+en: `<h2>Time and measure expressions in the accusative (no preposition)</h2>
+<div class="rule-formula">Duration / repetition / measure <b>without a preposition</b> → <span class="rule-hl">Accusative</span></div>
+<p>When a duration, time span, measure, weight, age or price appears <b>without a preposition</b>, German uses the <b>accusative</b>.</p>
+
+<h3>1. Duration (how long?)</h3>
+<table class="rule-table"><tr><th>Accusative</th><th>Example</th></tr>
+<tr><td><b>einen Monat</b></td><td>Ich war <b>einen Monat</b> in Berlin.</td></tr>
+<tr><td><b>eine Stunde</b></td><td>Wir warten schon <b>eine Stunde</b>.</td></tr>
+<tr><td><b>den ganzen Tag</b></td><td>Er bleibt <b>den ganzen Tag</b> zu Hause.</td></tr>
+<tr><td><b>drei Jahre</b></td><td>Sie lernt schon <b>drei Jahre</b> Deutsch.</td></tr></table>
+
+<h3>2. Repetition (how often?) — jeden / jede / jedes</h3>
+<table class="rule-table"><tr><th>Gender</th><th>Accusative</th><th>Example</th></tr>
+<tr><td>der Tag (m)</td><td><b>jeden</b> Tag</td><td>Er fährt <b>jeden Tag</b> mit dem Bus.</td></tr>
+<tr><td>die Woche (f)</td><td><b>jede</b> Woche</td><td>Wir gehen <b>jede Woche</b> ins Kino.</td></tr>
+<tr><td>das Jahr (n)</td><td><b>jedes</b> Jahr</td><td>Sie reist <b>jedes Jahr</b> nach Italien.</td></tr></table>
+
+<h3>3. Time point — nächste / letzte / diese + n</h3>
+<p><b>Nächsten</b> Montag · <b>Letztes</b> Jahr · <b>Diesen</b> Sommer.</p>
+
+<h3>4. Measures: height / weight / age / price / distance</h3>
+<table class="rule-table"><tr><th>Measure</th><th>Example</th></tr>
+<tr><td>Height</td><td>Das Kind ist <b>einen Meter</b> groß.</td></tr>
+<tr><td>Weight</td><td>Das Paket wiegt <b>einen Kilogramm</b>.</td></tr>
+<tr><td>Age</td><td>Mein Sohn ist <b>einen Monat</b> alt.</td></tr>
+<tr><td>Price</td><td>Das Buch kostet <b>einen Euro</b>.</td></tr>
+<tr><td>Distance</td><td>Wir sind <b>einen Kilometer</b> gelaufen.</td></tr></table>
+
+<p><b>Note:</b> With a preposition the case changes → <i>seit einem Monat</i> (dative), <i>vor zwei Wochen</i> (dative).</p>`,
+tr: `<h2>Akkusatif ile zaman ve ölçü ifadeleri (edatsız)</h2>
+<div class="rule-formula">Süre / tekrar / ölçü <b>edatsız</b> → <span class="rule-hl">Akkusatif</span></div>
+<p>Süre, zaman, ölçü, ağırlık, yaş veya fiyat ifadeleri <b>edat olmadan</b> kullanıldığında <b>Akkusatif</b> alır.</p>
+
+<h3>1. Süre (ne kadar?)</h3>
+<table class="rule-table"><tr><th>Akkusatif</th><th>Örnek</th></tr>
+<tr><td><b>einen Monat</b></td><td>Ich war <b>einen Monat</b> in Berlin. — Bir ay Berlin'deydim.</td></tr>
+<tr><td><b>eine Stunde</b></td><td>Wir warten schon <b>eine Stunde</b>. — Bir saattir bekliyoruz.</td></tr>
+<tr><td><b>den ganzen Tag</b></td><td>Er bleibt <b>den ganzen Tag</b> zu Hause.</td></tr>
+<tr><td><b>drei Jahre</b></td><td>Sie lernt schon <b>drei Jahre</b> Deutsch.</td></tr></table>
+
+<h3>2. Tekrar (ne sıklıkla?) — jeden / jede / jedes</h3>
+<table class="rule-table"><tr><th>Cins</th><th>Akkusatif</th><th>Örnek</th></tr>
+<tr><td>der Tag (eril)</td><td><b>jeden</b> Tag</td><td>Er fährt <b>jeden Tag</b> mit dem Bus.</td></tr>
+<tr><td>die Woche (dişil)</td><td><b>jede</b> Woche</td><td>Wir gehen <b>jede Woche</b> ins Kino.</td></tr>
+<tr><td>das Jahr (nötr)</td><td><b>jedes</b> Jahr</td><td>Sie reist <b>jedes Jahr</b> nach Italien.</td></tr></table>
+
+<h3>3. Zaman noktası — nächste / letzte / diese + n</h3>
+<p><b>Nächsten</b> Montag · <b>Letztes</b> Jahr · <b>Diesen</b> Sommer.</p>
+
+<h3>4. Ölçüler: boy / ağırlık / yaş / fiyat / mesafe</h3>
+<table class="rule-table"><tr><th>Ölçü</th><th>Örnek</th></tr>
+<tr><td>Boy</td><td>Das Kind ist <b>einen Meter</b> groß.</td></tr>
+<tr><td>Ağırlık</td><td>Das Paket wiegt <b>einen Kilogramm</b>.</td></tr>
+<tr><td>Yaş</td><td>Mein Sohn ist <b>einen Monat</b> alt.</td></tr>
+<tr><td>Fiyat</td><td>Das Buch kostet <b>einen Euro</b>.</td></tr>
+<tr><td>Mesafe</td><td>Wir sind <b>einen Kilometer</b> gelaufen.</td></tr></table>
+
+<p><b>Dikkat:</b> Edatla birlikte hâl değişir → <i>seit einem Monat</i> (Dativ), <i>vor zwei Wochen</i> (Dativ).</p>`,
+ar: `<h2>تعبيرات الزمن والقياس في حالة النصب (بدون حرف جر)</h2>
+<div class="rule-formula">المدة / التكرار / القياس <b>بدون حرف جر</b> ← <span class="rule-hl">حالة النصب</span></div>
+<p>عندما يأتي تعبير عن مدة، وقت، قياس، وزن، عمر أو ثمن <b>بدون حرف جر</b> في الجملة الألمانية، يُستخدم <b>Akkusativ</b> (حالة النصب).</p>
+
+<h3>1. المدة (لكم من الوقت؟)</h3>
+<table class="rule-table"><tr><th>Akkusativ</th><th>المثال</th></tr>
+<tr><td><b>einen Monat</b></td><td>Ich war <b>einen Monat</b> in Berlin. — كنت في برلين شهراً.</td></tr>
+<tr><td><b>eine Stunde</b></td><td>Wir warten schon <b>eine Stunde</b>.</td></tr>
+<tr><td><b>den ganzen Tag</b></td><td>Er bleibt <b>den ganzen Tag</b> zu Hause.</td></tr>
+<tr><td><b>drei Jahre</b></td><td>Sie lernt schon <b>drei Jahre</b> Deutsch.</td></tr></table>
+
+<h3>2. التكرار (كم مرة؟) — jeden / jede / jedes</h3>
+<table class="rule-table"><tr><th>الجنس</th><th>Akkusativ</th><th>المثال</th></tr>
+<tr><td>der Tag (مذكر)</td><td><b>jeden</b> Tag</td><td>Er fährt <b>jeden Tag</b> mit dem Bus.</td></tr>
+<tr><td>die Woche (مؤنث)</td><td><b>jede</b> Woche</td><td>Wir gehen <b>jede Woche</b> ins Kino.</td></tr>
+<tr><td>das Jahr (محايد)</td><td><b>jedes</b> Jahr</td><td>Sie reist <b>jedes Jahr</b> nach Italien.</td></tr></table>
+
+<h3>3. نقطة زمنية — nächste / letzte / diese + n</h3>
+<p><b>Nächsten</b> Montag · <b>Letztes</b> Jahr · <b>Diesen</b> Sommer.</p>
+
+<h3>4. القياسات: الطول / الوزن / العمر / السعر / المسافة</h3>
+<table class="rule-table"><tr><th>القياس</th><th>المثال</th></tr>
+<tr><td>الطول</td><td>Das Kind ist <b>einen Meter</b> groß.</td></tr>
+<tr><td>الوزن</td><td>Das Paket wiegt <b>einen Kilogramm</b>.</td></tr>
+<tr><td>العمر</td><td>Mein Sohn ist <b>einen Monat</b> alt.</td></tr>
+<tr><td>السعر</td><td>Das Buch kostet <b>einen Euro</b>.</td></tr>
+<tr><td>المسافة</td><td>Wir sind <b>einen Kilometer</b> gelaufen.</td></tr></table>
+
+<p><b>تنبيه:</b> مع حرف الجر تتغير الحالة → <i>seit einem Monat</i> (Dativ)، <i>vor zwei Wochen</i> (Dativ).</p>`,
+fa: `<h2>بیان زمان و اندازه در حالت Akkusativ (بدون حرف اضافه)</h2>
+<div class="rule-formula">مدت / تکرار / اندازه <b>بدون حرف اضافه</b> ← <span class="rule-hl">Akkusativ</span></div>
+<p>هرگاه مدت، زمان، اندازه، وزن، سن یا قیمت <b>بدون حرف اضافه</b> در جمله بیاید، در حالت <b>Akkusativ</b> به کار می‌رود.</p>
+
+<h3>۱. مدت (چه‌قدر؟)</h3>
+<table class="rule-table"><tr><th>Akkusativ</th><th>مثال</th></tr>
+<tr><td><b>einen Monat</b></td><td>Ich war <b>einen Monat</b> in Berlin. — یک ماه در برلین بودم.</td></tr>
+<tr><td><b>eine Stunde</b></td><td>Wir warten schon <b>eine Stunde</b>.</td></tr>
+<tr><td><b>den ganzen Tag</b></td><td>Er bleibt <b>den ganzen Tag</b> zu Hause.</td></tr>
+<tr><td><b>drei Jahre</b></td><td>Sie lernt schon <b>drei Jahre</b> Deutsch.</td></tr></table>
+
+<h3>۲. تکرار (چند بار؟) — jeden / jede / jedes</h3>
+<table class="rule-table"><tr><th>جنس</th><th>Akkusativ</th><th>مثال</th></tr>
+<tr><td>der Tag (مذکر)</td><td><b>jeden</b> Tag</td><td>Er fährt <b>jeden Tag</b> mit dem Bus.</td></tr>
+<tr><td>die Woche (مؤنث)</td><td><b>jede</b> Woche</td><td>Wir gehen <b>jede Woche</b> ins Kino.</td></tr>
+<tr><td>das Jahr (خنثی)</td><td><b>jedes</b> Jahr</td><td>Sie reist <b>jedes Jahr</b> nach Italien.</td></tr></table>
+
+<h3>۳. نقطهٔ زمانی — nächste / letzte / diese + n</h3>
+<p><b>Nächsten</b> Montag · <b>Letztes</b> Jahr · <b>Diesen</b> Sommer.</p>
+
+<h3>۴. اندازه‌ها: قد / وزن / سن / قیمت / مسافت</h3>
+<table class="rule-table"><tr><th>اندازه</th><th>مثال</th></tr>
+<tr><td>قد</td><td>Das Kind ist <b>einen Meter</b> groß.</td></tr>
+<tr><td>وزن</td><td>Das Paket wiegt <b>einen Kilogramm</b>.</td></tr>
+<tr><td>سن</td><td>Mein Sohn ist <b>einen Monat</b> alt.</td></tr>
+<tr><td>قیمت</td><td>Das Buch kostet <b>einen Euro</b>.</td></tr>
+<tr><td>مسافت</td><td>Wir sind <b>einen Kilometer</b> gelaufen.</td></tr></table>
+
+<p><b>توجه:</b> با حرف اضافه حالت تغییر می‌کند → <i>seit einem Monat</i> (Dativ)، <i>vor zwei Wochen</i> (Dativ).</p>`,
+vi: `<h2>Biểu thức thời gian và kích thước ở Akkusativ (không có giới từ)</h2>
+<div class="rule-formula">Thời lượng / sự lặp / kích thước <b>không giới từ</b> → <span class="rule-hl">Akkusativ</span></div>
+<p>Khi một biểu thức về thời lượng, thời điểm, kích thước, cân nặng, tuổi hay giá xuất hiện <b>không có giới từ</b>, tiếng Đức dùng <b>Akkusativ</b>.</p>
+
+<h3>1. Thời lượng (bao lâu?)</h3>
+<table class="rule-table"><tr><th>Akkusativ</th><th>Ví dụ</th></tr>
+<tr><td><b>einen Monat</b></td><td>Ich war <b>einen Monat</b> in Berlin. — Tôi đã ở Berlin một tháng.</td></tr>
+<tr><td><b>eine Stunde</b></td><td>Wir warten schon <b>eine Stunde</b>.</td></tr>
+<tr><td><b>den ganzen Tag</b></td><td>Er bleibt <b>den ganzen Tag</b> zu Hause.</td></tr>
+<tr><td><b>drei Jahre</b></td><td>Sie lernt schon <b>drei Jahre</b> Deutsch.</td></tr></table>
+
+<h3>2. Sự lặp lại (bao lâu một lần?) — jeden / jede / jedes</h3>
+<table class="rule-table"><tr><th>Giống</th><th>Akkusativ</th><th>Ví dụ</th></tr>
+<tr><td>der Tag (đực)</td><td><b>jeden</b> Tag</td><td>Er fährt <b>jeden Tag</b> mit dem Bus.</td></tr>
+<tr><td>die Woche (cái)</td><td><b>jede</b> Woche</td><td>Wir gehen <b>jede Woche</b> ins Kino.</td></tr>
+<tr><td>das Jahr (trung)</td><td><b>jedes</b> Jahr</td><td>Sie reist <b>jedes Jahr</b> nach Italien.</td></tr></table>
+
+<h3>3. Mốc thời gian — nächste / letzte / diese + n</h3>
+<p><b>Nächsten</b> Montag · <b>Letztes</b> Jahr · <b>Diesen</b> Sommer.</p>
+
+<h3>4. Kích thước: chiều cao / cân nặng / tuổi / giá / khoảng cách</h3>
+<table class="rule-table"><tr><th>Đại lượng</th><th>Ví dụ</th></tr>
+<tr><td>Chiều cao</td><td>Das Kind ist <b>einen Meter</b> groß.</td></tr>
+<tr><td>Cân nặng</td><td>Das Paket wiegt <b>einen Kilogramm</b>.</td></tr>
+<tr><td>Tuổi</td><td>Mein Sohn ist <b>einen Monat</b> alt.</td></tr>
+<tr><td>Giá</td><td>Das Buch kostet <b>einen Euro</b>.</td></tr>
+<tr><td>Khoảng cách</td><td>Wir sind <b>einen Kilometer</b> gelaufen.</td></tr></table>
+
+<p><b>Lưu ý:</b> Khi có giới từ, cách thay đổi → <i>seit einem Monat</i> (Dativ), <i>vor zwei Wochen</i> (Dativ).</p>`,
+},
 
 };
