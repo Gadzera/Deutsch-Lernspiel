@@ -726,7 +726,8 @@ function showMenu() {
         sqBtn('🔄','Reflexivpronomen','pronouns','reflexiv')+
         sqBtn('🔗','Relativpronomen','pronouns','relativ')+
         sqBtn('❓','Indefinitpronomen','pronouns','indefinit')+
-        sqBtn('❔','welch- / was für ein-','pronouns','frageartikel'));
+        sqBtn('❔','welch- / was für ein-','pronouns','frageartikel')+
+        sqBtn('🔖','dieser/jeder/mancher','pronouns','artikelwort'));
 
     // 7. VWU — отдельная кнопка ведёт в showVWUMenu()
     const hasVWU=typeof VWU!=='undefined'&&VWU.levels;
@@ -1175,7 +1176,8 @@ function getMCQExplanation(item,cat,userAns,correct,isOk){
             relativ:T('Relativpronomen','Relative pronoun','Relativpronomen','İlgi zamiri','Đại từ quan hệ','ضمير الوصل','ضمیر موصولی'),
             demonstrativ:T('Demonstrativpronomen','Demonstrative pronoun','Demonstrativpronomen','İşaret zamiri','Đại từ chỉ định','ضمير الإشارة','ضمیر اشاره'),
             indefinit:T('Indefinitpronomen','Indefinite pronoun','Indefinitpronomen','Belirsiz zamir','Đại từ không xác định','ضمير غير معرف','ضمیر نامعین'),
-            frageartikel:T('Frageartikel (welch- / was für ein-)','Question article (welch- / was für ein-)','Frageartikel','Soru artikeli','Mạo từ nghi vấn','أداة السؤال','حرف تعریف پرسشی')
+            frageartikel:T('Frageartikel (welch- / was für ein-)','Question article (welch- / was für ein-)','Frageartikel','Soru artikeli','Mạo từ nghi vấn','أداة السؤال','حرف تعریف پرسشی'),
+            artikelwort:T('Artikelwort (dieser/jeder/mancher/solcher/jener)','Determiner (dieser/jeder/mancher/solcher/jener)','Artikelwort','Belirleyici zamir','Mạo từ chỉ định','أداة تعريف','حرف تعریف اشاره')
         };
         const tn=typeNames[item.type]||'';
         why=`<b>${correct}</b> — ${tn}`;
