@@ -664,6 +664,15 @@ function showMenu() {
                             <label class="toggle-switch"><input type="checkbox" ${APP.subliminal?'checked':''} onchange="APP.subliminal=this.checked;localStorage.setItem(CONFIG.prefix+'sub',this.checked)"><span class="toggle-slider"></span></label></div>
                         <div class="toggle-row"><div><div class="toggle-row-label">Dunkelmodus</div><div class="toggle-row-sub">Augenschonend bei Nacht</div></div>
                             <label class="toggle-switch"><input type="checkbox" ${localStorage.getItem(CONFIG.prefix+'dark')==='true'?'checked':''} onchange="toggleDark(this.checked)"><span class="toggle-slider"></span></label></div>
+                        <div class="setting-row" style="flex-direction:column;align-items:stretch;gap:8px">
+                            <div class="toggle-row-label">💾 Fortschritt sichern</div>
+                            <div class="toggle-row-sub" style="margin-bottom:4px">Backup als Datei speichern oder wiederherstellen</div>
+                            <div style="display:flex;gap:8px">
+                                <button class="btn btn-outline" style="flex:1;padding:8px" onclick="exportBackup()">⬇ Export</button>
+                                <button class="btn btn-outline" style="flex:1;padding:8px" onclick="triggerImport()">⬆ Import</button>
+                                <input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importBackup(event)">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div style="text-align:center;margin-bottom:12px"><button class="btn btn-outline" onclick="showStats()" style="width:auto;padding:8px 24px">📊 Meine Statistik</button></div>
@@ -686,6 +695,49 @@ function showMenu() {
 
 function doLogout(){if(!confirm(UI.logoutQ))return;localStorage.removeItem(CONFIG.prefix+'cur');APP.user=null;showAuth();}
 function toggleDark(on){document.documentElement.setAttribute('data-theme',on?'dark':'light');localStorage.setItem(CONFIG.prefix+'dark',on);}
+
+// ============== BACKUP / RESTORE ==============
+// Export ALL dlp2_* localStorage keys to a JSON file.
+// Works for all users — preserves progress, accounts, settings, known-word lists.
+function exportBackup(){
+    const data={};
+    for(let i=0;i<localStorage.length;i++){
+        const k=localStorage.key(i);
+        if(k&&k.startsWith(CONFIG.prefix)) data[k]=localStorage.getItem(k);
+    }
+    const payload={app:'deutsch-lernspiel',version:CONFIG.version,ts:Date.now(),data};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    const name=(APP.user&&APP.user.name?APP.user.name.replace(/\s+/g,'_'):'backup');
+    const date=new Date().toISOString().slice(0,10);
+    a.href=url; a.download=`dlp2_${name}_${date}.json`;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast('✓ Backup gespeichert');
+}
+function triggerImport(){ const f=$('importFile'); if(f) f.click(); }
+function importBackup(evt){
+    const file=evt.target.files&&evt.target.files[0];
+    if(!file) return;
+    const rd=new FileReader();
+    rd.onload=function(e){
+        try{
+            const p=JSON.parse(e.target.result);
+            if(!p||p.app!=='deutsch-lernspiel'||!p.data) throw new Error('invalid');
+            if(!confirm('Backup einspielen? Dies überschreibt deinen aktuellen Fortschritt.')) return;
+            Object.keys(p.data).forEach(k=>{
+                if(k.startsWith(CONFIG.prefix)) localStorage.setItem(k,p.data[k]);
+            });
+            toast('✓ Backup wiederhergestellt');
+            setTimeout(()=>location.reload(),600);
+        }catch(err){
+            toast('✗ Ungültige Backup-Datei');
+        }
+    };
+    rd.readAsText(file);
+    evt.target.value='';
+}
 
 // ============== LANGUAGE MODAL ==============
 function showLangModal(){
