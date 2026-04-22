@@ -2428,6 +2428,18 @@ function showVWULuecke(){
             });
             body+=`</div></div>`;
         });
+    } else if(item.satz){
+        // Режим конструктора предложений (Satzbau) для G2 obwohl/trotzdem и G3 damit
+        const s=item.satz;
+        APP._satz={words:[...s.words],placed:[],models:s.models,start:s.start||''};
+        body+=`<div class="satz-prompt-text">${esc(s.text)}</div>`;
+        if(s.start) body+=`<span class="satz-connector">${esc(s.start)}</span> `;
+        body+=`<div class="satz-build" id="satzBuild"></div>`;
+        body+=`<div class="luecke-bank">`;
+        s.words.forEach((w,i)=>{
+            body+=`<button class="luecke-bchip" id="sw_${i}" onclick="satzPick(${i})">${esc(w)}</button>`;
+        });
+        body+=`</div>`;
     } else if(item.text!==undefined&&item.blanks){
         const bankWords=item.bank||[];
         APP._luecke={blanks:item.blanks,bank:bankWords,reuse:sec.reuse||item.reuse||false,filled:new Array(item.blanks.length).fill(null),selectedSlot:0};
@@ -2498,6 +2510,36 @@ function lueckePick(bi){
     if(nx!==-1){const ns=document.getElementById('ls_'+nx);if(ns)ns.classList.add('luecke-slot-selected');}
 }
 
+function satzPick(wi){
+    const S=APP._satz;
+    if(!S)return;
+    const chip=document.getElementById('sw_'+wi);
+    if(!chip||chip.classList.contains('luecke-bchip-used'))return;
+    chip.classList.add('luecke-bchip-used');
+    S.placed.push(wi);
+    renderSatzBuild();
+}
+
+function satzRemove(pi){
+    const S=APP._satz;
+    if(!S)return;
+    const wi=S.placed[pi];
+    S.placed.splice(pi,1);
+    const chip=document.getElementById('sw_'+wi);
+    if(chip)chip.classList.remove('luecke-bchip-used');
+    renderSatzBuild();
+}
+
+function renderSatzBuild(){
+    const S=APP._satz;
+    const el=document.getElementById('satzBuild');
+    if(!el||!S)return;
+    if(S.placed.length===0){el.innerHTML='<span class="satz-placeholder">Tippen Sie auf die Wörter...</span>';return;}
+    el.innerHTML=S.placed.map((wi,pi)=>
+        '<button class="satz-word" onclick="satzRemove('+pi+')">'+esc(S.words[wi])+'</button>'
+    ).join(' ');
+}
+
 function checkVWULuecke(){
     const v=APP.vwu,sec=v.test.sections[v.secIdx];
     const item=sec.items[v.gramIdx];
@@ -2517,6 +2559,18 @@ function checkVWULuecke(){
                 else{chip.classList.add('luecke-chip-ok');}
             });
         });
+    } else if(item.satz){
+        const S=APP._satz;
+        const built=S.placed.map(wi=>S.words[wi]).join(' ');
+        const norm=s=>s.toLowerCase().replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim();
+        const ok=item.satz.models.some(m=>norm(built)===norm(m));
+        const el=document.getElementById('satzBuild');
+        document.querySelectorAll('.luecke-bchip').forEach(c=>{c.disabled=true;c.onclick=null;});
+        if(el){
+            document.querySelectorAll('.satz-word').forEach(w=>{w.onclick=null;w.style.cursor='default';});
+            if(ok){el.classList.add('satz-build-correct');score+=perItem*2;}
+            else{el.classList.add('satz-build-wrong');el.insertAdjacentHTML('afterend','<div class="luecke-model">'+esc(item.satz.models[0])+'</div>');v.wrongs.push({q:item.satz.text,userAnswer:built||'—',correct:item.satz.models[0]});}
+        }
     } else if(item.text!==undefined&&item.blanks){
         const L=APP._luecke;
         item.blanks.forEach((acc,i)=>{
