@@ -2411,24 +2411,7 @@ function showVWULuecke(){
     const rk=sec.ruleKey;
     const regelH=rk&&typeof RULES!=='undefined'&&RULES[rk]?`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('${rk}','showVWULuecke()')">📖</button>`:'';
     let body='';
-    if(item.text!==undefined&&item.blanks){
-        if(item.bank&&item.bank.length){
-            body+=`<div class="luecke-bank"><em>${esc(sec.bankLabel||'')}</em> <strong>${item.bank.map(w=>esc(w)).join(' – ')}</strong></div>`;
-        }
-        let tx=esc(item.text);
-        for(let i=0;i<item.blanks.length;i++){
-            const h=item.hints?item.hints[i]||'':'';
-            const hh=h?` <span class="luecke-hint">${esc(h)}</span>`:'';
-            tx=tx.replace('___'+i+'___',`<input type="text" class="luecke-input" id="lk_${i}" autocomplete="off" autocapitalize="off" spellcheck="false">${hh}`);
-        }
-        body+=`<div class="luecke-text">${tx}</div>`;
-    } else if(item.prompts){
-        item.prompts.forEach((p,i)=>{
-            body+=`<div class="luecke-prompt">`;
-            if(p.text) body+=`<div class="luecke-prompt-text">${esc(p.text)}</div>`;
-            body+=`<div class="luecke-prompt-row"><span class="luecke-prompt-hint">${esc(p.hint||'')}</span><input type="text" class="luecke-input luecke-input-wide" id="lk_${i}" autocomplete="off" spellcheck="false"></div></div>`;
-        });
-    } else if(item.questions){
+    if(item.questions){
         if(item.example){
             const eq=item.example;
             body+=`<div class="luecke-example"><strong>Beispiel:</strong> ${esc(eq.q)}<br><div class="luecke-chips luecke-chips-demo">`;
@@ -2445,26 +2428,25 @@ function showVWULuecke(){
             });
             body+=`</div></div>`;
         });
-    } else if(item.verbs){
-        if(item.example){
-            body+=`<div class="luecke-example"><strong>Beispiel:</strong> ${esc(item.example.verb)} → <em>${esc(item.example.answer)}</em></div>`;
+    } else if(item.text!==undefined&&item.blanks){
+        const bankWords=item.bank||[];
+        APP._luecke={blanks:item.blanks,bank:bankWords,reuse:sec.reuse||item.reuse||false,filled:new Array(item.blanks.length).fill(null),selectedSlot:0};
+        if(bankWords.length){
+            body+=`<div class="luecke-bank">`;
+            if(sec.bankLabel) body+=`<em class="luecke-bank-label">${esc(sec.bankLabel)}</em>`;
+            bankWords.forEach((w,i)=>{
+                body+=`<button class="luecke-bchip" id="lbc_${i}" onclick="lueckePick(${i})">${esc(w)}</button>`;
+            });
+            body+=`</div>`;
         }
-        item.verbs.forEach((vb,i)=>{
-            body+=`<div class="luecke-verb-row"><span class="luecke-verb">• ${esc(vb.verb)}</span> → <input type="text" class="luecke-input luecke-input-wide" id="lk_${i}" autocomplete="off" spellcheck="false"></div>`;
-        });
-    } else if(item.rows){
-        body+=`<table class="luecke-table"><tr><th>Überbegriff</th><th colspan="3">Passende Nomen</th></tr>`;
-        if(item.example){
-            body+=`<tr class="luecke-ex-row"><td><em>${esc(item.example.category)}</em></td>`;
-            item.example.nouns.forEach(n=>{body+=`<td>${esc(n)}</td>`;});
-            body+=`<td><em>${esc(item.example.answer)}</em></td></tr>`;
+        let tx=esc(item.text).replace(/\n/g,'<br>');
+        for(let i=0;i<item.blanks.length;i++){
+            const h=item.hints?item.hints[i]||'':'';
+            const hh=h?` <span class="luecke-hint">${esc(h)}</span>`:'';
+            const sel=i===0?' luecke-slot-selected':'';
+            tx=tx.replace('___'+i+'___',`<button class="luecke-slot${sel}" id="ls_${i}" onclick="lueckeSlot(${i})">___</button>${hh}`);
         }
-        item.rows.forEach((r,ri)=>{
-            body+=`<tr><td><input type="text" class="luecke-input luecke-input-sm" id="lk_cat_${ri}" placeholder="?" autocomplete="off"></td>`;
-            r.nouns.forEach(n=>{body+=`<td>${esc(n)}</td>`;});
-            body+=`<td><input type="text" class="luecke-input luecke-input-sm" id="lk_noun_${ri}" placeholder="?" autocomplete="off"></td></tr>`;
-        });
-        body+=`</table>`;
+        body+=`<div class="luecke-text">${tx}</div>`;
     }
     $('app').innerHTML=`
         <div class="quiz-page">
@@ -2480,8 +2462,40 @@ function showVWULuecke(){
                 <div class="vwu-rule-hint" id="vwuRule" style="display:none"></div>
             </div>
         </div>`;
-    const fi=document.querySelector('.luecke-input');
-    if(fi)setTimeout(()=>fi.focus(),150);
+}
+
+function lueckeSlot(idx){
+    const L=APP._luecke;
+    if(!L)return;
+    if(L.filled[idx]!==null){
+        const bi=L.filled[idx];
+        L.filled[idx]=null;
+        const s=document.getElementById('ls_'+idx);
+        if(s){s.textContent='___';s.classList.remove('luecke-slot-filled');}
+        if(!L.reuse){const c=document.getElementById('lbc_'+bi);if(c)c.classList.remove('luecke-bchip-used');}
+    }
+    document.querySelectorAll('.luecke-slot').forEach(s=>s.classList.remove('luecke-slot-selected'));
+    const s=document.getElementById('ls_'+idx);
+    if(s)s.classList.add('luecke-slot-selected');
+    L.selectedSlot=idx;
+}
+
+function lueckePick(bi){
+    const L=APP._luecke;
+    if(!L)return;
+    const chip=document.getElementById('lbc_'+bi);
+    if(!L.reuse&&chip&&chip.classList.contains('luecke-bchip-used'))return;
+    let t=L.selectedSlot;
+    if(t===null||t===undefined||L.filled[t]!==null){t=L.filled.indexOf(null);if(t===-1)return;}
+    L.filled[t]=bi;
+    const w=L.bank[bi];
+    const sl=document.getElementById('ls_'+t);
+    if(sl){sl.textContent=w;sl.classList.add('luecke-slot-filled');sl.classList.remove('luecke-slot-selected');}
+    if(!L.reuse&&chip)chip.classList.add('luecke-bchip-used');
+    const nx=L.filled.indexOf(null);
+    L.selectedSlot=nx;
+    document.querySelectorAll('.luecke-slot').forEach(s=>s.classList.remove('luecke-slot-selected'));
+    if(nx!==-1){const ns=document.getElementById('ls_'+nx);if(ns)ns.classList.add('luecke-slot-selected');}
 }
 
 function checkVWULuecke(){
@@ -2489,27 +2503,7 @@ function checkVWULuecke(){
     const item=sec.items[v.gramIdx];
     let score=0;
     const perItem=sec.perItem||0.5;
-    if(item.text!==undefined&&item.blanks){
-        item.blanks.forEach((acc,i)=>{
-            const inp=document.getElementById('lk_'+i);
-            if(!inp)return;
-            const val=inp.value.trim();
-            const ok=acc.some(a=>a.toLowerCase()===val.toLowerCase());
-            inp.disabled=true;
-            if(ok){inp.classList.add('luecke-correct');score+=perItem;}
-            else{inp.classList.add('luecke-wrong');inp.insertAdjacentHTML('afterend',`<span class="luecke-answer">${esc(acc[0])}</span>`);v.wrongs.push({q:'Lücke '+(i+1),userAnswer:val||'—',correct:acc[0]});}
-        });
-    } else if(item.prompts){
-        item.prompts.forEach((p,i)=>{
-            const inp=document.getElementById('lk_'+i);
-            if(!inp)return;
-            inp.disabled=true;
-            const val=inp.value.trim();
-            if(val.length>5){score+=perItem;inp.classList.add('luecke-correct');}
-            else{inp.classList.add('luecke-wrong');}
-            inp.insertAdjacentHTML('afterend',`<div class="luecke-model">Muster: ${esc(p.model)}</div>`);
-        });
-    } else if(item.questions){
+    if(item.questions){
         item.questions.forEach((q,qi)=>{
             q.words.forEach((w,wi)=>{
                 const cb=document.getElementById('lk_'+qi+'_'+wi);
@@ -2523,30 +2517,24 @@ function checkVWULuecke(){
                 else{chip.classList.add('luecke-chip-ok');}
             });
         });
-    } else if(item.verbs){
-        item.verbs.forEach((vb,i)=>{
-            const inp=document.getElementById('lk_'+i);
-            if(!inp)return;
-            inp.disabled=true;
-            const val=inp.value.trim().toLowerCase();
-            const ok=vb.answers.some(a=>a.toLowerCase()===val);
-            if(ok){score+=perItem;inp.classList.add('luecke-correct');}
-            else if(val.length>3){score+=perItem*0.5;inp.classList.add('luecke-partial');}
-            else{inp.classList.add('luecke-wrong');v.wrongs.push({q:vb.verb,userAnswer:val||'—',correct:vb.answers[0]});}
-            inp.insertAdjacentHTML('afterend',`<div class="luecke-model">${esc(vb.answers[0])}</div>`);
+    } else if(item.text!==undefined&&item.blanks){
+        const L=APP._luecke;
+        item.blanks.forEach((acc,i)=>{
+            const sl=document.getElementById('ls_'+i);
+            if(!sl)return;
+            const val=L&&L.filled[i]!==null?L.bank[L.filled[i]]:'';
+            const ok=acc.some(a=>a.toLowerCase()===val.toLowerCase());
+            sl.onclick=null;sl.style.cursor='default';
+            if(ok){sl.classList.add('luecke-correct');score+=perItem;}
+            else{sl.classList.add('luecke-wrong');sl.insertAdjacentHTML('afterend',`<span class="luecke-answer">${esc(acc[0])}</span>`);v.wrongs.push({q:'Lücke '+(i+1),userAnswer:val||'—',correct:acc[0]});}
         });
-    } else if(item.rows){
-        item.rows.forEach((r,ri)=>{
-            const ci=document.getElementById('lk_cat_'+ri),ni=document.getElementById('lk_noun_'+ri);
-            if(ci){ci.disabled=true;const val=ci.value.trim().toLowerCase();const ok=r.catAnswers.some(a=>a.toLowerCase()===val);if(ok){score+=perItem;ci.classList.add('luecke-correct');}else{ci.classList.add('luecke-wrong');ci.insertAdjacentHTML('afterend',`<span class="luecke-answer">${esc(r.catAnswers[0])}</span>`);v.wrongs.push({q:'Überbegriff',userAnswer:val||'—',correct:r.catAnswers[0]});}}
-            if(ni){ni.disabled=true;const val=ni.value.trim().toLowerCase();const ok=r.nounAnswers.some(a=>a.toLowerCase()===val);if(ok){score+=perItem;ni.classList.add('luecke-correct');}else{ni.classList.add('luecke-wrong');ni.insertAdjacentHTML('afterend',`<span class="luecke-answer">${esc(r.nounAnswers[0])}</span>`);v.wrongs.push({q:'Nomen',userAnswer:val||'—',correct:r.nounAnswers[0]});}}
-        });
+        document.querySelectorAll('.luecke-bchip').forEach(c=>{c.disabled=true;c.onclick=null;});
     }
     v.gramScore+=Math.round(score*10)/10;
     const sc=$('qsc');if(sc)sc.textContent='✓ '+v.gramScore;
     const btn=document.getElementById('lueckeCheckBtn');
     if(btn){btn.textContent='Weiter →';btn.onclick=function(){v.gramIdx++;showVWULuecke();};}
-    document.querySelectorAll('.luecke-input').forEach(inp=>{inp.disabled=true;});
+    document.querySelectorAll('.luecke-slot').forEach(s=>{s.onclick=null;s.style.cursor='default';});
     document.querySelectorAll('.luecke-chip input').forEach(cb=>{cb.disabled=true;});
 }
 
