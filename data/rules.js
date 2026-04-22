@@ -4347,4 +4347,305 @@ vi: `<h2>Präteritum (thì quá khứ văn viết)</h2>
 <p>bringen → <b>brachte</b> · denken → <b>dachte</b> · wissen → <b>wusste</b> · kennen → <b>kannte</b> · nennen → <b>nannte</b>.</p>`,
 },
 
+
+deklination: {
+de: `<h2>Deklination im Deutschen</h2>
+<h3>1. n-Deklination (schwache Maskulina)</h3>
+<p>Bestimmte maskuline Nomen erhalten im <b>Akkusativ, Dativ und Genitiv</b> die Endung <b>-(e)n</b>.</p>
+<p>Typisch: Nomen auf <b>-e</b> (der Junge, der Kollege), <b>-ant/-ent/-ist/-at</b> (der Student, der Patient, der Polizist).</p>
+<table><tr><th>Kasus</th><th>Artikel</th><th>Nomen</th></tr>
+<tr><td>Nominativ</td><td>der</td><td>Student</td></tr>
+<tr><td>Akkusativ</td><td>den</td><td>Student<b>en</b></td></tr>
+<tr><td>Dativ</td><td>dem</td><td>Student<b>en</b></td></tr>
+<tr><td>Genitiv</td><td>des</td><td>Student<b>en</b></td></tr></table>
+<h3>2. Adjektivdeklination</h3>
+<p><b>Schwache Deklination</b> (nach der/die/das): Nominativ <b>-e</b>, alle anderen Fälle <b>-en</b>.</p>
+<p><b>Gemischte Deklination</b> (nach ein/kein/mein): m.Nom <b>-er</b>, n.Nom/Akk <b>-es</b>, f.Nom/Akk <b>-e</b>, Rest <b>-en</b>.</p>
+<p><b>Starke Deklination</b> (ohne Artikel): Adjektiv übernimmt Artikelendung.</p>
+<h3>3. Genitiv-Attribute</h3>
+<p>Maskulin/Neutrum: <b>des + Nomen+(e)s</b>: <em>des Mannes, des Kindes</em></p>
+<p>Feminin/Plural: <b>der + Nomen</b>: <em>der Frau, der Kinder</em></p>`,
+ru: `<h2>Склонение в немецком языке</h2>
+<h3>1. n-Deklination (слабые существительные мужского рода)</h3>
+<p>Некоторые мужские существительные получают окончание <b>-(e)n</b> во всех падежах, кроме Nominativ.</p>
+<p>Типичные: на <b>-e</b> (der Junge, der Kollege), <b>-ant/-ent/-ist/-at</b> (der Student, der Patient).</p>
+<table><tr><th>Падеж</th><th>Артикль</th><th>Существительное</th></tr>
+<tr><td>Nominativ</td><td>der</td><td>Student</td></tr>
+<tr><td>Akkusativ</td><td>den</td><td>Student<b>en</b></td></tr>
+<tr><td>Dativ</td><td>dem</td><td>Student<b>en</b></td></tr>
+<tr><td>Genitiv</td><td>des</td><td>Student<b>en</b></td></tr></table>
+<h3>2. Склонение прилагательных</h3>
+<p><b>Слабое</b> (после der/die/das): Nom <b>-e</b>, всё остальное <b>-en</b>.</p>
+<p><b>Смешанное</b> (после ein/kein/mein): м.Nom <b>-er</b>, ср.Nom/Akk <b>-es</b>, ж.Nom/Akk <b>-e</b>, остальное <b>-en</b>.</p>
+<p><b>Сильное</b> (без артикля): прилагательное берёт окончание артикля.</p>
+<h3>3. Генитив</h3>
+<p>Муж./Средний: <b>des + сущ.+(e)s</b>: <em>des Mannes, des Kindes</em></p>
+<p>Жен./Мн.ч.: <b>der + сущ.</b>: <em>der Frau, der Kinder</em></p>`,
+en: `<h2>Declension in German</h2>
+<h3>1. n-Declension (weak masculine nouns)</h3>
+<p>Certain masculine nouns take the ending <b>-(e)n</b> in Accusative, Dative, and Genitive.</p>
+<p>Typical: nouns ending in <b>-e</b> (der Junge, der Kollege), <b>-ant/-ent/-ist/-at</b> (der Student, der Patient).</p>
+<table><tr><th>Case</th><th>Article</th><th>Noun</th></tr>
+<tr><td>Nominativ</td><td>der</td><td>Student</td></tr>
+<tr><td>Akkusativ</td><td>den</td><td>Student<b>en</b></td></tr>
+<tr><td>Dativ</td><td>dem</td><td>Student<b>en</b></td></tr>
+<tr><td>Genitiv</td><td>des</td><td>Student<b>en</b></td></tr></table>
+<h3>2. Adjective Declension</h3>
+<p><b>Weak</b> (after der/die/das): Nominative <b>-e</b>, all others <b>-en</b>.</p>
+<p><b>Mixed</b> (after ein/kein/mein): m.Nom <b>-er</b>, n.Nom/Acc <b>-es</b>, f.Nom/Acc <b>-e</b>, rest <b>-en</b>.</p>
+<p><b>Strong</b> (no article): adjective takes the article ending.</p>
+<h3>3. Genitive Attributes</h3>
+<p>Masculine/Neuter: <b>des + noun+(e)s</b>. Feminine/Plural: <b>der + noun</b>.</p>`,
+},
+
+
+vwu_nomen_verben: {
+de: `<h2>Nomen → Verben</h2>
+<p>Viele deutsche Nomen sind von Verben abgeleitet. Die wichtigsten Muster:</p>
+<table class="rule-table"><tr><th>Nomen</th><th>Verb</th><th>Muster</th></tr>
+<tr><td>die Wohn<b>ung</b></td><td>wohn<b>en</b></td><td>-ung → -en</td></tr>
+<tr><td>die Fahr<b>t</b></td><td>fahr<b>en</b></td><td>-t → -en (Stammvokal!)</td></tr>
+<tr><td>der An<b>ruf</b></td><td><b>an</b>ruf<b>en</b></td><td>trennbares Verb</td></tr>
+<tr><td>die Über<b>setzung</b></td><td>über<b>setzen</b></td><td>untrennbar: be-, er-, ver-, zer-, über-...</td></tr>
+</table>
+<p><b>Achtung:</b> Starke Verben ändern den Stammvokal: der Schlaf → er schl<b>ä</b>ft, der Vorschlag → sie schl<b>ä</b>gt vor.</p>`,
+ru: `<h2>Существительное → Глагол</h2>
+<p>Многие существительные образованы от глаголов:</p>
+<table class="rule-table"><tr><th>Сущ.</th><th>Глагол</th><th>Модель</th></tr>
+<tr><td>die Wohn<b>ung</b></td><td>wohn<b>en</b></td><td>-ung → -en</td></tr>
+<tr><td>die Fahr<b>t</b></td><td>fahr<b>en</b></td><td>-t → -en (корневая гласная!)</td></tr>
+<tr><td>der An<b>ruf</b></td><td><b>an</b>ruf<b>en</b></td><td>отделяемый глагол</td></tr>
+</table>
+<p><b>Внимание:</b> сильные глаголы меняют корневую гласную: der Schlaf → er schl<b>ä</b>ft.</p>`,
+en: `<h2>Noun → Verb</h2>
+<p>Many German nouns are derived from verbs:</p>
+<table class="rule-table"><tr><th>Noun</th><th>Verb</th><th>Pattern</th></tr>
+<tr><td>die Wohn<b>ung</b></td><td>wohn<b>en</b></td><td>-ung → -en</td></tr>
+<tr><td>die Fahr<b>t</b></td><td>fahr<b>en</b></td><td>-t → -en (stem vowel change!)</td></tr>
+<tr><td>der An<b>ruf</b></td><td><b>an</b>ruf<b>en</b></td><td>separable verb</td></tr>
+</table>
+<p><b>Note:</b> Strong verbs change the stem vowel: der Schlaf → er schl<b>ä</b>ft.</p>`
+},
+
+vwu_adj_antonyme: {
+de: `<h2>Adjektive & Antonyme</h2>
+<p><b>Adjektive</b> beschreiben Eigenschaften: klug, durstig, still, leer, treu, fein.</p>
+<p>Nicht verwechseln mit Adverbien (jetzt, dann, nur, sowieso) oder Konjunktionen (weil, ob, statt)!</p>
+<h3>Antonyme (Gegenteile)</h3>
+<table class="rule-table"><tr><th>Adjektiv</th><th>Gegenteil</th><th>Bildung</th></tr>
+<tr><td>schnell</td><td>langsam</td><td>komplett anders</td></tr>
+<tr><td>höflich</td><td><b>un</b>höflich</td><td>Präfix <b>un-</b></td></tr>
+<tr><td>einschalten</td><td><b>aus</b>schalten</td><td>Präfix-Wechsel</td></tr>
+</table>
+<p><b>Tipp:</b> Häufige Antonyme mit <b>un-</b>: glücklich/unglücklich, höflich/unhöflich, sicher/unsicher.</p>`,
+ru: `<h2>Прилагательные и антонимы</h2>
+<p><b>Прилагательные</b> описывают свойства: klug (умный), still (тихий), leer (пустой).</p>
+<p>Не путайте с наречиями (jetzt, dann) или союзами (weil, ob)!</p>
+<h3>Антонимы</h3>
+<table class="rule-table"><tr><th>Слово</th><th>Антоним</th><th>Способ</th></tr>
+<tr><td>schnell</td><td>langsam</td><td>другое слово</td></tr>
+<tr><td>höflich</td><td><b>un</b>höflich</td><td>приставка <b>un-</b></td></tr>
+</table>`,
+en: `<h2>Adjectives & Antonyms</h2>
+<p><b>Adjectives</b> describe qualities: klug (clever), still (quiet), leer (empty).</p>
+<p>Don't confuse with adverbs (jetzt, dann) or conjunctions (weil, ob)!</p>
+<h3>Antonyms</h3>
+<table class="rule-table"><tr><th>Word</th><th>Antonym</th><th>Method</th></tr>
+<tr><td>schnell</td><td>langsam</td><td>different word</td></tr>
+<tr><td>höflich</td><td><b>un</b>höflich</td><td>prefix <b>un-</b></td></tr>
+</table>`
+},
+
+vwu_konnektoren: {
+de: `<h2>Konnektoren: als, bis, seit(dem), wann, wenn</h2>
+<table class="rule-table"><tr><th>Konnektor</th><th>Bedeutung</th><th>Beispiel</th></tr>
+<tr><td><b>als</b></td><td>einmalig in der Vergangenheit</td><td><b>Als</b> er ankam, war er müde.</td></tr>
+<tr><td><b>wenn</b></td><td>wiederholend / Gegenwart / Zukunft / Bedingung</td><td><b>Wenn</b> es regnet, nehme ich den Schirm.</td></tr>
+<tr><td><b>bis</b></td><td>bis zu einem Zeitpunkt</td><td>Warte, <b>bis</b> ich komme.</td></tr>
+<tr><td><b>seit(dem)</b></td><td>seit einem Zeitpunkt (andauernd)</td><td><b>Seitdem</b> er hier wohnt, ist er glücklich.</td></tr>
+<tr><td><b>wann</b></td><td>Frage nach dem Zeitpunkt</td><td>Weißt du, <b>wann</b> er kommt?</td></tr>
+</table>
+<p><b>Merke:</b> als/wenn → Nebensatz (Verb am Ende). wann → indirekte Frage.</p>`,
+ru: `<h2>Коннекторы: als, bis, seit(dem), wann, wenn</h2>
+<table class="rule-table"><tr><th>Слово</th><th>Значение</th><th>Пример</th></tr>
+<tr><td><b>als</b></td><td>однократно в прошлом</td><td><b>Als</b> er ankam, war er müde.</td></tr>
+<tr><td><b>wenn</b></td><td>повторяющееся / настоящее / будущее / условие</td><td><b>Wenn</b> es regnet, nehme ich den Schirm.</td></tr>
+<tr><td><b>bis</b></td><td>до какого-то момента</td><td>Warte, <b>bis</b> ich komme.</td></tr>
+<tr><td><b>seit(dem)</b></td><td>с какого-то момента</td><td><b>Seitdem</b> er hier wohnt, ist er glücklich.</td></tr>
+<tr><td><b>wann</b></td><td>вопрос о времени</td><td>Weißt du, <b>wann</b> er kommt?</td></tr>
+</table>`,
+en: `<h2>Connectors: als, bis, seit(dem), wann, wenn</h2>
+<table class="rule-table"><tr><th>Word</th><th>Meaning</th><th>Example</th></tr>
+<tr><td><b>als</b></td><td>one-time past event</td><td><b>Als</b> er ankam, war er müde.</td></tr>
+<tr><td><b>wenn</b></td><td>repeated / present / future / condition</td><td><b>Wenn</b> es regnet, nehme ich den Schirm.</td></tr>
+<tr><td><b>bis</b></td><td>until a point in time</td><td>Warte, <b>bis</b> ich komme.</td></tr>
+<tr><td><b>seit(dem)</b></td><td>since a point in time</td><td><b>Seitdem</b> er hier wohnt, ist er glücklich.</td></tr>
+<tr><td><b>wann</b></td><td>question about time</td><td>Weißt du, <b>wann</b> er kommt?</td></tr>
+</table>`
+},
+
+
+pron_personal: {
+de: `<h2>Personalpronomen</h2>
+<table class="rule-table"><tr><th></th><th>Nom.</th><th>Akk.</th><th>Dat.</th></tr>
+<tr><td>ich</td><td>ich</td><td>mich</td><td>mir</td></tr>
+<tr><td>du</td><td>du</td><td>dich</td><td>dir</td></tr>
+<tr><td>er</td><td>er</td><td>ihn</td><td>ihm</td></tr>
+<tr><td>sie</td><td>sie</td><td>sie</td><td>ihr</td></tr>
+<tr><td>es</td><td>es</td><td>es</td><td>ihm</td></tr>
+<tr><td>wir</td><td>wir</td><td>uns</td><td>uns</td></tr>
+<tr><td>ihr</td><td>ihr</td><td>euch</td><td>euch</td></tr>
+<tr><td>sie/Sie</td><td>sie/Sie</td><td>sie/Sie</td><td>ihnen/Ihnen</td></tr>
+</table>`,
+ru: `<h2>Личные местоимения</h2>
+<table class="rule-table"><tr><th></th><th>Им.</th><th>Вин.</th><th>Дат.</th></tr>
+<tr><td>я</td><td>ich</td><td>mich</td><td>mir</td></tr>
+<tr><td>ты</td><td>du</td><td>dich</td><td>dir</td></tr>
+<tr><td>он</td><td>er</td><td>ihn</td><td>ihm</td></tr>
+<tr><td>она</td><td>sie</td><td>sie</td><td>ihr</td></tr>
+<tr><td>оно</td><td>es</td><td>es</td><td>ihm</td></tr>
+<tr><td>мы</td><td>wir</td><td>uns</td><td>uns</td></tr>
+<tr><td>вы</td><td>ihr</td><td>euch</td><td>euch</td></tr>
+<tr><td>они/Вы</td><td>sie/Sie</td><td>sie/Sie</td><td>ihnen/Ihnen</td></tr>
+</table>`,
+en: `<h2>Personal Pronouns</h2>
+<table class="rule-table"><tr><th></th><th>Nom.</th><th>Acc.</th><th>Dat.</th></tr>
+<tr><td>I</td><td>ich</td><td>mich</td><td>mir</td></tr>
+<tr><td>you</td><td>du</td><td>dich</td><td>dir</td></tr>
+<tr><td>he</td><td>er</td><td>ihn</td><td>ihm</td></tr>
+<tr><td>she</td><td>sie</td><td>sie</td><td>ihr</td></tr>
+<tr><td>it</td><td>es</td><td>es</td><td>ihm</td></tr>
+<tr><td>we</td><td>wir</td><td>uns</td><td>uns</td></tr>
+<tr><td>you(pl)</td><td>ihr</td><td>euch</td><td>euch</td></tr>
+<tr><td>they/You</td><td>sie/Sie</td><td>sie/Sie</td><td>ihnen/Ihnen</td></tr>
+</table>`
+},
+
+pron_possessiv: {
+de: `<h2>Possessivpronomen</h2>
+<table class="rule-table"><tr><th>Person</th><th>Nom. m</th><th>Nom. f</th><th>Nom. n</th><th>Akk. m</th></tr>
+<tr><td>ich</td><td>mein</td><td>meine</td><td>mein</td><td>meinen</td></tr>
+<tr><td>du</td><td>dein</td><td>deine</td><td>dein</td><td>deinen</td></tr>
+<tr><td>er/es</td><td>sein</td><td>seine</td><td>sein</td><td>seinen</td></tr>
+<tr><td>sie</td><td>ihr</td><td>ihre</td><td>ihr</td><td>ihren</td></tr>
+<tr><td>wir</td><td>unser</td><td>unsere</td><td>unser</td><td>unseren</td></tr>
+<tr><td>ihr</td><td>euer</td><td>eure</td><td>euer</td><td>euren</td></tr>
+<tr><td>sie/Sie</td><td>ihr/Ihr</td><td>ihre/Ihre</td><td>ihr/Ihr</td><td>ihren/Ihren</td></tr>
+</table>
+<p>Endungen wie ein-Wörter: mein<b>en</b> (Akk.m), mein<b>em</b> (Dat.m/n), mein<b>er</b> (Dat.f/Gen.f).</p>`,
+ru: `<h2>Притяжательные местоимения</h2>
+<p>mein (мой), dein (твой), sein (его), ihr (её), unser (наш), euer (ваш), ihr (их).</p>
+<p>Склоняются как ein-слова: mein<b>en</b> (Akk.m), mein<b>em</b> (Dat.m/n), mein<b>er</b> (Dat.f).</p>`,
+en: `<h2>Possessive Pronouns</h2>
+<p>mein (my), dein (your), sein (his), ihr (her), unser (our), euer (your pl.), ihr (their).</p>
+<p>Declined like ein-words: mein<b>en</b> (Acc.m), mein<b>em</b> (Dat.m/n), mein<b>er</b> (Dat.f).</p>`
+},
+
+pron_reflexiv: {
+de: `<h2>Reflexivpronomen</h2>
+<table class="rule-table"><tr><th>Person</th><th>Akkusativ</th><th>Dativ</th></tr>
+<tr><td>ich</td><td>mich</td><td>mir</td></tr>
+<tr><td>du</td><td>dich</td><td>dir</td></tr>
+<tr><td>er/sie/es</td><td>sich</td><td>sich</td></tr>
+<tr><td>wir</td><td>uns</td><td>uns</td></tr>
+<tr><td>ihr</td><td>euch</td><td>euch</td></tr>
+<tr><td>sie/Sie</td><td>sich</td><td>sich</td></tr>
+</table>
+<p><b>Akk:</b> sich waschen, sich setzen. <b>Dat:</b> sich die Hände waschen, sich etwas kaufen.</p>`,
+ru: `<h2>Возвратные местоимения</h2>
+<table class="rule-table"><tr><th>Лицо</th><th>Вин.</th><th>Дат.</th></tr>
+<tr><td>ich</td><td>mich</td><td>mir</td></tr>
+<tr><td>du</td><td>dich</td><td>dir</td></tr>
+<tr><td>er/sie/es</td><td>sich</td><td>sich</td></tr>
+<tr><td>wir</td><td>uns</td><td>uns</td></tr>
+<tr><td>ihr</td><td>euch</td><td>euch</td></tr>
+<tr><td>sie/Sie</td><td>sich</td><td>sich</td></tr>
+</table>`,
+en: `<h2>Reflexive Pronouns</h2>
+<table class="rule-table"><tr><th>Person</th><th>Acc.</th><th>Dat.</th></tr>
+<tr><td>ich</td><td>mich</td><td>mir</td></tr>
+<tr><td>du</td><td>dich</td><td>dir</td></tr>
+<tr><td>er/sie/es</td><td>sich</td><td>sich</td></tr>
+<tr><td>wir</td><td>uns</td><td>uns</td></tr>
+<tr><td>ihr</td><td>euch</td><td>euch</td></tr>
+<tr><td>sie/Sie</td><td>sich</td><td>sich</td></tr>
+</table>`
+},
+
+pron_relativ: {
+de: `<h2>Relativpronomen</h2>
+<table class="rule-table"><tr><th>Kasus</th><th>Maskulin</th><th>Feminin</th><th>Neutrum</th><th>Plural</th></tr>
+<tr><td>Nom.</td><td>der</td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Akk.</td><td>den</td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Dat.</td><td>dem</td><td>der</td><td>dem</td><td>denen</td></tr>
+<tr><td>Gen.</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
+</table>
+<p>Der Mann, <b>den</b> ich kenne... Die Frau, <b>der</b> ich helfe... Das Kind, <b>das</b> spielt...</p>`,
+ru: `<h2>Относительные местоимения</h2>
+<table class="rule-table"><tr><th>Падеж</th><th>м.р.</th><th>ж.р.</th><th>ср.р.</th><th>мн.ч.</th></tr>
+<tr><td>Им.</td><td>der</td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Вин.</td><td>den</td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Дат.</td><td>dem</td><td>der</td><td>dem</td><td>denen</td></tr>
+<tr><td>Род.</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
+</table>`,
+en: `<h2>Relative Pronouns</h2>
+<table class="rule-table"><tr><th>Case</th><th>Masc.</th><th>Fem.</th><th>Neut.</th><th>Plural</th></tr>
+<tr><td>Nom.</td><td>der</td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Acc.</td><td>den</td><td>die</td><td>das</td><td>die</td></tr>
+<tr><td>Dat.</td><td>dem</td><td>der</td><td>dem</td><td>denen</td></tr>
+<tr><td>Gen.</td><td>dessen</td><td>deren</td><td>dessen</td><td>deren</td></tr>
+</table>`
+},
+
+pron_indefinit: {
+de: `<h2>Indefinitpronomen</h2>
+<p><b>man</b> (jemand allgemein), <b>jemand</b> (eine Person), <b>niemand</b> (keine Person),
+<b>etwas</b> (eine Sache), <b>nichts</b> (keine Sache), <b>alle</b> (Gesamtheit), <b>einige</b> (Teil), <b>viele</b> (große Menge).</p>
+<table class="rule-table"><tr><th>Wort</th><th>Akk.</th><th>Dat.</th></tr>
+<tr><td>jemand</td><td>jemand(en)</td><td>jemand(em)</td></tr>
+<tr><td>niemand</td><td>niemand(en)</td><td>niemand(em)</td></tr>
+</table>
+<p><b>Tipp:</b> man ≠ Mann! <i>Man</i> = unpersönlich, <i>der Mann</i> = Substantiv.</p>`,
+ru: `<h2>Неопределённые местоимения</h2>
+<p><b>man</b> (кто-то вообще), <b>jemand</b> (кто-то), <b>niemand</b> (никто),
+<b>etwas</b> (что-то), <b>nichts</b> (ничего), <b>alle</b> (все).</p>`,
+en: `<h2>Indefinite Pronouns</h2>
+<p><b>man</b> (one/people in general), <b>jemand</b> (someone), <b>niemand</b> (nobody),
+<b>etwas</b> (something), <b>nichts</b> (nothing), <b>alle</b> (all/everyone).</p>`
+},
+
+pron_frageartikel: {
+de: `<h2>Frageartikel: welch- / was für ein-</h2>
+<table class="rule-table"><tr><th>Kasus</th><th>welch- (m)</th><th>welch- (f)</th><th>welch- (n)</th><th>welch- (Pl)</th></tr>
+<tr><td>Nom.</td><td>welcher</td><td>welche</td><td>welches</td><td>welche</td></tr>
+<tr><td>Akk.</td><td>welchen</td><td>welche</td><td>welches</td><td>welche</td></tr>
+<tr><td>Dat.</td><td>welchem</td><td>welcher</td><td>welchem</td><td>welchen</td></tr>
+</table>
+<p><b>welch-</b> = aus einer begrenzten Auswahl: <i>Welchen Kurs besuchst du?</i></p>
+<p><b>was für ein-</b> = nach Art/Typ: <i>Was für ein Auto hast du?</i></p>`,
+ru: `<h2>Вопросительные артикли: welch- / was für ein-</h2>
+<p><b>welch-</b> = какой (из выбора): <i>Welchen Kurs besuchst du?</i></p>
+<p><b>was für ein-</b> = что за (тип): <i>Was für ein Auto hast du?</i></p>`,
+en: `<h2>Question Articles: welch- / was für ein-</h2>
+<p><b>welch-</b> = which (from a set): <i>Welchen Kurs besuchst du?</i></p>
+<p><b>was für ein-</b> = what kind of: <i>Was für ein Auto hast du?</i></p>`
+},
+
+pron_artikelwort: {
+de: `<h2>Artikelwörter: dieser, jeder, mancher</h2>
+<table class="rule-table"><tr><th>Kasus</th><th>dies- (m)</th><th>dies- (f)</th><th>dies- (n)</th><th>dies- (Pl)</th></tr>
+<tr><td>Nom.</td><td>dieser</td><td>diese</td><td>dieses</td><td>diese</td></tr>
+<tr><td>Akk.</td><td>diesen</td><td>diese</td><td>dieses</td><td>diese</td></tr>
+<tr><td>Dat.</td><td>diesem</td><td>dieser</td><td>diesem</td><td>diesen</td></tr>
+</table>
+<p>Gleiche Endungen für: <b>jeder, mancher, solcher, welcher</b>.</p>
+<p><b>Merke:</b> Endungen wie der bestimmte Artikel (der/die/das)!</p>`,
+ru: `<h2>Артиклевые слова: dieser, jeder, mancher</h2>
+<p>Склоняются как определённый артикль: dies<b>er</b> (Nom.m), dies<b>en</b> (Akk.m), dies<b>em</b> (Dat.m).</p>
+<p>Те же окончания у: <b>jeder, mancher, solcher, welcher</b>.</p>`,
+en: `<h2>Article Words: dieser, jeder, mancher</h2>
+<p>Declined like the definite article: dies<b>er</b> (Nom.m), dies<b>en</b> (Acc.m), dies<b>em</b> (Dat.m).</p>
+<p>Same endings for: <b>jeder, mancher, solcher, welcher</b>.</p>`
+},
+
 };
