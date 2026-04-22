@@ -2233,3 +2233,17 @@ body {
 .satz-word { display: inline-block; padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--primary); background: rgba(108,99,255,0.10); color: var(--text); font-size: 0.9em; cursor: pointer; font-family: inherit; transition: transform .1s; }
 .satz-word:active { transform: scale(0.93); }
 .satz-placeholder { color: #999; font-style: italic; font-size: 0.85rem; }
+.satz-feedback { margin-top: 12px; padding: 12px 14px; border-radius: 12px; font-size: 0.88rem; line-height: 1.6; animation: fadeSlideUp .4s ease; }
+.satz-fb-ok { background: rgba(67,160,71,0.10); border: 1.5px solid #43A047; color: #2E7D32; font-weight: 600; font-size: 1rem; }
+.satz-fb-wrong { background: rgba(229,57,53,0.06); border: 1.5px solid #E53935; }
+.satz-corr-label { font-size: 0.78rem; color: #888; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.satz-corr-user { color: #E53935; text-decoration: line-through; margin-bottom: 4px; font-size: 0.9rem; }
+.satz-corr-model { font-weight: 600; font-size: 0.92rem; margin-bottom: 8px; }
+.satz-diff-ok { color: #2E7D32; }
+.satz-diff-wrong { color: #E53935; text-decoration: line-through; opacity: 0.6; }
+.satz-diff-right { color: #2E7D32; font-weight: 700; background: rgba(67,160,71,0.12); padding: 1px 4px; border-radius: 4px; }
+.satz-rule { margin-top: 8px; padding: 8px 10px; background: rgba(25,118,210,0.08); border-radius: 8px; color: #1565C0; font-size: 0.84rem; }
+[data-theme="dark"] .satz-rule { background: rgba(100,181,246,0.10); color: #64B5F6; }
+.satz-alts { margin-top: 6px; font-size: 0.82rem; color: #666; }
+.satz-alt { color: #43A047; font-style: italic; }
+@keyframes fadeSlideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
