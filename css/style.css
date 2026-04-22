@@ -2224,3 +2224,12 @@ body {
 [data-theme="dark"] .luecke-bchip { background: rgba(255,255,255,0.06); border-color: rgba(108,99,255,0.6); }
 .luecke-bank-label { display: block; margin-bottom: 6px; font-size: 0.82rem; color: #666; }
 [data-theme="dark"] .luecke-bank-label { color: #aaa; }
+.satz-prompt-text { font-size: 1rem; font-weight: 600; margin-bottom: 10px; line-height: 1.5; padding: 8px 12px; background: #F3E5F5; border-radius: 10px; }
+[data-theme="dark"] .satz-prompt-text { background: rgba(156,39,176,0.12); }
+.satz-connector { display: inline-block; font-weight: 700; color: var(--primary); font-size: 1rem; margin-bottom: 4px; }
+.satz-build { min-height: 50px; padding: 10px; margin: 8px 0 14px; border: 2px dashed var(--border); border-radius: 12px; background: rgba(108,99,255,0.04); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.satz-build-correct { border-color: #43A047 !important; background: rgba(67,160,71,0.08) !important; }
+.satz-build-wrong { border-color: #E53935 !important; background: rgba(229,57,53,0.06) !important; }
+.satz-word { display: inline-block; padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--primary); background: rgba(108,99,255,0.10); color: var(--text); font-size: 0.9em; cursor: pointer; font-family: inherit; transition: transform .1s; }
+.satz-word:active { transform: scale(0.93); }
+.satz-placeholder { color: #999; font-style: italic; font-size: 0.85rem; }
