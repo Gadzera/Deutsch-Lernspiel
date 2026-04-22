@@ -2429,17 +2429,8 @@ function showVWULuecke(){
             body+=`</div></div>`;
         });
     } else if(item.satz){
-        // Режим конструктора предложений (Satzbau) для G2 obwohl/trotzdem и G3 damit
-        const s=item.satz;
-        APP._satz={words:[...s.words],placed:[],models:s.models,start:s.start||''};
-        body+=`<div class="satz-prompt-text">${esc(s.text)}</div>`;
-        if(s.start) body+=`<span class="satz-connector">${esc(s.start)}</span> `;
-        body+=`<div class="satz-build" id="satzBuild"></div>`;
-        body+=`<div class="luecke-bank">`;
-        s.words.forEach((w,i)=>{
-            body+=`<button class="luecke-bchip" id="sw_${i}" onclick="satzPick(${i})">${esc(w)}</button>`;
-        });
-        body+=`</div>`;
+        APP._satz={words:[...item.satz.words],built:[],start:item.satz.start||'',models:item.satz.models,checked:false};
+        renderVWUSatz();return;
     } else if(item.text!==undefined&&item.blanks){
         const bankWords=item.bank||[];
         APP._luecke={blanks:item.blanks,bank:bankWords,reuse:sec.reuse||item.reuse||false,filled:new Array(item.blanks.length).fill(null),selectedSlot:0};
@@ -2510,31 +2501,115 @@ function lueckePick(bi){
     if(nx!==-1){const ns=document.getElementById('ls_'+nx);if(ns)ns.classList.add('luecke-slot-selected');}
 }
 
-function satzPick(wi){
-    const S=APP._satz;
-    if(!S)return;
-    const chip=document.getElementById('sw_'+wi);
-    if(!chip||chip.classList.contains('luecke-bchip-used'))return;
-    chip.classList.add('luecke-bchip-used');
-    S.placed.push(wi);
-    renderSatzBuild();
+function renderVWUSatz(){
+    var v=APP.vwu,sec=v.test.sections[v.secIdx];
+    var item=sec.items[v.gramIdx];
+    var S=APP._satz,s=item.satz;
+    var num=v.gramIdx+1,tot=sec.items.length;
+    var pct=(v.gramIdx/tot)*100;
+    var hint=s[APP.lang||'ru']||s.en||s.ru||'';
+    var startC=S.start?'<span class="word-chip wc-correct">'+esc(S.start)+'</span>':'';
+    var builtH=startC;
+    if(S.checked&&!APP._satzCorr){
+        var ok=S._wasOk;
+        S.built.forEach(function(wi){builtH+='<span class="word-chip wc-correct">'+esc(S.words[wi])+'</span>';});
+        if(!S.built.length) builtH+='<span class="sentence-ph">—</span>';
+        var feedH='';
+        if(ok) feedH='<div class="satz-feedback satz-fb-ok">✓ Richtig!</div>';
+        else{
+            feedH='<div class="satz-alts" style="margin-top:10px"><strong>Richtige Varianten:</strong><br>';
+            s.models.slice(0,3).forEach(function(m){feedH+='<span style="color:#43A047">• '+esc(S.start+' '+m)+'</span><br>';});
+            feedH+='</div>';
+        }
+        $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span class="quiz-progress-text">'+esc(sec.name||v.test.name)+' '+num+'/'+tot+'</span></div><span class="quiz-score" id="qsc">&#10003; '+v.gramScore+'</span></div><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:'+pct+'%"></div></div><div class="quiz-body"><div class="quiz-question-label">'+esc(s.text)+'</div><div class="quiz-hint">'+esc(hint)+'</div><div class="sentence-area">'+builtH+'</div>'+feedH+'<button class="btn btn-primary" style="margin-top:14px" onclick="nextVWUSatz()">Weiter →</button></div></div>';
+        return;
+    }
+    S.built.forEach(function(wi,pi){builtH+='<span class="word-chip wc-user" onclick="satzRemove('+pi+')">'+esc(S.words[wi])+'</span>';});
+    if(!S.built.length) builtH+='<span class="sentence-ph">Tippen Sie auf die Wörter...</span>';
+    var poolH='';
+    S.words.forEach(function(w,i){var used=S.built.indexOf(i)>=0;poolH+='<span class="word-chip pool-word'+(used?' pw-used':'')+'" onclick="'+(used?'':'satzPick('+i+')')+'">'+esc(w)+'</span>';});
+    $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span class="quiz-progress-text">'+esc(sec.name||v.test.name)+' '+num+'/'+tot+'</span></div><span class="quiz-score" id="qsc">&#10003; '+v.gramScore+'</span></div><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:'+pct+'%"></div></div><div class="quiz-body"><div class="quiz-question-label">'+esc(s.text)+'</div><div class="quiz-hint">'+esc(hint)+'</div><div class="sentence-area">'+builtH+'</div><div class="word-pool">'+poolH+'</div><button class="btn btn-primary" style="margin-top:14px" onclick="checkVWUSatz()">Überprüfen</button></div></div>';
 }
-
-function satzRemove(pi){
-    const S=APP._satz;
-    if(!S)return;
-    const wi=S.placed[pi];
-    S.placed.splice(pi,1);
-    const chip=document.getElementById('sw_'+wi);
-    if(chip)chip.classList.remove('luecke-bchip-used');
-    renderSatzBuild();
+function satzPick(wi){var S=APP._satz;if(!S||S.checked||S.built.indexOf(wi)>=0)return;S.built.push(wi);renderVWUSatz();}
+function satzRemove(pi){var S=APP._satz;if(!S||S.checked)return;S.built.splice(pi,1);renderVWUSatz();}
+function checkVWUSatz(){
+    var v=APP.vwu,sec=v.test.sections[v.secIdx],item=sec.items[v.gramIdx];
+    var S=APP._satz;
+    var built=S.built.map(function(wi){return S.words[wi];});
+    var norm=function(s){return s.toLowerCase().replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim();};
+    var ok=false;
+    for(var mi=0;mi<S.models.length;mi++){if(norm(built.join(' '))===norm(S.models[mi])){ok=true;break;}}
+    S.checked=true;S._wasOk=ok;
+    var perItem=sec.perItem||0.5;
+    if(ok){v.gramScore+=perItem*2;var sc=$('qsc');if(sc)sc.textContent='✓ '+v.gramScore;renderVWUSatz();}
+    else{
+        if(navigator.vibrate)navigator.vibrate(100);
+        var bestModel=S.models[0].split(' '),bestScore=-1;
+        for(var mi=0;mi<S.models.length;mi++){var mw=S.models[mi].split(' ');var sc2=0;for(var i=0;i<Math.min(built.length,mw.length);i++){if(built[i]===mw[i])sc2++;}if(sc2>bestScore){bestScore=sc2;bestModel=mw;}}
+        v.wrongs.push({q:item.satz.text,userAnswer:(S.start+' '+built.join(' ')).trim(),correct:S.start+' '+bestModel.join(' ')});
+        startVWUSatzCorr(built,bestModel,item);
+    }
 }
+function startVWUSatzCorr(userW,correctW,item){
+    var corrs=[];
+    for(var i=0;i<correctW.length;i++){
+        if(i>=userW.length||userW[i]!==correctW[i]){
+            var uw=i<userW.length?userW[i]:'___';
+            corrs.push({pos:i,wrong:uw,correct:correctW[i]});
+        }
+    }
+    if(!corrs.length){renderVWUSatz();return;}
+    APP._satzCorr={corrs:corrs,corrIdx:0,corrDisplay:userW.slice(),correctWords:correctW,item:item};
+    while(APP._satzCorr.corrDisplay.length<correctW.length) APP._satzCorr.corrDisplay.push('___');
+    showVWUSatzCorr();
+}
+function showVWUSatzCorr(){
+    var v=APP.vwu,sec=v.test.sections[v.secIdx];
+    var C=APP._satzCorr;
+    if(!C||C.corrIdx>=C.corrs.length){delete APP._satzCorr;renderVWUSatz();return;}
+    var corr=C.corrs[C.corrIdx],item=C.item,s=item.satz;
+    var num=v.gramIdx+1,tot=sec.items.length,pct=(v.gramIdx/tot)*100;
+    var hint=s[APP.lang||'ru']||s.en||s.ru||'';
+    var startC=s.start?'<span class="word-chip wc-correct">'+esc(s.start)+'</span>':'';
+    var sentH=startC;
+    for(var i=0;i<C.correctWords.length;i++){
+        if(i<corr.pos){sentH+='<span class="word-chip wc-correct">'+esc(C.correctWords[i])+'</span>';}
+        else if(i===corr.pos){sentH+='<span class="word-chip corr-wrong" id="corrW">'+esc(corr.wrong)+'</span>';sentH+='<span class="word-chip corr-right" id="corrR">'+esc(corr.correct)+'</span>';}
+        else{var w=C.corrDisplay[i]||'___';sentH+='<span class="word-chip '+(w===C.correctWords[i]?'':'corr-pending')+'">'+esc(w)+'</span>';}
+    }
+    var altsH='<div class="satz-alts" style="margin-top:8px;font-size:0.82rem;color:#666">Auch richtig: '+s.models.slice(1,3).map(function(m){return '<em>'+esc(s.start+' '+m)+'</em>';}).join(' | ')+'</div>';
+    $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span class="quiz-progress-text">'+esc(sec.name||v.test.name)+' '+num+'/'+tot+'</span></div><span class="quiz-score" id="qsc">&#10003; '+v.gramScore+'</span></div><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:'+pct+'%"></div></div><div class="quiz-body"><div class="quiz-question-label">'+esc(s.text)+'</div><div class="quiz-hint">'+esc(hint)+'</div><div class="sentence-area corr-mode">'+sentH+'</div><div class="corr-rule-box" id="corrRule"><div class="corr-rule-text" id="corrRuleText"></div><button class="corr-skip-btn" id="corrSkip" onclick="nextVWUSatzCorr()">→</button></div><div class="corr-counter">'+String(C.corrIdx+1)+' / '+C.corrs.length+' Korrekturen</div>'+altsH+'</div></div>';
+    var wEl=$('corrW'),rEl=$('corrR'),ruleBox=$('corrRule'),ruleText=$('corrRuleText');
+    if(ruleBox)ruleBox.style.opacity='0';
+    if(rEl)rEl.style.display='none';
+    setTimeout(function(){
+        if(wEl)wEl.classList.add('corr-shake');
+        setTimeout(function(){
+            if(wEl){wEl.classList.remove('corr-shake');wEl.classList.add('corr-fade-out');}
+            setTimeout(function(){
+                if(wEl)wEl.style.display='none';
+                if(rEl){rEl.style.display='';rEl.classList.add('corr-slide-in');}
+                if(ruleBox){ruleBox.style.opacity='1';ruleBox.style.transition='opacity 0.4s';}
+                if(ruleText){
+                    var start=s.start||'';
+                    var rule=start==='obwohl'?'obwohl → Nebensatz: Verb am ENDE!':start==='Trotzdem'?'Trotzdem → Hauptsatz: Verb auf Position 2!':start==='damit'?'damit → Nebensatz: Verb am ENDE!':'';
+                    ruleText.innerHTML='📝 '+esc(rule);
+                }
+            },500);
+        },600);
+    },300);
+}
+function nextVWUSatzCorr(){
+    var C=APP._satzCorr;
+    if(C&&C.corrIdx<C.corrs.length){C.corrDisplay[C.corrs[C.corrIdx].pos]=C.corrs[C.corrIdx].correct;}
+    C.corrIdx++;
+    if(C.corrIdx>=C.corrs.length){delete APP._satzCorr;renderVWUSatz();}
+    else{showVWUSatzCorr();}
+}
+function nextVWUSatz(){APP.vwu.gramIdx++;showVWULuecke();}
 
-function renderSatzBuild(){
-    const S=APP._satz;
-    const el=document.getElementById('satzBuild');
-    if(!el||!S)return;
-    if(S.placed.length===0){el.innerHTML='<span class="satz-placeholder">Tippen Sie auf die Wörter...</span>';return;}
+
+
     el.innerHTML=S.placed.map((wi,pi)=>
         '<button class="satz-word" onclick="satzRemove('+pi+')">'+esc(S.words[wi])+'</button>'
     ).join(' ');
@@ -2559,41 +2634,7 @@ function checkVWULuecke(){
                 else{chip.classList.add('luecke-chip-ok');}
             });
         });
-    } else if(item.satz){
-        const S=APP._satz;
-        const built=S.placed.map(wi=>S.words[wi]).join(' ');
-        const norm=s=>s.toLowerCase().replace(/[.,!?;:]/g,'').replace(/\s+/g,' ').trim();
-        const ok=item.satz.models.some(m=>norm(built)===norm(m));
-        const el=document.getElementById('satzBuild');
-        document.querySelectorAll('.luecke-bchip').forEach(c=>{c.disabled=true;c.onclick=null;});
-        if(el){
-            document.querySelectorAll('.satz-word').forEach(w=>{w.onclick=null;w.style.cursor='default';});
-            if(ok){
-                el.classList.add('satz-build-correct');score+=perItem*2;
-                el.insertAdjacentHTML('afterend','<div class="satz-feedback satz-fb-ok">✓ Richtig!</div>');
-            } else {
-                el.classList.add('satz-build-wrong');
-                const userW=S.placed.map(wi=>S.words[wi]);
-                const modelW=item.satz.models[0].split(' ');
-                let diffH='';
-                const maxL=Math.max(userW.length,modelW.length);
-                for(let i=0;i<maxL;i++){
-                    const uw=userW[i]||'';
-                    const mw=modelW[i]||'';
-                    if(norm(uw)===norm(mw)) diffH+='<span class="satz-diff-ok">'+esc(mw)+'</span> ';
-                    else{
-                        if(uw) diffH+='<span class="satz-diff-wrong">'+esc(uw)+'</span> ';
-                        diffH+='<span class="satz-diff-right">'+esc(mw)+'</span> ';
-                    }
-                }
-                const start=item.satz.start||'';
-                const rule=start==='obwohl'?'obwohl → Nebensatz: Verb am ENDE! (obwohl + S + ... + Verb)':start==='Trotzdem'?'Trotzdem → Hauptsatz: Verb auf Position 2! (Trotzdem + Verb + S + ...)':start==='damit'?'damit → Nebensatz: Verb am ENDE! (damit + S + ... + Verb)':'';
-                const alts=item.satz.models.length>1?'<div class="satz-alts"><strong>Andere Varianten:</strong> '+item.satz.models.slice(1,4).map(m=>'<span class="satz-alt">'+esc(start+' '+m)+'</span>').join(', ')+'</div>':'';
-                el.insertAdjacentHTML('afterend','<div class="satz-feedback satz-fb-wrong"><div class="satz-corr-label">Ihr Satz:</div><div class="satz-corr-user">'+esc(start)+' '+userW.map(w=>'<span>'+esc(w)+'</span>').join(' ')+'</div><div class="satz-corr-label">Korrektur:</div><div class="satz-corr-model">'+esc(start)+' '+diffH+'</div>'+(rule?'<div class="satz-rule">📝 '+esc(rule)+'</div>':'')+alts+'</div>');
-                v.wrongs.push({q:item.satz.text,userAnswer:built||'—',correct:item.satz.models[0]});
-            }
-        }
-    } else if(item.text!==undefined&&item.blanks){
+        } else if(item.text!==undefined&&item.blanks){
         const L=APP._luecke;
         item.blanks.forEach((acc,i)=>{
             const sl=document.getElementById('ls_'+i);
