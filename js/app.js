@@ -662,9 +662,11 @@ function ruleBtn(cat){
     if(typeof RULES==='undefined'||!RULES[cat]) return '';
     return `<button class="sub-quiz-btn rule-btn" onclick="showRule('${cat}')">📖 Regel</button>`;
 }
-function showRule(cat,fromQuiz){
+function showRule(cat,backAction){
     if(typeof RULES==='undefined'||!RULES[cat]) return;
-    const back=fromQuiz?'renderBuilder()':'showMenu()';
+    let back='showMenu()';
+    if(backAction===true) back='renderBuilder()';
+    else if(typeof backAction==='string') back=backAction;
     // Multilingual rule selection: RULES[cat] can be either an HTML string (legacy)
     // or an object { de, ru, en, tr, ar, fa, vi }. Pick the current language
     // and fall back through a chain.
@@ -740,17 +742,18 @@ function showMenu() {
     if(hasPn) cats+=catHTML('👥','Pronomen',PRONOUNS.length+' Übungen','pron_all',PRONOUNS.length,'catPron',
         ruleBtn('pronouns')+
         sqBtn('👤','Alle Pronomen','pronouns','all')+
-        sqBtn('🙋','Personalpronomen','pronouns','personal')+
-        sqBtn('📎','Possessivpronomen','pronouns','possessiv')+
-        sqBtn('🔄','Reflexivpronomen','pronouns','reflexiv')+
-        sqBtn('🔗','Relativpronomen','pronouns','relativ')+
-        sqBtn('❓','Indefinitpronomen','pronouns','indefinit')+
-        sqBtn('❔','welch- / was für ein-','pronouns','frageartikel')+
-        sqBtn('🔖','dieser/jeder/mancher','pronouns','artikelwort'));
+        ruleBtn('pron_personal')+sqBtn('🙋','Personalpronomen','pronouns','personal')+
+        ruleBtn('pron_possessiv')+sqBtn('📎','Possessivpronomen','pronouns','possessiv')+
+        ruleBtn('pron_reflexiv')+sqBtn('🔄','Reflexivpronomen','pronouns','reflexiv')+
+        ruleBtn('pron_relativ')+sqBtn('🔗','Relativpronomen','pronouns','relativ')+
+        ruleBtn('pron_indefinit')+sqBtn('❓','Indefinitpronomen','pronouns','indefinit')+
+        ruleBtn('pron_frageartikel')+sqBtn('❔','welch- / was für ein-','pronouns','frageartikel')+
+        ruleBtn('pron_artikelwort')+sqBtn('🔖','dieser/jeder/mancher','pronouns','artikelwort'));
 
     // 7. Deklination — новая карточка (n-Deklination, Genitiv, Adjektiv)
     const hasDk=typeof DEKLINATION!=='undefined'&&DEKLINATION.length;
     if(hasDk) cats+=catHTML('🏛️','Deklination',DEKLINATION.length+' Übungen','dekl_all',DEKLINATION.length,'catDekl',
+        ruleBtn('deklination')+
         sqBtn('🏛️','Alle Deklinationen','deklination','all')+
         sqBtn('👨','n-Deklination','deklination','n_dekl')+
         sqBtn('📖','Genitiv-Attribute','deklination','genitiv_attr')+
@@ -1077,12 +1080,15 @@ function showMCQ(){
     const item=APP.quiz.items[APP.quiz.idx];
     const ticked=APP.quiz.knownTicked&&APP.quiz.knownTicked.has(item.id);
     const tickLbl=tickBtnLabel();
+    let mcqRuleBtn='';
+    if(cat==='pronouns'&&item.type){const rk='pron_'+item.type;if(typeof RULES!=='undefined'&&RULES[rk])mcqRuleBtn=`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('${rk}',true)">📖</button>`;}
+    if(cat==='deklination'){mcqRuleBtn=`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('deklination',true)">📖</button>`;}
     $('app').innerHTML=`
         <div class="quiz-page">
             <div class="quiz-header">
                 <div class="quiz-header-left"><button class="quiz-back" onclick="quitQ()">&#8592;</button><span class="quiz-progress-text">${num} ${UI.of} ${tot}</span></div>
                 <div class="quiz-header-right">
-                    <span class="quiz-score" id="qsc">&#10003; ${APP.quiz.score}</span>
+                    ${mcqRuleBtn}<span class="quiz-score" id="qsc">&#10003; ${APP.quiz.score}</span>
                 </div>
             </div>
             <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
@@ -2310,11 +2316,54 @@ function startVWU(levelId,testId){
     if(typeof VWU==='undefined') return;
     const level=VWU.levels.find(l=>l.id===levelId);
     if(!level) return;
+    const test=level.tests.find(t=>t.id===testId);
+    if(!test) return;
+    if(test.empty||!test.sections||test.sections.length===0){
+        APP.vwu={level,test:Object.assign({},test),secIdx:0};showVWUEmptyPlaceholder();return;
+    }
+    const backFn="startVWU('"+esc(levelId)+"','"+esc(testId)+"')";
+    let cards='';
+    test.sections.forEach((sec,i)=>{
+        const icon=sec.type==='leseverstehen'?'📖':sec.type==='schreiben'?'✍️':'📝';
+        const cnt=sec.type==='grammatik'?(sec.items?sec.items.length:'30')+' Aufgaben':sec.type==='leseverstehen'?'Leseverstehen':sec.type==='schreiben'?'Textproduktion':sec.type==='wortschatz'?'Wortschatz':sec.type==='strukturen'?'Strukturen':'';
+        const nm=sec.name||sec.type;
+        const rk=sec.ruleKey;
+        const hasRule=rk&&typeof RULES!=='undefined'&&RULES[rk];
+        const regelBtn=hasRule?`<span class="vwu-regel-btn" onclick="event.stopPropagation();showRule('${rk}','${backFn}')">📖</span>`:'';
+        cards+=`<button class="sub-quiz-btn" onclick="runVWUSec('${esc(levelId)}','${esc(testId)}',${i})" style="text-align:left;position:relative">
+            <span>${icon}</span> ${esc(nm)}
+            <span style="font-size:0.75rem;color:var(--text-secondary);margin-left:auto">${cnt}</span>
+            ${regelBtn}
+        </button>`;
+    });
+    $('app').innerHTML=`
+        <div class="app-shell">
+            <div class="app-header">
+                <div class="app-header-left"><button class="quiz-back" onclick="showVWUMenu()">&#8592;</button><h1>${esc(test.name)}</h1></div>
+            </div>
+            <div class="app-content"><div class="menu-scroll" style="padding:12px 16px">
+                <button class="sub-quiz-btn vwu-all-btn" onclick="runVWUAll('${esc(levelId)}','${esc(testId)}')" style="text-align:center;font-weight:600;background:var(--primary);color:#fff;border:none">
+                    🚀 Alle Abschnitte starten
+                </button>
+                ${cards}
+            </div></div>
+        </div>`;
+}
+
+function runVWUSec(levelId,testId,secIdx){
+    const level=VWU.levels.find(l=>l.id===levelId);
     const origTest=level.tests.find(t=>t.id===testId);
-    if(!origTest) return;
-    // Tiefe Kopie der Sektionen, damit Pool-Substitutionen pro Test-Lauf frisch sind
+    const sec=Object.assign({},origTest.sections[secIdx]);
+    const test=Object.assign({},origTest,{sections:[sec]});
+    APP.vwu={level,test,origTestId:testId,origSecIdx:secIdx,secIdx:0,gramIdx:0,gramScore:0,gramTotal:0,wrongs:[],t0:Date.now(),lesenPick:null,singleSection:true};
+    showVWUSection();
+}
+
+function runVWUAll(levelId,testId){
+    const level=VWU.levels.find(l=>l.id===levelId);
+    const origTest=level.tests.find(t=>t.id===testId);
     const test=Object.assign({},origTest,{sections:origTest.sections.map(s=>Object.assign({},s))});
-    APP.vwu={level,test,secIdx:0,gramIdx:0,gramScore:0,gramTotal:0,wrongs:[],t0:Date.now(),lesenPick:null};
+    APP.vwu={level,test,origTestId:testId,secIdx:0,gramIdx:0,gramScore:0,gramTotal:0,wrongs:[],t0:Date.now(),lesenPick:null};
     showVWUSection();
 }
 
@@ -2359,15 +2408,17 @@ function showVWUGram(){
     const num=v.gramIdx+1,tot=sec.items.length;
     const pct=(v.gramIdx/tot)*100;
     const btns=item.opts.map(o=>`<button class="answer-btn" data-val="${esc(o)}" data-cor="${esc(item.ans)}" onclick="checkVWUGram(this)">${o}</button>`).join('');
+    const rk=sec.ruleKey;
+    const regelH=rk&&typeof RULES!=='undefined'&&RULES[rk]?`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('${rk}','showVWUGram()')">📖</button>`:'';
     $('app').innerHTML=`
         <div class="quiz-page">
             <div class="quiz-header">
-                <div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span class="quiz-progress-text">${v.test.name} &bull; Grammatik ${num}/${tot}</span></div>
-                <span class="quiz-score" id="qsc">&#10003; ${v.gramScore}</span>
+                <div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span class="quiz-progress-text">${esc(sec.name||v.test.name)} ${num}/${tot}</span></div>
+                ${regelH}<span class="quiz-score" id="qsc">&#10003; ${v.gramScore}</span>
             </div>
             <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
             <div class="quiz-body">
-                <div class="quiz-question-label">Ergänzen Sie:</div>
+                <div class="quiz-question-label">${sec.desc||'Ergänzen Sie:'}</div>
                 <div class="vwu-sentence">${item.q.replace('___','<span class="vwu-blank">______</span>')}</div>
                 <div class="quiz-answers stagger">${btns}</div>
                 <div class="vwu-rule-hint" id="vwuRule" style="display:none"></div>
@@ -2805,13 +2856,17 @@ function showVWUResults(){
             </div>
             ${wrongCards?'<div style="margin-top:16px;text-align:left"><div class="stat-section-title">&#10060; Fehler</div>'+wrongCards+'</div>':''}
             <div class="results-actions">
-                <button class="btn btn-primary" onclick="startVWU('${v.level.id}','${v.test.id}')">🔄 Nochmal</button>
-                <button class="btn btn-outline" onclick="showMenu()">&#8592; Menü</button>
+                <button class="btn btn-primary" onclick="${v.singleSection?`runVWUSec('${v.level.id}','${v.origTestId||v.test.id}',${v.origSecIdx||0})`:`runVWUAll('${v.level.id}','${v.origTestId||v.test.id}')`}">🔄 Nochmal</button>
+                <button class="btn btn-outline" onclick="startVWU('${v.level.id}','${v.origTestId||v.test.id}')">&#8592; Zum Test</button>
             </div>
         </div>`;
 }
 
-function quitVWU(){showVWUMenu();}
+function quitVWU(){
+    const v=APP.vwu;
+    if(v&&v.origTestId) startVWU(v.level.id,v.origTestId);
+    else showVWUMenu();
+}
 
 // ============== START ==============
 window.addEventListener('DOMContentLoaded', initApp);
