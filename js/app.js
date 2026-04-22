@@ -2568,8 +2568,30 @@ function checkVWULuecke(){
         document.querySelectorAll('.luecke-bchip').forEach(c=>{c.disabled=true;c.onclick=null;});
         if(el){
             document.querySelectorAll('.satz-word').forEach(w=>{w.onclick=null;w.style.cursor='default';});
-            if(ok){el.classList.add('satz-build-correct');score+=perItem*2;}
-            else{el.classList.add('satz-build-wrong');el.insertAdjacentHTML('afterend','<div class="luecke-model">'+esc(item.satz.models[0])+'</div>');v.wrongs.push({q:item.satz.text,userAnswer:built||'—',correct:item.satz.models[0]});}
+            if(ok){
+                el.classList.add('satz-build-correct');score+=perItem*2;
+                el.insertAdjacentHTML('afterend','<div class="satz-feedback satz-fb-ok">✓ Richtig!</div>');
+            } else {
+                el.classList.add('satz-build-wrong');
+                const userW=S.placed.map(wi=>S.words[wi]);
+                const modelW=item.satz.models[0].split(' ');
+                let diffH='';
+                const maxL=Math.max(userW.length,modelW.length);
+                for(let i=0;i<maxL;i++){
+                    const uw=userW[i]||'';
+                    const mw=modelW[i]||'';
+                    if(norm(uw)===norm(mw)) diffH+='<span class="satz-diff-ok">'+esc(mw)+'</span> ';
+                    else{
+                        if(uw) diffH+='<span class="satz-diff-wrong">'+esc(uw)+'</span> ';
+                        diffH+='<span class="satz-diff-right">'+esc(mw)+'</span> ';
+                    }
+                }
+                const start=item.satz.start||'';
+                const rule=start==='obwohl'?'obwohl → Nebensatz: Verb am ENDE! (obwohl + S + ... + Verb)':start==='Trotzdem'?'Trotzdem → Hauptsatz: Verb auf Position 2! (Trotzdem + Verb + S + ...)':start==='damit'?'damit → Nebensatz: Verb am ENDE! (damit + S + ... + Verb)':'';
+                const alts=item.satz.models.length>1?'<div class="satz-alts"><strong>Andere Varianten:</strong> '+item.satz.models.slice(1,4).map(m=>'<span class="satz-alt">'+esc(start+' '+m)+'</span>').join(', ')+'</div>':'';
+                el.insertAdjacentHTML('afterend','<div class="satz-feedback satz-fb-wrong"><div class="satz-corr-label">Ihr Satz:</div><div class="satz-corr-user">'+esc(start)+' '+userW.map(w=>'<span>'+esc(w)+'</span>').join(' ')+'</div><div class="satz-corr-label">Korrektur:</div><div class="satz-corr-model">'+esc(start)+' '+diffH+'</div>'+(rule?'<div class="satz-rule">📝 '+esc(rule)+'</div>':'')+alts+'</div>');
+                v.wrongs.push({q:item.satz.text,userAnswer:built||'—',correct:item.satz.models[0]});
+            }
         }
     } else if(item.text!==undefined&&item.blanks){
         const L=APP._luecke;
