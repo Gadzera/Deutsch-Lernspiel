@@ -1076,8 +1076,8 @@ function showMCQ(){
     const ticked=APP.quiz.knownTicked&&APP.quiz.knownTicked.has(item.id);
     const tickLbl=tickBtnLabel();
     let mcqRuleBtn='';
-    if(cat==='pronouns'&&item.type){const rk='pron_'+item.type;if(typeof RULES!=='undefined'&&RULES[rk])mcqRuleBtn=`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('${rk}',true)">📖</button>`;}
-    if(cat==='deklination'){mcqRuleBtn=`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('deklination',true)">📖</button>`;}
+    if(cat==='pronouns'&&item.type){const rk='pron_'+item.type;if(typeof RULES!=='undefined'&&RULES[rk])mcqRuleBtn=`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('${rk}',true)">📖 Regel</button>`;}
+    if(cat==='deklination'){mcqRuleBtn=`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('deklination',true)">📖 Regel</button>`;}
     $('app').innerHTML=`
         <div class="quiz-page">
             <div class="quiz-header">
@@ -2324,7 +2324,7 @@ function startVWU(levelId,testId){
         const nm=sec.name||sec.type;
         const rk=sec.ruleKey;
         const hasRule=rk&&typeof RULES!=='undefined'&&RULES[rk];
-        const regelBtn=hasRule?`<span class="vwu-regel-btn" onclick="event.stopPropagation();showRule('${rk}','${backFn}')">📖</span>`:'';
+        const regelBtn=hasRule?`<span class="vwu-regel-btn" onclick="event.stopPropagation();showRule('${rk}','${backFn}')">📖 Regel</span>`:'';
         cards+=`<button class="sub-quiz-btn" onclick="runVWUSec('${esc(levelId)}','${esc(testId)}',${i})" style="text-align:left;position:relative">
             <span>${icon}</span> ${esc(nm)}
             <span style="font-size:0.75rem;color:var(--text-secondary);margin-left:auto">${cnt}</span>
@@ -2404,7 +2404,7 @@ function showVWULuecke(){
     const num=v.gramIdx+1,tot=sec.items.length;
     const pct=(v.gramIdx/tot)*100;
     const rk=sec.ruleKey;
-    const regelH=rk&&typeof RULES!=='undefined'&&RULES[rk]?`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('${rk}','showVWULuecke()')">📖</button>`:'';
+    const regelH=rk&&typeof RULES!=='undefined'&&RULES[rk]?`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('${rk}','showVWULuecke()')">📖 Regel</button>`:'';
     let body='';
     if(item.questions){
         if(item.example){
@@ -2428,22 +2428,31 @@ function showVWULuecke(){
         APP._satz={words:sw,built:[],start:item.satz.start||'',models:item.satz.models,checked:false};
         renderVWUSatz();return;
     } else if(item.text!==undefined&&item.blanks){
-        const bankWords=item.bank||[];
-        APP._luecke={blanks:item.blanks,bank:bankWords,reuse:sec.reuse||item.reuse||false,filled:new Array(item.blanks.length).fill(null),selectedSlot:0};
-        if(bankWords.length){
-            body+=`<div class="luecke-bank">`;
-            if(sec.bankLabel) body+=`<em class="luecke-bank-label">${esc(sec.bankLabel)}</em>`;
-            bankWords.forEach((w,i)=>{
-                body+=`<button class="luecke-bchip" id="lbc_${i}" onclick="lueckePick(${i})">${esc(w)}</button>`;
-            });
-            body+=`</div>`;
+        const isTyping=sec.typing||false;
+        if(!isTyping){
+            const bankWords=item.bank||[];
+            APP._luecke={blanks:item.blanks,bank:bankWords,reuse:sec.reuse||item.reuse||false,filled:new Array(item.blanks.length).fill(null),selectedSlot:0};
+            if(bankWords.length){
+                body+=`<div class="luecke-bank">`;
+                if(sec.bankLabel) body+=`<em class="luecke-bank-label">${esc(sec.bankLabel)}</em>`;
+                bankWords.forEach((w,i)=>{
+                    body+=`<button class="luecke-bchip" id="lbc_${i}" onclick="lueckePick(${i})">${esc(w)}</button>`;
+                });
+                body+=`</div>`;
+            }
+        } else {
+            APP._luecke={blanks:item.blanks,bank:[],reuse:false,filled:[],typing:true};
         }
         let tx=esc(item.text).replace(/\n/g,'<br>');
         for(let i=0;i<item.blanks.length;i++){
             const h=item.hints?item.hints[i]||'':'';
             const hh=h?` <span class="luecke-hint">${esc(h)}</span>`:'';
-            const sel=i===0?' luecke-slot-selected':'';
-            tx=tx.replace('___'+i+'___',`<button class="luecke-slot${sel}" id="ls_${i}" onclick="lueckeSlot(${i})">___</button>${hh}`);
+            if(isTyping){
+                tx=tx.replace('___'+i+'___',`<input type="text" class="luecke-input" id="li_${i}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="...">${hh}`);
+            } else {
+                const sel=i===0?' luecke-slot-selected':'';
+                tx=tx.replace('___'+i+'___',`<button class="luecke-slot${sel}" id="ls_${i}" onclick="lueckeSlot(${i})">___</button>${hh}`);
+            }
         }
         body+=`<div class="luecke-text">${tx}</div>`;
     }
@@ -2625,16 +2634,25 @@ function checkVWULuecke(){
         });
         } else if(item.text!==undefined&&item.blanks){
         const L=APP._luecke;
+        const isTyping=L&&L.typing;
         item.blanks.forEach((acc,i)=>{
-            const sl=document.getElementById('ls_'+i);
-            if(!sl)return;
-            const val=L&&L.filled[i]!==null?L.bank[L.filled[i]]:'';
+            let val='',el;
+            if(isTyping){
+                el=document.getElementById('li_'+i);
+                if(!el)return;
+                val=el.value.trim();
+                el.disabled=true;
+            } else {
+                el=document.getElementById('ls_'+i);
+                if(!el)return;
+                val=L&&L.filled[i]!==null?L.bank[L.filled[i]]:'';
+                el.onclick=null;el.style.cursor='default';
+            }
             const ok=acc.some(a=>a.toLowerCase()===val.toLowerCase());
-            sl.onclick=null;sl.style.cursor='default';
-            if(ok){sl.classList.add('luecke-correct');score+=perItem;}
-            else{sl.classList.add('luecke-wrong');sl.insertAdjacentHTML('afterend',`<span class="luecke-answer">${esc(acc[0])}</span>`);v.wrongs.push({q:'Lücke '+(i+1),userAnswer:val||'—',correct:acc[0]});}
+            if(ok){el.classList.add('luecke-correct');score+=perItem;}
+            else{el.classList.add('luecke-wrong');el.insertAdjacentHTML('afterend',`<span class="luecke-answer">${esc(acc[0])}</span>`);v.wrongs.push({q:'Lücke '+(i+1),userAnswer:val||'—',correct:acc[0]});}
         });
-        document.querySelectorAll('.luecke-bchip').forEach(c=>{c.disabled=true;c.onclick=null;});
+        if(!isTyping) document.querySelectorAll('.luecke-bchip').forEach(c=>{c.disabled=true;c.onclick=null;});
     }
     v.gramScore+=Math.round(score*10)/10;
     const sc=$('qsc');if(sc)sc.textContent='✓ '+v.gramScore;
@@ -2652,7 +2670,7 @@ function showVWUGram(){
     const pct=(v.gramIdx/tot)*100;
     const btns=item.opts.map(o=>`<button class="answer-btn" data-val="${esc(o)}" data-cor="${esc(item.ans)}" onclick="checkVWUGram(this)">${o}</button>`).join('');
     const rk=sec.ruleKey;
-    const regelH=rk&&typeof RULES!=='undefined'&&RULES[rk]?`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('${rk}','showVWUGram()')">📖</button>`:'';
+    const regelH=rk&&typeof RULES!=='undefined'&&RULES[rk]?`<button class="btn btn-outline rule-quiz-btn" onclick="showRule('${rk}','showVWUGram()')">📖 Regel</button>`:'';
     $('app').innerHTML=`
         <div class="quiz-page">
             <div class="quiz-header">
