@@ -2429,7 +2429,8 @@ function showVWULuecke(){
             body+=`</div></div>`;
         });
     } else if(item.satz){
-        APP._satz={words:[...item.satz.words],built:[],start:item.satz.start||'',models:item.satz.models,checked:false};
+        var sw=[...item.satz.words];for(var i=sw.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=sw[i];sw[i]=sw[j];sw[j]=tmp;}
+        APP._satz={words:sw,built:[],start:item.satz.start||'',models:item.satz.models,checked:false};
         renderVWUSatz();return;
     } else if(item.text!==undefined&&item.blanks){
         const bankWords=item.bank||[];
