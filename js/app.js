@@ -2608,13 +2608,6 @@ function nextVWUSatzCorr(){
 }
 function nextVWUSatz(){APP.vwu.gramIdx++;showVWULuecke();}
 
-
-
-    el.innerHTML=S.placed.map((wi,pi)=>
-        '<button class="satz-word" onclick="satzRemove('+pi+')">'+esc(S.words[wi])+'</button>'
-    ).join(' ');
-}
-
 function checkVWULuecke(){
     const v=APP.vwu,sec=v.test.sections[v.secIdx];
     const item=sec.items[v.gramIdx];
