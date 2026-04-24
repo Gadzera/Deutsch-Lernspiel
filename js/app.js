@@ -713,12 +713,10 @@ function showMenu() {
         sqBtn('🌍','Übersetzung → Deutsch','words','l12de'));
     // 2. Partizip II
     if(hasPt) cats+=catHTML('📝','Partizip II',PARTIZIP2.length+' Verben','partizip_v2p',PARTIZIP2.length,'catPartiz',
-        ruleBtn('partizip')+
         sqBtn('➡️','Verb → hat/ist + Partizip II','partizip','v2p')+
         sqBtn('🔀','haben oder sein?','partizip','aux'));
     // 3. Reflexive
     if(hasRf) cats+=catHTML('🔄','Reflexive Verben',REFLEXIVE.length+' Verben','reflexive_conj',REFLEXIVE.length,'catReflex',
-        ruleBtn('reflexive')+
         sqBtn('✍️','Satz vervollständigen','reflexive','conj')+
         sqBtn('🎯','Akkusativ oder Dativ?','reflexive','case'));
     // 4. Satzbau — gruppiert nach Konnektor-Typ / Verb-Position
@@ -729,7 +727,6 @@ function showMenu() {
     }
     // 5. Präpositionen
     if(hasPp) cats+=catHTML('📌','Präpositionen',PREPOSITIONS.length+' Übungen','prep_all',PREPOSITIONS.length,'catPrep',
-        ruleBtn('prepositions')+
         sqBtn('📌','Alle Präpositionen','prepositions','all')+
         sqBtn('🔄','Wechselpräpositionen','prepositions','wechsel')+
         sqBtn('📗','Dativ-Präpositionen','prepositions','dativ')+
@@ -740,20 +737,18 @@ function showMenu() {
         sqBtn('💡','Adjektiv + Präposition','prepositions','adjektiv_prep'));
     // 6. Pronomen
     if(hasPn) cats+=catHTML('👥','Pronomen',PRONOUNS.length+' Übungen','pron_all',PRONOUNS.length,'catPron',
-        ruleBtn('pronouns')+
         sqBtn('👤','Alle Pronomen','pronouns','all')+
-        ruleBtn('pron_personal')+sqBtn('🙋','Personalpronomen','pronouns','personal')+
-        ruleBtn('pron_possessiv')+sqBtn('📎','Possessivpronomen','pronouns','possessiv')+
-        ruleBtn('pron_reflexiv')+sqBtn('🔄','Reflexivpronomen','pronouns','reflexiv')+
-        ruleBtn('pron_relativ')+sqBtn('🔗','Relativpronomen','pronouns','relativ')+
-        ruleBtn('pron_indefinit')+sqBtn('❓','Indefinitpronomen','pronouns','indefinit')+
-        ruleBtn('pron_frageartikel')+sqBtn('❔','welch- / was für ein-','pronouns','frageartikel')+
-        ruleBtn('pron_artikelwort')+sqBtn('🔖','dieser/jeder/mancher','pronouns','artikelwort'));
+        sqBtn('🙋','Personalpronomen','pronouns','personal')+
+        sqBtn('📎','Possessivpronomen','pronouns','possessiv')+
+        sqBtn('🔄','Reflexivpronomen','pronouns','reflexiv')+
+        sqBtn('🔗','Relativpronomen','pronouns','relativ')+
+        sqBtn('❓','Indefinitpronomen','pronouns','indefinit')+
+        sqBtn('❔','welch- / was für ein-','pronouns','frageartikel')+
+        sqBtn('🔖','dieser/jeder/mancher','pronouns','artikelwort'));
 
     // 7. Deklination — новая карточка (n-Deklination, Genitiv, Adjektiv)
     const hasDk=typeof DEKLINATION!=='undefined'&&DEKLINATION.length;
     if(hasDk) cats+=catHTML('🏛️','Deklination',DEKLINATION.length+' Übungen','dekl_all',DEKLINATION.length,'catDekl',
-        ruleBtn('deklination')+
         sqBtn('🏛️','Alle Deklinationen','deklination','all')+
         sqBtn('👨','n-Deklination','deklination','n_dekl')+
         sqBtn('📖','Genitiv-Attribute','deklination','genitiv_attr')+
