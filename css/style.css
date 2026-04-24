@@ -2183,6 +2183,10 @@ body {
 .luecke-partial { border-bottom-color: #FF9800 !important; color: #E65100 !important; }
 .luecke-answer { color: #43A047; font-weight: 600; font-size: 0.82rem; margin-left: 4px; }
 .luecke-hint { color: #9E9E9E; font-size: 0.8rem; font-style: italic; }
+.luecke-input { display: inline-block; width: 90px; padding: 4px 8px; margin: 2px 3px; border: 2px solid var(--primary); border-radius: 8px; background: rgba(108,99,255,0.06); color: var(--text); font-size: 0.92em; text-align: center; vertical-align: baseline; font-family: inherit; outline: none; transition: all .2s; }
+.luecke-input:focus { border-color: #FF6B6B; box-shadow: 0 0 0 3px rgba(255,107,107,0.25); background: #fff; }
+.luecke-input.luecke-correct { border-color: #43A047 !important; background: rgba(67,160,71,0.12) !important; color: #43A047 !important; font-weight: 600; }
+.luecke-input.luecke-wrong { border-color: #E53935 !important; background: rgba(229,57,53,0.08) !important; color: #E53935 !important; text-decoration: line-through; }
 .luecke-model { color: #1565C0; font-size: 0.82rem; margin-top: 4px; font-style: italic; }
 [data-theme="dark"] .luecke-model { color: #64B5F6; }
 .luecke-prompt { margin-bottom: 16px; padding: 10px; background: var(--bg); border-radius: 10px; }
