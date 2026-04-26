@@ -2253,6 +2253,11 @@ body {
 @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Textproduktion — свободный конструктор */
+.tp-aufgabe { font-size: 0.88rem; line-height: 1.5; margin-bottom: 8px; padding: 10px 12px; background: rgba(108,99,255,0.06); border-radius: 10px; }
+.tp-punkte { font-size: 0.84rem; margin: 6px 0; padding-left: 20px; line-height: 1.5; }
+.tp-punkte li { margin-bottom: 4px; }
+.tp-instr { font-size: 0.8rem; color: var(--text-secondary); font-style: italic; margin-bottom: 10px; padding: 6px 10px; background: rgba(0,0,0,0.03); border-radius: 8px; }
+[data-theme="dark"] .tp-instr { background: rgba(255,255,255,0.04); }
 .tp-quote { background: #FFF9C4; padding: 10px 14px; border-radius: 10px; font-style: italic; font-size: 0.88rem; margin-bottom: 12px; line-height: 1.4; border-left: 4px solid #F9A825; }
 [data-theme="dark"] .tp-quote { background: rgba(249,168,37,0.12); color: #FFD54F; }
 .tp-part-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 2px; opacity: 0.7; }
