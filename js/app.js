@@ -3160,9 +3160,11 @@ function showTPMenu(){
     if(typeof TP_DATA==='undefined'||!TP_DATA.length){$('app').innerHTML='<div class="quiz-page"><div class="quiz-body"><p>Textproduktion wird geladen...</p><button class="btn btn-outline" onclick="showMenu()">← Menü</button></div></div>';return;}
     var cards='';
     TP_DATA.forEach(function(tp,i){
+        var icon=tp.type==='email'?'📧':'📝';
+        var tag=tp.type==='email'?'E-Mail':'Stellungnahme';
         cards+='<button class="sub-quiz-btn" onclick="startTP('+i+')" style="text-align:left">'+
-            '<span>✍️</span> '+esc(tp.topic)+
-            '<span style="font-size:0.75rem;color:var(--text-secondary);margin-left:auto">'+esc(tp.level)+'</span></button>';
+            '<span>'+icon+'</span> '+esc(tp.topic)+
+            '<span style="font-size:0.7rem;color:var(--text-secondary);margin-left:auto">'+esc(tag)+' · '+esc(tp.level)+'</span></button>';
     });
     $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="showMenu()">&#8592;</button><span class="quiz-progress-text">Textproduktion</span></div></div><div class="quiz-body"><div class="quiz-question-label" style="margin-bottom:12px">Bauen Sie einen Text — Wort für Wort!</div>'+cards+'</div></div>';
 }
@@ -3178,7 +3180,7 @@ function startTP(idx){
 function tpGetWords(catKey){
     var T=APP.tp,tp=T.topic;
     if(typeof TP_SHARED!=='undefined'){
-        if(catKey==='redemittel') return TP_SHARED.redemittel||[];
+        if(catKey==='redemittel') return (tp.type==='email'?(TP_SHARED.redemittel_email||[]):[]).concat(TP_SHARED.redemittel||[]);
         if(catKey==='konnektoren') return TP_SHARED.konnektoren||[];
         if(catKey==='pronomen') return TP_SHARED.pronomen||[];
         if(catKey==='praepos') return TP_SHARED.praepos||[];
@@ -3197,7 +3199,10 @@ function renderTP(){
     var sec=T.sections[T.activeSec];
     var totalWords=0;
     T.sections.forEach(function(s){totalWords+=s.words.length;});
-    var quoteH=tp.quote?'<div class="tp-quote">'+esc(tp.quote)+'</div>':'';
+    var aufgH='<div class="tp-aufgabe"><strong>'+esc(tp.aufgabe)+'</strong></div>';
+    if(tp.quote) aufgH+='<div class="tp-quote">'+esc(tp.quote)+'</div>';
+    if(tp.punkte&&tp.punkte.length) aufgH+='<ul class="tp-punkte">'+tp.punkte.map(function(p){return '<li>'+esc(p)+'</li>';}).join('')+'</ul>';
+    if(tp.instructions) aufgH+='<div class="tp-instr">'+esc(tp.instructions)+'</div>';
     var secsH='';
     T.sections.forEach(function(s,i){
         var active=i===T.activeSec;
@@ -3230,7 +3235,7 @@ function renderTP(){
     if(T.activeSec<T.sections.length-1) navH+='<button class="btn btn-outline btn-sm" onclick="tpSetSec('+(T.activeSec+1)+')">'+esc(T.sections[T.activeSec+1].label)+' →</button>';
     else navH+='<button class="btn btn-primary btn-sm" onclick="finishTP()">✅ Fertig!</button>';
     navH+='</div>';
-    $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="showTPMenu()">&#8592;</button><span class="quiz-progress-text">'+esc(tp.topic)+'</span></div><span class="quiz-score">'+totalWords+' Wörter</span></div><div class="quiz-body">'+quoteH+secsH+tabsH+bankH+navH+'</div></div>';
+    $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="showTPMenu()">&#8592;</button><span class="quiz-progress-text">'+esc(tp.topic)+'</span></div><span class="quiz-score">'+totalWords+' W.</span></div><div class="quiz-body">'+aufgH+secsH+tabsH+bankH+navH+'</div></div>';
 }
 
 function tpSetSec(i){var T=APP.tp;if(!T)return;T.activeSec=i;renderTP();}
