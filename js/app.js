@@ -754,7 +754,20 @@ function showMenu() {
         sqBtn('📖','Genitiv-Attribute','deklination','genitiv_attr')+
         sqBtn('🎨','Adjektivdeklination','deklination','adj_dekl'));
 
-    // 8. VWU — отдельная кнопка ведёт в showVWUMenu()
+    // 8. Textproduktion
+    const hasTP=typeof TP_DATA!=='undefined'&&TP_DATA.length;
+    if(hasTP){
+        cats+=`<div class="cat-card">
+            <div class="cat-header" onclick="showTPMenu()">
+                <span class="cat-icon">✍️</span>
+                <div class="cat-info"><div class="cat-title">Textproduktion</div>
+                <div class="cat-sub">${TP_DATA.length} Themen &bull; Stellungnahme</div></div>
+                <span class="cat-arrow">&rsaquo;</span>
+            </div>
+        </div>`;
+    }
+
+    // 9. VWU — отдельная кнопка ведёт в showVWUMenu()
     const hasVWU=typeof VWU!=='undefined'&&VWU.levels;
     if(hasVWU){
         const totalTests=VWU.levels.reduce((s,l)=>s+l.tests.length,0);
@@ -3127,6 +3140,110 @@ function quitVWU(){
     const v=APP.vwu;
     if(v&&v.origTestId) startVWU(v.level.id,v.origTestId);
     else showVWUMenu();
+}
+
+// ============== TEXTPRODUKTION ==============
+function showTPMenu(){
+    if(!APP.user)return showAuth();
+    if(typeof TP_DATA==='undefined'||!TP_DATA.length){$('app').innerHTML='<div class="quiz-page"><div class="quiz-body"><p>Textproduktion wird geladen...</p><button class="btn btn-outline" onclick="showMenu()">← Menü</button></div></div>';return;}
+    var cards='';
+    TP_DATA.forEach(function(tp,i){
+        var done=ld(CONFIG.prefix+'tp_done_'+tp.id);
+        cards+='<button class="sub-quiz-btn" onclick="startTP('+i+')" style="text-align:left">'+
+            '<span>'+(done?'✅':'✍️')+'</span> '+esc(tp.topic)+
+            '<span style="font-size:0.75rem;color:var(--text-secondary);margin-left:auto">'+esc(tp.level)+'</span></button>';
+    });
+    $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="showMenu()">&#8592;</button><span class="quiz-progress-text">Textproduktion</span></div></div><div class="quiz-body"><div class="quiz-question-label" style="margin-bottom:12px">Wählen Sie ein Thema und bauen Sie einen Text!</div>'+cards+'</div></div>';
+}
+
+function startTP(idx){
+    var tp=TP_DATA[idx];
+    var totalSlots=0;
+    tp.parts.forEach(function(p){p.segments.forEach(function(s){if(s.opts)totalSlots++;});});
+    APP.tp={topicIdx:idx,topic:tp,choices:new Array(totalSlots).fill(null),activeSlot:0,totalSlots:totalSlots,done:false};
+    renderTP();
+}
+
+function renderTP(){
+    var T=APP.tp,tp=T.topic;
+    var lang=APP.lang||'ru';
+    var filled=T.choices.filter(function(c){return c!==null;}).length;
+    var pct=T.totalSlots?Math.round(filled/T.totalSlots*100):0;
+    var textH='';
+    var slotIdx=0;
+    tp.parts.forEach(function(part){
+        textH+='<div class="tp-part"><div class="tp-part-label">'+esc(part.label)+'</div><div class="tp-part-text">';
+        part.segments.forEach(function(seg){
+            if(typeof seg==='string'){
+                if(seg==='\n') textH+='<br>';
+                else textH+=esc(seg)+' ';
+            } else if(seg.opts){
+                var si=slotIdx++;
+                var chosen=T.choices[si];
+                if(chosen!==null){
+                    var opt=seg.opts[chosen];
+                    textH+='<span class="tp-chosen" onclick="tpOpenSlot('+si+')">'+esc(opt.de)+'</span> ';
+                } else {
+                    var cls=si===T.activeSlot?' tp-slot-active':'';
+                    textH+='<span class="tp-slot'+cls+'" onclick="tpOpenSlot('+si+')">______</span> ';
+                }
+            }
+        });
+        textH+='</div></div>';
+    });
+    var optsH='';
+    if(!T.done){
+        var slot=tpGetSlot(tp,T.activeSlot);
+        if(slot){
+            optsH='<div class="tp-opts-panel"><div class="tp-opts-title">Wählen Sie:</div>';
+            slot.opts.forEach(function(opt,oi){
+                var tr=opt[lang]||opt.en||opt.ru||'';
+                optsH+='<button class="tp-opt" onclick="tpPick('+T.activeSlot+','+oi+')"><span class="tp-opt-de">'+esc(opt.de)+'</span><span class="tp-opt-tr">'+esc(tr)+'</span></button>';
+            });
+            optsH+='</div>';
+        }
+    }
+    var doneBtn='';
+    if(filled===T.totalSlots&&!T.done) doneBtn='<button class="btn btn-primary" style="margin-top:16px" onclick="finishTP()">✅ Text fertig!</button>';
+    else if(T.done) doneBtn='<div class="tp-done-msg">✅ Ihr Text ist fertig! Gut gemacht!</div><button class="btn btn-primary" style="margin-top:10px" onclick="showTPMenu()">← Themenliste</button>';
+    var quoteH=tp.quote?'<div class="tp-quote">'+esc(tp.quote)+'</div>':'';
+    $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="showTPMenu()">&#8592;</button><span class="quiz-progress-text">'+esc(tp.topic)+'</span></div><span class="quiz-score" id="qsc">'+filled+'/'+T.totalSlots+'</span></div><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:'+pct+'%"></div></div><div class="quiz-body">'+quoteH+textH+optsH+doneBtn+'</div></div>';
+}
+
+function tpGetSlot(tp,idx){
+    var si=0;
+    for(var pi=0;pi<tp.parts.length;pi++){
+        var segs=tp.parts[pi].segments;
+        for(var j=0;j<segs.length;j++){
+            if(segs[j].opts){if(si===idx)return segs[j];si++;}
+        }
+    }
+    return null;
+}
+
+function tpOpenSlot(si){
+    var T=APP.tp;if(!T||T.done)return;
+    T.activeSlot=si;
+    renderTP();
+}
+
+function tpPick(si,oi){
+    var T=APP.tp;if(!T||T.done)return;
+    T.choices[si]=oi;
+    var next=si+1;
+    while(next<T.totalSlots&&T.choices[next]!==null)next++;
+    if(next>=T.totalSlots){
+        var first=T.choices.indexOf(null);
+        T.activeSlot=first>=0?first:si;
+    } else T.activeSlot=next;
+    renderTP();
+}
+
+function finishTP(){
+    var T=APP.tp;if(!T)return;
+    T.done=true;
+    sv(CONFIG.prefix+'tp_done_'+T.topic.id,true);
+    renderTP();
 }
 
 // ============== START ==============
