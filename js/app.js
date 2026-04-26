@@ -3171,8 +3171,9 @@ function showTPMenu(){
 
 function startTP(idx){
     var tp=TP_DATA[idx];
+    var secLabels=tp.sections||TP_SECTIONS;
     var secs=[];
-    TP_SECTIONS.forEach(function(s){secs.push({label:s,words:[]});});
+    secLabels.forEach(function(s){secs.push({label:s,words:[]});});
     APP.tp={topicIdx:idx,topic:tp,sections:secs,activeSec:0,activeCat:"redemittel"};
     renderTP();
 }
@@ -3229,6 +3230,7 @@ function renderTP(){
         bankH+='<button class="tp-wchip" onclick="tpAddWord(\''+T.activeCat+'\','+i+')"><span class="tp-wchip-de">'+esc(w.de)+'</span>'+(tr?'<span class="tp-wchip-tr">'+esc(tr)+'</span>':'')+'</button>';
     });
     bankH+='</div>';
+    bankH+='<div class="tp-custom"><input type="text" id="tpCustom" class="tp-custom-input" placeholder="Eigenes Wort eingeben..." autocomplete="off" autocapitalize="off" spellcheck="false"><button class="btn btn-sm btn-primary tp-custom-btn" onclick="tpAddCustom()">+</button></div>';
     var navH='<div class="tp-nav">';
     if(T.activeSec>0) navH+='<button class="btn btn-outline btn-sm" onclick="tpSetSec('+(T.activeSec-1)+')">← '+esc(T.sections[T.activeSec-1].label)+'</button>';
     else navH+='<span></span>';
@@ -3254,9 +3256,25 @@ function tpRemoveWord(wi){
     T.sections[T.activeSec].words.splice(wi,1);
     renderTP();
 }
+function tpAddCustom(){
+    var T=APP.tp;if(!T)return;
+    var inp=document.getElementById('tpCustom');
+    if(!inp||!inp.value.trim())return;
+    T.sections[T.activeSec].words.push({de:inp.value.trim()});
+    inp.value='';
+    renderTP();
+}
 function finishTP(){
     var T=APP.tp;if(!T)return;
-    var lang=APP.lang||'ru';
+    var totalWords=0;
+    var emptySecs=[];
+    T.sections.forEach(function(s){totalWords+=s.words.length;if(!s.words.length)emptySecs.push(s.label);});
+    if(emptySecs.length){
+        var msg=APP.lang==='ru'?'Пустые секции: '+emptySecs.join(', ')+'. Продолжить?':'Leere Abschnitte: '+emptySecs.join(', ')+'. Trotzdem fertig?';
+        if(!confirm(msg))return;
+    }
+    var isEmail=T.topic.type==='email';
+    var minW=isEmail?140:100,maxW=isEmail?160:120;
     var textH='';
     T.sections.forEach(function(s){
         textH+='<div class="tp-result-sec"><strong>'+esc(s.label)+':</strong> ';
@@ -3264,8 +3282,21 @@ function finishTP(){
         else textH+='<em style="color:#999">—</em>';
         textH+='</div>';
     });
-    var totalWords=0;T.sections.forEach(function(s){totalWords+=s.words.length;});
-    $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="showTPMenu()">&#8592;</button><span class="quiz-progress-text">'+esc(T.topic.topic)+'</span></div></div><div class="quiz-body"><div class="tp-done-msg">✅ Ihr Text ('+totalWords+' Wörter)</div>'+textH+'<div style="margin-top:16px;display:flex;gap:8px"><button class="btn btn-primary" onclick="startTP('+T.topicIdx+')">🔄 Nochmal</button><button class="btn btn-outline" onclick="showTPMenu()">← Themen</button></div></div></div>';
+    var fbH='';
+    if(totalWords<minW) fbH='<div class="tp-fb tp-fb-warn">⚠️ '+totalWords+' Wörter — zu wenig (Ziel: '+minW+'–'+maxW+')</div>';
+    else if(totalWords>maxW) fbH='<div class="tp-fb tp-fb-warn">⚠️ '+totalWords+' Wörter — zu viel (Ziel: '+minW+'–'+maxW+')</div>';
+    else fbH='<div class="tp-fb tp-fb-ok">✅ '+totalWords+' Wörter — perfekt! ('+minW+'–'+maxW+')</div>';
+    var fullText='';T.sections.forEach(function(s){if(s.words.length)fullText+=s.words.map(function(w){return w.de;}).join(' ')+' ';});
+    var hasNeben=/\b(weil|dass|obwohl|wenn|als|damit|ob|seit|bis|bevor|nachdem|während)\b/i.test(fullText);
+    if(!hasNeben) fbH+='<div class="tp-fb tp-fb-warn">⚠️ Keine Nebensätze gefunden (weil, dass, obwohl, wenn ...)</div>';
+    else fbH+='<div class="tp-fb tp-fb-ok">✅ Nebensätze vorhanden</div>';
+    if(isEmail){
+        var hasAnrede=/\b(Liebe|Lieber|Hallo|Sehr geehrte)/i.test(fullText);
+        var hasGruss=/\b(Grüße|Gruesse|Gruss|Bis bald|Dein|Deine)\b/i.test(fullText);
+        if(!hasAnrede) fbH+='<div class="tp-fb tp-fb-warn">⚠️ Anrede fehlt (Liebe/Lieber/Hallo)</div>';
+        if(!hasGruss) fbH+='<div class="tp-fb tp-fb-warn">⚠️ Grußformel fehlt (Liebe Grüße / Bis bald)</div>';
+    }
+    $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="showTPMenu()">&#8592;</button><span class="quiz-progress-text">'+esc(T.topic.topic)+'</span></div></div><div class="quiz-body"><div class="tp-done-msg">Ihr Text</div>'+fbH+textH+'<div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-primary" onclick="startTP('+T.topicIdx+')">🔄 Nochmal</button><button class="btn btn-outline" onclick="showTPMenu()">← Themen</button></div></div></div>';
 }
 
 // ============== START ==============
