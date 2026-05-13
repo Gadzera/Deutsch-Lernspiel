@@ -317,16 +317,3 @@ const EV_ZT3_SECTIONS = [
   t.empty=false;
   t.sections=EV_ZT3_SECTIONS;
 })();
-
-]; // end EV_ZT3_SECTIONS
-
-// Inject into VWU after vwu.js is loaded
-(function(){
-  if(typeof VWU==='undefined') return;
-  const ev=VWU.levels.find(function(l){return l.id==='ev';});
-  if(!ev) return;
-  const t=ev.tests.find(function(t){return t.id==='ev_zt3';});
-  if(!t) return;
-  t.empty=false;
-  t.sections=EV_ZT3_SECTIONS;
-})();
