@@ -2902,7 +2902,9 @@ function showVWUWortschatz(){
                 innerH+=`<div class="vwu-ws-item"><span class="vwu-ws-noun">${esc(it.word)}</span> → <input class="vwu-ws-input" id="ant_${ti}_${ii}" placeholder="..." autocomplete="off" autocapitalize="off"></div>`;
             });
         }
-        tasksH+=`<div class="vwu-task-block"><div class="vwu-task-title">${ti+1}. ${esc(task.q)} <span class="vwu-lv-pts">(${esc(task.scoring)})</span></div>${innerH}</div>`;
+        const wrk=task.ruleKey;
+        const wTaskRuleBtn=wrk&&typeof RULES!=='undefined'&&RULES[wrk]?`<button class="btn btn-outline rule-quiz-btn" style="font-size:0.75em;padding:2px 8px" onclick="showRule('${wrk}','nextVWUSec()')">📖 Regel</button>`:'';
+        tasksH+=`<div class="vwu-task-block"><div class="vwu-task-title">${ti+1}. ${esc(task.q)} <span class="vwu-lv-pts">(${esc(task.scoring)})</span> ${wTaskRuleBtn}</div>${innerH}</div>`;
     });
     $('app').innerHTML=`
         <div class="quiz-page">
@@ -3001,7 +3003,9 @@ function showVWUStrukturen(){
                 innerH+=`<div class="vwu-str-item">${it.prefix?'<span class="vwu-str-prefix">'+esc(it.prefix)+'</span>':''} ${sentH}</div>`;
             });
         }
-        tasksH+=`<div class="vwu-task-block"><div class="vwu-task-title">${ti+1}. ${esc(task.q)} <span class="vwu-lv-pts">(${esc(task.scoring)})</span></div>${innerH}</div>`;
+        const rk=task.ruleKey;
+        const taskRuleBtn=rk&&typeof RULES!=='undefined'&&RULES[rk]?`<button class="btn btn-outline rule-quiz-btn" style="font-size:0.75em;padding:2px 8px" onclick="showRule('${rk}','nextVWUSec()')">📖 Regel</button>`:'';
+        tasksH+=`<div class="vwu-task-block"><div class="vwu-task-title">${ti+1}. ${esc(task.q)} <span class="vwu-lv-pts">(${esc(task.scoring)})</span> ${taskRuleBtn}</div>${innerH}</div>`;
     });
     $('app').innerHTML=`
         <div class="quiz-page">

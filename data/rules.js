@@ -4631,6 +4631,145 @@ en: `<h2>Question Articles: welch- / was für ein-</h2>
 <p><b>was für ein-</b> = what kind of: <i>Was für ein Auto hast du?</i></p>`
 },
 
+vwu_genitiv: {
+de: `<h2>Genitiv — Ergänzung</h2>
+<p>Der Genitiv zeigt Zugehörigkeit und folgt auf Präpositionen wie <b>wegen, trotz, während, aufgrund, statt</b>.</p>
+<table class="rule-table">
+<tr><th>Artikel</th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr>
+<tr><td>bestimmt</td><td>des Mann<b>es</b></td><td>der Frau</td><td>des Kind<b>es</b></td><td>der Kinder</td></tr>
+<tr><td>unbestimmt</td><td>eines Mann<b>es</b></td><td>einer Frau</td><td>eines Kind<b>es</b></td><td>—</td></tr>
+<tr><td>Possessiv</td><td>meines Vater<b>s</b></td><td>meiner Mutter</td><td>meines Kind<b>es</b></td><td>meiner Eltern</td></tr>
+</table>
+<div class="rule-box rule-blue"><b>Nomen m/n:</b> +<b>s</b> oder +<b>es</b><br>der Mann → des Mann<b>es</b> | das Kind → des Kind<b>es</b></div>
+<div class="rule-box rule-green"><b>Nomen f + Plural:</b> kein -s!<br>die Frau → der Frau | die Kinder → der Kinder</div>
+<h3>Adjektiv im Genitiv</h3>
+<table class="rule-table">
+<tr><th></th><th>m (des)</th><th>f (der)</th><th>n (des)</th></tr>
+<tr><td>nach best. Art.</td><td>des alt<b>en</b> Mannes</td><td>der alt<b>en</b> Frau</td><td>des alt<b>en</b> Kindes</td></tr>
+<tr><td>nach unbest. Art.</td><td>eines alt<b>en</b> Mannes</td><td>einer alt<b>en</b> Frau</td><td>eines alt<b>en</b> Kindes</td></tr>
+</table>`,
+ru: `<h2>Родительный падеж (Genitiv)</h2>
+<p>Genitiv = принадлежность (чей?). Предлоги: <b>wegen, trotz, während, aufgrund, statt</b>.</p>
+<table class="rule-table">
+<tr><th>Артикль</th><th>Муж.</th><th>Жен.</th><th>Ср.</th><th>Мн.ч.</th></tr>
+<tr><td>опред.</td><td>des Mann<b>es</b></td><td>der Frau</td><td>des Kind<b>es</b></td><td>der Kinder</td></tr>
+<tr><td>неопред.</td><td>eines Mann<b>es</b></td><td>einer Frau</td><td>eines Kindes</td><td>—</td></tr>
+</table>
+<div class="rule-box rule-blue"><b>Муж. и ср.:</b> существительное + -s или -es</div>
+<div class="rule-box rule-green"><b>Жен. и мн.ч.:</b> существительное без изменений</div>
+<p><b>Примеры:</b> wegen <u>des Wetters</u> | während <u>des Studiums</u> | trotz <u>der Müdigkeit</u></p>`,
+en: `<h2>Genitive Case (Genitiv)</h2>
+<p>Shows possession. Used after: <b>wegen, trotz, während, aufgrund, statt</b>.</p>
+<table class="rule-table">
+<tr><th>Article</th><th>Masc.</th><th>Fem.</th><th>Neut.</th><th>Plural</th></tr>
+<tr><td>definite</td><td>des Mann<b>es</b></td><td>der Frau</td><td>des Kind<b>es</b></td><td>der Kinder</td></tr>
+<tr><td>indefinite</td><td>eines Mann<b>es</b></td><td>einer Frau</td><td>eines Kindes</td><td>—</td></tr>
+</table>
+<div class="rule-box rule-blue">Masc. + neut. nouns: add -s or -es</div>
+<div class="rule-box rule-green">Fem. + plural nouns: no change</div>`
+},
+
+vwu_wortbildung: {
+de: `<h2>Wortbildung: Verb – Adjektiv – Nomen</h2>
+<table class="rule-table">
+<tr><th>Verb</th><th>Adjektiv</th><th>Nomen</th></tr>
+<tr><td>arbeiten</td><td>arbeitslos / fleißig</td><td>die Arbeit</td></tr>
+<tr><td>tanzen</td><td>tänzerisch</td><td>der Tanz</td></tr>
+<tr><td>telefonieren</td><td>telefonisch</td><td>das Telefonat</td></tr>
+<tr><td>ärgern</td><td>ärgerlich</td><td>der Ärger</td></tr>
+</table>
+<h3>Typische Endungen</h3>
+<table class="rule-table">
+<tr><th>Wortart</th><th>Endungen</th><th>Beispiel</th></tr>
+<tr><td>Nomen (f)</td><td>-ung, -heit, -keit, -schaft, -ion</td><td>Hoffnung, Freiheit, Freundlichkeit</td></tr>
+<tr><td>Adjektiv</td><td>-lich, -ig, -isch, -los, -voll</td><td>freundlich, mutig, telefonisch, arbeitslos</td></tr>
+<tr><td>Verb</td><td>-en, -ieren, -ern</td><td>lernen, studieren, zögern</td></tr>
+</table>`,
+ru: `<h2>Словообразование: глагол – прилагательное – существительное</h2>
+<table class="rule-table">
+<tr><th>Глагол</th><th>Прилагательное</th><th>Существительное</th></tr>
+<tr><td>arbeiten</td><td>arbeitslos</td><td>die Arbeit</td></tr>
+<tr><td>telefonieren</td><td>telefonisch</td><td>das Telefonat</td></tr>
+<tr><td>ärgern</td><td>ärgerlich</td><td>der Ärger</td></tr>
+</table>
+<h3>Типичные окончания</h3>
+<table class="rule-table">
+<tr><th>Часть речи</th><th>Окончания</th></tr>
+<tr><td>Существительное</td><td>-ung, -heit, -keit, -schaft</td></tr>
+<tr><td>Прилагательное</td><td>-lich, -ig, -isch, -los</td></tr>
+<tr><td>Глагол</td><td>-en, -ieren, -ern</td></tr>
+</table>`,
+en: `<h2>Word Formation</h2>
+<table class="rule-table">
+<tr><th>Verb</th><th>Adjective</th><th>Noun</th></tr>
+<tr><td>arbeiten</td><td>arbeitslos</td><td>die Arbeit</td></tr>
+<tr><td>telefonieren</td><td>telefonisch</td><td>das Telefonat</td></tr>
+</table>
+<p>Noun suffixes: -ung, -heit, -keit | Adj.: -lich, -ig, -isch | Verb: -en, -ieren</p>`
+},
+
+vwu_komposita: {
+de: `<h2>Komposita — Zusammengesetzte Nomen</h2>
+<p>Das letzte Wort (Grundwort) bestimmt den Artikel!</p>
+<div class="rule-formula">Bestimmungswort + <span class="rule-hl">Grundwort</span> → Artikel des Grundworts</div>
+<table class="rule-table">
+<tr><th>Teil 1</th><th>Teil 2</th><th>Kompositum</th></tr>
+<tr><td>Küche</td><td><b>das</b> Messer</td><td><b>das</b> Küchenmesser</td></tr>
+<tr><td>Haus</td><td><b>die</b> Aufgabe</td><td><b>die</b> Hausaufgabe</td></tr>
+<tr><td>Schul</td><td><b>das</b> Buch</td><td><b>das</b> Schulbuch</td></tr>
+<tr><td>Geburts</td><td><b>der</b> Tag</td><td><b>der</b> Geburtstag</td></tr>
+</table>
+<div class="rule-box rule-blue"><b>Fugen-s:</b> Geburts<b>tag</b>, Arbeit<b>s</b>platz, Fahrt<b>s</b>kosten</div>
+<div class="rule-box rule-green"><b>Fugen-en/n:</b> Blum<b>en</b>topf, Straß<b>en</b>bahn, Kind<b>er</b>garten</div>`,
+ru: `<h2>Сложные слова (Komposita)</h2>
+<p>Артикль берётся от ПОСЛЕДНЕГО слова (Grundwort)!</p>
+<table class="rule-table">
+<tr><th>Часть 1</th><th>Часть 2</th><th>Сложное слово</th></tr>
+<tr><td>Küche</td><td><b>das</b> Messer</td><td><b>das</b> Küchenmesser</td></tr>
+<tr><td>Haus</td><td><b>die</b> Aufgabe</td><td><b>die</b> Hausaufgabe</td></tr>
+<tr><td>Schul</td><td><b>das</b> Buch</td><td><b>das</b> Schulbuch</td></tr>
+</table>
+<p>Соединительный элемент -s-: Arbeit<b>s</b>platz, Geburts<b>tag</b></p>`,
+en: `<h2>Compound Nouns (Komposita)</h2>
+<p>The article comes from the LAST word!</p>
+<table class="rule-table">
+<tr><th>Part 1</th><th>Part 2</th><th>Compound</th></tr>
+<tr><td>Küche</td><td><b>das</b> Messer</td><td><b>das</b> Küchenmesser</td></tr>
+<tr><td>Haus</td><td><b>die</b> Aufgabe</td><td><b>die</b> Hausaufgabe</td></tr>
+</table>`
+},
+
+vwu_synonyme: {
+de: `<h2>Synonyme finden</h2>
+<p>Synonyme sind Wörter mit gleicher oder ähnlicher Bedeutung.</p>
+<table class="rule-table">
+<tr><th>Wort</th><th>Synonyme</th></tr>
+<tr><td>beginnen</td><td>anfangen, starten, loslegen</td></tr>
+<tr><td>sprechen</td><td>reden, sagen, erzählen</td></tr>
+<tr><td>kaufen</td><td>erwerben, anschaffen</td></tr>
+<tr><td>helfen</td><td>unterstützen, assistieren</td></tr>
+<tr><td>Ende</td><td>Schluss, Abschluss, Finale</td></tr>
+<tr><td>Fehler</td><td>Irrtum, Versehen, Mangel</td></tr>
+</table>
+<div class="rule-box rule-blue"><b>Tipp:</b> Lernen Sie Synonyme immer mit Kontext und Beispielsatz!</div>`,
+ru: `<h2>Синонимы (Synonyme)</h2>
+<p>Синонимы — слова с одинаковым или похожим значением.</p>
+<table class="rule-table">
+<tr><th>Слово</th><th>Синонимы</th></tr>
+<tr><td>beginnen</td><td>anfangen, starten</td></tr>
+<tr><td>sprechen</td><td>reden, erzählen</td></tr>
+<tr><td>helfen</td><td>unterstützen</td></tr>
+<tr><td>Ende</td><td>Schluss, Abschluss</td></tr>
+</table>`,
+en: `<h2>Synonyms (Synonyme)</h2>
+<table class="rule-table">
+<tr><th>Word</th><th>Synonyms</th></tr>
+<tr><td>beginnen</td><td>anfangen, starten</td></tr>
+<tr><td>helfen</td><td>unterstützen</td></tr>
+<tr><td>Ende</td><td>Schluss, Finale</td></tr>
+</table>`
+},
+
 pron_artikelwort: {
 de: `<h2>Artikelwörter: dieser, jeder, mancher</h2>
 <table class="rule-table"><tr><th>Kasus</th><th>dies- (m)</th><th>dies- (f)</th><th>dies- (n)</th><th>dies- (Pl)</th></tr>
