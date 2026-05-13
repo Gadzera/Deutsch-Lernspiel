@@ -305,14 +305,18 @@ const EV_ZT3_SECTIONS = [
 {q:"Sie hat ___ Erfahrung als er. (viel)",opts:["mehr","mehrere","am meisten","viele"],ans:"mehr",rule:"unregelmäßig: viel → mehr"},
 {q:"Das ist das ___ Zimmer im Hotel. (klein)",opts:["kleinste","kleinere","kleiner","am kleinsten"],ans:"kleinste",rule:"Superlativ + Artikel: das kleinste"}
 ]},
+]; // end EV_ZT3_SECTIONS
 
-// ──────────────────────────────────────────────────────────────────
-// 8. SCHRIFTLICHE PRODUKTION
-// ──────────────────────────────────────────────────────────────────
-{type:"schreiben", name:"Schriftliche Produktion",
- prompt:"Argumentation: Schreiben Sie einen Text von 180–200 Wörtern zu einem der beiden Themen. Sie erhalten Punkte für Inhalt, Aufbau, Wortschatz und Sprachrichtigkeit.\n\nThema 1: „Du bist, was du isst.“\n• Was halten Sie von dieser Aussage?\n• Warum ist dieses Thema für viele Menschen wichtig?\n• Was für eine Rolle spielt dieses Thema für Sie und warum?\n• Was essen Sie persönlich am liebsten und warum?\n• Welche Tipps zum Thema Essen haben Sie?\n\nThema 2: „Ich brauche keine Geschäfte, denn ich kaufe nur online ein.“\n• Was halten Sie von dieser Aussage?\n• Aus welchen Gründen kaufen Ihrer Meinung nach immer mehr Menschen online ein?\n• Was sind die Vor- und Nachteile von Online-Shopping?\n• Worauf sollte man beim Einkaufen im Internet achten?\n• Was ist für Sie beim Einkaufen wichtig? Warum?",
- tip:"Achten Sie auf: 1) Satz- und Textverknüpfungsmittel (weil, deshalb, obwohl, trotzdem, außerdem, jedoch, einerseits…andererseits). 2) Einleitung + Hauptteil + Schluss. 3) Eigene Meinung + Begründung. Ziel: 180–200 Wörter."}
-
+// Inject into VWU after vwu.js is loaded
+(function(){
+  if(typeof VWU==='undefined') return;
+  const ev=VWU.levels.find(function(l){return l.id==='ev';});
+  if(!ev) return;
+  const t=ev.tests.find(function(t){return t.id==='ev_zt3';});
+  if(!t) return;
+  t.empty=false;
+  t.sections=EV_ZT3_SECTIONS;
+})();
 
 ]; // end EV_ZT3_SECTIONS
 
