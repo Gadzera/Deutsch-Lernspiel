@@ -1,1 +1,8 @@
 CLAUDE.md
+
+# Cloudflare Wrangler local cache / state (per-machine, not for the repo)
+.wrangler/
+
+# Node
+node_modules/
+npm-debug.log*
