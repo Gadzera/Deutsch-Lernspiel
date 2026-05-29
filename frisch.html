@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- apple-mobile-web-app-capable removed deliberately: it makes iOS aggressively cache
+         the WebClip snapshot when the user taps "Add to Home Screen", and that snapshot
+         then ignores all server-side updates indefinitely. Without it, home-screen icons
+         become normal Safari shortcuts that respect HTTP caching. -->
+    <meta name="theme-color" content="#1E3A8A">
+    <title>Deutsch Lernspiel Pro v2.2 · Berlin Modern</title>
+    <script>
+    // Bundle version baked at build time. Compared against /version.txt at runtime —
+    // if the server has a newer version, the page hard-reloads with a fresh URL.
+    window.__APP_VERSION = 'v2.2-2026-05-29';
+
+    // Nuclear cache cleanup: clear service workers + CacheStorage on every load.
+    (function(){
+      try{
+        if('serviceWorker' in navigator){
+          navigator.serviceWorker.getRegistrations().then(function(rs){
+            rs.forEach(function(r){ r.unregister().catch(function(){}); });
+          }).catch(function(){});
+        }
+        if('caches' in window){
+          caches.keys().then(function(ks){
+            ks.forEach(function(k){ caches.delete(k).catch(function(){}); });
+          }).catch(function(){});
+        }
+      }catch(e){}
+    })();
+    console.log('%c Deutsch Lernspiel · ' + window.__APP_VERSION + ' ', 'background:#1E3A8A;color:#E0A82E;font-weight:700;padding:4px 10px;border-radius:4px;');
+
+    // Runtime version check: fetch the server's version stamp and if it differs from
+    // the one baked into THIS HTML, the user is on a stale cached HTML — force a fresh
+    // navigation to a unique URL the browser has definitely never seen.
+    (function(){
+      try{
+        fetch('version.txt?nocache=' + Date.now(), { cache: 'no-store' })
+          .then(function(r){ return r.text(); })
+          .then(function(text){
+            // version.txt's first line is the canonical build stamp.
+            var serverStamp = (text || '').split('\n')[0].trim();
+            if(!serverStamp) return;
+            // If the local baked version is missing from the server stamp, the user is
+            // running stale HTML. Reload to a never-before-seen URL.
+            if(serverStamp.indexOf(window.__APP_VERSION) === -1){
+              var url = location.pathname + '?force=' + encodeURIComponent(serverStamp.slice(0, 32)) + '_' + Date.now();
+              console.warn('[version-check] stale HTML detected, reloading to', url);
+              location.replace(url);
+            }
+          })
+          .catch(function(){});
+      }catch(e){}
+    })();
+    </script>
+    <!-- Cache-busting: bump ?v=... on every deploy so phones get new JS -->
+    <script>
+      document.write('<link rel="stylesheet" href="css/style.v2.css?t='+Date.now()+'">');
+    </script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body>
+    <div id="app"></div>
+
+    <!-- 25th Frame (Subliminal Learning) -->
+    <div id="subliminalFrame" class="subliminal-frame">
+        <div class="subliminal-content">
+            <div id="subliminalWord" class="subliminal-word"></div>
+            <div id="subliminalTrans" class="subliminal-translation"></div>
+        </div>
+    </div>
+    <script>
+    // Dynamically inject all scripts with a fresh timestamp so browser cannot
+    // use a stale cached version of any JS/data file.
+    (function(){
+      var V='?t='+Date.now();
+      var files=[
+        'data/nouns.js','data/verbs.js','data/partizip2.js','data/reflexive.js',
+        'data/sentences.js','data/prepositions.js','data/pronouns.js',
+        'data/deklination.js',
+        'data/rules.js','data/vwu.js','data/ev_zt1_lesen.js','data/ev_zt1_pool.js',
+        'data/ev_zt1_sections.js','data/ev_zt2.js','data/ev_zt3.js','data/textproduktion.js',
+        'js/app.js'
+      ];
+      files.forEach(function(f){
+        document.write('<scr'+'ipt src="'+f+V+'"></scr'+'ipt>');
+      });
+    })();
+    </script>
+</body>
+</html>
