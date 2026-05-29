@@ -1,6 +1,32 @@
 /* ============ FONTS ============ */
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* ============ VERSION BADGE ============
+   Visible top-right pill that says "v2.2 NEU". Pure CSS, attached to body,
+   so it shows on every screen regardless of which page is rendered. If the
+   user does NOT see this badge, they are looking at a cached old version.
+*/
+body::before {
+    content: 'v2.2 · NEU';
+    position: fixed;
+    top: env(safe-area-inset-top, 6px);
+    right: 8px;
+    z-index: 9998;
+    background: linear-gradient(135deg, #1E3A8A, #E0A82E);
+    color: #fff;
+    font-family: 'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(30,58,138,0.35);
+    pointer-events: none;
+    line-height: 1.2;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+
 /* ============ RESET & BASE ============ */
 *, *::before, *::after {
     box-sizing: border-box;
