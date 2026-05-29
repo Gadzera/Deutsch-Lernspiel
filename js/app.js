@@ -268,7 +268,7 @@ function toast(msg) {
 // ============== INIT ==============
 function initApp() {
     if (typeof NOUNS==='undefined'||typeof VERBS==='undefined') {
-        $('app').innerHTML='<p style="text-align:center;padding:40px;color:red">Wörterbuch nicht geladen!</p>';
+        $('app').innerHTML='<p style="text-align:center;padding:40px;color:var(--danger)">Wörterbuch nicht geladen!</p>';
         return;
     }
     APP.allWords=[...NOUNS,...VERBS];
@@ -2235,9 +2235,9 @@ function showStats(){
                 <div class="quiz-header-left"><button class="quiz-back" onclick="showMenu()">&#8592;</button><span>Meine Statistik</span></div>
             </div>
             <div class="quiz-body" style="padding-top:16px">
-                ${weak.length?'<div class="stat-section"><div class="stat-section-title">&#10060; Schwächen</div>'+rowH(weak,'#e53935')+'</div>':''}
-                ${mid.length?'<div class="stat-section"><div class="stat-section-title">&#9888;&#65039; Mittel</div>'+rowH(mid,'#FB8C00')+'</div>':''}
-                ${strong.length?'<div class="stat-section"><div class="stat-section-title">&#10004; Stärken</div>'+rowH(strong,'#43A047')+'</div>':''}
+                ${weak.length?'<div class="stat-section"><div class="stat-section-title">&#10060; Schwächen</div>'+rowH(weak,'var(--danger)')+'</div>':''}
+                ${mid.length?'<div class="stat-section"><div class="stat-section-title">&#9888;&#65039; Mittel</div>'+rowH(mid,'var(--warning)')+'</div>':''}
+                ${strong.length?'<div class="stat-section"><div class="stat-section-title">&#10004; Stärken</div>'+rowH(strong,'var(--success)')+'</div>':''}
                 <button class="btn btn-outline" onclick="showMenu()" style="margin-top:20px">&#8592; ${UI.menu}</button>
             </div>
         </div>`;
@@ -2536,7 +2536,7 @@ function renderVWUSatz(){
         if(ok) feedH='<div class="satz-feedback satz-fb-ok">✓ Richtig!</div>';
         else{
             feedH='<div class="satz-alts" style="margin-top:10px"><strong>Richtige Varianten:</strong><br>';
-            s.models.slice(0,3).forEach(function(m){feedH+='<span style="color:#43A047">• '+esc(S.start+' '+m)+'</span><br>';});
+            s.models.slice(0,3).forEach(function(m){feedH+='<span style="color:var(--success)">• '+esc(S.start+' '+m)+'</span><br>';});
             feedH+='</div>';
         }
         $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span class="quiz-progress-text">'+esc(sec.name||v.test.name)+' '+num+'/'+tot+'</span></div><span class="quiz-score" id="qsc">&#10003; '+v.gramScore+'</span></div><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:'+pct+'%"></div></div><div class="quiz-body"><div class="quiz-question-label">'+esc(s.text)+'</div><div class="quiz-hint">'+esc(hint)+'</div><div class="sentence-area">'+builtH+'</div>'+feedH+'<button class="btn btn-primary" style="margin-top:14px" onclick="nextVWUSatz()">Weiter →</button></div></div>';
@@ -2595,7 +2595,7 @@ function showVWUSatzCorr(){
         else if(i===corr.pos){sentH+='<span class="word-chip corr-wrong" id="corrW">'+esc(corr.wrong)+'</span>';sentH+='<span class="word-chip corr-right" id="corrR">'+esc(corr.correct)+'</span>';}
         else{var w=C.corrDisplay[i]||'___';sentH+='<span class="word-chip '+(w===C.correctWords[i]?'':'corr-pending')+'">'+esc(w)+'</span>';}
     }
-    var altsH='<div class="satz-alts" style="margin-top:8px;font-size:0.82rem;color:#666">Auch richtig: '+s.models.slice(1,3).map(function(m){return '<em>'+esc(s.start+' '+m)+'</em>';}).join(' | ')+'</div>';
+    var altsH='<div class="satz-alts" style="margin-top:8px;font-size:0.82rem;color:var(--text-secondary)">Auch richtig: '+s.models.slice(1,3).map(function(m){return '<em>'+esc(s.start+' '+m)+'</em>';}).join(' | ')+'</div>';
     $('app').innerHTML='<div class="quiz-page"><div class="quiz-header"><div class="quiz-header-left"><button class="quiz-back" onclick="quitVWU()">&#8592;</button><span class="quiz-progress-text">'+esc(sec.name||v.test.name)+' '+num+'/'+tot+'</span></div><span class="quiz-score" id="qsc">&#10003; '+v.gramScore+'</span></div><div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:'+pct+'%"></div></div><div class="quiz-body"><div class="quiz-question-label">'+esc(s.text)+'</div><div class="quiz-hint">'+esc(hint)+'</div><div class="sentence-area corr-mode">'+sentH+'</div><div class="corr-rule-box" id="corrRule"><div class="corr-rule-text" id="corrRuleText"></div><button class="corr-skip-btn" id="corrSkip" onclick="nextVWUSatzCorr()">→</button></div><div class="corr-counter">'+String(C.corrIdx+1)+' / '+C.corrs.length+' Korrekturen</div>'+altsH+'</div></div>';
     var wEl=$('corrW'),rEl=$('corrR'),ruleBox=$('corrRule'),ruleText=$('corrRuleText');
     if(ruleBox)ruleBox.style.opacity='0';
@@ -3279,7 +3279,7 @@ function finishTP(){
     T.sections.forEach(function(s){
         textH+='<div class="tp-result-sec"><strong>'+esc(s.label)+':</strong> ';
         if(s.words.length) textH+=s.words.map(function(w){return esc(w.de);}).join(' ');
-        else textH+='<em style="color:#999">—</em>';
+        else textH+='<em style="color:var(--text-light)">—</em>';
         textH+='</div>';
     });
     var fbH='';
