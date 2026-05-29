@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Deutsch — Lernspiel</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="theme-color" content="#C25737">
+<meta http-equiv="refresh" content="0;url=react-app.html">
+<style>
+html,body{margin:0;padding:0;height:100%;background:#F4EDE1;color:#2C2118;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+display:flex;align-items:center;justify-content:center;}
+.b{width:46px;height:46px;border:3px solid rgba(194,87,55,.2);border-top-color:#C25737;
+border-radius:50%;animation:r 1s linear infinite;}
+@keyframes r{to{transform:rotate(360deg);}}
+a{color:#C25737;font-weight:600;}
+</style>
+</head>
+<body>
+<div class="b"></div>
+<script>
+(function(){
+  try{
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.getRegistrations().then(function(rs){
+        rs.forEach(function(r){r.unregister().catch(function(){});});
+      }).catch(function(){});
+    }
+    if('caches' in window){
+      caches.keys().then(function(ks){
+        ks.forEach(function(k){caches.delete(k).catch(function(){});});
+      }).catch(function(){});
+    }
+  }catch(e){}
+  location.replace('react-app.html?b=' + Date.now() + '_' + Math.random().toString(36).slice(2,8));
+})();
+</script>
+<noscript><a href="react-app.html">Deutsch Lernspiel öffnen →</a></noscript>
+</body>
+</html>
