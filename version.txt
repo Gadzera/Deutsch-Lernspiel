@@ -1,1 +1,1 @@
-2026-05-29 — Berlin Modern redesign (cobalt + Bauhaus mustard, Bricolage Grotesque + Inter)
+2026-05-29 — v2.2 Berlin Modern redesign (cobalt + Bauhaus mustard, Bricolage Grotesque + Inter). CSS renamed to style.v2.css to defeat browser cache.

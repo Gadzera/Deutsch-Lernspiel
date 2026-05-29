@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#1E3A8A">
-    <title>Deutsch Lernspiel Pro v2.1</title>
+    <title>Deutsch Lernspiel Pro v2.2 · Berlin Modern</title>
     <script>
     // Nuclear cache cleanup: clear service workers + CacheStorage on every load.
     // This runs before all other scripts so old cached resources get flushed.
@@ -24,10 +24,11 @@
         }
       }catch(e){}
     })();
+    console.log('%c Deutsch Lernspiel · v2.2 Berlin Modern ', 'background:#1E3A8A;color:#E0A82E;font-weight:700;padding:4px 10px;border-radius:4px;');
     </script>
     <!-- Cache-busting: bump ?v=... on every deploy so phones get new JS -->
     <script>
-      document.write('<link rel="stylesheet" href="css/style.css?t='+Date.now()+'">');
+      document.write('<link rel="stylesheet" href="css/style.v2.css?t='+Date.now()+'">');
     </script>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
