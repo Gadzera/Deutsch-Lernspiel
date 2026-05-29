@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- apple-mobile-web-app-capable removed deliberately: it makes iOS aggressively cache
+         the WebClip snapshot when the user taps "Add to Home Screen", and that snapshot
+         then ignores all server-side updates indefinitely. Without it, home-screen icons
+         become normal Safari shortcuts that respect HTTP caching. -->
     <meta name="theme-color" content="#1E3A8A">
     <title>Deutsch Lernspiel Pro v2.2 · Berlin Modern</title>
     <script>
+    // Bundle version baked at build time. Compared against /version.txt at runtime —
+    // if the server has a newer version, the page hard-reloads with a fresh URL.
+    window.__APP_VERSION = 'v2.2-2026-05-29';
+
     // Nuclear cache cleanup: clear service workers + CacheStorage on every load.
-    // This runs before all other scripts so old cached resources get flushed.
     (function(){
       try{
         if('serviceWorker' in navigator){
@@ -24,7 +29,30 @@
         }
       }catch(e){}
     })();
-    console.log('%c Deutsch Lernspiel · v2.2 Berlin Modern ', 'background:#1E3A8A;color:#E0A82E;font-weight:700;padding:4px 10px;border-radius:4px;');
+    console.log('%c Deutsch Lernspiel · ' + window.__APP_VERSION + ' ', 'background:#1E3A8A;color:#E0A82E;font-weight:700;padding:4px 10px;border-radius:4px;');
+
+    // Runtime version check: fetch the server's version stamp and if it differs from
+    // the one baked into THIS HTML, the user is on a stale cached HTML — force a fresh
+    // navigation to a unique URL the browser has definitely never seen.
+    (function(){
+      try{
+        fetch('version.txt?nocache=' + Date.now(), { cache: 'no-store' })
+          .then(function(r){ return r.text(); })
+          .then(function(text){
+            // version.txt's first line is the canonical build stamp.
+            var serverStamp = (text || '').split('\n')[0].trim();
+            if(!serverStamp) return;
+            // If the local baked version is missing from the server stamp, the user is
+            // running stale HTML. Reload to a never-before-seen URL.
+            if(serverStamp.indexOf(window.__APP_VERSION) === -1){
+              var url = location.pathname + '?force=' + encodeURIComponent(serverStamp.slice(0, 32)) + '_' + Date.now();
+              console.warn('[version-check] stale HTML detected, reloading to', url);
+              location.replace(url);
+            }
+          })
+          .catch(function(){});
+      }catch(e){}
+    })();
     </script>
     <!-- Cache-busting: bump ?v=... on every deploy so phones get new JS -->
     <script>
