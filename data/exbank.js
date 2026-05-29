@@ -172,6 +172,305 @@
   add('C2', 'wortschatz', 'Bedeutung', { display: 'ein „Ohrwurm" ist …', displaySmall: true, opts: ['ein Insekt im Ohr', 'eine Melodie, die im Kopf bleibt', 'eine Ohrenkrankheit', 'ein lautes Geräusch'], a: 'eine Melodie, die im Kopf bleibt', why: 'der <b>Ohrwurm</b> = eine eingängige Melodie, die nicht aus dem Kopf geht.' });
   add('C2', 'wortschatz', 'Person', { display: 'Ein „Glückspilz" ist eine Person, die …', displaySmall: true, opts: ['oft Glück hat', 'Pilze sammelt', 'immer Pech hat', 'gerne kocht'], a: 'oft Glück hat', why: 'der <b>Glückspilz</b> = jemand, der viel Glück hat (Gegenteil: Pechvogel).' });
 
+  /* ================= NEW BLOCK — expanded coverage (Uni Wien EV scenarios) ================= */
+
+  /* ---- A1/A2 — mehr Artikel (Kursvokabular) ---- */
+  art('A1', 'Bär', 'der', '<b>der</b> Bär.');
+  art('A1', 'Hase', 'der', '<b>der</b> Hase.');
+  art('A1', 'Löwe', 'der', '<b>der</b> Löwe.');
+  art('A1', 'Biene', 'die', '<b>die</b> Biene.');
+  art('A1', 'Spinne', 'die', '<b>die</b> Spinne.');
+  art('A1', 'Igel', 'der', '<b>der</b> Igel.');
+  art('A1', 'Pinguin', 'der', '<b>der</b> Pinguin.');
+  art('A1', 'Schnecke', 'die', '<b>die</b> Schnecke.');
+  art('A1', 'Lift', 'der', '<b>der</b> Lift (= der Aufzug).');
+  art('A1', 'Flur', 'der', '<b>der</b> Flur (= der Gang).');
+  art('A1', 'WG', 'die', '<b>die</b> WG (Wohngemeinschaft).');
+  art('A1', 'Putzplan', 'der', '<b>der</b> Putzplan.');
+  art('A1', 'Nachtruhe', 'die', '<b>die</b> Nachtruhe.');
+  art('A1', 'Soße', 'die', '<b>die</b> Soße.');
+  art('A1', 'Mehl', 'das', '<b>das</b> Mehl.');
+  art('A1', 'Obst', 'das', '<b>das</b> Obst.');
+  art('A1', 'Kebap', 'der', '<b>der</b> Kebap.');
+  art('A1', 'Dessert', 'das', '<b>das</b> Dessert (= die Nachspeise).');
+  art('A1', 'Paar', 'das', '<b>das</b> Paar.');
+  art('A1', 'Verlobung', 'die', '<b>die</b> Verlobung.');
+  art('A1', 'Heiratsantrag', 'der', '<b>der</b> Heiratsantrag.');
+  art('A1', 'Freundschaft', 'die', '<b>die</b> Freundschaft.');
+  art('A1', 'Trennung', 'die', '<b>die</b> Trennung.');
+  art('A1', 'Liebeskummer', 'der', '<b>der</b> Liebeskummer.');
+  art('A1', 'Notfall', 'der', '<b>der</b> Notfall.');
+  art('A1', 'Notarzt', 'der', '<b>der</b> Notarzt.');
+  art('A1', 'Notaufnahme', 'die', '<b>die</b> Notaufnahme.');
+  art('A1', 'Notbremse', 'die', '<b>die</b> Notbremse.');
+  art('A1', 'Erkältung', 'die', '<b>die</b> Erkältung.');
+  art('A1', 'Brand', 'der', '<b>der</b> Brand.');
+  art('A1', 'Überschwemmung', 'die', '<b>die</b> Überschwemmung.');
+  art('A1', 'Welle', 'die', '<b>die</b> Welle.');
+  art('A1', 'Erde', 'die', '<b>die</b> Erde.');
+  art('A1', 'Weltall', 'das', '<b>das</b> Weltall.');
+  art('A1', 'Königin', 'die', '<b>die</b> Königin.');
+  art('A1', 'Palast', 'der', '<b>der</b> Palast.');
+  art('A1', 'Kleid', 'das', '<b>das</b> Kleid.');
+  art('A1', 'Feder', 'die', '<b>die</b> Feder.');
+  art('A1', 'Zwerg', 'der', '<b>der</b> Zwerg.');
+  art('A2', 'Häuschen', 'das', '-chen → <b>das</b> Häuschen.');
+  art('A1', 'Band', 'die', '<b>die</b> Band (Musikgruppe).');
+  art('A1', 'Schlagzeug', 'das', '<b>das</b> Schlagzeug.');
+  art('A1', 'Mikrofon', 'das', '<b>das</b> Mikrofon.');
+  art('A1', 'Ohrwurm', 'der', '<b>der</b> Ohrwurm.');
+  art('A1', 'Kopfkino', 'das', '<b>das</b> Kopfkino.');
+  art('A1', 'Abitur', 'das', '<b>das</b> Abitur.');
+  art('A1', 'Matura', 'die', '<b>die</b> Matura (österr. = Abitur).');
+  art('A1', 'Studiengang', 'der', '<b>der</b> Studiengang.');
+  art('A1', 'Aufnahmeprüfung', 'die', '<b>die</b> Aufnahmeprüfung.');
+  art('A1', 'Hausarbeit', 'die', '<b>die</b> Hausarbeit.');
+  art('A1', 'Wortschatz', 'der', '<b>der</b> Wortschatz.');
+  art('A2', 'Pechvogel', 'der', '<b>der</b> Pechvogel.');
+  art('A2', 'Glückspilz', 'der', '<b>der</b> Glückspilz.');
+  art('A2', 'Naschkatze', 'die', '<b>die</b> Naschkatze.');
+  art('A2', 'Schnapsidee', 'die', '<b>die</b> Schnapsidee.');
+
+  /* ---- A1/A2 — Präsens: stammverändernde Verben ---- */
+  add('A1', 'praesens', 'Präsens (a→ä)', { display: 'Du ___ zu schnell. <span style="opacity:.6">(fahren)</span>', grid: true, opts: ['fahrst', 'fährst', 'fahrest', 'fährt'], a: 'fährst', why: 'a→ä bei du: <b>fährst</b>.' });
+  add('A1', 'praesens', 'Präsens (a→ä)', { display: 'Er ___ den ganzen Tag. <span style="opacity:.6">(schlafen)</span>', grid: true, opts: ['schlaft', 'schläft', 'schlaft', 'schlieft'], a: 'schläft', why: 'a→ä bei er/sie/es: <b>schläft</b>.' });
+  add('A1', 'praesens', 'Präsens (au→äu)', { display: 'Sie ___ sehr schnell. <span style="opacity:.6">(laufen)</span>', grid: true, opts: ['lauft', 'läuft', 'läufst', 'loft'], a: 'läuft', why: 'au→äu bei er/sie/es: <b>läuft</b>.' });
+  add('A1', 'praesens', 'Präsens (e→i)', { display: 'Du ___ mir das Buch. <span style="opacity:.6">(geben)</span>', grid: true, opts: ['gebst', 'gibst', 'gibt', 'gebest'], a: 'gibst', why: 'e→i bei du: <b>gibst</b>.' });
+  add('A1', 'praesens', 'Präsens (e→ie)', { display: 'Er ___ den Film. <span style="opacity:.6">(sehen)</span>', grid: true, opts: ['seht', 'sieht', 'siht', 'seiht'], a: 'sieht', why: 'e→ie bei er/sie/es: <b>sieht</b>.' });
+  add('A1', 'praesens', 'Präsens (e→i)', { display: 'Du ___ Brot. <span style="opacity:.6">(essen)</span>', grid: true, opts: ['esst', 'isst', 'esset', 'ißt'], a: 'isst', why: 'e→i bei du: <b>isst</b>.' });
+  add('A2', 'praesens', 'Präsens (e→i)', { display: 'Sie ___ ihm. <span style="opacity:.6">(helfen)</span>', grid: true, opts: ['helft', 'hilft', 'hilfst', 'helfet'], a: 'hilft', why: 'e→i bei er/sie/es: <b>hilft</b>.' });
+  add('A2', 'praesens', 'Präsens (e→i)', { display: 'Du ___ ein Auto. <span style="opacity:.6">(nehmen)</span>', grid: true, opts: ['nehmst', 'nimmst', 'nimmt', 'nehmest'], a: 'nimmst', why: 'e→i bei du: <b>nimmst</b>.' });
+  add('A1', 'praesens', 'Präsens (haben)', { display: 'Du ___ ein Buch. <span style="opacity:.6">(haben)</span>', grid: true, opts: ['hast', 'habst', 'hat', 'habest'], a: 'hast', why: 'haben unregelmäßig: du <b>hast</b>.' });
+  add('A1', 'praesens', 'Präsens (sein)', { display: 'Ihr ___ pünktlich. <span style="opacity:.6">(sein)</span>', grid: true, opts: ['sind', 'seid', 'seit', 'bist'], a: 'seid', why: 'ihr <b>seid</b> (mit d).' });
+
+  /* ---- A1/A2 — Modalverben ---- */
+  add('A1', 'modalverb', 'können', { display: 'Ich ___ schwimmen.', grid: true, opts: ['kann', 'kannst', 'können', 'könnt'], a: 'kann', why: 'ich/er kann (kein -e): <b>kann</b>.' });
+  add('A1', 'modalverb', 'können', { display: 'Du ___ gut kochen.', grid: true, opts: ['kann', 'kannst', 'kannt', 'könnst'], a: 'kannst', why: 'du <b>kannst</b>.' });
+  add('A1', 'modalverb', 'müssen', { display: 'Wir ___ jetzt gehen.', grid: true, opts: ['muss', 'müssen', 'müsst', 'musst'], a: 'müssen', why: 'wir <b>müssen</b>.' });
+  add('A1', 'modalverb', 'müssen', { display: 'Ich ___ heute lernen.', grid: true, opts: ['muss', 'musst', 'müsse', 'müssen'], a: 'muss', why: 'ich <b>muss</b> (kein Umlaut, kein -e).' });
+  add('A2', 'modalverb', 'wollen', { display: 'Er ___ nach Wien fahren.', grid: true, opts: ['will', 'willst', 'wollt', 'wollen'], a: 'will', why: 'er <b>will</b>.' });
+  add('A2', 'modalverb', 'dürfen', { display: 'Hier ___ man nicht rauchen.', grid: true, opts: ['darf', 'darfst', 'dürfen', 'durft'], a: 'darf', why: 'man <b>darf</b> nicht (= verboten).' });
+  add('A2', 'modalverb', 'sollen', { display: 'Du ___ mehr schlafen, sagt der Arzt.', grid: true, opts: ['sollst', 'soll', 'sollt', 'sollest'], a: 'sollst', why: 'du <b>sollst</b> (Rat/Auftrag).' });
+  add('A2', 'modalverb', 'mögen', { display: 'Ich ___ keinen Kaffee.', grid: true, opts: ['mag', 'magst', 'möge', 'mögen'], a: 'mag', why: 'ich <b>mag</b> (Vorliebe).' });
+  add('A2', 'modalverb', 'Satzklammer', { display: 'Ich ___ heute nicht ___. <span style="opacity:.6">(können / kommen)</span>', displaySmall: true, opts: ['kann … kommen', 'komme … können', 'kann … komme', 'könne … kommen'], a: 'kann … kommen', why: 'Modalverb Pos. 2, Infinitiv am Ende: <b>kann … kommen</b>.' });
+  add('A2', 'modalverb', 'mögen (möchte)', { display: 'Ich ___ einen Tee, bitte.', grid: true, opts: ['möchte', 'möchtest', 'mag', 'will'], a: 'möchte', why: 'höflicher Wunsch: ich <b>möchte</b>.' });
+
+  /* ---- A1/A2 — trennbare Verben ---- */
+  add('A1', 'trennbar', 'aufstehen', { display: 'Ich ___ um 7 Uhr ___. <span style="opacity:.6">(aufstehen)</span>', displaySmall: true, opts: ['stehe … auf', 'aufstehe …', 'stehe auf …', 'auf … stehe'], a: 'stehe … auf', why: 'Trennbar: Vorsilbe ans Ende → <b>stehe … auf</b>.' });
+  add('A1', 'trennbar', 'einkaufen', { display: 'Wir ___ am Samstag ___. <span style="opacity:.6">(einkaufen)</span>', displaySmall: true, opts: ['kaufen … ein', 'einkaufen …', 'kaufen ein …', 'ein … kaufen'], a: 'kaufen … ein', why: 'Trennbar: <b>kaufen … ein</b>.' });
+  add('A1', 'trennbar', 'anrufen', { display: 'Sie ___ ihre Mutter ___. <span style="opacity:.6">(anrufen)</span>', displaySmall: true, opts: ['ruft … an', 'anruft …', 'ruft an …', 'an … ruft'], a: 'ruft … an', why: 'Trennbar: <b>ruft … an</b>.' });
+  add('A2', 'trennbar', 'fernsehen', { display: 'Am Abend ___ ich gern ___. <span style="opacity:.6">(fernsehen)</span>', displaySmall: true, opts: ['sehe … fern', 'fernsehe …', 'sehe fern …', 'fern … sehe'], a: 'sehe … fern', why: 'Trennbar: <b>sehe … fern</b>.' });
+  add('A2', 'trennbar', 'Partizip II (trennbar)', { display: 'aufstehen → ich bin …', grid: true, opts: ['aufgestanden', 'aufgestiegen', 'gestanden auf', 'aufstanden'], a: 'aufgestanden', why: 'ge- in der Mitte: <b>aufgestanden</b>.' });
+  add('A2', 'trennbar', 'Partizip II (trennbar)', { display: 'einkaufen → ich habe …', grid: true, opts: ['eingekauft', 'gekauft ein', 'einkauft', 'eingekaufen'], a: 'eingekauft', why: 'auf+ge+kauft → <b>eingekauft</b>.' });
+  add('A2', 'trennbar', 'untrennbar (kein ge-)', { display: 'verstehen → ich habe …', grid: true, opts: ['geverstanden', 'verstanden', 'versteht', 'verstande'], a: 'verstanden', why: 'untrennbar (ver-) → kein ge-: <b>verstanden</b>.' });
+
+  /* ---- A1/A2 — Possessivartikel ---- */
+  add('A1', 'possessiv', 'mein/dein', { display: 'Das ist ___ Bruder. <span style="opacity:.6">(ich)</span>', grid: true, opts: ['mein', 'meine', 'meinen', 'meiner'], a: 'mein', why: 'Nom. maskulin: <b>mein</b> Bruder.' });
+  add('A1', 'possessiv', 'mein/dein', { display: 'Ist das ___ Schwester? <span style="opacity:.6">(du)</span>', grid: true, opts: ['dein', 'deine', 'deinen', 'deiner'], a: 'deine', why: 'Nom. feminin: <b>deine</b> Schwester.' });
+  add('A2', 'possessiv', 'sein/ihr', { display: 'Anna sucht ___ Buch. <span style="opacity:.6">(sie, Akk. neutrum)</span>', grid: true, opts: ['ihr', 'ihre', 'ihren', 'ihrem'], a: 'ihr', why: 'Akk. neutrum: <b>ihr</b> Buch (kein -e).' });
+  add('A2', 'possessiv', 'sein/ihr', { display: 'Der Mann liebt ___ Frau. <span style="opacity:.6">(er, Akk. feminin)</span>', grid: true, opts: ['sein', 'seine', 'seinen', 'seiner'], a: 'seine', why: 'Akk. feminin: <b>seine</b> Frau.' });
+  add('A2', 'possessiv', 'unser', { display: 'Wir lieben ___ Stadt. <span style="opacity:.6">(wir, Akk. feminin)</span>', grid: true, opts: ['unser', 'unsere', 'unseren', 'unserem'], a: 'unsere', why: 'Akk. feminin: <b>unsere</b> Stadt.' });
+  add('A2', 'possessiv', 'Dativ', { display: 'Ich spiele mit ___ Hund. <span style="opacity:.6">(ich, Dativ maskulin)</span>', grid: true, opts: ['mein', 'meine', 'meinem', 'meinen'], a: 'meinem', why: 'mit + Dativ maskulin: <b>meinem</b> Hund.' });
+
+  /* ---- A1/A2 — Akkusativ (ein/kein/-en) ---- */
+  add('A1', 'akkusativ', 'einen/ein/eine', { display: 'Ich habe ___ Hund. <span style="opacity:.6">(maskulin)</span>', grid: true, opts: ['ein', 'einen', 'einem', 'einer'], a: 'einen', why: 'Akk. maskulin: <b>einen</b> Hund.' });
+  add('A1', 'akkusativ', 'einen/ein/eine', { display: 'Sie kauft ___ Auto. <span style="opacity:.6">(neutrum)</span>', grid: true, opts: ['einen', 'ein', 'eine', 'einem'], a: 'ein', why: 'Akk. neutrum: <b>ein</b> Auto.' });
+  add('A1', 'akkusativ', 'eine', { display: 'Er sucht ___ Wohnung. <span style="opacity:.6">(feminin)</span>', grid: true, opts: ['einen', 'ein', 'eine', 'einer'], a: 'eine', why: 'Akk. feminin: <b>eine</b> Wohnung.' });
+  add('A2', 'akkusativ', 'kein/keinen', { display: 'Ich habe ___ Bruder. <span style="opacity:.6">(maskulin, Verneinung)</span>', grid: true, opts: ['kein', 'keinen', 'keine', 'keinem'], a: 'keinen', why: 'Akk. maskulin verneint: <b>keinen</b> Bruder.' });
+  add('A2', 'akkusativ', 'kein/keine', { display: 'Wir haben ___ Zeit. <span style="opacity:.6">(feminin, Verneinung)</span>', grid: true, opts: ['kein', 'keinen', 'keine', 'keiner'], a: 'keine', why: 'Akk. feminin verneint: <b>keine</b> Zeit.' });
+  add('A2', 'akkusativ', 'Akkusativ-Pronomen', { display: 'Kennst du den Film? – Ja, ich kenne ___.', grid: true, opts: ['er', 'ihn', 'ihm', 'es'], a: 'ihn', why: 'maskulin Akkusativ: <b>ihn</b>.' });
+
+  /* ---- A2 — nicht vs kein ---- */
+  add('A2', 'negation', 'nicht vs kein', { display: 'Ich habe ___ Auto.', grid: true, opts: ['nicht', 'kein', 'nicht ein', 'keine'], a: 'kein', why: 'Nomen mit unbest./ohne Artikel verneint man mit <b>kein</b>.' });
+  add('A2', 'negation', 'nicht vs kein', { display: 'Das Auto ist ___ rot.', grid: true, opts: ['kein', 'keine', 'nicht', 'nichts'], a: 'nicht', why: 'Adjektive/Verben verneint man mit <b>nicht</b>.' });
+  add('A2', 'negation', 'nicht vs kein', { display: 'Ich kenne den Mann ___.', grid: true, opts: ['kein', 'keinen', 'nicht', 'nichts'], a: 'nicht', why: 'Nomen mit bestimmtem Artikel → <b>nicht</b>.' });
+  add('A2', 'negation', 'Position von nicht', { display: 'Welcher Satz ist richtig?', displaySmall: true, opts: ['Ich komme nicht heute.', 'Ich komme heute nicht.', 'Ich nicht komme heute.'], a: 'Ich komme heute nicht.', why: 'Satznegation: <b>nicht</b> steht am Satzende.' });
+
+  /* ---- A2/B1 — mehr Perfekt (haben/sein) ---- */
+  add('A2', 'perfekt', 'Perfekt: haben/sein', { display: 'Er ___ schnell gelaufen.', grid: true, opts: ['ist', 'hat'], a: 'ist', why: 'laufen = Bewegung → <b>sein</b>.' });
+  add('A2', 'perfekt', 'Perfekt: haben/sein', { display: 'Ich ___ den Brief geschrieben.', grid: true, opts: ['bin', 'habe'], a: 'habe', why: 'schreiben → <b>haben</b>.' });
+  add('A2', 'perfekt', 'Perfekt: haben/sein', { display: 'Sie ___ in Wien geblieben.', grid: true, opts: ['ist', 'hat'], a: 'ist', why: 'bleiben → <b>sein</b> (Ausnahme).' });
+  add('A2', 'perfekt', 'Perfekt: haben/sein', { display: 'Das Kind ___ eingeschlafen.', grid: true, opts: ['ist', 'hat'], a: 'ist', why: 'einschlafen = Zustandsänderung → <b>sein</b>.' });
+  add('B1', 'perfekt', 'Perfekt: haben/sein', { display: 'Der Großvater ___ letztes Jahr gestorben.', grid: true, opts: ['ist', 'hat'], a: 'ist', why: 'sterben = Zustandsänderung → <b>sein</b>.' });
+  add('B1', 'perfekt', 'Perfekt: haben/sein', { display: 'Wir ___ den ganzen Film gesehen.', grid: true, opts: ['sind', 'haben'], a: 'haben', why: 'sehen → <b>haben</b>.' });
+
+  /* ---- A2/B1 — mehr Partizip II ---- */
+  add('A2', 'partizip', 'Partizip II', { display: 'fahren → ich bin …', grid: true, opts: ['gefahren', 'gefahrt', 'gefohren', 'gefahret'], a: 'gefahren', why: 'fahren–fuhr–<b>gefahren</b>.' });
+  add('A2', 'partizip', 'Partizip II', { display: 'kommen → ich bin …', grid: true, opts: ['gekommt', 'gekommen', 'gekamen', 'gekimmen'], a: 'gekommen', why: 'kommen–kam–<b>gekommen</b>.' });
+  add('B1', 'partizip', 'Partizip II', { display: 'lesen → ich habe …', grid: true, opts: ['gelest', 'gelesen', 'gelasen', 'gelisen'], a: 'gelesen', why: 'lesen–las–<b>gelesen</b>.' });
+  add('B1', 'partizip', 'Partizip II', { display: 'geben → ich habe …', grid: true, opts: ['gegebt', 'gegeben', 'gegoben', 'gegiben'], a: 'gegeben', why: 'geben–gab–<b>gegeben</b>.' });
+  add('B1', 'partizip', 'Partizip II (-ieren)', { display: 'studieren → ich habe …', grid: true, opts: ['gestudiert', 'studiert', 'studieren', 'gestudieren'], a: 'studiert', why: 'Verben auf -ieren: <b>kein</b> ge- → studiert.' });
+  add('B1', 'partizip', 'Partizip II', { display: 'bleiben → ich bin …', grid: true, opts: ['gebleibt', 'geblieben', 'gebliben', 'bleibt'], a: 'geblieben', why: 'bleiben–blieb–<b>geblieben</b>.' });
+
+  /* ---- B1 — mehr Präteritum (unregelmäßig) ---- */
+  add('B1', 'praeteritum', 'Präteritum', { display: 'sehen → er ___', grid: true, opts: ['sehte', 'sah', 'sieh', 'sahte'], a: 'sah', why: 'sehen–<b>sah</b>–gesehen.' });
+  add('B1', 'praeteritum', 'Präteritum', { display: 'geben → er ___', grid: true, opts: ['gebte', 'gab', 'gibt', 'gob'], a: 'gab', why: 'geben–<b>gab</b>–gegeben.' });
+  add('B1', 'praeteritum', 'Präteritum', { display: 'lesen → er ___', grid: true, opts: ['leste', 'las', 'lies', 'losen'], a: 'las', why: 'lesen–<b>las</b>–gelesen.' });
+  add('B1', 'praeteritum', 'Präteritum', { display: 'sprechen → er ___', grid: true, opts: ['sprechte', 'sprach', 'sprich', 'sproch'], a: 'sprach', why: 'sprechen–<b>sprach</b>–gesprochen.' });
+  add('B1', 'praeteritum', 'Präteritum', { display: 'schreiben → er ___', grid: true, opts: ['schreibte', 'schrieb', 'schrob', 'schreibe'], a: 'schrieb', why: 'schreiben–<b>schrieb</b>–geschrieben.' });
+  add('B1', 'praeteritum', 'Präteritum', { display: 'fahren → er ___', grid: true, opts: ['fahrte', 'fuhr', 'fahr', 'fihr'], a: 'fuhr', why: 'fahren–<b>fuhr</b>–gefahren.' });
+  add('B1', 'praeteritum', 'Präteritum', { display: 'nehmen → er ___', grid: true, opts: ['nehmte', 'nahm', 'nimmt', 'nohm'], a: 'nahm', why: 'nehmen–<b>nahm</b>–genommen.' });
+  add('B1', 'praeteritum', 'Präteritum', { display: 'bleiben → er ___', grid: true, opts: ['bleibte', 'blieb', 'blob', 'bleibe'], a: 'blieb', why: 'bleiben–<b>blieb</b>–geblieben.' });
+  add('B1', 'praeteritum', 'Präteritum (haben)', { display: 'haben → er ___', grid: true, opts: ['habte', 'hatte', 'hate', 'hatt'], a: 'hatte', why: 'haben–<b>hatte</b>–gehabt.' });
+  add('B1', 'praeteritum', 'Präteritum (werden)', { display: 'werden → er ___', grid: true, opts: ['werdete', 'wurde', 'ward', 'wurd'], a: 'wurde', why: 'werden–<b>wurde</b>–geworden.' });
+
+  /* ---- A2/B1 — mehr Wechselpräpositionen ---- */
+  add('A2', 'wechsel', 'Wo? → Dativ', { display: 'Das Buch liegt ___ Tisch.', opts: ['auf den', 'auf dem', 'auf der', 'an den'], a: 'auf dem', why: 'Wo? → Dativ: auf <b>dem</b> Tisch.' });
+  add('B1', 'wechsel', 'Wohin? → Akkusativ', { display: 'Ich lege das Buch ___ Tisch.', opts: ['auf dem', 'auf den', 'auf der', 'an dem'], a: 'auf den', why: 'legen = Richtung → Akk.: auf <b>den</b> Tisch.' });
+  add('B1', 'wechsel', 'Wo? → Dativ', { display: 'Die Lampe hängt ___ Tisch.', opts: ['über den', 'über dem', 'über der', 'auf den'], a: 'über dem', why: 'Wo? → Dativ: über <b>dem</b> Tisch.' });
+  add('B1', 'wechsel', 'Wohin? → Akkusativ', { display: 'Ich setze mich ___ Stuhl.', opts: ['auf dem', 'auf den', 'an dem', 'auf der'], a: 'auf den', why: 'sich setzen = Richtung → Akk.: auf <b>den</b> Stuhl.' });
+  add('B1', 'wechsel', 'Wo? → Dativ', { display: 'Der Hund sitzt ___ Tür.', opts: ['vor die', 'vor der', 'vor den', 'an die'], a: 'vor der', why: 'Wo? → Dativ: vor <b>der</b> Tür.' });
+  add('B1', 'wechsel', 'Wohin? → Akkusativ', { display: 'Wir gehen ___ Kino.', opts: ['in dem', 'ins', 'im', 'in der'], a: 'ins', why: 'Wohin? → Akk.: <b>ins</b> Kino (in das).' });
+
+  /* ---- B1 — mehr Reflexiv + Präposition ---- */
+  add('B1', 'refl_prep', 'Reflexiv + Präp.', { display: 'Er regt sich ___ den Lärm auf.', grid: true, opts: ['über', 'auf', 'an', 'für'], a: 'über', why: 'sich aufregen <b>über</b> + Akk.' });
+  add('B1', 'refl_prep', 'Reflexiv + Präp.', { display: 'Ich bedanke mich ___ das Geschenk.', grid: true, opts: ['für', 'über', 'auf', 'an'], a: 'für', why: 'sich bedanken <b>für</b> + Akk.' });
+  add('B1', 'refl_prep', 'Reflexiv + Präp.', { display: 'Sie beschwert sich ___ den Service.', grid: true, opts: ['auf', 'über', 'für', 'von'], a: 'über', why: 'sich beschweren <b>über</b> + Akk.' });
+  add('B1', 'refl_prep', 'Reflexiv + Präp.', { display: 'Wir kennen uns gut ___ Wien aus.', grid: true, opts: ['mit', 'in', 'an', 'über'], a: 'mit', why: 'sich auskennen <b>mit</b> + Dativ.' });
+  add('B1', 'refl_prep', 'Reflexiv + Präp.', { display: 'Ich erinnere mich ___ den Urlaub.', grid: true, opts: ['an', 'auf', 'über', 'für'], a: 'an', why: 'sich erinnern <b>an</b> + Akk.' });
+  add('B1', 'refl_prep', 'Reflexiv + Präp.', { display: 'Er schämt sich ___ seinen Fehler.', grid: true, opts: ['für', 'über', 'an', 'vor'], a: 'für', why: 'sich schämen <b>für</b> + Akk.' });
+  add('B1', 'refl_prep', 'Reflexiv + Präp.', { display: 'Sie verabredet sich ___ einer Freundin.', grid: true, opts: ['mit', 'für', 'an', 'auf'], a: 'mit', why: 'sich verabreden <b>mit</b> + Dativ.' });
+  add('B1', 'refl_prep', 'Reflexiv (Akk./Dat.)', { display: 'Ich wasche ___ die Hände.', grid: true, opts: ['mich', 'mir', 'mein', 'sich'], a: 'mir', why: 'Mit Akk.-Objekt (die Hände) → Reflexivpronomen im <b>Dativ</b>: mir.' });
+
+  /* ---- B1 — mehr Verben mit Präposition ---- */
+  add('B1', 'verb_prep', 'Verb + Präp.', { display: 'Wir denken oft ___ dich.', grid: true, opts: ['an', 'auf', 'über', 'von'], a: 'an', why: 'denken <b>an</b> + Akk.' });
+  add('B1', 'verb_prep', 'Verb + Präp.', { display: 'Sie bittet ihn ___ Hilfe.', grid: true, opts: ['um', 'für', 'an', 'auf'], a: 'um', why: 'bitten <b>um</b> + Akk.' });
+  add('B1', 'verb_prep', 'Verb + Präp.', { display: 'Das hängt ___ dem Wetter ab.', grid: true, opts: ['von', 'an', 'auf', 'über'], a: 'von', why: 'abhängen <b>von</b> + Dativ.' });
+  add('B1', 'verb_prep', 'Verb + Präp.', { display: 'Ich danke dir ___ deine Hilfe.', grid: true, opts: ['für', 'über', 'um', 'an'], a: 'für', why: 'danken <b>für</b> + Akk.' });
+  add('B1', 'verb_prep', 'Verb + Kasus', { display: 'Das Buch gehört ___ Lehrer. <span style="opacity:.6">(der)</span>', grid: true, opts: ['den', 'dem', 'der', 'des'], a: 'dem', why: 'gehören + <b>Dativ</b>: dem Lehrer.' });
+  add('B1', 'verb_prep', 'Fragewort (Person)', { display: '___ wartest du? <span style="opacity:.6">(auf meinen Bruder)</span>', grid: true, opts: ['Worauf', 'Auf wen', 'Wofür', 'Auf was'], a: 'Auf wen', why: 'Person + Präposition → <b>Auf wen</b>?' });
+
+  /* ---- B1 — mehr Dativ/Akkusativ-Reihenfolge ---- */
+  add('B1', 'da_reihenfolge', 'Dativ vor Akkusativ', { display: 'Sie gibt …', displaySmall: true, opts: ['den Brief der Frau', 'der Frau den Brief'], a: 'der Frau den Brief', why: 'Zwei Nomen: <b>Dativ vor Akkusativ</b>.' });
+  add('B1', 'da_reihenfolge', 'Pronomen zuerst', { display: 'Sie gibt …', displaySmall: true, opts: ['der Frau ihn', 'ihn der Frau'], a: 'ihn der Frau', why: 'Akkusativ-<b>Pronomen</b> vor dem Dativ-Nomen.' });
+  add('B2', 'da_reihenfolge', 'Zwei Pronomen', { display: 'Er gibt …', displaySmall: true, opts: ['ihm es', 'es ihm'], a: 'es ihm', why: 'Zwei Pronomen: <b>Akkusativ vor Dativ</b> (es ihm).' });
+
+  /* ---- B1/B2 — mehr Relativpronomen ---- */
+  add('B1', 'relativ', 'Relativpronomen', { display: 'Das Buch, ___ auf dem Tisch liegt, …', grid: true, opts: ['der', 'die', 'das', 'dem'], a: 'das', why: 'Subjekt, neutrum → <b>das</b> (Nom.).' });
+  add('B2', 'relativ', 'Relativpronomen (Gen.)', { display: 'Der Mann, ___ Auto kaputt ist, …', grid: true, opts: ['der', 'dessen', 'den', 'deren'], a: 'dessen', why: 'Besitz, maskulin → Genitiv <b>dessen</b>.' });
+  add('B2', 'relativ', 'Relativpronomen (Gen.)', { display: 'Die Frau, ___ Kinder hier spielen, …', grid: true, opts: ['die', 'deren', 'dessen', 'der'], a: 'deren', why: 'Besitz, feminin → Genitiv <b>deren</b>.' });
+  add('B2', 'relativ', 'Relativpronomen (Präp.)', { display: 'Der Stuhl, ___ ich sitze, ist alt.', grid: true, opts: ['auf den', 'auf dem', 'auf der', 'an dem'], a: 'auf dem', why: 'sitzen auf + Dativ, maskulin → auf <b>dem</b>.' });
+  add('B2', 'relativ', 'Relativpronomen (Pl.)', { display: 'Die Bücher, ___ ich lese, …', grid: true, opts: ['das', 'die', 'denen', 'der'], a: 'die', why: 'Objekt, Plural → <b>die</b> (Akk.).' });
+
+  /* ---- B1 — mehr Konjunktionen ---- */
+  add('B1', 'konjunktion', 'sondern vs aber', { display: 'Er kommt nicht heute, ___ morgen.', grid: true, opts: ['aber', 'sondern', 'denn', 'oder'], a: 'sondern', why: 'Nach Verneinung + Korrektur → <b>sondern</b>.' });
+  add('B1', 'konjunktion', 'deshalb', { display: 'Es regnet, ___ bleibe ich zu Hause.', grid: true, opts: ['weil', 'deshalb', 'obwohl', 'dass'], a: 'deshalb', why: '<b>deshalb</b> = Adverb (Folge), Verb auf Pos. 2.' });
+  add('B1', 'konjunktion', 'wenn (Bedingung)', { display: '___ es regnet, nehme ich den Schirm.', grid: true, opts: ['Als', 'Wenn', 'Ob', 'Dass'], a: 'Wenn', why: 'Bedingung/Wiederholung → <b>wenn</b>.' });
+  add('B1', 'konjunktion', 'da (= weil)', { display: '___ ich krank bin, bleibe ich im Bett.', grid: true, opts: ['Da', 'Denn', 'Trotzdem', 'Deshalb'], a: 'Da', why: '<b>Da</b> = weil (Nebensatz, Verb am Ende).' });
+  add('B1', 'konjunktion', 'und (Verbposition)', { display: 'Ich koche ___ du deckst den Tisch.', grid: true, opts: ['und', 'dass', 'weil', 'obwohl'], a: 'und', why: '<b>und</b> verbindet zwei Hauptsätze (Verb Pos. 2).' });
+  add('B1', 'konjunktion', 'oder', { display: 'Möchtest du Tee ___ Kaffee?', grid: true, opts: ['und', 'oder', 'aber', 'sondern'], a: 'oder', why: 'Alternative → <b>oder</b>.' });
+
+  /* ---- B1/B2 — mehr TE-KA-MO-LO ---- */
+  add('B1', 'tekamolo', 'Wortstellung TE-KA-MO-LO', { display: 'Welcher Satz ist richtig?', displaySmall: true, opts: ['Sie geht jeden Tag zu Fuß ins Büro.', 'Sie geht zu Fuß jeden Tag ins Büro.', 'Sie geht ins Büro jeden Tag zu Fuß.'], a: 'Sie geht jeden Tag zu Fuß ins Büro.', why: 'TE (jeden Tag) → MO (zu Fuß) → LO (ins Büro).' });
+  add('B2', 'tekamolo', 'Wortstellung TE-KA-MO-LO', { display: 'Welcher Satz ist richtig?', displaySmall: true, opts: ['Er fährt morgen aus Angst langsam nach Hause.', 'Er fährt aus Angst morgen langsam nach Hause.', 'Er fährt nach Hause morgen langsam aus Angst.'], a: 'Er fährt morgen aus Angst langsam nach Hause.', why: 'TE (morgen) → KA (aus Angst) → MO (langsam) → LO (nach Hause).' });
+
+  /* ---- B1/B2 — mehr Adjektivdeklination ---- */
+  add('B1', 'adjektiv', 'Adjektivendung', { display: 'Der ___ Mann singt. <span style="opacity:.6">(alt, best. Art.)</span>', grid: true, opts: ['alte', 'alten', 'alter', 'altes'], a: 'alte', why: 'best. Artikel, Nom. maskulin → <b>-e</b>.' });
+  add('B1', 'adjektiv', 'Adjektivendung', { display: 'Ich habe eine ___ Idee. <span style="opacity:.6">(gut)</span>', grid: true, opts: ['gute', 'guten', 'gutes', 'guter'], a: 'gute', why: 'unbest. Artikel, Akk. feminin → <b>-e</b>.' });
+  add('B2', 'adjektiv', 'Adjektivendung', { display: 'die ___ Häuser <span style="opacity:.6">(alt, best. Art., Plural)</span>', grid: true, opts: ['alte', 'alten', 'altes', 'alter'], a: 'alten', why: 'best. Artikel Plural → <b>-en</b>.' });
+  add('B2', 'adjektiv', 'Nullartikel', { display: 'Ich kaufe ___ Brot. <span style="opacity:.6">(frisch)</span>', grid: true, opts: ['frisches', 'frische', 'frischen', 'frischer'], a: 'frisches', why: 'ohne Artikel, Akk. neutrum → <b>-es</b>.' });
+  add('B2', 'adjektiv', 'Nullartikel (Plural)', { display: 'Das sind ___ Freunde. <span style="opacity:.6">(gut)</span>', grid: true, opts: ['gute', 'guten', 'gutes', 'guter'], a: 'gute', why: 'ohne Artikel, Nom. Plural → <b>-e</b>.' });
+  add('B2', 'adjektiv', 'Nullartikel (Material)', { display: 'ein Ring aus ___ Gold <span style="opacity:.6">(rein, Dativ neutrum)</span>', grid: true, opts: ['reines', 'reinem', 'reine', 'reinen'], a: 'reinem', why: 'ohne Artikel, Dativ neutrum → <b>-em</b>.' });
+
+  /* ---- B2 — mehr n-Deklination ---- */
+  add('B2', 'n_dekl', 'n-Deklination', { display: 'Ich kenne den ___. <span style="opacity:.6">(Kollege)</span>', grid: true, opts: ['Kollege', 'Kollegen', 'Kolleges', 'Kollegn'], a: 'Kollegen', why: '-e (Person) → n-Deklination: den <b>Kollegen</b>.' });
+  add('B2', 'n_dekl', 'n-Deklination', { display: 'Wir sprechen mit dem ___. <span style="opacity:.6">(Herr)</span>', grid: true, opts: ['Herr', 'Herrn', 'Herren', 'Herrs'], a: 'Herrn', why: 'Herr → Singular <b>Herrn</b> (Plural: Herren).' });
+  add('B2', 'n_dekl', 'n-Deklination', { display: 'Das ist die Idee eines ___. <span style="opacity:.6">(Journalist)</span>', grid: true, opts: ['Journalist', 'Journalists', 'Journalisten', 'Journalistes'], a: 'Journalisten', why: '-ist → n-Deklination, Genitiv: eines <b>Journalisten</b>.' });
+  add('B2', 'n_dekl', 'n-Deklination', { display: 'Ich sehe den ___ im Zoo. <span style="opacity:.6">(Affe)</span>', grid: true, opts: ['Affe', 'Affen', 'Affes', 'Affn'], a: 'Affen', why: 'Tier auf -e → n-Deklination: den <b>Affen</b>.' });
+
+  /* ---- B2 — mehr Passiv ---- */
+  add('B2', 'passiv', 'Passiv Präsens', { display: 'Die Tür ___ geöffnet.', grid: true, opts: ['wird', 'wurde', 'ist', 'hat'], a: 'wird', why: 'Passiv Präsens: werden + P2 → <b>wird</b> geöffnet.' });
+  add('B2', 'passiv', 'Passiv Präteritum', { display: 'Das Internet ___ in den 1960ern erfunden.', grid: true, opts: ['wird', 'wurde', 'ist', 'war'], a: 'wurde', why: 'Passiv Präteritum: <b>wurde</b> + P2.' });
+  add('B2', 'passiv', 'Passiv Perfekt', { display: 'Der Wagen ist repariert ___.', grid: true, opts: ['geworden', 'worden', 'gewesen', 'werden'], a: 'worden', why: 'Passiv Perfekt: ist + P2 + <b>worden</b>.' });
+  add('B2', 'passiv', 'Passiv Plusquam.', { display: 'Das Haus ___ schon verkauft worden.', grid: true, opts: ['hatte', 'war', 'ist', 'wurde'], a: 'war', why: 'Passiv Plusquam.: <b>war</b> + P2 + worden.' });
+  add('B2', 'passiv', 'Passiv mit Modalverb', { display: 'Die Aufgabe muss heute ___.', displaySmall: true, opts: ['gelöst werden', 'gelöst worden', 'lösen werden', 'werden gelöst'], a: 'gelöst werden', why: 'Modal + P2 + <b>werden</b>: muss gelöst werden.' });
+  add('B2', 'passiv', 'Vorgangs- vs Zustandspassiv', { display: 'Das Fenster ___ (jetzt) geöffnet. <span style="opacity:.6">(Zustand)</span>', grid: true, opts: ['wird', 'ist', 'wurde', 'hat'], a: 'ist', why: 'Zustandspassiv (Resultat): sein + P2 → <b>ist</b> geöffnet.' });
+
+  /* ---- B2 — mehr Plusquamperfekt ---- */
+  add('B2', 'plusquam', 'Plusquamperfekt', { display: 'Nachdem er gekommen ___, aßen wir.', grid: true, opts: ['hatte', 'war', 'ist', 'hat'], a: 'war', why: 'kommen → sein: <b>war</b> gekommen (Vorzeitigkeit).' });
+  add('B2', 'plusquam', 'Plusquamperfekt', { display: 'Sie war müde, weil sie schlecht ___. <span style="opacity:.6">(schlafen)</span>', displaySmall: true, opts: ['geschlafen hatte', 'geschlafen war', 'schlief', 'geschlafen ist'], a: 'geschlafen hatte', why: 'schlafen → haben: hatte <b>geschlafen</b>.' });
+
+  /* ---- A2/B1 — mehr Komparativ / Superlativ ---- */
+  add('B1', 'komparativ', 'Steigerung', { display: 'Ich trinke ___ Tee als Kaffee. <span style="opacity:.6">(gern)</span>', grid: true, opts: ['gerner', 'lieber', 'mehr gern', 'gernster'], a: 'lieber', why: 'gern – <b>lieber</b> – am liebsten (unregelmäßig).' });
+  add('B1', 'komparativ', 'Steigerung (Superlativ)', { display: 'Pizza esse ich ___. <span style="opacity:.6">(gern)</span>', grid: true, opts: ['am gernsten', 'am liebsten', 'am mehrsten', 'liebsten'], a: 'am liebsten', why: 'gern – lieber – <b>am liebsten</b>.' });
+  add('A2', 'komparativ', 'Steigerung (Umlaut)', { display: 'groß – ___ – am größten', grid: true, opts: ['grosser', 'größer', 'grösser', 'gröser'], a: 'größer', why: 'groß – <b>größer</b> – am größten (Umlaut).' });
+  add('B1', 'komparativ', 'so … wie', { display: 'Er ist ___ groß wie sein Bruder.', grid: true, opts: ['als', 'so', 'wie', 'mehr'], a: 'so', why: 'Gleichheit: <b>so</b> … wie (Vergleich mit als → Komparativ).' });
+  add('B1', 'komparativ', 'Superlativ (attributiv)', { display: 'Das ist der ___ Tag des Jahres. <span style="opacity:.6">(lang)</span>', grid: true, opts: ['längste', 'längster', 'längsten', 'am längsten'], a: 'längste', why: 'attributiver Superlativ: der <b>längste</b> Tag.' });
+
+  /* ---- B2 — mehr Konsekutiv / Final ---- */
+  add('B2', 'konsekutiv', 'sodass', { display: 'Er sprach leise, ___ ich nichts verstand.', grid: true, opts: ['sodass', 'so', 'damit', 'um'], a: 'sodass', why: 'Folge im Nebensatz: <b>sodass</b> + Verb am Ende.' });
+  add('B2', 'final', 'damit / um…zu', { display: 'Ich höre Podcasts, ___ meinen Wortschatz zu vergrößern.', grid: true, opts: ['damit', 'um', 'dass', 'weil'], a: 'um', why: 'Gleiches Subjekt → <b>um</b> … zu + Infinitiv.' });
+  add('B2', 'final', 'damit / um…zu', { display: 'Ich erkläre es langsam, ___ alle es verstehen.', grid: true, opts: ['um', 'damit', 'dass', 'sodass'], a: 'damit', why: 'Verschiedene Subjekte → <b>damit</b>.' });
+
+  /* ---- B2 — mehr indirekte Fragen ---- */
+  add('B2', 'indirekt', 'Indirekte Frage (W)', { display: 'Ich möchte wissen, ___ alt du bist.', grid: true, opts: ['ob', 'wie', 'dass', 'wenn'], a: 'wie', why: 'W-Frage (wie alt) bleibt: …, <b>wie</b> alt du bist.' });
+  add('B2', 'indirekt', 'Indirekte Frage (ob)', { display: 'Sie fragt, ___ ich Zeit habe.', grid: true, opts: ['ob', 'dass', 'wenn', 'was'], a: 'ob', why: 'Ja/Nein-Frage → <b>ob</b> (Verb am Ende).' });
+  add('B2', 'indirekt', 'Indirekte Frage (warum)', { display: 'Er fragt, ___ ich zu spät komme.', grid: true, opts: ['ob', 'warum', 'dass', 'wenn'], a: 'warum', why: 'W-Frage bleibt: …, <b>warum</b> ich … komme.' });
+
+  /* ---- A2/B1 — mehr Imperativ ---- */
+  add('A2', 'imperativ', 'Imperativ (ihr)', { display: '___ bitte leise! <span style="opacity:.6">(sein, ihr)</span>', grid: true, opts: ['Seid', 'Sei', 'Seien', 'Bist'], a: 'Seid', why: 'ihr-Imperativ von sein: <b>Seid</b> leise!' });
+  add('B1', 'imperativ', 'Imperativ (du)', { display: '___ keine Angst! <span style="opacity:.6">(haben, du)</span>', grid: true, opts: ['Hab', 'Habe du', 'Hast', 'Haben'], a: 'Hab', why: 'du-Imperativ von haben: <b>Hab</b> keine Angst!' });
+  add('B1', 'imperativ', 'Imperativ (du, a→ä?)', { display: '___ vorsichtig! <span style="opacity:.6">(fahren, du)</span>', grid: true, opts: ['Fähr', 'Fahr', 'Fahre du', 'Fahrst'], a: 'Fahr', why: 'a→ä gilt NICHT im Imperativ: <b>Fahr!</b>' });
+
+  /* ---- B1 — mehr zu + Infinitiv ---- */
+  add('B1', 'zu_inf', 'zu + Infinitiv', { display: 'Hast du Lust, ins Kino ___?', grid: true, opts: ['gehen', 'zu gehen', 'gehst', 'gegangen'], a: 'zu gehen', why: 'Lust haben + <b>zu</b> + Infinitiv.' });
+  add('B1', 'zu_inf', 'zu + Inf. (trennbar)', { display: 'Vergiss nicht, mich ___! <span style="opacity:.6">(anrufen)</span>', grid: true, opts: ['anzurufen', 'zu anrufen', 'anrufen zu', 'anzurufan'], a: 'anzurufen', why: 'Trennbar: zu in der Mitte → <b>anzurufen</b>.' });
+  add('B2', 'zu_inf', 'ohne zu', { display: 'Er ging weg, ___ etwas zu sagen.', grid: true, opts: ['ohne', 'um', 'statt', 'damit'], a: 'ohne', why: '<b>ohne</b> … zu + Infinitiv (= er sagte nichts).' });
+
+  /* ---- B1 — mehr Genus nach Suffix ---- */
+  add('B1', 'genus', 'Genus nach Endung', { display: 'die Universität, die Aktivität → Endung -tät ist …', displaySmall: true, grid: true, opts: ['der', 'die', 'das'], a: 'die', why: '-tät → immer <b>die</b>.' });
+  add('B1', 'genus', 'Genus nach Endung', { display: 'der Motor, der Doktor → Endung -or ist oft …', displaySmall: true, grid: true, opts: ['der', 'die', 'das'], a: 'der', why: '-or → meist <b>der</b>.' });
+
+  /* ---- B1/B2 — Genitiv ---- */
+  add('B1', 'genitiv', 'Genitiv (-s/-es)', { display: 'das Auto ___ Vaters', grid: true, opts: ['des', 'der', 'dem', 'den'], a: 'des', why: 'Genitiv maskulin: <b>des</b> Vaters.' });
+  add('B1', 'genitiv', 'Genitiv (-s/-es)', { display: 'der Titel des ___. <span style="opacity:.6">(Buch)</span>', grid: true, opts: ['Buch', 'Buchs', 'Buches', 'Bucher'], a: 'Buches', why: 'einsilbig oft +es: des <b>Buches</b>.' });
+  add('B2', 'genitiv', 'Genitiv (feminin)', { display: 'die Farbe ___ Blume', grid: true, opts: ['des', 'der', 'dem', 'den'], a: 'der', why: 'Genitiv feminin: <b>der</b> Blume.' });
+  add('B2', 'genitiv', 'Genitivpräposition', { display: '___ des Regens bleiben wir zu Hause.', grid: true, opts: ['Wegen', 'Trotz', 'Während', 'Wegens'], a: 'Wegen', why: '<b>wegen</b> + Genitiv (Grund): wegen des Regens.' });
+
+  /* ---- B2 — Konjunktiv II ---- */
+  add('B2', 'konjunktiv2', 'höfliche Bitte', { display: '___ Sie mir bitte helfen?', grid: true, opts: ['Können', 'Könnten', 'Konnten', 'Kannten'], a: 'Könnten', why: 'Höfliche Bitte: Konjunktiv II <b>Könnten</b> Sie …?' });
+  add('B2', 'konjunktiv2', 'höfliche Bitte', { display: '___ du mir das Salz geben?', grid: true, opts: ['Wurdest', 'Würdest', 'Wirst', 'Werdest'], a: 'Würdest', why: 'Höflich: <b>Würdest</b> du … (würde + Infinitiv).' });
+  add('B2', 'konjunktiv2', 'irreal (sein)', { display: 'Wenn ich reich ___, würde ich reisen.', grid: true, opts: ['war', 'wäre', 'bin', 'würde'], a: 'wäre', why: 'Irrealer Wunsch: ich <b>wäre</b> (Konjunktiv II von sein).' });
+  add('B2', 'konjunktiv2', 'irreal (haben)', { display: 'Wenn ich Zeit ___, käme ich mit.', grid: true, opts: ['hatte', 'hätte', 'habe', 'würde'], a: 'hätte', why: 'Irreal: ich <b>hätte</b> (Konjunktiv II von haben).' });
+  add('B2', 'konjunktiv2', 'irreal (würde)', { display: 'An deiner Stelle ___ ich mehr lernen.', grid: true, opts: ['werde', 'würde', 'wurde', 'wäre'], a: 'würde', why: 'Irreal: ich <b>würde</b> … lernen (würde + Infinitiv).' });
+  add('C1', 'konjunktiv2', 'Vergangenheit', { display: 'Wenn ich Zeit gehabt ___, wäre ich gekommen.', grid: true, opts: ['hätte', 'wäre', 'habe', 'würde'], a: 'hätte', why: 'Irreal Vergangenheit: <b>hätte</b> + P2 (hätte gehabt).' });
+
+  /* ---- B2 — Konnektoren ---- */
+  add('B2', 'konnektor', 'entweder … oder', { display: 'Wir fahren ___ nach Wien oder nach Graz.', grid: true, opts: ['entweder', 'sowohl', 'weder', 'nicht nur'], a: 'entweder', why: '<b>entweder</b> … oder (Alternative).' });
+  add('B2', 'konnektor', 'weder … noch', { display: 'Er trinkt ___ Kaffee noch Tee.', grid: true, opts: ['entweder', 'weder', 'sowohl', 'nicht nur'], a: 'weder', why: '<b>weder</b> … noch (doppelte Verneinung).' });
+  add('B2', 'konnektor', 'nicht nur … sondern auch', { display: 'Sie ist nicht nur klug, ___ auch fleißig.', grid: true, opts: ['aber', 'sondern', 'oder', 'denn'], a: 'sondern', why: 'nicht nur …, <b>sondern</b> auch.' });
+  add('B2', 'konnektor', 'sowohl … als auch', { display: '___ er als auch sie kommen mit.', grid: true, opts: ['Sowohl', 'Weder', 'Entweder', 'Nicht nur'], a: 'Sowohl', why: '<b>Sowohl</b> … als auch (beide).' });
+  add('B2', 'konnektor', 'je … desto', { display: 'Je mehr ich lerne, ___ besser verstehe ich.', grid: true, opts: ['desto', 'umso mehr', 'so', 'als'], a: 'desto', why: 'Je …, <b>desto</b> + Komparativ (Verb am Ende, dann Verb Pos. … nach desto).' });
+  add('B2', 'konnektor', 'zwar … aber', { display: 'Das Auto ist ___ teuer, aber sehr gut.', grid: true, opts: ['zwar', 'sowohl', 'weder', 'je'], a: 'zwar', why: '<b>zwar</b> … aber (Einräumung).' });
+
+  /* ---- C1/C2 — Partizipialattribute ---- */
+  add('C1', 'partizipattr', 'Partizip I (aktiv)', { display: 'der ___ Student <span style="opacity:.6">(lesen, gerade)</span>', grid: true, opts: ['gelesene', 'lesende', 'gelesen', 'lesen'], a: 'lesende', why: 'Partizip I (Infinitiv+d): der <b>lesende</b> Student (= der liest).' });
+  add('C1', 'partizipattr', 'Partizip II (passiv)', { display: 'das ___ Essen <span style="opacity:.6">(kochen, fertig)</span>', grid: true, opts: ['kochende', 'gekochte', 'kochend', 'gekocht'], a: 'gekochte', why: 'Partizip II als Attribut: das <b>gekochte</b> Essen (= wurde gekocht).' });
+  add('C1', 'partizipattr', 'Partizip I', { display: 'das ___ Kind <span style="opacity:.6">(weinen)</span>', grid: true, opts: ['geweinte', 'weinende', 'geweint', 'weinend'], a: 'weinende', why: 'Partizip I + Endung: das <b>weinende</b> Kind.' });
+  add('C1', 'partizipattr', 'Partizip II', { display: 'die ___ Tür <span style="opacity:.6">(schließen)</span>', grid: true, opts: ['schließende', 'geschlossene', 'geschlossen', 'schließend'], a: 'geschlossene', why: 'Partizip II als Attribut: die <b>geschlossene</b> Tür.' });
+
+  /* ---- C1/C2 — Passiv-Ersatzformen ---- */
+  add('C1', 'passiversatz', 'sich lassen', { display: 'Das Problem ___ sich leicht lösen.', grid: true, opts: ['lässt', 'wird', 'ist', 'kann'], a: 'lässt', why: 'sich lassen = kann … werden: <b>lässt</b> sich lösen.' });
+  add('C1', 'passiversatz', 'sein + zu + Inf.', { display: 'Die Aufgabe ist leicht zu ___.', grid: true, opts: ['lösen', 'gelöst', 'lösend', 'löst'], a: 'lösen', why: 'sein + zu + Infinitiv = muss/kann … werden: zu <b>lösen</b>.' });
+  add('C1', 'passiversatz', 'Adjektiv auf -bar', { display: 'Das Problem ist leicht ___. <span style="opacity:.6">(lösen)</span>', grid: true, opts: ['lösbar', 'gelöst', 'lösend', 'lösung'], a: 'lösbar', why: '-bar = kann … werden: <b>lösbar</b> (= kann gelöst werden).' });
+  add('C2', 'passiversatz', 'man (Ersatz)', { display: 'Aktiver Ersatz für „Hier wird Deutsch gesprochen": Hier ___ man Deutsch.', displaySmall: true, grid: true, opts: ['spricht', 'gesprochen', 'wird', 'sprechen'], a: 'spricht', why: 'Passiv-Ersatz mit <b>man</b>: Hier spricht man Deutsch.' });
+
+  /* ---- C1/C2 — feine Bedeutungsunterschiede ---- */
+  add('B2', 'bedeutung', 'legen vs liegen', { display: 'Ich ___ das Buch auf den Tisch.', grid: true, opts: ['liege', 'lege', 'liegt', 'gelegen'], a: 'lege', why: '<b>legen</b> (Akk., Wohin?) = etwas hinlegen; liegen = Position.' });
+  add('B2', 'bedeutung', 'liegen vs legen', { display: 'Das Buch ___ auf dem Tisch.', grid: true, opts: ['legt', 'liegt', 'lege', 'gelegt'], a: 'liegt', why: '<b>liegen</b> (Dativ, Wo?) = Position; legen = Handlung.' });
+  add('B2', 'bedeutung', 'stellen vs stehen', { display: 'Ich ___ die Flasche in den Kühlschrank.', grid: true, opts: ['stehe', 'stelle', 'steht', 'gestanden'], a: 'stelle', why: '<b>stellen</b> (Akk., Wohin?) = hinstellen; stehen = Position.' });
+  add('B2', 'bedeutung', 'stehen vs stellen', { display: 'Die Flasche ___ im Kühlschrank.', grid: true, opts: ['stellt', 'steht', 'stelle', 'gestellt'], a: 'steht', why: '<b>stehen</b> (Dativ, Wo?) = Position; stellen = Handlung.' });
+  add('B2', 'bedeutung', 'kennen vs wissen', { display: 'Ich ___ diese Stadt sehr gut.', grid: true, opts: ['weiß', 'kenne', 'kennt', 'wisse'], a: 'kenne', why: '<b>kennen</b> + Nomen (vertraut sein): kenne die Stadt.' });
+  add('B2', 'bedeutung', 'wissen vs kennen', { display: 'Ich ___ nicht, wo er wohnt.', grid: true, opts: ['kenne', 'weiß', 'kennt', 'wisse'], a: 'weiß', why: '<b>wissen</b> + Nebensatz/Fakt: ich weiß nicht, wo …' });
+
+  /* ---- C1/C2 — mehr Redewendungen & Wortschatz ---- */
+  add('C1', 'wortschatz', 'Person', { display: 'Ein „Pechvogel" ist eine Person, die …', displaySmall: true, opts: ['oft Pech hat', 'gern Vögel beobachtet', 'immer Glück hat', 'viel pfeift'], a: 'oft Pech hat', why: 'der <b>Pechvogel</b> = jemand mit viel Pech (Gegenteil: Glückspilz).' });
+  add('C1', 'wortschatz', 'Bedeutung', { display: 'das „Kopfkino" bedeutet …', displaySmall: true, opts: ['lebhafte Vorstellungen im Kopf', 'ein echtes Kino', 'Kopfschmerzen', 'ein Filmgenre'], a: 'lebhafte Vorstellungen im Kopf', why: 'das <b>Kopfkino</b> = man stellt sich etwas lebhaft vor.' });
+  add('C1', 'wortschatz', 'Person', { display: 'Eine „Naschkatze" ist jemand, der gern …', displaySmall: true, opts: ['Süßes isst', 'Katzen hat', 'schläft', 'streitet'], a: 'Süßes isst', why: 'die <b>Naschkatze</b> = jemand, der gern Süßigkeiten nascht.' });
+  add('C2', 'wortschatz', 'Bedeutung', { display: 'eine „Schnapsidee" ist …', displaySmall: true, opts: ['eine sehr unsinnige Idee', 'ein Rezept für Schnaps', 'eine gute Idee', 'ein Getränk'], a: 'eine sehr unsinnige Idee', why: 'die <b>Schnapsidee</b> = eine völlig verrückte/unsinnige Idee.' });
+  add('C2', 'idiom', 'Redewendung', { display: '„Hals- und Beinbruch" wünscht man jemandem, …', displaySmall: true, opts: ['der etwas Wichtiges vor sich hat', 'der sich verletzt hat', 'der schläft', 'der isst'], a: 'der etwas Wichtiges vor sich hat', why: '<b>Hals- und Beinbruch</b> = viel Glück (ironische Wunschformel).' });
+  add('C2', 'idiom', 'Redewendung', { display: '„Der Ton macht die Musik" bedeutet: Wichtig ist, …', displaySmall: true, opts: ['WIE man etwas sagt', 'WAS man sagt', 'wie laut man ist', 'welches Instrument'], a: 'WIE man etwas sagt', why: '<b>Der Ton macht die Musik</b> = die Art und Weise zählt.' });
+
   /* ---- expose ---- */
   window.EXBANK = Q;
   window.EXBANK_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
