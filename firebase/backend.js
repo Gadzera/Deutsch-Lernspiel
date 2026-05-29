@@ -169,6 +169,33 @@
       onlineCbs.push(cb);
       if (listening) fanout();
       return function () { onlineCbs = onlineCbs.filter(function (f) { return f !== cb; }); };
+    },
+
+    // ---- shared chat (RTDB /chat) -----------------------------------------
+    sendMessage: function (text, name) {
+      if (!db || !uid) return Promise.resolve();
+      text = String(text == null ? '' : text).replace(/\s+/g, ' ').trim().slice(0, 280);
+      if (!text) return Promise.resolve();
+      var firebase = window.firebase;
+      var TS = firebase.database.ServerValue.TIMESTAMP;
+      var nm = name || (usersCache[uid] && usersCache[uid].name) || 'Anonym';
+      return db.ref('chat').push({ uid: uid, name: String(nm).slice(0, 40), text: text, ts: TS })
+        .catch(function (e) { console.warn('[DeutschBackend] sendMessage failed', e); });
+    },
+
+    onChat: function (cb) {
+      if (!db) return function () {};
+      var ref = db.ref('chat').orderByChild('ts').limitToLast(50);
+      var handler = ref.on('value', function (snap) {
+        var v = snap.val() || {};
+        var msgs = Object.keys(v).map(function (k) {
+          var m = v[k] || {};
+          return { id: k, uid: m.uid, name: m.name || 'Anonym', text: m.text || '', ts: m.ts || 0 };
+        });
+        msgs.sort(function (a, b) { return a.ts - b.ts; });
+        try { cb(msgs); } catch (e) {}
+      }, function () {});
+      return function () { ref.off('value', handler); };
     }
   };
 
