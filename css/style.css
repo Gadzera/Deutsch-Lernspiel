@@ -9,6 +9,30 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+/* ============ VERSION BADGE ============
+   Top-right pill confirming v2.3 Warm Editorial is loaded. If you don't see it,
+   the page is from cache. */
+body::before {
+    content: 'v2.3 · neu';
+    position: fixed;
+    top: env(safe-area-inset-top, 6px);
+    right: 8px;
+    z-index: 9998;
+    background: linear-gradient(135deg, #C25737, #D6962F);
+    color: #FFFCF7;
+    font-family: 'Newsreader', Georgia, serif;
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 4px 11px;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(164,69,42,0.35);
+    pointer-events: none;
+    line-height: 1.2;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+
 /* ============================================================
    DESIGN SYSTEM — "Warm Editorial" (from user-provided design)
    Cream paper, terracotta clay, amber/sage/rose/plum accents,
