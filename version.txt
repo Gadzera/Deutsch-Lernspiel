@@ -1,2 +1,1 @@
-v2.3-2026-05-29-warm — Warm Editorial redesign (cream paper #F4EDE1, terracotta clay #C25737, Hanken Grotesk + Newsreader italic)
-Palette and typography taken from the user-provided design system.
+v3.0-2026-05-29 — React bundle from user-provided design (warm editorial, Hanken Grotesk + Newsreader, bottom-nav mobile / side-rail desktop, Berlin bear mascot, MCQ + sentence builder, VWU exam, Textproduktion)
