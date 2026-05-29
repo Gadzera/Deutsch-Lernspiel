@@ -1,2 +1,2 @@
-v2.2-2026-05-29 — Berlin Modern redesign (cobalt + Bauhaus mustard, Bricolage Grotesque + Inter)
-CSS renamed to style.v2.css; apple-mobile-web-app-capable removed to defeat iOS WebClip cache; runtime version-check added.
+v2.3-2026-05-29-warm — Warm Editorial redesign (cream paper #F4EDE1, terracotta clay #C25737, Hanken Grotesk + Newsreader italic)
+Palette and typography taken from the user-provided design system.
