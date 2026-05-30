@@ -7,6 +7,7 @@
 //   { task:"explain", question, answer, lang } -> explains a grammar point
 //   { task:"sentence", prompt, lang }          -> helps build/correct a sentence
 //   { task:"coach", text, lang }               -> coaches writing: hints + next-word options, NO full solution
+//   { task:"live", text, lang }                -> live (as-you-type) coach: tiny verdict + next words, NO correction
 // Response: { reply: "<markdown/text>" }  (or { error })
 //
 // The tutor "knowledge base" (TUTOR_BASE below) is injected into every request,
@@ -51,6 +52,13 @@ GERMAN GRAMMAR YOU KNOW AND APPLY:
 • Verben mit fester Präposition: warten auf+A, sich interessieren für+A, denken an+A, teilnehmen an+D, sich freuen über+A (Gegenwart/Vergangenes) bzw. auf+A (Zukunft).
 • Negation: "nicht" (Verb/Satz/Adjektiv) vs. "kein" (Nomen mit unbestimmtem oder ohne Artikel).
 • Textverbindung & Redemittel (Erörterung/Stellungnahme): "Meiner Meinung nach …", "Einerseits … andererseits …", "Ein wichtiges Argument ist …", "Ein Beispiel dafür ist …", "Zwar … aber …", "Je … desto …", "Zusammenfassend lässt sich sagen …", "Aus diesen Gründen …".
+
+KASUS-CHECK — die häufigste Fehlerquelle. Sei hier besonders sorgfältig und verwechsle NIEMALS Akkusativ, Dativ und Genitiv. Bevor du einen Kasus nennst, prüfe in dieser Reihenfolge:
+1) WECHSELPRÄPOSITION (an, auf, hinter, in, neben, über, unter, vor, zwischen)? → Frage zuerst: Bewegung zu einem Ziel (Wohin?) ODER fester Ort/Zustand (Wo?). Wohin → AKKUSATIV. Wo → DATIV. Durchgerechnet: „Ich gehe in die Stadt" (Wohin → Akk) ↔ „Ich wohne in der Stadt" (Wo → Dativ); „Ich lege das Buch auf den Tisch" (Akk) ↔ „Das Buch liegt auf dem Tisch" (Dativ); „an die Wand" (Akk) ↔ „an der Wand" (Dativ). Richtungsverben (gehen, fahren, kommen, legen, stellen, setzen, hängen=wohin) → Akkusativ; Ortsverben (sein, bleiben, liegen, stehen, sitzen, wohnen, hängen=wo) → Dativ.
+2) FESTE PRÄPOSITION? Diese haben IMMER denselben Kasus, egal welche Bedeutung: für, ohne, gegen, um, durch, bis, entlang → immer AKKUSATIV. aus, bei, mit, nach, seit, von, zu, gegenüber → immer DATIV. während, wegen, trotz, (an)statt, innerhalb, außerhalb → immer GENITIV.
+3) VERB MIT DATIV (ohne Präposition)? helfen, danken, gefallen, gehören, antworten, folgen, passen, schmecken, gratulieren, glauben → Dativ-Objekt: „Ich helfe dem Mann" (nicht „den Mann").
+4) GENITIV = Besitz/Zugehörigkeit: maskulin/neutrum → des + -(e)s (das Auto des Mannes, das Dach des Hauses), feminin/Plural → der (die Tasche der Frau, die Rechte der Kinder).
+Nenne IMMER den Kasus UND die Begründung (Wohin/Wo, feste Präp, Verb+Kasus, Besitz). Wenn du unsicher bist, überlege Schritt für Schritt und gib dann den KORREKTEN Kasus — rate nie.
 
 ÖSTERREICHISCHER KONTEXT: Dies ist ein Kurs in Wien (Österreich). Verwende, wo passend, österreichisches Standarddeutsch (z. B. "Jänner" statt "Januar", "heuer" = dieses Jahr; im Gespräch eher Perfekt als Präteritum) und orientiere dich an den VWU/ÖSD-Prüfungserwartungen.
 
@@ -107,6 +115,15 @@ TASK: COACH the student with their own German writing. Do NOT correct it for the
 Never output a full corrected version of the student's text and never fill in a blank for them.`;
       user = 'Hilf mir als Coach mit diesem deutschen Text — nur Hinweise geben, NICHT für mich korrigieren oder fertigschreiben:\n\n' + (b.text || b.prompt || '');
       maxTok = 500;
+    } else if (b.task === 'live') {
+      task = `
+
+TASK: You are a LIVE writing coach. The student is in the MIDDLE of writing this German text and just paused. Read the WHOLE text so far and answer VERY SHORTLY in ${L} (Markdown, at most ~5 short lines total). Do NOT rewrite the text and do NOT output a full correction.
+- Line 1 — a quick verdict: begin with "✅" if it is fine so far, or "✏️" if there is ONE important thing to fix; then ONE short sentence that names the rule (Kasus, Wortstellung, Tempus, Genus …). Apply the KASUS-CHECK strictly.
+- Then a line "**Weiter:**" followed by 2–3 German words/short phrases that could grammatically come next, each with a 2–5 word reason in brackets, e.g. «weil … (Verb ans Ende)», «den Termin (Akkusativ)», «deshalb … (Verb auf Position 2)».
+Be terse, concrete and encouraging. Never exceed ~5 lines.`;
+      user = 'Mein Text bis jetzt — gib kurzes Live-Feedback und nächste Wörter, NICHT korrigieren oder fertigschreiben:\n\n' + (b.text || b.prompt || '');
+      maxTok = 300;
     } else {
       task = `
 
@@ -125,6 +142,7 @@ TASK: Help the student build or correct a German sentence. Show the correct Germ
         const out = await env.AI.run(models[i], {
           messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
           max_tokens: maxTok,
+          temperature: 0.3,
         });
         reply = (out && (out.response || (out.result && out.result.response))) || '';
         if (reply) break;
