@@ -46,6 +46,41 @@
   var presenceWired = false;
   var pendingStats = null;        // stats requested before the profile existed
 
+  // ---- profanity filter ----------------------------------------------------
+  // Masks common swear words (RU mat + EN/DE/TR) in the shared chat and in
+  // display names. Word-based with light de-obfuscation (repeats, separators,
+  // a bit of leet). Not perfect — just extend BAD with more stems as needed.
+  var BAD = ('хуй хуя хуё хуе хуи хуев хуёв хуйн пизд пезд ебал ебан ебат ебач ебля ебло ебну ебуч ёбан ёбну ёбыр еблан ебанат ебанут '
+    + 'выеб въеб заеб наеб объеб отъеб подъеб разъеб уеб съеб доеб остоеб долбоеб долбоёб далбаёб блят бляд '
+    + 'сука суки суке суку сукой сучк сучар мудак мудач мудил мудо пидор пидар педик педрил пидорас пидарас гандон гондон гнида '
+    + 'залуп мандавош дроч херн херов херня херас херач говн гавн дерьм срать насра обосра посра зассан ссань мраз падла падло '
+    + 'шлюх шалав блудниц проститутк уёбищ уебищ ублюд выблядок дебил жоп задниц чмош чмыр '
+    + 'suka cyka suchk blyat blyad blya pizd pizdec huy huyl huya nahuy pohuy ebat ebal eban ebuch mudak pidor pidoras zalupa dolboeb gandon '
+    + 'fuck fuk fck shit bitch bastard asshole arsehole cunt dick pussy motherf bullshit slut whore faggot nigger nigga wanker twat cocksuck dumbass dipshit '
+    + 'scheiss scheiß arschloch arsch ficken fick fotze wichser hurensohn schlampe miststück votze nutte hure '
+    + 'orospu piç siktir sikis sikim yarrak pezeveng amcık amına gavat amk').split(/\s+/);
+
+  function _norm(w) {
+    return String(w).toLowerCase()
+      .replace(/[@4]/g, 'a').replace(/\$/g, 's').replace(/0/g, 'o').replace(/3/g, 'e').replace(/1/g, 'i').replace(/5/g, 's').replace(/7/g, 't')
+      .replace(/[^a-zа-яё]/g, '')
+      .replace(/(.)\1{2,}/g, '$1');
+  }
+  function _isBad(w) {
+    var t = _norm(w);
+    if (t.length < 3) return false;
+    for (var i = 0; i < BAD.length; i++) { if (BAD[i] && t.indexOf(BAD[i]) !== -1) return true; }
+    return false;
+  }
+  function clean(text) {
+    if (text == null) return text;
+    return String(text).replace(/[0-9A-Za-zА-Яа-яЁё@$]+/g, function (w) {
+      if (!_isBad(w)) return w;
+      var n = Math.max(1, Math.min(w.length - 1, 7));
+      return w.charAt(0) + new Array(n + 1).join('*');
+    });
+  }
+
   function loadScript(src) {
     return new Promise(function (resolve, reject) {
       var s = document.createElement('script');
@@ -60,7 +95,7 @@
     var rows = Object.keys(usersCache).map(function (k) {
       var r = usersCache[k] || {};
       return {
-        uid: k, name: r.name || 'Anonym', lang: r.lang || null,
+        uid: k, name: clean(r.name || 'Anonym'), lang: r.lang || null,
         xp: r.xp || 0, level: r.level || 0, streak: r.streak || 0,
         online: !!r.online, lastActive: r.lastActive || 0
       };
@@ -179,7 +214,7 @@
       var firebase = window.firebase;
       var TS = firebase.database.ServerValue.TIMESTAMP;
       var nm = name || (usersCache[uid] && usersCache[uid].name) || 'Anonym';
-      return db.ref('chat').push({ uid: uid, name: String(nm).slice(0, 40), text: text, ts: TS })
+      return db.ref('chat').push({ uid: uid, name: clean(String(nm).slice(0, 40)), text: clean(text), ts: TS })
         .catch(function (e) { console.warn('[DeutschBackend] sendMessage failed', e); });
     },
 
@@ -190,7 +225,7 @@
         var v = snap.val() || {};
         var msgs = Object.keys(v).map(function (k) {
           var m = v[k] || {};
-          return { id: k, uid: m.uid, name: m.name || 'Anonym', text: m.text || '', ts: m.ts || 0 };
+          return { id: k, uid: m.uid, name: clean(m.name || 'Anonym'), text: clean(m.text || ''), ts: m.ts || 0 };
         });
         msgs.sort(function (a, b) { return a.ts - b.ts; });
         try { cb(msgs); } catch (e) {}
