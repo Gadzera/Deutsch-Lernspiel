@@ -649,6 +649,205 @@
     ['C2', 'unumgänglich', 'unvermeidlich', ['optional', 'freiwillig', 'vermeidbar']]
   ].forEach(function (r) { gen(r[0], 'synonym', 'Synonym', 'Welches Wort bedeutet dasselbe wie „' + r[1] + '"?', r[2], r[3], '<b>' + r[1] + ' ≈ ' + r[2] + '</b>.', true); });
 
+  /* ---- Antonyme (Gegenteil); Distraktoren = Synonyme des Stichworts (sicher falsch) ---- */
+  [
+    ['A1', 'groß', 'klein', ['riesig', 'gewaltig', 'enorm']],
+    ['A1', 'gut', 'schlecht', ['prima', 'toll', 'super']],
+    ['A1', 'kalt', 'warm', ['eisig', 'frostig', 'kühl']],
+    ['A1', 'schnell', 'langsam', ['rasch', 'flink', 'zügig']],
+    ['A1', 'teuer', 'billig', ['kostspielig', 'hochpreisig', 'wertvoll']],
+    ['A1', 'hell', 'dunkel', ['licht', 'strahlend', 'leuchtend']],
+    ['A1', 'neu', 'alt', ['frisch', 'modern', 'nagelneu']],
+    ['A1', 'richtig', 'falsch', ['korrekt', 'zutreffend', 'stimmig']],
+    ['A2', 'offen', 'geschlossen', ['geöffnet', 'frei', 'zugänglich']],
+    ['A2', 'voll', 'leer', ['gefüllt', 'randvoll', 'prall']],
+    ['A2', 'früh', 'spät', ['zeitig', 'frühzeitig', 'beizeiten']],
+    ['A2', 'laut', 'leise', ['lärmend', 'geräuschvoll', 'schrill']],
+    ['A2', 'sauber', 'schmutzig', ['rein', 'blitzsauber', 'makellos']],
+    ['A2', 'leicht', 'schwer', ['mühelos', 'einfach', 'simpel']],
+    ['A2', 'fröhlich', 'traurig', ['heiter', 'vergnügt', 'aufgeräumt']],
+    ['A2', 'gleich', 'verschieden', ['identisch', 'übereinstimmend', 'deckungsgleich']],
+    ['A2', 'möglich', 'unmöglich', ['machbar', 'denkbar', 'realisierbar']],
+    ['A2', 'stark', 'schwach', ['kräftig', 'robust', 'muskulös']],
+    ['B1', 'wichtig', 'unwichtig', ['bedeutend', 'wesentlich', 'zentral']],
+    ['B1', 'erlauben', 'verbieten', ['gestatten', 'genehmigen', 'zulassen']],
+    ['B1', 'gewinnen', 'verlieren', ['siegen', 'obsiegen', 'triumphieren']],
+    ['B1', 'steigen', 'sinken', ['klettern', 'emporsteigen', 'hochgehen']],
+    ['B1', 'der Vorteil', 'der Nachteil', ['der Nutzen', 'der Pluspunkt', 'der Gewinn']],
+    ['B1', 'der Erfolg', 'der Misserfolg', ['der Triumph', 'der Sieg', 'das Gelingen']],
+    ['B1', 'zunehmen', 'abnehmen', ['ansteigen', 'wachsen', 'sich mehren']],
+    ['B1', 'die Mehrheit', 'die Minderheit', ['der Großteil', 'die Masse', 'das Gros']],
+    ['B1', 'loben', 'kritisieren', ['preisen', 'würdigen', 'rühmen']],
+    ['B1', 'vergessen', 'behalten', ['verdrängen', 'entfallen', 'versäumen']],
+    ['B2', 'der Aufstieg', 'der Abstieg', ['der Anstieg', 'der Aufschwung', 'das Hochkommen']],
+    ['B2', 'die Nachfrage', 'das Angebot', ['der Bedarf', 'das Verlangen', 'das Kaufinteresse']],
+    ['B2', 'der Gewinn', 'der Verlust', ['der Ertrag', 'der Profit', 'der Überschuss']],
+    ['B2', 'zulässig', 'unzulässig', ['gestattet', 'erlaubt', 'statthaft']],
+    ['B2', 'freiwillig', 'verpflichtend', ['ungezwungen', 'spontan', 'eigeninitiativ']],
+    ['B2', 'konkret', 'abstrakt', ['greifbar', 'anschaulich', 'handfest']],
+    ['B2', 'optimistisch', 'pessimistisch', ['zuversichtlich', 'hoffnungsvoll', 'positiv']],
+    ['B2', 'zustimmen', 'ablehnen', ['beipflichten', 'billigen', 'zusagen']],
+    ['B2', 'der Anstieg', 'der Rückgang', ['die Zunahme', 'der Zuwachs', 'die Steigerung']],
+    ['B2', 'großzügig', 'geizig', ['freigebig', 'spendabel', 'nobel']],
+    ['C1', 'billigen', 'missbilligen', ['gutheißen', 'befürworten', 'absegnen']],
+    ['C1', 'transparent', 'undurchsichtig', ['durchschaubar', 'nachvollziehbar', 'offenkundig']],
+    ['C1', 'bejahen', 'verneinen', ['zustimmen', 'bekräftigen', 'bestätigen']],
+    ['C1', 'der Fortschritt', 'der Rückschritt', ['der Aufschwung', 'die Weiterentwicklung', 'die Verbesserung']],
+    ['C1', 'nützen', 'schaden', ['fördern', 'dienen', 'unterstützen']],
+    ['C1', 'bescheiden', 'anmaßend', ['zurückhaltend', 'genügsam', 'schlicht']],
+    ['C1', 'verschwenden', 'sparen', ['vergeuden', 'verprassen', 'verschleudern']],
+    ['C1', 'gelingen', 'scheitern', ['glücken', 'klappen', 'fruchten']],
+    ['C1', 'verbindlich', 'unverbindlich', ['bindend', 'verpflichtend', 'definitiv']],
+    ['C1', 'nachhaltig', 'kurzlebig', ['dauerhaft', 'langfristig', 'beständig']],
+    ['C1', 'die Zustimmung', 'die Ablehnung', ['die Einwilligung', 'der Beifall', 'die Billigung']],
+    ['C1', 'die Aufwertung', 'die Abwertung', ['die Wertsteigerung', 'die Aufstockung', 'die Anhebung']],
+    ['C1', 'konventionell', 'unkonventionell', ['herkömmlich', 'traditionell', 'gängig']],
+    ['C1', 'der Aufschwung', 'die Rezession', ['die Hochkonjunktur', 'das Wachstum', 'der Boom']],
+    ['C1', 'offenkundig', 'verborgen', ['offensichtlich', 'augenfällig', 'evident']],
+    ['C1', 'zaghaft', 'entschlossen', ['zögerlich', 'vorsichtig', 'ängstlich']],
+    ['C2', 'explizit', 'implizit', ['ausdrücklich', 'unmissverständlich', 'klar']],
+    ['C2', 'subjektiv', 'objektiv', ['persönlich', 'parteiisch', 'befangen']],
+    ['C2', 'heterogen', 'homogen', ['verschiedenartig', 'uneinheitlich', 'gemischt']],
+    ['C2', 'redundant', 'prägnant', ['überflüssig', 'weitschweifig', 'doppelt']],
+    ['C2', 'kohärent', 'widersprüchlich', ['schlüssig', 'stimmig', 'folgerichtig']],
+    ['C2', 'progressiv', 'konservativ', ['fortschrittlich', 'zukunftsweisend', 'reformfreudig']],
+    ['C2', 'obligatorisch', 'fakultativ', ['verpflichtend', 'zwingend', 'vorgeschrieben']],
+    ['C2', 'konvergieren', 'divergieren', ['zusammenlaufen', 'sich annähern', 'übereinstimmen']],
+    ['C2', 'nüchtern', 'euphorisch', ['sachlich', 'distanziert', 'unterkühlt']],
+    ['C2', 'triftig', 'unbegründet', ['stichhaltig', 'überzeugend', 'plausibel']],
+    ['C2', 'die Diskrepanz', 'die Übereinstimmung', ['der Unterschied', 'die Abweichung', 'das Missverhältnis']],
+    ['C2', 'die Inklusion', 'die Exklusion', ['die Einbeziehung', 'die Teilhabe', 'die Aufnahme']],
+    ['C2', 'die Affirmation', 'die Negation', ['die Bejahung', 'die Zustimmung', 'die Bestätigung']],
+    ['C2', 'die Zentralisierung', 'die Dezentralisierung', ['die Bündelung', 'die Konzentration', 'die Zusammenführung']],
+    ['C2', 'ambivalent', 'eindeutig', ['zwiespältig', 'widersprüchlich', 'doppeldeutig']],
+    ['C2', 'rudimentär', 'ausgereift', ['ansatzweise', 'unvollständig', 'bruchstückhaft']]
+  ].forEach(function (r) { gen(r[0], 'antonym', 'Gegenteil', 'Was ist das Gegenteil von „' + r[1] + '"?', r[2], r[3], '<b>' + r[1] + ' ↔ ' + r[2] + '</b>.', true); });
+
+  /* ---- Synonyme (Teil 2); Distraktoren = Gegenteile/unverwandt (sicher falsch) ---- */
+  [
+    ['A1', 'schön', 'hübsch', ['hässlich', 'langweilig', 'schmutzig']],
+    ['A1', 'sprechen', 'reden', ['schlafen', 'essen', 'laufen']],
+    ['A1', 'nett', 'freundlich', ['böse', 'gemein', 'laut']],
+    ['A1', 'winzig', 'sehr klein', ['riesig', 'breit', 'schwer']],
+    ['A1', 'müde', 'schläfrig', ['wach', 'munter', 'fit']],
+    ['A1', 'rasch', 'schnell', ['langsam', 'faul', 'spät']],
+    ['A1', 'die Mama', 'die Mutter', ['die Tante', 'die Oma', 'die Tochter']],
+    ['A1', 'der Papa', 'der Vater', ['der Onkel', 'der Opa', 'der Sohn']],
+    ['A1', 'das Auto', 'der Wagen', ['das Fahrrad', 'der Zug', 'das Boot']],
+    ['A2', 'die Arbeit', 'der Job', ['die Pause', 'der Urlaub', 'die Freizeit']],
+    ['A2', 'kaputt', 'defekt', ['neu', 'heil', 'ganz']],
+    ['A2', 'der Arzt', 'der Doktor', ['der Lehrer', 'der Koch', 'der Fahrer']],
+    ['A2', 'schauen', 'blicken', ['hören', 'riechen', 'fühlen']],
+    ['A2', 'der Laden', 'das Geschäft', ['das Amt', 'das Lager', 'die Schule']],
+    ['A2', 'dünn', 'schlank', ['dick', 'breit', 'rund']],
+    ['A2', 'das Foto', 'das Bild', ['der Text', 'das Lied', 'der Film']],
+    ['A2', 'bekommen', 'erhalten', ['geben', 'senden', 'suchen']],
+    ['A2', 'der Chef', 'der Vorgesetzte', ['der Kollege', 'der Kunde', 'der Gast']],
+    ['A2', 'ungefähr', 'etwa', ['genau', 'exakt', 'sicher']],
+    ['A2', 'wütend', 'sauer', ['froh', 'ruhig', 'müde']],
+    ['A2', 'sich beeilen', 'sich sputen', ['warten', 'bummeln', 'ruhen']],
+    ['A2', 'preiswert', 'günstig', ['teuer', 'wertvoll', 'kostbar']],
+    ['A2', 'der Fehler', 'der Irrtum', ['der Erfolg', 'der Beweis', 'der Vorteil']],
+    ['A2', 'antworten', 'erwidern', ['fragen', 'schweigen', 'rufen']],
+    ['B2', 'behaupten', 'geltend machen', ['bezweifeln', 'leugnen', 'verschweigen']],
+    ['B2', 'die Ursache', 'der Grund', ['die Folge', 'die Wirkung', 'das Ergebnis']],
+    ['B2', 'beeinflussen', 'prägen', ['ignorieren', 'behindern', 'verhindern']],
+    ['B2', 'der Zweck', 'das Ziel', ['der Anlass', 'der Beginn', 'der Verlauf']],
+    ['B2', 'erheblich', 'beträchtlich', ['gering', 'minimal', 'unbedeutend']],
+    ['B2', 'vermeiden', 'umgehen', ['suchen', 'verursachen', 'herbeiführen']],
+    ['B2', 'die Voraussetzung', 'die Bedingung', ['die Folge', 'das Ergebnis', 'der Vorteil']],
+    ['B2', 'die Tendenz', 'die Neigung', ['die Abkehr', 'der Stillstand', 'die Umkehr']],
+    ['B2', 'offenkundig', 'offensichtlich', ['verborgen', 'fraglich', 'unklar']],
+    ['B2', 'zahlreich', 'viele', ['wenige', 'kaum', 'einzelne']],
+    ['B2', 'der Wandel', 'die Veränderung', ['der Stillstand', 'die Beständigkeit', 'die Erhaltung']],
+    ['B2', 'fördern', 'unterstützen', ['hemmen', 'blockieren', 'bremsen']],
+    ['B2', 'die Folge', 'die Konsequenz', ['die Ursache', 'der Auslöser', 'der Grund']],
+    ['B2', 'wesentlich', 'entscheidend', ['nebensächlich', 'belanglos', 'geringfügig']],
+    ['C1', 'darlegen', 'erläutern', ['verschweigen', 'verbergen', 'andeuten']],
+    ['C1', 'die Auswirkung', 'die Folge', ['die Ursache', 'der Anlass', 'der Auslöser']],
+    ['C1', 'hervorrufen', 'auslösen', ['verhindern', 'unterbinden', 'dämpfen']],
+    ['C1', 'maßgeblich', 'entscheidend', ['nebensächlich', 'geringfügig', 'unwichtig']],
+    ['C1', 'die Voreingenommenheit', 'das Vorurteil', ['die Unparteilichkeit', 'die Neutralität', 'die Objektivität']],
+    ['C1', 'beträchtlich', 'erheblich', ['marginal', 'gering', 'minimal']],
+    ['C1', 'sich abzeichnen', 'sich andeuten', ['verschwinden', 'enden', 'ausbleiben']],
+    ['C1', 'die Diskrepanz', 'das Missverhältnis', ['die Übereinstimmung', 'der Einklang', 'die Harmonie']],
+    ['C1', 'plausibel', 'nachvollziehbar', ['abwegig', 'unhaltbar', 'widersinnig']],
+    ['C1', 'einräumen', 'zugeben', ['bestreiten', 'leugnen', 'abstreiten']],
+    ['C1', 'die Errungenschaft', 'die Leistung', ['das Versagen', 'der Rückschritt', 'der Misserfolg']],
+    ['C1', 'unabdingbar', 'unerlässlich', ['entbehrlich', 'überflüssig', 'verzichtbar']],
+    ['C1', 'würdigen', 'anerkennen', ['herabsetzen', 'schmälern', 'missachten']],
+    ['C1', 'das Anliegen', 'das Bestreben', ['die Gleichgültigkeit', 'die Ablehnung', 'der Widerwille']],
+    ['C1', 'zwangsläufig', 'unweigerlich', ['zufällig', 'beliebig', 'vermeidbar']],
+    ['C1', 'differenziert', 'vielschichtig', ['simpel', 'pauschal', 'platt']],
+    ['C1', 'die Wechselwirkung', 'die gegenseitige Beeinflussung', ['die Trennung', 'die Isolation', 'der Stillstand']],
+    ['C1', 'ausschlaggebend', 'entscheidend', ['unwichtig', 'beiläufig', 'marginal']],
+    ['C1', 'vermitteln', 'nahebringen', ['verschleiern', 'vorenthalten', 'verbergen']],
+    ['C1', 'der Stellenwert', 'die Bedeutung', ['die Nebensache', 'die Belanglosigkeit', 'die Geringfügigkeit']],
+    ['C1', 'nachvollziehen', 'begreifen', ['verkennen', 'missdeuten', 'übersehen']],
+    ['C1', 'die Befürchtung', 'die Sorge', ['die Zuversicht', 'die Hoffnung', 'die Gewissheit']],
+    ['C2', 'konstatieren', 'feststellen', ['vermuten', 'bezweifeln', 'erahnen']],
+    ['C2', 'suggerieren', 'nahelegen', ['widerlegen', 'verschweigen', 'bestreiten']],
+    ['C2', 'die Ambivalenz', 'die Zwiespältigkeit', ['die Eindeutigkeit', 'die Klarheit', 'die Gewissheit']],
+    ['C2', 'rekurrieren auf', 'sich beziehen auf', ['ablehnen', 'ignorieren', 'übergehen']],
+    ['C2', 'evident', 'offenkundig', ['fraglich', 'zweifelhaft', 'dunkel']],
+    ['C2', 'die Prämisse', 'die Voraussetzung', ['die Folgerung', 'das Ergebnis', 'der Schluss']],
+    ['C2', 'antizipieren', 'vorwegnehmen', ['nachholen', 'verzögern', 'aufschieben']],
+    ['C2', 'divergieren', 'auseinandergehen', ['übereinstimmen', 'sich gleichen', 'konvergieren']],
+    ['C2', 'die Kontroverse', 'der Streit', ['die Einigkeit', 'der Konsens', 'die Eintracht']],
+    ['C2', 'obsolet', 'veraltet', ['aktuell', 'modern', 'zeitgemäß']],
+    ['C2', 'partiell', 'teilweise', ['vollständig', 'gänzlich', 'restlos']],
+    ['C2', 'die Prävalenz', 'das Vorherrschen', ['die Seltenheit', 'der Mangel', 'das Fehlen']],
+    ['C2', 'konzedieren', 'einräumen', ['bestreiten', 'leugnen', 'abstreiten']],
+    ['C2', 'stringent', 'schlüssig', ['widersprüchlich', 'wirr', 'unlogisch']],
+    ['C2', 'die Reziprozität', 'die Gegenseitigkeit', ['die Einseitigkeit', 'die Trennung', 'die Distanz']],
+    ['C2', 'exemplarisch', 'beispielhaft', ['untypisch', 'einmalig', 'abweichend']],
+    ['C2', 'die Disparität', 'die Ungleichheit', ['die Gleichheit', 'der Ausgleich', 'die Parität']],
+    ['C2', 'perpetuieren', 'aufrechterhalten', ['beenden', 'abschaffen', 'aufheben']],
+    ['C2', 'latent', 'verborgen', ['offensichtlich', 'manifest', 'sichtbar']],
+    ['C2', 'die Implikation', 'die Folgerung', ['die Voraussetzung', 'die Annahme', 'der Anlass']],
+    ['C2', 'revidieren', 'überdenken', ['beibehalten', 'bekräftigen', 'festhalten']],
+    ['C2', 'manifest', 'offenkundig', ['verborgen', 'latent', 'versteckt']]
+  ].forEach(function (r) { gen(r[0], 'synonym', 'Synonym', 'Welches Wort bedeutet dasselbe wie „' + r[1] + '"?', r[2], r[3], '<b>' + r[1] + ' ≈ ' + r[2] + '</b>.', true); });
+
+  /* ---- A2/B2 Auffüllung: weitere Artikel ---- */
+  [
+    ['A2', 'Ausweis', 'der'], ['A2', 'Lohn', 'der'], ['A2', 'Fahrschein', 'der'], ['A2', 'Bahnsteig', 'der'], ['A2', 'Anzug', 'der'], ['A2', 'Spiegel', 'der'], ['A2', 'Balkon', 'der'], ['A2', 'Keller', 'der'],
+    ['A2', 'Bewerbung', 'die'], ['A2', 'Unterschrift', 'die'], ['A2', 'Versicherung', 'die'], ['A2', 'Auskunft', 'die'], ['A2', 'Verspätung', 'die'], ['A2', 'Haltestelle', 'die'], ['A2', 'Quittung', 'die'], ['A2', 'Heizung', 'die'],
+    ['A2', 'Bargeld', 'das'], ['A2', 'Trinkgeld', 'das'], ['A2', 'Erdgeschoss', 'das'], ['A2', 'Handtuch', 'das'], ['A2', 'Werkzeug', 'das'], ['A2', 'Spielzeug', 'das'], ['A2', 'Medikament', 'das'], ['A2', 'Wörterbuch', 'das'],
+    ['B2', 'Wettbewerb', 'der'], ['B2', 'Verdacht', 'der'], ['B2', 'Konsum', 'der'], ['B2', 'Umbruch', 'der'], ['B2', 'Engpass', 'der'], ['B2', 'Zusammenhalt', 'der'],
+    ['B2', 'Vereinbarung', 'die'], ['B2', 'Zunahme', 'die'], ['B2', 'Abnahme', 'die'], ['B2', 'Knappheit', 'die'], ['B2', 'Skepsis', 'die'],
+    ['B2', 'Hindernis', 'das'], ['B2', 'Ungleichgewicht', 'das'], ['B2', 'Übel', 'das'], ['B2', 'Wohlergehen', 'das']
+  ].forEach(function (r) { art(r[0], r[1], r[2]); });
+
+  [
+    ['A2', 'der Ausweis', 'Ausweise', ['Ausweisse', 'Ausweisen', 'Ausweiser']],
+    ['A2', 'die Bewerbung', 'Bewerbungen', ['Bewerbunge', 'Bewerbungs', 'Bewerbungern']],
+    ['A2', 'das Medikament', 'Medikamente', ['Medikamenten', 'Medikaments', 'Medikamenter']],
+    ['A2', 'der Balkon', 'Balkone', ['Balkonen', 'Balkoner', 'Balköne']],
+    ['A2', 'die Quittung', 'Quittungen', ['Quittunge', 'Quittungs', 'Quittungern']],
+    ['A2', 'das Handtuch', 'Handtücher', ['Handtuche', 'Handtuchs', 'Handtuchen']],
+    ['A2', 'der Anzug', 'Anzüge', ['Anzuge', 'Anzugen', 'Anzügen']],
+    ['A2', 'die Versicherung', 'Versicherungen', ['Versicherunge', 'Versicherungs', 'Versicherungern']]
+  ].forEach(function (r) { gen(r[0], 'plural', 'Plural', r[1] + ' → Plural: die …', r[2], r[3], '<b>die ' + r[2] + '</b> (Plural von ' + r[1] + ').'); });
+
+  gen('A2', 'perfekt', 'Perfekt: haben/sein', 'Ich ___ gestern viel gelernt.', 'habe', ['bin', 'war', 'ist'], 'lernen → <b>haben</b>: ich habe gelernt.');
+  gen('A2', 'perfekt', 'Perfekt: haben/sein', 'Sie ___ nach Hause gegangen.', 'ist', ['hat', 'war', 'habe'], 'gehen = Bewegung → <b>sein</b>: sie ist gegangen.');
+  gen('A2', 'perfekt', 'Perfekt: haben/sein', 'Wir ___ einen Film gesehen.', 'haben', ['sind', 'waren', 'ist'], 'sehen → <b>haben</b>: wir haben gesehen.');
+  gen('A2', 'perfekt', 'Perfekt: haben/sein', 'Er ___ früh aufgestanden.', 'ist', ['hat', 'war', 'habe'], 'aufstehen = Bewegung → <b>sein</b>: er ist aufgestanden.');
+  gen('A2', 'modalverb', 'Modalverb', 'Du ___ pünktlich sein. (müssen)', 'musst', ['muss', 'müsst', 'müssen'], 'du <b>musst</b> (müssen, du-Form).');
+  gen('A2', 'modalverb', 'Modalverb', 'Ich ___ ein Eis. (wollen)', 'will', ['willst', 'wollt', 'wollen'], 'ich <b>will</b> (wollen, 1. Person).');
+
+  gen('B2', 'passiv', 'Passiv', 'Das Haus ___ 1990 gebaut. (Präteritum Passiv)', 'wurde', ['wird', 'ist', 'war'], 'Präteritum Passiv: <b>wurde</b> + Partizip (gebaut).');
+  gen('B2', 'passiv', 'Passiv', 'Der Brief ist schon geschrieben ___. (Perfekt Passiv)', 'worden', ['geworden', 'gewesen', 'war'], 'Perfekt Passiv: ist + Partizip + <b>worden</b>.');
+  gen('B2', 'konjunktiv2', 'Konjunktiv II', 'Wenn ich Zeit ___, käme ich. (haben)', 'hätte', ['habe', 'hatte', 'hättest'], 'KonjII von haben: ich <b>hätte</b>.');
+  gen('B2', 'konjunktiv2', 'Konjunktiv II', 'An deiner Stelle ___ ich gehen.', 'würde', ['werde', 'wurde', 'wäre'], 'höfliche Empfehlung: ich <b>würde</b> … gehen.');
+  gen('B2', 'konjunktiv2', 'Konjunktiv II', 'Ich wünschte, er ___ hier. (sein)', 'wäre', ['ist', 'war', 'sei'], 'irrealer Wunsch: er <b>wäre</b> hier.');
+  gen('B2', 'konnektor', 'Konnektor', '___ es regnete, gingen wir spazieren.', 'Obwohl', ['Weil', 'Damit', 'Indem'], 'Einräumung → <b>obwohl</b>.');
+  gen('B2', 'final', 'Finalsatz', 'Er lernte viel, ___ die Prüfung zu bestehen.', 'um', ['damit', 'weil', 'dass'], 'Zweck, gleiches Subjekt: <b>um</b> … zu.');
+  gen('B2', 'konnektor', 'Konnektor', 'Sie war krank, ___ blieb sie zu Hause.', 'deshalb', ['obwohl', 'sondern', 'dennoch'], 'Folge → <b>deshalb</b>.');
+  gen('B2', 'konnektor', 'Konnektor', 'Je mehr er übte, ___ besser wurde er.', 'desto', ['als', 'wie', 'so'], 'je …, <b>desto</b> … (Proportionalsatz).');
+  gen('B2', 'genitiv', 'Genitiv', 'Trotz ___ Regens gingen wir spazieren.', 'des', ['dem', 'der', 'den'], 'trotz + Genitiv: trotz <b>des</b> Regens.');
+
   /* ---- expose ---- */
   window.EXBANK = Q;
   window.EXBANK_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
