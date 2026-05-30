@@ -39,7 +39,7 @@
   /* ================= A1/A2 — Personalpronomen & Präsens ================= */
   add('A1', 'pronomen', 'Pronomen', { display: '___ heiße Anna.', grid: true, opts: ['Ich', 'Du', 'Er', 'Wir'], a: 'Ich', why: '1. Person Singular: <b>ich</b> heiße.' });
   add('A1', 'praesens', 'Präsens', { display: 'Er ___ aus Wien. <span style="opacity:.6">(kommen)</span>', grid: true, opts: ['komme', 'kommst', 'kommt', 'kommen'], a: 'kommt', why: 'er/sie/es → Stamm + <b>-t</b>: kommt.' });
-  add('A1', 'praesens', 'Präsens', { display: 'Du ___ Deutsch. <span style="opacity:.6">(sprechen)</span>', grid: true, opts: ['sprichst', 'sprechst', 'spricht', 'sprechst'], a: 'sprichst', why: 'e→i Wechsel + du-Endung -st: <b>sprichst</b>.' });
+  add('A1', 'praesens', 'Präsens', { display: 'Du ___ Deutsch. <span style="opacity:.6">(sprechen)</span>', grid: true, opts: ['sprichst', 'sprechst', 'spricht', 'sprachst'], a: 'sprichst', why: 'e→i Wechsel + du-Endung -st: <b>sprichst</b>.' });
   add('A2', 'praesens', 'Präsens', { display: 'Sie ___ ein Buch. <span style="opacity:.6">(lesen)</span>', grid: true, opts: ['list', 'liest', 'lest', 'liset'], a: 'liest', why: 'e→ie: sie <b>liest</b>.' });
 
   /* ================= A2 — Perfekt: haben/sein ================= */
@@ -233,7 +233,7 @@
 
   /* ---- A1/A2 — Präsens: stammverändernde Verben ---- */
   add('A1', 'praesens', 'Präsens (a→ä)', { display: 'Du ___ zu schnell. <span style="opacity:.6">(fahren)</span>', grid: true, opts: ['fahrst', 'fährst', 'fahrest', 'fährt'], a: 'fährst', why: 'a→ä bei du: <b>fährst</b>.' });
-  add('A1', 'praesens', 'Präsens (a→ä)', { display: 'Er ___ den ganzen Tag. <span style="opacity:.6">(schlafen)</span>', grid: true, opts: ['schlaft', 'schläft', 'schlaft', 'schlieft'], a: 'schläft', why: 'a→ä bei er/sie/es: <b>schläft</b>.' });
+  add('A1', 'praesens', 'Präsens (a→ä)', { display: 'Er ___ den ganzen Tag. <span style="opacity:.6">(schlafen)</span>', grid: true, opts: ['schlaft', 'schläft', 'schläfst', 'schlieft'], a: 'schläft', why: 'a→ä bei er/sie/es: <b>schläft</b>.' });
   add('A1', 'praesens', 'Präsens (au→äu)', { display: 'Sie ___ sehr schnell. <span style="opacity:.6">(laufen)</span>', grid: true, opts: ['lauft', 'läuft', 'läufst', 'loft'], a: 'läuft', why: 'au→äu bei er/sie/es: <b>läuft</b>.' });
   add('A1', 'praesens', 'Präsens (e→i)', { display: 'Du ___ mir das Buch. <span style="opacity:.6">(geben)</span>', grid: true, opts: ['gebst', 'gibst', 'gibt', 'gebest'], a: 'gibst', why: 'e→i bei du: <b>gibst</b>.' });
   add('A1', 'praesens', 'Präsens (e→ie)', { display: 'Er ___ den Film. <span style="opacity:.6">(sehen)</span>', grid: true, opts: ['seht', 'sieht', 'siht', 'seiht'], a: 'sieht', why: 'e→ie bei er/sie/es: <b>sieht</b>.' });
@@ -470,6 +470,184 @@
   add('C2', 'wortschatz', 'Bedeutung', { display: 'eine „Schnapsidee" ist …', displaySmall: true, opts: ['eine sehr unsinnige Idee', 'ein Rezept für Schnaps', 'eine gute Idee', 'ein Getränk'], a: 'eine sehr unsinnige Idee', why: 'die <b>Schnapsidee</b> = eine völlig verrückte/unsinnige Idee.' });
   add('C2', 'idiom', 'Redewendung', { display: '„Hals- und Beinbruch" wünscht man jemandem, …', displaySmall: true, opts: ['der etwas Wichtiges vor sich hat', 'der sich verletzt hat', 'der schläft', 'der isst'], a: 'der etwas Wichtiges vor sich hat', why: '<b>Hals- und Beinbruch</b> = viel Glück (ironische Wunschformel).' });
   add('C2', 'idiom', 'Redewendung', { display: '„Der Ton macht die Musik" bedeutet: Wichtig ist, …', displaySmall: true, opts: ['WIE man etwas sagt', 'WAS man sagt', 'wie laut man ist', 'welches Instrument'], a: 'WIE man etwas sagt', why: '<b>Der Ton macht die Musik</b> = die Art und Weise zählt.' });
+
+  /* ============================================================
+   *  GENERIERTE AUFGABEN — aus kompakten, korrekten Datentabellen.
+   *  So bekommt jede Stufe sehr viele Items. Distraktoren werden
+   *  rotiert, damit die richtige Antwort nicht immer vorne steht.
+   * ============================================================ */
+  var _ai = 0;
+  function rot(a, d) { var o = d.slice(); var pos = _ai++ % (o.length + 1); o.splice(pos, 0, a); return o; }
+  function gen(lvl, topic, label, display, a, dist, why, small) {
+    var def = { display: display, opts: rot(a, dist), a: a, why: why };
+    if (small) def.displaySmall = true;
+    add(lvl, topic, label, def);
+  }
+
+  /* ---- Artikel: Nomen → der/die/das (art() baut die Optionen) ---- */
+  var _seenArt = {};
+  var ART = {
+    A1: { der: ['Tisch', 'Stuhl', 'Schrank', 'Teller', 'Apfel', 'Kaffee', 'Saft', 'Computer', 'Fernseher', 'Schlüssel', 'Bahnhof', 'Garten', 'Mann', 'Sohn', 'Bruder', 'Freund', 'Lehrer', 'Arzt', 'Zug', 'Bus', 'Ball', 'Berg', 'Sommer', 'Winter', 'Morgen', 'Abend', 'Stift', 'Kühlschrank'],
+          die: ['Lampe', 'Tür', 'Wand', 'Küche', 'Tasche', 'Flasche', 'Tasse', 'Gabel', 'Banane', 'Milch', 'Butter', 'Frau', 'Tochter', 'Schwester', 'Freundin', 'Lehrerin', 'Schule', 'Straße', 'Stadt', 'Uhr', 'Woche', 'Stunde', 'Nacht', 'Sonne', 'Blume', 'Hand', 'Nase', 'Zeit'],
+          das: ['Buch', 'Heft', 'Fenster', 'Bett', 'Sofa', 'Auto', 'Fahrrad', 'Haus', 'Zimmer', 'Bad', 'Kind', 'Baby', 'Wasser', 'Bier', 'Ei', 'Handy', 'Telefon', 'Geld', 'Jahr', 'Kino', 'Theater', 'Hotel', 'Auge', 'Ohr', 'Wochenende', 'Restaurant'] },
+    A2: { der: ['Beruf', 'Termin', 'Urlaub', 'Flughafen', 'Koffer', 'Pass', 'Vertrag', 'Kollege', 'Chef', 'Nachbar', 'Wecker', 'Regen', 'Schnee', 'Wind', 'Markt', 'Preis', 'Kuchen', 'Käse', 'Wein', 'Brief'],
+          die: ['Arbeit', 'Reise', 'Wohnung', 'Miete', 'Rechnung', 'Gesundheit', 'Krankheit', 'Apotheke', 'Bäckerei', 'Zeitung', 'Sprache', 'Antwort', 'Frage', 'Familie', 'Party', 'Jacke', 'Hose', 'Brille', 'Natur', 'Karte'],
+          das: ['Büro', 'Krankenhaus', 'Rezept', 'Gehalt', 'Praktikum', 'Formular', 'Paket', 'Wetter', 'Gespräch', 'Frühstück', 'Mittagessen', 'Abendessen', 'Ticket', 'Gepäck', 'Hemd', 'Kleid', 'Problem', 'Beispiel', 'Ergebnis', 'Konto'] },
+    B1: { der: ['Vorteil', 'Nachteil', 'Unterschied', 'Vorschlag', 'Wunsch', 'Zweck', 'Erfolg', 'Versuch', 'Eindruck', 'Einfluss', 'Grund', 'Zusammenhang', 'Bereich', 'Vortrag', 'Antrag', 'Verkehr', 'Strom', 'Müll', 'Bürger', 'Anfang'],
+          die: ['Umwelt', 'Gesellschaft', 'Entwicklung', 'Meinung', 'Erfahrung', 'Lösung', 'Bedeutung', 'Möglichkeit', 'Verantwortung', 'Beziehung', 'Regierung', 'Bildung', 'Forschung', 'Werbung', 'Mehrheit', 'Pflicht', 'Gewohnheit', 'Absicht', 'Folge', 'Wirtschaft'],
+          das: ['Ziel', 'Mittel', 'Recht', 'Gesetz', 'Verhalten', 'Ereignis', 'Verhältnis', 'Bedürfnis', 'Wachstum', 'Wissen', 'Vertrauen', 'Gefühl', 'Erlebnis', 'Verständnis', 'Publikum', 'System', 'Niveau', 'Interesse', 'Gehirn', 'Gebäude'] },
+    B2: { der: ['Aspekt', 'Faktor', 'Begriff', 'Standpunkt', 'Konflikt', 'Fortschritt', 'Rückgang', 'Anstieg', 'Beitrag', 'Verzicht', 'Reichtum', 'Anspruch', 'Mangel', 'Überblick', 'Wandel', 'Ansatz', 'Zweifel', 'Nachweis', 'Hinweis', 'Schwerpunkt'],
+          die: ['Auswirkung', 'Voraussetzung', 'Herausforderung', 'Maßnahme', 'Tatsache', 'Ursache', 'Wirkung', 'Hinsicht', 'These', 'Quelle', 'Debatte', 'Studie', 'Statistik', 'Tendenz', 'Grundlage', 'Annahme', 'Behauptung', 'Vielfalt', 'Nachhaltigkeit', 'Sicht'],
+          das: ['Phänomen', 'Konzept', 'Kriterium', 'Verfahren', 'Vorhaben', 'Risiko', 'Ausmaß', 'Bewusstsein', 'Engagement', 'Defizit', 'Potenzial', 'Argument', 'Merkmal', 'Gegenteil', 'Vorbild', 'Missverständnis', 'Zugeständnis', 'Bündnis', 'Gleichgewicht', 'Vorurteil'] },
+    C1: { der: ['Diskurs', 'Konsens', 'Widerspruch', 'Sachverhalt', 'Gegensatz', 'Maßstab', 'Spielraum', 'Zuwachs', 'Niedergang', 'Wohlstand', 'Stellenwert', 'Umgang', 'Gesichtspunkt', 'Verlauf', 'Befund', 'Einwand', 'Antrieb', 'Schwund'],
+          die: ['Wahrnehmung', 'Auseinandersetzung', 'Errungenschaft', 'Beeinträchtigung', 'Gewichtung', 'Zuständigkeit', 'Verflechtung', 'Resonanz', 'Tragweite', 'Glaubwürdigkeit', 'Nachfrage', 'Befürchtung', 'Erkenntnis', 'Wechselwirkung', 'Voreingenommenheit', 'Triebkraft', 'Sichtweise', 'Zumutung'],
+          das: ['Spektrum', 'Gefüge', 'Zusammenspiel', 'Dilemma', 'Selbstverständnis', 'Spannungsfeld', 'Anliegen', 'Unterfangen', 'Bestreben', 'Ansehen', 'Vermögen', 'Postulat', 'Wechselspiel', 'Gleichnis', 'Gepräge', 'Unvermögen', 'Paradoxon', 'Vorhaben'] },
+    C2: { der: ['Inbegriff', 'Zeitgeist', 'Trugschluss', 'Sachzwang', 'Wesenszug', 'Gleichmut', 'Überdruss', 'Zwiespalt', 'Argwohn', 'Beifall', 'Hochmut', 'Werdegang', 'Nachhall', 'Zwist', 'Unmut', 'Verdruss', 'Gemeinplatz', 'Brückenschlag'],
+          die: ['Zwickmühle', 'Beharrlichkeit', 'Gelassenheit', 'Zerrissenheit', 'Gleichgültigkeit', 'Vergänglichkeit', 'Eigenart', 'Zuversicht', 'Befindlichkeit', 'Beliebigkeit', 'Schwerfälligkeit', 'Unverfrorenheit', 'Gemengelage', 'Wesensart', 'Tragfähigkeit', 'Zwangsläufigkeit', 'Unabdingbarkeit', 'Gepflogenheit'],
+          das: ['Pendant', 'Politikum', 'Spezifikum', 'Unbehagen', 'Gebaren', 'Sinnbild', 'Vermächtnis', 'Ärgernis', 'Bollwerk', 'Einvernehmen', 'Zerwürfnis', 'Sammelsurium', 'Allerlei', 'Brimborium', 'Unterfangen', 'Gleichnis', 'Vorhaben', 'Spektrum'] }
+  };
+  Object.keys(ART).forEach(function (lvl) {
+    ['der', 'die', 'das'].forEach(function (g) {
+      ART[lvl][g].forEach(function (n) {
+        var k = lvl + '|' + n;
+        if (_seenArt[k]) return;
+        _seenArt[k] = 1;
+        art(lvl, n, g);
+      });
+    });
+  });
+
+  /* ---- Plural ---- */
+  [
+    ['A1', 'das Auto', 'Autos', ['Auten', 'Autoer', 'Aute']],
+    ['A1', 'das Kind', 'Kinder', ['Kinde', 'Kinds', 'Kindern']],
+    ['A1', 'der Mann', 'Männer', ['Manner', 'Männen', 'Manns']],
+    ['A1', 'die Frau', 'Frauen', ['Fraus', 'Frauern', 'Fräue']],
+    ['A1', 'das Buch', 'Bücher', ['Buchs', 'Buche', 'Buchen']],
+    ['A1', 'der Apfel', 'Äpfel', ['Apfeln', 'Apfels', 'Äpfels']],
+    ['A1', 'das Haus', 'Häuser', ['Hause', 'Hausen', 'Häuse']],
+    ['A1', 'die Stadt', 'Städte', ['Stadten', 'Stadts', 'Städter']],
+    ['A2', 'der Tisch', 'Tische', ['Tischer', 'Tischen', 'Tisches']],
+    ['A2', 'die Blume', 'Blumen', ['Blumes', 'Blümer', 'Blume']],
+    ['A2', 'das Bild', 'Bilder', ['Bilde', 'Bilds', 'Bilden']],
+    ['A2', 'der Stuhl', 'Stühle', ['Stuhle', 'Stühlen', 'Stuhls']],
+    ['A2', 'die Hand', 'Hände', ['Handen', 'Hands', 'Händer']],
+    ['A2', 'das Wort', 'Wörter', ['Worts', 'Worte', 'Worten']],
+    ['A2', 'der Garten', 'Gärten', ['Gartens', 'Gartenen', 'Gärtens']],
+    ['A2', 'die Mutter', 'Mütter', ['Mutters', 'Mutteren', 'Müttern']],
+    ['B1', 'das Thema', 'Themen', ['Themas', 'Themaer', 'Themae']],
+    ['B1', 'der Vortrag', 'Vorträge', ['Vortrags', 'Vortragen', 'Vorträgen']],
+    ['B1', 'die Universität', 'Universitäten', ['Universität', 'Universitäte', 'Universitäts']],
+    ['B1', 'das Mitglied', 'Mitglieder', ['Mitglieds', 'Mitgliede', 'Mitglieden']],
+    ['B1', 'der Grund', 'Gründe', ['Grunds', 'Grunde', 'Gründen']],
+    ['B1', 'die Kenntnis', 'Kenntnisse', ['Kenntnis', 'Kenntnise', 'Kenntnissen']],
+    ['B2', 'das Praktikum', 'Praktika', ['Praktikums', 'Praktiken', 'Praktikume']],
+    ['B2', 'das Visum', 'Visa', ['Visums', 'Visen', 'Visume']],
+    ['B2', 'der Atlas', 'Atlanten', ['Atlasse', 'Atlas', 'Atlase']],
+    ['B2', 'die Krise', 'Krisen', ['Krises', 'Krisern', 'Krise']],
+    ['B2', 'das Material', 'Materialien', ['Materiale', 'Materials', 'Materialen']]
+  ].forEach(function (r) { gen(r[0], 'plural', 'Plural', r[1] + ' → Plural: die …', r[2], r[3], '<b>die ' + r[2] + '</b> (Plural von ' + r[1] + ').'); });
+
+  /* ---- Partizip II (Perfekt mit haben/sein) ---- */
+  [
+    ['A2', 'machen', 'habe', 'gemacht', ['gemachen', 'gemakt', 'machte']],
+    ['A2', 'kaufen', 'habe', 'gekauft', ['kaufte', 'gekaufen', 'kauft']],
+    ['A2', 'spielen', 'habe', 'gespielt', ['spielte', 'gespielen', 'gespield']],
+    ['A2', 'gehen', 'bin', 'gegangen', ['gegeht', 'gegangt', 'geht']],
+    ['A2', 'kommen', 'bin', 'gekommen', ['gekommt', 'gekamen', 'kommt']],
+    ['A2', 'fahren', 'bin', 'gefahren', ['gefahrt', 'gefuhren', 'fahrt']],
+    ['A2', 'essen', 'habe', 'gegessen', ['geesst', 'geessen', 'isst']],
+    ['A2', 'trinken', 'habe', 'getrunken', ['getrinkt', 'getrankt', 'trinkt']],
+    ['B1', 'nehmen', 'habe', 'genommen', ['genehmt', 'genahmen', 'nimmt']],
+    ['B1', 'geben', 'habe', 'gegeben', ['gegebt', 'gegoben', 'gibt']],
+    ['B1', 'finden', 'habe', 'gefunden', ['gefindet', 'gefanden', 'findet']],
+    ['B1', 'bleiben', 'bin', 'geblieben', ['gebleibt', 'gebluben', 'bleibt']],
+    ['B1', 'helfen', 'habe', 'geholfen', ['gehelft', 'gehalfen', 'hilft']],
+    ['B1', 'sprechen', 'habe', 'gesprochen', ['gesprecht', 'gesprachen', 'spricht']],
+    ['B1', 'schreiben', 'habe', 'geschrieben', ['geschreibt', 'geschrioben', 'schreibt']],
+    ['B1', 'werden', 'bin', 'geworden', ['gewerdet', 'gewordet', 'wird']],
+    ['B2', 'gelingen', 'ist', 'gelungen', ['gelingt', 'gegelingen', 'gelangen']],
+    ['B2', 'verlieren', 'habe', 'verloren', ['verliert', 'verlort', 'verlieren']],
+    ['B2', 'beginnen', 'habe', 'begonnen', ['beginnt', 'begannen', 'beginnen']],
+    ['B2', 'schließen', 'habe', 'geschlossen', ['schließt', 'geschließen', 'geschloßt']],
+    ['B2', 'wachsen', 'bin', 'gewachsen', ['wächst', 'gewachst', 'gewuchsen']],
+    ['B2', 'gelten', 'hat', 'gegolten', ['gilt', 'gegeltet', 'gegalten']]
+  ].forEach(function (r) { gen(r[0], 'partizip', 'Partizip II', r[1] + ' → ich ' + r[2] + ' …', r[3], r[4], r[1] + ' → ich ' + r[2] + ' <b>' + r[3] + '</b>.'); });
+
+  /* ---- Präteritum (er-Form) ---- */
+  [
+    ['B1', 'sehen', 'sah', ['sahte', 'sehte', 'sieh']],
+    ['B1', 'geben', 'gab', ['gabte', 'geb', 'gibte']],
+    ['B1', 'fahren', 'fuhr', ['fahrte', 'fuhrte', 'fahr']],
+    ['B1', 'lesen', 'las', ['laste', 'lese', 'list']],
+    ['B1', 'sprechen', 'sprach', ['sprachte', 'sprich', 'sproch']],
+    ['B1', 'schlafen', 'schlief', ['schlafte', 'schlaf', 'schlofte']],
+    ['B2', 'denken', 'dachte', ['denkte', 'dacht', 'dünkte']],
+    ['B2', 'ziehen', 'zog', ['ziehte', 'zoch', 'zugte']],
+    ['B2', 'bitten', 'bat', ['bittete', 'bot', 'batte']],
+    ['B2', 'liegen', 'lag', ['liegte', 'log', 'legte']],
+    ['B2', 'rufen', 'rief', ['rufte', 'ruf', 'riefte']],
+    ['B2', 'schließen', 'schloss', ['schließte', 'schluss', 'schlosste']],
+    ['C1', 'erwägen', 'erwog', ['erwägte', 'erwagte', 'erwiegte']],
+    ['C1', 'gedeihen', 'gedieh', ['gedeihte', 'gedeite', 'gediehte']],
+    ['C1', 'schwören', 'schwor', ['schwörte', 'schwurte', 'schworte']],
+    ['C1', 'meiden', 'mied', ['meidete', 'miedte', 'mod']]
+  ].forEach(function (r) { gen(r[0], 'praeteritum', 'Präteritum', r[1] + ' → er ___ (Präteritum)', r[2], r[3], r[1] + ' – <b>' + r[2] + '</b> – (Partizip).'); });
+
+  /* ---- Komparativ ---- */
+  [
+    ['A2', 'gut', 'besser', ['guter', 'gutter', 'besserer']],
+    ['A2', 'viel', 'mehr', ['vieler', 'mehrer', 'vielmehr']],
+    ['A2', 'hoch', 'höher', ['hocher', 'höcher', 'hoher']],
+    ['A2', 'nah', 'näher', ['naher', 'nähr', 'neher']],
+    ['A2', 'gern', 'lieber', ['gerner', 'lieberer', 'mehr gern']],
+    ['A2', 'groß', 'größer', ['grosser', 'größerer', 'gröber']],
+    ['B1', 'alt', 'älter', ['alter', 'älterer', 'elter']],
+    ['B1', 'kalt', 'kälter', ['kalter', 'kältester', 'kelter']],
+    ['B1', 'warm', 'wärmer', ['warmer', 'wärmster', 'wermer']],
+    ['B1', 'jung', 'jünger', ['junger', 'jüngster', 'jinger']],
+    ['B1', 'kurz', 'kürzer', ['kurzer', 'kürzester', 'korzer']],
+    ['B1', 'klug', 'klüger', ['kluger', 'klügster', 'kliger']]
+  ].forEach(function (r) { gen(r[0], 'komparativ', 'Komparativ', r[1] + ' → Komparativ?', r[2], r[3], r[1] + ' → <b>' + r[2] + '</b>.'); });
+
+  /* ---- Verb + Präposition (feste Rektion) ---- */
+  [
+    ['B1', 'warten', 'auf', ['für', 'an', 'über'], 'Ich warte ___ den Bus.'],
+    ['B1', 'sich freuen', 'auf', ['für', 'an', 'zu'], 'Ich freue mich ___ das Wochenende. (Vorfreude)'],
+    ['B1', 'denken', 'an', ['auf', 'für', 'zu'], 'Ich denke oft ___ dich.'],
+    ['B1', 'sich interessieren', 'für', ['auf', 'über', 'zu'], 'Sie interessiert sich ___ Kunst.'],
+    ['B1', 'bitten', 'um', ['für', 'nach', 'an'], 'Er bittet ___ Hilfe.'],
+    ['B2', 'sich erinnern', 'an', ['auf', 'über', 'von'], 'Ich erinnere mich ___ den Tag.'],
+    ['B2', 'teilnehmen', 'an', ['bei', 'auf', 'in'], 'Wir nehmen ___ dem Kurs teil.'],
+    ['B2', 'sich bewerben', 'um', ['für', 'nach', 'in'], 'Er bewirbt sich ___ die Stelle.'],
+    ['B2', 'bestehen', 'aus', ['von', 'in', 'bei'], 'Das Team besteht ___ fünf Leuten.'],
+    ['B2', 'bestehen', 'auf', ['in', 'an', 'über'], 'Sie besteht ___ ihrem Recht. (beharren)'],
+    ['B2', 'verzichten', 'auf', ['von', 'über', 'an'], 'Ich verzichte ___ Zucker.'],
+    ['C1', 'sich beziehen', 'auf', ['an', 'über', 'zu'], 'Der Text bezieht sich ___ eine Studie.'],
+    ['C1', 'gelten', 'als', ['für', 'wie', 'zu'], 'Er gilt ___ Experte.'],
+    ['C1', 'zweifeln', 'an', ['über', 'auf', 'von'], 'Ich zweifle ___ seiner Aussage.'],
+    ['C1', 'sich sehnen', 'nach', ['auf', 'für', 'an'], 'Sie sehnt sich ___ Ruhe.']
+  ].forEach(function (r) { gen(r[0], 'verb_prep', 'Verb + Präposition', r[4] + ' <span style="opacity:.6">(Präposition?)</span>', r[2], r[3], '<b>' + r[1] + ' ' + r[2] + '</b> — feste Präposition.', false); });
+
+  /* ---- Synonyme (Wortschatz C1/C2) ---- */
+  [
+    ['C1', 'beginnen', 'anfangen', ['aufhören', 'beenden', 'schließen']],
+    ['C1', 'wichtig', 'bedeutend', ['unwichtig', 'gering', 'belanglos']],
+    ['C1', 'schnell', 'rasch', ['langsam', 'träge', 'gemächlich']],
+    ['C1', 'die Meinung', 'die Ansicht', ['die Frage', 'die Antwort', 'die Tatsache']],
+    ['C1', 'das Problem', 'die Schwierigkeit', ['die Lösung', 'der Vorteil', 'der Erfolg']],
+    ['C1', 'erlauben', 'gestatten', ['verbieten', 'verhindern', 'ablehnen']],
+    ['C1', 'vermuten', 'annehmen', ['wissen', 'beweisen', 'leugnen']],
+    ['C1', 'nutzen', 'verwenden', ['verschwenden', 'wegwerfen', 'sparen']],
+    ['C2', 'hartnäckig', 'beharrlich', ['nachlässig', 'gleichgültig', 'sorglos']],
+    ['C2', 'zunehmen', 'ansteigen', ['sinken', 'fallen', 'abnehmen']],
+    ['C2', 'erörtern', 'diskutieren', ['verschweigen', 'ignorieren', 'beenden']],
+    ['C2', 'offensichtlich', 'augenscheinlich', ['versteckt', 'unklar', 'fraglich']],
+    ['C2', 'bewältigen', 'meistern', ['scheitern', 'aufgeben', 'versagen']],
+    ['C2', 'befürworten', 'unterstützen', ['ablehnen', 'kritisieren', 'verhindern']],
+    ['C2', 'geringfügig', 'unbedeutend', ['enorm', 'gewaltig', 'erheblich']],
+    ['C2', 'unumgänglich', 'unvermeidlich', ['optional', 'freiwillig', 'vermeidbar']]
+  ].forEach(function (r) { gen(r[0], 'synonym', 'Synonym', 'Welches Wort bedeutet dasselbe wie „' + r[1] + '"?', r[2], r[3], '<b>' + r[1] + ' ≈ ' + r[2] + '</b>.', true); });
 
   /* ---- expose ---- */
   window.EXBANK = Q;
