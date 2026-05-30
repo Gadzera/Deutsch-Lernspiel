@@ -848,6 +848,184 @@
   gen('B2', 'konnektor', 'Konnektor', 'Je mehr er übte, ___ besser wurde er.', 'desto', ['als', 'wie', 'so'], 'je …, <b>desto</b> … (Proportionalsatz).');
   gen('B2', 'genitiv', 'Genitiv', 'Trotz ___ Regens gingen wir spazieren.', 'des', ['dem', 'der', 'den'], 'trotz + Genitiv: trotz <b>des</b> Regens.');
 
+  /* ---- C1 Auffüllung auf 200 ---- */
+  [
+    ['C1', 'etwas auf die lange Bank schieben', 'etwas aufschieben', ['etwas verkaufen', 'etwas bauen', 'etwas verlieren']],
+    ['C1', 'jemandem die Daumen drücken', 'jemandem Glück wünschen', ['jemanden ärgern', 'jemanden drücken', 'faul sein']],
+    ['C1', 'ins Gras beißen', 'sterben', ['Gras essen', 'hinfallen', 'picknicken']],
+    ['C1', 'den Nagel auf den Kopf treffen', 'genau das Richtige sagen', ['sich verletzen', 'etwas bauen', 'danebenliegen']],
+    ['C1', 'die Katze im Sack kaufen', 'etwas ungeprüft kaufen', ['eine Katze kaufen', 'billig kaufen', 'etwas verkaufen']],
+    ['C1', 'jemandem reinen Wein einschenken', 'die Wahrheit sagen', ['Wein servieren', 'jemanden betrügen', 'einladen']],
+    ['C1', 'auf großem Fuß leben', 'verschwenderisch leben', ['große Schuhe tragen', 'viel wandern', 'sehr sparen']],
+    ['C1', 'Öl ins Feuer gießen', 'einen Streit verschärfen', ['kochen', 'ein Feuer löschen', 'heizen']],
+    ['C1', 'aus einer Mücke einen Elefanten machen', 'maßlos übertreiben', ['Tiere mögen', 'lügen', 'zaubern']],
+    ['C1', 'die Flinte ins Korn werfen', 'vorschnell aufgeben', ['jagen', 'Getreide säen', 'kämpfen']],
+    ['C1', 'jemandem auf den Zahn fühlen', 'jemanden gründlich ausfragen', ['zum Zahnarzt gehen', 'jemandem helfen', 'jemanden schlagen']],
+    ['C1', 'mit dem Feuer spielen', 'ein gefährliches Risiko eingehen', ['grillen', 'frieren', 'lügen']],
+    ['C1', 'den Kopf in den Sand stecken', 'die Realität verdrängen', ['graben', 'schlafen', 'baden']],
+    ['C1', 'jemanden auf die Palme bringen', 'jemanden wütend machen', ['jemandem helfen', 'jemanden hochheben', 'jemanden loben']],
+    ['C1', 'das Handtuch werfen', 'aufgeben', ['duschen', 'aufräumen', 'gewinnen']],
+    ['C1', 'Tomaten auf den Augen haben', 'etwas Offensichtliches nicht sehen', ['rote Augen haben', 'kochen', 'weinen']],
+    ['C1', 'über den eigenen Schatten springen', 'den inneren Widerstand überwinden', ['weit springen', 'weglaufen', 'sich verstecken']],
+    ['C1', 'die Ohren steif halten', 'durchhalten, nicht aufgeben', ['gut zuhören', 'frieren', 'schlafen']]
+  ].forEach(function (r) { gen(r[0], 'idiom', 'Redewendung', 'Was bedeutet „' + r[1] + '"?', r[2], r[3], '<b>' + r[1] + '</b> = ' + r[2] + '.', true); });
+
+  [
+    ['C1', 'sich bemühen', 'um', ['für', 'an', 'nach'], 'Er bemüht sich ___ eine gute Lösung.'],
+    ['C1', 'leiden', 'unter', ['von', 'über', 'für'], 'Sie leidet ___ dem Lärm.'],
+    ['C1', 'sich gewöhnen', 'an', ['auf', 'für', 'mit'], 'Ich gewöhne mich ___ das Klima.'],
+    ['C1', 'hinweisen', 'auf', ['an', 'über', 'zu'], 'Er weist ___ das Problem hin.'],
+    ['C1', 'sich beschweren', 'über', ['an', 'für', 'von'], 'Sie beschwert sich ___ den Lärm.'],
+    ['C1', 'abhängen', 'von', ['auf', 'an', 'über'], 'Das hängt ___ vielen Faktoren ab.'],
+    ['C1', 'sich bedanken', 'für', ['über', 'um', 'an'], 'Ich bedanke mich ___ das Geschenk.'],
+    ['C1', 'sich beteiligen', 'an', ['auf', 'für', 'in'], 'Er beteiligt sich ___ der Diskussion.'],
+    ['C1', 'sich kümmern', 'um', ['für', 'an', 'über'], 'Sie kümmert sich ___ die Kinder.'],
+    ['C1', 'rechnen', 'mit', ['auf', 'an', 'für'], 'Wir rechnen ___ Problemen.'],
+    ['C1', 'sich verlassen', 'auf', ['an', 'über', 'zu'], 'Ich verlasse mich ___ dich.'],
+    ['C1', 'sich freuen', 'über', ['auf', 'für', 'an'], 'Ich freue mich ___ dein Geschenk. (jetzt)'],
+    ['C1', 'sich eignen', 'für', ['an', 'auf', 'über'], 'Er eignet sich ___ diese Stelle.'],
+    ['C1', 'sich wenden', 'an', ['auf', 'für', 'zu'], 'Bitte wenden Sie sich ___ den Chef.'],
+    ['C1', 'protestieren', 'gegen', ['für', 'an', 'über'], 'Sie protestieren ___ das Gesetz.'],
+    ['C1', 'sich sehnen', 'nach', ['auf', 'für', 'um'], 'Er sehnt sich ___ Anerkennung.']
+  ].forEach(function (r) { gen(r[0], 'verb_prep', 'Verb + Präposition', r[4] + ' <span style="opacity:.6">(Präposition?)</span>', r[2], r[3], '<b>' + r[1] + ' ' + r[2] + '</b> — feste Präposition.', false); });
+
+  [
+    ['Wir ___ eine Entscheidung.', 'treffen', ['machen', 'nehmen', 'geben'], 'eine Entscheidung treffen'],
+    ['Er ___ alles in Frage.', 'stellt', ['setzt', 'bringt', 'legt'], 'in Frage stellen'],
+    ['Mir ___ ein Auto zur Verfügung.', 'steht', ['hat', 'gibt', 'macht'], 'zur Verfügung stehen'],
+    ['Sie ___ Kritik an dem Plan.', 'übt', ['macht', 'gibt', 'nimmt'], 'Kritik üben'],
+    ['Ich ___ einen Antrag.', 'stelle', ['mache', 'gebe', 'lege'], 'einen Antrag stellen'],
+    ['Er ___ Rücksicht auf andere.', 'nimmt', ['gibt', 'macht', 'hält'], 'Rücksicht nehmen'],
+    ['Geld ___ dabei keine Rolle.', 'spielt', ['hat', 'macht', 'tut'], 'eine Rolle spielen'],
+    ['Das Gesetz ___ morgen in Kraft.', 'tritt', ['geht', 'kommt', 'setzt'], 'in Kraft treten'],
+    ['Er ___ Abschied von ihr.', 'nimmt', ['gibt', 'macht', 'hält'], 'Abschied nehmen'],
+    ['Sie ___ das Thema zur Sprache.', 'bringt', ['kommt', 'stellt', 'setzt'], 'zur Sprache bringen'],
+    ['Der Staat ___ großen Einfluss aus.', 'übt', ['macht', 'gibt', 'tut'], 'Einfluss ausüben'],
+    ['Er ___ einen wichtigen Beitrag.', 'leistet', ['macht', 'gibt', 'tut'], 'einen Beitrag leisten'],
+    ['Die Bürger ___ Widerstand.', 'leisten', ['geben', 'machen', 'üben'], 'Widerstand leisten'],
+    ['Ich ___ zu dem Schluss, dass …', 'komme', ['gehe', 'trete', 'stelle'], 'zu dem Schluss kommen']
+  ].forEach(function (r) { gen('C1', 'fvg', 'Funktionsverbgefüge', r[0] + ' <span style="opacity:.6">(Funktionsverb?)</span>', r[1], r[2], '<b>' + r[3] + '</b> (festes Funktionsverbgefüge).', false); });
+
+  [
+    ['obwohl', 'einen Gegensatz / eine Einräumung', ['einen Grund', 'eine Folge', 'einen Zweck']],
+    ['damit', 'einen Zweck', ['einen Grund', 'einen Gegensatz', 'eine Bedingung']],
+    ['weil', 'einen Grund', ['eine Folge', 'einen Zweck', 'einen Gegensatz']],
+    ['falls', 'eine Bedingung', ['einen Grund', 'eine Folge', 'einen Zweck']],
+    ['indem', 'die Art und Weise (das Mittel)', ['einen Grund', 'einen Zweck', 'einen Gegensatz']],
+    ['sodass', 'eine Folge', ['einen Grund', 'einen Zweck', 'eine Bedingung']],
+    ['trotzdem', 'einen Gegensatz', ['einen Grund', 'einen Zweck', 'eine Folge']],
+    ['deshalb', 'eine Folge (Konsequenz)', ['eine Bedingung', 'einen Zweck', 'einen Gegensatz']],
+    ['während', 'einen Gegensatz', ['einen Zweck', 'einen Grund', 'eine Folge']],
+    ['sofern', 'eine Bedingung', ['eine Folge', 'einen Zweck', 'einen Gegensatz']],
+    ['je … desto', 'eine Proportionalität', ['einen Grund', 'einen Zweck', 'eine Einräumung']],
+    ['zumal', 'einen verstärkenden Grund', ['einen Zweck', 'eine Folge', 'einen Gegensatz']]
+  ].forEach(function (r) { gen('C1', 'konnektor', 'Konnektor – Bedeutung', 'Was drückt „' + r[0] + '" aus?', r[1], r[2], '<b>' + r[0] + '</b> drückt ' + r[1] + ' aus.', true); });
+
+  [
+    ['C1', 'Beistand', 'der'], ['C1', 'Verzug', 'der'], ['C1', 'Vorbehalt', 'der'], ['C1', 'Anklang', 'der'], ['C1', 'Zuspruch', 'der'], ['C1', 'Rückhalt', 'der'],
+    ['C1', 'Zuspitzung', 'die'], ['C1', 'Entgleisung', 'die'], ['C1', 'Verzahnung', 'die'], ['C1', 'Bandbreite', 'die'], ['C1', 'Reichweite', 'die'],
+    ['C1', 'Augenmerk', 'das'], ['C1', 'Ermessen', 'das'], ['C1', 'Gefälle', 'das'], ['C1', 'Gebot', 'das'], ['C1', 'Streben', 'das']
+  ].forEach(function (r) { art(r[0], r[1], r[2]); });
+
+  /* ---- C2 Auffüllung auf 200 ---- */
+  [
+    ['Perlen vor die Säue werfen', 'etwas Wertvolles an Unwürdige verschwenden', ['Tiere füttern', 'Schmuck kaufen', 'angeben']],
+    ['den Teufel an die Wand malen', 'das Schlimmste heraufbeschwören', ['malen lernen', 'lügen', 'Angst überwinden']],
+    ['jemandem einen Bären aufbinden', 'jemandem etwas Unwahres weismachen', ['ein Geschenk machen', 'jemandem helfen', 'jemandem drohen']],
+    ['die Kirche im Dorf lassen', 'nicht übertreiben', ['beten gehen', 'umziehen', 'etwas bauen']],
+    ['Wasser auf jemandes Mühlen sein', 'jemandes Position stützen', ['Durst löschen', 'schwimmen', 'putzen']],
+    ['den Stab über jemanden brechen', 'jemanden verurteilen', ['jemandem helfen', 'jemanden schlagen', 'jemanden loben']],
+    ['etwas durch die Blume sagen', 'etwas indirekt, verhüllt sagen', ['Blumen schenken', 'laut rufen', 'schweigen']],
+    ['ins Fettnäpfchen treten', 'unabsichtlich Anstoß erregen', ['kochen', 'ausrutschen', 'gewinnen']],
+    ['jemanden im Regen stehen lassen', 'jemanden im Stich lassen', ['jemanden nass machen', 'jemanden einladen', 'jemanden retten']],
+    ['das Kind mit dem Bade ausschütten', 'mit dem Schlechten auch das Gute verwerfen', ['baden', 'aufräumen', 'übertreiben']],
+    ['jemandem Honig um den Bart schmieren', 'jemandem schmeicheln', ['jemanden füttern', 'jemanden rasieren', 'jemanden beleidigen']],
+    ['aus dem Nähkästchen plaudern', 'Interna preisgeben', ['nähen', 'lügen', 'schweigen']],
+    ['den Braten riechen', 'eine Gefahr rechtzeitig ahnen', ['kochen', 'hungrig sein', 'essen']],
+    ['Schwein haben', 'unverdientes Glück haben', ['Tiere halten', 'schmutzig sein', 'verlieren']],
+    ['jemandem auf den Leim gehen', 'auf einen Betrug hereinfallen', ['kleben', 'jemandem folgen', 'jemandem helfen']],
+    ['die Hände in den Schoß legen', 'untätig bleiben', ['beten', 'frieren', 'hart arbeiten']],
+    ['ein Haar in der Suppe finden', 'an allem etwas auszusetzen haben', ['kochen', 'Ekel empfinden', 'loben']],
+    ['reinen Tisch machen', 'eine Sache offen klären', ['putzen', 'den Tisch decken', 'essen']],
+    ['auf dem Holzweg sein', 'sich gründlich irren', ['im Wald sein', 'etwas bauen', 'wandern']],
+    ['etwas aus dem Ärmel schütteln', 'etwas mühelos hervorbringen', ['sich anziehen', 'frieren', 'betteln']],
+    ['die Katze aus dem Sack lassen', 'ein Geheimnis verraten', ['eine Katze befreien', 'einkaufen', 'lügen']],
+    ['jemandem die Stirn bieten', 'sich jemandem mutig entgegenstellen', ['jemanden grüßen', 'jemandem helfen', 'weglaufen']],
+    ['Eulen nach Athen tragen', 'etwas Überflüssiges tun', ['verreisen', 'Vögel halten', 'studieren']],
+    ['den gordischen Knoten durchschlagen', 'ein schwieriges Problem entschlossen lösen', ['Seile knüpfen', 'aufgeben', 'kämpfen']],
+    ['das A und O', 'das Wichtigste', ['der Anfang', 'das Alphabet', 'das Ende']],
+    ['jemandem das Wasser reichen können', 'jemandem ebenbürtig sein', ['jemanden bedienen', 'jemandem helfen', 'jemanden übertreffen']],
+    ['mit allen Wassern gewaschen sein', 'sehr gerissen und erfahren sein', ['oft baden', 'sehr sauber sein', 'naiv sein']],
+    ['den roten Faden verlieren', 'den Zusammenhang verlieren', ['beim Nähen', 'sich verlaufen', 'aufgeben']],
+    ['die Flinte ins Korn werfen', 'mutlos aufgeben', ['jagen gehen', 'Getreide ernten', 'kämpfen']],
+    ['jemanden hinters Licht führen', 'jemanden täuschen', ['jemandem leuchten', 'jemanden führen', 'jemandem helfen']]
+  ].forEach(function (r) { gen('C2', 'idiom', 'Redewendung', 'Was bedeutet „' + r[0] + '"?', r[1], r[2], '<b>' + r[0] + '</b> = ' + r[1] + '.', true); });
+
+  [
+    ['Wir ___ das ernsthaft in Erwägung.', 'ziehen', ['nehmen', 'bringen', 'setzen'], 'in Erwägung ziehen'],
+    ['Das Gesetz ___ bald zur Anwendung.', 'kommt', ['geht', 'tritt', 'bringt'], 'zur Anwendung kommen'],
+    ['Er ___ rechtliche Hilfe in Anspruch.', 'nimmt', ['stellt', 'bringt', 'setzt'], 'in Anspruch nehmen'],
+    ['Sie ___ Bezug auf den Vertrag.', 'nimmt', ['gibt', 'macht', 'hält'], 'Bezug nehmen auf'],
+    ['Wir ___ alle Optionen in Betracht.', 'ziehen', ['nehmen', 'bringen', 'kommen'], 'in Betracht ziehen'],
+    ['Der Vorschlag ___ großen Anklang.', 'findet', ['macht', 'gibt', 'nimmt'], 'Anklang finden'],
+    ['Die Mannschaft ___ eine Niederlage.', 'erleidet', ['macht', 'nimmt', 'gibt'], 'eine Niederlage erleiden'],
+    ['Die Regierung ___ Maßnahmen.', 'ergreift', ['macht', 'gibt', 'tut'], 'Maßnahmen ergreifen'],
+    ['Er ___ den Nachteil in Kauf.', 'nimmt', ['gibt', 'stellt', 'macht'], 'in Kauf nehmen'],
+    ['Sie ___ ihre Sorge zum Ausdruck.', 'bringt', ['kommt', 'stellt', 'gibt'], 'zum Ausdruck bringen'],
+    ['Wir ___ den Risiken Rechnung.', 'tragen', ['machen', 'geben', 'halten'], 'einer Sache Rechnung tragen'],
+    ['Er ___ sein Können unter Beweis.', 'stellt', ['bringt', 'setzt', 'gibt'], 'unter Beweis stellen'],
+    ['Wir ___ diesen Punkt außer Acht.', 'lassen', ['legen', 'setzen', 'halten'], 'außer Acht lassen'],
+    ['Die Vernunft ___ die Oberhand.', 'gewinnt', ['nimmt', 'macht', 'hält'], 'die Oberhand gewinnen'],
+    ['Sie ___ Abstand von dem Plan.', 'nimmt', ['gibt', 'macht', 'hält'], 'Abstand nehmen von'],
+    ['Wir ___ rechtzeitig Vorsorge.', 'treffen', ['machen', 'geben', 'nehmen'], 'Vorsorge treffen']
+  ].forEach(function (r) { gen('C2', 'fvg', 'Funktionsverbgefüge', r[0] + ' <span style="opacity:.6">(Funktionsverb?)</span>', r[1], r[2], '<b>' + r[3] + '</b> (festes Funktionsverbgefüge).', false); });
+
+  [
+    ['gleichwohl', 'dennoch, trotzdem', ['deswegen', 'dadurch', 'sofern']],
+    ['mithin', 'folglich, also', ['obwohl', 'falls', 'indem']],
+    ['indes', 'jedoch', ['deshalb', 'damit', 'sobald']],
+    ['insofern', 'in dieser Hinsicht', ['obwohl', 'damit', 'bevor']],
+    ['demzufolge', 'folglich, daher', ['obwohl', 'damit', 'falls']],
+    ['infolgedessen', 'als Folge davon', ['obwohl', 'damit', 'falls']],
+    ['wohingegen', 'im Gegensatz dazu', ['weshalb', 'damit', 'sobald']],
+    ['nichtsdestotrotz', 'trotzdem', ['deshalb', 'dadurch', 'weil']],
+    ['demgegenüber', 'im Gegensatz dazu', ['deswegen', 'dadurch', 'sofern']],
+    ['somit', 'folglich, also', ['obwohl', 'falls', 'bevor']],
+    ['ungeachtet dessen', 'trotzdem', ['deshalb', 'dadurch', 'sobald']],
+    ['hierbei', 'dabei', ['deshalb', 'obwohl', 'falls']],
+    ['überdies', 'außerdem, zudem', ['deshalb', 'obwohl', 'falls']],
+    ['dessen ungeachtet', 'trotzdem', ['deswegen', 'dadurch', 'sofern']]
+  ].forEach(function (r) { gen('C2', 'konnektor', 'Konnektor – Bedeutung', 'Was bedeutet der Konnektor „' + r[0] + '"?', r[1], r[2], '<b>' + r[0] + '</b> = ' + r[1] + '.', true); });
+
+  [
+    ['ubiquitär', 'allgegenwärtig', ['selten', 'örtlich begrenzt', 'vergänglich']],
+    ['kontingent', 'zufällig, nicht notwendig', ['notwendig', 'ständig', 'geplant']],
+    ['dezidiert', 'entschieden, bestimmt', ['zögerlich', 'vage', 'beiläufig']],
+    ['prätentiös', 'anmaßend, hochtrabend', ['bescheiden', 'schlicht', 'ehrlich']],
+    ['rekapitulieren', 'zusammenfassend wiederholen', ['vergessen', 'erfinden', 'widerlegen']],
+    ['eloquent', 'redegewandt', ['wortkarg', 'schüchtern', 'unklar']],
+    ['pragmatisch', 'praktisch orientiert', ['theoretisch', 'idealistisch', 'verträumt']],
+    ['idiosynkratisch', 'höchst eigentümlich', ['allgemein', 'typisch', 'durchschnittlich']],
+    ['apodiktisch', 'keinen Widerspruch duldend', ['zweifelnd', 'offen', 'vorläufig']],
+    ['lakonisch', 'kurz und treffend', ['weitschweifig', 'umständlich', 'geschwätzig']],
+    ['prekär', 'heikel, unsicher', ['stabil', 'sicher', 'unkompliziert']],
+    ['diffus', 'unklar, verschwommen', ['scharf', 'deutlich', 'präzise']],
+    ['inhärent', 'innewohnend', ['äußerlich', 'zufällig', 'fehlend']],
+    ['affin', 'zugeneigt, verwandt', ['abgeneigt', 'fremd', 'gleichgültig']],
+    ['volatil', 'schwankend, unbeständig', ['stabil', 'ruhig', 'fest']],
+    ['nuanciert', 'fein abgestuft', ['grob', 'pauschal', 'einförmig']],
+    ['kryptisch', 'rätselhaft, schwer verständlich', ['klar', 'offen', 'einfach']],
+    ['profund', 'tiefgründig, gründlich', ['oberflächlich', 'seicht', 'flüchtig']],
+    ['ostentativ', 'betont zur Schau gestellt', ['verborgen', 'dezent', 'beiläufig']],
+    ['elaboriert', 'kunstvoll ausgearbeitet', ['grob', 'einfach', 'flüchtig']]
+  ].forEach(function (r) { gen('C2', 'bedeutung', 'Fremdwort', 'Was bedeutet „' + r[0] + '"?', r[1], r[2], '<b>' + r[0] + '</b> = ' + r[1] + '.', true); });
+
+  [
+    ['C2', 'Usus', 'der'], ['C2', 'Lapsus', 'der'], ['C2', 'Exodus', 'der'], ['C2', 'Duktus', 'der'], ['C2', 'Furor', 'der'],
+    ['C2', 'Aura', 'die'], ['C2', 'Maxime', 'die'], ['C2', 'Hybris', 'die'], ['C2', 'Nonchalance', 'die'], ['C2', 'Etikette', 'die'],
+    ['C2', 'Kalkül', 'das'], ['C2', 'Plädoyer', 'das'], ['C2', 'Paradigma', 'das'], ['C2', 'Charisma', 'das']
+  ].forEach(function (r) { art(r[0], r[1], r[2]); });
+
   /* ---- expose ---- */
   window.EXBANK = Q;
   window.EXBANK_LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
