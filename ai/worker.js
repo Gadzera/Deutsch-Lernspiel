@@ -8,6 +8,10 @@
 //   { task:"sentence", prompt, lang }          -> helps build/correct a sentence
 //   { task:"coach", text, lang }               -> coaches writing: hints + next-word options, NO full solution
 //   { task:"live", text, lang }                -> live (as-you-type) coach: tiny verdict + next words, NO correction
+//   { task:"letter", text, lang, ctx }         -> full letter evaluation (register, form, Inhaltspunkte, language)
+//   { task:"letterlive", text, lang, ctx }     -> live letter coach: verdict + open points + next words
+//        ctx = { level, kind:"formell"|"informell", title, prompt, points:[...], anrede, gruss }
+//        letter/letterlive end the reply with "[[DONE: 1,3]]" = covered required points (the client strips it).
 // Response: { reply: "<markdown/text>" }  (or { error })
 //
 // The tutor "knowledge base" (TUTOR_BASE below) is injected into every request,
@@ -124,6 +128,38 @@ TASK: You are a LIVE writing coach. The student is in the MIDDLE of writing this
 Be terse, concrete and encouraging. Never exceed ~5 lines.`;
       user = 'Mein Text bis jetzt — gib kurzes Live-Feedback und nächste Wörter, NICHT korrigieren oder fertigschreiben:\n\n' + (b.text || b.prompt || '');
       maxTok = 300;
+    } else if (b.task === 'letter' || b.task === 'letterlive') {
+      // Letter/e-mail writing trainer. ctx carries the exam task so the AI can
+      // check register (Sie/du), the German letter format AND tick off the
+      // required content points (Inhaltspunkte) live.
+      const c = b.ctx || {};
+      const formell = c.kind === 'formell';
+      const reg = formell
+        ? `Das ist ein FORMELLER Brief / eine formelle E-Mail (an Institution, Firma, Amt, Redaktion). REGISTER-REGELN: Höflichkeitsform "Sie/Ihnen/Ihr/Ihre" und sie wird GROSSGESCHRIEBEN; passende Anrede ("Sehr geehrte Damen und Herren," oder "Sehr geehrte/r Frau/Herr …,"); Schlussformel "Mit freundlichen Grüßen"; sachlicher, höflicher Ton; KEINE Umgangssprache, keine Smileys. Nach der Anrede mit Komma geht es klein weiter.`
+        : `Das ist ein INFORMELLER Brief / eine informelle E-Mail (an Freund/in, Familie). REGISTER-REGELN: persönliche Anrede mit "du/dein/dich/dir" (klein); Anrede "Liebe/r …,"; Schlussformel z. B. "Liebe Grüße", "Viele Grüße", "Bis bald"; freundlicher, persönlicher Ton. Nach der Anrede mit Komma geht es klein weiter.`;
+      const pts = (c.points || []).map((p, i) => `${i + 1}. ${p}`).join('\n') || '(keine angegeben)';
+      const ctxStr = `\n\nAUFGABE DES LERNERS (Niveau ${c.level || ''}):\n${reg}\nThema: ${c.title || ''} — ${c.prompt || ''}\nPFLICHT-INHALTSPUNKTE (jeder MUSS inhaltlich vorkommen):\n${pts}\n`;
+      const doneRule = `\n\nGanz am ENDE, in der ALLERLETZTEN Zeile, gib NUR einen Marker mit den Nummern der bereits inhaltlich erfüllten Pflicht-Inhaltspunkte aus, exakt im Format: [[DONE: 1,3]] (noch keiner erfüllt → [[DONE: ]]). Schreibe NICHTS nach diesem Marker.`;
+      if (b.task === 'letterlive') {
+        task = `${ctxStr}
+TASK: You are a LIVE writing coach for this GERMAN LETTER. The student is in the MIDDLE of writing and just paused. Read the WHOLE letter so far together with the task above, then answer VERY SHORTLY in ${L} (Markdown, at most ~5 short lines). Do NOT rewrite the letter and do NOT output a full correction.
+- Line 1 — a quick verdict: "✅" if it is on track, or "✏️" if there is ONE important thing to fix; then ONE short note that names the rule. Check REGISTER (Sie vs. du correct for this letter?), Anrede/Gruß, and apply the KASUS-CHECK strictly.
+- A line "**Noch offen:**" naming which PFLICHT-INHALTSPUNKTE are NOT yet covered (by number + keyword), or "alle Inhaltspunkte erledigt 🎉".
+- A line "**Weiter:**" with 2–3 German words/phrases that could grammatically continue the letter, each with a 2–5 word reason in brackets.
+Be terse, concrete and encouraging.${doneRule}`;
+        user = 'Mein Brief bis jetzt — gib kurzes Live-Feedback, prüfe Register und die Inhaltspunkte, NICHT korrigieren oder fertigschreiben:\n\n' + (b.text || '');
+        maxTok = 340;
+      } else {
+        task = `${ctxStr}
+TASK: Evaluate and correct this GERMAN LETTER like a VWU/ÖSD examiner. Reply in Markdown. Write the section LABELS and all explanations in ${L}; keep the German letter text and German examples in German. Use EXACTLY these sections:
+"## Korrigierter Brief" — the full corrected letter with a correct Anrede and Schlussformel for THIS register.
+"## Inhaltspunkte" — list every required point with ✅ (inhaltlich erfüllt) or ❌ (fehlt/zu knapp) + a 3–6 word note in ${L}.
+"## Form & Register" — one short line: are Anrede and Gruß correct, and is the Sie/du form consistent and right for a ${formell ? 'formellen' : 'informellen'} Brief?
+"## Sprache" — a short bullet list of the main language errors as «falsch → richtig» + a named rule (Kasus, Wortstellung, Tempus, Genus …) in ${L}.
+"## Tipp" — one short, motivating improvement tip in ${L}.${doneRule}`;
+        user = 'Bewerte und korrigiere diesen Brief; prüfe Register, Form und ALLE Inhaltspunkte:\n\n' + (b.text || '');
+        maxTok = 900;
+      }
     } else {
       task = `
 

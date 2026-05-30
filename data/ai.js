@@ -10,7 +10,13 @@
  *   DeutschAI.sentence(prompt, lang)         -> Promise<string>
  *   DeutschAI.coach(text, lang)              -> Promise<string> (writing hints, no full solution)
  *   DeutschAI.live(text, lang)               -> Promise<string> (tiny live as-you-type feedback)
+ *   DeutschAI.letterCheck(text, lang, ctx)   -> Promise<{text, done}> (full letter evaluation)
+ *   DeutschAI.letterLive(text, lang, ctx)    -> Promise<{text, done}> (live letter coach + covered-points)
  *   DeutschAI.setUrl(url) / DeutschAI.getUrl()
+ *
+ * ctx (letter tasks) = { level, kind:'formell'|'informell', title, prompt, points:[...], anrede, gruss }
+ * The reply may end with a marker "[[DONE: 1,3]]" listing which required content
+ * points are already covered; parseDone() strips it and returns the indices.
  */
 (function () {
   'use strict';
@@ -35,6 +41,17 @@
       return (j.reply || j.response || '').trim();
     });
   }
+  // Letter tasks may end with "[[DONE: 1,3]]" — covered required-points (1-based).
+  function parseDone(s) {
+    var done = [];
+    s = s || '';
+    var m = s.match(/\[\[\s*DONE\s*:\s*([0-9,\s]*)\]\]/i);
+    if (m) {
+      done = m[1].split(',').map(function (x) { return parseInt(x, 10); }).filter(function (x) { return !isNaN(x); });
+      s = s.replace(m[0], '').trim();
+    }
+    return { text: s, done: done };
+  }
   window.DeutschAI = {
     available: available,
     getUrl: getUrl,
@@ -44,5 +61,7 @@
     sentence: function (prompt, lang) { return call({ task: 'sentence', prompt: prompt, lang: lang }); },
     coach: function (text, lang) { return call({ task: 'coach', text: text, lang: lang }); },
     live: function (text, lang) { return call({ task: 'live', text: text, lang: lang }); },
+    letterCheck: function (text, lang, ctx) { return call({ task: 'letter', text: text, lang: lang, ctx: ctx }).then(parseDone); },
+    letterLive: function (text, lang, ctx) { return call({ task: 'letterlive', text: text, lang: lang, ctx: ctx }).then(parseDone); },
   };
 })();
