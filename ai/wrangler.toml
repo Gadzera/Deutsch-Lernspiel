@@ -1,6 +1,9 @@
 name = "deutsch-ai"
 main = "worker.js"
 compatibility_date = "2024-11-01"
+# Public account id (not a secret) — lets scoped API-token deploys skip
+# the "retrieve account IDs" step that needs account-list permission.
+account_id = "06973cbb69373ee79435d27d7cd1f3b3"
 
 # Workers AI binding — gives the Worker access to env.AI.run(...)
 [ai]
