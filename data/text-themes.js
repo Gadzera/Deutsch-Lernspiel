@@ -186,3 +186,267 @@
       tr: { ru: 'Почему важна культура памяти? Рассмотри значение обращения с прошлым.', en: 'Why is the culture of remembrance important? Discuss the significance of dealing with the past.', tr: 'Anma kültürü neden önemli? Geçmişle yüzleşmenin önemini tartış.', ar: 'لماذا تُعدّ ثقافة الذاكرة مهمة؟ ناقش أهمية التعامل مع الماضي.', fa: 'چرا فرهنگ یادبود مهم است؟ اهمیت برخورد با گذشته را بررسی کن.' } }
   );
 })();
+
+(function () {
+  'use strict';
+  window.TEXT_THEMES = window.TEXT_THEMES || [];
+  window.TEXT_THEMES.push(
+    /* ───── A1 · weitere Themen · ~60 Wörter ───── */
+    { id: 'a1-wetter', level: 'A1', kind: 'Beschreibung', title: 'Das Wetter heute', minWords: 60, tip: 'Es ist …, es regnet/schneit, die Sonne scheint',
+      prompt: 'Wie ist das Wetter heute? Beschreibe es.',
+      tr: { ru: 'Какая сегодня погода? Опиши её.', en: 'What is the weather like today? Describe it.', tr: 'Bugün hava nasıl? Anlat.', ar: 'كيف الطقس اليوم؟ صِفه.', fa: 'امروز هوا چطور است؟ توصیفش کن.' } },
+    { id: 'a1-kleidung', level: 'A1', kind: 'Beschreibung', title: 'Meine Kleidung', minWords: 60, tip: 'Ich trage …, gern, heute',
+      prompt: 'Was trägst du gern? Beschreibe deine Kleidung.',
+      tr: { ru: 'Что ты любишь носить? Опиши свою одежду.', en: 'What do you like to wear? Describe your clothes.', tr: 'Ne giymeyi seversin? Kıyafetlerini anlat.', ar: 'ماذا تحب أن ترتدي؟ صِف ملابسك.', fa: 'دوست داری چه بپوشی؟ لباس‌هایت را توصیف کن.' } },
+    { id: 'a1-einkaufen', level: 'A1', kind: 'Bericht', title: 'Einkaufen', minWords: 60, tip: 'Ich kaufe …, im Supermarkt, ich brauche',
+      prompt: 'Was kaufst du oft? Schreibe über deinen Einkauf.',
+      tr: { ru: 'Что ты часто покупаешь? Напиши о своих покупках.', en: 'What do you often buy? Write about your shopping.', tr: 'Sık sık ne alırsın? Alışverişin hakkında yaz.', ar: 'ماذا تشتري كثيرًا؟ اكتب عن تسوقك.', fa: 'اغلب چه می‌خری؟ درباره‌ی خریدت بنویس.' } },
+    { id: 'a1-haustier', level: 'A1', kind: 'Beschreibung', title: 'Mein Haustier', minWords: 60, tip: 'Ich habe …, es heißt …, es ist',
+      prompt: 'Hast du ein Haustier? Beschreibe es oder ein Tier, das du magst.',
+      tr: { ru: 'У тебя есть питомец? Опиши его или животное, которое тебе нравится.', en: 'Do you have a pet? Describe it or an animal you like.', tr: 'Evcil hayvanın var mı? Onu ya da sevdiğin bir hayvanı anlat.', ar: 'هل لديك حيوان أليف؟ صِفه أو حيوانًا تحبه.', fa: 'حیوان خانگی داری؟ آن یا حیوانی که دوست داری را توصیف کن.' } },
+    { id: 'a1-kurs', level: 'A1', kind: 'Beschreibung', title: 'Mein Deutschkurs', minWords: 60, tip: 'Mein Kurs ist …, ich lerne …, die Lehrerin',
+      prompt: 'Beschreibe deine Schule oder deinen Deutschkurs.',
+      tr: { ru: 'Опиши свою школу или курс немецкого.', en: 'Describe your school or your German course.', tr: 'Okulunu veya Almanca kursunu anlat.', ar: 'صِف مدرستك أو دورة الألمانية.', fa: 'مدرسه یا کلاس آلمانی‌ات را توصیف کن.' } },
+    { id: 'a1-arzt', level: 'A1', kind: 'Bericht', title: 'Beim Arzt', minWords: 60, tip: 'Mir tut … weh, ich bin krank, ich habe',
+      prompt: 'Dir geht es nicht gut. Schreibe, was dir wehtut.',
+      tr: { ru: 'Тебе нездоровится. Напиши, что у тебя болит.', en: 'You are not feeling well. Write what hurts.', tr: 'İyi hissetmiyorsun. Neyin ağrıdığını yaz.', ar: 'لست بخير. اكتب ما الذي يؤلمك.', fa: 'حالت خوب نیست. بنویس کجایت درد می‌کند.' } },
+    { id: 'a1-jahreszeit', level: 'A1', kind: 'Meinung', title: 'Meine Lieblingsjahreszeit', minWords: 60, tip: 'Ich mag … am liebsten, weil, im',
+      prompt: 'Welche Jahreszeit magst du am liebsten und warum?',
+      tr: { ru: 'Какое время года тебе нравится больше всего и почему?', en: 'Which season do you like best and why?', tr: 'En çok hangi mevsimi seversin ve neden?', ar: 'أي فصل تفضّل أكثر ولماذا؟', fa: 'کدام فصل را بیشتر دوست داری و چرا؟' } },
+    { id: 'a1-weg', level: 'A1', kind: 'Bericht', title: 'Mein Weg zur Arbeit', minWords: 60, tip: 'Ich fahre mit …, zu Fuß, es dauert',
+      prompt: 'Wie kommst du zur Arbeit oder zum Kurs? Beschreibe deinen Weg.',
+      tr: { ru: 'Как ты добираешься до работы или на курс? Опиши свой путь.', en: 'How do you get to work or to your course? Describe your way.', tr: 'İşe veya kursa nasıl gidersin? Yolunu anlat.', ar: 'كيف تذهب إلى العمل أو الدورة؟ صِف طريقك.', fa: 'چطور به محل کار یا کلاس می‌روی؟ مسیرت را توصیف کن.' } },
+    { id: 'a1-geburtstag', level: 'A1', kind: 'Bericht', title: 'Mein Geburtstag', minWords: 60, tip: 'Ich feiere …, mit …, wir essen',
+      prompt: 'Wie feierst du deinen Geburtstag?',
+      tr: { ru: 'Как ты празднуешь свой день рождения?', en: 'How do you celebrate your birthday?', tr: 'Doğum gününü nasıl kutlarsın?', ar: 'كيف تحتفل بعيد ميلادك؟', fa: 'تولدت را چطور جشن می‌گیری؟' } },
+    { id: 'a1-morgen', level: 'A1', kind: 'Beschreibung', title: 'Am Morgen', minWords: 60, tip: 'Zuerst, dann, ich stehe … auf',
+      prompt: 'Was machst du jeden Morgen? Beschreibe deine Morgenroutine.',
+      tr: { ru: 'Что ты делаешь каждое утро? Опиши своё утро.', en: 'What do you do every morning? Describe your morning routine.', tr: 'Her sabah ne yaparsın? Sabah rutinini anlat.', ar: 'ماذا تفعل كل صباح؟ صِف روتينك الصباحي.', fa: 'هر صبح چه می‌کنی؟ روال صبحت را توصیف کن.' } },
+    { id: 'a1-getraenk', level: 'A1', kind: 'Beschreibung', title: 'Was ich gern trinke', minWords: 60, tip: 'Ich trinke gern …, am Morgen, kalt/warm',
+      prompt: 'Was trinkst du gern? Schreibe darüber.',
+      tr: { ru: 'Что ты любишь пить? Напиши об этом.', en: 'What do you like to drink? Write about it.', tr: 'Ne içmeyi seversin? Bunun hakkında yaz.', ar: 'ماذا تحب أن تشرب؟ اكتب عن ذلك.', fa: 'دوست داری چه بنوشی؟ درباره‌اش بنویس.' } },
+    { id: 'a1-woche', level: 'A1', kind: 'Bericht', title: 'Meine Woche', minWords: 60, tip: 'am Montag, am Wochenende, jeden Tag',
+      prompt: 'Was machst du an den Tagen der Woche (Montag bis Sonntag)?',
+      tr: { ru: 'Что ты делаешь в дни недели (с понедельника по воскресенье)?', en: 'What do you do on the days of the week (Monday to Sunday)?', tr: 'Haftanın günlerinde (Pazartesi–Pazar) ne yaparsın?', ar: 'ماذا تفعل في أيام الأسبوع (الإثنين إلى الأحد)؟', fa: 'در روزهای هفته (دوشنبه تا یکشنبه) چه می‌کنی؟' } }
+  );
+})();
+
+(function () {
+  'use strict';
+  window.TEXT_THEMES = window.TEXT_THEMES || [];
+  window.TEXT_THEMES.push(
+    /* ───── A2 · weitere Themen · ~120 Wörter ───── */
+    { id: 'a2-nachbar', level: 'A2', kind: 'Beschreibung', title: 'Meine Nachbarn', minWords: 120, tip: 'Mein Nachbar …, wir, manchmal',
+      prompt: 'Beschreibe deine Nachbarn. Wie ist der Kontakt zu ihnen?',
+      tr: { ru: 'Опиши своих соседей. Какие у тебя с ними отношения?', en: 'Describe your neighbours. What is your contact with them like?', tr: 'Komşularını anlat. Onlarla ilişkin nasıl?', ar: 'صِف جيرانك. كيف هي علاقتك بهم؟', fa: 'همسایه‌هایت را توصیف کن. رابطه‌ات با آن‌ها چگونه است؟' } },
+    { id: 'a2-internet', level: 'A2', kind: 'Meinung', title: 'Internet im Alltag', minWords: 120, tip: 'Ich nutze …, um zu, jeden Tag',
+      prompt: 'Wofür nutzt du das Internet im Alltag? Schreibe darüber.',
+      tr: { ru: 'Для чего ты используешь интернет в повседневной жизни? Напиши об этом.', en: 'What do you use the internet for in everyday life? Write about it.', tr: 'Günlük hayatta interneti ne için kullanırsın? Yaz.', ar: 'لماذا تستخدم الإنترنت في حياتك اليومية؟ اكتب عن ذلك.', fa: 'در زندگی روزمره اینترنت را برای چه استفاده می‌کنی؟ بنویس.' } },
+    { id: 'a2-kochen', level: 'A2', kind: 'Bericht', title: 'Mein Lieblingsrezept', minWords: 120, tip: 'zuerst, dann, man braucht',
+      prompt: 'Beschreibe, wie man dein Lieblingsgericht kocht.',
+      tr: { ru: 'Опиши, как готовить твоё любимое блюдо.', en: 'Describe how to cook your favourite dish.', tr: 'En sevdiğin yemeğin nasıl yapıldığını anlat.', ar: 'صِف كيف يُطبخ طبقك المفضل.', fa: 'توصیف کن غذای موردعلاقه‌ات چطور پخته می‌شود.' } },
+    { id: 'a2-kindheit', level: 'A2', kind: 'Bericht', title: 'Meine Kindheit', minWords: 120, tip: 'Als Kind …, früher, ich habe oft',
+      prompt: 'Wie war deine Kindheit? Erzähle davon.',
+      tr: { ru: 'Каким было твоё детство? Расскажи о нём.', en: 'What was your childhood like? Tell about it.', tr: 'Çocukluğun nasıldı? Anlat.', ar: 'كيف كانت طفولتك؟ احكِ عنها.', fa: 'کودکی‌ات چگونه بود؟ درباره‌اش بگو.' } },
+    { id: 'a2-wohnort', level: 'A2', kind: 'Beschreibung', title: 'Mein Wohnort', minWords: 120, tip: 'Ich wohne in …, hier gibt es, man kann',
+      prompt: 'Beschreibe deinen Wohnort. Was gefällt dir dort, was nicht?',
+      tr: { ru: 'Опиши место, где ты живёшь. Что тебе там нравится, а что нет?', en: 'Describe where you live. What do you like there, what not?', tr: 'Yaşadığın yeri anlat. Orada neyi seviyorsun, neyi sevmiyorsun?', ar: 'صِف مكان سكنك. ما الذي يعجبك هناك وما الذي لا يعجبك؟', fa: 'محل زندگی‌ات را توصیف کن. آنجا چه چیزی را دوست داری و چه چیزی را نه؟' } },
+    { id: 'a2-feiertag', level: 'A2', kind: 'Beschreibung', title: 'Mein Lieblingsfeiertag', minWords: 120, tip: 'An … feiern wir, es gibt, die Familie',
+      prompt: 'Welcher Feiertag ist dein liebster? Beschreibe ihn.',
+      tr: { ru: 'Какой праздник твой любимый? Опиши его.', en: 'Which holiday is your favourite? Describe it.', tr: 'En sevdiğin bayram hangisi? Anlat.', ar: 'ما عيدك المفضل؟ صِفه.', fa: 'کدام تعطیلات موردعلاقه‌ات است؟ توصیفش کن.' } },
+    { id: 'a2-plaene', level: 'A2', kind: 'Meinung', title: 'Meine Pläne', minWords: 120, tip: 'Ich möchte …, in Zukunft, ich will',
+      prompt: 'Welche Pläne hast du für die nächsten Jahre?',
+      tr: { ru: 'Какие у тебя планы на ближайшие годы?', en: 'What plans do you have for the next few years?', tr: 'Önümüzdeki birkaç yıl için ne planların var?', ar: 'ما خططك للسنوات القادمة؟', fa: 'برای چند سال آینده چه برنامه‌هایی داری؟' } },
+    { id: 'a2-musik', level: 'A2', kind: 'Meinung', title: 'Musik in meinem Leben', minWords: 120, tip: 'Ich höre gern …, weil, beim',
+      prompt: 'Welche Musik hörst du gern und wann? Schreibe darüber.',
+      tr: { ru: 'Какую музыку ты любишь слушать и когда? Напиши об этом.', en: 'What music do you like to listen to and when? Write about it.', tr: 'Ne tür müzik dinlemeyi seversin ve ne zaman? Yaz.', ar: 'ما الموسيقى التي تحب أن تستمع إليها ومتى؟ اكتب عن ذلك.', fa: 'چه موسیقی‌ای دوست داری گوش بدهی و کِی؟ بنویس.' } },
+    { id: 'a2-fit', level: 'A2', kind: 'Meinung', title: 'Gesund bleiben', minWords: 120, tip: 'Man sollte …, es ist gut, ich versuche',
+      prompt: 'Was machst du, um gesund zu bleiben?',
+      tr: { ru: 'Что ты делаешь, чтобы оставаться здоровым(ой)?', en: 'What do you do to stay healthy?', tr: 'Sağlıklı kalmak için ne yaparsın?', ar: 'ماذا تفعل لتبقى بصحة جيدة؟', fa: 'برای سالم ماندن چه می‌کنی؟' } },
+    { id: 'a2-einladung', level: 'A2', kind: 'Bericht', title: 'Eine Einladung', minWords: 120, tip: 'Ich lade dich ein, am …, um … Uhr, komm',
+      prompt: 'Du machst eine Party. Schreibe eine Einladung an einen Freund.',
+      tr: { ru: 'Ты устраиваешь вечеринку. Напиши приглашение другу.', en: 'You are having a party. Write an invitation to a friend.', tr: 'Bir parti veriyorsun. Bir arkadaşına davet yaz.', ar: 'تقيم حفلة. اكتب دعوة إلى صديق.', fa: 'مهمانی می‌گیری. برای یک دوست دعوت‌نامه بنویس.' } },
+    { id: 'a2-ausflug', level: 'A2', kind: 'Bericht', title: 'Ein Ausflug', minWords: 120, tip: 'Wir sind … gefahren, zuerst, am Ende',
+      prompt: 'Erzähle von einem Ausflug, den du gemacht hast.',
+      tr: { ru: 'Расскажи о поездке или прогулке, которую ты совершил(а).', en: 'Tell about an outing or trip you went on.', tr: 'Yaptığın bir gezi hakkında anlat.', ar: 'احكِ عن نزهة أو رحلة قمت بها.', fa: 'درباره‌ی گردش یا سفری که رفتی بگو.' } },
+    { id: 'a2-arbeitstag', level: 'A2', kind: 'Beschreibung', title: 'Mein Arbeitstag', minWords: 120, tip: 'Ich beginne um …, dann, am Ende des Tages',
+      prompt: 'Beschreibe einen typischen Arbeits- oder Schultag.',
+      tr: { ru: 'Опиши типичный рабочий или учебный день.', en: 'Describe a typical work or school day.', tr: 'Tipik bir iş veya okul gününü anlat.', ar: 'صِف يوم عمل أو دراسة اعتياديًا.', fa: 'یک روز کاری یا درسی معمولی را توصیف کن.' } }
+  );
+})();
+
+(function () {
+  'use strict';
+  window.TEXT_THEMES = window.TEXT_THEMES || [];
+  window.TEXT_THEMES.push(
+    /* ───── B1 · weitere Themen · ~180 Wörter ───── */
+    { id: 'b1-sport', level: 'B1', kind: 'Meinung', title: 'Sport treiben', minWords: 180, tip: 'einerseits, gesund, ich finde',
+      prompt: 'Wie wichtig ist Sport für ein gesundes Leben? Begründe deine Meinung.',
+      tr: { ru: 'Насколько важен спорт для здоровой жизни? Обоснуй своё мнение.', en: 'How important is sport for a healthy life? Justify your opinion.', tr: 'Sağlıklı bir yaşam için spor ne kadar önemli? Görüşünü gerekçelendir.', ar: 'ما أهمية الرياضة لحياة صحية؟ برِّر رأيك.', fa: 'ورزش برای زندگی سالم چقدر مهم است؟ نظرت را توجیه کن.' } },
+    { id: 'b1-haustiere', level: 'B1', kind: 'Erörterung', title: 'Haustiere in der Stadt', minWords: 180, tip: 'Vorteile, Nachteile, meiner Meinung nach',
+      prompt: 'Ist es gut, Haustiere in einer Stadtwohnung zu halten? Nenne Vor- und Nachteile.',
+      tr: { ru: 'Хорошо ли держать питомцев в городской квартире? Назови плюсы и минусы.', en: 'Is it good to keep pets in a city flat? Give pros and cons.', tr: 'Şehir dairesinde evcil hayvan beslemek iyi mi? Artı ve eksileri yaz.', ar: 'هل من الجيد تربية حيوانات أليفة في شقة بالمدينة؟ اذكر الإيجابيات والسلبيات.', fa: 'آیا نگه‌داری حیوان خانگی در آپارتمان شهری خوب است؟ مزایا و معایب را بنویس.' } },
+    { id: 'b1-fernsehen', level: 'B1', kind: 'Erörterung', title: 'Fernsehen oder Streaming', minWords: 180, tip: 'früher, heute, im Vergleich',
+      prompt: 'Fernsehen oder Streamingdienste – was ist besser? Vergleiche und nimm Stellung.',
+      tr: { ru: 'Телевидение или стриминг — что лучше? Сравни и выскажи позицию.', en: 'Television or streaming services – which is better? Compare and take a position.', tr: 'Televizyon mu yayın hizmetleri mi daha iyi? Karşılaştır ve görüş belirt.', ar: 'التلفزيون أم خدمات البث – أيهما أفضل؟ قارن وحدّد موقفك.', fa: 'تلویزیون یا سرویس‌های پخش — کدام بهتر است؟ مقایسه کن و موضع بگیر.' } },
+    { id: 'b1-ehrenamt', level: 'B1', kind: 'Meinung', title: 'Ehrenamtliche Arbeit', minWords: 180, tip: 'man hilft, dadurch, ich denke',
+      prompt: 'Sollte man ehrenamtlich arbeiten? Schreibe über Vorteile für die Gesellschaft und für einen selbst.',
+      tr: { ru: 'Стоит ли заниматься волонтёрством? Напиши о пользе для общества и для себя.', en: 'Should one do volunteer work? Write about benefits for society and for oneself.', tr: 'Gönüllü çalışmalı mı? Topluma ve kişiye faydalarını yaz.', ar: 'هل ينبغي القيام بعمل تطوعي؟ اكتب عن الفوائد للمجتمع وللفرد.', fa: 'آیا باید کار داوطلبانه کرد؟ درباره‌ی فواید برای جامعه و خود فرد بنویس.' } },
+    { id: 'b1-geld', level: 'B1', kind: 'Meinung', title: 'Umgang mit Geld', minWords: 180, tip: 'sparen, ausgeben, es ist wichtig',
+      prompt: 'Wie geht man am besten mit Geld um? Schreibe deine Tipps und Meinung.',
+      tr: { ru: 'Как лучше всего обращаться с деньгами? Напиши советы и мнение.', en: 'What is the best way to handle money? Write your tips and opinion.', tr: 'Parayı en iyi nasıl yönetmeli? Önerilerini ve görüşünü yaz.', ar: 'ما أفضل طريقة للتعامل مع المال؟ اكتب نصائحك ورأيك.', fa: 'بهترین راه مدیریت پول چیست؟ توصیه‌ها و نظرت را بنویس.' } },
+    { id: 'b1-werbung', level: 'B1', kind: 'Erörterung', title: 'Werbung', minWords: 180, tip: 'einerseits, andererseits, beeinflusst',
+      prompt: 'Beeinflusst Werbung unser Kaufverhalten zu stark? Diskutiere.',
+      tr: { ru: 'Слишком ли сильно реклама влияет на наши покупки? Обсуди.', en: 'Does advertising influence our buying behaviour too much? Discuss.', tr: 'Reklam satın alma davranışımızı fazla mı etkiliyor? Tartış.', ar: 'هل تؤثر الإعلانات كثيرًا على سلوكنا الشرائي؟ ناقش.', fa: 'آیا تبلیغات بیش از حد بر رفتار خرید ما اثر می‌گذارد؟ بحث کن.' } },
+    { id: 'b1-auto-fahrrad', level: 'B1', kind: 'Erörterung', title: 'Auto oder Fahrrad', minWords: 180, tip: 'praktisch, umweltfreundlich, ich bevorzuge',
+      prompt: 'Auto oder Fahrrad in der Stadt – was ist besser? Begründe.',
+      tr: { ru: 'Машина или велосипед в городе — что лучше? Обоснуй.', en: 'Car or bicycle in the city – which is better? Justify.', tr: 'Şehirde araba mı bisiklet mi daha iyi? Gerekçelendir.', ar: 'السيارة أم الدراجة في المدينة – أيهما أفضل؟ برِّر.', fa: 'خودرو یا دوچرخه در شهر — کدام بهتر است؟ توجیه کن.' } },
+    { id: 'b1-fremdsprachen', level: 'B1', kind: 'Meinung', title: 'Fremdsprachen lernen', minWords: 180, tip: 'es hilft, beim Reisen, ich finde',
+      prompt: 'Warum ist es nützlich, Fremdsprachen zu lernen? Schreibe deine Meinung.',
+      tr: { ru: 'Почему полезно учить иностранные языки? Напиши своё мнение.', en: 'Why is it useful to learn foreign languages? Write your opinion.', tr: 'Yabancı dil öğrenmek neden faydalı? Görüşünü yaz.', ar: 'لماذا من المفيد تعلّم اللغات الأجنبية؟ اكتب رأيك.', fa: 'چرا یادگیری زبان‌های خارجی مفید است؟ نظرت را بنویس.' } },
+    { id: 'b1-stress', level: 'B1', kind: 'Meinung', title: 'Stress im Alltag', minWords: 180, tip: 'oft, deshalb, um … zu vermeiden',
+      prompt: 'Was sind die Ursachen von Stress und wie kann man ihn vermeiden?',
+      tr: { ru: 'Каковы причины стресса и как его избежать?', en: 'What are the causes of stress and how can one avoid it?', tr: 'Stresin nedenleri nelerdir ve nasıl önlenebilir?', ar: 'ما أسباب التوتر وكيف يمكن تجنّبه؟', fa: 'علل استرس چیست و چگونه می‌توان از آن جلوگیری کرد؟' } },
+    { id: 'b1-feste', level: 'B1', kind: 'Beschreibung', title: 'Feste und Traditionen', minWords: 180, tip: 'man feiert, früher, heute',
+      prompt: 'Wie wichtig sind Feste und Traditionen heute noch? Schreibe darüber.',
+      tr: { ru: 'Насколько важны праздники и традиции сегодня? Напиши об этом.', en: 'How important are festivals and traditions still today? Write about it.', tr: 'Bayramlar ve gelenekler bugün hâlâ ne kadar önemli? Yaz.', ar: 'ما مدى أهمية الأعياد والتقاليد اليوم؟ اكتب عن ذلك.', fa: 'جشن‌ها و سنت‌ها امروز چقدر مهم‌اند؟ درباره‌اش بنویس.' } },
+    { id: 'b1-nachbarschaft', level: 'B1', kind: 'Meinung', title: 'Gute Nachbarschaft', minWords: 180, tip: 'man sollte, hilfsbereit, ich meine',
+      prompt: 'Was macht eine gute Nachbarschaft aus? Schreibe deine Gedanken.',
+      tr: { ru: 'Что делает соседство хорошим? Напиши свои мысли.', en: 'What makes good neighbourliness? Write your thoughts.', tr: 'İyi bir komşuluğu ne oluşturur? Düşüncelerini yaz.', ar: 'ما الذي يصنع حُسن الجوار؟ اكتب أفكارك.', fa: 'یک همسایگی خوب چه ویژگی‌هایی دارد؟ افکارت را بنویس.' } },
+    { id: 'b1-zukunftsberuf', level: 'B1', kind: 'Meinung', title: 'Beruf der Zukunft', minWords: 180, tip: 'in Zukunft, wegen, ich glaube',
+      prompt: 'Welche Berufe werden in Zukunft wichtig sein? Begründe deine Meinung.',
+      tr: { ru: 'Какие профессии будут важны в будущем? Обоснуй своё мнение.', en: 'Which jobs will be important in the future? Justify your opinion.', tr: 'Gelecekte hangi meslekler önemli olacak? Görüşünü gerekçelendir.', ar: 'ما المهن التي ستكون مهمة في المستقبل؟ برِّر رأيك.', fa: 'کدام مشاغل در آینده مهم خواهند بود؟ نظرت را توجیه کن.' } }
+  );
+})();
+
+(function () {
+  'use strict';
+  window.TEXT_THEMES = window.TEXT_THEMES || [];
+  window.TEXT_THEMES.push(
+    /* ───── B2 · weitere Themen · ~220 Wörter · Erörterung ───── */
+    { id: 'b2-rauchen', level: 'B2', kind: 'Erörterung', title: 'Rauchverbot', minWords: 220, tip: 'Befürworter, Gegner, abschließend',
+      prompt: 'Sollte das Rauchen an öffentlichen Orten generell verboten werden? Erörtere.',
+      tr: { ru: 'Следует ли полностью запретить курение в общественных местах? Рассмотри.', en: 'Should smoking in public places be banned entirely? Discuss.', tr: 'Kamuya açık yerlerde sigara tamamen yasaklanmalı mı? Tartış.', ar: 'هل ينبغي حظر التدخين في الأماكن العامة تمامًا؟ ناقش.', fa: 'آیا باید سیگار در اماکن عمومی کاملاً ممنوع شود؟ بررسی کن.' } },
+    { id: 'b2-tempolimit', level: 'B2', kind: 'Erörterung', title: 'Tempolimit', minWords: 220, tip: 'für, gegen, letztlich',
+      prompt: 'Sollte es ein allgemeines Tempolimit auf Autobahnen geben? Erörtere Pro und Contra.',
+      tr: { ru: 'Должно ли быть общее ограничение скорости на автобанах? Рассмотри за и против.', en: 'Should there be a general speed limit on motorways? Discuss pros and cons.', tr: 'Otoyollarda genel hız sınırı olmalı mı? Lehte ve aleyhte tartış.', ar: 'هل ينبغي وجود حد سرعة عام على الطرق السريعة؟ ناقش المؤيد والمعارض.', fa: 'آیا باید محدودیت سرعت عمومی در بزرگراه‌ها باشد؟ موافق و مخالف را بررسی کن.' } },
+    { id: 'b2-gentechnik', level: 'B2', kind: 'Erörterung', title: 'Gentechnik in Lebensmitteln', minWords: 220, tip: 'Chancen, Risiken, insgesamt',
+      prompt: 'Ist Gentechnik in Lebensmitteln vertretbar? Diskutiere Chancen und Risiken.',
+      tr: { ru: 'Допустима ли генная инженерия в продуктах? Обсуди возможности и риски.', en: 'Is genetic engineering in food acceptable? Discuss opportunities and risks.', tr: 'Gıdada gen teknolojisi kabul edilebilir mi? Fırsat ve riskleri tartış.', ar: 'هل الهندسة الوراثية في الغذاء مقبولة؟ ناقش الفرص والمخاطر.', fa: 'آیا مهندسی ژنتیک در غذا پذیرفتنی است؟ فرصت‌ها و خطرها را بررسی کن.' } },
+    { id: 'b2-zoo', level: 'B2', kind: 'Erörterung', title: 'Zoos', minWords: 220, tip: 'einerseits, andererseits, meiner Ansicht nach',
+      prompt: 'Sollten Zoos abgeschafft werden? Erörtere Argumente dafür und dagegen.',
+      tr: { ru: 'Следует ли закрыть зоопарки? Рассмотри аргументы за и против.', en: 'Should zoos be abolished? Discuss arguments for and against.', tr: 'Hayvanat bahçeleri kapatılmalı mı? Lehte ve aleyhte argümanları tartış.', ar: 'هل ينبغي إلغاء حدائق الحيوان؟ ناقش الحجج المؤيدة والمعارضة.', fa: 'آیا باغ‌وحش‌ها باید برچیده شوند؟ دلایل موافق و مخالف را بررسی کن.' } },
+    { id: 'b2-uniform', level: 'B2', kind: 'Erörterung', title: 'Schuluniform', minWords: 220, tip: 'Vorteile, Nachteile, zusammenfassend',
+      prompt: 'Sollten Schulen eine Schuluniform einführen? Erörtere.',
+      tr: { ru: 'Должны ли школы ввести школьную форму? Рассмотри.', en: 'Should schools introduce a school uniform? Discuss.', tr: 'Okullar üniforma getirmeli mi? Tartış.', ar: 'هل ينبغي للمدارس فرض زي موحد؟ ناقش.', fa: 'آیا مدارس باید لباس فرم اجباری کنند؟ بررسی کن.' } },
+    { id: 'b2-wahlpflicht', level: 'B2', kind: 'Erörterung', title: 'Wahlpflicht', minWords: 220, tip: 'demokratisch, Freiheit, abschließend',
+      prompt: 'Sollte es eine Wahlpflicht geben? Diskutiere Vor- und Nachteile.',
+      tr: { ru: 'Должно ли голосование быть обязательным? Обсуди плюсы и минусы.', en: 'Should voting be compulsory? Discuss pros and cons.', tr: 'Oy verme zorunlu olmalı mı? Artı ve eksileri tartış.', ar: 'هل ينبغي أن يكون التصويت إلزاميًا؟ ناقش الإيجابيات والسلبيات.', fa: 'آیا رأی‌دادن باید اجباری باشد؟ مزایا و معایب را بررسی کن.' } },
+    { id: 'b2-handy-schule', level: 'B2', kind: 'Erörterung', title: 'Handyverbot in der Schule', minWords: 220, tip: 'für, gegen, im Ergebnis',
+      prompt: 'Sollten Handys an Schulen verboten werden? Erörtere die Argumente.',
+      tr: { ru: 'Следует ли запретить телефоны в школах? Рассмотри аргументы.', en: 'Should mobile phones be banned at schools? Discuss the arguments.', tr: 'Okullarda cep telefonu yasaklanmalı mı? Argümanları tartış.', ar: 'هل ينبغي حظر الهواتف في المدارس؟ ناقش الحجج.', fa: 'آیا باید موبایل در مدارس ممنوع شود؟ دلایل را بررسی کن.' } },
+    { id: 'b2-grundeinkommen', level: 'B2', kind: 'Erörterung', title: 'Bedingungsloses Grundeinkommen', minWords: 220, tip: 'Befürworter, Kritiker, letztlich',
+      prompt: 'Wäre ein bedingungsloses Grundeinkommen sinnvoll? Erörtere.',
+      tr: { ru: 'Имеет ли смысл безусловный базовый доход? Рассмотри.', en: 'Would an unconditional basic income make sense? Discuss.', tr: 'Koşulsuz temel gelir mantıklı olur mu? Tartış.', ar: 'هل سيكون الدخل الأساسي غير المشروط منطقيًا؟ ناقش.', fa: 'آیا درآمد پایه‌ی بی‌قیدوشرط منطقی است؟ بررسی کن.' } },
+    { id: 'b2-tierversuche', level: 'B2', kind: 'Erörterung', title: 'Tierversuche', minWords: 220, tip: 'einerseits, andererseits, abschließend',
+      prompt: 'Sind Tierversuche in der Forschung zu rechtfertigen? Erörtere.',
+      tr: { ru: 'Оправданы ли опыты над животными в науке? Рассмотри.', en: 'Are animal experiments in research justifiable? Discuss.', tr: 'Araştırmada hayvan deneyleri haklı görülebilir mi? Tartış.', ar: 'هل تجارب الحيوانات في البحث لها ما يبررها؟ ناقش.', fa: 'آیا آزمایش روی حیوانات در پژوهش قابل توجیه است؟ بررسی کن.' } },
+    { id: 'b2-stadtgruen', level: 'B2', kind: 'Erörterung', title: 'Mehr Grün in Städten', minWords: 220, tip: 'Vorteile, Kosten, insgesamt',
+      prompt: 'Sollten Städte deutlich mehr Grünflächen schaffen? Erörtere Nutzen und Probleme.',
+      tr: { ru: 'Должны ли города создавать намного больше зелёных зон? Рассмотри пользу и проблемы.', en: 'Should cities create considerably more green spaces? Discuss benefits and problems.', tr: 'Şehirler çok daha fazla yeşil alan oluşturmalı mı? Fayda ve sorunları tartış.', ar: 'هل ينبغي للمدن إنشاء مساحات خضراء أكثر بكثير؟ ناقش الفوائد والمشكلات.', fa: 'آیا شهرها باید فضای سبز بسیار بیشتری ایجاد کنند؟ فواید و مشکلات را بررسی کن.' } },
+    { id: 'b2-pflichtdienst', level: 'B2', kind: 'Erörterung', title: 'Sozialer Pflichtdienst', minWords: 220, tip: 'für, gegen, abschließend',
+      prompt: 'Sollte es einen verpflichtenden sozialen Dienst für junge Menschen geben? Erörtere.',
+      tr: { ru: 'Должна ли быть обязательная социальная служба для молодёжи? Рассмотри.', en: 'Should there be a compulsory social service for young people? Discuss.', tr: 'Gençler için zorunlu bir sosyal hizmet olmalı mı? Tartış.', ar: 'هل ينبغي وجود خدمة اجتماعية إلزامية للشباب؟ ناقش.', fa: 'آیا باید خدمت اجتماعی اجباری برای جوانان باشد؟ بررسی کن.' } },
+    { id: 'b2-arbeit-freizeit', level: 'B2', kind: 'Erörterung', title: 'Arbeit und Freizeit', minWords: 220, tip: 'einerseits, andererseits, im Ergebnis',
+      prompt: 'Arbeiten viele Menschen heute zu viel? Erörtere das Verhältnis von Arbeit und Freizeit.',
+      tr: { ru: 'Слишком ли много работают многие сегодня? Рассмотри баланс работы и отдыха.', en: 'Do many people work too much today? Discuss the balance of work and leisure.', tr: 'Bugün birçok insan fazla mı çalışıyor? İş ve boş zaman dengesini tartış.', ar: 'هل يعمل كثير من الناس اليوم أكثر من اللازم؟ ناقش العلاقة بين العمل والفراغ.', fa: 'آیا امروز بسیاری بیش از حد کار می‌کنند؟ تعادل کار و اوقات فراغت را بررسی کن.' } }
+  );
+})();
+
+(function () {
+  'use strict';
+  window.TEXT_THEMES = window.TEXT_THEMES || [];
+  window.TEXT_THEMES.push(
+    /* ───── C1 · weitere Themen · ~300 Wörter ───── */
+    { id: 'c1-medienkompetenz', level: 'C1', kind: 'Erörterung', title: 'Medien und Wahrheit', minWords: 300, tip: 'einerseits, andererseits, vor diesem Hintergrund',
+      prompt: 'Wie kann man in Zeiten von Fake News verlässliche Informationen erkennen? Erörtere.',
+      tr: { ru: 'Как в эпоху фейковых новостей распознавать достоверную информацию? Рассмотри.', en: 'How can one identify reliable information in times of fake news? Discuss.', tr: 'Sahte haberler çağında güvenilir bilgi nasıl ayırt edilir? Tartış.', ar: 'كيف يمكن تمييز المعلومات الموثوقة في زمن الأخبار الزائفة؟ ناقش.', fa: 'در عصر اخبار جعلی چگونه می‌توان اطلاعات معتبر را تشخیص داد؟ بررسی کن.' } },
+    { id: 'c1-digital-arbeit', level: 'C1', kind: 'Erörterung', title: 'Digitalisierung der Arbeit', minWords: 300, tip: 'zweifellos, gleichwohl, folglich',
+      prompt: 'Wie verändert die Digitalisierung die Arbeitswelt? Diskutiere Chancen und Gefahren.',
+      tr: { ru: 'Как цифровизация меняет мир труда? Обсуди возможности и опасности.', en: 'How is digitalisation changing the world of work? Discuss opportunities and dangers.', tr: 'Dijitalleşme iş dünyasını nasıl değiştiriyor? Fırsat ve tehlikeleri tartış.', ar: 'كيف تغيّر الرقمنة عالم العمل؟ ناقش الفرص والمخاطر.', fa: 'دیجیتالی‌شدن چگونه دنیای کار را تغییر می‌دهد؟ فرصت‌ها و خطرها را بررسی کن.' } },
+    { id: 'c1-urbanisierung', level: 'C1', kind: 'Erörterung', title: 'Leben in der Großstadt', minWords: 300, tip: 'einerseits, andererseits, abschließend',
+      prompt: 'Immer mehr Menschen ziehen in Großstädte. Erörtere Folgen für Mensch und Umwelt.',
+      tr: { ru: 'Всё больше людей переезжают в мегаполисы. Рассмотри последствия для человека и среды.', en: 'More and more people move to big cities. Discuss consequences for people and the environment.', tr: 'Giderek daha çok insan büyük şehirlere taşınıyor. İnsan ve çevre için sonuçları tartış.', ar: 'يتزايد انتقال الناس إلى المدن الكبرى. ناقش العواقب على الإنسان والبيئة.', fa: 'مردم بیش‌ازپیش به کلان‌شهرها می‌روند. پیامدها برای انسان و محیط را بررسی کن.' } },
+    { id: 'c1-gesundheit-verantwortung', level: 'C1', kind: 'Stellungnahme', title: 'Gesundheit und Eigenverantwortung', minWords: 300, tip: 'es lässt sich argumentieren, letztlich, demgegenüber',
+      prompt: 'Wie weit reicht die Eigenverantwortung für die eigene Gesundheit? Nimm Stellung.',
+      tr: { ru: 'Насколько простирается личная ответственность за своё здоровье? Выскажи позицию.', en: 'How far does personal responsibility for one’s own health extend? Take a position.', tr: 'Kendi sağlığımız için kişisel sorumluluk nereye kadar uzanır? Görüş belirt.', ar: 'إلى أي مدى تمتدّ المسؤولية الشخصية عن الصحة؟ حدّد موقفك.', fa: 'مسئولیت فردی برای سلامت خود تا کجاست؟ موضع بگیر.' } },
+    { id: 'c1-kulturfoerderung', level: 'C1', kind: 'Erörterung', title: 'Kulturförderung', minWords: 300, tip: 'einerseits, andererseits, vor diesem Hintergrund',
+      prompt: 'Sollte der Staat Kunst und Kultur finanziell fördern? Erörtere.',
+      tr: { ru: 'Должно ли государство финансово поддерживать искусство и культуру? Рассмотри.', en: 'Should the state financially support art and culture? Discuss.', tr: 'Devlet sanat ve kültürü maddi olarak desteklemeli mi? Tartış.', ar: 'هل ينبغي للدولة دعم الفن والثقافة ماليًا؟ ناقش.', fa: 'آیا دولت باید هنر و فرهنگ را مالی حمایت کند؟ بررسی کن.' } },
+    { id: 'c1-generationen', level: 'C1', kind: 'Erörterung', title: 'Generationengerechtigkeit', minWords: 300, tip: 'auf der einen Seite, auf der anderen Seite, abzuwägen ist',
+      prompt: 'Handeln wir gegenüber künftigen Generationen verantwortungsvoll? Erörtere.',
+      tr: { ru: 'Поступаем ли мы ответственно по отношению к будущим поколениям? Рассмотри.', en: 'Are we acting responsibly towards future generations? Discuss.', tr: 'Gelecek nesillere karşı sorumlu davranıyor muyuz? Tartış.', ar: 'هل نتصرّف بمسؤولية تجاه الأجيال القادمة؟ ناقش.', fa: 'آیا نسبت به نسل‌های آینده مسئولانه عمل می‌کنیم؟ بررسی کن.' } },
+    { id: 'c1-tierethik', level: 'C1', kind: 'Stellungnahme', title: 'Mensch und Tier', minWords: 300, tip: 'es stellt sich die Frage, dabei ist zu bedenken, somit',
+      prompt: 'Welche Verantwortung trägt der Mensch gegenüber Tieren? Nimm begründet Stellung.',
+      tr: { ru: 'Какую ответственность несёт человек перед животными? Выскажи обоснованную позицию.', en: 'What responsibility do humans have towards animals? Take a reasoned position.', tr: 'İnsanın hayvanlara karşı sorumluluğu nedir? Gerekçeli görüş belirt.', ar: 'ما مسؤولية الإنسان تجاه الحيوانات؟ اتخذ موقفًا مبرَّرًا.', fa: 'انسان چه مسئولیتی در برابر حیوانات دارد؟ موضعی مستدل بگیر.' } },
+    { id: 'c1-energiewende', level: 'C1', kind: 'Erörterung', title: 'Energiewende', minWords: 300, tip: 'einerseits, andererseits, im Ergebnis',
+      prompt: 'Wie kann der Übergang zu erneuerbaren Energien gelingen? Erörtere Chancen und Hürden.',
+      tr: { ru: 'Как может удаться переход к возобновляемой энергии? Рассмотри возможности и препятствия.', en: 'How can the transition to renewable energy succeed? Discuss opportunities and obstacles.', tr: 'Yenilenebilir enerjiye geçiş nasıl başarılabilir? Fırsat ve engelleri tartış.', ar: 'كيف يمكن أن ينجح الانتقال إلى الطاقة المتجددة؟ ناقش الفرص والعقبات.', fa: 'چگونه گذار به انرژی‌های تجدیدپذیر می‌تواند موفق شود؟ فرصت‌ها و موانع را بررسی کن.' } },
+    { id: 'c1-wissenschaft-vertrauen', level: 'C1', kind: 'Stellungnahme', title: 'Vertrauen in die Wissenschaft', minWords: 300, tip: 'es lässt sich argumentieren, demgegenüber, folglich',
+      prompt: 'Warum vertrauen manche Menschen der Wissenschaft nicht? Nimm Stellung.',
+      tr: { ru: 'Почему некоторые люди не доверяют науке? Выскажи позицию.', en: 'Why do some people not trust science? Take a position.', tr: 'Bazı insanlar bilime neden güvenmiyor? Görüş belirt.', ar: 'لماذا لا يثق بعض الناس بالعلم؟ حدّد موقفك.', fa: 'چرا برخی به علم اعتماد ندارند؟ موضع بگیر.' } },
+    { id: 'c1-zivilgesellschaft', level: 'C1', kind: 'Erörterung', title: 'Engagement in der Gesellschaft', minWords: 300, tip: 'einerseits, andererseits, abschließend',
+      prompt: 'Wie wichtig ist bürgerschaftliches Engagement für eine Gesellschaft? Erörtere.',
+      tr: { ru: 'Насколько важна гражданская активность для общества? Рассмотри.', en: 'How important is civic engagement for a society? Discuss.', tr: 'Yurttaş katılımı bir toplum için ne kadar önemli? Tartış.', ar: 'ما أهمية المشاركة المدنية للمجتمع؟ ناقش.', fa: 'مشارکت مدنی برای یک جامعه چقدر مهم است؟ بررسی کن.' } },
+    { id: 'c1-sprachwandel', level: 'C1', kind: 'Stellungnahme', title: 'Sprachwandel', minWords: 300, tip: 'es stellt sich die Frage, somit, gleichwohl',
+      prompt: 'Verarmt unsere Sprache durch Anglizismen und Digitalisierung? Nimm Stellung.',
+      tr: { ru: 'Беднеет ли наш язык из-за англицизмов и цифровизации? Выскажи позицию.', en: 'Is our language becoming impoverished through anglicisms and digitalisation? Take a position.', tr: 'Dilimiz İngilizce sözcükler ve dijitalleşme yüzünden fakirleşiyor mu? Görüş belirt.', ar: 'هل تفتقر لغتنا بسبب الكلمات الإنجليزية والرقمنة؟ حدّد موقفك.', fa: 'آیا زبان ما به‌خاطر واژه‌های انگلیسی و دیجیتالی‌شدن فقیر می‌شود؟ موضع بگیر.' } },
+    { id: 'c1-mobilitaet', level: 'C1', kind: 'Erörterung', title: 'Mobilität der Zukunft', minWords: 300, tip: 'einerseits, andererseits, folglich',
+      prompt: 'Wie sollte die Mobilität der Zukunft aussehen? Erörtere mögliche Wege.',
+      tr: { ru: 'Какой должна быть мобильность будущего? Рассмотри возможные пути.', en: 'What should the mobility of the future look like? Discuss possible paths.', tr: 'Geleceğin ulaşımı nasıl olmalı? Olası yolları tartış.', ar: 'كيف ينبغي أن يكون التنقّل في المستقبل؟ ناقش المسارات الممكنة.', fa: 'تحرک آینده باید چگونه باشد؟ مسیرهای ممکن را بررسی کن.' } }
+  );
+})();
+
+(function () {
+  'use strict';
+  window.TEXT_THEMES = window.TEXT_THEMES || [];
+  window.TEXT_THEMES.push(
+    /* ───── C2 · weitere Themen · ~350 Wörter ───── */
+    { id: 'c2-freiheit-sicherheit', level: 'C2', kind: 'Erörterung', title: 'Freiheit oder Sicherheit', minWords: 350, tip: 'einerseits, andererseits, in letzter Konsequenz',
+      prompt: 'Wie viel Freiheit darf für mehr Sicherheit geopfert werden? Erörtere differenziert.',
+      tr: { ru: 'Сколько свободы можно пожертвовать ради безопасности? Рассмотри дифференцированно.', en: 'How much freedom may be sacrificed for more security? Discuss in a differentiated way.', tr: 'Daha fazla güvenlik için ne kadar özgürlük feda edilebilir? Ayrıntılı tartış.', ar: 'كم من الحرية يمكن التضحية بها مقابل أمن أكبر؟ ناقش بتمييز.', fa: 'چه میزان آزادی را می‌توان برای امنیت بیشتر فدا کرد؟ به‌تفصیل بررسی کن.' } },
+    { id: 'c2-wahrheit-medien', level: 'C2', kind: 'Essay', title: 'Wahrheit im medialen Zeitalter', minWords: 350, tip: 'es ließe sich einwenden, gleichwohl, in letzter Konsequenz',
+      prompt: 'Gibt es im Zeitalter der Medien noch eine gemeinsame Wahrheit? Verfasse einen Essay.',
+      tr: { ru: 'Существует ли в эпоху медиа ещё общая истина? Напиши эссе.', en: 'Is there still a shared truth in the age of media? Write an essay.', tr: 'Medya çağında hâlâ ortak bir gerçek var mı? Bir deneme yaz.', ar: 'هل ما زالت هناك حقيقة مشتركة في عصر الإعلام؟ اكتب مقالًا.', fa: 'آیا در عصر رسانه هنوز حقیقتی مشترک وجود دارد؟ یک مقاله بنویس.' } },
+    { id: 'c2-technik-menschlichkeit', level: 'C2', kind: 'Erörterung', title: 'Technik und Menschlichkeit', minWords: 350, tip: 'grundsätzlich, im Spannungsverhältnis, daraus ergibt sich',
+      prompt: 'Bedroht der technische Fortschritt unsere Menschlichkeit? Erörtere.',
+      tr: { ru: 'Угрожает ли технический прогресс нашей человечности? Рассмотри.', en: 'Does technological progress threaten our humanity? Discuss.', tr: 'Teknolojik ilerleme insanlığımızı tehdit ediyor mu? Tartış.', ar: 'هل يهدّد التقدّم التقني إنسانيتنا؟ ناقش.', fa: 'آیا پیشرفت فناوری انسانیت ما را تهدید می‌کند؟ بررسی کن.' } },
+    { id: 'c2-gerechtigkeit', level: 'C2', kind: 'Essay', title: 'Was ist Gerechtigkeit?', minWords: 350, tip: 'unbestreitbar, vielmehr, in diesem Sinne',
+      prompt: 'Was bedeutet Gerechtigkeit in einer modernen Gesellschaft? Verfasse einen reflektierenden Essay.',
+      tr: { ru: 'Что значит справедливость в современном обществе? Напиши рефлексивное эссе.', en: 'What does justice mean in a modern society? Write a reflective essay.', tr: 'Modern bir toplumda adalet ne anlama gelir? Düşünsel bir deneme yaz.', ar: 'ماذا تعني العدالة في مجتمع حديث؟ اكتب مقالًا تأمّليًا.', fa: 'عدالت در جامعه‌ی مدرن چه معنایی دارد؟ یک مقاله‌ی تأملی بنویس.' } },
+    { id: 'c2-natur-kultur', level: 'C2', kind: 'Erörterung', title: 'Natur und Kultur', minWords: 350, tip: 'einerseits, andererseits, letztlich',
+      prompt: 'In welchem Verhältnis stehen Mensch und Natur? Erörtere.',
+      tr: { ru: 'В каком отношении находятся человек и природа? Рассмотри.', en: 'What is the relationship between humans and nature? Discuss.', tr: 'İnsan ile doğa arasındaki ilişki nedir? Tartış.', ar: 'ما العلاقة بين الإنسان والطبيعة؟ ناقش.', fa: 'رابطه‌ی انسان و طبیعت چیست؟ بررسی کن.' } },
+    { id: 'c2-glueck', level: 'C2', kind: 'Essay', title: 'Was ist Glück?', minWords: 350, tip: 'es lässt sich beobachten, insofern, letztlich',
+      prompt: 'Was macht ein gelungenes, glückliches Leben aus? Verfasse einen Essay.',
+      tr: { ru: 'Что делает жизнь удавшейся и счастливой? Напиши эссе.', en: 'What makes a successful, happy life? Write an essay.', tr: 'Başarılı, mutlu bir hayatı ne oluşturur? Bir deneme yaz.', ar: 'ما الذي يصنع حياة ناجحة وسعيدة؟ اكتب مقالًا.', fa: 'چه چیزی یک زندگی موفق و شاد می‌سازد؟ یک مقاله بنویس.' } },
+    { id: 'c2-zeit', level: 'C2', kind: 'Essay', title: 'Der Umgang mit Zeit', minWords: 350, tip: 'einerseits, andererseits, in diesem Sinne',
+      prompt: 'Wie verändert die Beschleunigung des Lebens unseren Umgang mit Zeit? Erörtere.',
+      tr: { ru: 'Как ускорение жизни меняет наше обращение со временем? Рассмотри.', en: 'How does the acceleration of life change our relationship with time? Discuss.', tr: 'Hayatın hızlanması zamanla ilişkimizi nasıl değiştiriyor? Tartış.', ar: 'كيف يغيّر تسارع الحياة علاقتنا بالوقت؟ ناقش.', fa: 'شتاب زندگی چگونه رابطه‌ی ما با زمان را تغییر می‌دهد؟ بررسی کن.' } },
+    { id: 'c2-macht-sprache', level: 'C2', kind: 'Erörterung', title: 'Die Macht der Sprache', minWords: 350, tip: 'unbestreitbar, vielmehr, daraus ergibt sich',
+      prompt: 'Welche Macht übt Sprache über das Denken und Handeln aus? Erörtere.',
+      tr: { ru: 'Какую власть язык оказывает на мышление и действия? Рассмотри.', en: 'What power does language exert over thought and action? Discuss.', tr: 'Dil, düşünce ve eylem üzerinde nasıl bir güç uygular? Tartış.', ar: 'ما السلطة التي تمارسها اللغة على الفكر والفعل؟ ناقش.', fa: 'زبان چه قدرتی بر اندیشه و کنش اعمال می‌کند؟ بررسی کن.' } },
+    { id: 'c2-tradition-moderne', level: 'C2', kind: 'Erörterung', title: 'Tradition und Moderne', minWords: 350, tip: 'einerseits, andererseits, im Ergebnis',
+      prompt: 'Wie lassen sich Tradition und Fortschritt miteinander vereinbaren? Erörtere.',
+      tr: { ru: 'Как примирить традицию и прогресс? Рассмотри.', en: 'How can tradition and progress be reconciled? Discuss.', tr: 'Gelenek ve ilerleme nasıl bağdaştırılabilir? Tartış.', ar: 'كيف يمكن التوفيق بين التقليد والتقدّم؟ ناقش.', fa: 'چگونه می‌توان سنت و پیشرفت را با هم آشتی داد؟ بررسی کن.' } },
+    { id: 'c2-verantwortung-zukunft', level: 'C2', kind: 'Stellungnahme', title: 'Verantwortung für die Zukunft', minWords: 350, tip: 'von zentraler Bedeutung, nicht zuletzt, zusammenfassend',
+      prompt: 'Welche Verantwortung tragen wir für kommende Generationen? Nimm begründet Stellung.',
+      tr: { ru: 'Какую ответственность мы несём за грядущие поколения? Выскажи обоснованную позицию.', en: 'What responsibility do we bear for coming generations? Take a reasoned position.', tr: 'Gelecek nesiller için ne tür bir sorumluluk taşıyoruz? Gerekçeli görüş belirt.', ar: 'ما المسؤولية التي نتحمّلها تجاه الأجيال القادمة؟ اتخذ موقفًا مبرَّرًا.', fa: 'چه مسئولیتی در برابر نسل‌های آینده داریم؟ موضعی مستدل بگیر.' } },
+    { id: 'c2-bildung-wert', level: 'C2', kind: 'Essay', title: 'Der Wert der Bildung', minWords: 350, tip: 'es ließe sich einwenden, gleichwohl, letztlich',
+      prompt: 'Worin liegt der eigentliche Wert von Bildung? Verfasse einen Essay.',
+      tr: { ru: 'В чём заключается подлинная ценность образования? Напиши эссе.', en: 'What is the true value of education? Write an essay.', tr: 'Eğitimin gerçek değeri nedir? Bir deneme yaz.', ar: 'ما القيمة الحقيقية للتعليم؟ اكتب مقالًا.', fa: 'ارزش واقعی آموزش در چیست؟ یک مقاله بنویس.' } },
+    { id: 'c2-wahrheit-objektiv', level: 'C2', kind: 'Erörterung', title: 'Objektive Wahrheit', minWords: 350, tip: 'einerseits, andererseits, in letzter Konsequenz',
+      prompt: 'Gibt es eine objektive Wahrheit oder ist alles Ansichtssache? Erörtere.',
+      tr: { ru: 'Существует ли объективная истина или всё — дело взгляда? Рассмотри.', en: 'Is there an objective truth or is everything a matter of opinion? Discuss.', tr: 'Nesnel bir gerçek var mı yoksa her şey görüş meselesi mi? Tartış.', ar: 'هل هناك حقيقة موضوعية أم أن كل شيء مسألة رأي؟ ناقش.', fa: 'آیا حقیقتی عینی وجود دارد یا همه‌چیز سلیقه‌ای است؟ بررسی کن.' } }
+  );
+})();
