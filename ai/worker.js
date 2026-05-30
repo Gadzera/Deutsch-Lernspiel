@@ -81,7 +81,7 @@ export default {
     // Force the model to answer in the learner's language, not English.
     const RULE = ` IMPORTANT: Write ALL explanations and comments in ${L}. Keep German example words and sentences in German, and use the GERMAN names of grammatical terms (Nominativ, Akkusativ, Dativ, Genitiv, Partizip II, Konjunktiv II, Perfekt, Präteritum …) WITHOUT translating them into ${L} — translating case names confuses learners. Be precise and never mix up the four cases. Never answer in English unless ${L} is English.`;
 
-    let task, user;
+    let task, user, maxTok = 700;
     if (b.task === 'correct') {
       task = `
 
@@ -90,11 +90,13 @@ TASK: Correct the student's German text. Keep their meaning and level. Reply in 
 "## Änderungen" — a short bullet list; each item «falsch → richtig» + a 3–8 word reason that names the rule (in ${L}).
 "## Tipp" — one short, motivating improvement tip (in ${L}).`;
       user = 'Korrigiere und erkläre diesen Text:\n\n' + (b.text || '');
+      maxTok = 820;
     } else if (b.task === 'explain') {
       task = `
 
 TASK: Explain the grammar point or why the correct answer is correct. Be clear and brief (max ~5 sentences). Name the rule, give exactly one short German example, and explain the reason.`;
       user = 'Erkläre für einen Deutschlerner: ' + (b.question || '') + (b.answer ? ` (richtige Antwort: ${b.answer})` : '');
+      maxTok = 420;
     } else if (b.task === 'coach') {
       task = `
 
@@ -104,6 +106,7 @@ TASK: COACH the student with their own German writing. Do NOT correct it for the
 "## Wie könntest du weitermachen?" — suggest 2–4 German words or short phrases that could grammatically continue or improve the text, each with a tiny reason in brackets, e.g. «weil … (Verb ans Satzende)», «deshalb … (Position 1, dann das Verb)», «den Mann (Akkusativ, maskulin)». The student picks one.
 Never output a full corrected version of the student's text and never fill in a blank for them.`;
       user = 'Hilf mir als Coach mit diesem deutschen Text — nur Hinweise geben, NICHT für mich korrigieren oder fertigschreiben:\n\n' + (b.text || b.prompt || '');
+      maxTok = 500;
     } else {
       task = `
 
@@ -121,7 +124,7 @@ TASK: Help the student build or correct a German sentence. Show the correct Germ
       try {
         const out = await env.AI.run(models[i], {
           messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
-          max_tokens: 820,
+          max_tokens: maxTok,
         });
         reply = (out && (out.response || (out.result && out.result.response))) || '';
         if (reply) break;
