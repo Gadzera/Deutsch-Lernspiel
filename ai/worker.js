@@ -140,25 +140,30 @@ Be terse, concrete and encouraging. Never exceed ~5 lines.`;
       const pts = (c.points || []).map((p, i) => `${i + 1}. ${p}`).join('\n') || '(keine angegeben)';
       const ctxStr = `\n\nAUFGABE DES LERNERS (Niveau ${c.level || ''}):\n${reg}\nThema: ${c.title || ''} — ${c.prompt || ''}\nPFLICHT-INHALTSPUNKTE (jeder MUSS inhaltlich vorkommen):\n${pts}\n`;
       const doneRule = `\n\nGanz am ENDE, in der ALLERLETZTEN Zeile, gib NUR einen Marker mit den Nummern der bereits inhaltlich erfüllten Pflicht-Inhaltspunkte aus, exakt im Format: [[DONE: 1,3]] (noch keiner erfüllt → [[DONE: ]]). Schreibe NICHTS nach diesem Marker.`;
+      // The single most important rule for letters: the learner reads the help in
+      // THEIR language. Force the whole answer — verdict, explanations AND every
+      // label/heading — into ${L}; only the German letter text, single German
+      // example words and the German grammar terms stay German.
+      const SPRACHE = `\n\nWICHTIGSTE REGEL — SPRACHE: Schreibe deine GANZE Antwort auf ${L} (die Sprache des Lerners): das Verdikt, ALLE Erklärungen, Hinweise UND alle Abschnitts-Labels/Überschriften. Übersetze auch Label-Wörter wie „Noch offen", „Weiter", „Korrigierter Brief", „Inhaltspunkte", „Form & Register", „Sprache", „Tipp" in ${L}. NUR diese drei Dinge bleiben auf Deutsch: (1) der korrigierte deutsche Brieftext selbst, (2) einzelne deutsche Beispielwörter, (3) die deutschen Grammatik-Fachbegriffe (Nominativ, Akkusativ, Dativ, Genitiv, Konjunktiv II, Perfekt, Präteritum …). Antworte NIEMALS auf Deutsch, außer ${L} ist selbst Deutsch.`;
       if (b.task === 'letterlive') {
-        task = `${ctxStr}
-TASK: You are a LIVE writing coach for this GERMAN LETTER. The student is in the MIDDLE of writing and just paused. Read the WHOLE letter so far together with the task above, then answer VERY SHORTLY in ${L} (Markdown, at most ~5 short lines). Do NOT rewrite the letter and do NOT output a full correction.
-- Line 1 — a quick verdict: "✅" if it is on track, or "✏️" if there is ONE important thing to fix; then ONE short note that names the rule. Check REGISTER (Sie vs. du correct for this letter?), Anrede/Gruß, and apply the KASUS-CHECK strictly.
-- A line "**Noch offen:**" naming which PFLICHT-INHALTSPUNKTE are NOT yet covered (by number + keyword), or "alle Inhaltspunkte erledigt 🎉".
-- A line "**Weiter:**" with 2–3 German words/phrases that could grammatically continue the letter, each with a 2–5 word reason in brackets.
+        task = `${ctxStr}${SPRACHE}
+TASK: You are a LIVE writing coach for this GERMAN LETTER. The student is in the MIDDLE of writing and just paused. Read the WHOLE letter so far together with the task above, then answer VERY SHORTLY (Markdown, at most ~5 short lines) — and remember the SPRACHE rule above: write everything in ${L}. Do NOT rewrite the letter and do NOT output a full correction.
+- Line 1 — a quick verdict: "✅" if it is on track, or "✏️" if there is ONE important thing to fix; then ONE short note (in ${L}) that names the rule. Check REGISTER (Sie vs. du correct for this letter?), Anrede/Gruß, and apply the KASUS-CHECK strictly.
+- A line that begins with a bold label meaning "Still missing" (translated into ${L}) and names which PFLICHT-INHALTSPUNKTE are NOT yet covered (by number + keyword), or says (in ${L}) that all content points are done 🎉.
+- A line that begins with a bold label meaning "Next" (translated into ${L}) with 2–3 German words/phrases that could grammatically continue the letter, each with a 2–5 word reason in brackets (the reason in ${L}).
 Be terse, concrete and encouraging.${doneRule}`;
         user = 'Mein Brief bis jetzt — gib kurzes Live-Feedback, prüfe Register und die Inhaltspunkte, NICHT korrigieren oder fertigschreiben:\n\n' + (b.text || '');
-        maxTok = 340;
+        maxTok = 360;
       } else {
-        task = `${ctxStr}
-TASK: Evaluate and correct this GERMAN LETTER like a VWU/ÖSD examiner. Reply in Markdown. Write the section LABELS and all explanations in ${L}; keep the German letter text and German examples in German. Use EXACTLY these sections:
-"## Korrigierter Brief" — the full corrected letter with a correct Anrede and Schlussformel for THIS register.
-"## Inhaltspunkte" — list every required point with ✅ (inhaltlich erfüllt) or ❌ (fehlt/zu knapp) + a 3–6 word note in ${L}.
-"## Form & Register" — one short line: are Anrede and Gruß correct, and is the Sie/du form consistent and right for a ${formell ? 'formellen' : 'informellen'} Brief?
-"## Sprache" — a short bullet list of the main language errors as «falsch → richtig» + a named rule (Kasus, Wortstellung, Tempus, Genus …) in ${L}.
-"## Tipp" — one short, motivating improvement tip in ${L}.${doneRule}`;
+        task = `${ctxStr}${SPRACHE}
+TASK: Evaluate and correct this GERMAN LETTER like a VWU/ÖSD examiner. Reply in Markdown. Follow the SPRACHE rule above: the section headings and all explanations go in ${L}; the corrected letter text and German examples stay German. Use EXACTLY these five sections, but TRANSLATE each heading into ${L} (the German originals are only to tell you what each section is):
+1) heading = "Korrigierter Brief" (in ${L}) — the full corrected letter, in GERMAN, with a correct Anrede and Schlussformel for THIS register.
+2) heading = "Inhaltspunkte" (in ${L}) — list every required point with ✅ (inhaltlich erfüllt) or ❌ (fehlt/zu knapp) + a 3–6 word note in ${L}.
+3) heading = "Form & Register" (in ${L}) — one short line: are Anrede and Gruß correct, and is the Sie/du form consistent and right for a ${formell ? 'formellen' : 'informellen'} Brief?
+4) heading = "Sprache" (in ${L}) — a short bullet list of the main language errors as «falsch → richtig» + a named German rule term + the reason in ${L}.
+5) heading = "Tipp" (in ${L}) — one short, motivating improvement tip in ${L}.${doneRule}`;
         user = 'Bewerte und korrigiere diesen Brief; prüfe Register, Form und ALLE Inhaltspunkte:\n\n' + (b.text || '');
-        maxTok = 900;
+        maxTok = 950;
       }
     } else {
       task = `
