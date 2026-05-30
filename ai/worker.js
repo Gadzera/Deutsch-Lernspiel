@@ -122,12 +122,13 @@ Never output a full corrected version of the student's text and never fill in a 
     } else if (b.task === 'live') {
       task = `
 
-TASK: You are a LIVE writing coach. The student is in the MIDDLE of writing this German text and just paused. Read the WHOLE text so far and answer VERY SHORTLY in ${L} (Markdown, at most ~5 short lines total). Do NOT rewrite the text and do NOT output a full correction.
-- Line 1 — a quick verdict: begin with "✅" if it is fine so far, or "✏️" if there is ONE important thing to fix; then ONE short sentence that names the rule (Kasus, Wortstellung, Tempus, Genus …). Apply the KASUS-CHECK strictly.
-- Then a line "**Weiter:**" followed by 2–3 German words/short phrases that could grammatically come next, each with a 2–5 word reason in brackets, e.g. «weil … (Verb ans Ende)», «den Termin (Akkusativ)», «deshalb … (Verb auf Position 2)».
-Be terse, concrete and encouraging. Never exceed ~5 lines.`;
-      user = 'Mein Text bis jetzt — gib kurzes Live-Feedback und nächste Wörter, NICHT korrigieren oder fertigschreiben:\n\n' + (b.text || b.prompt || '');
-      maxTok = 300;
+TASK: You are a LIVE writing coach. The student is writing this German text and just paused. Read the WHOLE text so far and help them CONCRETELY. Answer in ${L} (Markdown, ~4–6 short lines). Do NOT rewrite the whole text.
+- Line 1 — verdict: begin with "✅" if it is fine so far, or "✏️" if there is something to fix; then ONE short, CLEAR sentence in ${L} that says exactly what to improve right now.
+- A line that starts with a bold label meaning "Fix" (in ${L}): quote the student's OWN wrong words and show the correct German as «falsch → richtig» — take only 1–3 mistakes that are REALLY in the text (never invent mistakes), each with a 2–5 word reason in ${L} that names the rule (Kasus, Wortstellung, Tempus, Genus, Verbstellung …). Apply the KASUS-CHECK strictly.
+- A line that starts with a bold label meaning "Next" (in ${L}): 2–3 German words/short phrases that could grammatically come next, each with a tiny reason in ${L}.
+Be concrete, clear and encouraging; ALWAYS quote the student's real words so it is obvious what you mean. Do not exceed ~6 lines.`;
+      user = 'Mein Text bis jetzt — gib kurzes, KONKRETES Live-Feedback: zeig meine echten Fehler als «falsch → richtig» und nenne nächste Wörter, aber schreib den Text NICHT fertig:\n\n' + (b.text || b.prompt || '');
+      maxTok = 380;
     } else if (b.task === 'letter' || b.task === 'letterlive') {
       // Letter/e-mail writing trainer. ctx carries the exam task so the AI can
       // check register (Sie/du), the German letter format AND tick off the
@@ -147,13 +148,14 @@ Be terse, concrete and encouraging. Never exceed ~5 lines.`;
       const SPRACHE = `\n\nWICHTIGSTE REGEL — SPRACHE: Schreibe deine GANZE Antwort auf ${L} (die Sprache des Lerners): das Verdikt, ALLE Erklärungen, Hinweise UND alle Abschnitts-Labels/Überschriften. Übersetze auch Label-Wörter wie „Noch offen", „Weiter", „Korrigierter Brief", „Inhaltspunkte", „Form & Register", „Sprache", „Tipp" in ${L}. NUR diese drei Dinge bleiben auf Deutsch: (1) der korrigierte deutsche Brieftext selbst, (2) einzelne deutsche Beispielwörter, (3) die deutschen Grammatik-Fachbegriffe (Nominativ, Akkusativ, Dativ, Genitiv, Konjunktiv II, Perfekt, Präteritum …). Antworte NIEMALS auf Deutsch, außer ${L} ist selbst Deutsch.`;
       if (b.task === 'letterlive') {
         task = `${ctxStr}${SPRACHE}
-TASK: You are a LIVE writing coach for this GERMAN LETTER. The student is in the MIDDLE of writing and just paused. Read the WHOLE letter so far together with the task above, then answer VERY SHORTLY (Markdown, at most ~5 short lines) — and remember the SPRACHE rule above: write everything in ${L}. Do NOT rewrite the letter and do NOT output a full correction.
-- Line 1 — a quick verdict: "✅" if it is on track, or "✏️" if there is ONE important thing to fix; then ONE short note (in ${L}) that names the rule. Check REGISTER (Sie vs. du correct for this letter?), Anrede/Gruß, and apply the KASUS-CHECK strictly.
-- A line that begins with a bold label meaning "Still missing" (translated into ${L}) and names which PFLICHT-INHALTSPUNKTE are NOT yet covered (by number + keyword), or says (in ${L}) that all content points are done 🎉.
-- A line that begins with a bold label meaning "Next" (translated into ${L}) with 2–3 German words/phrases that could grammatically continue the letter, each with a 2–5 word reason in brackets (the reason in ${L}).
-Be terse, concrete and encouraging.${doneRule}`;
-        user = 'Mein Brief bis jetzt — gib kurzes Live-Feedback, prüfe Register und die Inhaltspunkte, NICHT korrigieren oder fertigschreiben:\n\n' + (b.text || '');
-        maxTok = 360;
+TASK: You are a LIVE writing coach for this GERMAN LETTER. The student is writing and just paused. Read the WHOLE letter so far together with the task above, then help them CONCRETELY — remember the SPRACHE rule above: write everything in ${L}. Do NOT rewrite the whole letter.
+- Line 1 — verdict: "✅" if it is on track, or "✏️" if there is something to fix; then ONE short, CLEAR note in ${L}. Be ACCURATE about register: only warn about Sie/du if it is actually wrong for THIS letter (do not warn when it is already correct); check Anrede/Gruß and apply the KASUS-CHECK strictly.
+- A line that begins with a bold label meaning "Fix" (translated into ${L}): quote the student's OWN wrong words and show the correct German as «falsch → richtig» — take only 1–3 mistakes that are REALLY in the text (never invent mistakes), each with a 2–5 word reason in ${L} that names the rule.
+- A line that begins with a bold label meaning "Still missing" (translated into ${L}): names which PFLICHT-INHALTSPUNKTE are NOT yet covered (by number + keyword), or says (in ${L}) that all content points are done 🎉.
+- A line that begins with a bold label meaning "Next" (translated into ${L}): 2–3 German words/phrases that could grammatically continue the letter, each with a tiny reason in ${L}.
+Be concrete, clear and kind; ALWAYS quote the student's real words so it is obvious what you mean.${doneRule}`;
+        user = 'Mein Brief bis jetzt — gib kurzes, KONKRETES Live-Feedback: zeig meine echten Fehler als «falsch → richtig», prüfe Register und die Inhaltspunkte, aber schreib den Brief NICHT fertig:\n\n' + (b.text || '');
+        maxTok = 440;
       } else {
         task = `${ctxStr}${SPRACHE}
 TASK: Evaluate and correct this GERMAN LETTER like a VWU/ÖSD examiner. Reply in Markdown. Follow the SPRACHE rule above: the section headings and all explanations go in ${L}; the corrected letter text and German examples stay German. Use EXACTLY these five sections, but TRANSLATE each heading into ${L} (the German originals are only to tell you what each section is):
