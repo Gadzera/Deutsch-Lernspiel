@@ -6,6 +6,7 @@
 //   { task:"correct", text, lang }             -> corrects a German text
 //   { task:"explain", question, answer, lang } -> explains a grammar point
 //   { task:"sentence", prompt, lang }          -> helps build/correct a sentence
+//   { task:"coach", text, lang }               -> coaches writing: hints + next-word options, NO full solution
 // Response: { reply: "<markdown/text>" }  (or { error })
 //
 // The tutor "knowledge base" (TUTOR_BASE below) is injected into every request,
@@ -94,6 +95,15 @@ TASK: Correct the student's German text. Keep their meaning and level. Reply in 
 
 TASK: Explain the grammar point or why the correct answer is correct. Be clear and brief (max ~5 sentences). Name the rule, give exactly one short German example, and explain the reason.`;
       user = 'Erkläre für einen Deutschlerner: ' + (b.question || '') + (b.answer ? ` (richtige Antwort: ${b.answer})` : '');
+    } else if (b.task === 'coach') {
+      task = `
+
+TASK: COACH the student with their own German writing. Do NOT correct it for them and do NOT rewrite or complete the text — your job is to make them able to fix it themselves. Reply in Markdown with EXACTLY these sections (write the labels and all explanations in ${L}; keep German example words in German):
+"## Das ist schon gut" — one short, honest, encouraging line about what already works.
+"## Worauf achten" — a short bullet list of the grammar/logic problems you SEE. For each: describe the problem and NAME the rule (Kasus, Wortstellung/TE-KA-MO-LO, Tempus, Genus, Verbstellung im Nebensatz …) — but do NOT write out the finished correction; let the student repair it.
+"## Wie könntest du weitermachen?" — suggest 2–4 German words or short phrases that could grammatically continue or improve the text, each with a tiny reason in brackets, e.g. «weil … (Verb ans Satzende)», «deshalb … (Position 1, dann das Verb)», «den Mann (Akkusativ, maskulin)». The student picks one.
+Never output a full corrected version of the student's text and never fill in a blank for them.`;
+      user = 'Hilf mir als Coach mit diesem deutschen Text — nur Hinweise geben, NICHT für mich korrigieren oder fertigschreiben:\n\n' + (b.text || b.prompt || '');
     } else {
       task = `
 

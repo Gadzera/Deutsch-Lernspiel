@@ -40,5 +40,6 @@
     correctText: function (text, lang) { return call({ task: 'correct', text: text, lang: lang }); },
     explain: function (question, answer, lang) { return call({ task: 'explain', question: question, answer: answer, lang: lang }); },
     sentence: function (prompt, lang) { return call({ task: 'sentence', prompt: prompt, lang: lang }); },
+    coach: function (text, lang) { return call({ task: 'coach', text: text, lang: lang }); },
   };
 })();
