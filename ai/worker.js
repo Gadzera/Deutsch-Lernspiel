@@ -122,13 +122,14 @@ Never output a full corrected version of the student's text and never fill in a 
     } else if (b.task === 'live') {
       task = `
 
-TASK: You are a LIVE writing coach. The student is writing this German text and just paused. Read the WHOLE text so far and help them CONCRETELY. Answer in ${L} (Markdown, ~4–6 short lines). Do NOT rewrite the whole text.
+TASK: You are a LIVE, HIGH-QUALITY writing coach. The student is writing this German text and just paused. Read the WHOLE text so far and help them CONCRETELY. Answer in ${L} (Markdown, compact). Do NOT rewrite the whole text for them, but DO give rich, usable suggestions.
 - Line 1 — verdict: begin with "✅" if it is fine so far, or "✏️" if there is something to fix; then ONE short, CLEAR sentence in ${L} that says exactly what to improve right now.
 - A line that starts with a bold label meaning "Fix" (in ${L}): quote the student's OWN wrong words and show the correct German as «falsch → richtig» — take only 1–3 mistakes that are REALLY in the text (never invent mistakes), each with a 2–5 word reason in ${L} that names the rule (Kasus, Wortstellung, Tempus, Genus, Verbstellung …). Apply the KASUS-CHECK strictly.
-- A line that starts with a bold label meaning "Next" (in ${L}): 2–3 German words/short phrases that could grammatically come next, each with a tiny reason in ${L}.
-Be concrete, clear and encouraging; ALWAYS quote the student's real words so it is obvious what you mean. Do not exceed ~6 lines.`;
-      user = 'Mein Text bis jetzt — gib kurzes, KONKRETES Live-Feedback: zeig meine echten Fehler als «falsch → richtig» und nenne nächste Wörter, aber schreib den Text NICHT fertig:\n\n' + (b.text || b.prompt || '');
-      maxTok = 380;
+- A line that starts with a bold label meaning "Better" (in ${L}): 1–2 concrete style/wording IMPROVEMENTS of what the student already wrote — show «schwächer → besser» using more precise, idiomatic and level-appropriate German (a stronger verb, a better Redemittel/connector, a smoother phrasing), each with a short reason in ${L} why it is better. Improve only their OWN content; do not add new topics.
+- A line that starts with a bold label meaning "Next" (in ${L}): 2–3 READY-TO-USE short GERMAN sentences or phrases the student could write next, fitting the topic and a good written style (e.g. a Redemittel + clause, a linking sentence) — give WHOLE usable phrases/sentences, not single words, each with a tiny reason in ${L}.
+Be concrete, clear and encouraging; ALWAYS quote the student's real words so it is obvious what you mean. Keep it compact (no long paragraphs).`;
+      user = 'Mein Text bis jetzt — gib kurzes, KONKRETES Live-Feedback in hoher Qualität: echte Fehler «falsch → richtig», 1–2 Stil-Verbesserungen «schwächer → besser» und 2–3 fertige deutsche Satz-/Phrasenvorschläge zum Weiterschreiben, aber schreib den Text NICHT fertig:\n\n' + (b.text || b.prompt || '');
+      maxTok = 480;
     } else if (b.task === 'letter' || b.task === 'letterlive') {
       // Letter/e-mail writing trainer. ctx carries the exam task so the AI can
       // check register (Sie/du), the German letter format AND tick off the
@@ -148,14 +149,15 @@ Be concrete, clear and encouraging; ALWAYS quote the student's real words so it 
       const SPRACHE = `\n\nWICHTIGSTE REGEL — SPRACHE: Schreibe deine GANZE Antwort auf ${L} (die Sprache des Lerners): das Verdikt, ALLE Erklärungen, Hinweise UND alle Abschnitts-Labels/Überschriften. Übersetze auch Label-Wörter wie „Noch offen", „Weiter", „Korrigierter Brief", „Inhaltspunkte", „Form & Register", „Sprache", „Tipp" in ${L}. NUR diese drei Dinge bleiben auf Deutsch: (1) der korrigierte deutsche Brieftext selbst, (2) einzelne deutsche Beispielwörter, (3) die deutschen Grammatik-Fachbegriffe (Nominativ, Akkusativ, Dativ, Genitiv, Konjunktiv II, Perfekt, Präteritum …). Antworte NIEMALS auf Deutsch, außer ${L} ist selbst Deutsch.`;
       if (b.task === 'letterlive') {
         task = `${ctxStr}${SPRACHE}
-TASK: You are a LIVE writing coach for this GERMAN LETTER. The student is writing and just paused. Read the WHOLE letter so far together with the task above, then help them CONCRETELY — remember the SPRACHE rule above: write everything in ${L}. Do NOT rewrite the whole letter.
+TASK: You are a LIVE, HIGH-QUALITY writing coach for this GERMAN LETTER. The student is writing and just paused. Read the WHOLE letter so far together with the task above, then help them CONCRETELY — remember the SPRACHE rule above: write everything in ${L}. Do NOT rewrite the whole letter, but DO give rich, usable suggestions.
 - Line 1 — verdict: "✅" if it is on track, or "✏️" if there is something to fix; then ONE short, CLEAR note in ${L}. Be ACCURATE about register: only warn about Sie/du if it is actually wrong for THIS letter (do not warn when it is already correct); check Anrede/Gruß and apply the KASUS-CHECK strictly.
 - A line that begins with a bold label meaning "Fix" (translated into ${L}): quote the student's OWN wrong words and show the correct German as «falsch → richtig» — take only 1–3 mistakes that are REALLY in the text (never invent mistakes), each with a 2–5 word reason in ${L} that names the rule.
+- A line that begins with a bold label meaning "Better" (translated into ${L}): 1–2 concrete IMPROVEMENTS that make the letter sound better for a ${formell ? 'formellen' : 'informellen'} Brief — show «schwächer → besser» with more polite, precise and idiomatic German that fits the register and good letter style (a stronger Redemittel/Floskel, e.g. for a formal letter «Ich würde mich sehr freuen, wenn …», «Über eine positive Rückmeldung würde ich mich freuen»), each with a short reason in ${L}. Improve only their OWN content.
 - A line that begins with a bold label meaning "Still missing" (translated into ${L}): names which PFLICHT-INHALTSPUNKTE are NOT yet covered (by number + keyword), or says (in ${L}) that all content points are done 🎉.
-- A line that begins with a bold label meaning "Next" (translated into ${L}): 2–3 German words/phrases that could grammatically continue the letter, each with a tiny reason in ${L}.
+- A line that begins with a bold label meaning "Next" (translated into ${L}): 2–3 READY-TO-USE short GERMAN sentences/phrases that fit THIS letter and its register and could come next (ideally a sentence that covers an open Inhaltspunkt) — give WHOLE usable sentences/phrases, not single words, each with a tiny reason in ${L}.
 Be concrete, clear and kind; ALWAYS quote the student's real words so it is obvious what you mean.${doneRule}`;
-        user = 'Mein Brief bis jetzt — gib kurzes, KONKRETES Live-Feedback: zeig meine echten Fehler als «falsch → richtig», prüfe Register und die Inhaltspunkte, aber schreib den Brief NICHT fertig:\n\n' + (b.text || '');
-        maxTok = 440;
+        user = 'Mein Brief bis jetzt — gib kurzes, KONKRETES Live-Feedback in hoher Qualität: echte Fehler «falsch → richtig», 1–2 Stil-Verbesserungen «schwächer → besser» passend zum Register und 2–3 fertige deutsche Satzvorschläge (am besten für offene Inhaltspunkte), prüfe Register und Inhaltspunkte, aber schreib den Brief NICHT fertig:\n\n' + (b.text || '');
+        maxTok = 580;
       } else {
         task = `${ctxStr}${SPRACHE}
 TASK: Evaluate and correct this GERMAN LETTER like a VWU/ÖSD examiner. Reply in Markdown. Follow the SPRACHE rule above: the section headings and all explanations go in ${L}; the corrected letter text and German examples stay German. Use EXACTLY these five sections, but TRANSLATE each heading into ${L} (the German originals are only to tell you what each section is):
